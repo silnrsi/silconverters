@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Data;using System.Drawing;
 using System.Text;
@@ -62,6 +63,9 @@ namespace DChartHelper
                 dataGridViewChart.Columns["Verb"].DisplayIndex = 5;
                 dataGridViewChart.Columns["PostS"].DisplayIndex = 6;
             }
+            // This is needed for Mono
+            Properties.Settings.Default.RecentFiles = new StringCollection();
+            Properties.Settings.Default.RecentCharts = new StringCollection();
         }
 
         protected void LoadLastSettings()
@@ -71,6 +75,9 @@ namespace DChartHelper
             Size szForm = new Size();
             try
             {
+                if (Properties.Settings.Default.FormWidth == 0)
+                    throw new Exception();
+                Console.Error.WriteLine("Setting width from properties: " + Properties.Settings.Default.FormWidth.ToString());
                 szForm.Width = Properties.Settings.Default.FormWidth;
                 szForm.Height = Properties.Settings.Default.FormHeight;
                 ptTopLeft.X = Properties.Settings.Default.PointX;
@@ -80,6 +87,7 @@ namespace DChartHelper
             {
                 Rectangle rectScreen = Screen.PrimaryScreen.WorkingArea;
                 szForm.Width = rectScreen.Width;
+                Console.Error.WriteLine("width = " + rectScreen.Width.ToString());
                 szForm.Height = rectScreen.Height / 2;
                 ptTopLeft.X = ptTopLeft.Y = 0;
             }
@@ -300,6 +308,7 @@ namespace DChartHelper
                 gi = new GlossTranslationInfo();
             }
 
+            System.Diagnostics.Debug.WriteLine("Picking ambiguity.");
             PickAmbiguity dlg = new PickAmbiguity(theCell.Value,
                 (e.Button == MouseButtons.Left) ? null : theEC, 
                 m_fontVernacular, m_fontGloss);
@@ -366,6 +375,7 @@ namespace DChartHelper
                 }
                 else if( strExistingReference != " ")
                     theRefCell.Value = CycleReference(strExistingReference);
+                System.Diagnostics.Debug.WriteLine("Set ref cell value to " + theRefCell.Value);
             }
             else
             {
@@ -382,6 +392,7 @@ namespace DChartHelper
                         theRow.Tag = new GlossTranslations();
                         foreach (DataGridViewCell aCell in theRow.Cells)
                         {
+                            System.Diagnostics.Debug.WriteLine("Clearing cell " + aCell.ToString());
                             aCell.Value = null;
                             aCell.Selected = false;
                         }
@@ -389,8 +400,17 @@ namespace DChartHelper
 
                     // get the word from the text box
                     strWord = richTextBoxText.GetCurrentWord();
+                    System.Diagnostics.Debug.WriteLine("Current word " + strWord);
                     DataGridViewCell aCurrCell = dataGridViewChart.Rows[e.RowIndex].Cells[e.ColumnIndex];
+                    if (aCurrCell.IsInEditMode) {
+                        System.Diagnostics.Debug.WriteLine("Ending edit mode.");
+                        dataGridViewChart.EndEdit();
+                    }
+                    //aCurrCell.Value = "modifying>";
+                    //aCurrCell.Selected = true;
+                    //aCurrCell.Selected = true;
                     m_undoDetails.GoForward(aCurrCell, strWord, m_fontVernacular, m_fontGloss);
+                    System.Diagnostics.Debug.WriteLine("New cell value is " + aCurrCell.Value);
 
                     // help out with the reference number
                     DataGridViewCell theRefCell = dataGridViewChart.Rows[e.RowIndex].Cells[0];
@@ -403,6 +423,7 @@ namespace DChartHelper
                         if ((strValue == " ") && (e.RowIndex > 1))
                             strValue = (string)dataGridViewChart.Rows[e.RowIndex - 2].Cells[0].Value;
 
+                        System.Diagnostics.Debug.WriteLine("Setting ref cell value to " + strValue);
                         theRefCell.Value = NextRef(strValue);
                     }
                 }
@@ -417,6 +438,7 @@ namespace DChartHelper
                         DataGridViewCell theCell = dataGridViewChart.Rows[e.RowIndex].Cells[e.ColumnIndex];
                         if (theCell.Value != null)
                         {
+                            System.Diagnostics.Debug.WriteLine("Picking Ambiguity for cell " + theCell.ToString());
                             PickAmbiguity dlg = new PickAmbiguity(theCell.Value,
                                 (e.Button == MouseButtons.Left) ? null : GetMeaningLookupConverter,
                                 m_fontVernacular, m_fontGloss);
@@ -483,6 +505,7 @@ namespace DChartHelper
 
             else if (e.KeyCode == Keys.Delete)
             {
+                System.Diagnostics.Debug.WriteLine("Clearing cell " + dataGridViewChart.CurrentCell.ToString());
                 dataGridViewChart.CurrentCell.Value = null;
                 dataGridViewChart.CurrentCell.ToolTipText = null;
             }
@@ -505,8 +528,9 @@ namespace DChartHelper
             return String.Format("#{0:X2}{1:X2}{2:X2}", color.R, color.G, color.B);
         }
 
-        protected void DoCopy()
+        protected void DoCopy(string filepath=null)
         {
+            System.Diagnostics.Debug.WriteLine("DoCopy() BEGIN");
             // write the row data as XML to a memory stream
             MemoryStream streamData = new MemoryStream();
             using (DiscourseChartDataClass ds = GetDataSet(true))
@@ -526,7 +550,8 @@ namespace DChartHelper
 
             // get the XSLT format string (i.e. without the font names/sizes or column names) and then populate
             //  the appropriate information. (this doesn't support repositioning the "Ref" column)
-            string strXsltString = String.Format(Properties.Resources.DiscourseChart2HtmlFormatString,
+            string strXsltString = String.Format(
+                Properties.Resources.DiscourseChart2HtmlFormatString,
                 "Ref",
                 astrColumnNames[0],
                 astrColumnNames[1],
@@ -547,10 +572,31 @@ namespace DChartHelper
             // transform the row data to HTML using the XSLT.
             string strCBData = TransformedRowXmlDataToHtml(streamXSLT, streamData);
 
-            // finally copy it to clipboard.
-            DataObject obj = new DataObject();
-            CopyHtmlToClipBoard(strCBData, ref obj);
-            Clipboard.SetDataObject(obj, true);
+            byte [] htmlFragment = HtmlForClipBoard(strCBData);
+            if (filepath == null)
+            {
+                // finally copy it to clipboard.
+                DataObject obj = new DataObject(DataFormats.Html, new MemoryStream(htmlFragment));
+                System.Diagnostics.Debug.WriteLine("Setting clipboard...");
+                Clipboard.SetDataObject(obj, true);
+            }
+            else
+            {
+                System.Diagnostics.Debug.WriteLine("Saving to file...");
+                try
+                {
+                    FileStream fs = new FileStream (filepath, FileMode.Create);
+                    fs.Write(htmlFragment, 0, htmlFragment.Length);
+                    fs.Close();
+                    System.Diagnostics.Debug.WriteLine("Wrote to " + filepath);
+                }
+                catch (Exception ex)
+                {
+                    System.Diagnostics.Debug.WriteLine (
+                        "Error writing to file: " + ex.Message);
+                }
+            }
+            System.Diagnostics.Debug.WriteLine("DoCopy() END");
         }
 
         protected string TransformedRowXmlDataToHtml(Stream streamXSLT, Stream streamData)
@@ -568,7 +614,8 @@ namespace DChartHelper
             return strBuilder.ToString();
         }
 
-        public static void CopyHtmlToClipBoard(string html, ref DataObject obj)
+        //public static void CopyHtmlToClipBoard(string html, ref DataObject obj)
+        public static byte [] HtmlForClipBoard(string html)
         {
             Encoding enc = Encoding.UTF8;
             
@@ -598,7 +645,7 @@ namespace DChartHelper
               , count_begin + count_html_begin + count_html
               ) + html_begin + html + html_end;
 
-           obj.SetData(DataFormats.Html, new MemoryStream(enc.GetBytes(html_total)));
+            return enc.GetBytes(html_total);
         }
 
         private void buttonPrevParagraph_Click(object sender, EventArgs e)
@@ -646,6 +693,7 @@ namespace DChartHelper
 
         private DiscourseChartDataClass GetDataSet(bool bSelectedOnly)
         {
+            Console.Error.WriteLine("GetDataSet BEGIN");
             DiscourseChartDataClass file = new DiscourseChartDataClass();
             file.DiscourseChartData.AddDiscourseChartDataRow(
                 dataGridViewChart.Columns[0].DisplayIndex,
@@ -739,6 +787,7 @@ namespace DChartHelper
 
         private void SaveFile(string strFilename, bool bXML)
         {
+            Console.WriteLine("SaveFile BEGIN");
             if (bXML)
             {
                 GetDataSet(false).WriteXml(strFilename);
@@ -869,6 +918,7 @@ namespace DChartHelper
                     aRow.Height = m_fontVernacular.Height + CnExtraHeight;
                     aRow.HeaderCell.ToolTipText = "Right-click to add/edit a free translation";
                     
+                    System.Diagnostics.Debug.WriteLine("Setting row.");
                     aRow.Cells[0].Value = aClause.Ref;
                     aRow.Cells[1].Value = (aVernRow.IsPreSNull()) ? null : aVernRow.PreS;
                     aRow.Cells[2].Value = (aVernRow.IsSubjectNull()) ? null : aVernRow.Subject;
@@ -971,6 +1021,7 @@ namespace DChartHelper
                                     strWord = strWord.Remove(++nQuoteIndex, 1);
                             }
 
+                            System.Diagnostics.Debug.WriteLine("Setting cell to '" + strWord + "'");
                             aRow.Cells[k].Value = strWord;
                         }
                     }
@@ -1280,6 +1331,7 @@ namespace DChartHelper
         {
             get
             {
+                Console.Error.WriteLine("get_GetTranslator BEGIN");
                 if (m_aECTransliterator == null)
                 {
                     DChartHelper.Properties.Settings.Default.Reload();
@@ -1290,9 +1342,11 @@ namespace DChartHelper
                         EncConverters aECs = GetEncConverters;
                         if (aECs != null)
                         {
+                            Console.Error.WriteLine("Getting Any-Latin ICU transliterator.");
                             aECs.Add(strECName,
                                 "Any-Latin", ConvType.Unicode_to_from_Unicode,
                                 null, null, ProcessTypeFlags.ICUTransliteration);
+                            Console.Error.WriteLine("Got Any-Latin ICU transliterator.");
 
                             m_aECTransliterator = new DirectableEncConverter(strECName, true, NormalizeFlags.None);
                         }
@@ -1312,6 +1366,7 @@ namespace DChartHelper
                         DChartHelper.Properties.Settings.Default.Save();
                     }
                 }
+                Console.Error.WriteLine("get_GetTranslator END");
                 return m_aECTransliterator;
             }
         }
@@ -1541,10 +1596,30 @@ namespace DChartHelper
             DoCopy();
         }
 
+        private void exportAsHtmlToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            System.Windows.Forms.SaveFileDialog dlg = new System.Windows.Forms.SaveFileDialog();
+            dlg.Title = "Save selection as HTML file";
+            dlg.Filter = "HTML files (*.html)|*.html";
+            dlg.DefaultExt = "html";
+            string filepath = null;
+            if (dlg.ShowDialog() == DialogResult.OK)
+            {
+                filepath = dlg.FileName;
+            }
+            if (filepath != null)
+                DoCopy(filepath);
+        }
+
         private void openReadmeToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            Console.Error.WriteLine("openReadmeToolStripMenuItem_Click BEGIN");
             string strAppPath = Application.ExecutablePath;
-            string strHelpFilename = strAppPath.Substring(0, strAppPath.LastIndexOf('\\')) + @"\Discourse Chart Helper Readme.pdf";
+            Console.Error.WriteLine(strAppPath);
+            string strHelpFilename = strAppPath.Substring(
+                0, strAppPath.LastIndexOf(Path.DirectorySeparatorChar)) +
+                Path.DirectorySeparatorChar + @"Discourse Chart Helper Readme.pdf";
+            Console.Error.WriteLine(strHelpFilename);
             LaunchProgram(strHelpFilename, "");
         }
 
@@ -1586,12 +1661,14 @@ namespace DChartHelper
             recentFileToolStripMenuItem.DropDownItems.Clear();
             recentFileToolStripMenuItem.Enabled = (Properties.Settings.Default.RecentFiles.Count > 0);
             foreach (string strRecentFile in Properties.Settings.Default.RecentFiles)
-                recentFileToolStripMenuItem.DropDownItems.Add(strRecentFile, null, recentFilesToolStripMenuItem_Click);
+                recentFileToolStripMenuItem.DropDownItems.Add(
+                    strRecentFile, null, recentFilesToolStripMenuItem_Click);
 
             recentChartsToolStripMenuItem.DropDownItems.Clear();
             recentChartsToolStripMenuItem.Enabled = (Properties.Settings.Default.RecentCharts.Count > 0);
             foreach (string strRecentChart in Properties.Settings.Default.RecentCharts)
-                recentChartsToolStripMenuItem.DropDownItems.Add(strRecentChart, null, recentChartsToolStripMenuItem_Click);
+                recentChartsToolStripMenuItem.DropDownItems.Add(
+                    strRecentChart, null, recentChartsToolStripMenuItem_Click);
         }
 
         void recentFilesToolStripMenuItem_Click(object sender, EventArgs e)

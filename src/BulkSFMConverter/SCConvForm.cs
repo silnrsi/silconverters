@@ -337,8 +337,8 @@ namespace SFMConv
         private string GetDirEnsureFinalSlash(string strFilename)
         {
             string strFolder = Path.GetDirectoryName(strFilename);
-            if (strFolder[strFolder.Length - 1] != '\\')
-                strFolder += '\\';
+            if (strFolder[strFolder.Length - 1] != Path.DirectorySeparatorChar)
+                strFolder += Path.DirectorySeparatorChar;
             return strFolder;
         }
 

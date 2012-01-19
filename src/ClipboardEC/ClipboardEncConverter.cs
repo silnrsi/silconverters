@@ -99,10 +99,10 @@ namespace ClipboardEC
         private ToolStripSeparator toolStripSeparator8;
         private System.ComponentModel.IContainer components;
 
-        private bool _windowInitialised = false;
+        //private bool _windowInitialised = false;
 
-        [DllImport("user32", SetLastError=true)]
-        static extern bool IsGUIThread(bool bConvert);
+        //[DllImport("user32", SetLastError=true)]
+        //static extern bool IsGUIThread(bool bConvert);
 
         public delegate void FakeDelegate();
         public FormClipboardEncConverter()
@@ -110,6 +110,7 @@ namespace ClipboardEC
             // from the website: http://forums.msdn.microsoft.com/en-US/netfxbcl/thread/fb267827-1765-4bd9-ae2f-0abbd5a2ae22/
             //  the following snippet is supposed to get rid of the .NET-BroadcastEventWindow fatal exception when the process
             //  is ended.
+/*
             if (!_windowInitialised && IsGUIThread(false))
             {
                 Microsoft.Win32.SystemEvents.InvokeOnEventsThread(new FakeDelegate(delegate()
@@ -118,6 +119,7 @@ namespace ClipboardEC
                 }));
                 _windowInitialised = true;
             }
+*/
 
             //
 			// Required for Windows Form Designer support
@@ -652,9 +654,11 @@ namespace ClipboardEC
             // 
             // FormClipboardEncConverter
             // 
-            this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
+            //this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
             this.CausesValidation = false;
-            this.ClientSize = new System.Drawing.Size(166, 253);
+            //this.ClientSize = new System.Drawing.Size(166, 253);
+            //this.ClientSize = new System.Drawing.Size(20, 20);
+            this.ClientSize = new System.Drawing.Size(10, 10);
             this.ControlBox = false;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -667,7 +671,6 @@ namespace ClipboardEC
             this.WindowState = System.Windows.Forms.FormWindowState.Minimized;
             this.contextMenuStripEC.ResumeLayout(false);
             this.ResumeLayout(false);
-
         }
 		#endregion
 
@@ -677,7 +680,11 @@ namespace ClipboardEC
 		[STAThread]
 		static void Main() 
 		{
-			Application.Run(new FormClipboardEncConverter());
+			FormClipboardEncConverter f = new FormClipboardEncConverter();
+            f.Visible = false;  // doesn't work here
+            f.Hide();           // doesn't work here
+			//Application.Run(new FormClipboardEncConverter());
+			Application.Run(f);
 		}
 
         private const ProcessTypeFlags  constAllProcessTypes = 
@@ -814,11 +821,12 @@ namespace ClipboardEC
             if( ShowPreview )
             {
                 IDataObject iData = Clipboard.GetDataObject();
-     
-                // Determines whether the data is in a format you can use.
-                if( iData.GetDataPresent(DataFormats.UnicodeText) )
-                {
-                    strInput = (string)iData.GetData(DataFormats.UnicodeText);
+                if (iData != null) {
+                    // Determines whether the data is in a format you can use.
+                    if( iData.GetDataPresent(DataFormats.UnicodeText) )
+                    {
+                        strInput = (string)iData.GetData(DataFormats.UnicodeText);
+                    }
                 }
             }
 
