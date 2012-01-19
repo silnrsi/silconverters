@@ -14,12 +14,14 @@ namespace DChartHelper
 
         public void GoForward(DataGridViewCell aCell, string strNewValue, Font fontSource, Font fontTarget)
         {
+            System.Diagnostics.Debug.WriteLine("UndoDetails.GoForward BEGIN");
             if (strNewValue == null)
                 return;
             m_aCells.Add(aCell);
             m_astrNewValues.Add(strNewValue);
 
             string strOldValue = (string)aCell.Value;
+            System.Diagnostics.Debug.WriteLine("Old value '" + strOldValue + "'");
             m_astrOldValues.Add(strOldValue);
 
             // first check for ambiguities
@@ -31,9 +33,13 @@ namespace DChartHelper
                     strNewValue = aPicker.SelectedWord;
             }
 
+            System.Diagnostics.Debug.WriteLine("New value '" + strNewValue + "'");
             if (strOldValue != null)
                 strNewValue = strOldValue + ' ' + strNewValue;
+            System.Diagnostics.Debug.WriteLine("Setting value '" + strNewValue + "'");
             aCell.Value = strNewValue;
+            System.Diagnostics.Debug.WriteLine("Cell value is '" + aCell.Value + "'");
+            System.Diagnostics.Debug.WriteLine("UndoDetails.GoForward END");
         }
 
         public void Undo(out string strNewValue)

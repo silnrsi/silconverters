@@ -48,6 +48,7 @@ namespace DChartHelper
             this.recentChartsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveChartAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exportAsHtmlToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -143,6 +144,7 @@ namespace DChartHelper
             this.recentChartsToolStripMenuItem,
             this.saveToolStripMenuItem,
             this.saveChartAsToolStripMenuItem,
+            this.exportAsHtmlToolStripMenuItem,
             this.toolStripSeparator1,
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
@@ -212,6 +214,14 @@ namespace DChartHelper
             this.saveChartAsToolStripMenuItem.Text = "Save chart &As";
             this.saveChartAsToolStripMenuItem.ToolTipText = "Save the current chart with a new name";
             this.saveChartAsToolStripMenuItem.Click += new System.EventHandler(this.saveChartAsToolStripMenuItem_Click);
+            // 
+            // exportAsHtmlToolStripMenuItem
+            // 
+            this.exportAsHtmlToolStripMenuItem.Name = "exportAsHtmlToolStripMenuItem";
+            this.exportAsHtmlToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
+            this.exportAsHtmlToolStripMenuItem.Text = "Export as &HTML";
+            this.exportAsHtmlToolStripMenuItem.ToolTipText = "Save selected lines to an HTML file";
+            this.exportAsHtmlToolStripMenuItem.Click += new System.EventHandler(this.exportAsHtmlToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
@@ -477,25 +487,28 @@ namespace DChartHelper
             // tableLayoutPanel
             // 
             this.tableLayoutPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+                       | System.Windows.Forms.AnchorStyles.Left)
+                      | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel.ColumnCount = 3;
             this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            //this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel.Location = new System.Drawing.Point(0, 28);
+            this.tableLayoutPanel.Margin = new System.Windows.Forms.Padding(0);
+            this.tableLayoutPanel.Name = "tableLayoutPanel";
+            this.tableLayoutPanel.RowCount = 3;
+            //this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            //this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel.Controls.Add(this.richTextBoxText, 1, 1);
             this.tableLayoutPanel.Controls.Add(this.buttonPrevParagraph, 2, 1);
             this.tableLayoutPanel.Controls.Add(this.buttonNextParagraph, 2, 2);
             this.tableLayoutPanel.Controls.Add(this.splitContainer, 0, 0);
             this.tableLayoutPanel.Controls.Add(this.label1, 0, 1);
-            this.tableLayoutPanel.Location = new System.Drawing.Point(0, 28);
-            this.tableLayoutPanel.Margin = new System.Windows.Forms.Padding(0);
-            this.tableLayoutPanel.Name = "tableLayoutPanel";
-            this.tableLayoutPanel.RowCount = 3;
-            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel.Size = new System.Drawing.Size(767, 301);
             this.tableLayoutPanel.TabIndex = 1;
             // 
@@ -803,8 +816,8 @@ namespace DChartHelper
             // 
             // DiscourseChartForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            //this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            //this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(767, 329);
             this.Controls.Add(this.tableLayoutPanel);
             this.Controls.Add(this.menuStripFile);
@@ -826,7 +839,6 @@ namespace DChartHelper
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewGloss)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
-
         }
 
         #endregion
@@ -874,6 +886,7 @@ namespace DChartHelper
         private System.Windows.Forms.ToolStripMenuItem copyToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
         private System.Windows.Forms.ToolStripMenuItem saveChartAsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem exportAsHtmlToolStripMenuItem;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ToolTip toolTip;
         private System.Windows.Forms.DataGridViewTextBoxColumn CRef;
