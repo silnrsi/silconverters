@@ -13,12 +13,15 @@
     <property name="debug" value="true" overwrite="false"/>
 
     <property name="projroot"
-     value="/media/winD/Jim/computing/SEC_on_linux/sec-main/linux-branch" />
+     value="/media/winD/Jim/computing/SEC_on_linux/sec" />
     <if test="${environment::variable-exists('SECROOT')}">
         <property name="projroot" value="${environment::get-variable('SECROOT')}"/>
     </if>
+    <property name="ecprojroot"
+     value="/media/winD/Jim/computing/SEC_on_linux/ec-main" />
     <property name="config" value="Debug"/> <!-- Debug/Release/Bounds -->
     <property name="dir.output" value="${projroot}/output/${config}"/>
+    <property name="ec.dir.output" value="${ecprojroot}/output/${config}"/>
 
     <target name="all" depends="SFMConv,
                                 SilConvertersXML,
@@ -106,9 +109,9 @@
     </target>
 
     <target name="compile">
-        <assemblyfileset id="refs" basedir="${projroot}/">
+        <assemblyfileset id="refs" basedir="${ecprojroot}/">
             <lib>
-                <include name="${dir.output}" />
+                <include name="${ec.dir.output}" />
             </lib>
             <patternset refid="Reference" />
         </assemblyfileset>
