@@ -19,6 +19,9 @@
     </if>
     <property name="ecprojroot"
      value="/media/winD/Jim/computing/SEC_on_linux/ec-main" />
+    <if test="${environment::variable-exists('ECROOT')}">
+        <property name="ecprojroot" value="${environment::get-variable('ECROOT')}"/>
+    </if>
     <property name="config" value="Debug"/> <!-- Debug/Release/Bounds -->
     <property name="dir.output" value="${projroot}/output/${config}"/>
     <property name="ec.dir.output" value="${ecprojroot}/output/${config}"/>
