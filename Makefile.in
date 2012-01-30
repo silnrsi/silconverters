@@ -1,0 +1,33 @@
+# Master Makefile for the encConverters package
+# Makefile.in created January 30, 2012 by Stephen McConnel
+
+@SET_MAKE@
+# the next line requires GNU make ...
+MAKEFLAGS=#--no-print-directory
+srcdir = @srcdir@
+VPATH  = @srcdir@
+INSTALL     = @INSTALL@
+prefix      = @prefix@
+exec_prefix = @exec_prefix@
+ROOTDIR     = @abs_top_srcdir@
+OUTDIR      = $(ROOTDIR)/output/Debug
+
+EXES    = ClipboardEC.exe DChartHelper.exe SFMConv.exe SilConvertersXML.exe
+LIBDIR  = $(exec_prefix)/lib/encConverters
+
+all:
+	@(cd build && nant) || true
+
+clean:
+	@(cd build && nant clean) || true
+	@find . -name '*~' -exec rm '{}' ';'
+
+distclean: clean
+	@rm -f Makefile config.cache src/config.h config.log config.status src/stamp-h1 autogen.err
+	@rm -rf autom4te.cache output
+
+install:
+	@mkdir -p $(DESTDIR)$(LIBDIR)
+	@for file in $(EXES); do \
+	  $(INSTALL) $(OUTDIR)/$$file $(DESTDIR)$(LIBDIR); \
+	done
