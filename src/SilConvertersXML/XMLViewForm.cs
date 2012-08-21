@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -568,6 +569,23 @@ namespace SilConvertersXML
             //  it's not like the user actually click to do that function with this)
             m_dtStarted = DateTime.Now;
         }
+
+        private void treeViewXmlDoc_BeforeCollapse(object sender, TreeViewCancelEventArgs e)
+        {
+            var treeNode = e.Node as TreeNode;
+            if (treeNode != null)
+                CollapseAllChildren(treeNode.Nodes);
+        }
+
+        private void CollapseAllChildren(IEnumerable nodes)
+        {
+            foreach (TreeNode node in nodes)
+            {
+                node.Collapse();
+                CollapseAllChildren(node.Nodes);
+            }
+        }
+
 
         private void treeViewXmlDoc_AfterExpand(object sender, TreeViewEventArgs e)
         {

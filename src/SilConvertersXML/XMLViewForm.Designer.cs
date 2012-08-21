@@ -68,9 +68,11 @@ namespace SilConvertersXML
             this.backgroundWorker = new System.ComponentModel.BackgroundWorker();
             this.fontDialog = new System.Windows.Forms.FontDialog();
             this.menuStrip.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
             this.splitContainer.Panel1.SuspendLayout();
             this.splitContainer.Panel2.SuspendLayout();
             this.splitContainer.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
@@ -108,14 +110,14 @@ namespace SilConvertersXML
             this.toolStripSeparator1,
             this.exitToolStripMenuItem});
             this.ToolStripMenuItemFile.Name = "ToolStripMenuItemFile";
-            this.ToolStripMenuItemFile.Size = new System.Drawing.Size(35, 20);
+            this.ToolStripMenuItemFile.Size = new System.Drawing.Size(37, 20);
             this.ToolStripMenuItemFile.Text = "&File";
             this.ToolStripMenuItemFile.DropDownOpening += new System.EventHandler(this.ToolStripMenuItemFile_DropDownOpening);
             // 
             // openXMLDocumentToolStripMenuItem
             // 
             this.openXMLDocumentToolStripMenuItem.Name = "openXMLDocumentToolStripMenuItem";
-            this.openXMLDocumentToolStripMenuItem.Size = new System.Drawing.Size(234, 22);
+            this.openXMLDocumentToolStripMenuItem.Size = new System.Drawing.Size(252, 22);
             this.openXMLDocumentToolStripMenuItem.Text = "&Open XML Document";
             this.openXMLDocumentToolStripMenuItem.ToolTipText = "Click to open an XML document you want to convert";
             this.openXMLDocumentToolStripMenuItem.Click += new System.EventHandler(this.openXMLDocumentToolStripMenuItem_Click);
@@ -123,18 +125,18 @@ namespace SilConvertersXML
             // recentFilesToolStripMenuItem
             // 
             this.recentFilesToolStripMenuItem.Name = "recentFilesToolStripMenuItem";
-            this.recentFilesToolStripMenuItem.Size = new System.Drawing.Size(234, 22);
+            this.recentFilesToolStripMenuItem.Size = new System.Drawing.Size(252, 22);
             this.recentFilesToolStripMenuItem.Text = "Recent &Files";
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(231, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(249, 6);
             // 
             // processAndSaveDocumentsToolStripMenuItem
             // 
             this.processAndSaveDocumentsToolStripMenuItem.Name = "processAndSaveDocumentsToolStripMenuItem";
-            this.processAndSaveDocumentsToolStripMenuItem.Size = new System.Drawing.Size(234, 22);
+            this.processAndSaveDocumentsToolStripMenuItem.Size = new System.Drawing.Size(252, 22);
             this.processAndSaveDocumentsToolStripMenuItem.Text = "&Convert and Save XML Document";
             this.processAndSaveDocumentsToolStripMenuItem.ToolTipText = "Click to convert the opened XML document and save it with a new name";
             this.processAndSaveDocumentsToolStripMenuItem.Click += new System.EventHandler(this.processAndSaveDocuments);
@@ -142,12 +144,12 @@ namespace SilConvertersXML
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(231, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(249, 6);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(234, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(252, 22);
             this.exitToolStripMenuItem.Text = "&Exit";
             this.exitToolStripMenuItem.ToolTipText = "Click to exit the application";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
@@ -162,13 +164,13 @@ namespace SilConvertersXML
             this.saveToolStripMenuItem});
             this.converterMappingsToolStripMenuItem.Enabled = false;
             this.converterMappingsToolStripMenuItem.Name = "converterMappingsToolStripMenuItem";
-            this.converterMappingsToolStripMenuItem.Size = new System.Drawing.Size(116, 20);
+            this.converterMappingsToolStripMenuItem.Size = new System.Drawing.Size(127, 20);
             this.converterMappingsToolStripMenuItem.Text = "&Converter Mappings";
             // 
             // setDefaultConverterToolStripMenuItem
             // 
             this.setDefaultConverterToolStripMenuItem.Name = "setDefaultConverterToolStripMenuItem";
-            this.setDefaultConverterToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.setDefaultConverterToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
             this.setDefaultConverterToolStripMenuItem.Text = "Set &Default Converter";
             this.setDefaultConverterToolStripMenuItem.ToolTipText = "Select a converter to be applied to all fields that aren\'t currently configured";
             this.setDefaultConverterToolStripMenuItem.Click += new System.EventHandler(this.setDefaultConverterToolStripMenuItem_Click);
@@ -176,12 +178,12 @@ namespace SilConvertersXML
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(177, 6);
+            this.toolStripSeparator4.Size = new System.Drawing.Size(183, 6);
             // 
             // newToolStripMenuItem
             // 
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
             this.newToolStripMenuItem.Text = "&New";
             this.newToolStripMenuItem.ToolTipText = "Click to reset the current mapping of XPath fields to system converters";
             this.newToolStripMenuItem.Click += new System.EventHandler(this.newToolStripMenuItem_Click);
@@ -189,16 +191,16 @@ namespace SilConvertersXML
             // loadToolStripMenuItem
             // 
             this.loadToolStripMenuItem.Name = "loadToolStripMenuItem";
-            this.loadToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.loadToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
             this.loadToolStripMenuItem.Text = "&Load";
             this.loadToolStripMenuItem.ToolTipText = "Click to load a previously saved mapping of XPath statements to system converters" +
-                "";
+    "";
             this.loadToolStripMenuItem.Click += new System.EventHandler(this.loadToolStripMenuItem_Click);
             // 
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
             this.saveToolStripMenuItem.Text = "&Save";
             this.saveToolStripMenuItem.ToolTipText = "Click to save the current mapping of XPath statements to system converters";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
@@ -208,14 +210,14 @@ namespace SilConvertersXML
             this.advancedToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.enterXPathExpressionToolStripMenuItem});
             this.advancedToolStripMenuItem.Name = "advancedToolStripMenuItem";
-            this.advancedToolStripMenuItem.Size = new System.Drawing.Size(67, 20);
+            this.advancedToolStripMenuItem.Size = new System.Drawing.Size(72, 20);
             this.advancedToolStripMenuItem.Text = "&Advanced";
             // 
             // enterXPathExpressionToolStripMenuItem
             // 
             this.enterXPathExpressionToolStripMenuItem.Enabled = false;
             this.enterXPathExpressionToolStripMenuItem.Name = "enterXPathExpressionToolStripMenuItem";
-            this.enterXPathExpressionToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
+            this.enterXPathExpressionToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
             this.enterXPathExpressionToolStripMenuItem.Text = "Enter &XPath Expression";
             this.enterXPathExpressionToolStripMenuItem.Click += new System.EventHandler(this.enterXPathExpressionToolStripMenuItem_Click);
             // 
@@ -231,10 +233,11 @@ namespace SilConvertersXML
             this.treeViewXmlDoc.Size = new System.Drawing.Size(512, 254);
             this.treeViewXmlDoc.TabIndex = 1;
             this.treeViewXmlDoc.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.treeViewXmlDoc_AfterCheck);
+            this.treeViewXmlDoc.BeforeCollapse += new System.Windows.Forms.TreeViewCancelEventHandler(this.treeViewXmlDoc_BeforeCollapse);
             this.treeViewXmlDoc.AfterCollapse += new System.Windows.Forms.TreeViewEventHandler(this.treeViewXmlDoc_AfterCollapse);
-            this.treeViewXmlDoc.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.treeViewXmlDoc_PreviewKeyDown);
-            this.treeViewXmlDoc.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeViewXmlDoc_NodeMouseClick);
             this.treeViewXmlDoc.AfterExpand += new System.Windows.Forms.TreeViewEventHandler(this.treeViewXmlDoc_AfterExpand);
+            this.treeViewXmlDoc.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeViewXmlDoc_NodeMouseClick);
+            this.treeViewXmlDoc.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.treeViewXmlDoc_PreviewKeyDown);
             // 
             // splitContainer
             // 
@@ -307,7 +310,7 @@ namespace SilConvertersXML
             this.listBoxViewData.Location = new System.Drawing.Point(3, 3);
             this.listBoxViewData.Name = "listBoxViewData";
             this.listBoxViewData.ScrollAlwaysVisible = true;
-            this.listBoxViewData.Size = new System.Drawing.Size(224, 212);
+            this.listBoxViewData.Size = new System.Drawing.Size(224, 222);
             this.listBoxViewData.TabIndex = 2;
             this.listBoxViewData.MouseUp += new System.Windows.Forms.MouseEventHandler(this.listBoxViewData_MouseUp);
             // 
@@ -364,9 +367,9 @@ namespace SilConvertersXML
             this.dataGridViewConverterMapping.RowHeadersWidth = 22;
             this.dataGridViewConverterMapping.Size = new System.Drawing.Size(740, 135);
             this.dataGridViewConverterMapping.TabIndex = 1;
+            this.dataGridViewConverterMapping.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridViewConverterMapping_CellMouseClick);
             this.dataGridViewConverterMapping.UserDeletedRow += new System.Windows.Forms.DataGridViewRowEventHandler(this.dataGridViewConverterMapping_UserDeletedRow);
-            this.dataGridViewConverterMapping.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(dataGridViewConverterMapping_CellMouseClick);
-            this.dataGridViewConverterMapping.KeyPress += new System.Windows.Forms.KeyPressEventHandler(dataGridViewConverterMapping_KeyPress);
+            this.dataGridViewConverterMapping.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.dataGridViewConverterMapping_KeyPress);
             // 
             // ColumnNode
             // 
@@ -380,7 +383,7 @@ namespace SilConvertersXML
             this.ExampleData.Name = "ExampleData";
             this.ExampleData.ReadOnly = true;
             this.ExampleData.ToolTipText = "This column shows sample data for the given SFM fields (click a cell in this colu" +
-                "mn to see the next occurrence)";
+    "mn to see the next occurrence)";
             // 
             // ColumnConverter
             // 
@@ -396,7 +399,7 @@ namespace SilConvertersXML
             this.ExampleResults.Name = "ExampleResults";
             this.ExampleResults.ReadOnly = true;
             this.ExampleResults.ToolTipText = "This column shows a preview of what the output would look like after the conversi" +
-                "on";
+    "on";
             // 
             // textBoxInput
             // 
@@ -426,8 +429,8 @@ namespace SilConvertersXML
             this.backgroundWorker.WorkerReportsProgress = true;
             this.backgroundWorker.WorkerSupportsCancellation = true;
             this.backgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker_DoWork);
-            this.backgroundWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker_RunWorkerCompleted);
             this.backgroundWorker.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorker_ProgressChanged);
+            this.backgroundWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker_RunWorkerCompleted);
             // 
             // XMLViewForm
             // 
@@ -448,9 +451,11 @@ namespace SilConvertersXML
             this.menuStrip.PerformLayout();
             this.splitContainer.Panel1.ResumeLayout(false);
             this.splitContainer.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).EndInit();
             this.splitContainer.ResumeLayout(false);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             this.tableLayoutPanelSampleData.ResumeLayout(false);
             this.tableLayoutPanelSampleData.PerformLayout();
