@@ -64,6 +64,6 @@ using System.Resources;	// GuidAttribute
 [assembly: AssemblyDelaySign(false)]
 [assembly: AssemblyKeyFile("")]
 [assembly: AssemblyKeyName("")]
-[assembly: AssemblyFileVersionAttribute("4.0.1.0")]
+[assembly: AssemblyFileVersionAttribute("4.0.1.1")]
 [assembly: ComVisibleAttribute(false)]
 [assembly: NeutralResourcesLanguageAttribute("en")]

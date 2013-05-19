@@ -1,0 +1,85 @@
+HKCR
+{
+	SILConvertersOffice.Connect = s 'Connect Class'
+	{
+		CLSID = s '{31b69269-4301-4522-8446-3c3d3acf7abe}'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove '{31b69269-4301-4522-8446-3c3d3acf7abe}' = s 'SILConvertersOffice.Connect'
+		{
+			ProgID = s 'SILConvertersOffice.Connect'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+			Programmable
+		}
+	}
+}
+
+HKCU
+{
+	NoRemove Software
+	{
+		NoRemove Microsoft
+		{
+			NoRemove Office
+			{
+				NoRemove Access
+				{
+					NoRemove Addins
+					{
+						ForceRemove SILConvertersOffice.Connect
+						{
+							val 'Description' = s 'Providing access to SILConverters from Microsoft Office 2003 applications'
+							val 'FriendlyName' = s 'SILConverters for Microsoft Office 2003'
+							val 'LoadBehavior' = d 3
+						}
+					}
+				}
+				NoRemove Excel
+				{
+					NoRemove Addins
+					{
+						ForceRemove SILConvertersOffice.Connect
+						{
+							val 'Description' = s 'Providing access to SILConverters from Microsoft Office 2003 applications'
+							val 'FriendlyName' = s 'SILConverters for Microsoft Office 2003'
+							val 'LoadBehavior' = d 3
+						}
+					}
+				}
+				NoRemove Publisher
+				{
+					NoRemove Addins
+					{
+						ForceRemove SILConvertersOffice.Connect
+						{
+							val 'Description' = s 'Providing access to SILConverters from Microsoft Office 2003 applications'
+							val 'FriendlyName' = s 'SILConverters for Microsoft Office 2003'
+							val 'LoadBehavior' = d 3
+						}
+					}
+				}
+				NoRemove Word
+				{
+					NoRemove Addins
+					{
+						ForceRemove SILConvertersOffice.Connect
+						{
+							val 'Description' = s 'Providing access to SILConverters from Microsoft Office 2003 applications'
+							val 'FriendlyName' = s 'SILConverters for Microsoft Office 2003'
+							val 'LoadBehavior' = d 3
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+
+
+
+

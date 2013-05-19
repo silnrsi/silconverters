@@ -1,0 +1,39 @@
+// COMAddInShim07.idl 
+import "oaidl.idl";
+import "ocidl.idl";
+
+[
+	uuid(04222A4C-D279-45D7-870D-61608E168445),
+	version(1.0),
+	helpstring("COMAddInShim07 1.0 Type Library")
+]
+library COMAddInShim07Lib
+{
+	importlib("stdole2.tlb");
+
+	[
+		uuid(3addf7e6-29f1-43f5-bf95-06c0579a286b),
+		helpstring("ConnectProxy Class")
+	]
+	coclass ConnectProxy
+	{
+		[default] interface IUnknown;
+	};
+
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
