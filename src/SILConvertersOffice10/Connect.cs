@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using System.IO;
 using System.Reflection;
 using System.Windows.Forms;
 using ECInterfaces;
@@ -55,27 +56,55 @@ namespace SILConvertersOffice10
 		/// <seealso class='IDTExtensibility2' />
 		public void OnConnection(object application, Extensibility.ext_ConnectMode connectMode, object addInInst, ref System.Array custom)
 		{
-            string strAppName = (string)application.GetType().InvokeMember("Name", BindingFlags.GetProperty, null, application, null);
-            if (strAppName == "Microsoft Word")
-                appThis = new WordApp(application);
-            else if (strAppName == "Microsoft Excel")
-                appThis = new ExcelApp(application);
-            else if (strAppName == "Microsoft Publisher")
-                appThis = new PubApp(application);
-            else if (strAppName == "Microsoft Access")
-                appThis = new AccessApp(application);
-            else
-            {
-                string strError = String.Format("The '{0}' application is not supported!", strAppName);
-                System.Windows.Forms.MessageBox.Show(strError, OfficeApp.cstrCaption);
-                throw new Exception(strError);
-            }
+		    try
+		    {
+                var strAppName = (string)application.GetType().InvokeMember("Name", BindingFlags.GetProperty, null, application, null);
+                if (strAppName == "Microsoft Word")
+                    appThis = new WordApp(application);
+                else if (strAppName == "Microsoft Excel")
+                    appThis = new ExcelApp(application);
+                else if (strAppName == "Microsoft Publisher")
+                    appThis = new PubApp(application);
+                else if (strAppName == "Microsoft Access")
+                    appThis = new AccessApp(application);
+                else
+                {
+                    string strError = String.Format("The '{0}' application is not supported!", strAppName);
+                    System.Windows.Forms.MessageBox.Show(strError, OfficeApp.cstrCaption);
+                    throw new Exception(strError);
+                }
 
-            if (connectMode != ext_ConnectMode.ext_cm_Startup)
-            {
-                OnStartupComplete(ref custom);
+                if (connectMode != ext_ConnectMode.ext_cm_Startup)
+                {
+                    OnStartupComplete(ref custom);
+                }
+                WriteErrorMessage("Finished OnConnection");
             }
+		    catch (Exception ex)
+		    {
+		        ProcessException(ex);
+		        throw;
+		    }
         }
+
+        private static void ProcessException(Exception ex)
+        {
+            var strErrorMsg = ex.Message;
+            if (ex.InnerException != null)
+                strErrorMsg += String.Format("{0}{0}{1}",
+                                            Environment.NewLine,
+                                            ex.InnerException.Message);
+
+            WriteErrorMessage(strErrorMsg);
+        }
+
+        private static void WriteErrorMessage(string strErrorMsg)
+        {
+            var strFileSpec = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
+                                           "ErrorLog.txt");
+            File.AppendAllText(strFileSpec, strErrorMsg);
+        }
+
 
 		/// <summary>
 		///     Implements the OnDisconnection method of the IDTExtensibility2 interface.

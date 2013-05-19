@@ -297,9 +297,24 @@ namespace SILConvertersOffice
 		protected const char chCellBreak = '\u0007';
 		protected const char chInlineGraphics = '\u0001';
 
+#if BUILD_FOR_OFF14
+        // rde: 2012-12-04: I don't know why this used to include form feed characters, because the D:\temp\PBTPNG\SH OT0001 Legacy.pub
+        //  file has form feeds right in the middle of a paragraph (which causes us to *not* convert all subsequent pages that are
+        //  part of that same paragraph. So I'm taking out form feed and assuming that it doesn't need to be there
+        // Thought: it's probably the case that this is a difference in Publisher's PIA -- probably in earlier versions of Office 
+        //  (prior to off14), it treats form feeds the same as carriage returns, but not as of Off14... so only do this for off14
+        // protected static char[] m_achParagraphTerminators = new char[] { chNL, chFormFeed };
+        protected static char[] m_achParagraphTerminators = new char[] { chNL };
+
+        // ... however, we do need the processor to skip past it so it doesn't get clobbered... so treat it like whitespace...
+        // protected static char[] m_achWhiteSpace = new char[] { chSpace, chTab, chFootnote };
+        protected static char[] m_achWhiteSpace = new char[] { chSpace, chTab, chFootnote, chFormFeed };
+        protected static char[] m_achWordTerminators = new char[] { chSpace, chTab, chNL, chFootnote, chFormFeed };
+#else
         protected static char[] m_achParagraphTerminators = new char[] { chNL, chFormFeed };
         protected static char[] m_achWhiteSpace = new char[] { chSpace, chTab, chFootnote };
         protected static char[] m_achWordTerminators = new char[] { chSpace, chTab, chNL, chFootnote };
+#endif
 
         public OfficeDocument(object doc)
         {

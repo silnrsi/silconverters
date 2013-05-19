@@ -443,7 +443,26 @@ namespace SILConvertersWordML
         * the presence of w:rStyle/@w:val suggests style-based formatting (which gets picked up elsewhere, so we have to prevent it here)
         * and the presence of wx:font/@wx:val suggests custom formatting (which gets picked here)
         */
-        public const string cstrXPathWordMLFormatGetFontText = "/w:wordDocument/w:body//w:p//w:r[not(w:rPr/w:rStyle/@w:val)][w:rPr/wx:font/@wx:val = {0}{1}{0}]/w:t";
+        // rde: 5/9/13 (ironic date -- 3 years after the above change)
+        //  Actually, we also have a case like this:
+        /*
+          <w:rPr>
+            <w:rStyle w:val="Strong" />
+            <w:rFonts w:ascii="Kruti Dev 010" w:h-ansi="Kruti Dev 010" />
+            <wx:font wx:val="Kruti Dev 010" />
+            <w:sz w:val="36" />
+            <w:sz-cs w:val="36" />
+          </w:rPr>
+          <w:t>isjsfjr dj dke</w:t>
+        */
+        // where the style is a character style, but which isn't a font-oriented character style (here it's just 'bold').
+        //  So in this case, we really do what to have the custom font (i.e. w:rFonts + w:font) to override the style.
+        //  SO I think instead of blocking this situation here, let's block it in the style based on (so we add not(w:rPr/wx:font/@wx:val) to that one
+        //  to block it from picking this up also
+        // public const string cstrXPathWordMLFormatGetFontText = "/w:wordDocument/w:body//w:p//w:r[not(w:rPr/w:rStyle/@w:val)][w:rPr/wx:font/@wx:val = {0}{1}{0}]/w:t";
+
+        // so back to the original:
+        public const string cstrXPathWordMLFormatGetFontText = "/w:wordDocument/w:body//w:p//w:r[w:rPr/wx:font/@wx:val = {0}{1}{0}]/w:t";
         
 
 		public const string cstrXPathWordMLFormatGetSymbolFontChar = "/w:wordDocument/w:body//w:p//w:r/w:sym[@w:font = {0}{1}{0}]/@w:char";
@@ -470,12 +489,21 @@ namespace SILConvertersWordML
 
         public const string cstrXPathWordMLFormatGetPStyleText = "/w:wordDocument/w:body//w:p[w:pPr/w:pStyle/@w:val = {0}{1}{0}]/w:r[not(w:rPr/wx:font)]/w:t";
         
-        public const string cstrXPathWordMLFormatGetCStyleText = "/w:wordDocument/w:body//w:p/w:r[w:rPr/w:rStyle/@w:val = {0}{1}{0}]/w:t";
+        // public const string cstrXPathWordMLFormatGetCStyleText = "/w:wordDocument/w:body//w:p/w:r[w:rPr/w:rStyle/@w:val = {0}{1}{0}]/w:t";
+        //  see note above for cstrXPathWordMLFormatGetFontText
+        public const string cstrXPathWordMLFormatGetCStyleText = "/w:wordDocument/w:body//w:p/w:r[w:rPr/w:rStyle/@w:val = {0}{1}{0}][not(w:rPr/wx:font/@wx:val)]/w:t";
+
 
         protected const string cstrXPathHasSingleCharacterRun = "/w:wordDocument/w:body//w:p/w:r[w:rPr/wx:sym/@wx:char]/w:t";
 
         // public const string cstrXPathWordMLFormatReplaceFontNameGetFontText = "/w:wordDocument/w:body//w:p//w:r[w:rPr/wx:font/@wx:val = '{0}']";
-        public const string cstrXPathWordMLFormatReplaceFontNameGetFontText = "/w:wordDocument/w:body//w:p//w:r[not(w:rPr/w:rStyle/@w:val)][w:rPr/wx:font/@wx:val = {0}{1}{0}]";
+        // public const string cstrXPathWordMLFormatReplaceFontNameGetFontText = "/w:wordDocument/w:body//w:p//w:r[not(w:rPr/w:rStyle/@w:val)][w:rPr/wx:font/@wx:val = {0}{1}{0}]";
+        // rde: 5/9/13: this needs to be changed again to all the replacing of font names that have been converted that are both character style-based and custom formatting
+        //  since a character style like "bold" still might need the font changed. 
+        // If there's a place to "replace" the font of a style in the run area, then we might need to block it from happening by adding a not(w:rPr/wx:font/@wx:val)
+        //  (as here, we were trying to block the custom formatting from overriding the Cstyle formatting, which turned out to be wrong)
+        public const string cstrXPathWordMLFormatReplaceFontNameGetFontText = "/w:wordDocument/w:body//w:p//w:r[w:rPr/wx:font/@wx:val = {0}{1}{0}]";
+
         public const string cstrXPathWordMLFormatReplaceFontNameNoRunParagraphs = "/w:wordDocument/w:body//w:p[w:pPr/w:rPr/wx:font/@wx:val = {0}{1}{0}]/w:pPr";
         public const string cstrXPathWordMLFormatReplaceFontNameNoRunCsParagraphs = "/w:wordDocument/w:body//w:p[w:pPr/w:rPr/w:rFonts/@w:cs = {0}{1}{0}]/w:pPr";
 
