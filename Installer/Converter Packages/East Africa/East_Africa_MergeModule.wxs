@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+	<Module Id="East_Africa40MergeModule" Language="1033" Version="4.0.0.0">
+		<Package Id="72c6abaf-2171-4db1-afa2-ab46ac37362b" Comments="Encoding converters used in East Africa" Description="Encoding converters for East Africa" Keywords="SILConverters; Encoding Conversion; East Africa; EncConverters" Manufacturer="SIL International" InstallerVersion="200" />
+
+		<Directory Id="TARGETDIR" Name="SourceDir">
+            <Directory Id="CommonAppDataFolder" SourceName="AppData">
+                <Directory Id="SIL" Name="SIL">
+                    <Directory Id="SILConverters40" Name="SILConverters40">
+                        <Directory Id="MapsTables" Name="MapsTables">
+                            <Component Id="Times_African.tec" Guid="b59a8524-90a2-4688-9092-3feb39cf6254">
+                                <File Id="Times_African.tec" Name="Times African.tec" KeyPath="yes" Source="MapsTables\Times African.tec" />
+                            </Component>
+                            <Component Id="EAfrica.xml" Guid="bfe1ef86-9e0d-4564-8f19-a647dee2be64">
+                                <File Id="EAfrica.xml" Name="EAfrica.xml" KeyPath="yes" Source="MapsTables\EAfrica.xml" />
+                            </Component>
+                            <Component Id="Bantu_Und.tec.vbs" Guid="d10ceec4-5277-4bd4-8269-987f7887daac">
+                                <File Id="Bantu_Und.tec.vbs" Name="Bantu Und.tec.vbs" KeyPath="yes" Source="MapsTables\Bantu Und.tec.vbs" />
+                            </Component>
+                            <Component Id="Times_African.tec.vbs" Guid="bdd92cc3-ecd3-4870-a04e-e709433ceb17">
+                                <File Id="Times_African.tec.vbs" Name="Times African.tec.vbs" KeyPath="yes" Source="MapsTables\Times African.tec.vbs" />
+                            </Component>
+                            <Component Id="Bantu_Und.tec" Guid="2f6bac9b-268c-4290-9256-3057e84b0948">
+                                <File Id="Bantu_Und.tec" Name="Bantu Und.tec" KeyPath="yes" Source="MapsTables\Bantu Und.tec" />
+                            </Component>
+                        </Directory>
+                    </Directory>
+                </Directory>
+            </Directory>
+        </Directory>
+	</Module>
+</Wix>

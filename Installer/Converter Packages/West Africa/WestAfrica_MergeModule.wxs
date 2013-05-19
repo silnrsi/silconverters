@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+	<Module Id="West_Africa40MergeModule" Language="1033" Version="4.0.0.0">
+		<Package Id="9c7e2ab4-6c25-4652-bfe1-2bdc83aac310" Comments="Encoding converters used in West Africa" Description="Encoding converters for West Africa encoding" Keywords="SILConverters; Encoding Conversion; West Africa; EncConverters" Manufacturer="SIL International" InstallerVersion="200" />
+
+		<Directory Id="TARGETDIR" Name="SourceDir">
+            <Directory Id="CommonAppDataFolder" SourceName="AppData">
+                <Directory Id="SIL" Name="SIL">
+                    <Directory Id="SILConverters40" Name="SILConverters40">
+                        <Directory Id="MapsTables" Name="MapsTables">
+                            <Component Id="Bambara_SIL_Charis.map" Guid="f1bf5056-3a57-49cb-8c7c-11827b4eada6">
+                                <File Id="Bambara_SIL_Charis.map" Name="Bambara SIL Charis.map" KeyPath="yes" Source="MapsTables\Bambara SIL Charis.map" />
+                            </Component>
+                            <Component Id="Songhai.map" Guid="71c3100c-7b85-4e16-b48a-6c375cce8001">
+                                <File Id="Songhai.map" Name="Songhai.map" KeyPath="yes" Source="MapsTables\Songhai.map" />
+                            </Component>
+                            <Component Id="fulfulde.tec" Guid="d71e0bf3-21b7-40f1-983d-9f599418ad16">
+                                <File Id="fulfulde.tec" Name="fulfulde.tec" KeyPath="yes" Source="MapsTables\fulfulde.tec" />
+                            </Component>
+                            <Component Id="BF_Times.tec" Guid="3e1d6d47-0528-40b2-a150-9a562e155ac3">
+                                <File Id="BF_Times.tec" Name="BF Times.tec" KeyPath="yes" Source="MapsTables\BF Times.tec" />
+                            </Component>
+                            <Component Id="SIL_Kar.map" Guid="57be3464-22ad-44d8-89d7-c8da4288a339">
+                                <File Id="SIL_Kar.map" Name="SIL-Kar.map" KeyPath="yes" Source="MapsTables\SIL-Kar.map" />
+                            </Component>
+                            <Component Id="BF_Font_Family.tec" Guid="8a9995fd-2682-4261-b918-6ca883446f74">
+                                <File Id="BF_Font_Family.tec" Name="BF Font Family.tec" KeyPath="yes" Source="MapsTables\BF Font Family.tec" />
+                            </Component>
+                            <Component Id="fulfulde.map" Guid="87d7c110-5f12-4b4d-8ad0-c35037e9bb2e">
+                                <File Id="fulfulde.map" Name="fulfulde.map" KeyPath="yes" Source="MapsTables\fulfulde.map" />
+                            </Component>
+                            <Component Id="f93_linb.map" Guid="f7d18019-9c52-47da-af1d-c79afca73f03">
+                                <File Id="f93_linb.map" Name="93-linb.map" KeyPath="yes" Source="MapsTables\93-linb.map" />
+                            </Component>
+                            <Component Id="Songhai.tec" Guid="9dc5f2b9-e280-4230-b808-945130e5e45b">
+                                <File Id="Songhai.tec" Name="Songhai.tec" KeyPath="yes" Source="MapsTables\Songhai.tec" />
+                            </Component>
+                            <Component Id="SILSamogho.tec" Guid="0daaee88-9ca1-406d-86da-c4a55a0401cd">
+                                <File Id="SILSamogho.tec" Name="SILSamogho.tec" KeyPath="yes" Source="MapsTables\SILSamogho.tec" />
+                            </Component>
+                            <Component Id="Winye.tec" Guid="f37abff4-6cdf-4e13-8622-e47c28651e16">
+                                <File Id="Winye.tec" Name="Winye.tec" KeyPath="yes" Source="MapsTables\Winye.tec" />
+                            </Component>
+                            <Component Id="Tbb4.tec" Guid="868335da-48c8-40e4-9c02-04ad27949568">
+                                <File Id="Tbb4.tec" Name="Tbb4.tec" KeyPath="yes" Source="MapsTables\Tbb4.tec" />
+                            </Component>
+                            <Component Id="Mali_Standard.map" Guid="16053c48-ba20-4d93-8476-e77a08abed01">
+                                <File Id="Mali_Standard.map" Name="Mali Standard.map" KeyPath="yes" Source="MapsTables\Mali Standard.map" />
+                            </Component>
+                            <Component Id="Ghana.map" Guid="2dfaeda8-71e5-4b78-9550-60a77b4338f3">
+                                <File Id="Ghana.map" Name="Ghana.map" KeyPath="yes" Source="MapsTables\Ghana.map" />
+                            </Component>
+                            <Component Id="f93_linb.tec" Guid="315549f0-e493-423b-a85c-58dd2016c722">
+                                <File Id="f93_linb.tec" Name="93-linb.tec" KeyPath="yes" Source="MapsTables\93-linb.tec" />
+                            </Component>
+                            <Component Id="BF_Font_Family.map" Guid="82cc96b6-62c9-4f1a-af61-b777640529a6">
+                                <File Id="BF_Font_Family.map" Name="BF Font Family.map" KeyPath="yes" Source="MapsTables\BF Font Family.map" />
+                            </Component>
+                            <Component Id="Abidjan.tec" Guid="e18d97eb-2cdd-41df-8548-3c0d296a1a6d">
+                                <File Id="Abidjan.tec" Name="Abidjan.tec" KeyPath="yes" Source="MapsTables\Abidjan.tec" />
+                            </Component>
+                            <Component Id="Mali_Standard.tec" Guid="36803707-bcd3-4ee2-83dd-3650b425fd9f">
+                                <File Id="Mali_Standard.tec" Name="Mali Standard.tec" KeyPath="yes" Source="MapsTables\Mali Standard.tec" />
+                            </Component>
+                            <Component Id="BF_Times.map" Guid="2f813c8e-e7f7-4621-b207-1e1e0e120c65">
+                                <File Id="BF_Times.map" Name="BF Times.map" KeyPath="yes" Source="MapsTables\BF Times.map" />
+                            </Component>
+                            <Component Id="Senufo.tec" Guid="2b8a9b94-f781-4fcc-b0bb-aacaae631338">
+                                <File Id="Senufo.tec" Name="Senufo.tec" KeyPath="yes" Source="MapsTables\Senufo.tec" />
+                            </Component>
+                            <Component Id="Bambara_SIL_Charis.tec" Guid="697cf505-9a5d-4943-9d65-b3fb4f9ea227">
+                                <File Id="Bambara_SIL_Charis.tec" Name="Bambara SIL Charis.tec" KeyPath="yes" Source="MapsTables\Bambara SIL Charis.tec" />
+                            </Component>
+                            <Component Id="Abidjan.map" Guid="a9b532f8-15ae-498a-b97d-fb900d7b11f5">
+                                <File Id="Abidjan.map" Name="Abidjan.map" KeyPath="yes" Source="MapsTables\Abidjan.map" />
+                            </Component>
+                            <Component Id="Senufo.map" Guid="44015d5f-d33f-4510-a936-f991bbb75d23">
+                                <File Id="Senufo.map" Name="Senufo.map" KeyPath="yes" Source="MapsTables\Senufo.map" />
+                            </Component>
+                            <Component Id="Tombouctou.tec" Guid="ea40a281-9a34-492f-b482-7dcdf244067b">
+                                <File Id="Tombouctou.tec" Name="Tombouctou.tec" KeyPath="yes" Source="MapsTables\Tombouctou.tec" />
+                            </Component>
+                            <Component Id="SILSamogho.map" Guid="fbab7794-da13-4cbd-b7aa-d76a70da870b">
+                                <File Id="SILSamogho.map" Name="SILSamogho.map" KeyPath="yes" Source="MapsTables\SILSamogho.map" />
+                            </Component>
+                            <Component Id="RCIStandard.map" Guid="a31a018f-640a-43db-b1fc-7826312d8281">
+                                <File Id="RCIStandard.map" Name="RCIStandard.map" KeyPath="yes" Source="MapsTables\RCIStandard.map" />
+                            </Component>
+                            <Component Id="Tombouctou.map" Guid="26f86d22-4252-48a1-93bd-25492590eed5">
+                                <File Id="Tombouctou.map" Name="Tombouctou.map" KeyPath="yes" Source="MapsTables\Tombouctou.map" />
+                            </Component>
+                            <Component Id="RCIStandard.tec" Guid="aa54f49a-0839-43dc-916b-d3de6d5c8197">
+                                <File Id="RCIStandard.tec" Name="RCIStandard.tec" KeyPath="yes" Source="MapsTables\RCIStandard.tec" />
+                            </Component>
+                            <Component Id="Tbb4.map" Guid="7f1d3b5f-9550-4b0b-b8df-92995a8873f9">
+                                <File Id="Tbb4.map" Name="Tbb4.map" KeyPath="yes" Source="MapsTables\Tbb4.map" />
+                            </Component>
+                            <Component Id="Ghana.tec" Guid="a5646886-4f01-41d7-92f9-460d2db4df63">
+                                <File Id="Ghana.tec" Name="Ghana.tec" KeyPath="yes" Source="MapsTables\Ghana.tec" />
+                            </Component>
+                            <Component Id="Winye.map" Guid="8be9f49f-7e08-46d2-9906-eb4cf51591a0">
+                                <File Id="Winye.map" Name="Winye.map" KeyPath="yes" Source="MapsTables\Winye.map" />
+                            </Component>
+                            <Component Id="WAfrica.xml" Guid="8985ab9d-8fc0-4654-bd5d-5224bbcbf7d4">
+                                <File Id="WAfrica.xml" Name="WAfrica.xml" KeyPath="yes" Source="MapsTables\WAfrica.xml" />
+                            </Component>
+                            <Component Id="SIL_Kar.tec" Guid="147812e3-45f6-463b-8787-675e566bb625">
+                                <File Id="SIL_Kar.tec" Name="SIL-Kar.tec" KeyPath="yes" Source="MapsTables\SIL-Kar.tec" />
+                            </Component>                            
+                        </Directory>
+                    </Directory>
+                </Directory>
+            </Directory>
+        </Directory>
+	</Module>
+</Wix>

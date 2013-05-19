@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+	<Module Id="SilConvertersForWordMM" Language="1033" Version="4.0.0.0">
+		<Package Id="7644c6d7-9b45-400c-b8d5-6e5a85cc245b" Comments="SILConverters' Bulk Word Document Converter" Keywords="SILConverters; Encoding Conversion; SIL; Word" Manufacturer="SIL International" InstallerVersion="200" />
+
+		<Directory Id="TARGETDIR" Name="SourceDir">
+
+            <Component Id="xmlOpenWithRegKeys" Guid="{16C1F605-F6E0-490F-998A-84738ED2BC42}">
+                <RegistryValue Id="xmlOpenWithRegKeys1" Root="HKCR" Key=".doc\OpenWithList\SILConvertersWordML.exe" Value="" Type="string" KeyPath="yes" />
+                <RegistryValue Id="xmlOpenWithRegKeys2" Root="HKCR" Key=".xml\OpenWithList\SILConvertersWordML.exe" Value="" Type="string" />
+                <RegistryValue Id="xmlOpenWithRegKeys3" Root="HKCR" Key=".xml" Name="PerceivedType" Value="text" Type="string" />
+                <RegistryValue Id="xmlOpenWithRegKeys4" Root="HKCR" Key=".xml" Value="xmlfile" Type="string" />
+                <RegistryValue Id="xmlOpenWithRegKeys5" Root="HKCR" Key=".xml" Name="Content Type" Value="text/xml" Type="string" />
+                <RegistryValue Id="xmlOpenWithRegKeys6" Root="HKCR" Key=".rtf\OpenWithList\SILConvertersWordML.exe" Value="" Type="string" />
+                <RegistryValue Id="xmlOpenWithRegKeys7" Root="HKCR" Key="Applications\SILConvertersWordML.exe\shell\open\command" Value="&quot;[TARGETDIR]SILConvertersWordML.exe&quot; &quot;%1&quot;" Type="string" />
+                <RegistryValue Id="xmlOpenWithRegKeys8" Root="HKCR" Key="Applications\SILConvertersWordML.exe\shell\open" Value="&amp;Open" Type="string" />
+                <RegistryValue Id="xmlOpenWithRegKeys9" Root="HKLM" Key="SOFTWARE\Classes\.rtf\OpenWithList\SILConvertersWordML.exe" Value="" Type="string" />
+                <RegistryValue Id="xmlOpenWithRegKeysA" Root="HKLM" Key="SOFTWARE\Classes\.xml\OpenWithList\SILConvertersWordML.exe" Value="" Type="string" />
+                <RegistryValue Id="xmlOpenWithRegKeysB" Root="HKLM" Key="SOFTWARE\Classes\.xml" Name="Content Type" Value="text/xml" Type="string" />
+                <RegistryValue Id="xmlOpenWithRegKeysC" Root="HKLM" Key="SOFTWARE\Classes\.xml" Name="PerceivedType" Value="text" Type="string" />
+                <RegistryValue Id="xmlOpenWithRegKeysD" Root="HKLM" Key="SOFTWARE\Classes\.xml" Value="xmlfile" Type="string" />
+                <RegistryValue Id="xmlOpenWithRegKeysE" Root="HKLM" Key="SOFTWARE\Classes\.doc\OpenWithList\SILConvertersWordML.exe" Value="" Type="string" />
+                <RegistryValue Id="xmlOpenWithRegKeysF" Root="HKLM" Key="SOFTWARE\Classes\Applications\SILConvertersWordML.exe\shell\open\command" Value="&quot;[TARGETDIR]SILConvertersWordML.exe&quot; &quot;%1&quot;" Type="string" />
+                <RegistryValue Id="xmlOpenWithRegKeysG" Root="HKLM" Key="SOFTWARE\Classes\Applications\SILConvertersWordML.exe\shell\open" Value="&amp;Open" Type="string" />
+            </Component>
+
+            <Directory Id="MergeRedirectFolder">
+
+                <Component Id="SILConvertersWordML.exe" Guid="{9D600B51-A06E-4FF5-8CBD-9E63C95F5192}">
+                    <File Id="SILConvertersWordML.exe" Name="SILConvertersWordML.exe" KeyPath="yes" Assembly=".net" AssemblyManifest="SILConvertersWordML.exe" AssemblyApplication="SILConvertersWordML.exe" Source="..\..\output\release\SILConvertersWordML.exe" />
+                    <Shortcut Id="SILConvertersWordML.exe" Directory="SILConverters" Name="Bulk Word Document Converter" Description="Convert your MS Word documents with converters in the system repository" IconIndex="0" Show="normal" Target="[#SILConvertersWordML.exe]" WorkingDirectory="MergeRedirectFolder" Advertise="no" />
+                </Component>
+
+            </Directory>
+
+            <Directory Id="StartMenuFolder" SourceName="Start Menu">
+                <Directory Id="ProgramMenuFolder" SourceName="Programs">
+                    <Directory Id="SILConverters" Name="SIL Converters" />
+                </Directory>
+            </Directory>
+
+        </Directory>
+	</Module>
+</Wix>

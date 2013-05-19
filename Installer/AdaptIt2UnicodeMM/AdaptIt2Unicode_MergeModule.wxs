@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+	<Module Id="AdaptIt2Unicode40" Language="1033" Version="4.0.0.0">
+		<Package Id="c6628a1b-f759-4068-b112-eb2d401aefa9" Manufacturer="SIL International" Comments="Merge module containing the AdaptIt2Unicode program" Description="Installer for the AdaptIt2Unicode utility" InstallerVersion="200" Keywords="Encoding Converters; Adapt It; SIL; Unicode" />
+
+		<Directory Id="TARGETDIR" Name="SourceDir">
+			<Directory Id="MergeRedirectFolder">
+
+                <Component Id="AdaptIt2Unicode.exe" Guid="FC11A9E6-7044-48B4-BC13-C93B85BCB092">
+                    <File Id="AdaptIt2Unicode.exe" Name="AdaptIt2Unicode.exe" KeyPath="yes" Assembly=".net" AssemblyManifest="AdaptIt2Unicode.exe" AssemblyApplication="AdaptIt2Unicode.exe" Source="..\..\output\release\AdaptIt2Unicode.exe" />
+                    <Shortcut Id="AdaptIt2Unicode.exe" Directory="SILConverters" Name="Adapt It to Unicode Project Converter" Description="Start the AdaptIt to Unicode conversion program" IconIndex="0" Show="normal" Target="[#AdaptIt2Unicode.exe]" WorkingDirectory="MergeRedirectFolder" Advertise="no" />
+                </Component>
+
+			</Directory>
+
+            <Directory Id="StartMenuFolder" SourceName="Start Menu">
+                <Directory Id="ProgramMenuFolder" SourceName="Programs">
+                    <Directory Id="SILConverters" Name="SIL Converters" />
+                </Directory>
+            </Directory>
+		</Directory>
+	</Module>
+</Wix>
