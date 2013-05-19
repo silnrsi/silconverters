@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+	<Module Id="MS_KB908002_Fix" Language="1033" Version="1.0.0.0">
+		<Package Id="82b48c06-e6b8-4d5a-9eeb-189d36a5145f" Keywords="SILConverters for Office 2003, KB908002, Shared Add-in support fix" Description="MS KB908002 Fix" Manufacturer="SIL International" SummaryCodepage="1252" InstallerVersion="200" />
+
+        <Property Id="SIL_KB908002_PRESENT">
+            <ComponentSearch Id="AppComp" Guid="232405A0-F32C-4F19-889A-FEE3EC7305C8" Type="directory"/>
+        </Property>
+
+        <Directory Id="TARGETDIR" Name="SourceDir">
+            <Component Id="registry" Guid="9C271DF5-036F-41EC-A553-3985E3A1FC5F">
+                <Condition><![CDATA[NOT SIL_KB908002_PRESENT.82b48c06_e6b8_4d5a_9eeb_189d36a5145f]]></Condition>
+                <RegistryValue Root="HKLM" Key="Software\SIL\Installer\EC\MS KB908002 Fix" Name="Run" Type="string" KeyPath="yes" Value="[#setup.exe]"/>
+            </Component>
+
+            <Directory Id="MS_KB908002_Fix" Name="MS KB908002 Fix">
+                <Component Id="SILConvertersOfficeSetup.msi" Guid="03B83C4F-2FBE-4A03-ACDF-C09F58730972">
+                    <File Id="SILConvertersOfficeSetup.msi" Name="SILConvertersOfficeSetup.msi" Source="..\ExternalMergeModules\MS KB908002 Fix\SILConvertersOfficeSetup.msi" KeyPath="yes"/>
+                </Component>
+                <Component Id="setup.exe" Guid="232405A0-F32C-4F19-889A-FEE3EC7305C8">
+                    <File Id="setup.exe" Name="setup.exe" Checksum="yes" Source="..\ExternalMergeModules\MS KB908002 Fix\setup.exe" KeyPath="yes"/>
+                </Component>
+                <Directory Id="KB908002" Name="KB908002">
+                    <Component Id="extensibilityMSM.msi" Guid="4F938998-CF0A-45B6-BC3F-11DBB00DF4B6">
+                        <File Id="extensibilityMSM.msi" Name="extensibilityMSM.msi" Source="..\ExternalMergeModules\MS KB908002 Fix\KB908002\extensibilityMSM.msi" KeyPath="yes"/>
+                    </Component>
+                    <Component Id="lockbackRegKey.msi" Guid="46C9C312-0B51-4C22-B9D1-6C229A12D005">
+                        <File Id="lockbackRegKey.msi" Name="lockbackRegKey.msi" Source="..\ExternalMergeModules\MS KB908002 Fix\KB908002\lockbackRegKey.msi" KeyPath="yes"/>
+                    </Component>
+                    <Component Id="office2003kb907417sfxcabENU.exe" Guid="B4F705E4-D54C-4512-AB99-AE95DA6D18B3">
+                        <File Id="office2003kb907417sfxcabENU.exe" Name="office2003-kb907417sfxcab-ENU.exe" Source="..\ExternalMergeModules\MS KB908002 Fix\KB908002\office2003-kb907417sfxcab-ENU.exe" Checksum="yes" KeyPath="yes"/>
+                    </Component>
+                </Directory>
+            </Directory>
+        </Directory>
+
+        <!-- The following section launches the installed file setup.exe but hides its DOS window -->
+        <CustomAction Id="SetKB908002Data" Return="check" Property="LaunchKB908002Fix" Value="[#setup.exe]" />
+        <CustomAction Id="LaunchKB908002Fix" Return="ignore" Impersonate="no" Execute="deferred" Script="vbscript">
+            <![CDATA[
+dim KB908002FixSetupPath = Session.Property("CustomActionData")
+const WindowStyleStealth  = &H20000000
+set WSO = createobject("WScript.Shell")
+WSO.run "%comspec% /c """ + KB908002FixSetupPath + """", WindowStyleStealth, false
+]]>
+        </CustomAction>
+
+        <InstallExecuteSequence>
+            <Custom Action="SetKB908002Data" Before="InstallInitialize"><![CDATA[VersionNT >= 501]]></Custom>
+            <Custom Action="LaunchKB908002Fix" After="PublishComponents"><![CDATA[NOT Installed]]></Custom>
+        </InstallExecuteSequence>
+
+    </Module>
+</Wix>

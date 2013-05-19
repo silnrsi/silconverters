@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+    <Module Id="BasicConverters40MergeModule" Language="1033" Version="4.0.0.0">
+        <Package Id="986d0cb0-8d39-4120-a049-eaffdf42c6f9" Comments="Set of basic converters usable to most users" Description="Basic Converters for use in SILConverters' client applications" Keywords="SILConverters; Encoding Conversion; Transliteration; EncConverters" Manufacturer="SIL International" InstallerVersion="200" />
+
+        <Directory Id="TARGETDIR" Name="SourceDir">
+            <Directory Id="CommonAppDataFolder" SourceName="AppData">
+                <Directory Id="SIL" Name="SIL">
+                    <Directory Id="SILConverters40" Name="SILConverters40">
+                        <Directory Id="MapsTables" Name="MapsTables">
+                            <Component Id="SILGreek.tec.vbs" Guid="BB4375DF-C076-4708-9AB3-F187AAD16505">
+                                <File Id="SILGreek.tec.vbs" Name="SILGreek.tec.vbs" KeyPath="yes" Source="MapsTables\SILGreek.tec.vbs" />
+                            </Component>
+                            <Component Id="SILPUAtoUnicode60.tec" Guid="{7DF91C30-B9B2-4BC2-B133-ACC95FDD5D89}">
+                                <File Id="SILPUAtoUnicode60.tec" Name="SILPUAtoUnicode60.tec" KeyPath="yes" Source="MapsTables\SILPUAtoUnicode60.tec" />
+                            </Component>
+                            <Component Id="SIL_IPA_1990.tec" Guid="{D79F91F7-246B-4156-BB75-916854D5ABF5}">
+                                <File Id="SIL_IPA_1990.tec" Name="SIL-IPA-1990.tec" KeyPath="yes" Source="MapsTables\SIL-IPA-1990.tec" />
+                            </Component>
+                            <Component Id="SILPUAtoUnicode60.map" Guid="{15845579-BC85-491E-A4B9-89ADB55ACCBC}">
+                                <File Id="SILPUAtoUnicode60.map" Name="SILPUAtoUnicode60.map" KeyPath="yes" Source="MapsTables\SILPUAtoUnicode60.map" />
+                            </Component>
+                            <Component Id="SIL_IPA_1990.map" Guid="{31C6AB78-0079-492E-A77C-6CBC8FDD1191}">
+                                <File Id="SIL_IPA_1990.map" Name="SIL-IPA-1990.map" KeyPath="yes" Source="MapsTables\SIL-IPA-1990.map" />
+                            </Component>
+                            <Component Id="SILPUAtoUnicode50.map" Guid="{3B7F297D-F4AF-452B-B450-D87141F3E1A6}">
+                                <File Id="SILPUAtoUnicode50.map" Name="SILPUAtoUnicode50.map" KeyPath="yes" Source="MapsTables\SILPUAtoUnicode50.map" />
+                            </Component>
+                            <Component Id="silgreek2004_04_27.tec" Guid="{DDED0185-7FCB-42C7-9B20-D5EB18B3B20A}">
+                                <File Id="silgreek2004_04_27.tec" Name="silgreek2004-04-27.tec" KeyPath="yes" Source="MapsTables\silgreek2004-04-27.tec" />
+                            </Component>
+                            <Component Id="silipa93.tec.vbs" Guid="{04D1C27A-7AA0-47A3-B7AB-EED503094B01}">
+                                <File Id="silipa93.tec.vbs" Name="silipa93.tec.vbs" KeyPath="yes" Source="MapsTables\silipa93.tec.vbs" />
+                            </Component>
+                            <Component Id="Basic_Converters.xml" Guid="{C13AF622-D01D-4ECE-8B77-88999FF8A4EB}">
+                                <File Id="Basic_Converters.xml" Name="Basic Converters.xml" KeyPath="yes" Source="MapsTables\Basic Converters.xml" />
+                            </Component>
+                            <Component Id="Windows_SymbolEncodedFont2SymbolCP.tec" Guid="{438075FB-8C58-4E4F-A446-F9599DDDC738}">
+                                <File Id="Windows_SymbolEncodedFont2SymbolCP.tec" Name="Windows-SymbolEncodedFont2SymbolCP.tec" KeyPath="yes" Source="MapsTables\Windows-SymbolEncodedFont2SymbolCP.tec" />
+                            </Component>
+                            <Component Id="iso_8859.tec" Guid="{F6CD851F-EB71-465B-9E93-FEE0F62440A5}">
+                                <File Id="iso_8859.tec" Name="iso-8859.tec" KeyPath="yes" Source="MapsTables\iso-8859.tec" />
+                            </Component>
+                            <Component Id="EC_Installation_Readme.txt" Guid="{39AA94C1-02CC-49DC-AFCA-2ADCBA97D9E0}">
+                                <File Id="EC_Installation_Readme.txt" Name="EC Installation Readme.txt" KeyPath="yes" Source="MapsTables\EC Installation Readme.txt" />
+                            </Component>
+                            <Component Id="AMPHON.tec" Guid="{F1883257-A20B-4FE6-A1BF-73C46AB510C5}">
+                                <File Id="AMPHON.tec" Name="AMPHON.tec" KeyPath="yes" Source="MapsTables\AMPHON.tec" />
+                            </Component>
+                            <Component Id="SIL_IPA93_2001.map" Guid="{46C12205-1AB0-4EE4-BA9D-6893AA7BAE72}">
+                                <File Id="SIL_IPA93_2001.map" Name="SIL-IPA93-2001.map" KeyPath="yes" Source="MapsTables\SIL-IPA93-2001.map" />
+                            </Component>
+                            <Component Id="windows_symbolencodedfont.tec" Guid="{860E0790-EE6B-4274-BD58-A9CE31BAF70C}">
+                                <File Id="windows_symbolencodedfont.tec" Name="windows-symbolencodedfont.tec" KeyPath="yes" Source="MapsTables\windows-symbolencodedfont.tec" />
+                            </Component>
+                            <Component Id="SILPUAtoUnicode41.tec" Guid="{79118CC9-8196-498B-8A83-DA03853149A2}">
+                                <File Id="SILPUAtoUnicode41.tec" Name="SILPUAtoUnicode41.tec" KeyPath="yes" Source="MapsTables\SILPUAtoUnicode41.tec" />
+                            </Component>
+                            <Component Id="SILPUAtoUnicode50.tec" Guid="{77FB1F4D-0994-4B90-B87D-00849E9649EC}">
+                                <File Id="SILPUAtoUnicode50.tec" Name="SILPUAtoUnicode50.tec" KeyPath="yes" Source="MapsTables\SILPUAtoUnicode50.tec" />
+                            </Component>
+                            <Component Id="Windows_SymbolEncodedFont2SymbolCP.map" Guid="{5CB04EF5-319F-4B0B-AFF3-D0AEBDCB9901}">
+                                <File Id="Windows_SymbolEncodedFont2SymbolCP.map" Name="Windows-SymbolEncodedFont2SymbolCP.map" KeyPath="yes" Source="MapsTables\Windows-SymbolEncodedFont2SymbolCP.map" />
+                            </Component>
+                            <Component Id="iso_8859.map" Guid="{C2AA8667-8232-45E5-9428-7B5685914069}">
+                                <File Id="iso_8859.map" Name="iso-8859.map" KeyPath="yes" Source="MapsTables\iso-8859.map" />
+                            </Component>
+                            <Component Id="SILPUAtoUnicode51.tec" Guid="{9D6073ED-5D4C-4A4B-A517-57D227F8A8E2}">
+                                <File Id="SILPUAtoUnicode51.tec" Name="SILPUAtoUnicode51.tec" KeyPath="yes" Source="MapsTables\SILPUAtoUnicode51.tec" />
+                            </Component>
+                            <Component Id="SIL_IPA_1990.tec.vbs" Guid="{9CC2895B-8553-4AA0-89DF-74FFBFA77A45}">
+                                <File Id="SIL_IPA_1990.tec.vbs" Name="SIL-IPA-1990.tec.vbs" KeyPath="yes" Source="MapsTables\SIL-IPA-1990.tec.vbs" />
+                            </Component>
+                            <Component Id="SILPUAtoUnicode51.map" Guid="{EBF4C875-F777-4A4F-B79E-D925C2E98D0B}">
+                                <File Id="SILPUAtoUnicode51.map" Name="SILPUAtoUnicode51.map" KeyPath="yes" Source="MapsTables\SILPUAtoUnicode51.map" />
+                            </Component>
+                            <Component Id="AMPHON.map" Guid="{12159B36-7F2F-4CDD-B26A-54B918F645A0}">
+                                <File Id="AMPHON.map" Name="AMPHON.map" KeyPath="yes" Source="MapsTables\AMPHON.map" />
+                            </Component>
+                            <Component Id="SILPUAtoUnicode41.map" Guid="{D6393411-3B94-409D-9781-7B03DF7B7007}">
+                                <File Id="SILPUAtoUnicode41.map" Name="SILPUAtoUnicode41.map" KeyPath="yes" Source="MapsTables\SILPUAtoUnicode41.map" />
+                            </Component>
+                            <Component Id="Windows_SymbolEncodedFont.map" Guid="{8EEB2BBC-8C86-4946-9258-D3AD8028CB47}">
+                                <File Id="Windows_SymbolEncodedFont.map" Name="Windows-SymbolEncodedFont.map" KeyPath="yes" Source="MapsTables\Windows-SymbolEncodedFont.map" />
+                            </Component>
+                            <Component Id="README.txt" Guid="{B9717559-DF91-43D8-9C53-0D7378FE9166}">
+                                <File Id="README.txt" Name="README.txt" KeyPath="yes" Source="MapsTables\README.txt" />
+                            </Component>
+                            <Component Id="SILGreek2004_04_27.map" Guid="{BB262014-DD5E-4C0A-A3CF-8EC8DBF872FD}">
+                                <File Id="SILGreek2004_04_27.map" Name="SILGreek2004-04-27.map" KeyPath="yes" Source="MapsTables\SILGreek2004-04-27.map" />
+                            </Component>
+                            <Component Id="silipa93.tec" Guid="{789923EB-7841-4C69-9FC4-3C11D378C940}">
+                                <File Id="silipa93.tec" Name="silipa93.tec" KeyPath="yes" Source="MapsTables\silipa93.tec" />
+                            </Component>
+                        </Directory>
+                    </Directory>
+                </Directory>
+            </Directory>
+        </Directory>
+
+    </Module>
+</Wix>

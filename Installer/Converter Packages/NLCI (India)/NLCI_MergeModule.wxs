@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+	<Module Id="NLCI_India40MergeModule" Language="1033" Version="4.0.0.0">
+		<Package Id="641f4129-3b21-4fa4-b1f5-411fd6038932" Comments="Encoding converters created by NLCI in India" Description="Converters/transliterators created by NLCI in India" Keywords="SILConverters; Encoding Conversion; WinScript; CDAC; EncConverters" Manufacturer="SIL International" InstallerVersion="200" />
+
+		<Directory Id="TARGETDIR" Name="SourceDir">
+            <Directory Id="CommonAppDataFolder" SourceName="AppData">
+                <Directory Id="SIL" Name="SIL">
+                    <Directory Id="SILConverters40" Name="SILConverters40">
+                        <Directory Id="MapsTables" Name="MapsTables">
+                            <Component Id="WinScrOri.tec" Guid="27bcfcff-e247-4d96-a6d0-e587b6cf001f">
+                                <File Id="WinScrOri.tec" Name="WinScrOri.tec" KeyPath="yes" Source="MapsTables\WinScrOri.tec" />
+                            </Component>
+                            <Component Id="WinScrMal.map" Guid="6f0f7d30-7f27-4c5d-8a7c-77d9dea61c5d">
+                                <File Id="WinScrMal.map" Name="WinScrMal.map" KeyPath="yes" Source="MapsTables\WinScrMal.map" />
+                            </Component>
+                            <Component Id="NLCI.xml" Guid="01874040-1922-450f-9e62-30660b5b7b7d">
+                                <File Id="NLCI.xml" Name="NLCI.xml" KeyPath="yes" Source="MapsTables\NLCI.xml" />
+                            </Component>
+                            <Component Id="WinScrTam.tec.vbs" Guid="60e60f04-5ea7-4f19-b542-8aa4aa8fa2d3">
+                                <File Id="WinScrTam.tec.vbs" Name="WinScrTam.tec.vbs" KeyPath="yes" Source="MapsTables\WinScrTam.tec.vbs" />
+                            </Component>
+                            <Component Id="WinScrOri.map" Guid="f054fae0-6211-4225-a3ec-e9566930321e">
+                                <File Id="WinScrOri.map" Name="WinScrOri.map" KeyPath="yes" Source="MapsTables\WinScrOri.map" />
+                            </Component>
+                            <Component Id="WinScrGuj.tec.vbs" Guid="33fd9d2d-2fd9-4832-a767-91eb44d0a3c4">
+                                <File Id="WinScrGuj.tec.vbs" Name="WinScrGuj.tec.vbs" KeyPath="yes" Source="MapsTables\WinScrGuj.tec.vbs" />
+                            </Component>
+                            <Component Id="WinScrTel.tec.vbs" Guid="0a2cbc95-767a-429f-ab8e-ed15adf6cb8b">
+                                <File Id="WinScrTel.tec.vbs" Name="WinScrTel.tec.vbs" KeyPath="yes" Source="MapsTables\WinScrTel.tec.vbs" />
+                            </Component>
+                            <Component Id="WinScrMal.tec.vbs" Guid="f6fd6223-04b9-46fa-85f2-5c302c37388e">
+                                <File Id="WinScrMal.tec.vbs" Name="WinScrMal.tec.vbs" KeyPath="yes" Source="MapsTables\WinScrMal.tec.vbs" />
+                            </Component>
+                            <Component Id="WinScrTel.map" Guid="265f5913-7808-4c65-9d98-9f3f234f0ece">
+                                <File Id="WinScrTel.map" Name="WinScrTel.map" KeyPath="yes" Source="MapsTables\WinScrTel.map" />
+                            </Component>
+                            <Component Id="WinScrDev.tec" Guid="e961c253-309e-462e-921d-759f579c70e8">
+                                <File Id="WinScrDev.tec" Name="WinScrDev.tec" KeyPath="yes" Source="MapsTables\WinScrDev.tec" />
+                            </Component>
+                            <Component Id="WinScrTel.tec" Guid="6211c4e4-48bb-44cb-82e6-b15f98f0202b">
+                                <File Id="WinScrTel.tec" Name="WinScrTel.tec" KeyPath="yes" Source="MapsTables\WinScrTel.tec" />
+                            </Component>
+                            <Component Id="WinScrTam.map" Guid="17cad5c9-0546-4774-949b-6da2f8e907c5">
+                                <File Id="WinScrTam.map" Name="WinScrTam.map" KeyPath="yes" Source="MapsTables\WinScrTam.map" />
+                            </Component>
+                            <Component Id="WinScrTam.tec" Guid="ecfeed66-b13c-4216-bef5-8e1084d816c6">
+                                <File Id="WinScrTam.tec" Name="WinScrTam.tec" KeyPath="yes" Source="MapsTables\WinScrTam.tec" />
+                            </Component>
+                            <Component Id="PHNindus2UnicodeIPA.tec" Guid="a1fd6149-8641-4a4c-9ae4-0fec04d018af">
+                                <File Id="PHNindus2UnicodeIPA.tec" Name="PHNindus2UnicodeIPA.tec" KeyPath="yes" Source="MapsTables\PHNindus2UnicodeIPA.tec" />
+                            </Component>
+                            <Component Id="WinScrMal.tec" Guid="a6e25e27-34ba-429e-8a39-fff26d6d1c4d">
+                                <File Id="WinScrMal.tec" Name="WinScrMal.tec" KeyPath="yes" Source="MapsTables\WinScrMal.tec" />
+                            </Component>
+                            <Component Id="WinScrDev.map" Guid="abf6762d-a75f-48a0-a486-66de86f63f47">
+                                <File Id="WinScrDev.map" Name="WinScrDev.map" KeyPath="yes" Source="MapsTables\WinScrDev.map" />
+                            </Component>
+                            <Component Id="WinScrGuj.tec" Guid="1c647a65-09ae-4017-beff-72597817cae5">
+                                <File Id="WinScrGuj.tec" Name="WinScrGuj.tec" KeyPath="yes" Source="MapsTables\WinScrGuj.tec" />
+                            </Component>
+                            <Component Id="SLOri2UOri.map" Guid="fa1ab909-1d75-4442-b631-363b82aae637">
+                                <File Id="SLOri2UOri.map" Name="SLOri2UOri.map" KeyPath="yes" Source="MapsTables\SLOri2UOri.map" />
+                            </Component>
+                            <Component Id="PHNindus2UnicodeIPA.map" Guid="23f286e3-5db1-48a5-8b1b-7c944ad003c0">
+                                <File Id="PHNindus2UnicodeIPA.map" Name="PHNindus2UnicodeIPA.map" KeyPath="yes" Source="MapsTables\PHNindus2UnicodeIPA.map" />
+                            </Component>
+                            <Component Id="SLOri2UOri.tec" Guid="42fb7ffd-aa11-4d30-b891-c6c5126b73ca">
+                                <File Id="SLOri2UOri.tec" Name="SLOri2UOri.tec" KeyPath="yes" Source="MapsTables\SLOri2UOri.tec" />
+                            </Component>
+                            <Component Id="SLOri2UOri.tec.vbs" Guid="567046d4-188e-4a84-bf9f-4bd6268c9557">
+                                <File Id="SLOri2UOri.tec.vbs" Name="SLOri2UOri.tec.vbs" KeyPath="yes" Source="MapsTables\SLOri2UOri.tec.vbs" />
+                            </Component>
+                            <Component Id="WinScrDev.tec.vbs" Guid="f5d7e00b-d8f4-4191-a712-26383ebcf5d7">
+                                <File Id="WinScrDev.tec.vbs" Name="WinScrDev.tec.vbs" KeyPath="yes" Source="MapsTables\WinScrDev.tec.vbs" />
+                            </Component>
+                            <Component Id="WinScrGuj.map" Guid="d7417ea6-285a-4e37-9076-be7d5a756a42">
+                                <File Id="WinScrGuj.map" Name="WinScrGuj.map" KeyPath="yes" Source="MapsTables\WinScrGuj.map" />
+                            </Component>                            
+                        </Directory>
+                    </Directory>
+                </Directory>
+            </Directory>
+        </Directory>
+	</Module>
+</Wix>

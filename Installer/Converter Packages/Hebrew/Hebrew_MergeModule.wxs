@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+	<Module Id="Hebrew40MergeModule" Language="1033" Version="4.0.0.0">
+		<Package Id="f4579731-bed3-49f7-954b-5a2c31aa1f2a" Comments="Converters used in Papua New Guinea" Description="Converters related to Hebrew" Keywords="SILConverters; Encoding Conversion; Transliteration; EncConverters" Languages="1033" Manufacturer="SIL International" InstallerVersion="200" />
+
+		<Directory Id="TARGETDIR" Name="SourceDir">
+            <Directory Id="CommonAppDataFolder" SourceName="AppData">
+                <Directory Id="SIL" Name="SIL">
+                    <Directory Id="SILConverters40" Name="SILConverters40">
+                        <Directory Id="MapsTables" Name="MapsTables">
+                            <Component Id="EzraSIL20to25.tec" Guid="b88a816c-e569-4774-a893-a7575013c5b6">
+                                <File Id="EzraSIL20to25.tec" Name="EzraSIL20to25.tec" KeyPath="yes" Source="MapsTables\EzraSIL20to25.tec" />
+                            </Component>
+                            <Component Id="EzraSIL20to25.map" Guid="ee003f78-d4c1-437c-9610-a5276f226288">
+                                <File Id="EzraSIL20to25.map" Name="EzraSIL20to25.map" KeyPath="yes" Source="MapsTables\EzraSIL20to25.map" />
+                            </Component>
+                            <Component Id="r2l_2004.cct" Guid="A142E024-7593-4741-9AEB-47BC462A9B72">
+                                <File Id="r2l_2004.cct" Name="r2l_2004.cct" KeyPath="yes" Source="MapsTables\r2l_2004.cct" />
+                            </Component>
+                            <Component Id="SILEzratoUni50.tec" Guid="9da754fc-daee-451a-9a0c-5e58fa791d38">
+                                <File Id="SILEzratoUni50.tec" Name="SILEzratoUni50.tec" KeyPath="yes" Source="MapsTables\SILEzratoUni50.tec" />
+                            </Component>
+                            <Component Id="SILEzratoUni50.map" Guid="649e1081-6b00-46cc-aa63-b5f26a3b189b">
+                                <File Id="SILEzratoUni50.map" Name="SILEzratoUni50.map" KeyPath="yes" Source="MapsTables\SILEzratoUni50.map" />
+                            </Component>
+                            <Component Id="Hebrew.xml" Guid="9b57a2f1-2c87-4672-b0f2-60ed09d36c7e">
+                                <File Id="Hebrew.xml" Name="Hebrew.xml" KeyPath="yes" Source="MapsTables\Hebrew.xml" />
+                            </Component>
+                            <Component Id="SIL_Ezra.vbs" Guid="f954c48a-fe13-46e4-90fd-cb4f8986b543">
+                                <File Id="SIL_Ezra.vbs" Name="SIL Ezra.vbs" KeyPath="yes" Source="MapsTables\SIL Ezra.vbs" />
+                            </Component>
+                        </Directory>
+                    </Directory>
+                </Directory>
+            </Directory>
+        </Directory>
+	</Module>
+</Wix>

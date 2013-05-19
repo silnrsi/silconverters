@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+	<Module Id="ICU_Transliterators40MergeModule" Language="1033" Version="4.0.0.0">
+		<Package Id="7a662420-fd5e-4edd-8eb6-7017ab530636" Comments="Set of basic ICU transliterators from different ranges of Unicode to Latin" Description="Basic ICU transliterators from different ranges of Unicode to Latin" Manufacturer="SIL International" Keywords="ICU; SILConverters; Encoding Conversion; Transliteration; EncConverters" InstallerVersion="200" />
+
+		<Directory Id="TARGETDIR" Name="SourceDir">
+            <Directory Id="CommonAppDataFolder" SourceName="AppData">
+                <Directory Id="SIL" Name="SIL">
+                    <Directory Id="SILConverters40" Name="SILConverters40">
+                        <Directory Id="MapsTables" Name="MapsTables">
+                            <Component Id="ICU_Transliterators.xml" Guid="8014c0b2-81d6-4221-876f-914917d56499">
+                                <File Id="ICU_Transliterators.xml" Name="ICU Transliterators.xml" KeyPath="yes" Source="MapsTables\ICU Transliterators.xml" />
+                            </Component>
+                        </Directory>
+                    </Directory>
+                </Directory>
+            </Directory>
+        </Directory>
+	</Module>
+</Wix>

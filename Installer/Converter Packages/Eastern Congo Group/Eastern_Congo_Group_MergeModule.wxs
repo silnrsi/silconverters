@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+	<Module Id="Eastern_Congo_Group40MergeModule" Language="1033" Version="4.0.0.0">
+		<Package Id="6162bc4e-4267-43c2-9e8c-2860c6732ad5" Comments="Encoding converters used in Eastern Congo Group" Description="Encoding converters for Eastern Congo Group" Keywords="SILConverters; Encoding Conversion; Eastern Congo Group; EncConverters" Manufacturer="SIL International" InstallerVersion="200" />
+
+		<Directory Id="TARGETDIR" Name="SourceDir">
+            <Directory Id="CommonAppDataFolder" SourceName="AppData">
+                <Directory Id="SIL" Name="SIL">
+                    <Directory Id="SILConverters40" Name="SILConverters40">
+                        <Directory Id="MapsTables" Name="MapsTables">
+                            <Component Id="BUDU_Unicode.tec" Guid="8ae3a0c8-e877-4896-97c5-489f190e62e6">
+                                <File Id="BUDU_Unicode.tec" Name="BUDU-Unicode.tec" KeyPath="yes" Source="MapsTables\BUDU-Unicode.tec" />
+                            </Component>
+                            <Component Id="BuduASCII_Unicode.tec.vbs" Guid="8d1f489f-fabc-49ff-b525-bab2999aeded">
+                                <File Id="BuduASCII_Unicode.tec.vbs" Name="BuduASCII-Unicode.tec.vbs" KeyPath="yes" Source="MapsTables\BuduASCII-Unicode.tec.vbs" />
+                            </Component>
+                            <Component Id="Mayogo_Unicode.tec" Guid="1b0c63aa-4519-4221-9ece-b94c2c8bd63d">
+                                <File Id="Mayogo_Unicode.tec" Name="Mayogo-Unicode.tec" KeyPath="yes" Source="MapsTables\Mayogo-Unicode.tec" />
+                            </Component>
+                            <Component Id="Mayogo_Unicode.tec.vbs" Guid="f82be870-18c0-4691-b9b6-1b3a25c9810e">
+                                <File Id="Mayogo_Unicode.tec.vbs" Name="Mayogo-Unicode.tec.vbs" KeyPath="yes" Source="MapsTables\Mayogo-Unicode.tec.vbs" />
+                            </Component>
+                            <Component Id="ECG_Unicode.tec.vbs" Guid="ef4acd15-cab7-4cd4-8701-55072e4620c3">
+                                <File Id="ECG_Unicode.tec.vbs" Name="ECG-Unicode.tec.vbs" KeyPath="yes" Source="MapsTables\ECG-Unicode.tec.vbs" />
+                            </Component>
+                            <Component Id="KomoASCII_Unicode.tec" Guid="665facfc-80bb-491c-a00d-8fd05769848b">
+                                <File Id="KomoASCII_Unicode.tec" Name="KomoASCII-Unicode.tec" KeyPath="yes" Source="MapsTables\KomoASCII-Unicode.tec" />
+                            </Component>
+                            <Component Id="ECG.xml" Guid="f25dcbc6-b85a-4086-a364-c36209217e99">
+                                <File Id="ECG.xml" Name="ECG.xml" KeyPath="yes" Source="MapsTables\ECG.xml" />
+                            </Component>
+                            <Component Id="ECG_Unicode.tec" Guid="a5cb6c90-f636-4f2c-b5de-44c97d7c4b33">
+                                <File Id="ECG_Unicode.tec" Name="ECG-Unicode.tec" KeyPath="yes" Source="MapsTables\ECG-Unicode.tec" />
+                            </Component>
+                            <Component Id="BheleASCII_Unicode.tec.vbs" Guid="00db311b-3317-46c3-84eb-802fdabd574e">
+                                <File Id="BheleASCII_Unicode.tec.vbs" Name="BheleASCII-Unicode.tec.vbs" KeyPath="yes" Source="MapsTables\BheleASCII-Unicode.tec.vbs" />
+                            </Component>
+                            <Component Id="BheleASCII_Unicode.tec" Guid="702dcd29-5546-41de-9f72-adc14fe773c9">
+                                <File Id="BheleASCII_Unicode.tec" Name="BheleASCII-Unicode.tec" KeyPath="yes" Source="MapsTables\BheleASCII-Unicode.tec" />
+                            </Component>
+                            <Component Id="KomoASCII_Unicode.tec.vbs" Guid="112a510c-d7ac-4f7e-979a-0e0280b67090">
+                                <File Id="KomoASCII_Unicode.tec.vbs" Name="KomoASCII-Unicode.tec.vbs" KeyPath="yes" Source="MapsTables\KomoASCII-Unicode.tec.vbs" />
+                            </Component>
+                            <Component Id="Mayogo_Unicode.map" Guid="fb15cd3e-45df-4677-9007-a33dc2b3449c">
+                                <File Id="Mayogo_Unicode.map" Name="Mayogo-Unicode.map" KeyPath="yes" Source="MapsTables\Mayogo-Unicode.map" />
+                            </Component>
+                            <Component Id="BuduASCII_Unicode.tec" Guid="fa448ad2-5556-4e6a-ba97-a13bee49af16">
+                                <File Id="BuduASCII_Unicode.tec" Name="BuduASCII-Unicode.tec" KeyPath="yes" Source="MapsTables\BuduASCII-Unicode.tec" />
+                            </Component>
+                            <Component Id="Komo_Unicode.tec" Guid="d49688ad-c808-4c5e-a4aa-97e85849c83b">
+                                <File Id="Komo_Unicode.tec" Name="Komo-Unicode.tec" KeyPath="yes" Source="MapsTables\Komo-Unicode.tec" />
+                            </Component>
+                            <Component Id="Komo_Unicode.tec.vbs" Guid="395cbf9a-0970-45e3-8070-552d43103673">
+                                <File Id="Komo_Unicode.tec.vbs" Name="Komo-Unicode.tec.vbs" KeyPath="yes" Source="MapsTables\Komo-Unicode.tec.vbs" />
+                            </Component>
+                            <Component Id="BUDU_Unicode.tec.vbs" Guid="aad4b351-8c83-4a78-8e31-1de861eb511b">
+                                <File Id="BUDU_Unicode.tec.vbs" Name="BUDU-Unicode.tec.vbs" KeyPath="yes" Source="MapsTables\BUDU-Unicode.tec.vbs" />
+                            </Component>
+                        </Directory>
+                    </Directory>
+                </Directory>
+            </Directory>
+        </Directory>
+	</Module>
+</Wix>
