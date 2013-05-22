@@ -75,6 +75,7 @@ namespace SILConvertersWordML
             this.fontDialog = new System.Windows.Forms.FontDialog();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.helpProvider = new System.Windows.Forms.HelpProvider();
+            this.useLinqToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.toolStrip.SuspendLayout();
@@ -137,7 +138,7 @@ namespace SILConvertersWordML
             this.ColumnSampleData.Name = "ColumnSampleData";
             this.ColumnSampleData.ReadOnly = true;
             this.ColumnSampleData.ToolTipText = "This column shows sample data for the given font (click a cell in this column to " +
-                "see the next occurrence)";
+    "see the next occurrence)";
             // 
             // ColumnConverter
             // 
@@ -146,7 +147,7 @@ namespace SILConvertersWordML
             this.ColumnConverter.Name = "ColumnConverter";
             this.ColumnConverter.ReadOnly = true;
             this.ColumnConverter.ToolTipText = "Click a cell in this column to associate a system converter with the correspondin" +
-                "g font (use right-click to repeat the last converter selected)";
+    "g font (use right-click to repeat the last converter selected)";
             this.ColumnConverter.Width = 59;
             // 
             // ColumnResults
@@ -155,7 +156,7 @@ namespace SILConvertersWordML
             this.ColumnResults.Name = "ColumnResults";
             this.ColumnResults.ReadOnly = true;
             this.ColumnResults.ToolTipText = "This column shows a preview of what the output would look like after the conversi" +
-                "on";
+    "on";
             // 
             // ColumnTargetFont
             // 
@@ -206,7 +207,7 @@ namespace SILConvertersWordML
             this.toolStripButtonAutoSearch.Size = new System.Drawing.Size(23, 27);
             this.toolStripButtonAutoSearch.Text = "Search for documents to open based on font";
             this.toolStripButtonAutoSearch.ToolTipText = "Click to automatically search for Word documents to convert based on fonts used w" +
-                "ithin the document";
+    "ithin the document";
             this.toolStripButtonAutoSearch.Click += new System.EventHandler(this.autoSearchToolStripMenuItem_Click);
             // 
             // toolStripSeparator5
@@ -279,7 +280,7 @@ namespace SILConvertersWordML
             this.radioButtonEverything.TabStop = true;
             this.radioButtonEverything.Text = "&Styles && Custom formatting";
             this.toolTip.SetToolTip(this.radioButtonEverything, "Click this to convert all the text in the document(s) (both Style-based and custo" +
-                    "m-formatted)");
+        "m-formatted)");
             this.radioButtonEverything.UseVisualStyleBackColor = true;
             this.radioButtonEverything.Click += new System.EventHandler(this.radioButtonEverything_Click);
             // 
@@ -292,7 +293,7 @@ namespace SILConvertersWordML
             this.radioButtonStylesOnly.TabIndex = 1;
             this.radioButtonStylesOnly.Text = "S&tyles only";
             this.toolTip.SetToolTip(this.radioButtonStylesOnly, "Click this to convert text based on particular style(s) (doesn\'t convert custom-f" +
-                    "ormatted text)");
+        "ormatted text)");
             this.radioButtonStylesOnly.UseVisualStyleBackColor = true;
             this.radioButtonStylesOnly.Click += new System.EventHandler(this.radioButtonStylesOnly_Click);
             // 
@@ -305,7 +306,7 @@ namespace SILConvertersWordML
             this.radioButtonFontsOnly.TabIndex = 2;
             this.radioButtonFontsOnly.Text = "&Custom formatting only";
             this.toolTip.SetToolTip(this.radioButtonFontsOnly, "Click this to convert text that is custom-formatted (doesn\'t convert Style-format" +
-                    "ted text)");
+        "ted text)");
             this.radioButtonFontsOnly.UseVisualStyleBackColor = true;
             this.radioButtonFontsOnly.Click += new System.EventHandler(this.radioButtonFontsOnly_Click);
             // 
@@ -321,8 +322,8 @@ namespace SILConvertersWordML
             // 
             this.openFileDialog.DefaultExt = "doc";
             this.openFileDialog.Filter = "All Word Documents (*.doc; *.docx; *.dot; *.htm; *.html; *.url; *.rtf; *.mht; *.m" +
-                "html; *.xml)|*.doc; *.docx; *.dot; *.htm; *.html; *.url; *.rtf; *.mht; *.mhtml; " +
-                "*.xml|All files (*.*)|*.*";
+    "html; *.xml)|*.doc; *.docx; *.dot; *.htm; *.html; *.url; *.rtf; *.mht; *.mhtml; " +
+    "*.xml|All files (*.*)|*.*";
             this.openFileDialog.Multiselect = true;
             this.openFileDialog.RestoreDirectory = true;
             this.openFileDialog.SupportMultiDottedExtensions = true;
@@ -351,7 +352,7 @@ namespace SILConvertersWordML
             this.toolStripSeparator2,
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(35, 20);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "&File";
             this.fileToolStripMenuItem.DropDownOpening += new System.EventHandler(this.fileToolStripMenuItem_DropDownOpening);
             // 
@@ -359,7 +360,7 @@ namespace SILConvertersWordML
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
             this.openToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(230, 22);
             this.openToolStripMenuItem.Text = "&Open";
             this.openToolStripMenuItem.ToolTipText = "Click to open one or more Word documents you want to convert";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
@@ -367,17 +368,17 @@ namespace SILConvertersWordML
             // recentFilesToolStripMenuItem
             // 
             this.recentFilesToolStripMenuItem.Name = "recentFilesToolStripMenuItem";
-            this.recentFilesToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
+            this.recentFilesToolStripMenuItem.Size = new System.Drawing.Size(230, 22);
             this.recentFilesToolStripMenuItem.Text = "&Recent Files";
             this.recentFilesToolStripMenuItem.ToolTipText = "Recently used files";
             // 
             // autoSearchToolStripMenuItem
             // 
             this.autoSearchToolStripMenuItem.Name = "autoSearchToolStripMenuItem";
-            this.autoSearchToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
+            this.autoSearchToolStripMenuItem.Size = new System.Drawing.Size(230, 22);
             this.autoSearchToolStripMenuItem.Text = "&Search";
             this.autoSearchToolStripMenuItem.ToolTipText = "Click to automatically search for Word documents to convert based on fonts used w" +
-                "ithin the document";
+    "ithin the document";
             this.autoSearchToolStripMenuItem.Click += new System.EventHandler(this.autoSearchToolStripMenuItem_Click);
             // 
             // reloadToolStripMenuItem
@@ -385,7 +386,7 @@ namespace SILConvertersWordML
             this.reloadToolStripMenuItem.Enabled = false;
             this.reloadToolStripMenuItem.Name = "reloadToolStripMenuItem";
             this.reloadToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F5;
-            this.reloadToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
+            this.reloadToolStripMenuItem.Size = new System.Drawing.Size(230, 22);
             this.reloadToolStripMenuItem.Text = "&Reload";
             this.reloadToolStripMenuItem.ToolTipText = "Click to reload the files to convert.";
             this.reloadToolStripMenuItem.Click += new System.EventHandler(this.reloadToolStripMenuItem_Click);
@@ -393,13 +394,13 @@ namespace SILConvertersWordML
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(214, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(227, 6);
             // 
             // convertAndSaveDocumentsToolStripMenuItem
             // 
             this.convertAndSaveDocumentsToolStripMenuItem.Enabled = false;
             this.convertAndSaveDocumentsToolStripMenuItem.Name = "convertAndSaveDocumentsToolStripMenuItem";
-            this.convertAndSaveDocumentsToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
+            this.convertAndSaveDocumentsToolStripMenuItem.Size = new System.Drawing.Size(230, 22);
             this.convertAndSaveDocumentsToolStripMenuItem.Text = "&Convert and Save Documents";
             this.convertAndSaveDocumentsToolStripMenuItem.ToolTipText = "Click to convert the opened Word document(s) and save them with a new name";
             this.convertAndSaveDocumentsToolStripMenuItem.Click += new System.EventHandler(this.convertAndSaveDocumentsToolStripMenuItem_Click);
@@ -407,13 +408,13 @@ namespace SILConvertersWordML
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(214, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(227, 6);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
             this.exitToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.F4)));
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(230, 22);
             this.exitToolStripMenuItem.Text = "&Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -427,14 +428,14 @@ namespace SILConvertersWordML
             this.recentToolStripMenuItem,
             this.saveToolStripMenuItem});
             this.converterMappingsToolStripMenuItem.Name = "converterMappingsToolStripMenuItem";
-            this.converterMappingsToolStripMenuItem.Size = new System.Drawing.Size(116, 20);
+            this.converterMappingsToolStripMenuItem.Size = new System.Drawing.Size(127, 20);
             this.converterMappingsToolStripMenuItem.Text = "&Converter Mappings";
             this.converterMappingsToolStripMenuItem.DropDownOpening += new System.EventHandler(this.converterMappingsToolStripMenuItem_DropDownOpening);
             // 
             // setDefaultConverterToolStripMenuItem
             // 
             this.setDefaultConverterToolStripMenuItem.Name = "setDefaultConverterToolStripMenuItem";
-            this.setDefaultConverterToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.setDefaultConverterToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
             this.setDefaultConverterToolStripMenuItem.Text = "Set &Default Converter";
             this.setDefaultConverterToolStripMenuItem.ToolTipText = "Select a converter to be applied to all fields that aren\'t currently configured";
             this.setDefaultConverterToolStripMenuItem.Click += new System.EventHandler(this.setDefaultConverterToolStripMenuItem_Click);
@@ -442,12 +443,12 @@ namespace SILConvertersWordML
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(177, 6);
+            this.toolStripSeparator4.Size = new System.Drawing.Size(183, 6);
             // 
             // newToolStripMenuItem
             // 
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
             this.newToolStripMenuItem.Text = "&New";
             this.newToolStripMenuItem.ToolTipText = "Click to reset the current mapping of Font/Style names to system converters";
             this.newToolStripMenuItem.Click += new System.EventHandler(this.newToolStripMenuItem_Click);
@@ -455,22 +456,22 @@ namespace SILConvertersWordML
             // loadToolStripMenuItem
             // 
             this.loadToolStripMenuItem.Name = "loadToolStripMenuItem";
-            this.loadToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.loadToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
             this.loadToolStripMenuItem.Text = "&Load";
             this.loadToolStripMenuItem.ToolTipText = "Click to load a previously saved mapping of Font/Style names to system converters" +
-                "";
+    "";
             this.loadToolStripMenuItem.Click += new System.EventHandler(this.loadToolStripMenuItem_Click);
             // 
             // recentToolStripMenuItem
             // 
             this.recentToolStripMenuItem.Name = "recentToolStripMenuItem";
-            this.recentToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.recentToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
             this.recentToolStripMenuItem.Text = "&Recent";
             // 
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
             this.saveToolStripMenuItem.Text = "&Save";
             this.saveToolStripMenuItem.ToolTipText = "Click to save the current mapping of Font/Style names to system converters";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
@@ -479,16 +480,17 @@ namespace SILConvertersWordML
             // 
             this.advancedToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.singlestepConversionToolStripMenuItem,
-            this.leaveXMLFileInFolderToolStripMenuItem});
+            this.leaveXMLFileInFolderToolStripMenuItem,
+            this.useLinqToolStripMenuItem});
             this.advancedToolStripMenuItem.Name = "advancedToolStripMenuItem";
-            this.advancedToolStripMenuItem.Size = new System.Drawing.Size(67, 20);
+            this.advancedToolStripMenuItem.Size = new System.Drawing.Size(72, 20);
             this.advancedToolStripMenuItem.Text = "&Advanced";
             // 
             // singlestepConversionToolStripMenuItem
             // 
             this.singlestepConversionToolStripMenuItem.CheckOnClick = true;
             this.singlestepConversionToolStripMenuItem.Name = "singlestepConversionToolStripMenuItem";
-            this.singlestepConversionToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
+            this.singlestepConversionToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
             this.singlestepConversionToolStripMenuItem.Text = "&Single-step conversion";
             this.singlestepConversionToolStripMenuItem.ToolTipText = "Check this item to see the result of the conversion one \'run\' at a time";
             this.singlestepConversionToolStripMenuItem.CheckStateChanged += new System.EventHandler(this.singlestepConversionToolStripMenuItem_CheckStateChanged);
@@ -497,7 +499,7 @@ namespace SILConvertersWordML
             // 
             this.leaveXMLFileInFolderToolStripMenuItem.CheckOnClick = true;
             this.leaveXMLFileInFolderToolStripMenuItem.Name = "leaveXMLFileInFolderToolStripMenuItem";
-            this.leaveXMLFileInFolderToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
+            this.leaveXMLFileInFolderToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
             this.leaveXMLFileInFolderToolStripMenuItem.Text = "&Leave XML files in folder ";
             this.leaveXMLFileInFolderToolStripMenuItem.ToolTipText = resources.GetString("leaveXMLFileInFolderToolStripMenuItem.ToolTipText");
             // 
@@ -511,6 +513,15 @@ namespace SILConvertersWordML
             this.saveFileDialog.Filter = resources.GetString("saveFileDialog.Filter");
             this.saveFileDialog.RestoreDirectory = true;
             this.saveFileDialog.SupportMultiDottedExtensions = true;
+            // 
+            // useLinqToolStripMenuItem
+            // 
+            this.useLinqToolStripMenuItem.CheckOnClick = true;
+            this.useLinqToolStripMenuItem.Name = "useLinqToolStripMenuItem";
+            this.useLinqToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
+            this.useLinqToolStripMenuItem.Text = "&Use Linq";
+            this.useLinqToolStripMenuItem.ToolTipText = "Check this menu to have the \'Linq\' technology attempt to do the conversion (may y" +
+    "ield a different result if the normal approach doesn\'t work)";
             // 
             // FontsStylesForm
             // 
@@ -584,6 +595,7 @@ namespace SILConvertersWordML
         private System.Windows.Forms.ToolStripButton toolStripButtonAutoSearch;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
         private System.Windows.Forms.ToolStripMenuItem leaveXMLFileInFolderToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem useLinqToolStripMenuItem;
     }
 }
 

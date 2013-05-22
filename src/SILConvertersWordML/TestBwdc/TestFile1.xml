@@ -1,0 +1,2450 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<?mso-application progid="Word.Document"?>
+<w:wordDocument xmlns:aml="http://schemas.microsoft.com/aml/2001/core" xmlns:dt="uuid:C2F41010-65B3-11d1-A29F-00AA00C14882" xmlns:ve="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w10="urn:schemas-microsoft-com:office:word" xmlns:w="http://schemas.microsoft.com/office/word/2003/wordml" xmlns:wx="http://schemas.microsoft.com/office/word/2003/auxHint" xmlns:wsp="http://schemas.microsoft.com/office/word/2003/wordml/sp2" xmlns:sl="http://schemas.microsoft.com/schemaLibrary/2003/core" xmlns:st1="urn:schemas-microsoft-com:office:smarttags" w:macrosPresent="no" w:embeddedObjPresent="yes" w:ocxPresent="no" xml:space="preserve">
+  <w:ignoreSubtree w:val="http://schemas.microsoft.com/office/word/2003/wordml/sp2" />
+  <o:SmartTagType o:namespaceuri="urn:schemas-microsoft-com:office:smarttags" o:name="PlaceName" />
+  <o:SmartTagType o:namespaceuri="urn:schemas-microsoft-com:office:smarttags" o:name="PlaceType" />
+  <o:SmartTagType o:namespaceuri="urn:schemas-microsoft-com:office:smarttags" o:name="State" />
+  <o:SmartTagType o:namespaceuri="urn:schemas-microsoft-com:office:smarttags" o:name="country-region" />
+  <o:SmartTagType o:namespaceuri="urn:schemas-microsoft-com:office:smarttags" o:name="place" />
+  <o:SmartTagType o:namespaceuri="urn:schemas-microsoft-com:office:smarttags" o:name="City" />
+  <o:DocumentProperties>
+    <o:Title>How am I doing</o:Title>
+    <o:Author>Bruce Symons</o:Author>
+    <o:LastAuthor>Bob</o:LastAuthor>
+    <o:Revision>2</o:Revision>
+    <o:TotalTime>0</o:TotalTime>
+    <o:LastPrinted>2009-02-25T07:35:00Z</o:LastPrinted>
+    <o:Created>2010-12-16T14:08:00Z</o:Created>
+    <o:LastSaved>2010-12-16T14:08:00Z</o:LastSaved>
+    <o:Pages>25</o:Pages>
+    <o:Words>23960</o:Words>
+    <o:Characters>136577</o:Characters>
+    <o:Company>SPSIL</o:Company>
+    <o:Lines>1138</o:Lines>
+    <o:Paragraphs>320</o:Paragraphs>
+    <o:CharactersWithSpaces>160217</o:CharactersWithSpaces>
+    <o:Version>12</o:Version>
+  </o:DocumentProperties>
+  <w:fonts>
+    <w:defaultFonts w:ascii="Times New Roman" w:fareast="Times New Roman" w:h-ansi="Times New Roman" w:cs="Times New Roman" />
+    <w:font w:name="Times New Roman">
+      <w:panose-1 w:val="02020603050405020304" />
+      <w:charset w:val="00" />
+      <w:family w:val="Roman" />
+      <w:pitch w:val="variable" />
+      <w:sig w:usb-0="E0002AFF" w:usb-1="C0007841" w:usb-2="00000009" w:usb-3="00000000" w:csb-0="000001FF" w:csb-1="00000000" />
+    </w:font>
+    <w:font w:name="Arial">
+      <w:panose-1 w:val="020B0604020202020204" />
+      <w:charset w:val="00" />
+      <w:family w:val="Swiss" />
+      <w:pitch w:val="variable" />
+      <w:sig w:usb-0="E0002AFF" w:usb-1="C0007843" w:usb-2="00000009" w:usb-3="00000000" w:csb-0="000001FF" w:csb-1="00000000" />
+    </w:font>
+    <w:font w:name="Courier New">
+      <w:panose-1 w:val="02070309020205020404" />
+      <w:charset w:val="00" />
+      <w:family w:val="Modern" />
+      <w:pitch w:val="fixed" />
+      <w:sig w:usb-0="E0002AFF" w:usb-1="C0007843" w:usb-2="00000009" w:usb-3="00000000" w:csb-0="000001FF" w:csb-1="00000000" />
+    </w:font>
+    <w:font w:name="Symbol">
+      <w:panose-1 w:val="05050102010706020507" />
+      <w:charset w:val="02" />
+      <w:family w:val="Roman" />
+      <w:pitch w:val="variable" />
+      <w:sig w:usb-0="00000000" w:usb-1="10000000" w:usb-2="00000000" w:usb-3="00000000" w:csb-0="80000000" w:csb-1="00000000" />
+    </w:font>
+    <w:font w:name="Tms Rmn">
+      <w:panose-1 w:val="02020603040505020304" />
+      <w:charset w:val="00" />
+      <w:family w:val="Roman" />
+      <w:notTrueType />
+      <w:pitch w:val="variable" />
+      <w:sig w:usb-0="00000003" w:usb-1="00000000" w:usb-2="00000000" w:usb-3="00000000" w:csb-0="00000001" w:csb-1="00000000" />
+    </w:font>
+    <w:font w:name="Wingdings">
+      <w:panose-1 w:val="05000000000000000000" />
+      <w:charset w:val="02" />
+      <w:family w:val="auto" />
+      <w:pitch w:val="variable" />
+      <w:sig w:usb-0="00000000" w:usb-1="10000000" w:usb-2="00000000" w:usb-3="00000000" w:csb-0="80000000" w:csb-1="00000000" />
+    </w:font>
+    <w:font w:name="Cambria Math">
+      <w:panose-1 w:val="02040503050406030204" />
+      <w:charset w:val="01" />
+      <w:family w:val="Roman" />
+      <w:notTrueType />
+      <w:pitch w:val="variable" />
+      <w:sig w:usb-0="00000000" w:usb-1="00000000" w:usb-2="00000000" w:usb-3="00000000" w:csb-0="00000000" w:csb-1="00000000" />
+    </w:font>
+    <w:font w:name="Tahoma">
+      <w:panose-1 w:val="020B0604030504040204" />
+      <w:charset w:val="00" />
+      <w:family w:val="Swiss" />
+      <w:pitch w:val="variable" />
+      <w:sig w:usb-0="E1002EFF" w:usb-1="C000605B" w:usb-2="00000029" w:usb-3="00000000" w:csb-0="000101FF" w:csb-1="00000000" />
+    </w:font>
+    <w:font w:name="SILDoulos IPA93">
+      <w:altName w:val="Symbol" />
+      <w:panose-1 w:val="00000400000000000000" />
+      <w:charset w:val="02" />
+      <w:family w:val="auto" />
+      <w:pitch w:val="variable" />
+      <w:sig w:usb-0="00000000" w:usb-1="10000000" w:usb-2="00000000" w:usb-3="00000000" w:csb-0="80000000" w:csb-1="00000000" />
+    </w:font>
+    <w:font w:name="SILSophia IPA93">
+      <w:panose-1 w:val="00000400000000000000" />
+      <w:charset w:val="02" />
+      <w:family w:val="auto" />
+      <w:pitch w:val="variable" />
+      <w:sig w:usb-0="00000000" w:usb-1="10000000" w:usb-2="00000000" w:usb-3="00000000" w:csb-0="80000000" w:csb-1="00000000" />
+    </w:font>
+    <w:font w:name="Garamond">
+      <w:panose-1 w:val="02020404030301010803" />
+      <w:charset w:val="00" />
+      <w:family w:val="Roman" />
+      <w:pitch w:val="variable" />
+      <w:sig w:usb-0="00000287" w:usb-1="00000000" w:usb-2="00000000" w:usb-3="00000000" w:csb-0="0000009F" w:csb-1="00000000" />
+    </w:font>
+    <w:font w:name="SPTiberian">
+      <w:panose-1 w:val="00000400000000000000" />
+      <w:charset w:val="02" />
+      <w:family w:val="auto" />
+      <w:pitch w:val="variable" />
+      <w:sig w:usb-0="00000000" w:usb-1="10000000" w:usb-2="00000000" w:usb-3="00000000" w:csb-0="80000000" w:csb-1="00000000" />
+    </w:font>
+    <w:font w:name="SPIonic">
+      <w:panose-1 w:val="00000400000000000000" />
+      <w:charset w:val="02" />
+      <w:family w:val="auto" />
+      <w:pitch w:val="variable" />
+      <w:sig w:usb-0="00000000" w:usb-1="10000000" w:usb-2="00000000" w:usb-3="00000000" w:csb-0="80000000" w:csb-1="00000000" />
+    </w:font>
+    <w:font w:name="SILDoulosIPA">
+      <w:altName w:val="Symbol" />
+      <w:panose-1 w:val="00000400000000000000" />
+      <w:charset w:val="02" />
+      <w:family w:val="auto" />
+      <w:pitch w:val="variable" />
+      <w:sig w:usb-0="00000000" w:usb-1="10000000" w:usb-2="00000000" w:usb-3="00000000" w:csb-0="80000000" w:csb-1="00000000" />
+    </w:font>
+    <w:font w:name="CG Times (W1)">
+      <w:altName w:val="Times New Roman" />
+      <w:panose-1 w:val="00000000000000000000" />
+      <w:charset w:val="00" />
+      <w:family w:val="Roman" />
+      <w:notTrueType />
+      <w:pitch w:val="variable" />
+      <w:sig w:usb-0="00000003" w:usb-1="00000000" w:usb-2="00000000" w:usb-3="00000000" w:csb-0="00000001" w:csb-1="00000000" />
+    </w:font>
+  </w:fonts>
+  <w:styles>
+    <w:versionOfBuiltInStylenames w:val="7" />
+    <w:latentStyles w:defLockedState="off" w:latentStyleCount="267">
+      <w:lsdException w:name="Normal" />
+      <w:lsdException w:name="heading 1" />
+      <w:lsdException w:name="heading 2" />
+      <w:lsdException w:name="heading 3" />
+      <w:lsdException w:name="heading 4" />
+      <w:lsdException w:name="heading 5" />
+      <w:lsdException w:name="heading 6" />
+      <w:lsdException w:name="heading 7" />
+      <w:lsdException w:name="heading 8" />
+      <w:lsdException w:name="heading 9" />
+      <w:lsdException w:name="caption" />
+      <w:lsdException w:name="Title" />
+      <w:lsdException w:name="Subtitle" />
+      <w:lsdException w:name="Strong" />
+      <w:lsdException w:name="Emphasis" />
+      <w:lsdException w:name="Placeholder Text" />
+      <w:lsdException w:name="No Spacing" />
+      <w:lsdException w:name="Light Shading" />
+      <w:lsdException w:name="Light List" />
+      <w:lsdException w:name="Light Grid" />
+      <w:lsdException w:name="Medium Shading 1" />
+      <w:lsdException w:name="Medium Shading 2" />
+      <w:lsdException w:name="Medium List 1" />
+      <w:lsdException w:name="Medium List 2" />
+      <w:lsdException w:name="Medium Grid 1" />
+      <w:lsdException w:name="Medium Grid 2" />
+      <w:lsdException w:name="Medium Grid 3" />
+      <w:lsdException w:name="Dark List" />
+      <w:lsdException w:name="Colorful Shading" />
+      <w:lsdException w:name="Colorful List" />
+      <w:lsdException w:name="Colorful Grid" />
+      <w:lsdException w:name="Light Shading Accent 1" />
+      <w:lsdException w:name="Light List Accent 1" />
+      <w:lsdException w:name="Light Grid Accent 1" />
+      <w:lsdException w:name="Medium Shading 1 Accent 1" />
+      <w:lsdException w:name="Medium Shading 2 Accent 1" />
+      <w:lsdException w:name="Medium List 1 Accent 1" />
+      <w:lsdException w:name="Revision" />
+      <w:lsdException w:name="List Paragraph" />
+      <w:lsdException w:name="Quote" />
+      <w:lsdException w:name="Intense Quote" />
+      <w:lsdException w:name="Medium List 2 Accent 1" />
+      <w:lsdException w:name="Medium Grid 1 Accent 1" />
+      <w:lsdException w:name="Medium Grid 2 Accent 1" />
+      <w:lsdException w:name="Medium Grid 3 Accent 1" />
+      <w:lsdException w:name="Dark List Accent 1" />
+      <w:lsdException w:name="Colorful Shading Accent 1" />
+      <w:lsdException w:name="Colorful List Accent 1" />
+      <w:lsdException w:name="Colorful Grid Accent 1" />
+      <w:lsdException w:name="Light Shading Accent 2" />
+      <w:lsdException w:name="Light List Accent 2" />
+      <w:lsdException w:name="Light Grid Accent 2" />
+      <w:lsdException w:name="Medium Shading 1 Accent 2" />
+      <w:lsdException w:name="Medium Shading 2 Accent 2" />
+      <w:lsdException w:name="Medium List 1 Accent 2" />
+      <w:lsdException w:name="Medium List 2 Accent 2" />
+      <w:lsdException w:name="Medium Grid 1 Accent 2" />
+      <w:lsdException w:name="Medium Grid 2 Accent 2" />
+      <w:lsdException w:name="Medium Grid 3 Accent 2" />
+      <w:lsdException w:name="Dark List Accent 2" />
+      <w:lsdException w:name="Colorful Shading Accent 2" />
+      <w:lsdException w:name="Colorful List Accent 2" />
+      <w:lsdException w:name="Colorful Grid Accent 2" />
+      <w:lsdException w:name="Light Shading Accent 3" />
+      <w:lsdException w:name="Light List Accent 3" />
+      <w:lsdException w:name="Light Grid Accent 3" />
+      <w:lsdException w:name="Medium Shading 1 Accent 3" />
+      <w:lsdException w:name="Medium Shading 2 Accent 3" />
+      <w:lsdException w:name="Medium List 1 Accent 3" />
+      <w:lsdException w:name="Medium List 2 Accent 3" />
+      <w:lsdException w:name="Medium Grid 1 Accent 3" />
+      <w:lsdException w:name="Medium Grid 2 Accent 3" />
+      <w:lsdException w:name="Medium Grid 3 Accent 3" />
+      <w:lsdException w:name="Dark List Accent 3" />
+      <w:lsdException w:name="Colorful Shading Accent 3" />
+      <w:lsdException w:name="Colorful List Accent 3" />
+      <w:lsdException w:name="Colorful Grid Accent 3" />
+      <w:lsdException w:name="Light Shading Accent 4" />
+      <w:lsdException w:name="Light List Accent 4" />
+      <w:lsdException w:name="Light Grid Accent 4" />
+      <w:lsdException w:name="Medium Shading 1 Accent 4" />
+      <w:lsdException w:name="Medium Shading 2 Accent 4" />
+      <w:lsdException w:name="Medium List 1 Accent 4" />
+      <w:lsdException w:name="Medium List 2 Accent 4" />
+      <w:lsdException w:name="Medium Grid 1 Accent 4" />
+      <w:lsdException w:name="Medium Grid 2 Accent 4" />
+      <w:lsdException w:name="Medium Grid 3 Accent 4" />
+      <w:lsdException w:name="Dark List Accent 4" />
+      <w:lsdException w:name="Colorful Shading Accent 4" />
+      <w:lsdException w:name="Colorful List Accent 4" />
+      <w:lsdException w:name="Colorful Grid Accent 4" />
+      <w:lsdException w:name="Light Shading Accent 5" />
+      <w:lsdException w:name="Light List Accent 5" />
+      <w:lsdException w:name="Light Grid Accent 5" />
+      <w:lsdException w:name="Medium Shading 1 Accent 5" />
+      <w:lsdException w:name="Medium Shading 2 Accent 5" />
+      <w:lsdException w:name="Medium List 1 Accent 5" />
+      <w:lsdException w:name="Medium List 2 Accent 5" />
+      <w:lsdException w:name="Medium Grid 1 Accent 5" />
+      <w:lsdException w:name="Medium Grid 2 Accent 5" />
+      <w:lsdException w:name="Medium Grid 3 Accent 5" />
+      <w:lsdException w:name="Dark List Accent 5" />
+      <w:lsdException w:name="Colorful Shading Accent 5" />
+      <w:lsdException w:name="Colorful List Accent 5" />
+      <w:lsdException w:name="Colorful Grid Accent 5" />
+      <w:lsdException w:name="Light Shading Accent 6" />
+      <w:lsdException w:name="Light List Accent 6" />
+      <w:lsdException w:name="Light Grid Accent 6" />
+      <w:lsdException w:name="Medium Shading 1 Accent 6" />
+      <w:lsdException w:name="Medium Shading 2 Accent 6" />
+      <w:lsdException w:name="Medium List 1 Accent 6" />
+      <w:lsdException w:name="Medium List 2 Accent 6" />
+      <w:lsdException w:name="Medium Grid 1 Accent 6" />
+      <w:lsdException w:name="Medium Grid 2 Accent 6" />
+      <w:lsdException w:name="Medium Grid 3 Accent 6" />
+      <w:lsdException w:name="Dark List Accent 6" />
+      <w:lsdException w:name="Colorful Shading Accent 6" />
+      <w:lsdException w:name="Colorful List Accent 6" />
+      <w:lsdException w:name="Colorful Grid Accent 6" />
+      <w:lsdException w:name="Subtle Emphasis" />
+      <w:lsdException w:name="Intense Emphasis" />
+      <w:lsdException w:name="Subtle Reference" />
+      <w:lsdException w:name="Intense Reference" />
+      <w:lsdException w:name="Book Title" />
+      <w:lsdException w:name="Bibliography" />
+      <w:lsdException w:name="TOC Heading" />
+    </w:latentStyles>
+    <w:style w:type="paragraph" w:default="on" w:styleId="Normal">
+      <w:name w:val="Normal" />
+      <w:rsid w:val="00437261" />
+      <w:pPr>
+        <w:overflowPunct w:val="off" />
+        <w:autoSpaceDE w:val="off" />
+        <w:autoSpaceDN w:val="off" />
+        <w:adjustRightInd w:val="off" />
+        <w:textAlignment w:val="baseline" />
+      </w:pPr>
+      <w:rPr>
+        <w:rFonts w:ascii="Tahoma" w:h-ansi="Tahoma" />
+        <wx:font wx:val="Tahoma" />
+        <w:sz w:val="22" />
+        <w:lang w:val="EN-AU" w:fareast="EN-US" w:bidi="AR-SA" />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="Heading1">
+      <w:name w:val="heading 1" />
+      <wx:uiName wx:val="Heading 1" />
+      <w:basedOn w:val="Normal" />
+      <w:next w:val="Normal" />
+      <w:rsid w:val="00437261" />
+      <w:pPr>
+        <w:keepNext />
+        <w:spacing w:before="600" w:after="60" />
+        <w:jc w:val="center" />
+        <w:outlineLvl w:val="0" />
+      </w:pPr>
+      <w:rPr>
+        <w:rFonts w:ascii="Arial" w:h-ansi="Arial" />
+        <wx:font wx:val="Arial" />
+        <w:b />
+        <w:caps />
+        <w:kern w:val="28" />
+        <w:sz w:val="32" />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="Heading2">
+      <w:name w:val="heading 2" />
+      <wx:uiName wx:val="Heading 2" />
+      <w:basedOn w:val="Normal" />
+      <w:next w:val="Normal" />
+      <w:link w:val="Heading2Char" />
+      <w:rsid w:val="00437261" />
+      <w:pPr>
+        <w:keepNext />
+        <w:spacing w:before="240" w:after="120" />
+        <w:outlineLvl w:val="1" />
+      </w:pPr>
+      <w:rPr>
+        <w:rFonts w:ascii="Arial" w:h-ansi="Arial" />
+        <wx:font wx:val="Arial" />
+        <w:b />
+        <w:i />
+        <w:caps />
+        <w:sz w:val="24" />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="Heading3">
+      <w:name w:val="heading 3" />
+      <wx:uiName wx:val="Heading 3" />
+      <w:next w:val="BodyText" />
+      <w:rsid w:val="00437261" />
+      <w:pPr>
+        <w:keepNext />
+        <w:overflowPunct w:val="off" />
+        <w:autoSpaceDE w:val="off" />
+        <w:autoSpaceDN w:val="off" />
+        <w:adjustRightInd w:val="off" />
+        <w:spacing w:before="240" w:after="60" />
+        <w:textAlignment w:val="baseline" />
+        <w:outlineLvl w:val="2" />
+      </w:pPr>
+      <w:rPr>
+        <w:rFonts w:ascii="Tahoma" w:h-ansi="Tahoma" />
+        <wx:font wx:val="Tahoma" />
+        <w:b />
+        <w:noProof />
+        <w:sz w:val="24" />
+        <w:lang w:val="EN-AU" w:fareast="EN-US" w:bidi="AR-SA" />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="Heading4">
+      <w:name w:val="heading 4" />
+      <wx:uiName wx:val="Heading 4" />
+      <w:next w:val="Normal" />
+      <w:rsid w:val="00437261" />
+      <w:pPr>
+        <w:keepNext />
+        <w:overflowPunct w:val="off" />
+        <w:autoSpaceDE w:val="off" />
+        <w:autoSpaceDN w:val="off" />
+        <w:adjustRightInd w:val="off" />
+        <w:spacing w:before="60" w:after="60" />
+        <w:textAlignment w:val="baseline" />
+        <w:outlineLvl w:val="3" />
+      </w:pPr>
+      <w:rPr>
+        <wx:font wx:val="Times New Roman" />
+        <w:b />
+        <w:i />
+        <w:noProof />
+        <w:sz w:val="22" />
+        <w:lang w:val="EN-AU" w:fareast="EN-US" w:bidi="AR-SA" />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="Heading5">
+      <w:name w:val="heading 5" />
+      <wx:uiName wx:val="Heading 5" />
+      <w:next w:val="Normal" />
+      <w:rsid w:val="00437261" />
+      <w:pPr>
+        <w:keepNext />
+        <w:overflowPunct w:val="off" />
+        <w:autoSpaceDE w:val="off" />
+        <w:autoSpaceDN w:val="off" />
+        <w:adjustRightInd w:val="off" />
+        <w:spacing w:before="60" w:after="60" />
+        <w:textAlignment w:val="baseline" />
+        <w:outlineLvl w:val="4" />
+      </w:pPr>
+      <w:rPr>
+        <wx:font wx:val="Times New Roman" />
+        <w:i />
+        <w:noProof />
+        <w:sz w:val="22" />
+        <w:lang w:val="EN-AU" w:fareast="EN-US" w:bidi="AR-SA" />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="character" w:default="on" w:styleId="DefaultParagraphFont">
+      <w:name w:val="Default Paragraph Font" />
+    </w:style>
+    <w:style w:type="table" w:default="on" w:styleId="TableNormal">
+      <w:name w:val="Normal Table" />
+      <wx:uiName wx:val="Table Normal" />
+      <w:rPr>
+        <wx:font wx:val="Times New Roman" />
+        <w:lang w:val="EN-US" w:fareast="EN-US" w:bidi="HI" />
+      </w:rPr>
+      <w:tblPr>
+        <w:tblInd w:w="0" w:type="dxa" />
+        <w:tblCellMar>
+          <w:top w:w="0" w:type="dxa" />
+          <w:left w:w="108" w:type="dxa" />
+          <w:bottom w:w="0" w:type="dxa" />
+          <w:right w:w="108" w:type="dxa" />
+        </w:tblCellMar>
+      </w:tblPr>
+    </w:style>
+    <w:style w:type="list" w:default="on" w:styleId="NoList">
+      <w:name w:val="No List" />
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="BodyText">
+      <w:name w:val="Body Text" />
+      <w:basedOn w:val="Normal" />
+      <w:rsid w:val="00437261" />
+      <w:pPr>
+        <w:spacing w:after="120" />
+      </w:pPr>
+      <w:rPr>
+        <wx:font wx:val="Tahoma" />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="SubHeadingFirst">
+      <w:name w:val="SubHeadingFirst" />
+      <w:basedOn w:val="Normal" />
+      <w:rsid w:val="00437261" />
+      <w:pPr>
+        <w:keepNext />
+        <w:keepLines />
+        <w:widowControl w:val="off" />
+        <w:tabs>
+          <w:tab w:val="left" w:pos="1418" />
+        </w:tabs>
+        <w:spacing w:before="120" w:after="120" />
+      </w:pPr>
+      <w:rPr>
+        <w:rFonts w:ascii="Times New Roman" w:h-ansi="Times New Roman" />
+        <wx:font wx:val="Times New Roman" />
+        <w:b />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="MainHeading">
+      <w:name w:val="MainHeading" />
+      <w:basedOn w:val="Normal" />
+      <w:next w:val="Normal" />
+      <w:rsid w:val="00437261" />
+      <w:pPr>
+        <w:keepNext />
+        <w:keepLines />
+        <w:pageBreakBefore />
+        <w:jc w:val="center" />
+      </w:pPr>
+      <w:rPr>
+        <wx:font wx:val="Tahoma" />
+        <w:b />
+        <w:sz w:val="24" />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="BoxHeader">
+      <w:name w:val="BoxHeader" />
+      <w:basedOn w:val="Normal" />
+      <w:next w:val="Normal" />
+      <w:rsid w:val="00437261" />
+      <w:pPr>
+        <w:keepNext />
+        <w:keepLines />
+        <w:spacing w:before="120" w:after="120" />
+        <w:jc w:val="center" />
+      </w:pPr>
+      <w:rPr>
+        <wx:font wx:val="Tahoma" />
+        <w:b />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="ClassNumberInteger">
+      <w:name w:val="ClassNumberInteger" />
+      <w:basedOn w:val="Normal" />
+      <w:rsid w:val="00437261" />
+      <w:pPr>
+        <w:jc w:val="center" />
+      </w:pPr>
+      <w:rPr>
+        <wx:font wx:val="Tahoma" />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="ExtentNote">
+      <w:name w:val="ExtentNote" />
+      <w:basedOn w:val="Normal" />
+      <w:rsid w:val="00437261" />
+      <w:pPr>
+        <w:widowControl w:val="off" />
+        <w:tabs>
+          <w:tab w:val="left" w:pos="1418" />
+        </w:tabs>
+        <w:spacing w:after="120" />
+        <w:ind w:left="284" />
+      </w:pPr>
+      <w:rPr>
+        <wx:font wx:val="Tahoma" />
+        <w:i />
+        <w:sz w:val="18" />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="NormalIndent1">
+      <w:name w:val="Normal Indent1" />
+      <w:basedOn w:val="Normal" />
+      <w:rsid w:val="00437261" />
+      <w:pPr>
+        <w:widowControl w:val="off" />
+        <w:tabs>
+          <w:tab w:val="left" w:pos="1418" />
+        </w:tabs>
+        <w:ind w:left="284" />
+      </w:pPr>
+      <w:rPr>
+        <wx:font wx:val="Tahoma" />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="TitlePageTitle">
+      <w:name w:val="TitlePageTitle" />
+      <w:basedOn w:val="Heading1" />
+      <w:rsid w:val="00437261" />
+      <w:pPr>
+        <w:spacing w:before="2400" />
+        <w:outlineLvl w:val="9" />
+      </w:pPr>
+      <w:rPr>
+        <wx:font wx:val="Arial" />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="NumberCell">
+      <w:name w:val="NumberCell" />
+      <w:basedOn w:val="Normal" />
+      <w:rsid w:val="00437261" />
+      <w:pPr>
+        <w:keepNext />
+        <w:tabs>
+          <w:tab w:val="left" w:pos="-1276" />
+          <w:tab w:val="left" w:pos="567" />
+        </w:tabs>
+        <w:overflowPunct />
+        <w:autoSpaceDE />
+        <w:autoSpaceDN />
+        <w:adjustRightInd />
+        <w:jc w:val="right" />
+        <w:textAlignment w:val="auto" />
+      </w:pPr>
+      <w:rPr>
+        <wx:font wx:val="Tahoma" />
+        <w:sz w:val="24" />
+        <w:lang w:val="EN-US" />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="Header">
+      <w:name w:val="header" />
+      <wx:uiName wx:val="Header" />
+      <w:basedOn w:val="Normal" />
+      <w:autoRedefine />
+      <w:rsid w:val="00897303" />
+      <w:pPr>
+        <w:widowControl w:val="off" />
+        <w:tabs>
+          <w:tab w:val="center" w:pos="4536" />
+          <w:tab w:val="right" w:pos="9072" />
+        </w:tabs>
+      </w:pPr>
+      <w:rPr>
+        <wx:font wx:val="Tahoma" />
+        <w:smallCaps />
+        <w:noProof />
+        <w:sz w:val="18" />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="Footer">
+      <w:name w:val="footer" />
+      <wx:uiName wx:val="Footer" />
+      <w:basedOn w:val="Normal" />
+      <w:rsid w:val="00897303" />
+      <w:pPr>
+        <w:tabs>
+          <w:tab w:val="center" w:pos="3119" />
+          <w:tab w:val="center" w:pos="4536" />
+          <w:tab w:val="right" w:pos="9072" />
+        </w:tabs>
+      </w:pPr>
+      <w:rPr>
+        <wx:font wx:val="Tahoma" />
+        <w:sz w:val="18" />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="HeadingBullet">
+      <w:name w:val="Heading Bullet" />
+      <w:basedOn w:val="Heading2" />
+      <w:rsid w:val="00437261" />
+      <w:pPr>
+        <w:listPr>
+          <w:ilfo w:val="1" />
+        </w:listPr>
+        <w:overflowPunct />
+        <w:autoSpaceDE />
+        <w:autoSpaceDN />
+        <w:adjustRightInd />
+        <w:textAlignment w:val="auto" />
+      </w:pPr>
+      <w:rPr>
+        <wx:font wx:val="Arial" />
+        <w:b-cs />
+        <w:i-cs />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="NormalBullet0">
+      <w:name w:val="Normal Bullet" />
+      <w:basedOn w:val="NormalIndent1" />
+      <w:rsid w:val="00437261" />
+      <w:pPr>
+        <w:listPr>
+          <w:ilfo w:val="2" />
+        </w:listPr>
+      </w:pPr>
+      <w:rPr>
+        <wx:font wx:val="Tahoma" />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="character" w:styleId="PageNumber">
+      <w:name w:val="page number" />
+      <wx:uiName wx:val="Page Number" />
+      <w:basedOn w:val="DefaultParagraphFont" />
+      <w:rsid w:val="00897303" />
+      <w:rPr>
+        <w:rFonts w:ascii="Tahoma" w:h-ansi="Tahoma" />
+        <w:smallCaps />
+        <w:sz w:val="18" />
+        <w:sz-cs w:val="18" />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="Extras">
+      <w:name w:val="Extras" />
+      <w:basedOn w:val="Normal" />
+      <w:rsid w:val="00437261" />
+      <w:pPr>
+        <w:tabs>
+          <w:tab w:val="list" w:pos="360" />
+        </w:tabs>
+        <w:overflowPunct />
+        <w:autoSpaceDE />
+        <w:autoSpaceDN />
+        <w:adjustRightInd />
+        <w:ind w:left="357" w:hanging="357" />
+        <w:textAlignment w:val="auto" />
+      </w:pPr>
+      <w:rPr>
+        <wx:font wx:val="Tahoma" />
+        <w:sz w:val="24" />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="Instruction">
+      <w:name w:val="Instruction" />
+      <w:basedOn w:val="Normal" />
+      <w:rsid w:val="00437261" />
+      <w:pPr>
+        <w:overflowPunct />
+        <w:autoSpaceDE />
+        <w:autoSpaceDN />
+        <w:adjustRightInd />
+        <w:spacing w:before="120" />
+        <w:textAlignment w:val="auto" />
+      </w:pPr>
+      <w:rPr>
+        <wx:font wx:val="Tahoma" />
+        <w:b />
+        <w:sz w:val="24" />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="GlossCell">
+      <w:name w:val="GlossCell" />
+      <w:basedOn w:val="Normal" />
+      <w:rsid w:val="00437261" />
+      <w:pPr>
+        <w:keepNext />
+        <w:tabs>
+          <w:tab w:val="left" w:pos="-1276" />
+          <w:tab w:val="left" w:pos="567" />
+        </w:tabs>
+        <w:overflowPunct />
+        <w:autoSpaceDE />
+        <w:autoSpaceDN />
+        <w:adjustRightInd />
+        <w:spacing w:before="60" />
+        <w:textAlignment w:val="auto" />
+      </w:pPr>
+      <w:rPr>
+        <wx:font wx:val="Tahoma" />
+        <w:sz w:val="24" />
+        <w:lang w:val="EN-US" />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="FootnoteText">
+      <w:name w:val="footnote text" />
+      <wx:uiName wx:val="Footnote Text" />
+      <w:basedOn w:val="Normal" />
+      <w:rsid w:val="00437261" />
+      <w:rPr>
+        <wx:font wx:val="Tahoma" />
+        <w:sz w:val="16" />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="character" w:styleId="FootnoteReference">
+      <w:name w:val="footnote reference" />
+      <wx:uiName wx:val="Footnote Reference" />
+      <w:basedOn w:val="DefaultParagraphFont" />
+      <w:rsid w:val="00437261" />
+      <w:rPr>
+        <w:vertAlign w:val="superscript" />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="BodyText2">
+      <w:name w:val="Body Text 2" />
+      <w:basedOn w:val="Normal" />
+      <w:rsid w:val="00437261" />
+      <w:pPr>
+        <w:overflowPunct />
+        <w:autoSpaceDE />
+        <w:autoSpaceDN />
+        <w:adjustRightInd />
+        <w:textAlignment w:val="auto" />
+      </w:pPr>
+      <w:rPr>
+        <wx:font wx:val="Tahoma" />
+        <w:b />
+        <w:b-cs />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="Letter">
+      <w:name w:val="Letter" />
+      <w:basedOn w:val="Normal" />
+      <w:rsid w:val="00437261" />
+      <w:pPr>
+        <w:overflowPunct />
+        <w:autoSpaceDE />
+        <w:autoSpaceDN />
+        <w:adjustRightInd />
+        <w:spacing w:after="240" />
+        <w:jc w:val="both" />
+        <w:textAlignment w:val="auto" />
+      </w:pPr>
+      <w:rPr>
+        <wx:font wx:val="Tahoma" />
+        <w:sz w:val="24" />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="Cell">
+      <w:name w:val="Cell" />
+      <w:basedOn w:val="Normal" />
+      <w:rsid w:val="00437261" />
+      <w:pPr>
+        <w:overflowPunct />
+        <w:autoSpaceDE />
+        <w:autoSpaceDN />
+        <w:adjustRightInd />
+        <w:spacing w:before="60" />
+        <w:ind w:right="115" />
+        <w:textAlignment w:val="auto" />
+      </w:pPr>
+      <w:rPr>
+        <w:rFonts w:ascii="SILDoulos IPA93" w:h-ansi="SILDoulos IPA93" />
+        <wx:font wx:val="SILDoulos IPA93" />
+        <w:sz w:val="24" />
+        <w:lang w:val="EN-US" />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="Data">
+      <w:name w:val="Data" />
+      <w:basedOn w:val="Normal" />
+      <w:autoRedefine />
+      <w:rsid w:val="00437261" />
+      <w:pPr>
+        <w:overflowPunct />
+        <w:autoSpaceDE />
+        <w:autoSpaceDN />
+        <w:adjustRightInd />
+        <w:textAlignment w:val="auto" />
+      </w:pPr>
+      <w:rPr>
+        <w:rFonts w:ascii="SILSophia IPA93" w:h-ansi="SILSophia IPA93" />
+        <wx:font wx:val="SILSophia IPA93" />
+        <w:sz w:val="24" />
+        <w:lang w:val="EN-US" />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="Fillin">
+      <w:name w:val="Fillin" />
+      <w:basedOn w:val="Normal" />
+      <w:rsid w:val="00437261" />
+      <w:pPr>
+        <w:tabs>
+          <w:tab w:val="left" w:pos="567" />
+          <w:tab w:val="right" w:leader="underscore" w:pos="9214" />
+        </w:tabs>
+        <w:overflowPunct />
+        <w:autoSpaceDE />
+        <w:autoSpaceDN />
+        <w:adjustRightInd />
+        <w:spacing w:before="160" w:line="320" w:line-rule="exact" />
+        <w:ind w:right="-57" />
+        <w:textAlignment w:val="auto" />
+      </w:pPr>
+      <w:rPr>
+        <w:rFonts w:ascii="SILSophia IPA93" w:h-ansi="SILSophia IPA93" />
+        <wx:font wx:val="SILSophia IPA93" />
+        <w:lang w:val="EN-US" />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="Caption">
+      <w:name w:val="caption" />
+      <wx:uiName wx:val="Caption" />
+      <w:basedOn w:val="Normal" />
+      <w:next w:val="Normal" />
+      <w:rsid w:val="00437261" />
+      <w:pPr>
+        <w:overflowPunct />
+        <w:autoSpaceDE />
+        <w:autoSpaceDN />
+        <w:adjustRightInd />
+        <w:textAlignment w:val="auto" />
+      </w:pPr>
+      <w:rPr>
+        <wx:font wx:val="Tahoma" />
+        <w:b />
+        <w:sz w:val="32" />
+        <w:lang w:val="EN-US" />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="Title">
+      <w:name w:val="Title" />
+      <w:basedOn w:val="Normal" />
+      <w:rsid w:val="00437261" />
+      <w:pPr>
+        <w:overflowPunct />
+        <w:autoSpaceDE />
+        <w:autoSpaceDN />
+        <w:adjustRightInd />
+        <w:jc w:val="center" />
+        <w:textAlignment w:val="auto" />
+      </w:pPr>
+      <w:rPr>
+        <wx:font wx:val="Tahoma" />
+        <w:b />
+        <w:sz w:val="40" />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="character" w:styleId="PhoneticCharacters">
+      <w:name w:val="Phonetic Characters" />
+      <w:basedOn w:val="DefaultParagraphFont" />
+      <w:rsid w:val="00437261" />
+      <w:rPr>
+        <w:rFonts w:ascii="SILSophia IPA93" w:h-ansi="SILSophia IPA93" />
+        <w:noProof />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="PhonoEx">
+      <w:name w:val="Phono Ex" />
+      <w:basedOn w:val="Normal" />
+      <w:rsid w:val="00437261" />
+      <w:pPr>
+        <w:keepLines />
+        <w:tabs>
+          <w:tab w:val="right" w:pos="864" />
+          <w:tab w:val="left" w:pos="3845" />
+          <w:tab w:val="left" w:pos="6235" />
+        </w:tabs>
+        <w:overflowPunct />
+        <w:autoSpaceDE />
+        <w:autoSpaceDN />
+        <w:adjustRightInd />
+        <w:spacing w:before="60" />
+        <w:ind w:left="1440" w:hanging="1440" />
+        <w:jc w:val="both" />
+        <w:textAlignment w:val="auto" />
+      </w:pPr>
+      <w:rPr>
+        <w:rFonts w:cs="Arial" />
+        <wx:font wx:val="Tahoma" />
+        <w:lang w:val="EN-US" />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="StructureChart">
+      <w:name w:val="Structure Chart" />
+      <w:basedOn w:val="Normal" />
+      <w:rsid w:val="00437261" />
+      <w:pPr>
+        <w:overflowPunct />
+        <w:autoSpaceDE />
+        <w:autoSpaceDN />
+        <w:adjustRightInd />
+        <w:spacing w:before="40" w:after="40" />
+        <w:textAlignment w:val="auto" />
+      </w:pPr>
+      <w:rPr>
+        <wx:font wx:val="Tahoma" />
+        <w:sz w:val="24" />
+        <w:lang w:val="EN-US" />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="ListNumber">
+      <w:name w:val="List Number" />
+      <w:basedOn w:val="Normal" />
+      <w:rsid w:val="00437261" />
+      <w:pPr>
+        <w:overflowPunct />
+        <w:autoSpaceDE />
+        <w:autoSpaceDN />
+        <w:adjustRightInd />
+        <w:spacing w:after="120" />
+        <w:ind w:left="360" w:hanging="360" />
+        <w:textAlignment w:val="auto" />
+      </w:pPr>
+      <w:rPr>
+        <w:rFonts w:ascii="Times New Roman" w:h-ansi="Times New Roman" />
+        <wx:font wx:val="Times New Roman" />
+        <w:sz w:val="24" />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="ListBullet">
+      <w:name w:val="List Bullet" />
+      <w:basedOn w:val="Normal" />
+      <w:autoRedefine />
+      <w:rsid w:val="00437261" />
+      <w:pPr>
+        <w:listPr>
+          <w:ilfo w:val="23" />
+        </w:listPr>
+        <w:overflowPunct />
+        <w:autoSpaceDE />
+        <w:autoSpaceDN />
+        <w:adjustRightInd />
+        <w:ind w:left="357" w:first-line="0" />
+        <w:textAlignment w:val="auto" />
+      </w:pPr>
+      <w:rPr>
+        <wx:font wx:val="Tahoma" />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="ListBullet2">
+      <w:name w:val="List Bullet 2" />
+      <w:basedOn w:val="Normal" />
+      <w:autoRedefine />
+      <w:rsid w:val="00437261" />
+      <w:pPr>
+        <w:listPr>
+          <w:ilfo w:val="24" />
+        </w:listPr>
+        <w:tabs>
+          <w:tab w:val="clear" w:pos="643" />
+          <w:tab w:val="list" w:pos="720" />
+        </w:tabs>
+        <w:overflowPunct />
+        <w:autoSpaceDE />
+        <w:autoSpaceDN />
+        <w:adjustRightInd />
+        <w:ind w:left="720" />
+        <w:textAlignment w:val="auto" />
+      </w:pPr>
+      <w:rPr>
+        <w:rFonts w:ascii="Garamond" w:h-ansi="Garamond" />
+        <wx:font wx:val="Garamond" />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="ListBullet3">
+      <w:name w:val="List Bullet 3" />
+      <w:basedOn w:val="Normal" />
+      <w:autoRedefine />
+      <w:rsid w:val="00437261" />
+      <w:pPr>
+        <w:listPr>
+          <w:ilfo w:val="25" />
+        </w:listPr>
+        <w:tabs>
+          <w:tab w:val="clear" w:pos="926" />
+          <w:tab w:val="list" w:pos="1080" />
+        </w:tabs>
+        <w:overflowPunct />
+        <w:autoSpaceDE />
+        <w:autoSpaceDN />
+        <w:adjustRightInd />
+        <w:ind w:left="1080" />
+        <w:textAlignment w:val="auto" />
+      </w:pPr>
+      <w:rPr>
+        <w:rFonts w:ascii="Garamond" w:h-ansi="Garamond" />
+        <wx:font wx:val="Garamond" />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="CN">
+      <w:name w:val="CN" />
+      <w:rsid w:val="00437261" />
+      <w:pPr>
+        <w:keepNext />
+        <w:keepLines />
+        <w:spacing w:before="1200" w:line="240" w:line-rule="exact" />
+        <w:ind w:left="1441" w:right="1441" />
+        <w:jc w:val="center" />
+      </w:pPr>
+      <w:rPr>
+        <w:rFonts w:ascii="Tms Rmn" w:h-ansi="Tms Rmn" />
+        <wx:font wx:val="Tms Rmn" />
+        <w:b />
+        <w:smallCaps />
+        <w:sz w:val="40" />
+        <w:lang w:val="EN-US" w:fareast="EN-US" w:bidi="AR-SA" />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="CT">
+      <w:name w:val="CT" />
+      <w:rsid w:val="00437261" />
+      <w:pPr>
+        <w:keepNext />
+        <w:keepLines />
+        <w:spacing w:before="360" w:after="480" />
+        <w:ind w:left="1441" w:right="1441" />
+        <w:jc w:val="center" />
+      </w:pPr>
+      <w:rPr>
+        <w:rFonts w:ascii="Tms Rmn" w:h-ansi="Tms Rmn" />
+        <wx:font wx:val="Tms Rmn" />
+        <w:b />
+        <w:sz w:val="40" />
+        <w:lang w:val="EN-AU" w:fareast="EN-US" w:bidi="AR-SA" />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="S1">
+      <w:name w:val="S1" />
+      <w:basedOn w:val="Heading1" />
+      <w:rsid w:val="00437261" />
+      <w:pPr>
+        <w:overflowPunct />
+        <w:autoSpaceDE />
+        <w:autoSpaceDN />
+        <w:adjustRightInd />
+        <w:spacing w:before="480" w:after="120" w:line="240" w:line-rule="exact" />
+        <w:textAlignment w:val="auto" />
+      </w:pPr>
+      <w:rPr>
+        <w:rFonts w:ascii="Tms Rmn" w:h-ansi="Tms Rmn" />
+        <wx:font wx:val="Tms Rmn" />
+        <w:b-cs />
+        <w:kern w:val="0" />
+        <w:sz w:val="28" />
+        <w:lang w:val="EN-US" />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="BlockIndent">
+      <w:name w:val="BlockIndent" />
+      <w:basedOn w:val="NormalIndent" />
+      <w:rsid w:val="00437261" />
+      <w:pPr>
+        <w:overflowPunct />
+        <w:autoSpaceDE />
+        <w:autoSpaceDN />
+        <w:adjustRightInd />
+        <w:spacing w:before="60" w:line="264" w:line-rule="exact" />
+        <w:ind w:left="567" />
+        <w:jc w:val="both" />
+        <w:textAlignment w:val="auto" />
+      </w:pPr>
+      <w:rPr>
+        <w:rFonts w:ascii="Tms Rmn" w:h-ansi="Tms Rmn" />
+        <wx:font wx:val="Tms Rmn" />
+        <w:sz w:val="24" />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="NormalIndent">
+      <w:name w:val="Normal Indent" />
+      <w:basedOn w:val="Normal" />
+      <w:rsid w:val="00437261" />
+      <w:pPr>
+        <w:ind w:left="720" />
+      </w:pPr>
+      <w:rPr>
+        <wx:font wx:val="Tahoma" />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="S2">
+      <w:name w:val="S2" />
+      <w:basedOn w:val="S1" />
+      <w:rsid w:val="00437261" />
+      <w:pPr>
+        <w:spacing w:before="360" w:after="0" />
+      </w:pPr>
+      <w:rPr>
+        <wx:font wx:val="Tms Rmn" />
+        <w:sz w:val="26" />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="LearningOutcome">
+      <w:name w:val="Learning Outcome" />
+      <w:basedOn w:val="Normal" />
+      <w:rsid w:val="00437261" />
+      <w:pPr>
+        <w:tabs>
+          <w:tab w:val="left" w:pos="175" />
+        </w:tabs>
+        <w:overflowPunct />
+        <w:autoSpaceDE />
+        <w:autoSpaceDN />
+        <w:adjustRightInd />
+        <w:spacing w:after="60" />
+        <w:textAlignment w:val="auto" />
+      </w:pPr>
+      <w:rPr>
+        <w:rFonts w:ascii="Garamond" w:h-ansi="Garamond" />
+        <wx:font wx:val="Garamond" />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="AssessmentCriteria">
+      <w:name w:val="Assessment Criteria" />
+      <w:basedOn w:val="Normal" />
+      <w:rsid w:val="00437261" />
+      <w:pPr>
+        <w:overflowPunct />
+        <w:autoSpaceDE />
+        <w:autoSpaceDN />
+        <w:adjustRightInd />
+        <w:spacing w:after="60" />
+        <w:textAlignment w:val="auto" />
+      </w:pPr>
+      <w:rPr>
+        <w:rFonts w:ascii="Garamond" w:h-ansi="Garamond" />
+        <wx:font wx:val="Garamond" />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="NormalIndent0">
+      <w:name w:val="NormalIndent" />
+      <w:basedOn w:val="Normal" />
+      <w:rsid w:val="00437261" />
+      <w:pPr>
+        <w:ind w:left="284" />
+      </w:pPr>
+      <w:rPr>
+        <wx:font wx:val="Tahoma" />
+        <w:sz w:val="18" />
+        <w:lang w:val="EN-GB" />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="NormalIndent2">
+      <w:name w:val="Normal Indent2" />
+      <w:basedOn w:val="Normal" />
+      <w:next w:val="Normal" />
+      <w:rsid w:val="00437261" />
+      <w:pPr>
+        <w:widowControl w:val="off" />
+        <w:tabs>
+          <w:tab w:val="left" w:pos="1418" />
+        </w:tabs>
+        <w:ind w:left="567" />
+      </w:pPr>
+      <w:rPr>
+        <wx:font wx:val="Tahoma" />
+        <w:sz w:val="18" />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="Cutter">
+      <w:name w:val="Cutter" />
+      <w:basedOn w:val="Normal" />
+      <w:rsid w:val="00437261" />
+      <w:pPr>
+        <w:widowControl w:val="off" />
+        <w:tabs>
+          <w:tab w:val="left" w:pos="1441" />
+        </w:tabs>
+        <w:jc w:val="center" />
+      </w:pPr>
+      <w:rPr>
+        <wx:font wx:val="Tahoma" />
+        <w:sz w:val="20" />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="WorkTitle">
+      <w:name w:val="WorkTitle" />
+      <w:basedOn w:val="Normal" />
+      <w:rsid w:val="00437261" />
+      <w:pPr>
+        <w:widowControl w:val="off" />
+        <w:tabs>
+          <w:tab w:val="left" w:pos="1418" />
+        </w:tabs>
+      </w:pPr>
+      <w:rPr>
+        <wx:font wx:val="Tahoma" />
+        <w:i />
+        <w:sz w:val="18" />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="Principle">
+      <w:name w:val="Principle" />
+      <w:basedOn w:val="Normal" />
+      <w:next w:val="Normal" />
+      <w:rsid w:val="00437261" />
+      <w:rPr>
+        <wx:font wx:val="Tahoma" />
+        <w:b />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="ChapterHeading">
+      <w:name w:val="ChapterHeading" />
+      <w:basedOn w:val="Normal" />
+      <w:next w:val="Normal" />
+      <w:rsid w:val="00437261" />
+      <w:pPr>
+        <w:spacing w:before="720" w:after="360" />
+        <w:jc w:val="center" />
+      </w:pPr>
+      <w:rPr>
+        <wx:font wx:val="Tahoma" />
+        <w:caps />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="character" w:styleId="ChapterNumber">
+      <w:name w:val="ChapterNumber" />
+      <w:basedOn w:val="DefaultParagraphFont" />
+      <w:rsid w:val="00437261" />
+      <w:rPr>
+        <w:rFonts w:ascii="Times New Roman" w:h-ansi="Times New Roman" />
+        <w:b />
+        <w:sz w:val="32" />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="Author">
+      <w:name w:val="Author" />
+      <w:basedOn w:val="Normal" />
+      <w:rsid w:val="00437261" />
+      <w:pPr>
+        <w:spacing w:before="240" w:after="120" />
+        <w:jc w:val="center" />
+      </w:pPr>
+      <w:rPr>
+        <wx:font wx:val="Tahoma" />
+        <w:caps />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="FirstParagraph">
+      <w:name w:val="FirstParagraph" />
+      <w:basedOn w:val="Normal" />
+      <w:next w:val="Normal" />
+      <w:rsid w:val="00437261" />
+      <w:rPr>
+        <wx:font wx:val="Tahoma" />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="AuthorLocation">
+      <w:name w:val="AuthorLocation" />
+      <w:basedOn w:val="Author" />
+      <w:rsid w:val="00437261" />
+      <w:pPr>
+        <w:spacing w:before="0" />
+      </w:pPr>
+      <w:rPr>
+        <wx:font wx:val="Tahoma" />
+        <w:caps w:val="off" />
+        <w:sz w:val="16" />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="Quotation">
+      <w:name w:val="Quotation" />
+      <w:basedOn w:val="Normal" />
+      <w:next w:val="Normal" />
+      <w:rsid w:val="00437261" />
+      <w:pPr>
+        <w:ind w:left="624" w:hanging="340" />
+      </w:pPr>
+      <w:rPr>
+        <wx:font wx:val="Tahoma" />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="HebrewText">
+      <w:name w:val="HebrewText" />
+      <w:basedOn w:val="Normal" />
+      <w:rsid w:val="00437261" />
+      <w:pPr>
+        <w:ind w:right="284" />
+        <w:jc w:val="right" />
+      </w:pPr>
+      <w:rPr>
+        <w:rFonts w:ascii="SPTiberian" w:h-ansi="SPTiberian" />
+        <wx:font wx:val="SPTiberian" />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="GreekText">
+      <w:name w:val="GreekText" />
+      <w:basedOn w:val="Normal" />
+      <w:rsid w:val="00437261" />
+      <w:rPr>
+        <w:rFonts w:ascii="SPIonic" w:h-ansi="SPIonic" />
+        <wx:font wx:val="SPIonic" />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="TextualNote">
+      <w:name w:val="TextualNote" />
+      <w:basedOn w:val="Normal" />
+      <w:rsid w:val="00437261" />
+      <w:rPr>
+        <wx:font wx:val="Tahoma" />
+        <w:sz w:val="20" />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="Reference">
+      <w:name w:val="Reference" />
+      <w:basedOn w:val="Normal" />
+      <w:rsid w:val="00437261" />
+      <w:pPr>
+        <w:framePr w:hspace="181" w:vspace="181" w:wrap="around" w:hanchor="text" w:y-align="center" />
+        <w:jc w:val="center" />
+      </w:pPr>
+      <w:rPr>
+        <wx:font wx:val="Tahoma" />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="TitlePageAuthor">
+      <w:name w:val="TitlePageAuthor" />
+      <w:basedOn w:val="Heading1" />
+      <w:rsid w:val="00437261" />
+      <w:pPr>
+        <w:spacing w:before="1440" />
+        <w:outlineLvl w:val="9" />
+      </w:pPr>
+      <w:rPr>
+        <wx:font wx:val="Arial" />
+        <w:sz w:val="24" />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="ChapterNumber0">
+      <w:name w:val="Chapter Number" />
+      <w:basedOn w:val="Normal" />
+      <w:next w:val="ChapterHeading" />
+      <w:rsid w:val="00437261" />
+      <w:pPr>
+        <w:keepNext />
+        <w:spacing w:before="1920" />
+        <w:jc w:val="center" />
+      </w:pPr>
+      <w:rPr>
+        <wx:font wx:val="Tahoma" />
+        <w:smallCaps />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="Abstract">
+      <w:name w:val="Abstract" />
+      <w:basedOn w:val="Normal" />
+      <w:rsid w:val="00437261" />
+      <w:pPr>
+        <w:keepNext />
+        <w:spacing w:before="120" w:after="120" />
+        <w:ind w:left="284" w:right="284" />
+      </w:pPr>
+      <w:rPr>
+        <wx:font wx:val="Tahoma" />
+        <w:sz w:val="20" />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="Quote">
+      <w:name w:val="Quote" />
+      <w:basedOn w:val="Normal" />
+      <w:rsid w:val="00437261" />
+      <w:pPr>
+        <w:ind w:left="720" w:right="720" />
+      </w:pPr>
+      <w:rPr>
+        <wx:font wx:val="Tahoma" />
+        <w:sz w:val="18" />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="TabA">
+      <w:name w:val="TabA" />
+      <w:basedOn w:val="Normal" />
+      <w:next w:val="BodyText" />
+      <w:rsid w:val="00437261" />
+      <w:rPr>
+        <wx:font wx:val="Tahoma" />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="TabB">
+      <w:name w:val="TabB" />
+      <w:basedOn w:val="TabA" />
+      <w:next w:val="BodyText" />
+      <w:rsid w:val="00437261" />
+      <w:pPr>
+        <w:ind w:left="357" />
+      </w:pPr>
+      <w:rPr>
+        <wx:font wx:val="Tahoma" />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="TabC">
+      <w:name w:val="TabC" />
+      <w:basedOn w:val="TabA" />
+      <w:next w:val="BodyText" />
+      <w:rsid w:val="00437261" />
+      <w:pPr>
+        <w:ind w:left="720" />
+      </w:pPr>
+      <w:rPr>
+        <wx:font wx:val="Tahoma" />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="TabD">
+      <w:name w:val="TabD" />
+      <w:basedOn w:val="TabA" />
+      <w:next w:val="BodyText" />
+      <w:rsid w:val="00437261" />
+      <w:pPr>
+        <w:ind w:left="1077" />
+      </w:pPr>
+      <w:rPr>
+        <wx:font wx:val="Tahoma" />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="FootnoteTextQuote">
+      <w:name w:val="Footnote Text Quote" />
+      <w:basedOn w:val="FootnoteText" />
+      <w:rsid w:val="00437261" />
+      <w:pPr>
+        <w:ind w:left="680" w:right="680" />
+      </w:pPr>
+      <w:rPr>
+        <wx:font wx:val="Tahoma" />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="Bibliography">
+      <w:name w:val="Bibliography" />
+      <w:basedOn w:val="Normal" />
+      <w:rsid w:val="00437261" />
+      <w:pPr>
+        <w:spacing w:line="260" w:line-rule="at-least" />
+        <w:ind w:left="680" w:hanging="680" />
+      </w:pPr>
+      <w:rPr>
+        <wx:font wx:val="Tahoma" />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="TabE">
+      <w:name w:val="TabE" />
+      <w:basedOn w:val="TabD" />
+      <w:rsid w:val="00437261" />
+      <w:pPr>
+        <w:ind w:left="1361" />
+      </w:pPr>
+      <w:rPr>
+        <wx:font wx:val="Tahoma" />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="QuoteSource">
+      <w:name w:val="QuoteSource" />
+      <w:basedOn w:val="Quote" />
+      <w:rsid w:val="00437261" />
+      <w:pPr>
+        <w:jc w:val="right" />
+      </w:pPr>
+      <w:rPr>
+        <wx:font wx:val="Tahoma" />
+        <w:i />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="TOC2">
+      <w:name w:val="toc 2" />
+      <wx:uiName wx:val="TOC 2" />
+      <w:basedOn w:val="Normal" />
+      <w:next w:val="Normal" />
+      <w:rsid w:val="00437261" />
+      <w:pPr>
+        <w:tabs>
+          <w:tab w:val="right" w:pos="9072" />
+        </w:tabs>
+        <w:ind w:left="113" />
+      </w:pPr>
+      <w:rPr>
+        <wx:font wx:val="Tahoma" />
+        <w:sz w:val="18" />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="TOC3">
+      <w:name w:val="toc 3" />
+      <wx:uiName wx:val="TOC 3" />
+      <w:basedOn w:val="Normal" />
+      <w:next w:val="Normal" />
+      <w:autoRedefine />
+      <w:rsid w:val="00437261" />
+      <w:pPr>
+        <w:widowControl w:val="off" />
+        <w:tabs>
+          <w:tab w:val="right" w:pos="9072" />
+        </w:tabs>
+        <w:ind w:left="440" />
+      </w:pPr>
+      <w:rPr>
+        <wx:font wx:val="Tahoma" />
+        <w:sz w:val="18" />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="TOC4">
+      <w:name w:val="toc 4" />
+      <wx:uiName wx:val="TOC 4" />
+      <w:basedOn w:val="Normal" />
+      <w:next w:val="Normal" />
+      <w:rsid w:val="00437261" />
+      <w:pPr>
+        <w:tabs>
+          <w:tab w:val="right" w:pos="6350" />
+        </w:tabs>
+        <w:ind w:left="839" />
+      </w:pPr>
+      <w:rPr>
+        <wx:font wx:val="Tahoma" />
+        <w:sz w:val="18" />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="TOC5">
+      <w:name w:val="toc 5" />
+      <wx:uiName wx:val="TOC 5" />
+      <w:basedOn w:val="Normal" />
+      <w:next w:val="Normal" />
+      <w:rsid w:val="00437261" />
+      <w:pPr>
+        <w:tabs>
+          <w:tab w:val="right" w:leader="dot" w:pos="9071" />
+        </w:tabs>
+        <w:ind w:left="1123" />
+      </w:pPr>
+      <w:rPr>
+        <wx:font wx:val="Tahoma" />
+        <w:sz w:val="24" />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="TitlePageAuthorLocation">
+      <w:name w:val="TitlePageAuthorLocation" />
+      <w:basedOn w:val="AuthorLocation" />
+      <w:rsid w:val="00437261" />
+      <w:pPr>
+        <w:spacing w:before="480" />
+      </w:pPr>
+      <w:rPr>
+        <wx:font wx:val="Tahoma" />
+        <w:sz w:val="18" />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="TitlePageCopyright">
+      <w:name w:val="TitlePageCopyright" />
+      <w:basedOn w:val="TitlePageNote" />
+      <w:rsid w:val="00437261" />
+      <w:pPr>
+        <w:spacing w:before="4800" />
+      </w:pPr>
+      <w:rPr>
+        <wx:font wx:val="Tahoma" />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="TitlePageNote">
+      <w:name w:val="TitlePageNote" />
+      <w:basedOn w:val="Normal" />
+      <w:rsid w:val="00437261" />
+      <w:pPr>
+        <w:spacing w:before="720" />
+        <w:jc w:val="center" />
+      </w:pPr>
+      <w:rPr>
+        <wx:font wx:val="Tahoma" />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="Holdings">
+      <w:name w:val="Holdings" />
+      <w:basedOn w:val="Normal" />
+      <w:next w:val="Normal" />
+      <w:rsid w:val="00437261" />
+      <w:pPr>
+        <w:spacing w:line="160" w:line-rule="at-least" />
+        <w:ind w:left="680" />
+      </w:pPr>
+      <w:rPr>
+        <wx:font wx:val="Tahoma" />
+        <w:sz w:val="18" />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="HoldingsList">
+      <w:name w:val="HoldingsList" />
+      <w:basedOn w:val="Holdings" />
+      <w:rsid w:val="00437261" />
+      <w:rPr>
+        <wx:font wx:val="Tahoma" />
+        <w:i />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="Note">
+      <w:name w:val="Note" />
+      <w:basedOn w:val="Normal" />
+      <w:rsid w:val="00437261" />
+      <w:pPr>
+        <w:ind w:left="397" w:right="397" />
+      </w:pPr>
+      <w:rPr>
+        <wx:font wx:val="Tahoma" />
+        <w:sz w:val="24" />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="character" w:styleId="Hebrew">
+      <w:name w:val="Hebrew" />
+      <w:basedOn w:val="DefaultParagraphFont" />
+      <w:rsid w:val="00437261" />
+      <w:rPr>
+        <w:rFonts w:ascii="SPTiberian" w:h-ansi="SPTiberian" />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="character" w:styleId="Greek">
+      <w:name w:val="Greek" />
+      <w:basedOn w:val="DefaultParagraphFont" />
+      <w:rsid w:val="00437261" />
+      <w:rPr>
+        <w:rFonts w:ascii="SPIonic" w:h-ansi="SPIonic" />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="character" w:styleId="Italic">
+      <w:name w:val="Italic" />
+      <w:basedOn w:val="DefaultParagraphFont" />
+      <w:rsid w:val="00437261" />
+      <w:rPr>
+        <w:i />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="Annotation">
+      <w:name w:val="Annotation" />
+      <w:basedOn w:val="Normal" />
+      <w:rsid w:val="00437261" />
+      <w:pPr>
+        <w:spacing w:before="120" w:after="120" />
+      </w:pPr>
+      <w:rPr>
+        <wx:font wx:val="Tahoma" />
+        <w:sz w:val="18" />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="TOC1">
+      <w:name w:val="toc 1" />
+      <wx:uiName wx:val="TOC 1" />
+      <w:basedOn w:val="Normal" />
+      <w:next w:val="Normal" />
+      <w:autoRedefine />
+      <w:rsid w:val="00437261" />
+      <w:pPr>
+        <w:widowControl w:val="off" />
+      </w:pPr>
+      <w:rPr>
+        <wx:font wx:val="Tahoma" />
+        <w:b />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="EndnoteText">
+      <w:name w:val="endnote text" />
+      <wx:uiName wx:val="Endnote Text" />
+      <w:basedOn w:val="Normal" />
+      <w:rsid w:val="00437261" />
+      <w:pPr>
+        <w:spacing w:before="60" />
+      </w:pPr>
+      <w:rPr>
+        <wx:font wx:val="Tahoma" />
+        <w:sz w:val="24" />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="ChapterAuthor">
+      <w:name w:val="ChapterAuthor" />
+      <w:basedOn w:val="Normal" />
+      <w:next w:val="Normal" />
+      <w:rsid w:val="00437261" />
+      <w:pPr>
+        <w:spacing w:after="240" />
+        <w:jc w:val="center" />
+      </w:pPr>
+      <w:rPr>
+        <wx:font wx:val="Tahoma" />
+        <w:smallCaps />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="JournalHeader">
+      <w:name w:val="JournalHeader" />
+      <w:basedOn w:val="FirstParagraph" />
+      <w:rsid w:val="00437261" />
+      <w:rPr>
+        <wx:font wx:val="Tahoma" />
+        <w:sz w:val="18" />
+        <w:u w:val="single" />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="BiblioAnnotation">
+      <w:name w:val="BiblioAnnotation" />
+      <w:basedOn w:val="Normal" />
+      <w:rsid w:val="00437261" />
+      <w:pPr>
+        <w:spacing w:after="60" />
+        <w:ind w:left="284" />
+      </w:pPr>
+      <w:rPr>
+        <wx:font wx:val="Tahoma" />
+        <w:sz w:val="18" />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="TitlePageSubTitle">
+      <w:name w:val="TitlePageSubTitle" />
+      <w:basedOn w:val="TitlePageTitle" />
+      <w:rsid w:val="00437261" />
+      <w:pPr>
+        <w:spacing w:before="720" />
+      </w:pPr>
+      <w:rPr>
+        <wx:font wx:val="Arial" />
+        <w:b w:val="off" />
+        <w:sz w:val="24" />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="AuthorReview">
+      <w:name w:val="AuthorReview" />
+      <w:basedOn w:val="Normal" />
+      <w:rsid w:val="00437261" />
+      <w:pPr>
+        <w:spacing w:before="120" />
+        <w:jc w:val="right" />
+      </w:pPr>
+      <w:rPr>
+        <wx:font wx:val="Tahoma" />
+        <w:i />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="NormalText">
+      <w:name w:val="NormalText" />
+      <w:basedOn w:val="Normal" />
+      <w:rsid w:val="00437261" />
+      <w:rPr>
+        <wx:font wx:val="Tahoma" />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="TextNote">
+      <w:name w:val="TextNote" />
+      <w:basedOn w:val="NormalText" />
+      <w:rsid w:val="00437261" />
+      <w:rPr>
+        <wx:font wx:val="Tahoma" />
+        <w:sz w:val="24" />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="InterviewQ">
+      <w:name w:val="InterviewQ" />
+      <w:basedOn w:val="Normal" />
+      <w:rsid w:val="00437261" />
+      <w:pPr>
+        <w:keepNext />
+        <w:spacing w:before="120" />
+      </w:pPr>
+      <w:rPr>
+        <wx:font wx:val="Tahoma" />
+        <w:i />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="InterviewA">
+      <w:name w:val="InterviewA" />
+      <w:basedOn w:val="Normal" />
+      <w:rsid w:val="00437261" />
+      <w:rPr>
+        <wx:font wx:val="Tahoma" />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="ChapterAthorLocation">
+      <w:name w:val="ChapterAthorLocation" />
+      <w:basedOn w:val="AuthorLocation" />
+      <w:rsid w:val="00437261" />
+      <w:rPr>
+        <wx:font wx:val="Tahoma" />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="TitlePageSeries">
+      <w:name w:val="TitlePageSeries" />
+      <w:basedOn w:val="TitlePageTitle" />
+      <w:next w:val="TitlePageTitle" />
+      <w:rsid w:val="00437261" />
+      <w:pPr>
+        <w:spacing w:before="120" w:after="0" />
+      </w:pPr>
+      <w:rPr>
+        <wx:font wx:val="Arial" />
+        <w:spacing w:val="24" />
+        <w:sz w:val="24" />
+        <w:u w:val="single" />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="Heading10">
+      <w:name w:val="Heading1" />
+      <w:basedOn w:val="Normal" />
+      <w:next w:val="Normal" />
+      <w:rsid w:val="00437261" />
+      <w:pPr>
+        <w:keepNext />
+        <w:keepLines />
+        <w:pageBreakBefore />
+        <w:widowControl w:val="off" />
+        <w:tabs>
+          <w:tab w:val="left" w:pos="1418" />
+        </w:tabs>
+        <w:jc w:val="center" />
+      </w:pPr>
+      <w:rPr>
+        <wx:font wx:val="Tahoma" />
+        <w:b />
+        <w:sz w:val="24" />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="Heading20">
+      <w:name w:val="Heading2" />
+      <w:basedOn w:val="Normal" />
+      <w:rsid w:val="00437261" />
+      <w:pPr>
+        <w:keepNext />
+        <w:keepLines />
+        <w:widowControl w:val="off" />
+        <w:tabs>
+          <w:tab w:val="left" w:pos="1418" />
+        </w:tabs>
+        <w:spacing w:before="120" w:after="120" />
+      </w:pPr>
+      <w:rPr>
+        <wx:font wx:val="Tahoma" />
+        <w:b />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="Heading30">
+      <w:name w:val="Heading3" />
+      <w:basedOn w:val="Heading20" />
+      <w:rsid w:val="00437261" />
+      <w:rPr>
+        <wx:font wx:val="Tahoma" />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="NormalBullet">
+      <w:name w:val="NormalBullet" />
+      <w:basedOn w:val="Normal" />
+      <w:rsid w:val="00437261" />
+      <w:pPr>
+        <w:listPr>
+          <w:ilfo w:val="26" />
+        </w:listPr>
+        <w:tabs>
+          <w:tab w:val="left" w:pos="454" />
+        </w:tabs>
+      </w:pPr>
+      <w:rPr>
+        <wx:font wx:val="Tahoma" />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="character" w:styleId="InterviewHeader">
+      <w:name w:val="InterviewHeader" />
+      <w:basedOn w:val="DefaultParagraphFont" />
+      <w:rsid w:val="00437261" />
+      <w:rPr>
+        <w:b />
+        <w:b-cs />
+        <w:i />
+        <w:i-cs />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="TitlePageSubAuthor">
+      <w:name w:val="TitlePageSubAuthor" />
+      <w:basedOn w:val="TitlePageAuthor" />
+      <w:rsid w:val="00437261" />
+      <w:pPr>
+        <w:spacing w:before="240" />
+      </w:pPr>
+      <w:rPr>
+        <wx:font wx:val="Arial" />
+        <w:b w:val="off" />
+        <w:i />
+        <w:caps w:val="off" />
+        <w:sz w:val="22" />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="CallNo">
+      <w:name w:val="CallNo" />
+      <w:basedOn w:val="Holdings" />
+      <w:next w:val="Holdings" />
+      <w:rsid w:val="00437261" />
+      <w:pPr>
+        <w:keepNext />
+        <w:ind w:left="227" />
+      </w:pPr>
+      <w:rPr>
+        <wx:font wx:val="Tahoma" />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="TitlePageLogo">
+      <w:name w:val="TitlePageLogo" />
+      <w:basedOn w:val="TitlePageCopyright" />
+      <w:rsid w:val="00437261" />
+      <w:pPr>
+        <w:framePr w:hspace="181" w:wrap="around" w:hanchor="page" w:x-align="center" w:y-align="bottom" />
+        <w:spacing w:before="100" w:before-autospacing="on" />
+      </w:pPr>
+      <w:rPr>
+        <wx:font wx:val="Tahoma" />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="EG">
+      <w:name w:val="EG" />
+      <w:rsid w:val="00437261" />
+      <w:pPr>
+        <w:keepLines />
+      </w:pPr>
+      <w:rPr>
+        <w:rFonts w:ascii="Tms Rmn" w:h-ansi="Tms Rmn" />
+        <wx:font wx:val="Tms Rmn" />
+        <w:sz w:val="24" />
+        <w:lang w:val="EN-AU" w:fareast="EN-US" w:bidi="AR-SA" />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="DefinitionDE">
+      <w:name w:val="Definition.DE" />
+      <w:rsid w:val="00437261" />
+      <w:pPr>
+        <w:keepNext />
+        <w:keepLines />
+        <w:pBdr>
+          <w:top w:val="single" w:sz="12" wx:bdrwidth="60" w:space="2" w:color="auto" w:shadow="on" />
+          <w:left w:val="single" w:sz="12" wx:bdrwidth="60" w:space="2" w:color="auto" w:shadow="on" />
+          <w:bottom w:val="single" w:sz="12" wx:bdrwidth="60" w:space="2" w:color="auto" w:shadow="on" />
+          <w:right w:val="single" w:sz="12" wx:bdrwidth="60" w:space="2" w:color="auto" w:shadow="on" />
+        </w:pBdr>
+        <w:spacing w:before="240" w:after="120" />
+        <w:ind w:left="680" w:right="680" />
+      </w:pPr>
+      <w:rPr>
+        <wx:font wx:val="Times New Roman" />
+        <w:b />
+        <w:sz w:val="24" />
+        <w:lang w:val="EN-US" w:fareast="EN-US" w:bidi="AR-SA" />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="NormalContinue">
+      <w:name w:val="NormalContinue" />
+      <w:basedOn w:val="Normal" />
+      <w:rsid w:val="00437261" />
+      <w:pPr>
+        <w:overflowPunct />
+        <w:autoSpaceDE />
+        <w:autoSpaceDN />
+        <w:adjustRightInd />
+        <w:spacing w:line="264" w:line-rule="exact" />
+        <w:jc w:val="both" />
+        <w:textAlignment w:val="auto" />
+      </w:pPr>
+      <w:rPr>
+        <w:rFonts w:ascii="Tms Rmn" w:h-ansi="Tms Rmn" />
+        <wx:font wx:val="Tms Rmn" />
+        <w:sz w:val="24" />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="ED">
+      <w:name w:val="ED" />
+      <w:rsid w:val="00437261" />
+      <w:pPr>
+        <w:keepLines />
+        <w:tabs>
+          <w:tab w:val="left" w:pos="720" />
+        </w:tabs>
+        <w:ind w:left="567" />
+      </w:pPr>
+      <w:rPr>
+        <w:rFonts w:ascii="SILDoulosIPA" w:h-ansi="SILDoulosIPA" />
+        <wx:font wx:val="SILDoulosIPA" />
+        <w:sz w:val="24" />
+        <w:lang w:val="EN-US" w:fareast="EN-US" w:bidi="AR-SA" />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="NormalNotes">
+      <w:name w:val="NormalNotes" />
+      <w:basedOn w:val="Normal" />
+      <w:rsid w:val="00437261" />
+      <w:pPr>
+        <w:overflowPunct />
+        <w:autoSpaceDE />
+        <w:autoSpaceDN />
+        <w:adjustRightInd />
+        <w:spacing w:before="60" w:line="264" w:line-rule="exact" />
+        <w:jc w:val="both" />
+        <w:textAlignment w:val="auto" />
+      </w:pPr>
+      <w:rPr>
+        <w:rFonts w:ascii="Tms Rmn" w:h-ansi="Tms Rmn" />
+        <wx:font wx:val="Tms Rmn" />
+        <w:sz w:val="24" />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="TN">
+      <w:name w:val="TN" />
+      <w:basedOn w:val="Normal" />
+      <w:rsid w:val="00437261" />
+      <w:pPr>
+        <w:overflowPunct />
+        <w:autoSpaceDE />
+        <w:autoSpaceDN />
+        <w:adjustRightInd />
+        <w:jc w:val="right" />
+        <w:textAlignment w:val="auto" />
+      </w:pPr>
+      <w:rPr>
+        <w:rFonts w:ascii="Times New Roman" w:h-ansi="Times New Roman" />
+        <wx:font wx:val="Times New Roman" />
+        <w:sz w:val="24" />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="PhonoStatementWU">
+      <w:name w:val="PhonoStatement.WU" />
+      <w:rsid w:val="00437261" />
+      <w:pPr>
+        <w:spacing w:before="240" w:after="120" w:line="240" w:line-rule="exact" />
+        <w:ind w:left="567" />
+      </w:pPr>
+      <w:rPr>
+        <wx:font wx:val="Times New Roman" />
+        <w:i />
+        <w:sz w:val="24" />
+        <w:lang w:val="EN-US" w:fareast="EN-US" w:bidi="AR-SA" />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="ToRemember">
+      <w:name w:val="ToRemember" />
+      <w:basedOn w:val="Normal" />
+      <w:rsid w:val="00437261" />
+      <w:pPr>
+        <w:pBdr>
+          <w:top w:val="single" w:sz="4" wx:bdrwidth="20" w:space="1" w:color="auto" w:shadow="on" />
+          <w:left w:val="single" w:sz="4" wx:bdrwidth="20" w:space="4" w:color="auto" w:shadow="on" />
+          <w:bottom w:val="single" w:sz="4" wx:bdrwidth="20" w:space="1" w:color="auto" w:shadow="on" />
+          <w:right w:val="single" w:sz="4" wx:bdrwidth="20" w:space="4" w:color="auto" w:shadow="on" />
+        </w:pBdr>
+        <w:shd w:val="pct-15" w:color="auto" w:fill="FFFFFF" wx:bgcolor="D9D9D9" />
+        <w:overflowPunct />
+        <w:autoSpaceDE />
+        <w:autoSpaceDN />
+        <w:adjustRightInd />
+        <w:spacing w:before="120" w:line="264" w:line-rule="exact" />
+        <w:jc w:val="both" />
+        <w:textAlignment w:val="auto" />
+      </w:pPr>
+      <w:rPr>
+        <w:rFonts w:ascii="Times New Roman" w:h-ansi="Times New Roman" />
+        <wx:font wx:val="Times New Roman" />
+        <w:sz w:val="24" />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="EquationsRU">
+      <w:name w:val="Equations.RU" />
+      <w:basedOn w:val="Normal" />
+      <w:rsid w:val="00437261" />
+      <w:pPr>
+        <w:spacing w:before="60" />
+      </w:pPr>
+      <w:rPr>
+        <w:rFonts w:ascii="Times New Roman" w:h-ansi="Times New Roman" />
+        <wx:font wx:val="Times New Roman" />
+        <w:sz w:val="24" />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="EquationCentredRU">
+      <w:name w:val="EquationCentred.RU" />
+      <w:basedOn w:val="EquationsRU" />
+      <w:rsid w:val="00437261" />
+      <w:pPr>
+        <w:jc w:val="center" />
+      </w:pPr>
+      <w:rPr>
+        <wx:font wx:val="Times New Roman" />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="TableTextLeft">
+      <w:name w:val="TableTextLeft" />
+      <w:basedOn w:val="TableText" />
+      <w:rsid w:val="00437261" />
+      <w:pPr>
+        <w:jc w:val="left" />
+      </w:pPr>
+      <w:rPr>
+        <wx:font wx:val="Arial" />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="TableText">
+      <w:name w:val="TableText" />
+      <w:rsid w:val="00437261" />
+      <w:pPr>
+        <w:overflowPunct w:val="off" />
+        <w:autoSpaceDE w:val="off" />
+        <w:autoSpaceDN w:val="off" />
+        <w:adjustRightInd w:val="off" />
+        <w:spacing w:line="240" w:line-rule="at-least" />
+        <w:jc w:val="center" />
+        <w:textAlignment w:val="baseline" />
+      </w:pPr>
+      <w:rPr>
+        <w:rFonts w:ascii="Arial" w:h-ansi="Arial" />
+        <wx:font wx:val="Arial" />
+        <w:sz w:val="22" />
+        <w:lang w:val="EN-AU" w:fareast="EN-US" w:bidi="AR-SA" />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="ExampleIndentED">
+      <w:name w:val="ExampleIndent.ED" />
+      <w:rsid w:val="00437261" />
+      <w:pPr>
+        <w:keepLines />
+        <w:tabs>
+          <w:tab w:val="left" w:pos="720" />
+        </w:tabs>
+        <w:overflowPunct w:val="off" />
+        <w:autoSpaceDE w:val="off" />
+        <w:autoSpaceDN w:val="off" />
+        <w:adjustRightInd w:val="off" />
+        <w:spacing w:line="280" w:line-rule="exact" />
+        <w:ind w:left="567" />
+        <w:textAlignment w:val="baseline" />
+      </w:pPr>
+      <w:rPr>
+        <w:rFonts w:ascii="SILDoulosIPA" w:h-ansi="SILDoulosIPA" />
+        <wx:font wx:val="SILDoulosIPA" />
+        <w:sz w:val="24" />
+        <w:lang w:val="EN-US" w:fareast="EN-US" w:bidi="AR-SA" />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="FeatureHead">
+      <w:name w:val="FeatureHead" />
+      <w:basedOn w:val="Normal" />
+      <w:rsid w:val="00437261" />
+      <w:pPr>
+        <w:keepNext />
+        <w:keepLines />
+        <w:tabs>
+          <w:tab w:val="left" w:pos="2268" />
+        </w:tabs>
+        <w:spacing w:before="300" />
+      </w:pPr>
+      <w:rPr>
+        <w:rFonts w:ascii="Times New Roman" w:h-ansi="Times New Roman" />
+        <wx:font wx:val="Times New Roman" />
+        <w:b />
+        <w:sz w:val="26" />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="TOC6">
+      <w:name w:val="toc 6" />
+      <wx:uiName wx:val="TOC 6" />
+      <w:basedOn w:val="Normal" />
+      <w:next w:val="Normal" />
+      <w:autoRedefine />
+      <w:rsid w:val="00437261" />
+      <w:pPr>
+        <w:ind w:left="1100" />
+      </w:pPr>
+      <w:rPr>
+        <wx:font wx:val="Tahoma" />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="TOC7">
+      <w:name w:val="toc 7" />
+      <wx:uiName wx:val="TOC 7" />
+      <w:basedOn w:val="Normal" />
+      <w:next w:val="Normal" />
+      <w:autoRedefine />
+      <w:rsid w:val="00437261" />
+      <w:pPr>
+        <w:ind w:left="1320" />
+      </w:pPr>
+      <w:rPr>
+        <wx:font wx:val="Tahoma" />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="TOC8">
+      <w:name w:val="toc 8" />
+      <wx:uiName wx:val="TOC 8" />
+      <w:basedOn w:val="Normal" />
+      <w:next w:val="Normal" />
+      <w:autoRedefine />
+      <w:rsid w:val="00437261" />
+      <w:pPr>
+        <w:ind w:left="1540" />
+      </w:pPr>
+      <w:rPr>
+        <wx:font wx:val="Tahoma" />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="TOC9">
+      <w:name w:val="toc 9" />
+      <wx:uiName wx:val="TOC 9" />
+      <w:basedOn w:val="Normal" />
+      <w:next w:val="Normal" />
+      <w:autoRedefine />
+      <w:rsid w:val="00437261" />
+      <w:pPr>
+        <w:ind w:left="1760" />
+      </w:pPr>
+      <w:rPr>
+        <wx:font wx:val="Tahoma" />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="character" w:styleId="Hyperlink">
+      <w:name w:val="Hyperlink" />
+      <w:basedOn w:val="DefaultParagraphFont" />
+      <w:rsid w:val="00437261" />
+      <w:rPr>
+        <w:color w:val="0000FF" />
+        <w:u w:val="single" />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="TH">
+      <w:name w:val="TH" />
+      <w:basedOn w:val="Normal" />
+      <w:rsid w:val="00437261" />
+      <w:pPr>
+        <w:keepNext />
+        <w:keepLines />
+        <w:overflowPunct />
+        <w:autoSpaceDE />
+        <w:autoSpaceDN />
+        <w:adjustRightInd />
+        <w:spacing w:after="120" />
+        <w:jc w:val="center" />
+        <w:textAlignment w:val="auto" />
+      </w:pPr>
+      <w:rPr>
+        <w:rFonts w:ascii="CG Times (W1)" w:h-ansi="CG Times (W1)" />
+        <wx:font wx:val="CG Times (W1)" />
+        <w:b />
+        <w:sz w:val="24" />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="Heading0">
+      <w:name w:val="Heading 0" />
+      <w:basedOn w:val="TitlePageTitle" />
+      <w:rsid w:val="00437261" />
+      <w:pPr>
+        <w:spacing w:after="480" />
+      </w:pPr>
+      <w:rPr>
+        <w:rFonts w:cs="Arial" />
+        <wx:font wx:val="Arial" />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="NormalReading">
+      <w:name w:val="Normal Reading" />
+      <w:basedOn w:val="Normal" />
+      <w:rsid w:val="00437261" />
+      <w:pPr>
+        <w:ind w:first-line="284" />
+      </w:pPr>
+      <w:rPr>
+        <w:rFonts w:ascii="Times New Roman" w:h-ansi="Times New Roman" />
+        <wx:font wx:val="Times New Roman" />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="FootnoteTextRdg">
+      <w:name w:val="Footnote Text Rdg" />
+      <w:basedOn w:val="FootnoteText" />
+      <w:rsid w:val="00437261" />
+      <w:rPr>
+        <w:rFonts w:ascii="Times New Roman" w:h-ansi="Times New Roman" />
+        <wx:font wx:val="Times New Roman" />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="NormalReadingBullet">
+      <w:name w:val="Normal Reading Bullet" />
+      <w:basedOn w:val="NormalReading" />
+      <w:rsid w:val="00437261" />
+      <w:pPr>
+        <w:listPr>
+          <w:ilfo w:val="27" />
+        </w:listPr>
+      </w:pPr>
+      <w:rPr>
+        <wx:font wx:val="Times New Roman" />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="HeadingReading">
+      <w:name w:val="Heading Reading" />
+      <w:basedOn w:val="Heading2" />
+      <w:rsid w:val="00437261" />
+      <w:rPr>
+        <wx:font wx:val="Arial" />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="PlainText">
+      <w:name w:val="Plain Text" />
+      <w:basedOn w:val="Normal" />
+      <w:rsid w:val="00437261" />
+      <w:pPr>
+        <w:widowControl w:val="off" />
+        <w:tabs>
+          <w:tab w:val="left" w:pos="1418" />
+        </w:tabs>
+      </w:pPr>
+      <w:rPr>
+        <w:rFonts w:ascii="Courier New" w:h-ansi="Courier New" w:cs="Courier New" />
+        <wx:font wx:val="Courier New" />
+        <w:sz w:val="20" />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="CellHeading">
+      <w:name w:val="CellHeading" />
+      <w:basedOn w:val="Normal" />
+      <w:rsid w:val="00437261" />
+      <w:pPr>
+        <w:keepNext />
+        <w:tabs>
+          <w:tab w:val="left" w:pos="-1276" />
+          <w:tab w:val="left" w:pos="567" />
+        </w:tabs>
+        <w:spacing w:before="60" />
+      </w:pPr>
+      <w:rPr>
+        <wx:font wx:val="Tahoma" />
+        <w:b />
+        <w:sz w:val="24" />
+        <w:lang w:val="EN-US" />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="BalloonText">
+      <w:name w:val="Balloon Text" />
+      <w:basedOn w:val="Normal" />
+      <w:rsid w:val="00C24A41" />
+      <w:rPr>
+        <w:rFonts w:cs="Tahoma" />
+        <wx:font wx:val="Tahoma" />
+        <w:sz w:val="16" />
+        <w:sz-cs w:val="16" />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="StyleHeading216ptNotBold">
+      <w:name w:val="Style Heading 2 + 16 pt Not Bold" />
+      <w:basedOn w:val="Heading2" />
+      <w:link w:val="StyleHeading216ptNotBoldChar" />
+      <w:rsid w:val="00A6761E" />
+      <w:rPr>
+        <wx:font wx:val="Arial" />
+        <w:b w:val="off" />
+        <w:i-cs />
+        <w:sz w:val="28" />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="character" w:styleId="Heading2Char">
+      <w:name w:val="Heading 2 Char" />
+      <w:basedOn w:val="DefaultParagraphFont" />
+      <w:link w:val="Heading2" />
+      <w:rsid w:val="00A6761E" />
+      <w:rPr>
+        <w:rFonts w:ascii="Arial" w:h-ansi="Arial" />
+        <w:b />
+        <w:i />
+        <w:caps />
+        <w:sz w:val="24" />
+        <w:lang w:val="EN-AU" w:fareast="EN-US" w:bidi="AR-SA" />
+      </w:rPr>
+    </w:style>
+    <w:style w:type="character" w:styleId="StyleHeading216ptNotBoldChar">
+      <w:name w:val="Style Heading 2 + 16 pt Not Bold Char" />
+      <w:basedOn w:val="Heading2Char" />
+      <w:link w:val="StyleHeading216ptNotBold" />
+      <w:rsid w:val="00A6761E" />
+      <w:rPr>
+        <w:i-cs />
+        <w:sz w:val="28" />
+      </w:rPr>
+    </w:style>
+  </w:styles>
+  <w:body>
+    <w:p wsp:rsidR="00133C43" wsp:rsidRDefault="00133C43">
+      <aml:annotation aml:id="0" w:type="Word.Bookmark.Start" w:name="_Toc63657465" />
+      <aml:annotation aml:id="1" w:type="Word.Bookmark.Start" w:name="_Toc63657648" />
+    </w:p>
+    <wx:sub-section>
+      <w:p wsp:rsidR="008A2D7B" wsp:rsidRDefault="008A2D7B" wsp:rsidP="008A2D7B">
+        <w:pPr>
+          <w:pStyle w:val="Heading1" />
+          <w:spacing w:before="0" />
+        </w:pPr>
+        <aml:annotation aml:id="2" w:type="Word.Bookmark.Start" w:name="_Toc223319978" />
+        <aml:annotation aml:id="3" w:type="Word.Bookmark.Start" w:name="_Toc223320103" />
+        <aml:annotation aml:id="4" w:type="Word.Bookmark.Start" w:name="_Toc223320514" />
+        <aml:annotation aml:id="5" w:type="Word.Bookmark.Start" w:name="_Toc223320644" />
+        <aml:annotation aml:id="6" w:type="Word.Bookmark.Start" w:name="_Toc223343404" />
+        <aml:annotation aml:id="7" w:type="Word.Bookmark.Start" w:name="_Toc63657466" />
+        <aml:annotation aml:id="8" w:type="Word.Bookmark.Start" w:name="_Toc63657649" />
+        <aml:annotation aml:id="9" w:type="Word.Bookmark.Start" w:name="_Toc63673796" />
+        <aml:annotation aml:id="10" w:type="Word.Bookmark.Start" w:name="_Toc223319979" />
+        <aml:annotation aml:id="11" w:type="Word.Bookmark.Start" w:name="_Toc223320104" />
+        <aml:annotation aml:id="12" w:type="Word.Bookmark.Start" w:name="_Toc223320515" />
+        <aml:annotation aml:id="13" w:type="Word.Bookmark.Start" w:name="_Toc223320645" />
+        <aml:annotation aml:id="0" w:type="Word.Bookmark.End" />
+        <aml:annotation aml:id="1" w:type="Word.Bookmark.End" />
+        <w:r>
+          <w:t>Table of Contents</w:t>
+        </w:r>
+        <aml:annotation aml:id="2" w:type="Word.Bookmark.End" />
+        <aml:annotation aml:id="3" w:type="Word.Bookmark.End" />
+        <aml:annotation aml:id="4" w:type="Word.Bookmark.End" />
+        <aml:annotation aml:id="5" w:type="Word.Bookmark.End" />
+        <aml:annotation aml:id="6" w:type="Word.Bookmark.End" />
+      </w:p>
+      <w:p wsp:rsidR="00E92462" wsp:rsidRDefault="00437261">
+        <w:pPr>
+          <w:pStyle w:val="TOC2" />
+          <w:rPr>
+            <w:rFonts w:ascii="Times New Roman" w:h-ansi="Times New Roman" />
+            <wx:font wx:val="Times New Roman" />
+            <w:noProof />
+            <w:sz w:val="24" />
+            <w:sz-cs w:val="24" />
+            <w:lang w:fareast="EN-AU" />
+          </w:rPr>
+        </w:pPr>
+{0}
+      </w:p>
+      <w:p wsp:rsidR="00E92462" wsp:rsidRDefault="00437261">
+        <w:pPr>
+          <w:pStyle w:val="TOC2" />
+          <w:rPr>
+            <w:rFonts w:ascii="Times New Roman" w:h-ansi="Times New Roman" />
+            <wx:font wx:val="Times New Roman" />
+            <w:noProof />
+            <w:sz w:val="24" />
+            <w:sz-cs w:val="24" />
+            <w:lang w:fareast="EN-AU" />
+          </w:rPr>
+        </w:pPr>
+{1}
+      </w:p>
+    </wx:sub-section>
+  </w:body>
+</w:wordDocument>

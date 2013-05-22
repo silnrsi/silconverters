@@ -82,6 +82,7 @@
     <Reference Include="System.Runtime.Serialization.Formatters.Soap" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AutoSearchOptions.cs">
@@ -109,8 +110,13 @@
       <DependentUpon>FontsStylesForm.cs</DependentUpon>
     </Compile>
     <Compile Include="IteratorMap.cs" />
+    <Compile Include="LinqDocument.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StyleClass.cs" />
+    <Compile Include="Word03MLDocument.cs" />
+    <Compile Include="WordLinqDocument.cs" />
+    <Compile Include="WordMLDocument.cs" />
     <EmbeddedResource Include="AutoSearchOptions.resx">
       <SubType>Designer</SubType>
       <DependentUpon>AutoSearchOptions.cs</DependentUpon>

@@ -50,5 +50,15 @@ namespace SILConvertersWordML
         {
             get { return (FileNames.Length == 1); }
         }
+
+        public static void UpdateStatusBarDocNamePlusOne(string strFormat, string strParam)
+        {
+            m_aForm.UpdateStatusBarDocNamePlusOne(strFormat, strParam);
+        }
+
+        public static void UpdateStatusBarDocNamePlusTwo(string strFormat, string strParam1, string strParam2)
+        {
+            m_aForm.UpdateStatusBarDocNamePlusTwo(strFormat, strParam1, strParam2);
+        }
     }
 }

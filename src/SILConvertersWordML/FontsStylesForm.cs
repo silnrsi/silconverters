@@ -29,6 +29,7 @@ namespace SILConvertersWordML
         protected const string cstrCancelSearch = "Canceling the search";
         protected const string cstrLeftXmlFileSuffixBefore = " (SILConverters-generated before conversion).xml";
         internal const string cstrLeftXmlFileSuffixAfterXsltTransform = " (SILConverters-generated after xslt transform).xml";
+        internal const string cstrLeftXmlFileSuffixAfterLinqTransform = " (SILConverters-generated after linq transform).xml";
         protected const string cstrLeftXmlFileSuffixAfter = " (SILConverters-generated after conversion).xml";
 
         protected static int cnMaxConverterName = 30;
@@ -41,12 +42,6 @@ namespace SILConvertersWordML
         protected Hashtable m_mapEncConverters = new Hashtable();
 
         public Dictionary<string, Font> mapName2Font = new Dictionary<string, Font>();
-        public IteratorMap mapFontNames2Iterator = new IteratorMap();
-		public IteratorMap mapSymbolFontNames2Iterator = new IteratorMap();
-		public IteratorMap mapDefStyleFontNames2Iterator = new IteratorMap();
-		public IteratorMap mapPStyleFontNames2Iterator = new IteratorMap();
-		public IteratorMap mapCStyleFontNames2Iterator = new IteratorMap();
-        public IteratorMap mapStyleId2Iterator = new IteratorMap();
 
         protected DirectableEncConverter m_aECLast = null;
         protected Font m_aFontLast = null;
@@ -69,6 +64,11 @@ namespace SILConvertersWordML
             InitializeComponent();
 
             helpProvider.SetHelpString(this.dataGridView, Properties.Resources.dataGridViewHelp);
+
+#if DEBUG
+            leaveXMLFileInFolderToolStripMenuItem.Checked =
+                useLinqToolStripMenuItem.Checked = true;
+#endif
         }
 
         public void OpenDocuments(string[] astrFilenames)
@@ -95,7 +95,7 @@ namespace SILConvertersWordML
 
         public void AddFilenameToTitle(string[] FileNames)
         {
-            System.Diagnostics.Debug.Assert(FileNames.Length > 0);
+            Debug.Assert(FileNames.Length > 0);
             string strTitleName = "<various>";  // assume multiple files
 
             // if there's only one, then add it to the recently used files
@@ -120,7 +120,7 @@ namespace SILConvertersWordML
 
         public void AddToConverterMappingRecentlyUsed(string strFilename)
         {
-            System.Diagnostics.Debug.Assert(!String.IsNullOrEmpty(strFilename));
+            Debug.Assert(!String.IsNullOrEmpty(strFilename));
 
             // add this filename to the list of recently used files
             if (Properties.Settings.Default.ConverterMappingRecentFiles.Contains(strFilename))
@@ -132,7 +132,7 @@ namespace SILConvertersWordML
             Properties.Settings.Default.Save();
         }
 
-        protected XPathIterator GetIteratorFromMap(string strFontName, IteratorMap mapNames2Iterator)
+        protected DataIterator GetIteratorFromMap(string strFontName, IteratorMap mapNames2Iterator)
         {
             return mapNames2Iterator[strFontName];
         }
@@ -160,7 +160,7 @@ namespace SILConvertersWordML
             string strFontStyleName = (string)theRow.Cells[cnFontStyleColumn].Value;
             if (!String.IsNullOrEmpty(strSampleValue) && IsConverterDefined(strFontStyleName))
             {
-                DirectableEncConverter aEC = (DirectableEncConverter)m_mapEncConverters[strFontStyleName];
+                var aEC = (DirectableEncConverter)m_mapEncConverters[strFontStyleName];
                 strSampleValue = CallSafeConvert(aEC, strSampleValue);
             }
             theRow.Cells[cnExampleOutputColumn].Value = strSampleValue;
@@ -168,12 +168,10 @@ namespace SILConvertersWordML
 
         protected void UpdateSampleValue(DataGridViewRow theRow)
         {
-            XPathIterator xpIterator = (XPathIterator)theRow.Tag;
-            System.Diagnostics.Debug.Assert(xpIterator != null);
+            var xpIterator = (DataIterator)theRow.Tag;
+            Debug.Assert(xpIterator != null);
             if (xpIterator.MoveNext())
-            {
 				UpdateExampleDataColumns(theRow, xpIterator.CurrentValue);
-            }
         }
 
         internal static void UpdateConverterCellValue(DataGridViewCell theCell, DirectableEncConverter aEC)
@@ -200,22 +198,22 @@ namespace SILConvertersWordML
             RowMaxHeight = Math.Max(RowMaxHeight, fontTarget.Height);
         }
 
-        protected string GetDataSample(XPathIterator xpIterator)
+        protected string GetDataSample(DataIterator dataIterator)
         {
-            return xpIterator.CurrentValue;
+            return dataIterator.CurrentValue;
         }
 
         protected void PopulateGrid()
         {
             dataGridView.Rows.Clear();
-            List<string> lstInGrid = new List<string>();    // used so we don't add something twice
+            var lstInGrid = new List<string>();    // used so we don't add something twice
             if (this.radioButtonEverything.Checked)
             {
                 ColumnFont.HeaderText = "Font";
                 ColumnTargetFont.HeaderText = "Apply Font";
 
                 // get the Fonts and Styles out of the xml docs
-                GetTextIteratorListFontCustomAllDocs(ref lstInGrid);
+                GetTextIteratorListCustomFont(ref lstInGrid);
                 GetTextIteratorListStyleFont(ref lstInGrid);
             }
             else if (radioButtonStylesOnly.Checked)
@@ -224,7 +222,7 @@ namespace SILConvertersWordML
                 ColumnTargetFont.HeaderText = "New Style Font";
 
                 // get the Fonts and Styles out of the xml doc
-                GetTextIteratorListStyle(ref lstInGrid);
+                GetTextIteratorListStyleOnly(ref lstInGrid);
             }
             else if (radioButtonFontsOnly.Checked)
             {
@@ -232,10 +230,10 @@ namespace SILConvertersWordML
                 ColumnTargetFont.HeaderText = "Apply Font";
 
                 // get the Fonts and Styles out of the xml doc
-                GetTextIteratorListFontCustomAllDocs(ref lstInGrid);
+                GetTextIteratorListCustomFont(ref lstInGrid);
             }
             else
-                System.Diagnostics.Debug.Assert(false);
+                Debug.Assert(false);
 
             // set it up so we 'see' the click
             m_dtStarted = DateTime.Now;
@@ -244,9 +242,9 @@ namespace SILConvertersWordML
 
         public int RowMaxHeight = 28;    // start with this
 
-        protected void DisplayInGrid(string strName, XPathIterator xpIterator)
+        protected void DisplayInGrid(string strName, DataIterator dataIterator)
         {
-            string strTextSample = GetDataSample(xpIterator);
+            string strTextSample = GetDataSample(dataIterator);
             string strConverterName = cstrClickMsg;
             string strOutput = strTextSample;
             string strTooltip = cstrClickMsg;
@@ -308,7 +306,7 @@ namespace SILConvertersWordML
             int nIndex = this.dataGridView.Rows.Add(row);
             DataGridViewRow thisRow = dataGridView.Rows[nIndex];
             thisRow.Cells[cnEncConverterColumn].ToolTipText = strTooltip;
-            thisRow.Tag = xpIterator;
+            thisRow.Tag = dataIterator;
             thisRow.Cells[cnExampleDataColumn].Style.Font = fontSource;
             thisRow.Cells[cnExampleOutputColumn].Style.Font = fontTarget;
             thisRow.Height = RowMaxHeight;
@@ -370,12 +368,8 @@ namespace SILConvertersWordML
 
         protected void Reset()
         {
-            mapFontNames2Iterator.Clear();
-			mapSymbolFontNames2Iterator.Clear();
-            mapDefStyleFontNames2Iterator.Clear();
-			mapPStyleFontNames2Iterator.Clear();
-			mapCStyleFontNames2Iterator.Clear();
-            mapStyleId2Iterator.Clear();
+            if (DocXmlDocument.MapIteratorList != null)
+                DocXmlDocument.MapIteratorList.ResetMaps();
 
             m_mapDocName2XmlDocument.Clear();
             dataGridView.Rows.Clear();
@@ -441,42 +435,12 @@ namespace SILConvertersWordML
                                     strDocFilename, 
                                     leaveXMLFileInFolderToolStripMenuItem.Checked, null);
 
-            DocXmlDocument doc = 
-#if !DefineWord07MLDocument
-				(bWord2007) ? Word07MLDocument.GetXmlDocument(strXmlFilename) : 
-#endif
-                Word03MLDocument.GetXmlDocument(ref strXmlFilename, strDocFilename,
-                                                leaveXMLFileInFolderToolStripMenuItem.Checked);
-            /*
-            SaveIntermediateXmlFile(ref strXmlFilename, cstrLeftXmlFileSuffixBefore,
-                                    strDocFilename,
-                                    leaveXMLFileInFolderToolStripMenuItem.Checked, null);
-            try
-            {
-                if (leaveXMLFileInFolderToolStripMenuItem.Checked)
-                {
-                    int nIndex = strDocFilename.LastIndexOf('.');
-                    if (nIndex != -1)
-                    {
-                        strXmlFilename = String.Format(@"{0}\{1}{2}",
-                            Path.GetDirectoryName(strDocFilename),
-                            Path.GetFileName(strDocFilename),
-                            cstrLeftXmlFileSuffixBefore);
-                        if (File.Exists(strXmlFilename))
-                            File.Delete(strXmlFilename);
-                    }
-                }
-                doc.Save(strXmlFilename);
-            }
-            catch (Exception ex)
-            {
-                string strErrorMsg = String.Format("Unable to save a copy of the xml file in the local folder (requested by \"Advanced\", \"Leave XML file in folder\" option)! Reason:{0}{0}{1}{0}{0}Would you like to continue with the conversion process anyway?",
-                    Environment.NewLine, ex.Message);
-                DialogResult res = MessageBox.Show(strErrorMsg, cstrCaption, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Error);
-                if (res != DialogResult.Yes)
-                    return null;
-            }
-            */
+            var doc = (useLinqToolStripMenuItem.Checked)
+                          ? WordLinqDocument.GetXmlDocument(ref strXmlFilename, strDocFilename,
+                                                            leaveXMLFileInFolderToolStripMenuItem.Checked)
+                          : Word03MLDocument.GetXmlDocument(ref strXmlFilename, strDocFilename,
+                                                            leaveXMLFileInFolderToolStripMenuItem.Checked);
+
             return doc;
         }
 
@@ -840,7 +804,7 @@ namespace SILConvertersWordML
                         int nSuffixStart = (nIndexOfOrigName + strFileTitle.Length);
                         if (strNewTitle.Length > nSuffixStart)
                         {
-                            System.Diagnostics.Debug.Assert(nSuffixStart >= 0);
+                            Debug.Assert(nSuffixStart >= 0);
                             strFilenameSuffix = strNewTitle.Substring(nSuffixStart);
                         }
                         else
@@ -868,7 +832,7 @@ namespace SILConvertersWordML
             }
         }
 
-        public bool ConvertDoc(string strFontStyleName, XPathIterator xpIteratorFontStyleText, 
+        public bool ConvertDoc(string strFontStyleName, DataIterator dataIteratorFontStyleText, 
 			string strLhsFont, Font fontApply, bool bConvertCharValue)
         {
             bool bModified = false;
@@ -876,7 +840,7 @@ namespace SILConvertersWordML
             {
                 DirectableEncConverter aEC = GetConverter(strFontStyleName);
                 Font fontLhs = CreateFontSafe(strLhsFont);
-				bModified = SetValues(xpIteratorFontStyleText, strFontStyleName, aEC, 
+				bModified = SetValues(dataIteratorFontStyleText, strFontStyleName, aEC, 
 					fontLhs, fontApply, bConvertCharValue);
             }
             return bModified;
@@ -889,155 +853,21 @@ namespace SILConvertersWordML
             // set this in the global "doc we're working on" string so it can be used when writing to the
             //  status bar
             m_strCurrentDocument = Path.GetFileName(strDocFilename);
-            DocXmlDocument doc = m_mapDocName2XmlDocument[strDocFilename];
+            var doc = m_mapDocName2XmlDocument[strDocFilename];
             bool bModified = false;
 
             if (this.radioButtonEverything.Checked)
             {
-                // mapFontNames2Iterator, has one iterator for each unique font (across all docs). If there's
-                //  only one doc, then we're done. But if there's more than one doc, then we have to treat each 
-                //  one as if by itself (which unfortunately means empty the collection and requery)
-                if (!Program.IsOnlyOneDoc)
-                {
-                    mapFontNames2Iterator.Clear();
-					mapSymbolFontNames2Iterator.Clear();
-					mapDefStyleFontNames2Iterator.Clear(); 
-					mapPStyleFontNames2Iterator.Clear();
-					mapCStyleFontNames2Iterator.Clear();
-					GetTextIteratorListFontCustom(doc);     // this initializes mapFontNames2Iterator and mapSymbolFontNames2Iterator
-					GetTextIteratorListFontStyle(doc);      // this initializes mapDefStyleFontNames2Iterator, and mapP/CStyleFontNames2Iterator
-                }
-
-                foreach (string strFontName in mapFontNames2Iterator.Keys)
-                {
-                    System.Diagnostics.Debug.Assert(mapName2Font.ContainsKey(strFontName));
-                    Font fontTarget = mapName2Font[strFontName];
-
-                    bModified |= ConvertDoc(strFontName, mapFontNames2Iterator[strFontName],
-                                            strFontName, fontTarget, false);
-
-                    // update the font name as well
-                    if (strFontName != fontTarget.Name)
-                        doc.ReplaceTextFontNameGetFontText(strFontName, fontTarget.Name);
-                }
-
-				foreach (string strFontName in mapSymbolFontNames2Iterator.Keys)
-				{
-					System.Diagnostics.Debug.Assert(mapName2Font.ContainsKey(strFontName));
-					Font fontTarget = mapName2Font[strFontName];
-
-				    bModified |= ConvertDoc(strFontName, mapSymbolFontNames2Iterator[strFontName],
-				                            strFontName, fontTarget, true);
-
-					// update the font name as well
-					if (strFontName != fontTarget.Name)
-						doc.ReplaceSymbolTextFontNameGetFontText(strFontName, fontTarget.Name);
-				}
-
-				foreach (string strFontNameOfStyle in mapDefStyleFontNames2Iterator.Keys)
-                {
-                    System.Diagnostics.Debug.Assert(mapName2Font.ContainsKey(strFontNameOfStyle));
-                    Font fontTarget = mapName2Font[strFontNameOfStyle];
-
-                    bModified |= ConvertDoc(strFontNameOfStyle, mapDefStyleFontNames2Iterator[strFontNameOfStyle],
-                                            strFontNameOfStyle, fontTarget, false);
-                }
-
-				foreach (string strFontNameOfStyle in mapPStyleFontNames2Iterator.Keys)
-				{
-					System.Diagnostics.Debug.Assert(mapName2Font.ContainsKey(strFontNameOfStyle));
-					Font fontTarget = mapName2Font[strFontNameOfStyle];
-
-				    bModified |= ConvertDoc(strFontNameOfStyle, mapPStyleFontNames2Iterator[strFontNameOfStyle],
-				                            strFontNameOfStyle, fontTarget, false);
-
-					// update the font name as well
-					if (strFontNameOfStyle != fontTarget.Name)
-						doc.ReplaceTextFontNameGetPStyleFontText(strFontNameOfStyle, fontTarget.Name);
-				}
-
-				foreach (string strFontNameOfStyle in mapCStyleFontNames2Iterator.Keys)
-				{
-					System.Diagnostics.Debug.Assert(mapName2Font.ContainsKey(strFontNameOfStyle));
-					Font fontTarget = mapName2Font[strFontNameOfStyle];
-
-				    bModified |= ConvertDoc(strFontNameOfStyle, mapCStyleFontNames2Iterator[strFontNameOfStyle],
-				                            strFontNameOfStyle, fontTarget, false);
-
-					// update the font name as well
-					if (strFontNameOfStyle != fontTarget.Name)
-						doc.ReplaceTextFontNameGetCStyleFontText(strFontNameOfStyle, fontTarget.Name);
-				}
-			}
+                bModified |= doc.ConvertDocumentByFontNameAndStyle(mapName2Font, ConvertDoc);
+            }
             else if (radioButtonStylesOnly.Checked)
             {
-                // mapStyleId2Iterator, has one iterator for each unique style (across all docs). If there's
-                //  only one doc, then we're done. But if there's more than one doc, then we have to treat each 
-                //  one as if by itself (which unfortunately means empty the collection and requery)
-                if (!Program.IsOnlyOneDoc)
-                {
-                    mapStyleId2Iterator.Clear();
-                    GetTextIteratorListStyle(doc);  // this initializes mapStyleId2Iterator
-                }
-
-                foreach (string strStyleId in mapStyleId2Iterator.Keys)
-                {
-                    if (doc.mapStyleId2Name.ContainsKey(strStyleId))
-                    {
-                        string strStyleName = doc.mapStyleId2Name[strStyleId];
-
-                        System.Diagnostics.Debug.Assert(mapName2Font.ContainsKey(strStyleName));
-                        System.Diagnostics.Debug.Assert(doc.mapStyleName2FontName.ContainsKey(strStyleName));
-                        Font fontTarget = mapName2Font[strStyleName];
-                        string strOrigFont = doc.mapStyleName2FontName[strStyleName];
-
-                        bModified |= ConvertDoc(strStyleName, mapStyleId2Iterator[strStyleId],
-                                                strOrigFont, fontTarget, false);
-
-                        // update the font name as well
-                        if (strOrigFont != fontTarget.Name)
-                            doc.ReplaceTextFontNameGetStyleText(strStyleName, fontTarget.Name);
-                    }
-                }
+                bModified |= doc.ConvertDocumentByStylesOnly(mapName2Font, ConvertDoc);
             }
             else if (radioButtonFontsOnly.Checked)
             {
-                // mapFontNames2Iterator, has one iterator for each unique font (across all docs). If there's
-                //  only one doc, then we're done. But if there's more than one doc, then we have to treat each 
-                //  one as if by itself (which unfortunately means empty the collection and requery)
-                if (!Program.IsOnlyOneDoc)
-                {
-                    mapFontNames2Iterator.Clear();
-					mapSymbolFontNames2Iterator.Clear();
-					GetTextIteratorListFontCustom(doc); // this initializes mapFontNames2Iterator and mapSymbolFontNames2Iterator
-                }
-
-                foreach (string strFontName in mapFontNames2Iterator.Keys)
-                {
-                    System.Diagnostics.Debug.Assert(mapName2Font.ContainsKey(strFontName));
-                    Font fontTarget = mapName2Font[strFontName];
-
-                    bModified |= ConvertDoc(strFontName, mapFontNames2Iterator[strFontName],
-                                            strFontName, fontTarget, false);
-
-                    // update the font name as well
-                    if (strFontName != fontTarget.Name)
-                        doc.ReplaceTextFontNameGetFontText(strFontName, fontTarget.Name);
-                }
-
-				foreach (string strFontName in mapSymbolFontNames2Iterator.Keys)
-				{
-					System.Diagnostics.Debug.Assert(mapName2Font.ContainsKey(strFontName));
-					Font fontTarget = mapName2Font[strFontName];
-
-				    bModified |= ConvertDoc(strFontName, mapSymbolFontNames2Iterator[strFontName],
-				                            strFontName, fontTarget, false);
-
-					// update the font name as well
-					if (strFontName != fontTarget.Name)
-						doc.ReplaceSymbolTextFontNameGetFontText(strFontName, fontTarget.Name);
-				}
-			}
+                bModified |= doc.ConvertDocumentByFontNameOnly(mapName2Font, ConvertDoc);
+            }
 
             strXmlOutputFilename = Path.GetTempFileName() + ".xml";
 
@@ -1071,93 +901,7 @@ namespace SILConvertersWordML
             return bModified;
         }
 
-        // this gets the text iterators for custom font runs
-        //  (i.e. "Fonts only" -- "only custom font runs")
-        public void GetTextIteratorListFontCustom(DocXmlDocument doc)
-        {
-            // now m_astrFullFontNameList is loaded, so let's see which of these has any text associated 
-            foreach (string strFontName in doc.lstFontNamesCustom)
-            {
-                UpdateStatusBarDocNamePlusOne("Examining '{0}'... Searching for custom formatting with font '{1}'...",
-                    strFontName);
-                doc.GetTextIteratorForName(strFontName, doc.XPathFormatGetFontText,
-                    ref mapFontNames2Iterator, false);
-			}
-
-			// also check for inserted symbols
-			foreach (string strFontName in doc.lstFontNamesSymbolText)
-			{
-				UpdateStatusBarDocNamePlusOne("Examining '{0}'... Searching for inserted symbols with font '{1}'...",
-					strFontName);
-				doc.GetTextIteratorForName(strFontName, doc.XPathFormatGetSymbolFontText,
-					ref mapSymbolFontNames2Iterator, true);
-			}
-        }
-
-        // this gets the text iterators for Styles (based on a certain font) runs
-        public void GetTextIteratorListFontStyle(DocXmlDocument doc)
-        {
-            if (!String.IsNullOrEmpty(doc.m_strDefaultStyleFontName))
-            {
-                UpdateStatusBarDocNamePlusOne("Examining '{0}'... Searching for default paragraph style-based formatting based on font '{1}'...", doc.m_strDefaultStyleFontName);
-                doc.GetTextIteratorForName(doc.m_strDefaultStyleFontName, doc.XPathFormatGetDefaultPStyleFontText,
-					ref mapDefStyleFontNames2Iterator, false);
-            }
-
-            foreach (string strFontName in doc.lstFontNamesPStyle)
-            {
-                UpdateStatusBarDocNamePlusOne("Examining '{0}'... Searching for paragraph style-based formatting based on font '{1}'...", strFontName);
-                doc.GetTextIteratorForName(strFontName, doc.XPathFormatGetPStyleFontText,
-					ref mapPStyleFontNames2Iterator, false);
-            }
-
-            foreach (string strFontName in doc.lstFontNamesCStyle)
-            {
-                UpdateStatusBarDocNamePlusOne("Examining '{0}'... Searching for character style-based formatting based on font '{1}'...",
-                    strFontName);
-                doc.GetTextIteratorForName(strFontName, doc.XPathFormatGetCStyleFontText,
-					ref mapCStyleFontNames2Iterator, false);
-            }
-        }
-
-        // this gets the text iterators for style-based formatting that has text runs
-        //  (i.e. "Style only" -- "only Style-based runs")
-        public void GetTextIteratorListStyle(DocXmlDocument doc)
-        {
-            GetTextIteratorStyleType("paragraph", doc, doc.lstPStyleIdList, doc.XPathFormatGetPStyleText);
-            GetTextIteratorStyleType("character", doc, doc.lstCStyleIdList, doc.XPathFormatGetCStyleText);
-        }
-
-        protected void GetTextIteratorStyleType(string strStyleType, DocXmlDocument doc, List<string> lstStyleIds,
-            string strXPathFormatText)
-        {
-            foreach (string strStyleId in lstStyleIds)
-            {
-                // get the id of this style (which we've already looked up)
-                // (it may not occur in this particular document... so skip it if not)
-                if (doc.mapStyleId2Name.ContainsKey(strStyleId))
-                {
-                    string strStyleName = doc.mapStyleId2Name[strStyleId];
-                    UpdateStatusBarDocNamePlusTwo("Examining '{0}'... Searching for {1} style-based formatting based on style '{2}'...",
-                        strStyleType, strStyleName);
-
-                    if (doc.GetTextIteratorForName(strStyleId, strXPathFormatText,
-						ref mapStyleId2Iterator, false))
-                    {
-                        if (!mapName2Font.ContainsKey(strStyleName))
-                        {
-                            System.Diagnostics.Debug.Assert(doc.mapStyleName2FontName.ContainsKey(strStyleName));
-                            string strFontName = doc.mapStyleName2FontName[strStyleName];
-                            Font font = CreateFontSafe(strFontName);
-                            mapName2Font.Add(strStyleName, font);
-                            RowMaxHeight = Math.Max(RowMaxHeight, font.Height);
-                        }
-                    }
-                }
-            }
-        }
-
-		protected bool SetValues(XPathIterator xpIterator, string strFontStyleName,
+        protected bool SetValues(DataIterator dataIterator, string strFontStyleName,
 			DirectableEncConverter aEC, Font fontLhs, Font fontRhs, bool bConvertCharValue)
         {
             BaseConverterForm dlg = null;
@@ -1169,7 +913,7 @@ namespace SILConvertersWordML
 			string strReplacementCharacter = (aEC.IsRhsLegacy) ? "?" : "\ufffd";
             do
             {
-				string strInput = xpIterator.CurrentValue;
+				string strInput = dataIterator.CurrentValue;
                 string strOutput = CallSafeConvert(aEC, strInput);
 
                 UpdateStatusBar(String.Format("In '{0}', converting: '{1}' to '{2}'",
@@ -1191,14 +935,16 @@ namespace SILConvertersWordML
                     }
                 }
 
+                /* TODO: I think I'm stripping out inserted symbols altogether (no need for them)
                 // did a single inserted symbol result in a multi-char result?
-                if (xpIterator.IsInsertSymbolSituation && (strOutput.Length > 1))
+                if (dataIterator.IsInsertSymbolSituation && (strOutput.Length > 1))
                 {
                     bShowPotentialError = true;
                     if (dlg == null)
                         dlg = new BaseConverterForm(aEC, fontLhs, fontRhs, m_strCurrentDocument);
                     dlg.Text = "Inserted Symbol is converted to multi-char result! You probably want to use FullyComposed or result will be truncated";
                 }
+                */
 
                 // show user this one 
                 if (    (   (res != FormButtons.ReplaceAll)
@@ -1213,7 +959,7 @@ namespace SILConvertersWordML
 
                 if ((res == FormButtons.Replace) || (res == FormButtons.ReplaceAll))
                 {
-					xpIterator.SetCurrentValue(strOutput);
+					dataIterator.SetCurrentValue(strOutput);
                     bModified = true;
                 }
                 else if (res == FormButtons.Cancel)
@@ -1225,13 +971,13 @@ namespace SILConvertersWordML
                 }
                 else
                 {
-                    System.Diagnostics.Debug.Assert(res == FormButtons.Next);
+                    Debug.Assert(res == FormButtons.Next);
                     res = FormButtons.Replace;  // reset for next time.
                 }
                 
                 // don't put this in the while look in case the above 'continue' is executed (which will cause
                 //  us to repeat the last word again)
-                bContinue = xpIterator.MoveNext();
+                bContinue = dataIterator.MoveNext();
 
             } while (bContinue);
 
@@ -1307,7 +1053,7 @@ namespace SILConvertersWordML
             if (!CheckForWinWord())
                 return;
 
-            Word.Application wrdApp = new Word.Application();
+            var wrdApp = new Word.Application();
             try
             {
                 // first open all of the given files and save them as xml so we can work with them.
@@ -1316,8 +1062,8 @@ namespace SILConvertersWordML
                     m_strCurrentDocument = Path.GetFileName(strDocFilename);
                     UpdateStatusBar(String.Format("Examining '{0}'", m_strCurrentDocument));
 
-                    // convert the document to XML and get an XmlDoc for it (on which we can do XPath queries
-                    DocXmlDocument doc = ConvertDocToXml(wrdApp, strDocFilename);
+                    // convert the document to XML and get an XmlDoc for it (on which we can do queries for data)
+                    var doc = ConvertDocToXml(wrdApp, strDocFilename);
 
                     // put it in a map if it exists
                     if (doc != null)
@@ -1339,101 +1085,41 @@ namespace SILConvertersWordML
         //  (i.e. "Styles & Custom formatting" = "do it all")
         protected void GetTextIteratorListStyleFont(ref List<string> lstInGrid)
         {
-            if (!mapDefStyleFontNames2Iterator.IsInitialized)
+            if ((DocXmlDocument.MapIteratorList == null) || DocXmlDocument.MapIteratorList.IsInitializedFontsFromStyles) 
+                return;
+
+            foreach (var kvp in m_mapDocName2XmlDocument)
             {
-                foreach (KeyValuePair<string, DocXmlDocument> kvp in m_mapDocName2XmlDocument)
-                {
-                    m_strCurrentDocument = Path.GetFileName(kvp.Key);
-                    DocXmlDocument doc = kvp.Value;
-                    GetTextIteratorListFontStyle(doc);
-                }
+                m_strCurrentDocument = Path.GetFileName(kvp.Key);
+                var doc = kvp.Value;
+                doc.InitializeIteratorsFontsFromStyles(lstInGrid, DisplayInGrid);
             }
-
-            // put a clone in the grid (but only if we haven't already done one via the Custom font)
-            foreach (KeyValuePair<string, XPathIterator> kvp in mapDefStyleFontNames2Iterator)
-                if (!lstInGrid.Contains(kvp.Key))
-                {
-                    DisplayInGrid(kvp.Key, kvp.Value.Clone());
-                    lstInGrid.Add(kvp.Key);
-                }
-
-			foreach (KeyValuePair<string, XPathIterator> kvp in mapPStyleFontNames2Iterator)
-				if (!lstInGrid.Contains(kvp.Key))
-				{
-					DisplayInGrid(kvp.Key, kvp.Value.Clone());
-					lstInGrid.Add(kvp.Key);
-				}
-
-			foreach (KeyValuePair<string, XPathIterator> kvp in mapCStyleFontNames2Iterator)
-				if (!lstInGrid.Contains(kvp.Key))
-				{
-					DisplayInGrid(kvp.Key, kvp.Value.Clone());
-					lstInGrid.Add(kvp.Key);
-				}
-
-			// indicate that these are now initialized so that it doesn't happen again.
-            mapDefStyleFontNames2Iterator.IsInitialized = (m_mapDocName2XmlDocument.Count > 0);
         }
 
-        protected void GetTextIteratorListStyle(ref List<string> lstInGrid)
+        protected void GetTextIteratorListStyleOnly(ref List<string> lstInGrid)
         {
-            foreach (KeyValuePair<string, DocXmlDocument> kvp in m_mapDocName2XmlDocument)
+            if ((DocXmlDocument.MapIteratorList == null) || DocXmlDocument.MapIteratorList.IsInitializedStyleName)
+                return;
+
+            foreach (var kvp in m_mapDocName2XmlDocument)
             {
-                DocXmlDocument doc = kvp.Value;
-                if (!mapStyleId2Iterator.IsInitialized)
-                {
-                    m_strCurrentDocument = Path.GetFileName(kvp.Key);
-                    GetTextIteratorListStyle(doc);
-                }
-
-                // put a clone in the grid
-                foreach (KeyValuePair<string, XPathIterator> kvpIterator in mapStyleId2Iterator)
-                {
-                    if (doc.mapStyleId2Name.ContainsKey(kvpIterator.Key))
-                    {
-                        string strStyleName = doc.mapStyleId2Name[kvpIterator.Key];
-                        if (!lstInGrid.Contains(strStyleName))
-                        {
-                            DisplayInGrid(strStyleName, kvpIterator.Value.Clone());
-                            lstInGrid.Add(strStyleName);
-                        }
-                    }
-                }
+                m_strCurrentDocument = Path.GetFileName(kvp.Key);
+                var doc = kvp.Value;
+                doc.InitializeIteratorsStyleName(lstInGrid, DisplayInGrid);
             }
-
-            // indicate that these are now initialized so that it doesn't happen again.
-            mapStyleId2Iterator.IsInitialized = (m_mapDocName2XmlDocument.Count > 0);
         }
 
-        protected void GetTextIteratorListFontCustomAllDocs(ref List<string> lstInGrid)
+        protected void GetTextIteratorListCustomFont(ref List<string> lstInGrid)
         {
-            if (!mapFontNames2Iterator.IsInitialized)
+            if ((DocXmlDocument.MapIteratorList == null) || DocXmlDocument.MapIteratorList.IsInitializedCustomFontName)
+                return;
+
+            foreach (var kvp in m_mapDocName2XmlDocument)
             {
-                foreach (KeyValuePair<string, DocXmlDocument> kvp in m_mapDocName2XmlDocument)
-                {
-                    m_strCurrentDocument = Path.GetFileName(kvp.Key);
-                    DocXmlDocument doc = kvp.Value;
-                    GetTextIteratorListFontCustom(doc);
-                }
+                m_strCurrentDocument = Path.GetFileName(kvp.Key);
+                var doc = kvp.Value;
+                doc.InitializeIteratorsCustomFontName(lstInGrid, DisplayInGrid);
             }
-
-            // put a clone in the grid
-            foreach (KeyValuePair<string, XPathIterator> kvp in mapFontNames2Iterator)
-                if (!lstInGrid.Contains(kvp.Key))
-                {
-                    DisplayInGrid(kvp.Key, kvp.Value.Clone());
-                    lstInGrid.Add(kvp.Key);
-                }
-
-			foreach (KeyValuePair<string, XPathIterator> kvp in mapSymbolFontNames2Iterator)
-                if (!lstInGrid.Contains(kvp.Key))
-                {
-                    DisplayInGrid(kvp.Key, kvp.Value.Clone());
-                    lstInGrid.Add(kvp.Key);
-                }
-
-            // indicate that these are now initialized so that it doesn't happen again.
-            mapFontNames2Iterator.IsInitialized = (m_mapDocName2XmlDocument.Count > 0);
         }
 
         private void dataGridView_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
@@ -1919,7 +1605,7 @@ namespace SILConvertersWordML
                             && HasFont(fi.FullName, wrdApp, astrFontsToSearchFor, out doc))
                         {
                             // now we should have an xml object representing of this file
-                            System.Diagnostics.Debug.Assert(doc != null);
+                            Debug.Assert(doc != null);
                             UpdateStatusBar(String.Format("Found font data in '...{0}' ", strFolderOffset));
 
                             // first make a backup of the file in two locations: where the user requested it and in our AppData area (I don't
@@ -2012,6 +1698,18 @@ namespace SILConvertersWordML
 
             doc = null;
             return false;
+        }
+
+        internal void AddFontIfNeeded(DocXmlDocument doc, string strStyleName)
+        {
+            if (!mapName2Font.ContainsKey(strStyleName))
+            {
+                Debug.Assert(doc.MapStyleName2FontName.ContainsKey(strStyleName));
+                string strFontName = doc.MapStyleName2FontName[strStyleName];
+                Font font = CreateFontSafe(strFontName);
+                mapName2Font.Add(strStyleName, font);
+                RowMaxHeight = Math.Max(RowMaxHeight, font.Height);
+            }
         }
     }
 }
