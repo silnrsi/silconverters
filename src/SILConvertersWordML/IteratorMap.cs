@@ -2,16 +2,72 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Xml;
+using System.Xml.Linq;
 using System.Xml.XPath;
 
 namespace SILConvertersWordML
 {
-	public class XPathIterator
+    public abstract class DataIterator
+    {
+        public abstract string CurrentValue { get; }
+        public abstract void SetCurrentValue(string str);
+        public abstract bool MoveNext();
+        public abstract DataIterator Clone();
+    }
+
+    class LinqDataIterator : DataIterator
+    {
+        private List<XElement> _lstOfRuns;
+        private List<XElement>.Enumerator _enumListOfRuns;
+
+        public LinqDocument LinqDocument { get; set; }
+
+        public List<XElement> ListOfRuns
+        {
+            get { return _lstOfRuns; } 
+            set
+            {
+                _lstOfRuns = value;
+                if (value != null)
+                {
+                    _enumListOfRuns = ListOfRuns.GetEnumerator();
+                    _enumListOfRuns.MoveNext();
+                }
+            }
+        }
+
+        #region Overrides of DataIterator
+
+        public override string CurrentValue
+        {
+            get { return LinqDocument.GetTextFromRun(_enumListOfRuns.Current); }
+        }
+
+        public override void SetCurrentValue(string str)
+        {
+            LinqDocument.SetTextOfRun(_enumListOfRuns.Current, str);
+        }
+
+        public override bool MoveNext()
+        {
+            return _enumListOfRuns.MoveNext();
+        }
+
+        public override DataIterator Clone()
+        {
+            // I think this is a don't care for XDoc... let's hold off for now
+            return this;
+        }
+
+        #endregion
+    }
+
+    public class IteratorXPath : DataIterator
 	{
 		protected XPathNodeIterator m_ni = null;
 		protected bool m_bConvertAsCharValue;
 
-		public XPathIterator(XPathNodeIterator ni, bool bConvertAsCharValue)
+        public IteratorXPath(XPathNodeIterator ni, bool bConvertAsCharValue)
 		{
 			NodeIterator = ni;
 			ConvertAsCharValue = bConvertAsCharValue;
@@ -29,12 +85,12 @@ namespace SILConvertersWordML
 			set { m_bConvertAsCharValue = value; }
 		}
 
-		public XPathIterator Clone()
+        public override DataIterator Clone()
 		{
-			return new XPathIterator(NodeIterator.Clone(), ConvertAsCharValue);
+            return new IteratorXPath(NodeIterator.Clone(), ConvertAsCharValue);
 		}
 
-		public string CurrentValue
+		public override string CurrentValue
 		{
 			get
 			{
@@ -57,14 +113,14 @@ namespace SILConvertersWordML
 			}
 		}
 
-		public void SetCurrentValue(string str)
+		public override void SetCurrentValue(string str)
 		{
 			if (ConvertAsCharValue)
 				str = String.Format("{0:X4}", (int)str[0]);
 			NodeIterator.Current.SetValue(str);
 		}
 
-		public bool MoveNext()
+		public override bool MoveNext()
 		{
 			return NodeIterator.MoveNext();
 		}
@@ -73,22 +129,27 @@ namespace SILConvertersWordML
         {
             get
             {
-                return ((NodeIterator != null) && (NodeIterator.Current != null))
-                           ? ((NodeIterator.Current.Name == "w:char") ||
-                              (NodeIterator.Current.Name == "wx:char"))
-                           : false;
+                return ((NodeIterator != null) && 
+                        (NodeIterator.Current != null)) &&
+                       ((NodeIterator.Current.Name == "w:char") ||
+                        (NodeIterator.Current.Name == "wx:char"));
             }
         }
     }
 
-	public class IteratorMap : Dictionary<string, XPathIterator>
+	public class IteratorMap : Dictionary<string, DataIterator>
     {
-        public bool IsInitialized = false;
-
         public new void Clear()
         {
-            IsInitialized = false;
             base.Clear();
         }
+    }
+
+    public abstract class MapIteratorList
+    {
+        public abstract bool IsInitializedCustomFontName { get; }
+        public abstract bool IsInitializedFontsFromStyles { get; }
+        public abstract bool IsInitializedStyleName { get; }
+        public abstract void ResetMaps();
     }
 }
