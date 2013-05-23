@@ -29,11 +29,14 @@ namespace SILConvertersWordML
             {
                 _lstOfRuns = value;
                 if (value != null)
-                {
-                    _enumListOfRuns = ListOfRuns.GetEnumerator();
-                    _enumListOfRuns.MoveNext();
-                }
+                    InitializeEnumerator();
             }
+        }
+
+        private void InitializeEnumerator()
+        {
+            _enumListOfRuns = ListOfRuns.GetEnumerator();
+            _enumListOfRuns.MoveNext();
         }
 
         #region Overrides of DataIterator
@@ -55,7 +58,8 @@ namespace SILConvertersWordML
 
         public override DataIterator Clone()
         {
-            // I think this is a don't care for XDoc... let's hold off for now
+            // for us, we just need to reset the enumerator (in anticipation of the document about to be converted)
+            InitializeEnumerator();
             return this;
         }
 

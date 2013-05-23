@@ -15,7 +15,11 @@ namespace SILConvertersWordML
         protected WordMLDocument()
             : base(new MapIteratorListXPath())
         {
+            XmlDocument = new XmlDocument();
         }
+
+        protected XmlDocument XmlDocument { get; set; }
+
         protected List<string> LstFontNamesCustom = new List<string>();
         protected List<string> LstFontNamesSymbolText = new List<string>();
         protected List<string> LstFontNamesPStyle = new List<string>();
@@ -122,7 +126,7 @@ namespace SILConvertersWordML
 
         protected void InitXPathExpression(string strXPathExpr, ref XPathExpression xpe)
         {
-            XPathNavigator navigator = CreateNavigator();
+            XPathNavigator navigator = XmlDocument.CreateNavigator();
             xpe = navigator.Compile(strXPathExpr);
             XmlNamespaceManager manager;
             GetNamespaceManager(navigator, out manager);
@@ -285,6 +289,18 @@ namespace SILConvertersWordML
             }
         }
 
+        protected void HarvestFontsAndStylesUsedInAllText(string strXmlFilename, string strDocFilename)
+        {
+            XmlDocument.Load(strXmlFilename);
+            GetNameSpaceURIs(XmlDocument.DocumentElement);
+            InitXPathExpressions();
+
+            // get the full list of potential font and style names (these aren't what we'll present
+            //  to the user, because we'll only show those that have some text, but just to get a
+            //  full list that we won't have to a) requery or b) look beyond)
+            GetFullNameLists(strDocFilename);
+        }
+
         protected bool IsNamespaceRequired
         {
             get { return (m_mapPrefix2NamespaceURI.Count > 0); }
@@ -292,7 +308,7 @@ namespace SILConvertersWordML
 
         protected XPathNodeIterator GetIterator(string strXPath)
         {
-            XPathNavigator navigator = CreateNavigator();
+            XPathNavigator navigator = XmlDocument.CreateNavigator();
 
             XPathNodeIterator xpIterator = null;
             if (IsNamespaceRequired)
@@ -382,10 +398,11 @@ namespace SILConvertersWordML
             }
         }
 
-        public override void InitializeIteratorsCustomFontName(List<string> lstInGrid, Action<string, DataIterator> displayInGrid)
+        public override void InitializeIteratorsCustomFontNames(List<string> lstInGrid, Action<string, DataIterator> displayInGrid)
         {
             // first initialize the Maps for this document
-            GetTextIteratorListFontCustom();
+            if (!MyMapIteratorList.IsInitializedCustomFontName)
+                GetTextIteratorListFontCustom();
 
             // put a clone in the grid
             foreach (var kvp in MyMapIteratorList.MapFontNames2Iterator.Where(kvp => !lstInGrid.Contains(kvp.Key)))
@@ -404,7 +421,8 @@ namespace SILConvertersWordML
 
         public override void InitializeIteratorsFontsFromStyles(List<string> lstInGrid, Action<string, DataIterator> displayInGrid)
         {
-            GetTextIteratorListFontStyle();
+            if (!MyMapIteratorList.IsInitializedFontsFromStyles)
+                GetTextIteratorListFontStyle();
 
             // put a clone in the grid (but only if we haven't already done one via the Custom font)
             foreach (var kvp in MyMapIteratorList.MapDefStyleFontNames2Iterator
@@ -431,7 +449,8 @@ namespace SILConvertersWordML
 
         public override void InitializeIteratorsStyleName(List<string> lstInGrid, Action<string, DataIterator> displayInGrid)
         {
-            GetTextIteratorListStyle();
+            if (!MyMapIteratorList.IsInitializedStyleName)
+                GetTextIteratorListStyle();
 
             // put a clone in the grid
             foreach (var kvpIterator in MyMapIteratorList.MapStyleId2Iterator)
@@ -510,25 +529,20 @@ namespace SILConvertersWordML
             get { return MapIteratorList as MapIteratorListXPath; }
         }
 
-        protected void ReLoadMaps()
-        {
-            MapIteratorList = new MapIteratorListXPath();
-
-            // this initializes mapFontNames2Iterator and mapSymbolFontNames2Iterator
-            GetTextIteratorListFontCustom();
-
-            // this initializes mapDefStyleFontNames2Iterator, and mapP/CStyleFontNames2Iterator
-            GetTextIteratorListFontStyle();
-        }
-
         public override bool ConvertDocumentByFontNameAndStyle(Dictionary<string, Font> mapName2Font, Func<string, DataIterator, string, Font, bool, bool> convertDoc)
         {
             // mapFontNames2Iterator, has one iterator for each unique font (across all docs). If there's
-            //  only one doc, then we're done. But if there's more than one doc, then we have to treat each 
+            //  only one doc, then it's already loaded. But if there's more than one doc, then we have to treat each 
             //  one as if by itself (which unfortunately means empty the collection and requery)
             if (!Program.IsOnlyOneDoc)
             {
-                ReLoadMaps();
+                MapIteratorList = new MapIteratorListXPath();
+
+                // this initializes mapFontNames2Iterator and mapSymbolFontNames2Iterator
+                GetTextIteratorListFontCustom();
+
+                // this initializes mapDefStyleFontNames2Iterator, and mapP/CStyleFontNames2Iterator
+                GetTextIteratorListFontStyle();
             }
 
             var bModified = false;
@@ -678,6 +692,11 @@ namespace SILConvertersWordML
             // see if this document has an instance of the font
             XPathNodeIterator xpIteratorFontName = GetIterator(GetFindFontXPathExpression(astrFontsToSearchFor));
             return xpIteratorFontName.MoveNext();
+        }
+
+        public override void Save(string strXmlOutputFilename)
+        {
+            XmlDocument.Save(strXmlOutputFilename);
         }
     }
 

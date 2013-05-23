@@ -306,14 +306,7 @@ namespace SILConvertersWordML
 
             strXmlFilename = strXsltOutputFilename;
 
-            doc.Load(strXmlFilename);
-            doc.GetNameSpaceURIs(doc.DocumentElement);
-            doc.InitXPathExpressions();
-
-            // get the full list of potential font and style names (these aren't what we'll present
-            //  to the user, because we'll only show those that have some text, but just to get a
-            //  full list that we won't have to a) requery or b) look beyond)
-            doc.GetFullNameLists(strDocFilename);
+            doc.HarvestFontsAndStylesUsedInAllText(strXmlFilename, strDocFilename);
 
             return doc;
         }
