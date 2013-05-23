@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Xml;
 using System.Xml.Linq;
 
@@ -17,6 +19,9 @@ namespace SILConvertersWordML
         {
             // get the XDocument we're going to go through
             var doc = XDocument.Load(strXmlFilename);
+
+            // pre-process the file to fix-up issues that are presumably from earlier versions of Word
+            UnpackBareSymbolInserts(doc);
 
             // pre-process the file and combine the identically formatted runs of text within a paragraph
             CombineIsoFormattedRuns(doc);
@@ -43,6 +48,69 @@ namespace SILConvertersWordML
             return thisDoc;
         }
 
+        private static void UnpackBareSymbolInserts(XDocument doc)
+        {
+            /*
+              <w:p wsp:rsidR="00133C43" wsp:rsidRDefault="00133C43">
+                <w:r>
+                  <w:t>e.g. plosives </w:t>
+                </w:r>
+                <w:r>
+                  <w:sym w:font="Wingdings" w:char="F0E0" />
+                </w:r>
+            */
+            // This 'Wingdings' entry is weird... there's no rPr formatting element, but there is a w:sym, which
+            //  the below function would strip out. So if we find any w:sym with *no* w:t (which that function
+            //  expects to exist), then add it
+            Debug.Assert(doc.Root != null, "doc.Root != null");
+            var runsWithAbberentSyms = doc.Root.Descendants(w + "r").Where(r => r.Elements(w + "sym").Any() && !r.Elements(w + "t").Any());
+            foreach (var run in runsWithAbberentSyms)
+            {
+                var sym = GetElement(run, w + "sym");
+                var fontName = GetAttributeValue(sym, w + "font");
+                var strCharVal = GetAttributeValue(sym, w + "char");
+
+                // if this element doesn't have a rPr, then add it
+                var rPr = GetElement(run, w + "rPr");
+                if (rPr == null)
+                {
+                    // add this:
+                    // <w:r>
+                    //   <w:rPr>
+                    //     <wx:font wx:val="Wingdings" />
+                    //   </w:rPr>
+                    // ...
+                    //   <w:t></w:t>
+                    rPr = new XElement(w + "rPr", CreateWxFont(fontName));
+                    run.AddFirst(rPr);
+                }
+                else
+                {
+                    var wxfont = GetElement(rPr, wx + "font");
+                    if (wxfont == null)
+                    {
+                        wxfont = CreateWxFont(fontName);
+                        rPr.Add(wxfont);
+                    }
+
+                    Debug.Assert(GetAttributeValue(wxfont, wx + "val") == fontName);
+                }
+
+                var cCharValue = (char) Convert.ToInt32(strCharVal, 16);
+                var t = new XElement(w + "t", cCharValue);
+                run.Add(t);
+
+                // finally, get rid of the 'sym', since we don't want it now
+                sym.Remove();
+            }
+        }
+
+        private static XElement CreateWxFont(string fontName)
+        {
+            return new XElement(wx + "font",
+                                new XAttribute(wx + "val", fontName));
+        }
+
         /// <summary>
         /// This method will combine the w:t element values of sibling w:r elements whose w:rPr formatting specifications are equivalent
         /// </summary>
@@ -67,41 +135,80 @@ namespace SILConvertersWordML
             </w:r>
         */
             // first get all the 'p'aragraphs, so we can find sibling 'r'uns
+            Debug.Assert(doc.Root != null, "doc.Root != null");
             var paragraphs = doc.Root.Descendants(w + "p").ToList();
             foreach (var paragraph in paragraphs)
             {
                 // now get the sibling runs (via 'Elements'; rather than 'Descendents', since they are direct children)
-                var runs = paragraph.Elements(w + "r").ToList();
+                // var runs = paragraph.Elements(w + "r").ToList();
+                // UPDATE: I'm uncomfortable with joining runs that are broken up by something else... just saw this:
+                // <w:r>
+                //   <w:t>PH11 Introduction to Phonology</w:t>
+                // </w:r>
+                // <aml:annotation aml:id="33" w:type="Word.Bookmark.End" />
+                // <w:r>
+                //   <w:t> (GRAD DIP)</w:t>
+                // </w:r>
+                // SO, grab Elements; rather than just "w:r"s
+                var runs = paragraph.Elements().ToList();
                 if (runs.Count <= 1)
                     continue;
 
                 // get the 1st one...
                 var thisRun = runs.First();
-                var this_rPr_Value = Get_rPr_value(thisRun);    // the xml string representation of the rPr element
                 for (var i = 1; i < runs.Count; i++)
                 {
-                    // get the next one to compare with
+                    // skip over any elements that aren't bonafide "w:r"s
                     var nextRun = runs[i];
-                    var next_rPr_Value = Get_rPr_value(nextRun);
+                    if ((thisRun.Name != w + "r") || (nextRun.Name != w + "r"))
+                    {
+                        thisRun = nextRun;
+                        continue;
+                    }
 
                     // sometimes a 'run' doesn't have a w:t field... (those should also interrupt the combining of iso-formatted runs)
                     var tNext = Get_t(nextRun);
                     var tThis = Get_t(thisRun);
-                    if ((tThis == null) || (tNext == null) || (this_rPr_Value != next_rPr_Value))
+
+                    if ((tThis == null) ||
+                        (tNext == null) ||
+                        (GetRunIdentityValue(thisRun) != GetRunIdentityValue(nextRun)))
                     {
                         // the 'next' one wasn't identical to 'this' one (or otherwise we need to stop combining)... 
                         // so skip to the next one as being the 'this' one so we can compare *it* with
                         //  what follows next time
                         thisRun = nextRun;
-                        this_rPr_Value = Get_rPr_value(thisRun);
                         continue;
                     }
 
                     // we found an identically formatted run... concatenate the w:t values and remove the 'next' run
                     tThis.Value += tNext.Value;
+
+                    ElementsToStripOut.ForEach(xn => thisRun.Descendants(xn).Remove());
                     nextRun.Remove();
                 }
             }
+        }
+
+        private static string GetRunIdentityValue(XContainer run)
+        {
+            // var str = Get_rPr_value(run);
+            // UPDATE: initially, I was assuming that all the formatting was in the rPr, but that's not true. e.g.
+            // <w:r>
+            //   <w:t>(a) voice assimilation</w:t>
+            // </w:r>
+            // <w:r>
+            //   <w:br />
+            //   <w:t>(b) metathesis</w:t>
+            // </w:r>
+            // these shouldn't be combined, because the 2nd has a "w:br" element.
+            // SO, return all the stuff between w:r to w:t (I've never seen anything *below* a w:t)
+
+            var str = run.Descendants().Where(elem => !elem.HasElements && 
+                                                      (elem.Name != w + "t") && 
+                                                      !ElementsToStripOut.Contains(elem.Name))
+                                       .Aggregate<XElement, string>(null, (current, elem) => current + elem.ToString());
+            return str;
         }
 
         private static XElement Get_t(XElement run)
@@ -109,30 +216,10 @@ namespace SILConvertersWordML
             return GetElement(run, w + "t");
         }
 
-        private static readonly List<XName> AttributesToIgnore = new List<XName>
+        private static readonly List<XName> ElementsToStripOut = new List<XName>
                                                                      {
-                                                                         wx + "sym"    // this is for insert symbols, which don't need (the value is already in the w:t element)
+                                                                         wx + "sym" // this is for insert symbols, which don't need (the value is already in the w:t element)
                                                                      };
-
-        private static string Get_rPr_value(XElement run)
-        {
-            var rPr = Get_rPr(run);
-            return (rPr != null)
-                       ? rPr.ToString()
-                       : null;
-        }
-
-        private static XElement Get_rPr(XElement run)
-        {
-            var rPr = GetElement(run, w + "rPr");
-            if (rPr != null)
-                AttributesToIgnore.ForEach(xN =>
-                                               {
-                                                   var lst = rPr.Descendants(xN).ToList();
-                                                   lst.ForEach(e => e.Remove());
-                                               });
-            return rPr;
-        }
 
         protected override void GetMostRelevantStyleFormat(XElement run, XElement paragraph, out string strStyleId, out string strStyleName, out string strFontName)
         {
@@ -144,9 +231,10 @@ namespace SILConvertersWordML
             //                                                   actually, though, it doesn't matter, because this'll be picked up later by the CheckForCustomFont...
             var styleName = GetDescendantAttributeValue(run, w + "rStyle", w + "val");
 
-            if (!String.IsNullOrEmpty(styleName))
-                strStyleId = styleName;
-            else
+            // in checking for style override at the run level, only accept it if the style found
+            //  actually has Font formatting (if it doesn't then it's not relevant)
+            StyleClass styleClass;
+            if (String.IsNullOrEmpty(styleName) || !(styleClass = GetStyleById(styleName)).IsFontFormatting)
             {
                 // 2) style override at the paragraph level -- i.e.:
                 // <w:pPr>
@@ -154,13 +242,15 @@ namespace SILConvertersWordML
                 styleName = GetDescendantAttributeValue(paragraph, w + "pStyle", w + "val");
 
                 // 3) If neither of these apply, then it's 'Normal' style
-                strStyleId = !String.IsNullOrEmpty(styleName) ? styleName : "Normal";
+                styleClass = (!String.IsNullOrEmpty(styleName) && (styleClass = GetStyleById(styleName)).IsFontFormatting)
+                                ? styleClass 
+                                : GetStyleById("Normal");
             }
 
-            System.Diagnostics.Debug.Assert(!String.IsNullOrEmpty(strStyleId));
-            var style = GetStyleById(strStyleId);
-            strStyleName = style.Name;
-            strFontName = style.FontNames.First();
+            strStyleId = styleClass.Id;
+            strStyleName = styleClass.Name;
+            System.Diagnostics.Debug.Assert(styleClass.IsFontFormatting);   // if this doesn't turn out to be true, then get it from w:font/@defaultFonts...
+            strFontName = styleClass.FontNames.First();
         }
 
         protected override bool CheckForCustomFontFormatting(XElement run, ref string strFontName)
@@ -195,6 +285,15 @@ namespace SILConvertersWordML
             return Styles[strStyleId];
         }
 
+        protected override XElement GetRunFormattingParent(XElement run)
+        {
+            return GetElement(run, w + "rPr");
+        }
+
+        private static readonly XName CxNameElementForStyleFontName = wx + "font";
+        private static readonly XName CxNameAttributeForStyleFontName = wx + "val";
+        private static readonly XName CxNameElementForStyleFontNames = w + "rFonts";
+
         protected override List<StyleClass> ListStyles(XElement documentRoot)
         {
             System.Diagnostics.Debug.Assert(DocumentRoot != null);
@@ -204,16 +303,74 @@ namespace SILConvertersWordML
             //   <w:style
             var styleList = new List<StyleClass>();
             var stylesRoot = DocumentRoot.Descendants(w + "styles").FirstOrDefault();
-            if (stylesRoot != null)
-                styleList.AddRange(from styleElem in stylesRoot.Elements(w + "style")
-                                   let rPr = GetElement(styleElem, w + "rPr")
-                                   where rPr != null
-                                   let strFontName = GetElementAttributeValue(rPr, wx + "font", wx + "val")
-                                   select new StyleClass
-                                              {
-                                                  Id = GetAttributeValue(styleElem, w + "styleId"), Name = GetElementAttributeValue(styleElem, w + "name", w + "val"), FontNames = new List<string> {strFontName}
-                                              });
+            System.Diagnostics.Debug.Assert(stylesRoot != null);
+
+            foreach (var styleElem in stylesRoot.Elements(w + "style"))
+            {
+                List<string> lstFontNames = null;
+                var rPr = GetElement(styleElem, w + "rPr");
+                
+                // not all styles have font formatting
+                if (rPr != null)
+                {
+                    // first check to see if there's a wx:font... (this is a single value and usually (always?)
+                    //  is the fonts that are used
+                    var strFontName = GetElementAttributeValue(rPr, CxNameElementForStyleFontName,
+                                                               CxNameAttributeForStyleFontName);
+                    if (!String.IsNullOrEmpty(strFontName))
+                    {
+                        lstFontNames = new List<string> { strFontName };
+                    }
+                    else
+                    {
+                        // if not, then check to see if there's a w:rFonts
+                        // <w:rPr>
+                        //   <w:rFonts w:ascii="Tahoma" w:h-ansi="Tahoma" />
+                        var rFonts = GetElement(rPr, CxNameElementForStyleFontNames);
+                        if (rFonts != null)
+                        {
+                            lstFontNames = new List<string>();
+                            lstFontNames.AddRange(GetAllAttributeValues(rFonts));
+                        }
+                    }
+                }
+
+                var styleClass = new StyleClass
+                                        {
+                                            Id = GetAttributeValue(styleElem, w + "styleId"),
+                                            Name = GetStyleName(styleElem),
+                                            FontNames = lstFontNames,
+                                            AssociatedStyleElem = styleElem
+                                        };
+                styleList.Add(styleClass);
+            }
             return styleList;
+        }
+
+        protected string GetStyleName(XElement styleElem)
+        {
+            // in some documents, they use wx:uiName for the name to display for the font
+            // <w:style w:type="paragraph" w:styleId="Header">
+            //   <w:name w:val="header" />
+            //   <wx:uiName wx:val="Header" />
+            var strStyleName = GetElementAttributeValue(styleElem, wx + "uiName", wx + "val");
+            if (String.IsNullOrEmpty(strStyleName))
+                strStyleName = GetElementAttributeValue(styleElem, w + "name", w + "val");
+            return strStyleName;
+        }
+
+        protected override void ReplaceStyleFontName(StyleClass styleClass, string strFontNameSource, string strFontNameTarget)
+        {
+            // <w:style w:type="paragraph" w:default="on" w:styleId="Normal">
+            //   <w:name w:val="Normal" />
+            //   <w:rsid w:val="0015478C" />
+            //   <w:pPr>
+            //     <w:spacing w:after="200" w:line="276" w:line-rule="auto" />
+            //   </w:pPr>
+            //   <w:rPr>
+            //     <wx:font wx:val="Calibri" />
+            var rPr = GetRunFormattingParent(styleClass.AssociatedStyleElem);
+            UpdateAllChildElementAttributesValue(rPr, strFontNameSource, strFontNameTarget);
         }
 
         protected override IEnumerable<XElement> ParagraphsWithText
@@ -222,6 +379,17 @@ namespace SILConvertersWordML
             {
                 return DocumentRoot.Descendants(w + "p")
                     .Where(p => p.Descendants(w + "t").Any());
+            }
+        }
+
+        protected override XContainer FontsListRoot
+        {
+            get
+            {
+                // <w:fonts>
+                //   <w:defaultFonts w:ascii="Calibri" w:fareast="Calibri" w:h-ansi="Calibri" w:cs="Arial" />
+                //   <w:font w:name="Arial">
+                return DocumentRoot.Descendants(w + "fonts").FirstOrDefault();
             }
         }
 

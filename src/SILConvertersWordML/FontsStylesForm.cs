@@ -408,7 +408,7 @@ namespace SILConvertersWordML
 #endif
             }
 
-            bool bWord2007 = (wrdDoc.SaveFormat >= (int)wdFormatXMLDocument);
+            var bWord2007 = (wrdDoc.SaveFormat >= (int)wdFormatXMLDocument);
             if (bWord2007)
             {
                 if (m_bWarnAboutWord2007Conversion)
@@ -435,7 +435,8 @@ namespace SILConvertersWordML
                                     strDocFilename, 
                                     leaveXMLFileInFolderToolStripMenuItem.Checked, null);
 
-            var doc = (useLinqToolStripMenuItem.Checked)
+            var bUsingLinq = useLinqToolStripMenuItem.Checked;
+            var doc = bUsingLinq
                           ? WordLinqDocument.GetXmlDocument(ref strXmlFilename, strDocFilename,
                                                             leaveXMLFileInFolderToolStripMenuItem.Checked)
                           : Word03MLDocument.GetXmlDocument(ref strXmlFilename, strDocFilename,
@@ -838,8 +839,8 @@ namespace SILConvertersWordML
             bool bModified = false;
             if (IsConverterDefined(strFontStyleName))
             {
-                DirectableEncConverter aEC = GetConverter(strFontStyleName);
-                Font fontLhs = CreateFontSafe(strLhsFont);
+                var aEC = GetConverter(strFontStyleName);
+                var fontLhs = CreateFontSafe(strLhsFont);
 				bModified = SetValues(dataIteratorFontStyleText, strFontStyleName, aEC, 
 					fontLhs, fontApply, bConvertCharValue);
             }
@@ -886,7 +887,7 @@ namespace SILConvertersWordML
                 else
                 {
                     doc.Save(strXmlOutputFilename);
-
+                    /*
                     // at least *try* to clean up the temp files
                     const string cstrUdiPrefix = "file:///";
                     string strXmlFilename = doc.BaseURI;
@@ -894,6 +895,7 @@ namespace SILConvertersWordML
                     if (nIndex == 0)
                         strXmlFilename = strXmlFilename.Replace(cstrUdiPrefix, null);
                     File.Delete(strXmlFilename);
+                    */
                 }
             }
             catch { }
@@ -1085,7 +1087,7 @@ namespace SILConvertersWordML
         //  (i.e. "Styles & Custom formatting" = "do it all")
         protected void GetTextIteratorListStyleFont(ref List<string> lstInGrid)
         {
-            if ((DocXmlDocument.MapIteratorList == null) || DocXmlDocument.MapIteratorList.IsInitializedFontsFromStyles) 
+            if (DocXmlDocument.MapIteratorList == null)
                 return;
 
             foreach (var kvp in m_mapDocName2XmlDocument)
@@ -1098,7 +1100,7 @@ namespace SILConvertersWordML
 
         protected void GetTextIteratorListStyleOnly(ref List<string> lstInGrid)
         {
-            if ((DocXmlDocument.MapIteratorList == null) || DocXmlDocument.MapIteratorList.IsInitializedStyleName)
+            if (DocXmlDocument.MapIteratorList == null)
                 return;
 
             foreach (var kvp in m_mapDocName2XmlDocument)
@@ -1111,14 +1113,14 @@ namespace SILConvertersWordML
 
         protected void GetTextIteratorListCustomFont(ref List<string> lstInGrid)
         {
-            if ((DocXmlDocument.MapIteratorList == null) || DocXmlDocument.MapIteratorList.IsInitializedCustomFontName)
+            if (DocXmlDocument.MapIteratorList == null)
                 return;
 
             foreach (var kvp in m_mapDocName2XmlDocument)
             {
                 m_strCurrentDocument = Path.GetFileName(kvp.Key);
                 var doc = kvp.Value;
-                doc.InitializeIteratorsCustomFontName(lstInGrid, DisplayInGrid);
+                doc.InitializeIteratorsCustomFontNames(lstInGrid, DisplayInGrid);
             }
         }
 
@@ -1183,7 +1185,10 @@ namespace SILConvertersWordML
                     }
                     else
                     {
-                        fontDialog.Font = mapName2Font[strFontStyleName];
+                        fontDialog.Font = (m_aFontLast != null)
+                                              ? mapName2Font[strFontStyleName]
+                                              : new Font("Arial Unicode MS", 12);   // the 1st time this is done, set this as the font, since it doesn't otherwise want to show up!?
+
                         if (fontDialog.ShowDialog() == DialogResult.OK)
                         {
                             m_aFontLast = font = fontDialog.Font;

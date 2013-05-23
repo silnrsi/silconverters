@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Xml;
@@ -57,10 +59,94 @@ namespace SILConvertersWordML
         }
 
         public override bool ConvertDocumentByFontNameAndStyle(Dictionary<string, Font> mapName2Font,
-                                                               Func<string, DataIterator, string, Font, bool, bool>
-                                                                   convertDoc)
+                                                               Func<string, DataIterator, string, Font, bool, bool> convertDoc)
         {
-            throw new NotImplementedException();
+            // mapFontNames2Iterator, has one iterator for each unique font (across all docs). If there's
+            //  only one doc, then it's already loaded. But if there's more than one doc, then we have to treat each 
+            //  one as if by itself (which unfortunately means empty the collection and requery)
+            if (!Program.IsOnlyOneDoc)
+            {
+                MapIteratorList = new MapIteratorListXPath();
+                InitializeIteratorsCustomFontNames();
+                InitializeIteratorsFontsFromStyles();
+            }
+
+            var bModified = false;
+            var map2Iterator = MyMapIteratorList.MapCustomFontName2Iterator;
+            foreach (var strFontName in map2Iterator.Keys)
+            {
+                Debug.Assert(mapName2Font.ContainsKey(strFontName));
+                var fontTarget = mapName2Font[strFontName];
+
+                var mapItem = map2Iterator.FirstOrDefault(kvp => kvp.Key == strFontName);
+                bModified |= convertDoc(strFontName, mapItem.Value, strFontName, fontTarget, false);
+
+                // update the font name as well
+                if (strFontName != fontTarget.Name)
+                {
+                    ReplaceCustomFontName(mapItem, fontTarget.Name);
+                    ReplaceFontElementNames(strFontName, fontTarget.Name);
+                }
+            }
+
+            map2Iterator = MyMapIteratorList.MapStyleFontName2Iterator;
+            foreach (var strFontName in map2Iterator.Keys)
+            {
+                Debug.Assert(mapName2Font.ContainsKey(strFontName));
+                var fontTarget = mapName2Font[strFontName];
+
+                var mapItem = map2Iterator.FirstOrDefault(kvp => kvp.Key == strFontName);
+                bModified |= convertDoc(strFontName, mapItem.Value, strFontName, fontTarget, false);
+
+                // update the font name as well
+                if (strFontName != fontTarget.Name)
+                {
+                    ReplaceStyleFontName(mapItem, fontTarget.Name);
+                    ReplaceFontElementNames(strFontName, fontTarget.Name);
+                }
+            }
+            return bModified;
+        }
+
+        private void ReplaceFontElementNames(string strFontNameOld, string strFontNameNew)
+        {
+            UpdateAllChildElementAttributesValue(FontsListRoot, strFontNameOld, strFontNameNew);
+        }
+
+        private void ReplaceStyleFontName(KeyValuePair<string, DataIterator> mapItem, string strFontNameTarget)
+        {
+            var strFontNameSource = mapItem.Key;
+            foreach (var styleClass in Styles.Values
+                                             .Where(sc => (sc.FontNames != null) && 
+                                                           sc.FontNames.Contains(strFontNameSource)))
+            {
+                ReplaceStyleFontName(styleClass, strFontNameSource, strFontNameTarget);
+            }
+        }
+
+        private void ReplaceCustomFontName(KeyValuePair<string, DataIterator> mapItem, string strFontNameTarget)
+        {
+            var strFontNameSource = mapItem.Key;
+            var listOfRuns = ((LinqDataIterator) mapItem.Value).ListOfRuns;
+
+            // to keep this simple, just replace any attribute of any element whose value is the source font name 
+            //  with the new font name
+            listOfRuns.ForEach(run => UpdateAllChildElementAttributesValue(GetRunFormattingParent(run), strFontNameSource, strFontNameTarget));
+        }
+
+        protected static IEnumerable<string> GetAllAttributeValues(XElement elem)
+        {
+            return elem.Attributes().Select(attr => attr.Value);
+        }
+
+        protected static void UpdateAllChildElementAttributesValue(XContainer elemParent, string strOldValue, string strNewValue)
+        {
+            foreach (var attr in elemParent.Elements()
+                                           .Attributes()
+                                           .Where(attr => attr.Value == strOldValue))
+            {
+                attr.Value = strNewValue;
+            }
         }
 
         public override bool ConvertDocumentByStylesOnly(Dictionary<string, Font> mapName2Font,
@@ -81,6 +167,11 @@ namespace SILConvertersWordML
             throw new NotImplementedException();
         }
 
+        public override void Save(string strXmlOutputFilename)
+        {
+            XDocument.Save(strXmlOutputFilename);
+        }
+
         #endregion
 
         protected virtual void HarvestFontsAndStylesUsedInAllText()
@@ -97,11 +188,11 @@ namespace SILConvertersWordML
         {
             foreach (var run in RunsWithText(paragraph))
             {
-                HarvestFontAndOrStyleFromRun(run, paragraph);
+                HarvestCustomFontAndOrStyleFromRun(run, paragraph);
             }
         }
 
-        protected virtual void HarvestFontAndOrStyleFromRun(XElement run, XElement paragraph)
+        protected virtual void HarvestCustomFontAndOrStyleFromRun(XElement run, XElement paragraph)
         {
             // there are four types of ways in which a font is associated with some text:
             //  1) Custom formatting on the run (i.e. w:rFonts and/or wx:font within the run's w:rPr) (I think wx:font/@wx:val actually indicates the font being used an rFonts gives the possibilities for which range)
@@ -116,11 +207,13 @@ namespace SILConvertersWordML
             GetMostRelevantStyleFormat(run, paragraph, out strStyleId, out strStyleName, out strFontName);
             AddRunToStyleNameList(strStyleId, strStyleName, run);
 
-            // but if there's custom formatting, that overrules everything
-            AddRunToFontNameList(strFontName, run,
-                                 (CheckForCustomFontFormatting(run, ref strFontName))
-                                     ? MapCustomFontNameToListOfRuns
-                                     : MapStyleFontNameToListOfRuns);
+            // but if there's custom formatting, that overrules everything 
+            //  (we put CustomFont vs. style-based font runs in a different map)
+            var mapToListOfRuns = (CheckForCustomFontFormatting(run, ref strFontName))
+                                      ? MapCustomFontNameToListOfRuns
+                                      : MapStyleFontNameToListOfRuns;
+
+            AddRunToFontNameList(strFontName, run, mapToListOfRuns);
         }
 
         private static void AddRunToFontNameList(string strFontName, XElement run,
@@ -152,6 +245,12 @@ namespace SILConvertersWordML
             return GetAttributeValue(elem, xNameAttribute);
         }
 
+        protected static void SetElementAttributeValue(XElement elemParent, XName xNameElement, XName xNameAttribute, string strValue)
+        {
+            var elem = elemParent.Element(xNameElement);
+            SetAttributeValue(elem, xNameAttribute, strValue);
+        }
+
         protected static string GetDescendantAttributeValue(XElement elemParent, XName xNameElement,
                                                             XName xNameAttribute)
         {
@@ -170,6 +269,13 @@ namespace SILConvertersWordML
             return null;
         }
 
+        protected static void SetAttributeValue(XElement elem, XName xNameAttribute, string strValue)
+        {
+            var attr = elem.Attribute(xNameAttribute);
+            if (attr != null)
+                attr.Value = strValue;
+        }
+
         protected static XElement GetElement(XElement elem, XName xName)
         {
             return elem.Element(xName);
@@ -180,8 +286,22 @@ namespace SILConvertersWordML
             get { return MapIteratorList as MapIteratorListLinq; }
         }
 
-        public override void InitializeIteratorsCustomFontName(List<string> lstInGrid,
+        public override void InitializeIteratorsCustomFontNames(List<string> lstInGrid,
                                                                Action<string, DataIterator> displayInGrid)
+        {
+            if (!MyMapIteratorList.IsInitializedCustomFontName)
+                InitializeIteratorsCustomFontNames();
+    
+            // put a clone in the grid
+            foreach (var kvp in MyMapIteratorList.MapCustomFontName2Iterator
+                .Where(kvp => !lstInGrid.Contains(kvp.Key)))
+            {
+                displayInGrid(kvp.Key, kvp.Value);
+                lstInGrid.Add(kvp.Key);
+            }
+        }
+
+        private void InitializeIteratorsCustomFontNames()
         {
             // initialize the MapFontNames2Iterator
             foreach (var kvp in MapCustomFontNameToListOfRuns)
@@ -193,9 +313,16 @@ namespace SILConvertersWordML
                                    };
                 MyMapIteratorList.MapCustomFontName2Iterator.Add(kvp.Key, iterator);
             }
+        }
 
+        public override void InitializeIteratorsFontsFromStyles(List<string> lstInGrid,
+                                                                Action<string, DataIterator> displayInGrid)
+        {
+            if (!MyMapIteratorList.IsInitializedFontsFromStyles)
+                InitializeIteratorsFontsFromStyles();
+    
             // put a clone in the grid
-            foreach (var kvp in MyMapIteratorList.MapCustomFontName2Iterator
+            foreach (var kvp in MyMapIteratorList.MapStyleFontName2Iterator
                 .Where(kvp => !lstInGrid.Contains(kvp.Key)))
             {
                 displayInGrid(kvp.Key, kvp.Value);
@@ -203,8 +330,7 @@ namespace SILConvertersWordML
             }
         }
 
-        public override void InitializeIteratorsFontsFromStyles(List<string> lstInGrid,
-                                                                Action<string, DataIterator> displayInGrid)
+        private void InitializeIteratorsFontsFromStyles()
         {
             // initialize the MapFontNames2Iterator
             foreach (var kvp in MapStyleFontNameToListOfRuns)
@@ -216,9 +342,16 @@ namespace SILConvertersWordML
                                    };
                 MyMapIteratorList.MapStyleFontName2Iterator.Add(kvp.Key, iterator);
             }
+        }
 
-            // put a clone in the grid
-            foreach (var kvp in MyMapIteratorList.MapStyleFontName2Iterator
+        public override void InitializeIteratorsStyleName(List<string> lstInGrid,
+                                                          Action<string, DataIterator> displayInGrid)
+        {
+            if (!MyMapIteratorList.IsInitializedStyleName)
+                InitializeIteratorsStyleName();
+    
+            // put them in the grid
+            foreach (var kvp in MyMapIteratorList.MapStyleName2Iterator
                 .Where(kvp => !lstInGrid.Contains(kvp.Key)))
             {
                 displayInGrid(kvp.Key, kvp.Value);
@@ -226,8 +359,7 @@ namespace SILConvertersWordML
             }
         }
 
-        public override void InitializeIteratorsStyleName(List<string> lstInGrid,
-                                                          Action<string, DataIterator> displayInGrid)
+        private void InitializeIteratorsStyleName()
         {
             // initialize the MapFontNames2Iterator
             foreach (var kvp in MapStyleIdToListOfRuns)
@@ -237,21 +369,16 @@ namespace SILConvertersWordML
                                        LinqDocument = this,
                                        ListOfRuns = kvp.Value.Item2
                                    };
-                MyMapIteratorList.MapStyleFontName2Iterator.Add(kvp.Value.Item1, iterator);
-            }
-
-            // put them in the grid
-            foreach (var kvp in MyMapIteratorList.MapStyleFontName2Iterator
-                .Where(kvp => !lstInGrid.Contains(kvp.Key)))
-            {
-                displayInGrid(kvp.Key, kvp.Value);
-                lstInGrid.Add(kvp.Key);
+                MyMapIteratorList.MapStyleName2Iterator.Add(kvp.Value.Item1, iterator);
             }
         }
 
         protected abstract List<StyleClass> ListStyles(XElement documentRoot);
         protected abstract IEnumerable<XElement> ParagraphsWithText { get; }
+        protected abstract XContainer FontsListRoot { get; }
         protected abstract IEnumerable<XElement> RunsWithText(XElement paragraph);
+        protected abstract XElement GetRunFormattingParent(XElement run);
+        protected abstract void ReplaceStyleFontName(StyleClass styleClass, string strFontNameSource, string strFontNameTarget);
 
         protected abstract void GetMostRelevantStyleFormat(XElement run, XElement paragraph, out string strStyleId,
                                                            out string strStyleName, out string strFontName);
@@ -272,7 +399,7 @@ namespace SILConvertersWordML
                            // for "Custom Font only" and with the next for "Style and Custom Formatting"
 
         public IteratorMap MapStyleFontName2Iterator; // for "Style and Custom Formatting" (with the previous)
-        public IteratorMap MapStyleId2Iterator; // for "Style-only" formatting
+        public IteratorMap MapStyleName2Iterator; // for "Style-only" formatting
 
         #region Overrides of MapIteratorList
 
@@ -288,14 +415,14 @@ namespace SILConvertersWordML
 
         public override bool IsInitializedStyleName
         {
-            get { return (MapStyleId2Iterator.Count > 0); }
+            get { return (MapStyleName2Iterator.Count > 0); }
         }
 
         public override sealed void ResetMaps()
         {
             MapCustomFontName2Iterator = new IteratorMap();
             MapStyleFontName2Iterator = new IteratorMap();
-            MapStyleId2Iterator = new IteratorMap();
+            MapStyleName2Iterator = new IteratorMap();
         }
 
         #endregion

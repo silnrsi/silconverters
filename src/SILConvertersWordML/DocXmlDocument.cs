@@ -11,7 +11,7 @@ using System.Drawing;
 
 namespace SILConvertersWordML
 {
-    public abstract class DocXmlDocument : XmlDocument
+    public abstract class DocXmlDocument
     {
         protected DocXmlDocument(MapIteratorList mapIteratorList)
         {
@@ -42,14 +42,14 @@ namespace SILConvertersWordML
 
         protected abstract string GetXmlFileSuffix { get; }
 
-        public abstract void InitializeIteratorsCustomFontName(List<string> lstInGrid, Action<string, DataIterator> displayInGrid);
+        public abstract void InitializeIteratorsCustomFontNames(List<string> lstInGrid, Action<string, DataIterator> displayInGrid);
         public abstract void InitializeIteratorsFontsFromStyles(List<string> lstInGrid, Action<string, DataIterator> displayInGrid);
         public abstract void InitializeIteratorsStyleName(List<string> lstInGrid, Action<string, DataIterator> displayInGrid);
 
         public abstract bool ConvertDocumentByFontNameAndStyle(Dictionary<string, Font> mapName2Font, Func<string, DataIterator, string, Font, bool, bool> convertDoc);
         public abstract bool ConvertDocumentByStylesOnly(Dictionary<string, Font> mapName2Font, Func<string, DataIterator, string, Font, bool, bool> convertDoc);
         public abstract bool ConvertDocumentByFontNameOnly(Dictionary<string, Font> mapName2Font, Func<string, DataIterator, string, Font, bool, bool> convertDoc);
-
         public abstract bool HasFonts(List<string> astrFontsToSearchFor);
+        public abstract void Save(string strXmlOutputFilename);
     }
 }
