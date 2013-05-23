@@ -91,10 +91,7 @@
     </Link>
     <PostBuildEvent>
       <Message>Performing post-build tasks</Message>
-      <Command>regsvr32 /s /c "$(TargetPath)"
-copy "D:\src\sec\output\Release\SILConvertersOffice07.dll" "$(TargetDir)"
-copy "$(SolutionDir)ManagedAggregator\bin\Debug\ManagedAggregator.dll" "$(TargetDir)"
-</Command>
+      <Command>regsvr32 /s /c "$(TargetPath)"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
