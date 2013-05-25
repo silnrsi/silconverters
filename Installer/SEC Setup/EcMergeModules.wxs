@@ -43,9 +43,9 @@
         
 		<DirectoryRef Id="INSTALLDIR">
 			<!-- The following merge modules install to the default directory: C:\Program Files\SIL\SILConverters -->
-			<Merge Id="SEC_EC" Language="1033" SourceFile="..\MergeModules\SEC_EC_40.msm" DiskId="2"/>
-            <Merge Id="AIGuesser" Language="1033" SourceFile="..\MergeModules\AIGuesserMM.msm" DiskId="4"/>
-            <Merge Id="CcDLLsMM" Language="1033" SourceFile="..\MergeModules\CcDLLsMM.msm" DiskId="5" />
+			<Merge Id="SEC_EC" Language="1033" SourceFile="..\ExternalMergeModules\EC_40_MM.msm" DiskId="2"/>
+            <Merge Id="AIGuesser" Language="1033" SourceFile="..\ExternalMergeModules\AIGuesserMM.msm" DiskId="4"/>
+            <Merge Id="CcDLLsMM" Language="1033" SourceFile="..\ExternalMergeModules\CcDLLsMM.msm" DiskId="5" />
             <Merge Id="AdaptIt2Unicode" Language="1033" SourceFile="..\MergeModules\AdaptIt2UnicodeMM.msm" DiskId="2"/>
             <Merge Id="ConverterInstaller" Language="1033" SourceFile="..\MergeModules\ConverterInstallerMM.msm" DiskId="22"/>
             <Merge Id="IndicConverters" Language="1033" SourceFile="..\MergeModules\IndicConverters.msm" DiskId="30"/>
@@ -93,7 +93,7 @@
 		<DirectoryRef Id="CommonFilesFolderSIL">
             <!--The following merge modules install to the directory: C:\Program Files\Common Files\SIL-->
 			<Merge Id="SetPath" Language="1033" SourceFile="..\MergeModules\SetPath.msm" DiskId="1"/>
-            <Merge Id="TECkit_DLLs" Language="1033" SourceFile="..\MergeModules\TECkitDLLsMM.msm" DiskId="10"/>
+            <Merge Id="TECkit_DLLs" Language="1033" SourceFile="..\ExternalMergeModules\TECkitDLLsMM.msm" DiskId="10"/>
             <!--
             <Merge Id="Managed_Install_Fix" Language="1033" SourceFile="..\ExternalMergeModules\Managed Install Fix.msm" DiskId="2"/>
             <Merge Id="ScHelp" Language="1033" SourceFile="Installer\externalencodingconverters\ScHelpMM.msm" DiskId="5"/>
