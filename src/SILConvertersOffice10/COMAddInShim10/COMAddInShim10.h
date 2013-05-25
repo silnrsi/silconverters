@@ -4,7 +4,7 @@
 
 
  /* File created by MIDL compiler version 7.00.0555 */
-/* at Sat May 18 16:32:17 2013
+/* at Sat May 25 16:36:10 2013
  */
 /* Compiler settings for COMAddInShim10.idl:
     Oicf, W1, Zp8, env=Win32 (32b run), target_arch=X86 7.00.0555 
