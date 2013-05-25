@@ -28,8 +28,8 @@
                 </Component>
 
                 <Directory Id="SCHelp" Name="Help">
-                    <Component Id="DiscourseChartHelperReadme.pdf" Guid="">
-                        <File Id="DiscourseChartHelperReadme.pdf" Name="Discourse Chart Helper Readme.pdf" KeyPath="yes" ShortName="DISCOU~1.PDF" Source="..\..\src\DChartHelper\Discourse Chart Helper Readme.pdf" />
+                    <Component Id="DiscourseChartHelperReadme.pdf" Guid="{2E18A8CD-DCF5-4F03-8D6F-6AF4269B9635}">
+                        <File Id="DiscourseChartHelperReadme.pdf" Name="Discourse Chart Helper Readme.pdf" KeyPath="yes" Source="..\..\src\DChartHelper\Discourse Chart Helper Readme.pdf" />
                         <Shortcut Id="DiscourseChartHelperReadme.pdf" Directory="DcHelp" Name="Readme for Discourse Chart Helper" Description="View readme/help document for the Discourse Chart Helper application" IconIndex="0" Show="normal" Target="[#DiscourseChartHelperReadme.pdf]" WorkingDirectory="SCHelp" Advertise="no" />
                     </Component>
                 </Directory>
