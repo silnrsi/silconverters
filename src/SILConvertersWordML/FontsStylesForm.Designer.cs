@@ -71,11 +71,11 @@ namespace SILConvertersWordML
             this.advancedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.singlestepConversionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.leaveXMLFileInFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.useLinqToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.fontDialog = new System.Windows.Forms.FontDialog();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.helpProvider = new System.Windows.Forms.HelpProvider();
-            this.useLinqToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.toolStrip.SuspendLayout();
@@ -503,6 +503,17 @@ namespace SILConvertersWordML
             this.leaveXMLFileInFolderToolStripMenuItem.Text = "&Leave XML files in folder ";
             this.leaveXMLFileInFolderToolStripMenuItem.ToolTipText = resources.GetString("leaveXMLFileInFolderToolStripMenuItem.ToolTipText");
             // 
+            // useLinqToolStripMenuItem
+            // 
+            this.useLinqToolStripMenuItem.Checked = true;
+            this.useLinqToolStripMenuItem.CheckOnClick = true;
+            this.useLinqToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.useLinqToolStripMenuItem.Name = "useLinqToolStripMenuItem";
+            this.useLinqToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
+            this.useLinqToolStripMenuItem.Text = "&Use Linq";
+            this.useLinqToolStripMenuItem.ToolTipText = "Check this menu to have the \'Linq\' technology attempt to do the conversion (may y" +
+    "ield a different result if the normal approach doesn\'t work)";
+            // 
             // fontDialog
             // 
             this.fontDialog.Font = new System.Drawing.Font("Arial Unicode MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -513,15 +524,6 @@ namespace SILConvertersWordML
             this.saveFileDialog.Filter = resources.GetString("saveFileDialog.Filter");
             this.saveFileDialog.RestoreDirectory = true;
             this.saveFileDialog.SupportMultiDottedExtensions = true;
-            // 
-            // useLinqToolStripMenuItem
-            // 
-            this.useLinqToolStripMenuItem.CheckOnClick = true;
-            this.useLinqToolStripMenuItem.Name = "useLinqToolStripMenuItem";
-            this.useLinqToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
-            this.useLinqToolStripMenuItem.Text = "&Use Linq";
-            this.useLinqToolStripMenuItem.ToolTipText = "Check this menu to have the \'Linq\' technology attempt to do the conversion (may y" +
-    "ield a different result if the normal approach doesn\'t work)";
             // 
             // FontsStylesForm
             // 
