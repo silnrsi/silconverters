@@ -158,38 +158,134 @@ namespace TestBwdc
         public void MakeSureWeCombineAdjacentInsertSymbols()
         {
             const string cstrTwoIsoFormattedRuns =
-@"<w:r>
-    <w:rPr>
-        <w:rStyle w:val=""HindiWord"" />
-        <wx:font wx:val=""Arial Unicode MS"" />
-        <wx:sym wx:font=""Arial Unicode MS"" wx:char=""0915"" />
-    </w:rPr>
-    <w:t>क</w:t>
-</w:r>
-<w:r>
-    <w:rPr>
-        <w:rStyle w:val=""HindiWord"" />
-        <wx:font wx:val=""Arial Unicode MS"" />
-        <wx:sym wx:font=""Arial Unicode MS"" wx:char=""093F"" />
-    </w:rPr>
-    <w:t>ि</w:t>
-</w:r>";
+@"<w:p>
+    <w:r>
+        <w:rPr>
+            <w:rStyle w:val=""HindiWord"" />
+            <wx:font wx:val=""Arial Unicode MS"" />
+            <wx:sym wx:font=""Arial Unicode MS"" wx:char=""0915"" />
+        </w:rPr>
+        <w:t>क</w:t>
+    </w:r>
+    <w:r>
+        <w:rPr>
+            <w:rStyle w:val=""HindiWord"" />
+            <wx:font wx:val=""Arial Unicode MS"" />
+            <wx:sym wx:font=""Arial Unicode MS"" wx:char=""093F"" />
+        </w:rPr>
+        <w:t>ि</w:t>
+    </w:r>
+</w:p>";
             const string cstrOneRunOutput =
-@"<w:r>
-    <w:rPr>
-        <w:rStyle w:val=""HindiWord"" />
-        <wx:font wx:val=""Arial Unicode MS"" />
-        
-    </w:rPr>
-    <w:t>कि</w:t>
-</w:r>";
-            var strInput = String.Format(Properties.Resources.TestFile1,
-                                         cstrTwoIsoFormattedRuns,
+@"<w:p>
+    <w:r>
+        <w:rPr>
+            <w:rStyle w:val=""HindiWord"" />
+            <wx:font wx:val=""Arial Unicode MS"" />
+        </w:rPr>
+        <w:t>कि</w:t>
+    </w:r>
+</w:p>";
+            var strInput = String.Format(Properties.Resources.TestFile2,
                                          cstrTwoIsoFormattedRuns);
             var doc = XDocument.Parse(strInput);
+            WordLinqDocument.UnpackBareSymbolInserts(doc);
             WordLinqDocument.CombineIsoFormattedRuns(doc);
-            var strResult = doc.ToString();
-            Assert.IsTrue(strResult.Contains(cstrOneRunOutput));
+            var strResult = doc.Root.Descendants(WordLinqDocument.w + "p")
+                                                .FirstOrDefault()
+                                                .ToString();
+            AssertEqual(strResult, cstrOneRunOutput);
+        }
+
+        [TestMethod]
+        public void FixAbberantSyms()
+        {
+            const string cstrAbberantSymRun =
+@"<w:p>
+    <w:r>
+      <w:sym w:font=""Wingdings"" w:char=""F0E0"" />
+  </w:r>
+</w:p>";
+            const string cstrFixedSymRun =
+@"<w:p>
+    <w:r>
+      <w:rPr>
+        <wx:font wx:val=""Wingdings""/>
+      </w:rPr>      
+      <w:t></w:t>
+   </w:r>
+</w:p>";
+            var strInput = String.Format(Properties.Resources.TestFile2,
+                                         cstrAbberantSymRun);
+            var doc = XDocument.Parse(strInput);
+            WordLinqDocument.UnpackBareSymbolInserts(doc);
+            var strResult = doc.Root.Descendants(WordLinqDocument.w + "p")
+                                                .FirstOrDefault()
+                                                .ToString();
+            AssertEqual(strResult, cstrFixedSymRun);
+        }
+
+        [TestMethod]
+        public void FixAbberantSyms2()
+        {
+            const string cstrAbberantSymRun =
+@"<w:p>
+    <w:r>
+      <w:rPr>
+        <wx:font wx:val=""Wingdings""/>
+      </w:rPr>
+      <w:sym w:font=""Wingdings"" w:char=""F0E0"" />
+  </w:r>
+</w:p>";
+            const string cstrFixedSymRun =
+@"<w:p>
+    <w:r>
+      <w:rPr>
+        <wx:font wx:val=""Wingdings""/>
+      </w:rPr>      
+      <w:t></w:t>
+   </w:r>
+</w:p>";
+            var strInput = String.Format(Properties.Resources.TestFile2,
+                                         cstrAbberantSymRun);
+            var doc = XDocument.Parse(strInput);
+            WordLinqDocument.UnpackBareSymbolInserts(doc);
+            var strResult = doc.Root.Descendants(WordLinqDocument.w + "p")
+                                                .FirstOrDefault()
+                                                .ToString();
+            AssertEqual(strResult, cstrFixedSymRun);
+        }
+
+        [TestMethod]
+        public void FixSymsWhichMeansStripItOut()
+        {
+            const string cstrAbberantSymRun =
+@"<w:p>
+    <w:r>
+      <w:rPr>
+        <wx:font wx:val=""Wingdings""/>
+        <wx:sym w:font=""Wingdings"" w:char=""F0E0"" />
+      </w:rPr>
+      <w:t></w:t>
+  </w:r>
+</w:p>";
+            const string cstrFixedSymRun =
+@"<w:p>
+    <w:r>
+      <w:rPr>
+        <wx:font wx:val=""Wingdings""/>
+      </w:rPr>      
+      <w:t></w:t>
+   </w:r>
+</w:p>";
+            var strInput = String.Format(Properties.Resources.TestFile2,
+                                         cstrAbberantSymRun);
+            var doc = XDocument.Parse(strInput);
+            WordLinqDocument.UnpackBareSymbolInserts(doc);
+            var strResult = doc.Root.Descendants(WordLinqDocument.w + "p")
+                                                .FirstOrDefault()
+                                                .ToString();
+            AssertEqual(strResult, cstrFixedSymRun);
         }
 
         [TestMethod]

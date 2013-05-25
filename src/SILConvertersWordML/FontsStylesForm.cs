@@ -66,8 +66,7 @@ namespace SILConvertersWordML
             helpProvider.SetHelpString(this.dataGridView, Properties.Resources.dataGridViewHelp);
 
 #if DEBUG
-            leaveXMLFileInFolderToolStripMenuItem.Checked =
-                useLinqToolStripMenuItem.Checked = true;
+            leaveXMLFileInFolderToolStripMenuItem.Checked = true;
 #endif
         }
 

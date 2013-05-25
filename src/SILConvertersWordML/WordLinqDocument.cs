@@ -48,7 +48,7 @@ namespace SILConvertersWordML
             return thisDoc;
         }
 
-        private static void UnpackBareSymbolInserts(XDocument doc)
+        public static void UnpackBareSymbolInserts(XDocument doc)
         {
             /*
               <w:p wsp:rsidR="00133C43" wsp:rsidRDefault="00133C43">
@@ -101,6 +101,15 @@ namespace SILConvertersWordML
                 run.Add(t);
 
                 // finally, get rid of the 'sym', since we don't want it now
+                sym.Remove();
+            }
+
+            // get rid of any non-abberant 'sym'bol inserts too
+            foreach (var run in doc.Root.Descendants(w + "r").Where(r => r.Elements(w + "rPr").Any(rPr => rPr.Elements(wx + "sym").Any())))
+            {
+                Debug.Assert(run.Descendants(w + "t").Any());
+                var sym = run.Descendants(wx + "sym").FirstOrDefault();
+                Debug.Assert(sym != null, "sym != null");
                 sym.Remove();
             }
         }
@@ -183,8 +192,6 @@ namespace SILConvertersWordML
 
                     // we found an identically formatted run... concatenate the w:t values and remove the 'next' run
                     tThis.Value += tNext.Value;
-
-                    ElementsToStripOut.ForEach(xn => thisRun.Descendants(xn).Remove());
                     nextRun.Remove();
                 }
             }
