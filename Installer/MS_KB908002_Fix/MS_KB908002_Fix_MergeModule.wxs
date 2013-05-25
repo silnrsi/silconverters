@@ -34,21 +34,5 @@
             </Directory>
         </Directory>
 
-        <!-- The following section launches the installed file setup.exe but hides its DOS window -->
-        <CustomAction Id="SetKB908002Data" Return="check" Property="LaunchKB908002Fix" Value="[#setup.exe]" />
-        <CustomAction Id="LaunchKB908002Fix" Return="ignore" Impersonate="no" Execute="deferred" Script="vbscript">
-            <![CDATA[
-dim KB908002FixSetupPath = Session.Property("CustomActionData")
-const WindowStyleStealth  = &H20000000
-set WSO = createobject("WScript.Shell")
-WSO.run "%comspec% /c """ + KB908002FixSetupPath + """", WindowStyleStealth, false
-]]>
-        </CustomAction>
-
-        <InstallExecuteSequence>
-            <Custom Action="SetKB908002Data" Before="InstallInitialize"><![CDATA[VersionNT >= 501]]></Custom>
-            <Custom Action="LaunchKB908002Fix" After="PublishComponents"><![CDATA[NOT Installed]]></Custom>
-        </InstallExecuteSequence>
-
     </Module>
 </Wix>
