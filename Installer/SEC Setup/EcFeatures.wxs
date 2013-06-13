@@ -4,9 +4,9 @@
         <Property Id='EcFeaturesFragment' Value='1'/>
         <Feature Id="Always" Title="Always" Display="hidden" Level="1" AllowAdvertise="no">
             <ComponentRef Id="RemoveFile" />
+            <MergeRef Id="EcFolderACLs"/>
             <!--
             <MergeRef Id="ScHelp"/>
-            <MergeRef Id="EcFolderACLs"/>
             -->
         </Feature>
         <Feature Id="SILConverters_client_apps" Title="SIL Converters' client applications" Description="Expand this node to select or deselect individual client applications" Level="3" AllowAdvertise="no">
@@ -68,8 +68,8 @@
                 <MergeRef Id="SetPath"/>
             </Feature>
             -->
-            <Feature Id="Bulk_Word_Document_Converter" Title="Bulk Word Document Converter" Description="The Bulk Word document converter allows you to convert one or more Word documents using a converter in the system repository. Requires Word 2003, 2007, or 2010." Display="expand" Level="4" AllowAdvertise="no">
-                <Condition Level="3"><![CDATA[COMPONENTEXISTS_WORD_03_PIA OR COMPONENTEXISTS_WORD_07_PIA OR COMPONENTEXISTS_WORD_10_PIA]]></Condition>
+            <Feature Id="Bulk_Word_Document_Converter" Title="Bulk Word Document Converter" Description="The Bulk Word document converter allows you to convert one or more Word documents using a converter in the system repository. Requires Word 2003, 2007, 2010, or 2013." Display="expand" Level="4" AllowAdvertise="no">
+                <Condition Level="3"><![CDATA[COMPONENTEXISTS_WORD_03_PIA OR COMPONENTEXISTS_WORD_07_PIA OR COMPONENTEXISTS_WORD_10_PIA OR COMPONENTEXISTS_WORD_13_PIA]]></Condition>
                 <!--<MergeRef Id="Managed_Install_Fix"/>-->
                 <MergeRef Id="SEC_EC"/>
                 <MergeRef Id="SILConvertersForWord"/>
@@ -103,6 +103,14 @@
                 <MergeRef Id="SEC_ICU"/>
                 <MergeRef Id="ICUECHelp"/>-->
             </Feature>
+            <Feature Id="SILConverters_for_Office13" Title="SILConverters for Office 2013" Description="Provides SILConverter support in Publisher, Excel, and Access (as well as a few developer helps in Word). Requires Office 2013." Level="0" AllowAdvertise="no">
+                <Condition Level="3"><![CDATA[(COMPONENTEXISTS_WORD_13_PIA) OR (COMPONENTEXISTS_EXCEL_13_PIA) OR (ACCESS_2013_PIA_EXISTS) OR (PUBLISHER_2013_PIA_EXISTS)]]></Condition>
+                <MergeRef Id="SEC_EC"/>
+                <MergeRef Id="SCOffice13"/>
+                <!--<MergeRef Id="ICU"/>
+                <MergeRef Id="SEC_ICU"/>
+                <MergeRef Id="ICUECHelp"/>-->
+            </Feature>
             <Feature Id="Adapt_It_to_Unicode_Converter" Title="Adapt It to Unicode Converter" Description="Utility to convert legacy Adapt It projects to Unicode." Display="expand" Level="4" AllowAdvertise="no">
                 <Condition Level="3"><![CDATA[SIL_ADAPTIT_LEGACY_FOUND AND NOT REMOVE]]></Condition>
                 <!--<MergeRef Id="Managed_Install_Fix"/>-->
@@ -117,25 +125,14 @@
             </Feature>
         </Feature>
         <Feature Id="Transduction_Engines" Title="Transduction Engines" Description="Expand this node to select or deselect individual transduction engines" Level="3" AllowAdvertise="no">
-            <!--
-            <Feature Id="Perl_5.12" Title="Perl Expressions 5.12" Description="Perl plug-in to use Perl expressions for text transduction. Requires a separately-installed Perl v5.12 distribution." Display="expand" Level="4" AllowAdvertise="no">
-                <Condition Level="3"><![CDATA[SIL_PERL_FOUND AND NOT REMOVE]]></Condition>
-                <MergeRef Id="PerlEC"/>
-                <MergeRef Id="SEC_PerlEC"/>
-                <MergeRef Id="SetPath"/>
-                <MergeRef Id="MFC"/>
-                <MergeRef Id="CRT"/>
-            </Feature>
             <Feature Id="Python_2.7" Title="Python Script Functions 2.7" Description="Python plug-in to use Python functions for text transduction. Requires a separately-installed distribution of Python v2.7.x." Level="4" AllowAdvertise="no">
                 <Condition Level="3"><![CDATA[SIL_PYTHON_FOUND AND NOT REMOVE]]></Condition>
-                <MergeRef Id="PythonEC"/>
                 <MergeRef Id="SEC_PythonEC"/>
                 <MergeRef Id="SetPath"/>
                 <MergeRef Id="MFC"/>
                 <MergeRef Id="CRT"/>
                 <MergeRef Id="CRT90"/>
             </Feature>
-            -->
             <Feature Id="TECkit_DLLs" Title="TECkit" Description="Contains the TECkit conversion and compiling engines (DLLs). Select this component if you intend to use TECkit for encoding conversion or other transduction processing." Display="expand" Level="3" AllowAdvertise="no">
                 <MergeRef Id="TECkit_DLLs"/>
                 <MergeRef Id="SetPath"/>
@@ -155,6 +152,10 @@
                 <MergeRef Id="SEC_EC"/>
                 <MergeRef Id="SetPath"/>
                 <MergeRef Id="AIGuesser"/>
+            </Feature>
+            <Feature Id="Perl_5.12" Title="Perl Expressions" Description="Perl plug-in to use Perl expressions for text transduction. Requires a separately-installed Perl distribution." Display="expand" Level="4" AllowAdvertise="no">
+                <Condition Level="3"><![CDATA[SIL_PERL_FOUND AND NOT REMOVE]]></Condition>
+                <MergeRef Id="PerlEC"/>
             </Feature>
         </Feature>
         <Feature Id="Maps_and_Tables" Title="Maps and Tables" Description="Select sub-items to place individual converter sets on your machine. Note: a utility will run after installation, with which you can install the converters in the system repository." Level="3" AllowAdvertise="no">

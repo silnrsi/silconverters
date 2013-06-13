@@ -52,15 +52,16 @@
             <Merge Id="Clipboard_EncConverter" Language="1033" SourceFile="..\MergeModules\ClipboardEncConverter.msm" DiskId="13"/>
             <Merge Id="DChartHelper" Language="1033" SourceFile="..\MergeModules\DChartHelperMM.msm" DiskId="14"/>
             <Merge Id="SEC_ICU" Language="1033" SourceFile="..\MergeModules\SEC_ICU_50.msm" DiskId="7"/>
+            <Merge Id="SCOffice13" Language="1033" SourceFile="..\MergeModules\SCOffice13MM.msm" DiskId="17"/>
             <Merge Id="SCOffice10" Language="1033" SourceFile="..\MergeModules\SCOffice10MM.msm" DiskId="16"/>
             <Merge Id="SCOffice07" Language="1033" SourceFile="..\MergeModules\SCOffice07MM.msm" DiskId="11"/>
-            <Merge Id="SCOffice03" Language="1033" SourceFile="..\MergeModules\SCOffice03MM.msm" DiskId="8"/>
+            <Merge Id="SCOffice03" Language="1033" SourceFile="..\MergeModules\SCOffice03MM.msm" DiskId="10"/>
             <Merge Id="SILConvertersForWord" Language="1033" SourceFile="..\MergeModules\SilConvertersForWordMM.msm" DiskId="18"/>
             <Merge Id="MS_KB908002_Fix" Language="1033" SourceFile="..\MergeModules\MS_KB908002_Fix.msm" DiskId="15"/>
+            <Merge Id="PerlEC" Language="1033" SourceFile="..\ExternalMergeModules\PerlEcMM.msm" DiskId="8"/>
+            <Merge Id="SEC_PythonEC" Language="1033" SourceFile="..\ExternalMergeModules\PythonEcMM.msm" DiskId="9"/>
 
             <!--
-			<Merge Id="SEC_PerlEC" Language="1033" SourceFile="Installer\SEC_PerlEC.msm" DiskId="8"/>
-			<Merge Id="SEC_PythonEC" Language="1033" SourceFile="Installer\SEC_PythonEC.msm" DiskId="9"/>
 			<Merge Id="SFM_Converter" Language="1033" SourceFile="Installer\externalencodingconverters\SFM Converter.msm" DiskId="17"/>
 			<Merge Id="TECkitMapUEditor" Language="1033" SourceFile="Installer\externalencodingconverters\TECkitMapUEditor.msm" DiskId="19"/>
 			<Merge Id="XmlConverters" Language="1033" SourceFile="Installer\externalencodingconverters\XmlConvertersMM.msm" DiskId="20"/>
@@ -69,14 +70,14 @@
 			<Merge Id="TECkit_EXEs" Language="1033" SourceFile="Installer\externalencodingconverters\TECkit EXEs.msm" DiskId="12"/>
             <Merge Id="OO_Ling_Tools" Language="1033" SourceFile="Installer\OO_Ling_Tools.msm" DiskId="12"/>-->
         </DirectoryRef>
-        <!--
 		<DirectoryRef Id="AllUserAppDataSIL">
-			<Merge Id="EcFolderACLs" Language="1033" SourceFile="Installer\EcFolderACLs.msm" DiskId="1"/>
+			<Merge Id="EcFolderACLs" Language="1033" SourceFile="..\ExternalMergeModules\EcFolderACLs.msm" DiskId="1"/>
+            <!--
 			<Merge Id="CscDot" Language="1033" SourceFile="Installer\externalencodingconverters\CscDotMM.msm" DiskId="36"/>
 			<Merge Id="DcmDot" Language="1033" SourceFile="Installer\externalencodingconverters\DcmDotMM.msm" DiskId="37"/>
-		</DirectoryRef>
         -->
-		<DirectoryRef Id="AllUserAppDataSILConverters40">
+        </DirectoryRef>
+        <DirectoryRef Id="AllUserAppDataSILConverters40">
             <Merge Id="BasicConverters" Language="1033" SourceFile="..\MergeModules\BasicConverters.msm" DiskId="34"/>
             <Merge Id="SAGIndic" Language="1033" SourceFile="..\MergeModules\SagIndic.msm" DiskId="25"/>
             <Merge Id="Cameroon" Language="1033" SourceFile="..\MergeModules\Cameroon.msm" DiskId="35"/>
@@ -99,16 +100,14 @@
             <Merge Id="ScHelp" Language="1033" SourceFile="Installer\externalencodingconverters\ScHelpMM.msm" DiskId="5"/>
 			<Merge Id="ICU" Language="1033" SourceFile="Installer\ICU040.msm" DiskId="7"/>
 			<Merge Id="ICUECHelp" Language="1033" SourceFile="Installer\ICUECHelp.msm" DiskId="7"/>
-			<Merge Id="PerlEC" Language="1033" SourceFile="Installer\PerlEC.msm" DiskId="8"/>
-			<Merge Id="PythonEC" Language="1033" SourceFile="Installer\PythonEC.msm" DiskId="9"/>
 			<Merge Id="TECkit_DOCs" Language="1033" SourceFile="Installer\externalencodingconverters\TECkit DOCs.msm" DiskId="11"/>
             -->
 		</DirectoryRef>
 		<DirectoryRef Id="SystemFolder">
 			<Merge Id="CRT" Language="1033" SourceFile="..\ExternalMergeModules\Microsoft_VC100_CRT_x86.msm" DiskId="2"/>
             <Merge Id="MFC" Language="1033" SourceFile="..\ExternalMergeModules\Microsoft_VC100_MFC_x86.msm" DiskId="2"/>
-            <!-- The CRT90 merge module is needed only for the PythonEC (using Python 2.7) merge module:
-			<Merge Id="CRT90" Language="1033" SourceFile="Installer\ExternalMergeModules\Microsoft_VC90_CRT_x86.msm" DiskId="2"/> -->
+            <!-- The CRT90 merge module is needed only for the PythonEC (using Python 2.7) merge module:-->
+			<Merge Id="CRT90" Language="1033" SourceFile="..\ExternalMergeModules\Microsoft_VC90_CRT_x86.msm" DiskId="2"/> 
         </DirectoryRef>
     </Fragment>
 </Wix>
