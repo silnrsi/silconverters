@@ -170,7 +170,7 @@ namespace SILConvertersWordML
             var xpIterator = (DataIterator)theRow.Tag;
             Debug.Assert(xpIterator != null);
             if (xpIterator.MoveNext())
-				UpdateExampleDataColumns(theRow, xpIterator.CurrentValue);
+				UpdateExampleDataColumns(theRow, GetCurrentValue(xpIterator));
         }
 
         internal static void UpdateConverterCellValue(DataGridViewCell theCell, DirectableEncConverter aEC)
@@ -197,7 +197,7 @@ namespace SILConvertersWordML
             RowMaxHeight = Math.Max(RowMaxHeight, fontTarget.Height);
         }
 
-        protected string GetDataSample(DataIterator dataIterator)
+        protected string GetCurrentValue(DataIterator dataIterator)
         {
             return dataIterator.CurrentValue;
         }
@@ -243,7 +243,7 @@ namespace SILConvertersWordML
 
         protected void DisplayInGrid(string strName, DataIterator dataIterator)
         {
-            string strTextSample = GetDataSample(dataIterator);
+            string strTextSample = GetCurrentValue(dataIterator);
             string strConverterName = cstrClickMsg;
             string strOutput = strTextSample;
             string strTooltip = cstrClickMsg;
@@ -367,9 +367,6 @@ namespace SILConvertersWordML
 
         protected void Reset()
         {
-            if (DocXmlDocument.MapIteratorList != null)
-                DocXmlDocument.MapIteratorList.ResetMaps();
-
             m_mapDocName2XmlDocument.Clear();
             dataGridView.Rows.Clear();
             m_mapBackupNameToDocName.Clear();
@@ -634,26 +631,39 @@ namespace SILConvertersWordML
         protected void ConvertXmlToDoc(Word.Application wrdApp, string strXmlFilename, string strDocFilename, 
             Word.WdSaveFormat wdSaveFormat)
         {
+            object oFormat = null;
+            Word._Document wrdDoc = null;
 #if !FlawedImplementationByMS
-            // passing "false" for "ConfirmConversion" (i.e. the 2nd parameter to Documents.Open)
-            //  will actually reset the static options property "Tools, Options dialog, General Tab, 
-            //  Confirm Conversion at Open"
-            // so we have to remember what it was and reset it afterwards... don't ask...
-            bool oOriginalConfirmConversionValue = wrdApp.Options.ConfirmConversions;
+            try
+            {
+                // passing "false" for "ConfirmConversion" (i.e. the 2nd parameter to Documents.Open)
+                //  will actually reset the static options property "Tools, Options dialog, General Tab, 
+                //  Confirm Conversion at Open"
+                // so we have to remember what it was and reset it afterwards... don't ask...
+                bool oOriginalConfirmConversionValue = wrdApp.Options.ConfirmConversions;
 #endif
-            object oXmlFilename = strXmlFilename;
-            object oFormat = Microsoft.Office.Interop.Word.WdOpenFormat.wdOpenFormatXML;
-            Word._Document wrdDoc = wrdApp.Documents.Open(ref oXmlFilename, ref oFalse, ref oTrue,
-                ref oFalse, ref oMissing, ref oMissing, ref oMissing, ref oMissing, ref oMissing,
-                ref oFormat, ref oMissing, ref oMissing, ref oMissing, ref oMissing, ref oMissing, ref oMissing);
+                object oXmlFilename = strXmlFilename;
+                oFormat = Word.WdOpenFormat.wdOpenFormatXML;
+                wrdDoc = wrdApp.Documents.Open(ref oXmlFilename, ref oFalse, ref oTrue,
+                    ref oFalse, ref oMissing, ref oMissing, ref oMissing, ref oMissing, ref oMissing,
+                    ref oFormat, ref oMissing, ref oMissing, ref oMissing, ref oMissing, ref oMissing, ref oMissing);
 
 #if !FlawedImplementationByMS
-            // passing "false" for "ConfirmConversion" (i.e. the 2nd parameter to Documents.Open)
-            //  will actually reset the static options property "Tools, Options dialog, General Tab, 
-            //  Confirm Conversion at Open"
-            // so we have to remember what it was and reset it afterwards... don't ask...
-            wrdApp.Options.ConfirmConversions = oOriginalConfirmConversionValue;
+                // passing "false" for "ConfirmConversion" (i.e. the 2nd parameter to Documents.Open)
+                //  will actually reset the static options property "Tools, Options dialog, General Tab, 
+                //  Confirm Conversion at Open"
+                // so we have to remember what it was and reset it afterwards... don't ask...
+                wrdApp.Options.ConfirmConversions = oOriginalConfirmConversionValue;
 #endif
+            }
+            catch (Exception)
+            {
+                object oXmlFilename = strXmlFilename;
+                oFormat = Word.WdOpenFormat.wdOpenFormatXML;
+                wrdDoc = wrdApp.Documents.Open(ref oXmlFilename, ref oFalse, ref oTrue,
+                    ref oFalse, ref oMissing, ref oMissing, ref oMissing, ref oMissing, ref oMissing,
+                    ref oFormat, ref oMissing, ref oMissing, ref oMissing, ref oMissing, ref oMissing, ref oMissing);
+            }
 
             object oDocFilename = strDocFilename;
 
@@ -752,21 +762,35 @@ namespace SILConvertersWordML
                     {
                         do
                         {
-                            string strOutputFilenameOrig = strFilenamePath + strFilenamePrefix + strFileTitle + strFilenameSuffix; //  +strExtn;
-
-                            saveFileDialog.FileName = strOutputFilenameOrig;
-                            saveFileDialog.FilterIndex = FilterIndexFromFilename(strExtn);
-
-                            DialogResult res = this.saveFileDialog.ShowDialog();
-                            strSaveName = saveFileDialog.FileName.ToLower();
-                            if (res == DialogResult.Cancel)
+                            // if the user is saving the file somewhere besides the original folder...
+                            if (GetDirEnsureFinalSlash(strFileSpec) != strFilenamePath)
                             {
-                                UpdateStatusBar("Do not click 'File', 'Convert and Save' again or you may convert the document twice! Press F5 to reload the files from scratch.");
-                                return;
+                                // then no need to query for the name -- just use the bits we figured out from before
+                                var strOutputFilenameOrig = strFilenamePath + strFilenamePrefix + strFileTitle + strFilenameSuffix + strExtn;
+                                saveFileDialog.FileName = strOutputFilenameOrig;
+                                strSaveName = strOutputFilenameOrig.ToLower();
+                                saveFileDialog.FilterIndex = FilterIndexFromFilename(strExtn);
                             }
-                            else if ((res == DialogResult.OK) && (strSaveName == strFilename))
-                                MessageBox.Show("Sorry, you cannot save this file with the same name", cstrCaption);
+                            else
+                            {
+                                // otherwise, query for the name to make sure it isn't the same as the original file
+                                var strOutputFilenameOrig = strFilenamePath + strFilenamePrefix + strFileTitle +
+                                                               strFilenameSuffix; //  +strExtn;
 
+                                saveFileDialog.FileName = strOutputFilenameOrig;
+                                saveFileDialog.FilterIndex = FilterIndexFromFilename(strExtn);
+
+                                DialogResult res = this.saveFileDialog.ShowDialog();
+                                strSaveName = saveFileDialog.FileName.ToLower();
+                                if (res == DialogResult.Cancel)
+                                {
+                                    UpdateStatusBar(
+                                        "Do not click 'File', 'Convert and Save' again or you may convert the document twice! Press F5 to reload the files from scratch.");
+                                    return;
+                                }
+                                else if ((res == DialogResult.OK) && (strSaveName == strFilename))
+                                    MessageBox.Show("Sorry, you cannot save this file with the same name", cstrCaption);
+                            }
                         } while (strSaveName == strFilename);
                         strSaveName = saveFileDialog.FileName;
                         nFilterIndex = saveFileDialog.FilterIndex;
@@ -914,7 +938,9 @@ namespace SILConvertersWordML
 			string strReplacementCharacter = (aEC.IsRhsLegacy) ? "?" : "\ufffd";
             do
             {
-				string strInput = dataIterator.CurrentValue;
+                string strInput = GetCurrentValue(dataIterator);
+                if (strInput == null)
+                    break;
                 string strOutput = CallSafeConvert(aEC, strInput);
 
                 UpdateStatusBar(String.Format("In '{0}', converting: '{1}' to '{2}'",
@@ -1086,9 +1112,6 @@ namespace SILConvertersWordML
         //  (i.e. "Styles & Custom formatting" = "do it all")
         protected void GetTextIteratorListStyleFont(ref List<string> lstInGrid)
         {
-            if (DocXmlDocument.MapIteratorList == null)
-                return;
-
             foreach (var kvp in m_mapDocName2XmlDocument)
             {
                 m_strCurrentDocument = Path.GetFileName(kvp.Key);
@@ -1099,9 +1122,6 @@ namespace SILConvertersWordML
 
         protected void GetTextIteratorListStyleOnly(ref List<string> lstInGrid)
         {
-            if (DocXmlDocument.MapIteratorList == null)
-                return;
-
             foreach (var kvp in m_mapDocName2XmlDocument)
             {
                 m_strCurrentDocument = Path.GetFileName(kvp.Key);
@@ -1112,9 +1132,6 @@ namespace SILConvertersWordML
 
         protected void GetTextIteratorListCustomFont(ref List<string> lstInGrid)
         {
-            if (DocXmlDocument.MapIteratorList == null)
-                return;
-
             foreach (var kvp in m_mapDocName2XmlDocument)
             {
                 m_strCurrentDocument = Path.GetFileName(kvp.Key);

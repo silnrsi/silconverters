@@ -43,7 +43,20 @@ namespace SILConvertersWordML
 
         public override string CurrentValue
         {
-            get { return LinqDocument.GetTextFromRun(_enumListOfRuns.Current); }
+            get
+            {
+                // now that we have runs which *may not* have text, we might have to skip over this one
+                var strValue = LinqDocument.GetTextFromRun(_enumListOfRuns.Current);
+                while (strValue == null)
+                {
+                    if (MoveNext())
+                        strValue = LinqDocument.GetTextFromRun(_enumListOfRuns.Current);
+                    else
+                        break;
+                }
+
+                return strValue;
+            }
         }
 
         public override void SetCurrentValue(string str)

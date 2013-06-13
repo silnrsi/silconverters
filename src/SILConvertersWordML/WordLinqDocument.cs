@@ -93,7 +93,19 @@ namespace SILConvertersWordML
                         rPr.Add(wxfont);
                     }
 
-                    Debug.Assert(GetAttributeValue(wxfont, wx + "val") == fontName);
+                    /*
+                     * D:\temp\BWDC\Dennis\Steve Parker\Steve P Working\Steve P Legacy\section 1.doc
+                     * had this:
+                      <w:rPr>
+                        <w:rFonts w:ascii="B_steve B_steve SILDoulosL" w:h-ansi="B_steve B_steve SILDoulosL" />
+                        <wx:font wx:val="B_steve B_steve SILDoulosL" />
+                      </w:rPr>
+                      <w:sym w:font="Symbol" w:char="F0B1" />
+                     * It turns out that Word displays this as B_steve B_steve SILDoulosL... so it appears that the w:font 
+                     * of the w:sym can be overridden!
+                     * So
+                     // Debug.Assert(GetAttributeValue(wxfont, wx + "val") == fontName);
+                    */
                 }
 
                 var cCharValue = (char) Convert.ToInt32(strCharVal, 16);
@@ -220,13 +232,36 @@ namespace SILConvertersWordML
 
         private static XElement Get_t(XElement run)
         {
-            return GetElement(run, w + "t");
+            // in a few cases, I've seen the text actually be in a w:instrText element (rather than w:t)
+            //  NOTE: this method might return null!
+            return GetElement(run, w + "t") ?? GetElement(run, w + "instrText");
         }
 
         private static readonly List<XName> ElementsToStripOut = new List<XName>
                                                                      {
                                                                          wx + "sym" // this is for insert symbols, which don't need (the value is already in the w:t element)
                                                                      };
+
+        protected override void ReplaceFontNameAtParagraphLevel(string strFontNameOld, string strFontNameNew)
+        {
+            /*
+              <w:p ...>
+                <w:pPr>
+                  <w:rPr>
+                    <w:rFonts w:ascii="VG2000 Main" w:h-ansi="VG2000 Main" />               <============= replace these bits
+                    <wx:font wx:val="VG2000 Main" />
+                  </w:rPr>
+                </w:pPr>
+                ...
+              </w:p>
+            */
+            var paragraphStyles = DocumentRoot.Descendants(w + "pPr");
+            foreach (var elemFormatting in paragraphStyles.Select(GetRunFormattingParent)
+                                                          .Where(elemFormatting => elemFormatting != null))
+            {
+                UpdateAllChildElementAttributesValue(elemFormatting, strFontNameOld, strFontNameNew);
+            }
+        }
 
         protected override void GetMostRelevantStyleFormat(XElement run, XElement paragraph, out string strStyleId, out string strStyleName, out string strFontName)
         {
@@ -241,7 +276,7 @@ namespace SILConvertersWordML
             // in checking for style override at the run level, only accept it if the style found
             //  actually has Font formatting (if it doesn't then it's not relevant)
             StyleClass styleClass;
-            if (String.IsNullOrEmpty(styleName) || !(styleClass = GetStyleById(styleName)).IsFontFormatting)
+            if (String.IsNullOrEmpty(styleName) || !(styleClass = GetStyleById(styleName)).HasFontFormatting)
             {
                 // 2) style override at the paragraph level -- i.e.:
                 // <w:pPr>
@@ -249,14 +284,14 @@ namespace SILConvertersWordML
                 styleName = GetDescendantAttributeValue(paragraph, w + "pStyle", w + "val");
 
                 // 3) If neither of these apply, then it's 'Normal' style
-                styleClass = (!String.IsNullOrEmpty(styleName) && (styleClass = GetStyleById(styleName)).IsFontFormatting)
+                styleClass = (!String.IsNullOrEmpty(styleName) && (styleClass = GetStyleById(styleName)).HasFontFormatting)
                                 ? styleClass 
                                 : GetStyleById("Normal");
             }
 
             strStyleId = styleClass.Id;
             strStyleName = styleClass.Name;
-            System.Diagnostics.Debug.Assert(styleClass.IsFontFormatting);   // if this doesn't turn out to be true, then get it from w:font/@defaultFonts...
+            System.Diagnostics.Debug.Assert(styleClass.HasFontFormatting);   // if this doesn't turn out to be true, then get it from w:font/@defaultFonts...
             strFontName = styleClass.FontNames.First();
         }
 
@@ -266,23 +301,45 @@ namespace SILConvertersWordML
             // <w:rPr>
             //   <wx:font wx:val="Calibri" />   <======
             var fontName = GetDescendantAttributeValue(run, wx + "font", wx + "val");
-            
-            if (!String.IsNullOrEmpty(fontName))
+
+            // UPDATE: but there shouldn't be an "w:rStyle", which indicates style-based formatting
+            // if (!String.IsNullOrEmpty(fontName))
+            // UPDATE2: but... the style formatting might not have a font defined, so... it really would be custom formatting
+            // if (!String.IsNullOrEmpty(fontName) && 
+            //     !run.Descendants(w + "rStyle").Any())
+            // UPDATE3: I'm not sure this is correct either... even if the style has font formatting, 
+            //  the presence of a "w:rFonts" will *override* the style formatting. So I think the bottom 
+            //  line is that if there's a w:rFonts, *then* it's custom formatting.
+            // if (!String.IsNullOrEmpty(fontName))
+            // {
+            //     // so now see if there's a style format also there with a font embedded
+            //     var styleName = GetDescendantAttributeValue(run, w + "rStyle", w + "val");
+            //     if (String.IsNullOrEmpty(styleName) || !GetStyleById(styleName).HasFontFormatting)
+            // UPDATE4: let's say it's custom formatting if it has a w:rFonts OR if it doesn't have a w:rStyle
+            if (!String.IsNullOrEmpty(fontName) && 
+                (run.Descendants(w + "rFonts").Any() || !run.Descendants(w + "rStyle").Any()))
             {
                 strFontName = fontName;
                 return true;
             }
+
             return false;
         }
 
         public override string GetTextFromRun(XElement run)
         {
-            return Get_t(run).Value;
+            var tElem = Get_t(run);
+            return (tElem != null)
+                       ? tElem.Value
+                       : null;
         }
 
         internal override void SetTextOfRun(XElement run, string str)
         {
-            Get_t(run).Value = str;
+            var tElem = Get_t(run);
+            // if it's null, then there's nothing to do
+            if (tElem != null)
+                tElem.Value = str;
         }
 
         protected StyleClass GetStyleById(string strStyleId)
@@ -380,12 +437,15 @@ namespace SILConvertersWordML
             UpdateAllChildElementAttributesValue(rPr, strFontNameSource, strFontNameTarget);
         }
 
-        protected override IEnumerable<XElement> ParagraphsWithText
+        protected override IEnumerable<XElement> Paragraphs
         {
             get
             {
-                return DocumentRoot.Descendants(w + "p")
-                    .Where(p => p.Descendants(w + "t").Any());
+                return DocumentRoot.Descendants(w + "p");
+                // turns out we don't care whether there's text or not
+                //  for one thing, it might be w:instrText... for another
+                //  , we still want to convert any font naming in the 'empty' run
+                //  .Where(p => p.Descendants(w + "t").Any());
             }
         }
 
@@ -400,10 +460,13 @@ namespace SILConvertersWordML
             }
         }
 
-        protected override IEnumerable<XElement> RunsWithText(XElement paragraph)
+        protected override IEnumerable<XElement> Runs(XElement paragraph)
         {
-            return paragraph.Elements(w + "r")
-                .Where(r => r.Elements(w + "t").Any());
+            return paragraph.Elements(w + "r");
+                // turns out we don't care whether there's text or not
+                //  for one thing, it might be w:instrText... for another
+                //  , we still want to convert any font naming in the 'empty' run
+                // .Where(r => r.Elements(w + "t").Any());
         }
     }
 }

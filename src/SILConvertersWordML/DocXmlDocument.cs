@@ -20,7 +20,7 @@ namespace SILConvertersWordML
 
         public Dictionary<string, string> MapStyleName2FontName = new Dictionary<string, string>();
 
-        public static MapIteratorList MapIteratorList { get; set; }
+        public MapIteratorList MapIteratorList { get; set; }
 
         protected string GetOutputFileSpecForXmlFile(string strDocFilename, bool bSaveXmlOutputInFolder)
         {
