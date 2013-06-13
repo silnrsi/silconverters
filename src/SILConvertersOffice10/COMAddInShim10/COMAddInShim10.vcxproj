@@ -92,9 +92,8 @@
     </Link>
     <PostBuildEvent>
       <Message>Performing post-build tasks</Message>
-      <Command>regsvr32 /s /c "$(TargetPath)"
-copy "$(ProjectDir)..\ManagedAggregator\bin\x86\$(Configuration)\ManagedAggregator10.dll" "$(TargetDir)"
-</Command>
+      <Command>
+      </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -140,8 +139,8 @@ copy "$(ProjectDir)..\ManagedAggregator\bin\x86\$(Configuration)\ManagedAggregat
     </Link>
     <PostBuildEvent>
       <Message>Performing post-build tasks</Message>
-      <Command>regsvr32 /s /c "$(TargetPath)"
-</Command>
+      <Command>
+      </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
