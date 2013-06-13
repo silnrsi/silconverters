@@ -15,7 +15,7 @@ namespace SILConvertersWordML
         public List<string> FontNames { get; set; }
         public ChangeFontName ChangeFontNameFunc { get; set; }
         public XElement AssociatedStyleElem { get; set; }
-        public bool IsFontFormatting
+        public bool HasFontFormatting
         {
             get { return (FontNames != null); }
         }

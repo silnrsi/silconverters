@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
-using System.Xml;
 using System.Xml.Linq;
 
 namespace SILConvertersWordML
@@ -31,8 +29,7 @@ namespace SILConvertersWordML
             }
         }
 
-        protected Dictionary<string, StyleClass> _styles;
-
+        private Dictionary<string, StyleClass> _styles;
         protected Dictionary<string, StyleClass> Styles
         {
             get { return _styles ?? (_styles = ListStyles(DocumentRoot).ToDictionary(s => s.Id, s => s)); }
@@ -66,7 +63,7 @@ namespace SILConvertersWordML
             //  one as if by itself (which unfortunately means empty the collection and requery)
             if (!Program.IsOnlyOneDoc)
             {
-                MapIteratorList = new MapIteratorListXPath();
+                MapIteratorList = new MapIteratorListLinq();
                 InitializeIteratorsCustomFontNames();
                 InitializeIteratorsFontsFromStyles();
             }
@@ -81,12 +78,12 @@ namespace SILConvertersWordML
                 var mapItem = map2Iterator.FirstOrDefault(kvp => kvp.Key == strFontName);
                 bModified |= convertDoc(strFontName, mapItem.Value, strFontName, fontTarget, false);
 
-                // update the font name as well
-                if (strFontName != fontTarget.Name)
-                {
-                    ReplaceCustomFontName(mapItem, fontTarget.Name);
-                    ReplaceFontElementNames(strFontName, fontTarget.Name);
-                }
+                // update the font name as well if it changed...
+                if (strFontName == fontTarget.Name)
+                    continue;
+
+                ReplaceCustomFontName(mapItem, fontTarget.Name);
+                ReplaceFontElementNames(strFontName, fontTarget.Name);
             }
 
             map2Iterator = MyMapIteratorList.MapStyleFontName2Iterator;
@@ -98,12 +95,12 @@ namespace SILConvertersWordML
                 var mapItem = map2Iterator.FirstOrDefault(kvp => kvp.Key == strFontName);
                 bModified |= convertDoc(strFontName, mapItem.Value, strFontName, fontTarget, false);
 
-                // update the font name as well
-                if (strFontName != fontTarget.Name)
-                {
-                    ReplaceStyleFontName(mapItem, fontTarget.Name);
-                    ReplaceFontElementNames(strFontName, fontTarget.Name);
-                }
+                // update the font name as well if it changed...
+                if (strFontName == fontTarget.Name)
+                    continue;
+
+                ReplaceStyleFontName(mapItem, fontTarget.Name);
+                ReplaceFontElementNames(strFontName, fontTarget.Name);
             }
             return bModified;
         }
@@ -117,11 +114,29 @@ namespace SILConvertersWordML
         {
             var strFontNameSource = mapItem.Key;
             foreach (var styleClass in Styles.Values
-                                             .Where(sc => (sc.FontNames != null) && 
-                                                           sc.FontNames.Contains(strFontNameSource)))
+                                             .Where(sc => sc.HasFontFormatting && 
+                                                          sc.FontNames.Contains(strFontNameSource)))
             {
                 ReplaceStyleFontName(styleClass, strFontNameSource, strFontNameTarget);
             }
+
+            // since we might have things like this:
+            /*
+                <w:r wsp:rsidR="00A66D4F">
+                    <w:rPr>
+                        <w:rStyle w:val="PageNumber" />
+                        <wx:font wx:val="A_steve A_steve SILDoulosL" />             <=========== ... change these bits
+                    </w:rPr>
+                    <w:instrText>PAGE  </w:instrText>
+                </w:r>
+             */
+            // to keep this simple, just replace any attribute of any element whose value is the source font name 
+            //  with the new font name
+            var listOfRuns = ((LinqDataIterator)mapItem.Value).ListOfRuns;
+            listOfRuns.ForEach(run => UpdateAllChildElementAttributesValue(GetRunFormattingParent(run), strFontNameSource, strFontNameTarget));
+
+            // for Word, this also includes the style formatting at the paragraph level (where there is no text involved)
+            ReplaceFontNameAtParagraphLevel(strFontNameSource, strFontNameTarget);
         }
 
         private void ReplaceCustomFontName(KeyValuePair<string, DataIterator> mapItem, string strFontNameTarget)
@@ -132,6 +147,9 @@ namespace SILConvertersWordML
             // to keep this simple, just replace any attribute of any element whose value is the source font name 
             //  with the new font name
             listOfRuns.ForEach(run => UpdateAllChildElementAttributesValue(GetRunFormattingParent(run), strFontNameSource, strFontNameTarget));
+
+            // for Word, this also includes the custom formatting at the paragraph level (where there is no text involved)
+            ReplaceFontNameAtParagraphLevel(strFontNameSource, strFontNameTarget);
         }
 
         protected static IEnumerable<string> GetAllAttributeValues(XElement elem)
@@ -141,6 +159,9 @@ namespace SILConvertersWordML
 
         protected static void UpdateAllChildElementAttributesValue(XContainer elemParent, string strOldValue, string strNewValue)
         {
+            if (elemParent == null)
+                return; // nothing to do here... move along...
+
             foreach (var attr in elemParent.Elements()
                                            .Attributes()
                                            .Where(attr => attr.Value == strOldValue))
@@ -178,7 +199,7 @@ namespace SILConvertersWordML
         {
             // go through all the runs in the document that a) have text and b) find out what font as associated with it
             // to start with, get all the 'paragraphs' that have some text associated with it
-            foreach (var paragraph in ParagraphsWithText)
+            foreach (var paragraph in Paragraphs)
             {
                 HarvestFontAndOrStyleFromParagraph(paragraph);
             }
@@ -186,7 +207,7 @@ namespace SILConvertersWordML
 
         protected virtual void HarvestFontAndOrStyleFromParagraph(XElement paragraph)
         {
-            foreach (var run in RunsWithText(paragraph))
+            foreach (var run in Runs(paragraph))
             {
                 HarvestCustomFontAndOrStyleFromRun(run, paragraph);
             }
@@ -195,7 +216,8 @@ namespace SILConvertersWordML
         protected virtual void HarvestCustomFontAndOrStyleFromRun(XElement run, XElement paragraph)
         {
             // there are four types of ways in which a font is associated with some text:
-            //  1) Custom formatting on the run (i.e. w:rFonts and/or wx:font within the run's w:rPr) (I think wx:font/@wx:val actually indicates the font being used an rFonts gives the possibilities for which range)
+            //  1) Custom formatting on the run (i.e. w:rFonts and/or wx:font within the run's w:rPr) 
+            //     (I think wx:font/@wx:val actually indicates the font being used an rFonts gives the possibilities for which range)
             //  2) Style formatting override on the run (i.e. w:rStyle within the run's w:rPr)
             //  3) Default Paragraph Style formatting override
             //  4) Default document formatting
@@ -374,11 +396,12 @@ namespace SILConvertersWordML
         }
 
         protected abstract List<StyleClass> ListStyles(XElement documentRoot);
-        protected abstract IEnumerable<XElement> ParagraphsWithText { get; }
+        protected abstract IEnumerable<XElement> Paragraphs { get; }
         protected abstract XContainer FontsListRoot { get; }
-        protected abstract IEnumerable<XElement> RunsWithText(XElement paragraph);
+        protected abstract IEnumerable<XElement> Runs(XElement paragraph);
         protected abstract XElement GetRunFormattingParent(XElement run);
-        protected abstract void ReplaceStyleFontName(StyleClass styleClass, string strFontNameSource, string strFontNameTarget);
+        protected abstract void ReplaceStyleFontName(StyleClass styleClass, string strFontNameOld, string strFontNameNew);
+        protected abstract void ReplaceFontNameAtParagraphLevel(string strFontNameOld, string strFontNameNew);
 
         protected abstract void GetMostRelevantStyleFormat(XElement run, XElement paragraph, out string strStyleId,
                                                            out string strStyleName, out string strFontName);
