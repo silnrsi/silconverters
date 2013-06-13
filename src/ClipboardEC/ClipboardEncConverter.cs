@@ -136,38 +136,41 @@ namespace ClipboardEC
             this.notifyIconClipboardEC.MouseUp += new MouseEventHandler(notifyIconClipboardEC_MouseUp);
 
             RegistryKey keyLastState = Registry.CurrentUser.OpenSubKey(cstrProjectMemoryKey);
-            try
+            if (keyLastState != null)
             {
-                this.ShowPreview = ((int)keyLastState.GetValue(cstrProjectShowPreviewLastState) != 0);
-            }
-            catch {}
-            this.previewToolStripMenuItem.Checked = ShowPreview;
+                try
+                {
+                    this.ShowPreview = ((int)keyLastState.GetValue(cstrProjectShowPreviewLastState) != 0);
+                }
+                catch { }
+                this.previewToolStripMenuItem.Checked = ShowPreview;
 
-            try
-            {
-                this.DebugState = ((int)keyLastState.GetValue(cstrProjectDebugModeLastState) != 0);
-            }
-            catch {}
-            this.debugToolStripMenuItem.Checked = DebugState;
+                try
+                {
+                    this.DebugState = ((int)keyLastState.GetValue(cstrProjectDebugModeLastState) != 0);
+                }
+                catch { }
+                this.debugToolStripMenuItem.Checked = DebugState;
 
-            try
-            {
-                this.ImplTypeFilter = (string)keyLastState.GetValue(cstrProjectImplTypeFilterLastState);
-            }
-            catch {}
+                try
+                {
+                    this.ImplTypeFilter = (string)keyLastState.GetValue(cstrProjectImplTypeFilterLastState);
+                }
+                catch { }
 
-            try
-            {
-                this.EncodingFilter = (string)keyLastState.GetValue(cstrProjectEncodingFilterLastState);
-            }
-            catch {}
+                try
+                {
+                    this.EncodingFilter = (string)keyLastState.GetValue(cstrProjectEncodingFilterLastState);
+                }
+                catch { }
 
-            try
-            {
-                Int32 lValue = (Int32)keyLastState.GetValue(cstrProjectTransTypeFilterLastState);
-                this.ProcessTypeFilter = (ProcessTypeFlags)lValue;
+                try
+                {
+                    Int32 lValue = (Int32)keyLastState.GetValue(cstrProjectTransTypeFilterLastState);
+                    this.ProcessTypeFilter = (ProcessTypeFlags)lValue;
+                }
+                catch { }
             }
-            catch {}
 
             this.showAllTransductionTypesToolStripMenuItem.Checked = (this.ProcessTypeFilter == ProcessTypeFlags.DontKnow);
             
