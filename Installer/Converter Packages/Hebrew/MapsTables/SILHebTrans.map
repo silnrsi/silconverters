@@ -1,0 +1,148 @@
+﻿; This file was edited using TECkitMappingEditorU.exe v4.0.0.0 on 7/24/2013.
+;   Conversion Type = Legacy_to_from_Unicode
+;   Left-hand side font = SIL Heb Trans;11.25
+;   Right-hand side font = Charis SIL;11.25
+;   Main Window Position = 0,0,650,988
+;   Left-hand side Character Map Window Position = 650,0,449,442
+;   Right-hand side Character Map Window Position = 650,442,449,442
+;   Left-hand side code page = 42
+
+EncodingName			"SIL Heb Trans-1997"
+DescriptiveName			"SIL Heb Trans Font encoding"
+Version					"1.0"
+Contact					"mailto:lorna_priest@sil.org"
+RegistrationAuthority	"SIL International"
+RegistrationName		"SIL Heb Trans"
+
+RHSFlags				(ExpectsNFD)
+
+; 2006-05-16	LP	created (based on python scripts of Bruce Jakeway�s 
+;				(bruce_jakeway@sil.org)
+;				0x4E doesn�t exist in Unicode
+; 2013-07-23 BEaton added the 'noop' class to send unused bytes into the bit bucket
+;                   (these might be used to identify Hebrew source glyphs, but if 
+;                   we're converting the transliteration to Unicode, we don't care
+;                   about that anymore.
+
+pass(Byte_Unicode)
+
+ByteClass[ctl] = (0x00   .. 0x1F  )
+UniClass [ctl] = (U+0000 .. U+001F)
+
+; set of code points where there is no character (to be dropped in the bit bucket)
+ByteClass[noop] = ( 0x24 .. 0x26 0x3D 0x40 0x43 0x46 0x49 0x4A \
+                    0x4C 0x4D 0x51 0x52 0x55 0x56 0x59 0x5A \
+                    0x5E .. 0x60 0x66 0x6A 0x7C 0x7F .. 0x90 \
+                    0x95 0x98 .. 0xAA 0xAC .. 0xAF 0xB1 .. 0xB3 \
+                    0xB6 .. 0xBA 0xBC .. 0xC9 0xCC .. 0xCF 0xD1 ..0xE0 \
+                    0xE3 0xE5 .. 0xE8 0xED 0xEF .. 0xF1 0xFA 0xFD .. 0xFF \
+                  )
+
+[ctl]	<>	[ctl]
+[noop] >    ''
+
+0x20 <> U+0020     ; duplicated space
+0x21 <> U+0021     ; duplicated !
+0x22 <> U+0022     ; duplicated "
+0x23 <> U+0027     ; apostrophe (from decimal 35)
+0x27 <> U+02BE     ; modifier_letter_right_half_ring (aleph) 
+0x28 <> U+0028     ; duplicated (
+0x29 <> U+0029     ; duplicated )
+0x2A <> U+002A     ; duplicated *
+0x2B <> U+FE61     ; small asterisk 
+0x2C <> U+002C     ; duplicated ,
+0x2D <> U+002D     ; duplicated -
+0x2E <> U+002E     ; duplicated .
+0x2F <> U+002F     ; duplicated /
+0x30 <> U+0030     ; duplicated 0
+0x31 <> U+0031     ; duplicated 1
+0x32 <> U+0032     ; duplicated 2
+0x33 <> U+0033     ; duplicated 3
+0x34 <> U+0034     ; duplicated 4
+0x35 <> U+0035     ; duplicated 5
+0x36 <> U+0036     ; duplicated 6
+0x37 <> U+0037     ; duplicated 7
+0x38 <> U+0038     ; duplicated 8
+0x39 <> U+0039     ; duplicated 9
+0x3A <> U+003A     ; duplicated :
+0x3B <> U+003B     ; duplicated ;
+0x3C <> U+00A7     ; section sign
+0x3E <> U+00B6     ; pilcrow_sign 
+0x3F <> U+003F     ; duplicated ?
+0x41 <> U+0061 U+0304
+0x42 <> U+0062
+0x44 <> U+0064
+0x45 <> U+0065 U+0304     ; e + combining_macron 
+0x47 <> U+0067
+0x48 <> U+0073 U+030C     ; s + combining_caron 
+0x4B <> U+006B
+0x4E <> U+006E U+FFFD    ; should be small_letter_reversed_n 
+0x4F <> U+006F U+0304     ; o + combining_macron 
+0x50 <> U+0070
+0x53 <> U+0073 U+0304     ; s + combining_macron 
+0x54 <> U+0074
+0x57 <> U+0073  U+0301     ; s + combining_acute_accent 
+0x58 <> U+0074  U+0323     ; t + combining_dot_below 
+0x5B <> U+005B     ; duplicated [
+0x5C <> U+005C
+0x5D <> U+005D
+0x61 <> U+0061
+0x62 <> U+0062 U+0331     ; b + combining_macron_below 
+0x63 <> U+0073 U+0323     ; s + combining_dot_below
+0x64 <> U+0064 U+0331     ; d + combining_macron_below
+0x65 <> U+0065
+0x67 <> U+0067 U+0304     ; g + combining_macron 
+0x68 <> U+0068     ; (from decimal 104)
+0x69 <> U+0069     ; (from decimal 105)
+0x6B <> U+006B U+0331     ; k + combining_macron_below 
+0x6C <> U+006C
+0x6D <> U+006D 
+0x6E <> U+006E
+0x6F <> U+006F 
+0x70 <> U+0070 U+0304     ; p + combining_macron
+0x71 <> U+0071 
+0x72 <> U+0072
+0x73 <> U+0073
+0x74 <> U+0074 U+0331     ; t + combining_macron_below
+0x75 <> U+0075
+0x76 <> U+02BF     ; modifier_letter_left_half_ring
+0x77 <> U+0077
+0x78 <> U+0068 U+0323     ; h + combining_dot_below
+0x79 <> U+0079
+0x7A <> U+007A
+0x7B <> U+007B     ; duplicated {
+0x7D <> U+007D     ; duplicated }
+0x7E <> U+2020     ; dagger
+0x91 <> U+2018     ; left_single_quotation_mark
+0x92 <> U+2019     ; right_single_quotation_mark
+0x93 <> U+201C     ; left_double_quotation_mark
+0x94 <> U+201D     ; right_double_quotation_mark
+0x96 <> U+2013     ; en_dash
+0x97 <> U+2014     ; em_dash
+0xAB <> U+00AB     ; left-pointing_double_angle_quotation_mark (left chevron)
+0xB0 <> U+00A0     ; no-break_space
+0xB4 <> U+0301     ; combining_acute_accent
+0xB5 <> U+0301     ; combining_acute_accent
+0xBB <> U+00BB     ; right-pointing_double_angle_quotation_mark 
+0xCA <> U+0065 U+0302     ; e + combining_circumflex_accent 
+0xCB <> U+0065 U+0304 U+0068     ; e + combining_macron + h 
+0xD0 <> U+00B7     ; middle_dot
+0xE1 <> U+0061 U+0306     ; a + combining_breve
+0xE2 <> U+200D     ; zero_width_joiner
+0xE4 <> U+0061 U+0302     ; a + combining_circumflex_accent
+0xE9 <> U+0065 U+0306     ; e + combining_breve
+0xEA <> U+0065 U+0323 U+0302     ; e + combining_dot_below + combining_circumflex_accent)
+0xEB <> U+0065 U+0068
+0xEC <> U+0069 U+0304     ; i + combining_macron
+0xEE <> U+0069 U+0302     ; i + combining_circumflex_accent
+0xF2 <> U+1D43     ; superscript_latin_small_letter_a
+0xF3 <> U+006F U+0306     ; o + combining_breve
+0xF4 <> U+006F U+0302     ; o + combining_circumflex_accent
+0xF5 <> U+006F U+0323 U+0304     ; o + combining_dot_below + combining_macron
+0xF6 <> U+006F U+0304 U+0068     ; o + combining_macron + h
+0xF7 <> U+0331     ; combining_macron_below
+0xF8 <> U+1D4A     ; modifier_letter_small_schwa 
+0xF9 <> U+0075 U+0304     ; u + combining_macron
+0xFB <> U+0075 U+0302     ; u + combining_circumflex_accent
+0xFC <> U+01DD     ; latin_small_letter_turned_e
+

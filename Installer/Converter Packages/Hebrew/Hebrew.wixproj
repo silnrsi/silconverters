@@ -23,6 +23,11 @@
   <ItemGroup>
     <Compile Include="Hebrew_MergeModule.wxs" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="MapsTables\Hebrew.xml">
+      <Link>Hebrew.xml</Link>
+    </Content>
+  </ItemGroup>
   <Import Project="$(WixTargetsPath)" />
   <!--
 	To modify your build process, add your task inside one of the targets below and uncomment it.

@@ -16,5 +16,19 @@
                 <FileToInstall filename="MapsTables\SILEzratoUni50.tec"></FileToInstall>
             </FilesToInstall>
         </MapTable>
+        <MapTable description="Converts SIL Heb Trans data to Unicode IPA encoding">
+            <scriptInstall filename="MapsTables\SILHebTrans.vbs" mappingName="SIL Heb Trans&lt;&gt;UNICODE" conversionType="LegacyToFromUnicode" implementType="SIL.tec" ></scriptInstall>
+            <FilesToInstall>
+                <FileToInstall filename="MapsTables\SILHebTrans.tec"></FileToInstall>
+                <FileToInstall filename="MapsTables\SILHebTrans.map"></FileToInstall>
+            </FilesToInstall>
+        </MapTable>
+        <MapTable description="Converts SIL Heb Trans CAPs data to Unicode IPA encoding">
+            <autoInstall mappingName="SIL Heb Trans Caps&lt;&gt;UNICODE" converterSpec="MapsTables\SILHebTransCaps.tec" IsConverterSpecAFile="true" implementType="SIL.tec" conversionType="UnicodeToFromUnicode" leftEncoding="SIL Heb Trans Caps-1997" rightEncoding="UNICODE" processType="DontKnow"></autoInstall>
+            <FilesToInstall>
+                <FileToInstall filename="MapsTables\SILHebTransCaps.tec"></FileToInstall>
+                <FileToInstall filename="MapsTables\SILHebTransCaps.map"></FileToInstall>
+            </FilesToInstall>
+        </MapTable>
     </MapsTables>
 </SILConvertersInstallerDetails>
