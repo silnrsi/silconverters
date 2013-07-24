@@ -29,6 +29,21 @@
                             <Component Id="SIL_Ezra.vbs" Guid="f954c48a-fe13-46e4-90fd-cb4f8986b543">
                                 <File Id="SIL_Ezra.vbs" Name="SIL Ezra.vbs" KeyPath="yes" Source="MapsTables\SIL Ezra.vbs" />
                             </Component>
+                            <Component Id="SILHebTrans.map" Guid="19045720-0060-448C-939F-1F79871A9F90">
+                                <File Id="SILHebTrans.map" Name="SILHebTrans.map" KeyPath="yes" Source="MapsTables\SILHebTrans.map" />
+                            </Component>
+                            <Component Id="SILHebTrans.tec" Guid="2F0E3595-AD3A-4D0F-85B0-6E9367A1C1D5">
+                                <File Id="SILHebTrans.tec" Name="SILHebTrans.tec" KeyPath="yes" Source="MapsTables\SILHebTrans.tec" />
+                            </Component>                            
+                            <Component Id="SILHebTrans.vbs" Guid="BFBC013A-870E-4C95-810E-ACD57A9A8141">
+                                <File Id="SILHebTrans.vbs" Name="SILHebTrans.vbs" KeyPath="yes" Source="MapsTables\SILHebTrans.vbs" />
+                            </Component>
+                            <Component Id="SILHebTransCaps.map" Guid="827DD1CA-77E4-45B6-BC8E-D02967A1D834">
+                                <File Id="SILHebTransCaps.map" Name="SILHebTransCaps.map" KeyPath="yes" Source="MapsTables\SILHebTransCaps.map" />
+                            </Component>
+                            <Component Id="SILHebTransCaps.tec" Guid="7FF6F27D-5BA3-4799-8050-DDC4F29FFF45">
+                                <File Id="SILHebTransCaps.tec" Name="SILHebTransCaps.tec" KeyPath="yes" Source="MapsTables\SILHebTransCaps.tec" />
+                            </Component>
                         </Directory>
                     </Directory>
                 </Directory>
