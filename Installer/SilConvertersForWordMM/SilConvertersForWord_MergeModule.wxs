@@ -5,23 +5,17 @@
 
 		<Directory Id="TARGETDIR" Name="SourceDir">
 
-            <Component Id="xmlOpenWithRegKeys" Guid="{16C1F605-F6E0-490F-998A-84738ED2BC42}">
-                <RegistryValue Id="xmlOpenWithRegKeys1" Root="HKCR" Key=".doc\OpenWithList\SILConvertersWordML.exe" Value="" Type="string" KeyPath="yes" />
-                <RegistryValue Id="xmlOpenWithRegKeys2" Root="HKCR" Key=".xml\OpenWithList\SILConvertersWordML.exe" Value="" Type="string" />
-                <RegistryValue Id="xmlOpenWithRegKeys3" Root="HKCR" Key=".xml" Name="PerceivedType" Value="text" Type="string" />
-                <RegistryValue Id="xmlOpenWithRegKeys4" Root="HKCR" Key=".xml" Value="xmlfile" Type="string" />
-                <RegistryValue Id="xmlOpenWithRegKeys5" Root="HKCR" Key=".xml" Name="Content Type" Value="text/xml" Type="string" />
-                <RegistryValue Id="xmlOpenWithRegKeys6" Root="HKCR" Key=".rtf\OpenWithList\SILConvertersWordML.exe" Value="" Type="string" />
-                <RegistryValue Id="xmlOpenWithRegKeys7" Root="HKCR" Key="Applications\SILConvertersWordML.exe\shell\open\command" Value="&quot;[TARGETDIR]SILConvertersWordML.exe&quot; &quot;%1&quot;" Type="string" />
-                <RegistryValue Id="xmlOpenWithRegKeys8" Root="HKCR" Key="Applications\SILConvertersWordML.exe\shell\open" Value="&amp;Open" Type="string" />
-                <RegistryValue Id="xmlOpenWithRegKeys9" Root="HKLM" Key="SOFTWARE\Classes\.rtf\OpenWithList\SILConvertersWordML.exe" Value="" Type="string" />
-                <RegistryValue Id="xmlOpenWithRegKeysA" Root="HKLM" Key="SOFTWARE\Classes\.xml\OpenWithList\SILConvertersWordML.exe" Value="" Type="string" />
-                <RegistryValue Id="xmlOpenWithRegKeysB" Root="HKLM" Key="SOFTWARE\Classes\.xml" Name="Content Type" Value="text/xml" Type="string" />
-                <RegistryValue Id="xmlOpenWithRegKeysC" Root="HKLM" Key="SOFTWARE\Classes\.xml" Name="PerceivedType" Value="text" Type="string" />
-                <RegistryValue Id="xmlOpenWithRegKeysD" Root="HKLM" Key="SOFTWARE\Classes\.xml" Value="xmlfile" Type="string" />
-                <RegistryValue Id="xmlOpenWithRegKeysE" Root="HKLM" Key="SOFTWARE\Classes\.doc\OpenWithList\SILConvertersWordML.exe" Value="" Type="string" />
-                <RegistryValue Id="xmlOpenWithRegKeysF" Root="HKLM" Key="SOFTWARE\Classes\Applications\SILConvertersWordML.exe\shell\open\command" Value="&quot;[TARGETDIR]SILConvertersWordML.exe&quot; &quot;%1&quot;" Type="string" />
-                <RegistryValue Id="xmlOpenWithRegKeysG" Root="HKLM" Key="SOFTWARE\Classes\Applications\SILConvertersWordML.exe\shell\open" Value="&amp;Open" Type="string" />
+            <Component Id="xmlOpenWithRegKeysCr" Guid="6B391C9F-BA36-4E3D-8C58-55785E03857C">
+
+                <!-- Optional: add an 'Edit with XYZ' to 'right click' even when not associated -->
+                <RegistryValue Root="HKCR" Key="SystemFileAssociations\.doc\shell\edit.SILConvertersWordML.exe" Value="Edit with Bulk Word Document Converter" Type="string" />
+                <RegistryValue Root="HKCR" Key="SystemFileAssociations\.doc\shell\edit.SILConvertersWordML.exe\command" Value="&quot;[#SILConvertersWordML.exe]&quot; &quot;%1&quot;" Type="string" />
+                <RegistryValue Root="HKCR" Key="SystemFileAssociations\.docx\shell\edit.SILConvertersWordML.exe" Value="Edit with Bulk Word Document Converter" Type="string" />
+                <RegistryValue Root="HKCR" Key="SystemFileAssociations\.docx\shell\edit.SILConvertersWordML.exe\command" Value="&quot;[#SILConvertersWordML.exe]&quot; &quot;%1&quot;" Type="string" />
+                <RegistryValue Root="HKCR" Key="SystemFileAssociations\.rtf\shell\edit.SILConvertersWordML.exe" Value="Edit with Bulk Word Document Converter" Type="string" />
+                <RegistryValue Root="HKCR" Key="SystemFileAssociations\.rtf\shell\edit.SILConvertersWordML.exe\command" Value="&quot;[#SILConvertersWordML.exe]&quot; &quot;%1&quot;" Type="string" />
+                <RegistryValue Root="HKCR" Key="SystemFileAssociations\.xml\shell\edit.SILConvertersWordML.exe" Value="Edit with Bulk Word Document Converter" Type="string" />
+                <RegistryValue Root="HKCR" Key="SystemFileAssociations\.xml\shell\edit.SILConvertersWordML.exe\command" Value="&quot;[#SILConvertersWordML.exe]&quot; &quot;%1&quot;" Type="string" />
             </Component>
 
             <Directory Id="MergeRedirectFolder">
@@ -30,7 +24,6 @@
                     <File Id="SILConvertersWordML.exe" Name="SILConvertersWordML.exe" KeyPath="yes" Assembly=".net" AssemblyManifest="SILConvertersWordML.exe" AssemblyApplication="SILConvertersWordML.exe" Source="..\..\output\release\SILConvertersWordML.exe" />
                     <Shortcut Id="SILConvertersWordML.exe" Directory="SILConverters" Name="Bulk Word Document Converter" Description="Convert your MS Word documents with converters in the system repository" IconIndex="0" Show="normal" Target="[#SILConvertersWordML.exe]" WorkingDirectory="MergeRedirectFolder" Advertise="no" />
                 </Component>
-
             </Directory>
 
             <Directory Id="StartMenuFolder" SourceName="Start Menu">
