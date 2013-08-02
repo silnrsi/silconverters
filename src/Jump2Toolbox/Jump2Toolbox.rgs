@@ -1,0 +1,11 @@
+HKCR
+{
+	NoRemove AppID
+	{
+		'%APPID%' = s 'Jump2Toolbox'
+		'Jump2Toolbox.DLL'
+		{
+			val AppID = s '%APPID%'
+		}
+	}
+}
