@@ -47,16 +47,6 @@
                     <RegistryValue Root="HKCR" Key="CLSID\{852AF018-BE2D-4809-AE48-87A15E168731}\InprocServer32" Name="CodeBase" Value="file:///[#SILConvertersOffice10.dll]" Type="string" Action="write" />
                 </Component>
 
-                <Component Id="SILConvertersOffice10.tlb" Guid="{5931854C-7577-4CBD-87FF-100EC705ECF3}">
-                    <File Id="SILConvertersOffice10.tlb" KeyPath="yes" Source="..\..\output\release\SILConvertersOffice10.tlb">
-                        <TypeLib Id="{1E634DC3-F9AA-3E2C-8F56-F513B66E3DD9}" Description="COM add-in for SIL Converters" HelpDirectory="MergeRedirectFolder" Language="0" MajorVersion="4" MinorVersion="0">
-                            <Interface Id="{81145702-E4A1-327C-A43B-A69D9AE140F4}" Name="_ConvertFunctions" ProxyStubClassId32="{00020424-0000-0000-C000-000000000046}" />
-                            <Interface Id="{A0083B94-C44B-34FA-8258-1FF036A3980B}" Name="_InstallerRegistrationActions" ProxyStubClassId32="{00020424-0000-0000-C000-000000000046}" />
-                            <Interface Id="{FDFD33FB-E9D5-3E7B-8234-41FBE7C39F30}" Name="_Connect" ProxyStubClassId32="{00020424-0000-0000-C000-000000000046}" />
-                        </TypeLib>
-                    </File>
-                </Component>
-
                 <Component Id="SecOffice_COMAddInShim10" Guid="{2FEB91C6-DF94-4980-AA5F-0CB85A935335}">
                     <File Id="SecOffice_COMAddInShim10" KeyPath="yes" Source="..\..\output\release\SecOffice_COMAddInShim10.dll">
                         <Class Id="{852AF018-BE2D-4809-AE48-87A15E168731}" Context="InprocServer32" Description="SILConvertersOffice10.Connect" ThreadingModel="apartment" Programmable="yes">
