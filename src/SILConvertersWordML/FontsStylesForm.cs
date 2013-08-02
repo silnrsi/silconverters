@@ -479,6 +479,9 @@ namespace SILConvertersWordML
             return doc;
         }
 
+        // different versions of Word must surely be allowed to do this... 
+        //  use the extension insteads...
+        /*
         //  1:  Word Document (*.doc)|*.doc|
         //  2:  XML Document (*.xml)|*.xml|
         //  3:  Single File Web Page (*.mht; *.mhtml)|*.mht; *.mhtml|
@@ -537,31 +540,34 @@ namespace SILConvertersWordML
 
             return wdSaveFormat;
         }
+        */
 
-        protected int FilterIndexFromFilename(string strFilename)
+        protected Word.WdSaveFormat SaveFormatFromIndexFromFilename(string strFilename)
         {
             // from the FileSave dialog: Word Document (*.doc)|*.doc|XML Document (*.xml)|*.xml|Single File Web Page (*.mht; *.mhtml)|*.mht; *.mhtml|Web Page (*.htm; *.html)|*.htm; *.html|Web Page, Filtered (*.htm; *.html)|*.htm; *.html|Document Template (*.dot)|*.dot|Rich Text Format (*.rtf)|*.rtf|Plain Text (*.txt)|*.txt|Encoded Text (*.txt)|*.txt|Unicode Text (*.txt)|*.txt|Text with line breaks (*.txt)|*.txt|All files (*.*)|*.*
-            int nFilterIndex = 1;
-            string strExtn = Path.GetExtension(strFilename);
+            var strExtn = Path.GetExtension(strFilename);
             if (!String.IsNullOrEmpty(strExtn))
             {
                 strExtn = strExtn.ToLower();
-                if (strExtn == "xml")
-                    nFilterIndex = 2;
-                else if ((strExtn == "mht") || (strExtn == "mhtml"))
-                    nFilterIndex = 3;
-                else if ((strExtn == "htm") || (strExtn == "html"))
-                    nFilterIndex = 4;
-                else if (strExtn == "dot")
-                    nFilterIndex = 6;
-                else if (strExtn == "rtf")
-                    nFilterIndex = 7;
-                else if (strExtn == "txt")
-                    nFilterIndex = 9;
-                else
-                    nFilterIndex = 1;
+                switch (strExtn)
+                {
+                    case ".xml":
+                        return Word.WdSaveFormat.wdFormatXML;
+                    case ".mhtml":
+                    case ".mht":
+                        return Word.WdSaveFormat.wdFormatWebArchive;
+                    case ".html":
+                    case ".htm":
+                        return Word.WdSaveFormat.wdFormatHTML;
+                    case ".dot":
+                        return Word.WdSaveFormat.wdFormatTemplate;
+                    case ".rtf":
+                        return Word.WdSaveFormat.wdFormatRTF;
+                    case ".txt":
+                        return Word.WdSaveFormat.wdFormatEncodedText;
+                }
             }
-            return nFilterIndex;
+            return Word.WdSaveFormat.wdFormatDocument;
         }
 
         const Word.WdSaveFormat wdFormatXMLDocumentMacroEnabled = (Word.WdSaveFormat)13;
@@ -723,53 +729,51 @@ namespace SILConvertersWordML
             {
                 string strFilenamePath = null, strFilenamePrefix = null, strFilenameSuffix = cstrOutputFileAddn, strExtn = null;  // for starters
 
-                foreach (string strFileSpec in m_mapDocName2XmlDocument.Keys)
+                foreach (string strOrigFileSpec in m_mapDocName2XmlDocument.Keys)
                 {
                     // convert the data in the document
-                    string strXmlFilename;
-                    ConvertAndSaveDoc(strFileSpec, out strXmlFilename);
+                    string strConvertedXmlFilename;
+                    ConvertAndSaveDoc(strOrigFileSpec, out strConvertedXmlFilename);
 
                     // now convert it back to a Word .doc file
                     // First calculate the new filename
                     if (strExtn == null)
-                        strExtn = Path.GetExtension(strFileSpec);
+                        strExtn = Path.GetExtension(strOrigFileSpec);
 
                     if (strFilenamePath == null)
-                        strFilenamePath = GetDirEnsureFinalSlash(strFileSpec);
+                        strFilenamePath = GetDirEnsureFinalSlash(strOrigFileSpec);
 
-                    string strFileTitle = Path.GetFileNameWithoutExtension(strFileSpec);
+                    string strFileTitle = Path.GetFileNameWithoutExtension(strOrigFileSpec);
 
-                    string strFilename = strFileSpec.ToLower();
-                    string strSaveName = null;
+                    string strOrigFileSpecLowerCase = strOrigFileSpec.ToLower();
+                    string strNewSaveFileSpec = null;
                     string strBackup = null;
-                    int nFilterIndex;
-                    if ((m_mapBackupNameToDocName.Count > 0) && (m_mapBackupNameToDocName.ContainsKey(strFileSpec)))
+                    if ((m_mapBackupNameToDocName.Count > 0) && (m_mapBackupNameToDocName.ContainsKey(strOrigFileSpec)))
                     {
-                        strSaveName = m_mapBackupNameToDocName[strFileSpec];
-                        strBackup = String.Format(@"{0}\Backup of {1}", 
-                            Path.GetDirectoryName(strSaveName), Path.GetFileName(strFileSpec));
-                        File.Move(strSaveName, strBackup);
-                        nFilterIndex = -1;  // this will trigger a guess based on the filename
+                        strNewSaveFileSpec = m_mapBackupNameToDocName[strOrigFileSpec];
+                        strBackup = String.Format(@"{0}\Backup of {1}",
+                            Path.GetDirectoryName(strNewSaveFileSpec), Path.GetFileName(strOrigFileSpec));
+                        File.Move(strNewSaveFileSpec, strBackup);
 
                         if (leaveXMLFileInFolderToolStripMenuItem.Checked)
                         {
                             string strBackupXml = String.Format(@"{0}\{1}",
-                                Path.GetDirectoryName(strSaveName), Path.GetFileName(strXmlFilename));
-                            File.Copy(strXmlFilename, strBackupXml, true);
+                                Path.GetDirectoryName(strNewSaveFileSpec), Path.GetFileName(strConvertedXmlFilename));
+                            File.Copy(strConvertedXmlFilename, strBackupXml, true);
                         }
                     }
                     else
                     {
+                        string strNewSaveFileSpecLowerCase;
                         do
                         {
                             // if the user is saving the file somewhere besides the original folder...
-                            if (GetDirEnsureFinalSlash(strFileSpec) != strFilenamePath)
+                            if (GetDirEnsureFinalSlash(strOrigFileSpec) != strFilenamePath)
                             {
                                 // then no need to query for the name -- just use the bits we figured out from before
                                 var strOutputFilenameOrig = strFilenamePath + strFilenamePrefix + strFileTitle + strFilenameSuffix + strExtn;
                                 saveFileDialog.FileName = strOutputFilenameOrig;
-                                strSaveName = strOutputFilenameOrig.ToLower();
-                                saveFileDialog.FilterIndex = FilterIndexFromFilename(strExtn);
+                                strNewSaveFileSpecLowerCase = strOutputFilenameOrig.ToLower();
                             }
                             else
                             {
@@ -778,27 +782,25 @@ namespace SILConvertersWordML
                                                                strFilenameSuffix; //  +strExtn;
 
                                 saveFileDialog.FileName = strOutputFilenameOrig;
-                                saveFileDialog.FilterIndex = FilterIndexFromFilename(strExtn);
 
                                 DialogResult res = this.saveFileDialog.ShowDialog();
-                                strSaveName = saveFileDialog.FileName.ToLower();
+                                strNewSaveFileSpecLowerCase = saveFileDialog.FileName.ToLower();
                                 if (res == DialogResult.Cancel)
                                 {
                                     UpdateStatusBar(
                                         "Do not click 'File', 'Convert and Save' again or you may convert the document twice! Press F5 to reload the files from scratch.");
                                     return;
                                 }
-                                else if ((res == DialogResult.OK) && (strSaveName == strFilename))
+                                else if ((res == DialogResult.OK) && (strNewSaveFileSpecLowerCase == strOrigFileSpecLowerCase))
                                     MessageBox.Show("Sorry, you cannot save this file with the same name", cstrCaption);
                             }
-                        } while (strSaveName == strFilename);
-                        strSaveName = saveFileDialog.FileName;
-                        nFilterIndex = saveFileDialog.FilterIndex;
+                        } while (strNewSaveFileSpecLowerCase == strOrigFileSpecLowerCase);
+                        strNewSaveFileSpec = saveFileDialog.FileName;
                     }
 
-                    string strOutputFilenameNew = strSaveName;
-                    Word.WdSaveFormat wdSaveFormat = SaveFormatFromIndex(nFilterIndex, strOutputFilenameNew);
-                    ConvertXmlToDoc(wrdApp, strXmlFilename, strOutputFilenameNew, wdSaveFormat);
+                    string strOutputFilenameNew = strNewSaveFileSpec;
+                    var wdSaveFormat = SaveFormatFromIndexFromFilename(strOutputFilenameNew);
+                    ConvertXmlToDoc(wrdApp, strConvertedXmlFilename, strOutputFilenameNew, wdSaveFormat);
 
                     if (!String.IsNullOrEmpty(strBackup) && File.Exists(strBackup))
                     {

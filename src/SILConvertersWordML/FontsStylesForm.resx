@@ -132,6 +132,9 @@
   <metadata name="ColumnTargetFont.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
+  <metadata name="helpProvider.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>945, 17</value>
+  </metadata>
   <metadata name="toolStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>656, 17</value>
   </metadata>
@@ -156,17 +159,17 @@
   <data name="toolStripButtonAutoSearch.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         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
-        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
+        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
 </value>
   </data>
   <data name="toolStripButtonConvertAndSave.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
@@ -194,17 +197,17 @@
   <data name="toolStripButtonSingleStep.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         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
-        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
+        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
 </value>
   </data>
   <metadata name="toolTip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
@@ -219,6 +222,9 @@
   <data name="leaveXMLFileInFolderToolStripMenuItem.ToolTipText" xml:space="preserve">
     <value>Check this menu to have the before and after xml files (intermediary files used in the conversion process) left in the folder with the original document. These can be compared to see what data was converted</value>
   </data>
+  <metadata name="toolTip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>347, 17</value>
+  </metadata>
   <metadata name="fontDialog.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>432, 17</value>
   </metadata>
@@ -226,11 +232,8 @@
     <value>534, 17</value>
   </metadata>
   <data name="saveFileDialog.Filter" xml:space="preserve">
-    <value>Word Document (*.doc)|*.doc|XML Document (*.xml)|*.xml|Single File Web Page (*.mht; *.mhtml)|*.mht; *.mhtml|Web Page (*.htm; *.html)|*.htm; *.html|Web Page, Filtered (*.htm; *.html)|*.htm; *.html|Document Template (*.dot)|*.dot|Rich Text Format (*.rtf)|*.rtf|Plain Text (*.txt)|*.txt|Encoded Text (*.txt)|*.txt|Unicode Text (*.txt)|*.txt|Text with line breaks (*.txt)|*.txt|All files (*.*)|*.*</value>
+    <value>Word Document (*.doc)|*.doc|XML Document (*.xml)|*.xml|Single File Web Page (*.mht; *.mhtml)|*.mht; *.mhtml|Web Page (*.htm; *.html)|*.htm; *.html|Document Template (*.dot)|*.dot|Rich Text Format (*.rtf)|*.rtf|Encoded Text (*.txt)|*.txt|All files (*.*)|*.*</value>
   </data>
-  <metadata name="helpProvider.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>945, 17</value>
-  </metadata>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         AAABAAIAICAQAAAAAADoAgAAJgAAABAQEAAAAAAAKAEAAA4DAAAoAAAAIAAAAEAAAAABAAQAAAAAAIAC
