@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+	<Module Id="SpellFixerEcMM" Language="1033" Version="1.0.0.0">
+		<Package Id="c82ae0ac-fbe9-44b9-9d70-5b070989429e" Comments="SpellFixer Macro Word document template" Description="Document Template for doing spelling corrections using EncConverters in MS Word" InstallerVersion="200" Keywords="SILConverters; Spell Fixing in MS Word" Manufacturer="SIL" />
+
+		<Directory Id="TARGETDIR" Name="SourceDir">
+            
+			<Directory Id="MergeRedirectFolder">
+
+                <Component Id="SpellingFixerEC.dll" Guid="4B3D6318-7C27-4A91-A42B-D3E4730FCA06">
+                    <Class Id="{B3256CF8-FA9B-310D-89A6-9268B37A9A72}" Context="InprocServer32" Description="SpellingFixerEC.SpellingFixerEC" ThreadingModel="both" ForeignServer="mscoree.dll">
+                        <ProgId Id="SpellingFixerEC.SpellingFixerEC" Description="SpellingFixerEC.SpellingFixerEC" />
+                    </Class>
+                    <File Id="SpellingFixerEC.dll" Name="SpellingFixerEC.dll" KeyPath="yes" Assembly=".net" AssemblyManifest="SpellingFixerEC.dll" AssemblyApplication="SpellingFixerEC.dll" Source="..\..\output\release\SpellingFixerEC.dll" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{B3256CF8-FA9B-310D-89A6-9268B37A9A72}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{B3256CF8-FA9B-310D-89A6-9268B37A9A72}\InprocServer32\4.0.0.0" Name="Class" Value="SpellingFixerEC.SpellingFixerEC" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{B3256CF8-FA9B-310D-89A6-9268B37A9A72}\InprocServer32\4.0.0.0" Name="Assembly" Value="SpellingFixerEC, Version=4.0.0.0, Culture=neutral, PublicKeyToken=f1447bae1e63f485" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{B3256CF8-FA9B-310D-89A6-9268B37A9A72}\InprocServer32\4.0.0.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{B3256CF8-FA9B-310D-89A6-9268B37A9A72}\InprocServer32\4.0.0.0" Name="CodeBase" Value="file:///[#SpellingFixerEC.dll]" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{B3256CF8-FA9B-310D-89A6-9268B37A9A72}\InprocServer32" Name="Class" Value="SpellingFixerEC.SpellingFixerEC" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{B3256CF8-FA9B-310D-89A6-9268B37A9A72}\InprocServer32" Name="Assembly" Value="SpellingFixerEC, Version=4.0.0.0, Culture=neutral, PublicKeyToken=f1447bae1e63f485" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{B3256CF8-FA9B-310D-89A6-9268B37A9A72}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{B3256CF8-FA9B-310D-89A6-9268B37A9A72}\InprocServer32" Name="CodeBase" Value="file:///[#SpellingFixerEC.dll]" Type="string" Action="write" />
+                </Component>
+
+                <Component Id="SpellingFixerEC.tlb" Guid="2A6C0802-E2A5-45B1-8F0D-1804B296AC04">
+                    <File Id="SpellingFixerEC.tlb" Name="SpellingFixerEC.tlb" KeyPath="yes" Source="..\..\output\release\SpellingFixerEC.tlb">
+                        <TypeLib Id="{FE18485F-A565-3DA7-AD89-4998AE095D45}" Description="SIL Spelling fixer plug-in (for use with SILConverters)" HelpDirectory="MergeRedirectFolder" Language="0" MajorVersion="4" MinorVersion="0">
+                            <Interface Id="{36C6FF0D-92ED-3E87-934F-2394BA3E4683}" Name="_SpellingFixerEC" ProxyStubClassId32="{00020424-0000-0000-C000-000000000046}" />
+                        </TypeLib>
+                    </File>
+                </Component>
+
+            </Directory>
+
+            <Directory Id="WORD_DOT_FOLDER" Name="Word DOT Folder">
+                <Component Id="SpellFixer.dot" Guid="2E6335D3-C438-42F7-8A18-A51C5E3912A9">
+                    <File Id="SpellFixer.dot" Name="SpellFixer.dot" KeyPath="yes" Source="..\..\DistFiles\release\SpellFixer.dot" />
+                    <Shortcut Id="SpellFixer.dot" Directory="SILConvHelp" Name="Help for the SpellFixer macro" Description="Help information for the SpellFixer MS Word document template" Show="normal" WorkingDirectory="WORD_DOT_FOLDER" Advertise="yes" />
+                </Component>
+            </Directory>
+
+            <Directory Id="StartMenuFolder" SourceName="Start Menu">
+                <Directory Id="ProgramMenuFolder" SourceName="Programs">
+                    <Directory Id="SIL_Converters" Name="SIL Converters">
+                        <Directory Id="SILConvHelp" Name="Help" />
+                    </Directory>
+                </Directory>
+            </Directory>
+
+        </Directory>
+	</Module>
+</Wix>

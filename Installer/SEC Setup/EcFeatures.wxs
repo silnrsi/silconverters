@@ -5,9 +5,7 @@
         <Feature Id="Always" Title="Always" Display="hidden" Level="1" AllowAdvertise="no">
             <ComponentRef Id="RemoveFile" />
             <MergeRef Id="EcFolderACLs"/>
-            <!--
             <MergeRef Id="ScHelp"/>
-            -->
         </Feature>
         <Feature Id="SILConverters_client_apps" Title="SIL Converters' client applications" Description="Expand this node to select or deselect individual client applications" Level="3" AllowAdvertise="no">
             <Feature Id="Clipboard_EncConverter" Title="Clipboard Encoding Converter " Description="The Clipboard EncConverter allows you to convert data on the clipboard with one of the converters in the system repository (e.g. TECkit, CC, etc)." Display="expand" Level="3" AllowAdvertise="no">
@@ -17,51 +15,46 @@
                 <!--<MergeRef Id="MFC"/>
                 <MergeRef Id="CRT"/>-->
             </Feature>
-            <!--
             <Feature Id="Bulk_SFM_Converter" Title="Bulk SFM Converter" Description="The Bulk SFM Converter allows you to convert one or more SFM documents (e.g. Toolbox lexicon or text files) using a converter in the system repository (TECkit, CC, etc)." Level="3" AllowAdvertise="no">
-                <MergeRef Id="Managed_Install_Fix"/>
                 <MergeRef Id="SFM_Converter"/>
                 <MergeRef Id="SEC_EC"/>
-                <MergeRef Id="MFC"/>
-                <MergeRef Id="CRT"/>
+                <!--<MergeRef Id="MFC"/>
+                <MergeRef Id="CRT"/>-->
             </Feature>
             <Feature Id="XML_Data_Converter" Title="XML Data Converter" Description="An XML document editor which allows you to convert XML data attributes and elements using a converter from the system repository." Level="3" AllowAdvertise="no">
-                <MergeRef Id="Managed_Install_Fix"/>
                 <MergeRef Id="SEC_EC"/>
                 <MergeRef Id="XmlConverters"/>
-                <MergeRef Id="MFC"/>
-                <MergeRef Id="CRT"/>
+                <!--<MergeRef Id="MFC"/>
+                <MergeRef Id="CRT"/>-->
             </Feature>
             <Feature Id="Word_DOTs" Title="Word DOTs" Description="Expand this node to select or deselect individual document templates for Microsoft Word" Level="3" AllowAdvertise="no">
                 <Feature Id="DataConversion" Title="Data Conversion Macro" Description="Install this component to use SIL Converters in Microsoft Word." Display="expand" Level="3" AllowAdvertise="no">
-                    <MergeRef Id="Managed_Install_Fix"/>
                     <MergeRef Id="DcmDot"/>
                     <MergeRef Id="SEC_EC"/>
                     <MergeRef Id="SetPath"/>
-                    <MergeRef Id="MFC"/>
-                    <MergeRef Id="CRT"/>
                     <MergeRef Id="MS_KB908002_Fix"/>
+                    <!--<MergeRef Id="MFC"/>
+                    <MergeRef Id="CRT"/>-->
                 </Feature>
                 <Feature Id="SpellFixer" Title="Spelling Fixer" Description="An SIL Converters client application for fixing spelling errors in Microsoft Word." Level="3" AllowAdvertise="no">
-                    <MergeRef Id="Managed_Install_Fix"/>
-                    <MergeRef Id="SEC_EC"/>
                     <MergeRef Id="SpellFixerEc"/>
+                    <MergeRef Id="SEC_EC"/>
                     <MergeRef Id="SetPath"/>
-                    <MergeRef Id="MFC"/>
-                    <MergeRef Id="CRT"/>
                     <MergeRef Id="MS_KB908002_Fix"/>
+                    <!--<MergeRef Id="MFC"/>
+                    <MergeRef Id="CRT"/>-->
                 </Feature>
                 <Feature Id="ConsistencySpellingChecker" Title="Consistency Spelling Checker" Description="A Microsoft Word document template that provides utilities for checking the consistency of spelling for any language." Display="expand" Level="3" AllowAdvertise="no">
-                    <MergeRef Id="Managed_Install_Fix"/>
                     <MergeRef Id="CscDot"/>
                     <MergeRef Id="SEC_EC"/>
                     <MergeRef Id="SetPath"/>
-                    <MergeRef Id="MFC"/>
-                    <MergeRef Id="CRT"/>
                     <MergeRef Id="Jump2TbxMergeModule"/>
                     <MergeRef Id="MS_KB908002_Fix"/>
+                    <!--<MergeRef Id="MFC"/>
+                    <MergeRef Id="CRT"/>-->
                 </Feature>
             </Feature>
+            <!--
             <Feature Id="OO_Ling_Tools" Title="Open/LibreOffice Extension" Description="Install this component to use SIL Converters from within OpenOffice or LibreOffice." Level="3" AllowAdvertise="no">
                 <MergeRef Id="OO_Ling_Tools"/>
                 <MergeRef Id="SEC_EC"/>
@@ -239,26 +232,25 @@
                 <MergeRef Id="West_Africa"/>
             </Feature>
         </Feature>
-        <!--
         <Feature Id="TECkit" Title="Additional TECkit applications" Description="Contains the program files for developing and using TECkit map files for encoding conversion and other text processing applications." Level="4" AllowAdvertise="no">
-            <Feature Id="TECkitMapUEditor" Title="TECkit Map Unicode Editor" Description="The TECkit Map Unicode Editor assists in the development of encoding conversion and transliteration TECkit maps." Level="4" AllowAdvertise="no">
-                <MergeRef Id="Managed_Install_Fix"/>
+            <Feature Id="TECkitMapUEditor" Title="TECkit Map Unicode Editor" Description="The TECkit Map Unicode Editor assists in the development of encoding conversion and transliteration TECkit maps." Level="3" AllowAdvertise="no">
+                <!--<MergeRef Id="Managed_Install_Fix"/>-->
                 <MergeRef Id="SEC_EC"/>
                 <MergeRef Id="TECkit_DLLs"/>
                 <MergeRef Id="SetPath"/>
                 <MergeRef Id="TECkitMapUEditor"/>
-                <MergeRef Id="MFC"/>
-                <MergeRef Id="CRT"/>
+                <!--<MergeRef Id="MFC"/>
+                <MergeRef Id="CRT"/>-->
             </Feature>
+            <Feature Id="TECkit_Package" Title="TECkit Utilities" Description="Contains the executables from the TECkit package (i.e. DropTEC.exe, SFConv.exe, TECkit Mapping Editor.exe, TECkit_Compile.exe, and TxtConv.exe) and associated documentation." Display="expand" Level="4" AllowAdvertise="no">
+                <MergeRef Id="TECkit_Package"/>
+                <MergeRef Id="SetPath"/>
+            </Feature>
+            <!-- now part of the TECkitMapUEditor feature
             <Feature Id="TECkit_Documents" Title="TECkit Documents" Description="Contains the documentation for the TECkit mapping table syntax and instructions on using the executables from the TECkit Exes package." Level="4" AllowAdvertise="no">
                 <MergeRef Id="TECkit_DOCs"/>
             </Feature>
-            <Feature Id="TECkit_EXEs" Title="TECkit Utilities" Description="Contains the executables from the TECkit package (i.e. DropTEC.exe, SFConv.exe, TECkit Mapping Editor.exe, TECkit_Compile.exe, and TxtConv.exe)." Display="expand" Level="4" AllowAdvertise="no">
-                <MergeRef Id="TECkit_DLLs"/>
-                <MergeRef Id="SetPath"/>
-                <MergeRef Id="TECkit_EXEs"/>
-            </Feature>
-        </Feature>
 -->
-        </Fragment>
+        </Feature>
+    </Fragment>
 </Wix>

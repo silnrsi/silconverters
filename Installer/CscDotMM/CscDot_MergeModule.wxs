@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+	<Module Id="CscDotMM" Language="1033" Version="1.0.0.0">
+		<Package Id="288de69b-4287-4dfa-a10f-3322e3de0c20" Comments="Consistent Spelling Checker Macro Word document template" Description="Document Template for doing spelling corrections using EncConverters in MS Word" InstallerVersion="200" Keywords="SILConverters; Spell Fixing in MS Word" Manufacturer="SIL" />
+        
+        <Dependency RequiredId="Jump2ToolboxMM" RequiredLanguage="1033" RequiredVersion="4.0.0.0" />
+        
+		<Directory Id="TARGETDIR" Name="SourceDir">
+            
+            <Directory Id="WORD_DOT_FOLDER" Name="Word DOT Folder">
+                <Component Id="ConsistentSpellingChecker400.dot" Guid="18CA683D-1653-4E98-BD6C-47E21A2EE5E4">
+                    <File Id="ConsistentSpellingChecker400.dot" Name="Consistent Spelling Checker 400.dot" KeyPath="yes" Source="..\..\DistFiles\release\Consistent Spelling Checker 400.dot" />
+                    <Shortcut Id="ConsistentSpellingChecker400.dot" Directory="SILConvHelp" Name="Help for the Consistent Spelling Checker" Description="Help information for the Consistent Spelling Checker MS Word document template" Show="normal" WorkingDirectory="WORD_DOT_FOLDER" Advertise="yes" />
+                </Component>
+            </Directory>
+
+            <Directory Id="StartMenuFolder" SourceName="Start Menu">
+                <Directory Id="ProgramMenuFolder" SourceName="Programs">
+                    <Directory Id="SIL_Converters" Name="SIL Converters">
+                        <Directory Id="SILConvHelp" Name="Help" />
+                    </Directory>
+                </Directory>
+            </Directory>
+        </Directory>
+	</Module>
+</Wix>
