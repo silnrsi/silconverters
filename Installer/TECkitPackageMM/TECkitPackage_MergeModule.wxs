@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+	<Module Id="TECkitPackageMM" Language="1033" Version="1.0.0.0">
+		<Package Id="f34b50e8-aec4-46b3-a5e9-660e6a1c9f5d" Comments="Merge module containing the TECkit documentation and executables" Description="TECkit DOCs/EXEs" InstallerVersion="200" Keywords="TECkit, Encoding Conversion" Manufacturer="SIL" />
+
+		<Directory Id="TARGETDIR" Name="SourceDir">
+			<Directory Id="MergeRedirectFolder">
+
+                <Component Id="DropTEC.exe" Guid="38D13B26-C03E-454C-9A55-4B5BAACD53B6">
+                    <File Id="DropTEC.exe" Name="DropTEC.exe" KeyPath="yes" Source="..\..\DistFiles\release\DropTEC.exe" />
+                    <Shortcut Id="TECkitFolder" Name="TECkit Utilities Folder" Directory="TECkitMenu" Target="[MergeRedirectFolder]" WorkingDirectory="MergeRedirectFolder" Description="Opens a Explorer Window to the folder where the TECkit command line programs are installed" />
+                    <File Id="SFconv.exe" Name="SFconv.exe" Source="..\..\DistFiles\release\SFconv.exe" />
+                    <File Id="TECkitMappingEditor.exe" Name="TECkit Mapping Editor.exe" Source="..\..\DistFiles\release\TECkit Mapping Editor.exe" />
+                    <File Id="TECkit_Compile.exe" Name="TECkit_Compile.exe" Source="..\..\DistFiles\release\TECkit_Compile.exe" />
+                    <File Id="TxtConv.exe" Name="TxtConv.exe" Source="..\..\DistFiles\release\TxtConv.exe" />
+                </Component>
+
+                <Directory Id="TkHelp" Name="Help">
+                    <Component Id="TECkit_version_2.1.pdf" Guid="089CEABD-06EC-42EA-B6F8-C43C65552C1F">
+                        <File Id="TECkit_version_2.1.pdf" Name="TECkit_version_2.1.pdf" KeyPath="yes" Source="..\..\DistFiles\release\Help\TECkit_version_2.1.doc.pdf" />
+                        <Shortcut Id="TECkit_version_2.1.pdf" Directory="TkMenuHelp" Name="TECkit version 2.1" Description="Help files for TECkit v2.1" Show="normal" Target="[#TECkit_version_2.1.pdf]" WorkingDirectory="TkHelp" Advertise="no" />
+                    </Component>
+                    <Component Id="TECkit_Language_2.1.pdf" Guid="BF08383D-2BC6-4D43-BE53-E0FACD305A4E">
+                        <File Id="TECkit_Language_2.1.pdf" Name="TECkit_Language_2.1.pdf" KeyPath="yes" Source="..\..\DistFiles\release\Help\TECkit_Language_2.1.doc.pdf" />
+                        <Shortcut Id="TECkit_Language_2.1.pdf" Directory="TkMenuHelp" Name="TECkit Language 2.1" Description="Help files for TECkit Language v2.1" Show="normal" Target="[#TECkit_Language_2.1.pdf]" WorkingDirectory="TkHelp" Advertise="no" />
+                    </Component>
+                </Directory>
+
+            </Directory>
+
+            <Directory Id="StartMenuFolder" SourceName="Start Menu">
+                <Directory Id="ProgramMenuFolder" SourceName="Programs">
+                    <Directory Id="TECkitMenu" Name="TECkit">
+                        <Directory Id="TkMenuHelp" Name="Help" />
+                    </Directory>
+                </Directory>
+            </Directory>
+
+        </Directory>
+	</Module>
+</Wix>

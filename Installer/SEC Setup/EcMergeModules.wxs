@@ -43,39 +43,44 @@
         
 		<DirectoryRef Id="INSTALLDIR">
 			<!-- The following merge modules install to the default directory: C:\Program Files\SIL\SILConverters -->
-			<Merge Id="SEC_EC" Language="1033" SourceFile="..\ExternalMergeModules\EC_40_MM.msm" DiskId="2"/>
-            <Merge Id="AIGuesser" Language="1033" SourceFile="..\ExternalMergeModules\AIGuesserMM.msm" DiskId="4"/>
-            <Merge Id="CcDLLsMM" Language="1033" SourceFile="..\ExternalMergeModules\CcDLLsMM.msm" DiskId="5" />
-            <Merge Id="AdaptIt2Unicode" Language="1033" SourceFile="..\MergeModules\AdaptIt2UnicodeMM.msm" DiskId="2"/>
-            <Merge Id="ConverterInstaller" Language="1033" SourceFile="..\MergeModules\ConverterInstallerMM.msm" DiskId="22"/>
-            <Merge Id="IndicConverters" Language="1033" SourceFile="..\MergeModules\IndicConverters.msm" DiskId="30"/>
-            <Merge Id="Clipboard_EncConverter" Language="1033" SourceFile="..\MergeModules\ClipboardEncConverter.msm" DiskId="13"/>
-            <Merge Id="DChartHelper" Language="1033" SourceFile="..\MergeModules\DChartHelperMM.msm" DiskId="14"/>
-            <Merge Id="SEC_ICU" Language="1033" SourceFile="..\MergeModules\SEC_ICU_50.msm" DiskId="7"/>
-            <Merge Id="SCOffice13" Language="1033" SourceFile="..\MergeModules\SCOffice13MM.msm" DiskId="17"/>
-            <Merge Id="SCOffice10" Language="1033" SourceFile="..\MergeModules\SCOffice10MM.msm" DiskId="16"/>
-            <Merge Id="SCOffice07" Language="1033" SourceFile="..\MergeModules\SCOffice07MM.msm" DiskId="11"/>
-            <Merge Id="SCOffice03" Language="1033" SourceFile="..\MergeModules\SCOffice03MM.msm" DiskId="10"/>
-            <Merge Id="SILConvertersForWord" Language="1033" SourceFile="..\MergeModules\SilConvertersForWordMM.msm" DiskId="18"/>
+			<Merge Id="SEC_EC" Language="1033" SourceFile="..\ExternalMergeModules\EC_40_MM.msm" DiskId="1"/>
+            <Merge Id="CcDLLsMM" Language="1033" SourceFile="..\ExternalMergeModules\CcDLLsMM.msm" DiskId="1" />
+            <Merge Id="AIGuesser" Language="1033" SourceFile="..\ExternalMergeModules\AIGuesserMM.msm" DiskId="2"/>
+            <Merge Id="AdaptIt2Unicode" Language="1033" SourceFile="..\MergeModules\AdaptIt2UnicodeMM.msm" DiskId="4"/>
+            <Merge Id="ConverterInstaller" Language="1033" SourceFile="..\MergeModules\ConverterInstallerMM.msm" DiskId="5"/>
+            <Merge Id="IndicConverters" Language="1033" SourceFile="..\MergeModules\IndicConverters.msm" DiskId="6"/>
+            <Merge Id="Clipboard_EncConverter" Language="1033" SourceFile="..\MergeModules\ClipboardEncConverter.msm" DiskId="7"/>
+            <Merge Id="DChartHelper" Language="1033" SourceFile="..\MergeModules\DChartHelperMM.msm" DiskId="8"/>
+            <Merge Id="SEC_ICU" Language="1033" SourceFile="..\MergeModules\SEC_ICU_50.msm" DiskId="9"/>
+            <Merge Id="SCOffice13" Language="1033" SourceFile="..\MergeModules\SCOffice13MM.msm" DiskId="10"/>
+            <Merge Id="SCOffice10" Language="1033" SourceFile="..\MergeModules\SCOffice10MM.msm" DiskId="11"/>
+            <Merge Id="SCOffice07" Language="1033" SourceFile="..\MergeModules\SCOffice07MM.msm" DiskId="12"/>
+            <Merge Id="SCOffice03" Language="1033" SourceFile="..\MergeModules\SCOffice03MM.msm" DiskId="13"/>
+            <Merge Id="SILConvertersForWord" Language="1033" SourceFile="..\MergeModules\SilConvertersForWordMM.msm" DiskId="14"/>
             <Merge Id="MS_KB908002_Fix" Language="1033" SourceFile="..\MergeModules\MS_KB908002_Fix.msm" DiskId="15"/>
-            <Merge Id="PerlEC" Language="1033" SourceFile="..\ExternalMergeModules\PerlEcMM.msm" DiskId="8"/>
-            <Merge Id="SEC_PythonEC" Language="1033" SourceFile="..\ExternalMergeModules\PythonEcMM.msm" DiskId="9"/>
-
+            <Merge Id="SFM_Converter" Language="1033" SourceFile="..\MergeModules\SFM Converter MM.msm" DiskId="16"/>
+            <Merge Id="PerlEC" Language="1033" SourceFile="..\ExternalMergeModules\PerlEcMM.msm" DiskId="17"/>
+            <Merge Id="SEC_PythonEC" Language="1033" SourceFile="..\ExternalMergeModules\PythonEcMM.msm" DiskId="18"/>
+            <Merge Id="TECkitMapUEditor" Language="1033" SourceFile="..\MergeModules\TECkitMapUEditor.msm" DiskId="19"/>
+            <Merge Id="XmlConverters" Language="1033" SourceFile="..\MergeModules\XmlConvertersMM.msm" DiskId="20"/>
+            <Merge Id="SpellFixerEc" Language="1033" SourceFile="..\MergeModules\SpellFixerEcMM.msm" DiskId="38"/>
+            <Merge Id="ScHelp" Language="1033" SourceFile="..\MergeModules\ScHelpMM.msm" DiskId="1"/>
             <!--
-			<Merge Id="SFM_Converter" Language="1033" SourceFile="Installer\externalencodingconverters\SFM Converter.msm" DiskId="17"/>
-			<Merge Id="TECkitMapUEditor" Language="1033" SourceFile="Installer\externalencodingconverters\TECkitMapUEditor.msm" DiskId="19"/>
-			<Merge Id="XmlConverters" Language="1033" SourceFile="Installer\externalencodingconverters\XmlConvertersMM.msm" DiskId="20"/>
-			<Merge Id="Jump2TbxMergeModule" Language="1033" SourceFile="Installer\externalencodingconverters\Jump2TbxMergeModule.msm" DiskId="21"/>
-			<Merge Id="SpellFixerEc" Language="1033" SourceFile="Installer\externalencodingconverters\SpellFixerEcMM.msm" DiskId="38"/>
-			<Merge Id="TECkit_EXEs" Language="1033" SourceFile="Installer\externalencodingconverters\TECkit EXEs.msm" DiskId="12"/>
             <Merge Id="OO_Ling_Tools" Language="1033" SourceFile="Installer\OO_Ling_Tools.msm" DiskId="12"/>-->
         </DirectoryRef>
+
+        <DirectoryRef Id="TECkit">
+            <Merge Id="TECkit_Package" Language="1033" SourceFile="..\MergeModules\TECkitPackageMM.msm" DiskId="11"/>
+        </DirectoryRef>
+        
+        <DirectoryRef Id="Toolbox">
+            <Merge Id="Jump2TbxMergeModule" Language="1033" SourceFile="..\MergeModules\Jump2ToolboxMM.msm" DiskId="24"/>
+        </DirectoryRef>
+        
 		<DirectoryRef Id="AllUserAppDataSIL">
 			<Merge Id="EcFolderACLs" Language="1033" SourceFile="..\ExternalMergeModules\EcFolderACLs.msm" DiskId="1"/>
-            <!--
-			<Merge Id="CscDot" Language="1033" SourceFile="Installer\externalencodingconverters\CscDotMM.msm" DiskId="36"/>
-			<Merge Id="DcmDot" Language="1033" SourceFile="Installer\externalencodingconverters\DcmDotMM.msm" DiskId="37"/>
-        -->
+            <Merge Id="CscDot" Language="1033" SourceFile="..\MergeModules\CscDotMM.msm" DiskId="36"/>
+            <Merge Id="DcmDot" Language="1033" SourceFile="..\MergeModules\DcmDotMM.msm" DiskId="37"/>
         </DirectoryRef>
         <DirectoryRef Id="AllUserAppDataSILConverters40">
             <Merge Id="BasicConverters" Language="1033" SourceFile="..\MergeModules\BasicConverters.msm" DiskId="34"/>
@@ -97,10 +102,8 @@
             <Merge Id="TECkit_DLLs" Language="1033" SourceFile="..\ExternalMergeModules\TECkitDLLsMM.msm" DiskId="10"/>
             <!--
             <Merge Id="Managed_Install_Fix" Language="1033" SourceFile="..\ExternalMergeModules\Managed Install Fix.msm" DiskId="2"/>
-            <Merge Id="ScHelp" Language="1033" SourceFile="Installer\externalencodingconverters\ScHelpMM.msm" DiskId="5"/>
 			<Merge Id="ICU" Language="1033" SourceFile="Installer\ICU040.msm" DiskId="7"/>
 			<Merge Id="ICUECHelp" Language="1033" SourceFile="Installer\ICUECHelp.msm" DiskId="7"/>
-			<Merge Id="TECkit_DOCs" Language="1033" SourceFile="Installer\externalencodingconverters\TECkit DOCs.msm" DiskId="11"/>
             -->
 		</DirectoryRef>
 		<DirectoryRef Id="SystemFolder">
