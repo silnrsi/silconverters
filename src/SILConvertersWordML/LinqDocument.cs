@@ -105,11 +105,6 @@ namespace SILConvertersWordML
             return bModified;
         }
 
-        private void ReplaceFontElementNames(string strFontNameOld, string strFontNameNew)
-        {
-            UpdateAllChildElementAttributesValue(FontsListRoot, strFontNameOld, strFontNameNew);
-        }
-
         private void ReplaceStyleFontName(KeyValuePair<string, DataIterator> mapItem, string strFontNameTarget)
         {
             var strFontNameSource = mapItem.Key;
@@ -170,6 +165,19 @@ namespace SILConvertersWordML
             }
         }
 
+        protected static void UpdateAllChildElementAttributesValue(XContainer elemParent, XName xNameOfChild, string strOldValue, string strNewValue)
+        {
+            if (elemParent == null)
+                return; // nothing to do here... move along...
+
+            var child = elemParent.Element(xNameOfChild);
+            if (child == null)
+                return;
+
+            foreach (var attr in child.Attributes().Where(attr => attr.Value == strOldValue))
+                attr.Value = strNewValue;
+        }
+
         public override bool ConvertDocumentByStylesOnly(Dictionary<string, Font> mapName2Font,
                                                          Func<string, DataIterator, string, Font, bool, bool> convertDoc)
         {
@@ -179,11 +187,6 @@ namespace SILConvertersWordML
         public override bool ConvertDocumentByFontNameOnly(Dictionary<string, Font> mapName2Font,
                                                            Func<string, DataIterator, string, Font, bool, bool>
                                                                convertDoc)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override bool HasFonts(List<string> astrFontsToSearchFor)
         {
             throw new NotImplementedException();
         }
@@ -402,6 +405,8 @@ namespace SILConvertersWordML
         protected abstract XElement GetRunFormattingParent(XElement run);
         protected abstract void ReplaceStyleFontName(StyleClass styleClass, string strFontNameOld, string strFontNameNew);
         protected abstract void ReplaceFontNameAtParagraphLevel(string strFontNameOld, string strFontNameNew);
+        protected abstract void ReplaceFontElementNames(string strFontNameOld, string strFontNameNew);
+
 
         protected abstract void GetMostRelevantStyleFormat(XElement run, XElement paragraph, out string strStyleId,
                                                            out string strStyleName, out string strFontName);

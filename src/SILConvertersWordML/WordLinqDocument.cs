@@ -119,7 +119,7 @@ namespace SILConvertersWordML
             // get rid of any non-abberant 'sym'bol inserts too
             foreach (var run in doc.Root.Descendants(w + "r").Where(r => r.Elements(w + "rPr").Any(rPr => rPr.Elements(wx + "sym").Any())))
             {
-                Debug.Assert(run.Descendants(w + "t").Any());
+                Debug.Assert(Get_t(run) != null);
                 var sym = run.Descendants(wx + "sym").FirstOrDefault();
                 Debug.Assert(sym != null, "sym != null");
                 sym.Remove();
@@ -193,7 +193,7 @@ namespace SILConvertersWordML
 
                     if ((tThis == null) ||
                         (tNext == null) ||
-                        (GetRunIdentityValue(thisRun) != GetRunIdentityValue(nextRun)))
+                        !AreRunsIsoFormatted(thisRun, nextRun))
                     {
                         // the 'next' one wasn't identical to 'this' one (or otherwise we need to stop combining)... 
                         // so skip to the next one as being the 'this' one so we can compare *it* with
@@ -209,6 +209,34 @@ namespace SILConvertersWordML
             }
         }
 
+        private static bool AreRunsIsoFormatted(XContainer thisRun, XContainer nextRun)
+        {
+            // UPDATE: there's also stuff that even if two consecutive runs have it don't want to be considered
+            //  identical. e.g.
+            //         <w:r>
+            //           <w:tab />
+            //           <w:t>1.1  Introduction</w:t>
+            //         </w:r>
+            //         <w:r>
+            //           <w:tab />
+            //           <w:t>7</w:t>
+            //         </w:r>
+            // because the 'tab' means insert a tab, and if we combined them, we'd be losing one of them
+            // return (GetRunIdentityValue(thisRun) != GetRunIdentityValue(nextRun));
+            return (GetRunIdentityValue(thisRun) == GetRunIdentityValue(nextRun)) &&
+                   ElementsThatBlockIsoFormatting.All(xn => !thisRun.Elements(xn).Any());
+        }
+
+        private static readonly List<XName> ElementsThatBlockIsoFormatting = new List<XName>
+                                                                     {
+                                                                         w + "tab" // if this element is present, then we don't want to combine two runs
+                                                                     };
+
+        private static readonly List<XName> ElementsToStripOut = new List<XName>
+                                                                     {
+                                                                         wx + "sym" // this is for insert symbols, which don't need (the value is already in the w:t element)
+                                                                     };
+
         private static string GetRunIdentityValue(XContainer run)
         {
             // var str = Get_rPr_value(run);
@@ -222,7 +250,6 @@ namespace SILConvertersWordML
             // </w:r>
             // these shouldn't be combined, because the 2nd has a "w:br" element.
             // SO, return all the stuff between w:r to w:t (I've never seen anything *below* a w:t)
-
             var str = run.Descendants().Where(elem => !elem.HasElements && 
                                                       (elem.Name != w + "t") && 
                                                       !ElementsToStripOut.Contains(elem.Name))
@@ -234,33 +261,9 @@ namespace SILConvertersWordML
         {
             // in a few cases, I've seen the text actually be in a w:instrText element (rather than w:t)
             //  NOTE: this method might return null!
-            return GetElement(run, w + "t") ?? GetElement(run, w + "instrText");
-        }
-
-        private static readonly List<XName> ElementsToStripOut = new List<XName>
-                                                                     {
-                                                                         wx + "sym" // this is for insert symbols, which don't need (the value is already in the w:t element)
-                                                                     };
-
-        protected override void ReplaceFontNameAtParagraphLevel(string strFontNameOld, string strFontNameNew)
-        {
-            /*
-              <w:p ...>
-                <w:pPr>
-                  <w:rPr>
-                    <w:rFonts w:ascii="VG2000 Main" w:h-ansi="VG2000 Main" />               <============= replace these bits
-                    <wx:font wx:val="VG2000 Main" />
-                  </w:rPr>
-                </w:pPr>
-                ...
-              </w:p>
-            */
-            var paragraphStyles = DocumentRoot.Descendants(w + "pPr");
-            foreach (var elemFormatting in paragraphStyles.Select(GetRunFormattingParent)
-                                                          .Where(elemFormatting => elemFormatting != null))
-            {
-                UpdateAllChildElementAttributesValue(elemFormatting, strFontNameOld, strFontNameNew);
-            }
+            return GetElement(run, w + "t") ??
+                   GetElement(run, w + "instrText") ??
+                   GetElement(run, w + "delText");
         }
 
         protected override void GetMostRelevantStyleFormat(XElement run, XElement paragraph, out string strStyleId, out string strStyleName, out string strFontName)
@@ -423,6 +426,28 @@ namespace SILConvertersWordML
             return strStyleName;
         }
 
+        public override bool HasFonts(List<string> astrFontsToSearchFor)
+        {
+            return FontsListRoot.Elements(w + "font")
+                                .Any(e => astrFontsToSearchFor.Contains(GetAttributeValue(e, w + "name")));
+        }
+
+        protected override void ReplaceFontElementNames(string strFontNameOld, string strFontNameNew)
+        {
+            // Update, for the D:\temp\BWDC\Dennis\Steve Parker\Steve P Working\Steve P Legacy files,
+            //  I think we don't want to just change the name, but get rid of the element altogether... 
+            //  (or it could display improperly if the original was a symbol font)
+            // So now, just delete it... Word should be able to recreate it if it's actually needed
+            //  <w:font w:name="Mangal">
+            foreach (var fontElement in FontsListRoot.Elements(w + "font").Where(e => GetAttributeValue(e, w + "name") == strFontNameOld))
+                fontElement.Remove();
+
+            // <w:defaultFonts w:ascii="Times New Roman" w:fareast="Times New Roman" w:h-ansi="Times New Roman" w:cs="Times New Roman" />
+            // and if that font is used as one of the ranges of the 'defaultFonts' element, then change that too
+            UpdateAllChildElementAttributesValue(FontsListRoot, w + "defaultFonts", strFontNameOld, strFontNameNew);
+
+        }
+
         protected override void ReplaceStyleFontName(StyleClass styleClass, string strFontNameSource, string strFontNameTarget)
         {
             // <w:style w:type="paragraph" w:default="on" w:styleId="Normal">
@@ -435,6 +460,27 @@ namespace SILConvertersWordML
             //     <wx:font wx:val="Calibri" />
             var rPr = GetRunFormattingParent(styleClass.AssociatedStyleElem);
             UpdateAllChildElementAttributesValue(rPr, strFontNameSource, strFontNameTarget);
+        }
+
+        protected override void ReplaceFontNameAtParagraphLevel(string strFontNameOld, string strFontNameNew)
+        {
+            /*
+              <w:p ...>
+                <w:pPr>
+                  <w:rPr>
+                    <w:rFonts w:ascii="VG2000 Main" w:h-ansi="VG2000 Main" />               <============= replace these bits
+                    <wx:font wx:val="VG2000 Main" />
+                  </w:rPr>
+                </w:pPr>
+                ...
+              </w:p>
+            */
+            var paragraphStyles = DocumentRoot.Descendants(w + "pPr");
+            foreach (var elemFormatting in paragraphStyles.Select(GetRunFormattingParent)
+                                                          .Where(elemFormatting => elemFormatting != null))
+            {
+                UpdateAllChildElementAttributesValue(elemFormatting, strFontNameOld, strFontNameNew);
+            }
         }
 
         protected override IEnumerable<XElement> Paragraphs
