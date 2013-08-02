@@ -69,10 +69,6 @@ namespace SFMConv
             this.correctSpellingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openSFMFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.dataGridView = new System.Windows.Forms.DataGridView();
-            this.SFMs = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ExampleData = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Converter = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.ExampleResults = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.asdgToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.helpProvider = new System.Windows.Forms.HelpProvider();
@@ -89,6 +85,10 @@ namespace SFMConv
             this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButtonSingleStep = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
+            this.SFMs = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ExampleData = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Converter = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.ExampleResults = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.menuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
@@ -119,7 +119,7 @@ namespace SFMConv
             this.toolStripSeparator1,
             this.exitToolStripMenuItem});
             this.ToolStripMenuItemFile.Name = "ToolStripMenuItemFile";
-            this.ToolStripMenuItemFile.Size = new System.Drawing.Size(35, 20);
+            this.ToolStripMenuItemFile.Size = new System.Drawing.Size(37, 20);
             this.ToolStripMenuItemFile.Text = "&File";
             this.ToolStripMenuItemFile.DropDownOpening += new System.EventHandler(this.ToolStripMenuItemFile_DropDownOpening);
             // 
@@ -129,23 +129,23 @@ namespace SFMConv
             this.unicodeToolStripMenuItem,
             this.legacyToolStripMenuItem});
             this.openSFMDocumentToolStripMenuItem.Name = "openSFMDocumentToolStripMenuItem";
-            this.openSFMDocumentToolStripMenuItem.Size = new System.Drawing.Size(240, 22);
+            this.openSFMDocumentToolStripMenuItem.Size = new System.Drawing.Size(256, 22);
             this.openSFMDocumentToolStripMenuItem.Text = "&Open SFM Documents";
             this.openSFMDocumentToolStripMenuItem.ToolTipText = "Click to open one or more SFM documents you want to convert";
             // 
             // unicodeToolStripMenuItem
             // 
             this.unicodeToolStripMenuItem.Name = "unicodeToolStripMenuItem";
-            this.unicodeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.unicodeToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
             this.unicodeToolStripMenuItem.Text = "&Unicode";
             this.unicodeToolStripMenuItem.ToolTipText = "Use this option if your SFM documents are encoded in Unicode (i.e. UTF-8 or UTF-1" +
-                "6)";
+    "6)";
             this.unicodeToolStripMenuItem.Click += new System.EventHandler(this.unicodeToolStripMenuItem_Click);
             // 
             // legacyToolStripMenuItem
             // 
             this.legacyToolStripMenuItem.Name = "legacyToolStripMenuItem";
-            this.legacyToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.legacyToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
             this.legacyToolStripMenuItem.Text = "&Non-Unicode (Legacy)";
             this.legacyToolStripMenuItem.ToolTipText = "Use this option if your SFM documents are not encoded in Unicode";
             this.legacyToolStripMenuItem.Click += new System.EventHandler(this.legacyToolStripMenuItem_Click);
@@ -153,14 +153,14 @@ namespace SFMConv
             // recentFilesToolStripMenuItem
             // 
             this.recentFilesToolStripMenuItem.Name = "recentFilesToolStripMenuItem";
-            this.recentFilesToolStripMenuItem.Size = new System.Drawing.Size(240, 22);
+            this.recentFilesToolStripMenuItem.Size = new System.Drawing.Size(256, 22);
             this.recentFilesToolStripMenuItem.Text = "&Recent Files";
             // 
             // reloadToolStripMenuItem
             // 
             this.reloadToolStripMenuItem.Name = "reloadToolStripMenuItem";
             this.reloadToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F5;
-            this.reloadToolStripMenuItem.Size = new System.Drawing.Size(240, 22);
+            this.reloadToolStripMenuItem.Size = new System.Drawing.Size(256, 22);
             this.reloadToolStripMenuItem.Text = "&Reload";
             this.reloadToolStripMenuItem.ToolTipText = "Click to reload the files to convert.";
             this.reloadToolStripMenuItem.Click += new System.EventHandler(this.toolStripButtonRefresh_Click);
@@ -168,7 +168,7 @@ namespace SFMConv
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(237, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(253, 6);
             // 
             // processAndSaveDocumentsToolStripMenuItem
             // 
@@ -176,14 +176,14 @@ namespace SFMConv
             this.toolStripMenuItemSaveAsUTF8,
             this.toolStripMenuItemSaveAsLegacy});
             this.processAndSaveDocumentsToolStripMenuItem.Name = "processAndSaveDocumentsToolStripMenuItem";
-            this.processAndSaveDocumentsToolStripMenuItem.Size = new System.Drawing.Size(240, 22);
+            this.processAndSaveDocumentsToolStripMenuItem.Size = new System.Drawing.Size(256, 22);
             this.processAndSaveDocumentsToolStripMenuItem.Text = "&Convert and Save SFM Documents";
             this.processAndSaveDocumentsToolStripMenuItem.ToolTipText = "Click to convert the opened SFM documents and save the results";
             // 
             // toolStripMenuItemSaveAsUTF8
             // 
             this.toolStripMenuItemSaveAsUTF8.Name = "toolStripMenuItemSaveAsUTF8";
-            this.toolStripMenuItemSaveAsUTF8.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMenuItemSaveAsUTF8.Size = new System.Drawing.Size(194, 22);
             this.toolStripMenuItemSaveAsUTF8.Text = "&Unicode (UTF-8)";
             this.toolStripMenuItemSaveAsUTF8.ToolTipText = "Click here to convert the data and save the results in UTF-8 encoded file(s)";
             this.toolStripMenuItemSaveAsUTF8.Click += new System.EventHandler(this.toolStripMenuItemSaveAsUTF8_Click);
@@ -191,21 +191,21 @@ namespace SFMConv
             // toolStripMenuItemSaveAsLegacy
             // 
             this.toolStripMenuItemSaveAsLegacy.Name = "toolStripMenuItemSaveAsLegacy";
-            this.toolStripMenuItemSaveAsLegacy.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMenuItemSaveAsLegacy.Size = new System.Drawing.Size(194, 22);
             this.toolStripMenuItemSaveAsLegacy.Text = "&Non-Unicode (Legacy)";
             this.toolStripMenuItemSaveAsLegacy.ToolTipText = "Click here to convert the data and save the results in Legacy-encoded file(s) (i." +
-                "e. 8-bit characters using the default system code page)";
+    "e. 8-bit characters using the default system code page)";
             this.toolStripMenuItemSaveAsLegacy.Click += new System.EventHandler(this.legacyToolStripMenuItemProcess_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(237, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(253, 6);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(240, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(256, 22);
             this.exitToolStripMenuItem.Text = "&Exit";
             this.exitToolStripMenuItem.ToolTipText = "Click to exit the application";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
@@ -218,13 +218,13 @@ namespace SFMConv
             this.toolStripSeparator5,
             this.hideUnmappedFieldsToolStripMenuItem});
             this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
-            this.viewToolStripMenuItem.Size = new System.Drawing.Size(41, 20);
+            this.viewToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.viewToolStripMenuItem.Text = "&View";
             // 
             // setDefaultExampleDataFontToolStripMenuItem
             // 
             this.setDefaultExampleDataFontToolStripMenuItem.Name = "setDefaultExampleDataFontToolStripMenuItem";
-            this.setDefaultExampleDataFontToolStripMenuItem.Size = new System.Drawing.Size(238, 22);
+            this.setDefaultExampleDataFontToolStripMenuItem.Size = new System.Drawing.Size(251, 22);
             this.setDefaultExampleDataFontToolStripMenuItem.Text = "Set Default \'Example Data\' &Font";
             this.setDefaultExampleDataFontToolStripMenuItem.ToolTipText = "Select the font to use for the Example Data column";
             this.setDefaultExampleDataFontToolStripMenuItem.Click += new System.EventHandler(this.setDefaultExampleDataFontToolStripMenuItem_Click);
@@ -232,7 +232,7 @@ namespace SFMConv
             // setDefaultExampleResultsFontToolStripMenuItem
             // 
             this.setDefaultExampleResultsFontToolStripMenuItem.Name = "setDefaultExampleResultsFontToolStripMenuItem";
-            this.setDefaultExampleResultsFontToolStripMenuItem.Size = new System.Drawing.Size(238, 22);
+            this.setDefaultExampleResultsFontToolStripMenuItem.Size = new System.Drawing.Size(251, 22);
             this.setDefaultExampleResultsFontToolStripMenuItem.Text = "Set Default \'Example Results\' &Font";
             this.setDefaultExampleResultsFontToolStripMenuItem.ToolTipText = "Select the font to use for the Example Results column";
             this.setDefaultExampleResultsFontToolStripMenuItem.Click += new System.EventHandler(this.setDefaultExampleResultsFontToolStripMenuItem_Click);
@@ -240,13 +240,13 @@ namespace SFMConv
             // toolStripSeparator5
             // 
             this.toolStripSeparator5.Name = "toolStripSeparator5";
-            this.toolStripSeparator5.Size = new System.Drawing.Size(235, 6);
+            this.toolStripSeparator5.Size = new System.Drawing.Size(248, 6);
             // 
             // hideUnmappedFieldsToolStripMenuItem
             // 
             this.hideUnmappedFieldsToolStripMenuItem.CheckOnClick = true;
             this.hideUnmappedFieldsToolStripMenuItem.Name = "hideUnmappedFieldsToolStripMenuItem";
-            this.hideUnmappedFieldsToolStripMenuItem.Size = new System.Drawing.Size(238, 22);
+            this.hideUnmappedFieldsToolStripMenuItem.Size = new System.Drawing.Size(251, 22);
             this.hideUnmappedFieldsToolStripMenuItem.Text = "&Hide unmapped fields";
             this.hideUnmappedFieldsToolStripMenuItem.Click += new System.EventHandler(this.hideUnmappedFieldsToolStripMenuItem_Click);
             // 
@@ -260,14 +260,14 @@ namespace SFMConv
             this.recentToolStripMenuItem,
             this.saveToolStripMenuItem});
             this.converterMappingsToolStripMenuItem.Name = "converterMappingsToolStripMenuItem";
-            this.converterMappingsToolStripMenuItem.Size = new System.Drawing.Size(116, 20);
+            this.converterMappingsToolStripMenuItem.Size = new System.Drawing.Size(127, 20);
             this.converterMappingsToolStripMenuItem.Text = "&Converter Mappings";
             this.converterMappingsToolStripMenuItem.DropDownOpening += new System.EventHandler(this.converterMappingsToolStripMenuItem_DropDownOpening);
             // 
             // setDefaultConverterToolStripMenuItem
             // 
             this.setDefaultConverterToolStripMenuItem.Name = "setDefaultConverterToolStripMenuItem";
-            this.setDefaultConverterToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.setDefaultConverterToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
             this.setDefaultConverterToolStripMenuItem.Text = "Set &Default Converter";
             this.setDefaultConverterToolStripMenuItem.ToolTipText = "Select a converter to be applied to all fields that aren\'t currently configured";
             this.setDefaultConverterToolStripMenuItem.Click += new System.EventHandler(this.setDefaultConverterToolStripMenuItem_Click);
@@ -275,12 +275,12 @@ namespace SFMConv
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(177, 6);
+            this.toolStripSeparator4.Size = new System.Drawing.Size(183, 6);
             // 
             // newToolStripMenuItem
             // 
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
             this.newToolStripMenuItem.Text = "&New";
             this.newToolStripMenuItem.ToolTipText = "Click to reset the current mapping of SFM field names to system converters";
             this.newToolStripMenuItem.Click += new System.EventHandler(this.newToolStripMenuItem_Click);
@@ -288,7 +288,7 @@ namespace SFMConv
             // loadToolStripMenuItem
             // 
             this.loadToolStripMenuItem.Name = "loadToolStripMenuItem";
-            this.loadToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.loadToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
             this.loadToolStripMenuItem.Text = "&Load";
             this.loadToolStripMenuItem.ToolTipText = "Click to load a previously saved mapping of SFM field names to system converters";
             this.loadToolStripMenuItem.Click += new System.EventHandler(this.loadToolStripMenuItem_Click);
@@ -296,13 +296,13 @@ namespace SFMConv
             // recentToolStripMenuItem
             // 
             this.recentToolStripMenuItem.Name = "recentToolStripMenuItem";
-            this.recentToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.recentToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
             this.recentToolStripMenuItem.Text = "&Recent";
             // 
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
             this.saveToolStripMenuItem.Text = "&Save";
             this.saveToolStripMenuItem.ToolTipText = "Click to save the current mapping of SFM field names to system converters";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
@@ -313,17 +313,17 @@ namespace SFMConv
             this.singlestepConversionToolStripMenuItem,
             this.doErrorCheckingToolStripMenuItem});
             this.advancedToolStripMenuItem.Name = "advancedToolStripMenuItem";
-            this.advancedToolStripMenuItem.Size = new System.Drawing.Size(67, 20);
+            this.advancedToolStripMenuItem.Size = new System.Drawing.Size(72, 20);
             this.advancedToolStripMenuItem.Text = "&Advanced";
             // 
             // singlestepConversionToolStripMenuItem
             // 
             this.singlestepConversionToolStripMenuItem.CheckOnClick = true;
             this.singlestepConversionToolStripMenuItem.Name = "singlestepConversionToolStripMenuItem";
-            this.singlestepConversionToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
+            this.singlestepConversionToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
             this.singlestepConversionToolStripMenuItem.Text = "&Single-step conversion";
             this.singlestepConversionToolStripMenuItem.ToolTipText = "Check this menu item to cause the conversion to be executed one field of data at " +
-                "a time";
+    "a time";
             this.singlestepConversionToolStripMenuItem.CheckStateChanged += new System.EventHandler(this.singlestepConversionToolStripMenuItem_CheckStateChanged);
             // 
             // doErrorCheckingToolStripMenuItem
@@ -332,7 +332,7 @@ namespace SFMConv
             this.doErrorCheckingToolStripMenuItem.CheckOnClick = true;
             this.doErrorCheckingToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.doErrorCheckingToolStripMenuItem.Name = "doErrorCheckingToolStripMenuItem";
-            this.doErrorCheckingToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
+            this.doErrorCheckingToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
             this.doErrorCheckingToolStripMenuItem.Text = "Do &Error Checking";
             // 
             // consistentSpellingCheckToolStripMenuItem
@@ -370,7 +370,7 @@ namespace SFMConv
             this.dataGridView.AllowUserToAddRows = false;
             this.dataGridView.AllowUserToDeleteRows = false;
             this.dataGridView.AllowUserToResizeRows = false;
-            this.dataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.SFMs,
@@ -397,51 +397,6 @@ namespace SFMConv
             this.dataGridView.TabIndex = 3;
             this.dataGridView.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView_CellMouseClick);
             this.dataGridView.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.dataGridView_KeyPress);
-            // 
-            // SFMs
-            // 
-            this.SFMs.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.SFMs.HeaderText = "SFMs";
-            this.SFMs.Name = "SFMs";
-            this.SFMs.ReadOnly = true;
-            this.SFMs.ToolTipText = "List of the unique SFM fields found in the selected file(s)";
-            this.SFMs.Width = 59;
-            // 
-            // ExampleData
-            // 
-            this.ExampleData.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Arial Unicode MS", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ExampleData.DefaultCellStyle = dataGridViewCellStyle1;
-            this.ExampleData.HeaderText = "Example Data";
-            this.ExampleData.Name = "ExampleData";
-            this.ExampleData.ReadOnly = true;
-            this.ExampleData.ToolTipText = "This column shows sample data for the given SFM fields (click a cell in this colu" +
-                "mn to see the next occurrence)";
-            this.ExampleData.Width = 200;
-            // 
-            // Converter
-            // 
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Converter.DefaultCellStyle = dataGridViewCellStyle2;
-            this.Converter.HeaderText = "Converter";
-            this.Converter.Name = "Converter";
-            this.Converter.ReadOnly = true;
-            this.Converter.ToolTipText = "Click a cell in this column to associate a system converter with the correspondin" +
-                "g SFM field (use right-click to repeat the last converter selected)";
-            this.Converter.Width = 59;
-            // 
-            // ExampleResults
-            // 
-            this.ExampleResults.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Arial Unicode MS", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ExampleResults.DefaultCellStyle = dataGridViewCellStyle3;
-            this.ExampleResults.HeaderText = "Example Results";
-            this.ExampleResults.Name = "ExampleResults";
-            this.ExampleResults.ReadOnly = true;
-            this.ExampleResults.ToolTipText = "This column shows a preview of what the output would look like after the conversi" +
-                "on";
-            this.ExampleResults.Width = 200;
             // 
             // asdgToolStripMenuItem
             // 
@@ -559,7 +514,7 @@ namespace SFMConv
             this.toolStripButtonConvertAndSaveLegacy.Size = new System.Drawing.Size(23, 25);
             this.toolStripButtonConvertAndSaveLegacy.Text = "Save";
             this.toolStripButtonConvertAndSaveLegacy.ToolTipText = "Click here to convert the data and save the results in Legacy-encoded file(s) (i." +
-                "e. 8-bit characters using the default system code page)";
+    "e. 8-bit characters using the default system code page)";
             this.toolStripButtonConvertAndSaveLegacy.Click += new System.EventHandler(this.legacyToolStripMenuItemProcess_Click);
             // 
             // toolStripSeparator6
@@ -583,6 +538,46 @@ namespace SFMConv
             // 
             this.toolStripButton1.Name = "toolStripButton1";
             this.toolStripButton1.Size = new System.Drawing.Size(23, 23);
+            // 
+            // SFMs
+            // 
+            this.SFMs.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.SFMs.HeaderText = "SFMs";
+            this.SFMs.Name = "SFMs";
+            this.SFMs.ReadOnly = true;
+            this.SFMs.ToolTipText = "List of the unique SFM fields found in the selected file(s)";
+            this.SFMs.Width = 59;
+            // 
+            // ExampleData
+            // 
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Arial Unicode MS", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ExampleData.DefaultCellStyle = dataGridViewCellStyle1;
+            this.ExampleData.HeaderText = "Example Data";
+            this.ExampleData.Name = "ExampleData";
+            this.ExampleData.ReadOnly = true;
+            this.ExampleData.ToolTipText = "This column shows sample data for the given SFM fields (click a cell in this colu" +
+    "mn to see the next occurrence)";
+            // 
+            // Converter
+            // 
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Converter.DefaultCellStyle = dataGridViewCellStyle2;
+            this.Converter.HeaderText = "Converter";
+            this.Converter.Name = "Converter";
+            this.Converter.ReadOnly = true;
+            this.Converter.ToolTipText = "Click a cell in this column to associate a system converter with the correspondin" +
+    "g SFM field (use right-click to repeat the last converter selected)";
+            // 
+            // ExampleResults
+            // 
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Arial Unicode MS", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ExampleResults.DefaultCellStyle = dataGridViewCellStyle3;
+            this.ExampleResults.HeaderText = "Example Results";
+            this.ExampleResults.Name = "ExampleResults";
+            this.ExampleResults.ReadOnly = true;
+            this.ExampleResults.ToolTipText = "This column shows a preview of what the output would look like after the conversi" +
+    "on";
             // 
             // SCConvForm
             // 
@@ -643,10 +638,6 @@ namespace SFMConv
         private System.Windows.Forms.FontDialog fontDialog;
         private System.Windows.Forms.ToolStripMenuItem recentToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem setDefaultExampleDataFontToolStripMenuItem;
-        private System.Windows.Forms.DataGridViewTextBoxColumn SFMs;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ExampleData;
-        private System.Windows.Forms.DataGridViewButtonColumn Converter;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ExampleResults;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.ProgressBar progressBarSpellingCheck;
         private System.Windows.Forms.ToolStripMenuItem viewToolStripMenuItem;
@@ -664,6 +655,10 @@ namespace SFMConv
         private System.Windows.Forms.ToolStripButton toolStripButton1;
         private System.Windows.Forms.ToolStripMenuItem reloadToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem doErrorCheckingToolStripMenuItem;
+        private System.Windows.Forms.DataGridViewTextBoxColumn SFMs;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ExampleData;
+        private System.Windows.Forms.DataGridViewButtonColumn Converter;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ExampleResults;
     }
 }
 

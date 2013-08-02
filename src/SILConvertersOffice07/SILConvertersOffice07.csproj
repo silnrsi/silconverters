@@ -49,7 +49,7 @@
     <OutputPath>..\..\output\Release\</OutputPath>
     <DefineConstants>TRACE;BUILD_FOR_OFF12</DefineConstants>
     <Optimize>true</Optimize>
-    <RegisterForComInterop>true</RegisterForComInterop>
+    <RegisterForComInterop>false</RegisterForComInterop>
     <PlatformTarget>x86</PlatformTarget>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
