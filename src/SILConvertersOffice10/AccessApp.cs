@@ -23,7 +23,11 @@ namespace SILConvertersOffice10
 
         public override string GetCustomUI()
         {
-            return Properties.Resources.RibbonAccess;
+#if BUILD_FOR_OFF15
+            return SILConvertersOffice13.Properties.Resources.RibbonAccess;
+#elif BUILD_FOR_OFF14
+            return SILConvertersOffice10.Properties.Resources.RibbonAccess;
+#endif
         }
 
         public void ConvertTableFieldDialog_Click(Office.IRibbonControl control)

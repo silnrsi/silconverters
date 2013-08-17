@@ -20,7 +20,12 @@ namespace SILConvertersOffice
             get { return (Pub.Application)base.Application; }
         }
 
-#if BUILD_FOR_OFF14
+#if BUILD_FOR_OFF15
+        public override string GetCustomUI()
+        {
+            return SILConvertersOffice13.Properties.Resources.RibbonPublisher;
+        }
+#elif BUILD_FOR_OFF14
         public override string GetCustomUI()
         {
             return SILConvertersOffice10.Properties.Resources.RibbonPublisher;
@@ -32,7 +37,7 @@ namespace SILConvertersOffice
         }
 #endif
 
-#if BUILD_FOR_OFF14
+#if BUILD_FOR_OFF14 || BUILD_FOR_OFF15
 #else
         // still using this menuing technique for 2007 (but using the Ribbon for 2010 ff)
         private Office.CommandBarButton WholeDocumentConvertBtn;
@@ -87,14 +92,14 @@ namespace SILConvertersOffice
 
         OfficeDocumentProcessor m_aWordByWordFontProcessor = null;
 
-#if BUILD_FOR_OFF12 || BUILD_FOR_OFF14
+#if BUILD_FOR_OFF12 || BUILD_FOR_OFF14 || BUILD_FOR_OFF15
         public void WholeDocumentConvert_Click(Office.IRibbonControl control)
         {
             WholeDocumentConvert();
         }
 #endif
 
-#if BUILD_FOR_OFF14
+#if BUILD_FOR_OFF14 || BUILD_FOR_OFF15
 #else
         void WholeDocumentConvert_Click(Microsoft.Office.Core.CommandBarButton Ctrl, ref bool CancelDefault)
         {
@@ -139,14 +144,14 @@ namespace SILConvertersOffice
         string m_strLastStoryName = null;   // so we can detect if the user changes stories (in which case, we need to start over)
         OfficeDocumentProcessor m_aThisStoryWordByWordFontProcessor = null;
 
-#if BUILD_FOR_OFF12 || BUILD_FOR_OFF14
+#if BUILD_FOR_OFF12 || BUILD_FOR_OFF14 || BUILD_FOR_OFF15
         public void ThisStoryConvert_Click(Office.IRibbonControl control)
         {
             ThisStoryConvert();
         }
 #endif
 
-#if BUILD_FOR_OFF14
+#if BUILD_FOR_OFF14 || BUILD_FOR_OFF15
 #else
         void ThisStoryConvert_Click(Microsoft.Office.Core.CommandBarButton Ctrl, ref bool CancelDefault)
         {
@@ -203,14 +208,14 @@ namespace SILConvertersOffice
             }
         }
 
-#if BUILD_FOR_OFF12 || BUILD_FOR_OFF14
+#if BUILD_FOR_OFF12 || BUILD_FOR_OFF14 || BUILD_FOR_OFF15
         public void SelectionConvert_Click(Office.IRibbonControl control)
         {
             SelectionConvert();
         }
 #endif
 
-#if BUILD_FOR_OFF14
+#if BUILD_FOR_OFF14 || BUILD_FOR_OFF15
 #else
         void SelectionConvert_Click(Microsoft.Office.Core.CommandBarButton Ctrl, ref bool CancelDefault)
         {
@@ -236,14 +241,14 @@ namespace SILConvertersOffice
             }
         }
 
-#if BUILD_FOR_OFF12 || BUILD_FOR_OFF14
+#if BUILD_FOR_OFF12 || BUILD_FOR_OFF14 || BUILD_FOR_OFF15
         public void Reset_Click(Office.IRibbonControl control)
         {
             Reset();
         }
 #endif
 
-#if BUILD_FOR_OFF14
+#if BUILD_FOR_OFF14 || BUILD_FOR_OFF15
 #else
         void Reset_Click(Microsoft.Office.Core.CommandBarButton Ctrl, ref bool CancelDefault)
         {

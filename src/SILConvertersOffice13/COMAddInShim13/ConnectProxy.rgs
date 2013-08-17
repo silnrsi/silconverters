@@ -1,0 +1,85 @@
+HKCR
+{
+	SILConvertersOffice13.Connect = s 'Connect Class'
+	{
+		CLSID = s '{9fdb0283-1795-4bf4-97e9-84223f3fc8ea}'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove '{9fdb0283-1795-4bf4-97e9-84223f3fc8ea}' = s 'SILConvertersOffice13.Connect'
+		{
+			ProgID = s 'SILConvertersOffice13.Connect'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+			Programmable
+		}
+	}
+}
+
+HKLM
+{
+	NoRemove Software
+	{
+		NoRemove Microsoft
+		{
+			NoRemove Office
+			{
+				NoRemove Access
+				{
+					NoRemove Addins
+					{
+						ForceRemove SILConvertersOffice13.Connect
+						{
+							val 'Description' = s 'Providing access to SILConverters in Office 2013 applications'
+							val 'FriendlyName' = s 'SILConverters for Microsoft Office 2013'
+							val 'LoadBehavior' = d 3
+						}
+					}
+				}
+				NoRemove Excel
+				{
+					NoRemove Addins
+					{
+						ForceRemove SILConvertersOffice13.Connect
+						{
+							val 'Description' = s 'Providing access to SILConverters in Office 2013 applications'
+							val 'FriendlyName' = s 'SILConverters for Microsoft Office 2013'
+							val 'LoadBehavior' = d 3
+						}
+					}
+				}
+				NoRemove Publisher
+				{
+					NoRemove Addins
+					{
+						ForceRemove SILConvertersOffice13.Connect
+						{
+							val 'Description' = s 'Providing access to SILConverters in Office 2013 applications'
+							val 'FriendlyName' = s 'SILConverters for Microsoft Office 2013'
+							val 'LoadBehavior' = d 3
+						}
+					}
+				}
+				NoRemove Word
+				{
+					NoRemove Addins
+					{
+						ForceRemove SILConvertersOffice13.Connect
+						{
+							val 'Description' = s 'Providing access to SILConverters in Office 2013 applications'
+							val 'FriendlyName' = s 'SILConverters for Microsoft Office 2013'
+							val 'LoadBehavior' = d 3
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+
+
+
+

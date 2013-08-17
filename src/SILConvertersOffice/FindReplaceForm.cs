@@ -56,7 +56,11 @@ namespace SILConvertersOffice
                 foreach (string str in Properties.Settings.Default.RecentReplaceWith)
                     comboBoxReplaceWith.Items.Add(str);
 
-#if BUILD_FOR_OFF14
+#if BUILD_FOR_OFF15
+            helpProvider.SetHelpString(this, SILConvertersOffice13.Properties.Resources.FindReplaceFormHelpString);
+            helpProvider.SetHelpString(ecTextBoxFindWhat, SILConvertersOffice13.Properties.Resources.ecTextBoxFindWhatHelpString);
+            helpProvider.SetHelpString(ecTextBoxReplaceWith, SILConvertersOffice13.Properties.Resources.ecTextBoxReplaceWithHelpString);
+#elif BUILD_FOR_OFF14
             helpProvider.SetHelpString(this, SILConvertersOffice10.Properties.Resources.FindReplaceFormHelpString);
             helpProvider.SetHelpString(ecTextBoxFindWhat, SILConvertersOffice10.Properties.Resources.ecTextBoxFindWhatHelpString);
             helpProvider.SetHelpString(ecTextBoxReplaceWith, SILConvertersOffice10.Properties.Resources.ecTextBoxReplaceWithHelpString);

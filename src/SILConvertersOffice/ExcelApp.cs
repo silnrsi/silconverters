@@ -21,7 +21,12 @@ namespace SILConvertersOffice
             get { return (Excel.Application)base.Application; }
         }
 
-#if BUILD_FOR_OFF14
+#if BUILD_FOR_OFF15
+        public override string GetCustomUI()
+        {
+            return SILConvertersOffice13.Properties.Resources.RibbonExcel;
+        }
+#elif BUILD_FOR_OFF14
         public override string GetCustomUI()
         {
             return SILConvertersOffice10.Properties.Resources.RibbonExcel;
@@ -61,7 +66,7 @@ namespace SILConvertersOffice
 #endif
 
         private OfficeDocumentProcessor m_aSelectionProcessor = null;
-#if BUILD_FOR_OFF12 || BUILD_FOR_OFF14
+#if BUILD_FOR_OFF12 || BUILD_FOR_OFF14 || BUILD_FOR_OFF15
         public void ConvertTableField_Click(Office.IRibbonControl control)
 #else
         void ConvertTableField_Click(Microsoft.Office.Core.CommandBarButton Ctrl, ref bool CancelDefault)
@@ -95,7 +100,7 @@ namespace SILConvertersOffice
             }
         }
 
-#if BUILD_FOR_OFF12 || BUILD_FOR_OFF14
+#if BUILD_FOR_OFF12 || BUILD_FOR_OFF14 || BUILD_FOR_OFF15
         public void Reset_Click(Office.IRibbonControl control)
 #else
         void Reset_Click(Microsoft.Office.Core.CommandBarButton Ctrl, ref bool CancelDefault)
