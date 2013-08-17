@@ -1,0 +1,9 @@
+; COMAddInShim13.def : Declares the module parameters.
+
+LIBRARY      "SecOffice_COMAddInShim13.DLL"
+
+EXPORTS
+	DllCanUnloadNow		PRIVATE
+	DllGetClassObject	PRIVATE
+	DllRegisterServer	PRIVATE
+	DllUnregisterServer	PRIVATE

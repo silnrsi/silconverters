@@ -176,7 +176,7 @@ namespace SILConvertersOffice
             }
         }
 
-#if BUILD_FOR_OFF12 || BUILD_FOR_OFF14
+#if BUILD_FOR_OFF12 || BUILD_FOR_OFF14 || BUILD_FOR_OFF15
         public abstract string GetCustomUI();
 #endif
     }
@@ -297,7 +297,7 @@ namespace SILConvertersOffice
 		protected const char chCellBreak = '\u0007';
 		protected const char chInlineGraphics = '\u0001';
 
-#if BUILD_FOR_OFF14
+#if BUILD_FOR_OFF14 || BUILD_FOR_OFF15
         // rde: 2012-12-04: I don't know why this used to include form feed characters, because the D:\temp\PBTPNG\SH OT0001 Legacy.pub
         //  file has form feeds right in the middle of a paragraph (which causes us to *not* convert all subsequent pages that are
         //  part of that same paragraph. So I'm taking out form feed and assuming that it doesn't need to be there

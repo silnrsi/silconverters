@@ -252,9 +252,11 @@
     <None Include="..\SILConvertersOffice\Properties\Settings.settings">
       <Link>Settings.settings</Link>
       <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings1.Designer.cs</LastGenOutput>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <None Include="app.config" />
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="FieldWorks.snk" />
   </ItemGroup>
   <ItemGroup>

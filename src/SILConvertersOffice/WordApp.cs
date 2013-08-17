@@ -61,7 +61,12 @@ namespace SILConvertersOffice
             get { return (Word.Application)base.Application; }
         }
 
-#if BUILD_FOR_OFF14
+#if BUILD_FOR_OFF15
+        public override string GetCustomUI()
+        {
+            return SILConvertersOffice13.Properties.Resources.RibbonWord;
+        }
+#elif BUILD_FOR_OFF14
         public override string GetCustomUI()
         {
             return SILConvertersOffice10.Properties.Resources.RibbonWord;
@@ -192,7 +197,7 @@ namespace SILConvertersOffice
             return false;
         }
 
-#if BUILD_FOR_OFF12 || BUILD_FOR_OFF14
+#if BUILD_FOR_OFF12 || BUILD_FOR_OFF14 || BUILD_FOR_OFF15
         public void SelectionConvert_Click(Office.IRibbonControl control)
 #else
         void SelectionConvert_Click(Microsoft.Office.Core.CommandBarButton Ctrl, ref bool CancelDefault)
@@ -227,7 +232,7 @@ namespace SILConvertersOffice
 
         FindReplaceForm m_formFindReplace = null;
 
-#if BUILD_FOR_OFF12 || BUILD_FOR_OFF14
+#if BUILD_FOR_OFF12 || BUILD_FOR_OFF14 || BUILD_FOR_OFF15
         public void FindReplace_Click(Office.IRibbonControl control)
 #else
         void FindReplace_Click(Microsoft.Office.Core.CommandBarButton Ctrl, ref bool CancelDefault)
@@ -254,7 +259,7 @@ namespace SILConvertersOffice
         }
 
         RoundTripCheckWordProcessor m_aRoundTripCheckWordProcessor = null;
-#if BUILD_FOR_OFF12 || BUILD_FOR_OFF14
+#if BUILD_FOR_OFF12 || BUILD_FOR_OFF14 || BUILD_FOR_OFF15
         public void RoundTripCheck_Click(Office.IRibbonControl control)
 #else
         void RoundTripCheck_Click(Microsoft.Office.Core.CommandBarButton Ctrl, ref bool CancelDefault)
@@ -290,7 +295,7 @@ namespace SILConvertersOffice
             m_aRoundTripCheckWordProcessor = null;
         }
 
-#if BUILD_FOR_OFF12 || BUILD_FOR_OFF14
+#if BUILD_FOR_OFF12 || BUILD_FOR_OFF14 || BUILD_FOR_OFF15
         public void Reset_Click(Office.IRibbonControl control)
 #else
         void Reset_Click(Microsoft.Office.Core.CommandBarButton Ctrl, ref bool CancelDefault)
