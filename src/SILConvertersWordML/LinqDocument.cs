@@ -181,14 +181,68 @@ namespace SILConvertersWordML
         public override bool ConvertDocumentByStylesOnly(Dictionary<string, Font> mapName2Font,
                                                          Func<string, DataIterator, string, Font, bool, bool> convertDoc)
         {
-            throw new NotImplementedException();
+            // mapFontNames2Iterator, has one iterator for each unique font (across all docs). If there's
+            //  only one doc, then it's already loaded. But if there's more than one doc, then we have to treat each 
+            //  one as if by itself (which unfortunately means empty the collection and requery)
+            if (!Program.IsOnlyOneDoc)
+            {
+                MapIteratorList = new MapIteratorListLinq();
+                InitializeIteratorsStyleName();
+            }
+
+            var bModified = false;
+            var map2Iterator = MyMapIteratorList.MapStyleName2Iterator;
+            foreach (var strStyleId in map2Iterator.Keys
+                                                   .Where(sn => Program.m_aForm.IsConverterDefined(sn)))
+            {
+                Debug.Assert(mapName2Font.ContainsKey(strStyleId));
+                var fontTarget = mapName2Font[strStyleId];
+
+                var mapItem = map2Iterator.FirstOrDefault(kvp => kvp.Key == strStyleId);
+                bModified |= convertDoc(strStyleId, mapItem.Value, strStyleId, fontTarget, false);
+
+                // update the font name as well if it changed...
+                if (Styles[strStyleId].FontNames.Contains(fontTarget.Name))
+                    continue;
+
+                ReplaceStyleFontName(mapItem, fontTarget.Name);
+            }
+
+            return bModified;
         }
 
         public override bool ConvertDocumentByFontNameOnly(Dictionary<string, Font> mapName2Font,
                                                            Func<string, DataIterator, string, Font, bool, bool>
                                                                convertDoc)
         {
-            throw new NotImplementedException();
+            // mapFontNames2Iterator, has one iterator for each unique font (across all docs). If there's
+            //  only one doc, then it's already loaded. But if there's more than one doc, then we have to treat each 
+            //  one as if by itself (which unfortunately means empty the collection and requery)
+            if (!Program.IsOnlyOneDoc)
+            {
+                MapIteratorList = new MapIteratorListLinq();
+                InitializeIteratorsCustomFontNames();
+            }
+
+            var bModified = false;
+            var map2Iterator = MyMapIteratorList.MapCustomFontName2Iterator;
+            foreach (var strFontName in map2Iterator.Keys)
+            {
+                Debug.Assert(mapName2Font.ContainsKey(strFontName));
+                var fontTarget = mapName2Font[strFontName];
+
+                var mapItem = map2Iterator.FirstOrDefault(kvp => kvp.Key == strFontName);
+                bModified |= convertDoc(strFontName, mapItem.Value, strFontName, fontTarget, false);
+
+                // update the font name as well if it changed...
+                if (strFontName == fontTarget.Name)
+                    continue;
+
+                ReplaceCustomFontName(mapItem, fontTarget.Name);
+                ReplaceFontElementNames(strFontName, fontTarget.Name);
+            }
+
+            return bModified;
         }
 
         public override void Save(string strXmlOutputFilename)
