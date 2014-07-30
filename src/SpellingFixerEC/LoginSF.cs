@@ -704,7 +704,7 @@ namespace SpellingFixerEC
         {
             get
             {
-                string strMapsTableDir = Util.GetSpecialFolderPath(Environment.SpecialFolder.CommonApplicationData);
+                string strMapsTableDir = Util.CommonAppDataPath();
                 strMapsTableDir += EncConverters.strDefMapsTablesPath;
 
                 if (!Directory.Exists(strMapsTableDir))

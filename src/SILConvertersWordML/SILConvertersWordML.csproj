@@ -61,7 +61,7 @@
   <ItemGroup>
     <Reference Include="ECInterfaces, Version=4.0.0.0, Culture=neutral, PublicKeyToken=f1447bae1e63f485, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\DistFiles\release\ECInterfaces.dll</HintPath>
+      <HintPath>..\..\EC DistFiles\ECInterfaces.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Office.Interop.Word, Version=11.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c">
       <SpecificVersion>False</SpecificVersion>
@@ -69,7 +69,7 @@
     </Reference>
     <Reference Include="SilEncConverters40, Version=4.0.0.0, Culture=neutral, PublicKeyToken=f1447bae1e63f485, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\release\SilEncConverters40.dll</HintPath>
+      <HintPath>..\..\EC DistFiles\SilEncConverters40.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="System" />

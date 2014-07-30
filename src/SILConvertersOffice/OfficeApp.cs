@@ -96,7 +96,7 @@ namespace SILConvertersOffice
         {
             get
             {
-                return Util.GetSpecialFolderPath(Environment.SpecialFolder.CommonApplicationData) + cstrAppFolderExtra;
+                return Util.CommonAppDataPath() + cstrAppFolderExtra;
             }
         }
 

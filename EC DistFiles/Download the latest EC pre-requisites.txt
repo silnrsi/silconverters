@@ -1,0 +1,5 @@
+in order to build SEC, you need to download the contents of the dropbox folder: https://www.dropbox.com/sh/sc41u56qynyeqe5/AACBXtdslNhttY6k70bDuPmza
+
+And put them in this folder (so that, for e.g., SilEncConverters40.dll will be in the same folder as this file).
+
+bob_eaton@sall.com

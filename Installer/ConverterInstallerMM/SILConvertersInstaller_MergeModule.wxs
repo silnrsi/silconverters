@@ -4,16 +4,16 @@
         <Package Id="255aefdd-0db2-405f-a2ea-627e40057f4b" Comments="Merge module for the SILConverters options installer" Description="Program to activate installed (optional) converters" InstallerVersion="200" Keywords="SILConverters; Encoding Conversion; Transliteration; EncConverters" Manufacturer="SIL International" />
 
         <Directory Id="TARGETDIR" Name="SourceDir">
-            <Component Id="MapsTablesPathKey" Guid="{DF4417AB-0C82-4751-AE61-F9EBD37F33B6}">
+            <Component Id="MapsTablesPathKey" Guid="DF4417AB-0C82-4751-AE61-F9EBD37F33B6">
                 <RegistryValue Id="MapsTablesPathKey" Root="HKLM" Key="SOFTWARE\SIL\SilEncConverters40\Installer" Name="MapsTablesPath" Value="[SILConverters40]" Type="string" KeyPath="yes" />
             </Component>
-            <Component Id="InstallerPathKey" Guid="{B5436AEB-2C6A-4D82-AF69-34A92D01D097}">
+            <Component Id="InstallerPathKey" Guid="B5436AEB-2C6A-4D82-AF69-34A92D01D097">
                 <RegistryValue Id="InstallerPathKey" Root="HKLM" Key="SOFTWARE\SIL\SilEncConverters40\Installer" Name="InstallerPath" Value="[#SecOptionsInstaller.exe]" Type="string" KeyPath="yes" />
             </Component>
 
             <Directory Id="MergeRedirectFolder">
 
-                <Component Id="SecOptionsInstaller.exe" Guid="{A3A61D7D-7F33-4254-A448-0840C32FFAB9}">
+                <Component Id="SecOptionsInstaller.exe" Guid="A3A61D7D-7F33-4254-A448-0840C32FFAB9">
                     <File Id="SecOptionsInstaller.exe" Name="SecOptionsInstaller.exe" KeyPath="yes" Assembly=".net" AssemblyManifest="SecOptionsInstaller.exe" AssemblyApplication="SecOptionsInstaller.exe" Source="..\..\output\release\SecOptionsInstaller.exe" />
                     <Shortcut Id="SecOptionsInstaller.exe" Directory="SILConverters" Name="Launch Converter Options Installer (4.0)" Description="Start the Converter Installer to install specific converters (e.g. SIL IPA93&lt;&gt;UNICODE) into the system repository" IconIndex="0" Show="normal" Target="[#SecOptionsInstaller.exe]" WorkingDirectory="MergeRedirectFolder" Advertise="no" />
                 </Component>

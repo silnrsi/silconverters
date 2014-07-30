@@ -54,13 +54,11 @@
                     <MergeRef Id="CRT"/>-->
                 </Feature>
             </Feature>
-            <!--
             <Feature Id="OO_Ling_Tools" Title="Open/LibreOffice Extension" Description="Install this component to use SIL Converters from within OpenOffice or LibreOffice." Level="3" AllowAdvertise="no">
                 <MergeRef Id="OO_Ling_Tools"/>
                 <MergeRef Id="SEC_EC"/>
                 <MergeRef Id="SetPath"/>
             </Feature>
-            -->
             <Feature Id="Bulk_Word_Document_Converter" Title="Bulk Word Document Converter" Description="The Bulk Word document converter allows you to convert one or more Word documents using a converter in the system repository. Requires Word 2003, 2007, 2010, or 2013." Display="expand" Level="4" AllowAdvertise="no">
                 <Condition Level="3"><![CDATA[COMPONENTEXISTS_WORD_03_PIA OR COMPONENTEXISTS_WORD_07_PIA OR COMPONENTEXISTS_WORD_10_PIA OR COMPONENTEXISTS_WORD_13_PIA]]></Condition>
                 <!--<MergeRef Id="Managed_Install_Fix"/>-->
@@ -74,8 +72,8 @@
                 <MergeRef Id="SCOffice03"/>
                 <!--The KB908002 fix is necessary for Office 2003-->
                 <MergeRef Id="MS_KB908002_Fix"/>
-                <!--<MergeRef Id="ICU"/>
                 <MergeRef Id="SEC_ICU"/>
+                <!--<MergeRef Id="ICU"/>
                 <MergeRef Id="ICUECHelp"/>-->
             </Feature>
             <Feature Id="SILConverters_for_Office07" Title="SILConverters for Office 2007" Description="Provides SILConverter support in Publisher, Excel, and Access (as well as a few developer helps in Word). Requires Office 2007." Level="0" AllowAdvertise="no">
@@ -83,8 +81,8 @@
                 <!--<MergeRef Id="Managed_Install_Fix"/>-->
                 <MergeRef Id="SEC_EC"/>
                 <MergeRef Id="SCOffice07"/>
-                <!--<MergeRef Id="ICU"/>
                 <MergeRef Id="SEC_ICU"/>
+                <!--<MergeRef Id="ICU"/>
                 <MergeRef Id="ICUECHelp"/>-->
             </Feature>
             <Feature Id="SILConverters_for_Office10" Title="SILConverters for Office 2010" Description="Provides SILConverter support in Publisher, Excel, and Access (as well as a few developer helps in Word). Requires Office 2010." Level="0" AllowAdvertise="no">
@@ -92,16 +90,16 @@
                 <!--<MergeRef Id="Managed_Install_Fix"/>-->
                 <MergeRef Id="SEC_EC"/>
                 <MergeRef Id="SCOffice10"/>
-                <!--<MergeRef Id="ICU"/>
                 <MergeRef Id="SEC_ICU"/>
+                <!--<MergeRef Id="ICU"/>
                 <MergeRef Id="ICUECHelp"/>-->
             </Feature>
             <Feature Id="SILConverters_for_Office13" Title="SILConverters for Office 2013" Description="Provides SILConverter support in Publisher, Excel, and Access (as well as a few developer helps in Word). Requires Office 2013." Level="0" AllowAdvertise="no">
                 <Condition Level="3"><![CDATA[(COMPONENTEXISTS_WORD_13_PIA) OR (COMPONENTEXISTS_EXCEL_13_PIA) OR (ACCESS_2013_PIA_EXISTS) OR (PUBLISHER_2013_PIA_EXISTS)]]></Condition>
                 <MergeRef Id="SEC_EC"/>
                 <MergeRef Id="SCOffice13"/>
-                <!--<MergeRef Id="ICU"/>
                 <MergeRef Id="SEC_ICU"/>
+                <!--<MergeRef Id="ICU"/>
                 <MergeRef Id="ICUECHelp"/>-->
             </Feature>
             <Feature Id="Adapt_It_to_Unicode_Converter" Title="Adapt It to Unicode Converter" Description="Utility to convert legacy Adapt It projects to Unicode." Display="expand" Level="4" AllowAdvertise="no">
@@ -205,9 +203,9 @@
             <Feature Id="ICUTransliterators" Title="ICU Transliterators" Description="ICU Transliterators to Latin (e.g. &quot;Devanagari to Latin&quot;, &quot;Greek to Latin&quot;, &quot;Hebrew to Latin&quot;, etc)" Display="expand" Level="3" AllowAdvertise="no">
                 <MergeRef Id="ICUTransliterators"/>
                 <MergeRef Id="SetPath"/>
+                <MergeRef Id="SEC_ICU"/>
                 <!--
                 <MergeRef Id="ICU"/>
-                <MergeRef Id="SEC_ICU"/>
                 <MergeRef Id="ICUECHelp"/>
                 -->
             </Feature>
@@ -232,7 +230,7 @@
                 <MergeRef Id="West_Africa"/>
             </Feature>
         </Feature>
-        <Feature Id="TECkit" Title="Additional TECkit applications" Description="Contains the program files for developing and using TECkit map files for encoding conversion and other text processing applications." Level="4" AllowAdvertise="no">
+        <Feature Id="TECkit" Title="Additional TECkit applications" Description="Contains the program files for developing and using TECkit map files for encoding conversion and other text processing applications." Level="3" AllowAdvertise="no">
             <Feature Id="TECkitMapUEditor" Title="TECkit Map Unicode Editor" Description="The TECkit Map Unicode Editor assists in the development of encoding conversion and transliteration TECkit maps." Level="3" AllowAdvertise="no">
                 <!--<MergeRef Id="Managed_Install_Fix"/>-->
                 <MergeRef Id="SEC_EC"/>
