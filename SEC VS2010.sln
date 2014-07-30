@@ -237,6 +237,9 @@ EndProject
 Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "DcmDotMM", "Installer\DcmDotMM\DcmDotMM.wixproj", "{CB992865-C2E0-4D4A-B6A6-E979076913C6}"
 EndProject
 Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "SpellFixerEcMM", "Installer\SpellFixerEcMM\SpellFixerEcMM.wixproj", "{906F2914-563F-4B12-8AC9-54117D29D2B5}"
+	ProjectSection(ProjectDependencies) = postProject
+		{1514880B-9F3C-4BDA-BAFF-0B09DF049EB7} = {1514880B-9F3C-4BDA-BAFF-0B09DF049EB7}
+	EndProjectSection
 EndProject
 Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "ScHelpMM", "Installer\ScHelpMM\ScHelpMM.wixproj", "{E87D3A3C-DB9D-417F-87E5-E43D693AE31F}"
 EndProject
