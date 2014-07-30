@@ -8,11 +8,11 @@
 
                 <Directory Id="SCHelp" Name="Help">
                     <Component Id="HelpforSILConverters.pdf" Guid="055804CE-DBFC-4236-AAB3-52FF1B988714">
-                        <File Id="HelpforSILConverters.pdf" Name="Help for SIL Converters.pdf" KeyPath="yes" Source="..\..\DistFiles\release\Help\Help for SIL Converters.pdf" />
+                        <File Id="HelpforSILConverters.pdf" Name="Help for SIL Converters.pdf" KeyPath="yes" Source="..\..\EC DistFiles\redist\Help\Help for SIL Converters.pdf" />
                         <Shortcut Id="HelpforSILConverters.pdf" Directory="ScHelp" Name="Help for SIL Converters" Description="Help files for SILConverters' client apps and transduction engines" Show="normal" Target="[#HelpforSILConverters.pdf]" WorkingDirectory="SCHelp" Advertise="no" />
                     </Component>
                     <Component Id="SILConvertersInstallationHelp.pdf" Guid="7FD93F39-B1DD-4429-812B-2E54C96F8671">
-                        <File Id="SILConvertersInstallationHelp.pdf" Name="SILConverters Installation Help.pdf" KeyPath="yes" Source="..\..\DistFiles\release\Help\SILConverters Installation Help.pdf" />
+                        <File Id="SILConvertersInstallationHelp.pdf" Name="SILConverters Installation Help.pdf" KeyPath="yes" Source="..\..\EC DistFiles\redist\Help\SILConverters Installation Help.pdf" />
                         <Shortcut Id="SILConvertersInstallationHelp.pdf" Directory="ScHelp" Name="Help for SIL Converters" Description="Help files for SILConverters' client apps and transduction engines" Show="normal" Target="[#SILConvertersInstallationHelp.pdf]" WorkingDirectory="SCHelp" Advertise="no" />
                     </Component>
                 </Directory>

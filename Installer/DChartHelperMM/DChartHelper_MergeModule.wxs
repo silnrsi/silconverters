@@ -22,7 +22,7 @@
 
             <Directory Id="MergeRedirectFolder">
 
-                <Component Id="DChartHelper.exe" Guid="FC11A9E6-7044-48B4-BC13-C93B85BCB092">
+                <Component Id="DChartHelper.exe" Guid="A067E41F-AE5A-4757-9567-0C55E10B50C1">
                     <File Id="DChartHelper.exe" Name="DChartHelper.exe" KeyPath="yes" Assembly=".net" AssemblyManifest="DChartHelper.exe" AssemblyApplication="DChartHelper.exe" Source="..\..\output\release\DChartHelper.exe" />
                     <Shortcut Id="DChartHelper.exe" Directory="SILConverters" Name="Discourse Chart Helper" Description="Prepare discourse analysis charts" IconIndex="0" Show="normal" Target="[#DChartHelper.exe]" WorkingDirectory="MergeRedirectFolder" Advertise="no" />
                 </Component>

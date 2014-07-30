@@ -82,11 +82,11 @@
   <ItemGroup>
     <Reference Include="ECInterfaces, Version=4.0.0.0, Culture=neutral, PublicKeyToken=f1447bae1e63f485, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\DistFiles\release\ECInterfaces.dll</HintPath>
+      <HintPath>..\..\EC DistFiles\ECInterfaces.dll</HintPath>
     </Reference>
     <Reference Include="SilEncConverters40, Version=4.0.0.0, Culture=neutral, PublicKeyToken=f1447bae1e63f485, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\DistFiles\release\SilEncConverters40.dll</HintPath>
+      <HintPath>..\..\EC DistFiles\SilEncConverters40.dll</HintPath>
     </Reference>
     <Reference Include="System">
       <Name>System</Name>

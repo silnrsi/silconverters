@@ -76,11 +76,11 @@
   <ItemGroup>
     <Reference Include="CcEC, Version=4.0.0.0, Culture=neutral, PublicKeyToken=f1447bae1e63f485, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\DistFiles\release\CcEC.dll</HintPath>
+      <HintPath>..\..\EC DistFiles\CcEC.dll</HintPath>
     </Reference>
     <Reference Include="ECInterfaces, Version=4.0.0.0, Culture=neutral, PublicKeyToken=f1447bae1e63f485, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\release\ECInterfaces.dll</HintPath>
+      <HintPath>..\..\EC DistFiles\ECInterfaces.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="SilEncConverters40, Version=4.0.0.0, Culture=neutral, PublicKeyToken=f1447bae1e63f485, processorArchitecture=x86" />

@@ -10,7 +10,7 @@
                     <Class Id="{0F218E35-EA40-4D56-9FFF-322094B4F412}" Context="InprocServer32" Description="SilEncConverters40.TechHindiSiteEncConverter" ThreadingModel="both" ForeignServer="mscoree.dll">
                         <ProgId Id="SilEncConverters40.TechHindiSiteEncConverter" Description="SilEncConverters40.TechHindiSiteEncConverter" />
                     </Class>
-                    <File Id="SilIndicEncConverters40.dll" Name="SilIndicEncConverters40.dll" KeyPath="yes" Source="..\..\..\DistFiles\release\SilIndicEncConverters40.dll" />
+                    <File Id="SilIndicEncConverters40.dll" Name="SilIndicEncConverters40.dll" KeyPath="yes" Source="..\..\..\EC DistFiles\SilIndicEncConverters40.dll" />
                     <RegistryValue Root="HKCR" Key="CLSID\{0F218E35-EA40-4D56-9FFF-322094B4F412}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
                     <RegistryValue Root="HKCR" Key="CLSID\{0F218E35-EA40-4D56-9FFF-322094B4F412}\InprocServer32\4.0.0.0" Name="Class" Value="SilEncConverters40.TechHindiSiteEncConverter" Type="string" Action="write" />
                     <RegistryValue Root="HKCR" Key="CLSID\{0F218E35-EA40-4D56-9FFF-322094B4F412}\InprocServer32\4.0.0.0" Name="Assembly" Value="SilIndicEncConverters40, Version=4.0.0.0, Culture=neutral, PublicKeyToken=f1447bae1e63f485" Type="string" Action="write" />
@@ -21,20 +21,11 @@
                     <RegistryValue Root="HKCR" Key="CLSID\{0F218E35-EA40-4D56-9FFF-322094B4F412}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
                     <RegistryValue Root="HKCR" Key="CLSID\{0F218E35-EA40-4D56-9FFF-322094B4F412}\InprocServer32" Name="CodeBase" Value="file:///[#SilIndicEncConverters40.dll]" Type="string" Action="write" />
                 </Component>
-                <Component Id="SilIndicEncConverters40.tlb" Guid="2A6C0802-E2A5-45B1-8F0D-1804B296AC04">
-                    <File Id="SilIndicEncConverters40.tlb" Name="SilIndicEncConverters40.tlb" KeyPath="yes" Source="..\..\..\DistFiles\release\SilIndicEncConverters40.tlb">
-                        <TypeLib Id="{E511146A-A9AC-4707-B192-51B64FDBF24D}" Description="Indic Encoding Converters" HelpDirectory="MergeRedirectFolder" Language="0" MajorVersion="4" MinorVersion="0">
-                            <Interface Id="{A5160502-E027-32E7-AF94-84558042A83D}" Name="_ElementPicker" ProxyStubClassId32="{00020424-0000-0000-C000-000000000046}" />
-                            <Interface Id="{E04CA2E9-E03F-3FBB-8394-41B7506535AE}" Name="_TechHindiSiteAutoConfigDialog" ProxyStubClassId32="{00020424-0000-0000-C000-000000000046}" />
-                            <Interface Id="{EC10E554-E696-3A08-8989-945C0A3E449C}" Name="_TechHindiSiteEncConverter" ProxyStubClassId32="{00020424-0000-0000-C000-000000000046}" />
-                        </TypeLib>
-                    </File>
-                </Component>
 
                 <Directory Id="ECFolder" Name="EC">
                     <Directory Id="PluginsFolder" Name="Plugins">
                         <Component Id="SIEC_4.0.0.0_Plugin_Details.xml" Guid="304b6f60-e5f2-43c6-a655-f33367e3fe4d">
-                            <File Id="SIEC_4.0.0.0_Plugin_Details.xml" Name="SIEC 4.0.0.0 Plugin Details.xml" KeyPath="yes" Source="..\..\..\DistFiles\release\EC\Plugins\SIEC 4.0.0.0 Plugin Details.xml"/>
+                            <File Id="SIEC_4.0.0.0_Plugin_Details.xml" Name="SIEC 4.0.0.0 Plugin Details.xml" KeyPath="yes" Source="..\..\..\EC DistFiles\redist\EC\Plugins\SIEC 4.0.0.0 Plugin Details.xml"/>
                         </Component>
                     </Directory>
                 </Directory>
@@ -161,7 +152,7 @@
                 <Directory Id="SIL" Name="SIL">
                     <Directory Id="Help" Name="Help">
                         <Component Id="HelpFile" Guid="1b50c017-4738-4e07-8db1-3e30a9e6d12e">
-                            <File Id="HelpFile" Name="Technical Hindi (Google group) Html Converter Plug-in About box.mht" KeyPath="yes" Source="..\..\..\DistFiles\release\Help\Technical Hindi (Google group) Html Converter Plug-in About box.mht" />
+                            <File Id="HelpFile" Name="Technical Hindi (Google group) Html Converter Plug-in About box.mht" KeyPath="yes" Source="..\..\..\EC DistFiles\redist\Help\Technical Hindi (Google group) Html Converter Plug-in About box.mht" />
                             <Shortcut Id="HelpFile" Directory="UsersSilConvertersHelpMenu" Name="Help for Technical Hindi (Google group) Html Converter Plug-in" IconIndex="0" Show="normal" Target="[#HelpFile]" Advertise="no" />
                         </Component>
                     </Directory>

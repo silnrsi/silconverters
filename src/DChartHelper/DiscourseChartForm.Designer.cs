@@ -109,6 +109,7 @@ namespace DChartHelper
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.menuStripFile.SuspendLayout();
             this.tableLayoutPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
             this.splitContainer.Panel1.SuspendLayout();
             this.splitContainer.Panel2.SuspendLayout();
             this.splitContainer.SuspendLayout();
@@ -128,7 +129,7 @@ namespace DChartHelper
             this.helpToolStripMenuItem});
             this.menuStripFile.Location = new System.Drawing.Point(0, 0);
             this.menuStripFile.Name = "menuStripFile";
-            this.menuStripFile.Size = new System.Drawing.Size(767, 24);
+            this.menuStripFile.Size = new System.Drawing.Size(958, 24);
             this.menuStripFile.TabIndex = 0;
             this.menuStripFile.Text = "menuStrip1";
             // 
@@ -146,7 +147,7 @@ namespace DChartHelper
             this.toolStripSeparator1,
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(35, 20);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "&File";
             this.fileToolStripMenuItem.DropDownOpening += new System.EventHandler(this.fileToolStripMenuItem_DropDownOpening);
             // 
@@ -155,27 +156,27 @@ namespace DChartHelper
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
             this.openToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+O";
             this.openToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
             this.openToolStripMenuItem.Text = "&Open";
             this.openToolStripMenuItem.ToolTipText = "Open a text-based document and display it line-by-line in the bottom-most window " +
-                "(e.g. for SFM documents) for adding the words to chart squares";
+    "(e.g. for SFM documents) for adding the words to chart squares";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
             // recentFileToolStripMenuItem
             // 
             this.recentFileToolStripMenuItem.Name = "recentFileToolStripMenuItem";
-            this.recentFileToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
+            this.recentFileToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
             this.recentFileToolStripMenuItem.Text = "&Recent Files";
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(161, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(165, 6);
             // 
             // newToolStripMenuItem
             // 
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
             this.newToolStripMenuItem.Text = "&New chart";
             this.newToolStripMenuItem.ToolTipText = "Start a new chart";
             this.newToolStripMenuItem.Click += new System.EventHandler(this.newToolStripMenuItem_Click);
@@ -184,7 +185,7 @@ namespace DChartHelper
             // 
             this.openSavedGridToolStripMenuItem.Name = "openSavedGridToolStripMenuItem";
             this.openSavedGridToolStripMenuItem.ShortcutKeyDisplayString = "";
-            this.openSavedGridToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
+            this.openSavedGridToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
             this.openSavedGridToolStripMenuItem.Text = "Open sa&ved chart";
             this.openSavedGridToolStripMenuItem.ToolTipText = "Load a previously saved chart";
             this.openSavedGridToolStripMenuItem.Click += new System.EventHandler(this.openSavedGridToolStripMenuItem_Click);
@@ -192,7 +193,7 @@ namespace DChartHelper
             // recentChartsToolStripMenuItem
             // 
             this.recentChartsToolStripMenuItem.Name = "recentChartsToolStripMenuItem";
-            this.recentChartsToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
+            this.recentChartsToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
             this.recentChartsToolStripMenuItem.Text = "Recent &Charts";
             // 
             // saveToolStripMenuItem
@@ -200,7 +201,7 @@ namespace DChartHelper
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
             this.saveToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+S";
             this.saveToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
             this.saveToolStripMenuItem.Text = "&Save chart";
             this.saveToolStripMenuItem.ToolTipText = "Save the current chart";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
@@ -208,7 +209,7 @@ namespace DChartHelper
             // saveChartAsToolStripMenuItem
             // 
             this.saveChartAsToolStripMenuItem.Name = "saveChartAsToolStripMenuItem";
-            this.saveChartAsToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
+            this.saveChartAsToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
             this.saveChartAsToolStripMenuItem.Text = "Save chart &As";
             this.saveChartAsToolStripMenuItem.ToolTipText = "Save the current chart with a new name";
             this.saveChartAsToolStripMenuItem.Click += new System.EventHandler(this.saveChartAsToolStripMenuItem_Click);
@@ -216,13 +217,13 @@ namespace DChartHelper
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(161, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(165, 6);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
             this.exitToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.F4)));
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
             this.exitToolStripMenuItem.Text = "&Exit";
             this.exitToolStripMenuItem.ToolTipText = "Click to exit the application";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
@@ -238,7 +239,7 @@ namespace DChartHelper
             this.toolStripSeparator6,
             this.reglossToolStripMenuItem});
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(39, 20);
             this.editToolStripMenuItem.Text = "&Edit";
             // 
             // findToolStripMenuItem
@@ -246,7 +247,7 @@ namespace DChartHelper
             this.findToolStripMenuItem.Name = "findToolStripMenuItem";
             this.findToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+F";
             this.findToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F)));
-            this.findToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
+            this.findToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
             this.findToolStripMenuItem.Text = "&Find";
             this.findToolStripMenuItem.ToolTipText = "Search for a particular string in the chart";
             this.findToolStripMenuItem.Click += new System.EventHandler(this.findToolStripMenuItem_Click);
@@ -256,7 +257,7 @@ namespace DChartHelper
             this.findNextToolStripMenuItem.Name = "findNextToolStripMenuItem";
             this.findNextToolStripMenuItem.ShortcutKeyDisplayString = "F3";
             this.findNextToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F3;
-            this.findNextToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
+            this.findNextToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
             this.findNextToolStripMenuItem.Text = "Find &Next";
             this.findNextToolStripMenuItem.ToolTipText = "Find the next occurrence";
             this.findNextToolStripMenuItem.Click += new System.EventHandler(this.findNextToolStripMenuItem_Click);
@@ -264,13 +265,13 @@ namespace DChartHelper
             // toolStripSeparator5
             // 
             this.toolStripSeparator5.Name = "toolStripSeparator5";
-            this.toolStripSeparator5.Size = new System.Drawing.Size(166, 6);
+            this.toolStripSeparator5.Size = new System.Drawing.Size(171, 6);
             // 
             // editCellToolStripMenuItem
             // 
             this.editCellToolStripMenuItem.Name = "editCellToolStripMenuItem";
             this.editCellToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F2;
-            this.editCellToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
+            this.editCellToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
             this.editCellToolStripMenuItem.Text = "&Edit Cell";
             this.editCellToolStripMenuItem.Click += new System.EventHandler(this.editCellToolStripMenuItem_Click);
             // 
@@ -278,7 +279,7 @@ namespace DChartHelper
             // 
             this.copyToolStripMenuItem.Name = "copyToolStripMenuItem";
             this.copyToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.C)));
-            this.copyToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
+            this.copyToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
             this.copyToolStripMenuItem.Text = "&Copy";
             this.copyToolStripMenuItem.ToolTipText = "HTML copy of the selected rows of the chart";
             this.copyToolStripMenuItem.Click += new System.EventHandler(this.copyToolStripMenuItem_Click);
@@ -286,15 +287,15 @@ namespace DChartHelper
             // toolStripSeparator6
             // 
             this.toolStripSeparator6.Name = "toolStripSeparator6";
-            this.toolStripSeparator6.Size = new System.Drawing.Size(166, 6);
+            this.toolStripSeparator6.Size = new System.Drawing.Size(171, 6);
             // 
             // reglossToolStripMenuItem
             // 
             this.reglossToolStripMenuItem.Name = "reglossToolStripMenuItem";
-            this.reglossToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
+            this.reglossToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
             this.reglossToolStripMenuItem.Text = "&Re-gloss entire text";
             this.reglossToolStripMenuItem.ToolTipText = "Click here to re-gloss the entire text (if you just want to requery the glosses f" +
-                "or a single row, then click on its row header in the lower grid)";
+    "or a single row, then click on its row header in the lower grid)";
             this.reglossToolStripMenuItem.Click += new System.EventHandler(this.reglossToolStripMenuItem_Click);
             // 
             // viewToolStripMenuItem
@@ -308,7 +309,7 @@ namespace DChartHelper
             this.toolStripSeparator4,
             this.defineFontToolStripMenuItem});
             this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
-            this.viewToolStripMenuItem.Size = new System.Drawing.Size(41, 20);
+            this.viewToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.viewToolStripMenuItem.Text = "&View";
             // 
             // adjustAllColumnWidthsToFitToolStripMenuItem
@@ -317,7 +318,7 @@ namespace DChartHelper
             this.adjustAllColumnWidthsToFitToolStripMenuItem.CheckOnClick = true;
             this.adjustAllColumnWidthsToFitToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.adjustAllColumnWidthsToFitToolStripMenuItem.Name = "adjustAllColumnWidthsToFitToolStripMenuItem";
-            this.adjustAllColumnWidthsToFitToolStripMenuItem.Size = new System.Drawing.Size(214, 22);
+            this.adjustAllColumnWidthsToFitToolStripMenuItem.Size = new System.Drawing.Size(233, 22);
             this.adjustAllColumnWidthsToFitToolStripMenuItem.Text = "A&djust all column widths to fit";
             this.adjustAllColumnWidthsToFitToolStripMenuItem.Click += new System.EventHandler(this.adjustAllColumnWidthsToFitToolStripMenuItem_Click);
             // 
@@ -325,13 +326,13 @@ namespace DChartHelper
             // 
             this.lockChartToolStripMenuItem.CheckOnClick = true;
             this.lockChartToolStripMenuItem.Name = "lockChartToolStripMenuItem";
-            this.lockChartToolStripMenuItem.Size = new System.Drawing.Size(214, 22);
+            this.lockChartToolStripMenuItem.Size = new System.Drawing.Size(233, 22);
             this.lockChartToolStripMenuItem.Text = "&Lock Chart";
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(211, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(230, 6);
             // 
             // transliterationToolStripMenuItem
             // 
@@ -339,26 +340,26 @@ namespace DChartHelper
             this.showTransToolStripMenuItem,
             this.chooseTransSILConverterToolStripMenuItem});
             this.transliterationToolStripMenuItem.Name = "transliterationToolStripMenuItem";
-            this.transliterationToolStripMenuItem.Size = new System.Drawing.Size(214, 22);
+            this.transliterationToolStripMenuItem.Size = new System.Drawing.Size(233, 22);
             this.transliterationToolStripMenuItem.Text = "&Transliteration";
             // 
             // showTransToolStripMenuItem
             // 
             this.showTransToolStripMenuItem.CheckOnClick = true;
             this.showTransToolStripMenuItem.Name = "showTransToolStripMenuItem";
-            this.showTransToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
+            this.showTransToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
             this.showTransToolStripMenuItem.Text = "&Show";
             this.showTransToolStripMenuItem.ToolTipText = "Check this menu item to show the Latin transliteration of the words in the select" +
-                "ed rows of the chart in a table below";
+    "ed rows of the chart in a table below";
             this.showTransToolStripMenuItem.CheckStateChanged += new System.EventHandler(this.showTransToolStripMenuItem_CheckStateChanged);
             // 
             // chooseTransSILConverterToolStripMenuItem
             // 
             this.chooseTransSILConverterToolStripMenuItem.Name = "chooseTransSILConverterToolStripMenuItem";
-            this.chooseTransSILConverterToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
+            this.chooseTransSILConverterToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
             this.chooseTransSILConverterToolStripMenuItem.Text = "&Choose SILConverter";
             this.chooseTransSILConverterToolStripMenuItem.ToolTipText = "Click this menu item to select the SILConverter to be used for transliteration (e" +
-                ".g. other than the default \"Any to Latin\")";
+    ".g. other than the default \"Any to Latin\")";
             this.chooseTransSILConverterToolStripMenuItem.Click += new System.EventHandler(this.chooseTransSILConverterToolStripMenuItem_Click);
             // 
             // glossingToolStripMenuItem
@@ -367,32 +368,32 @@ namespace DChartHelper
             this.showToolStripMenuItem,
             this.chooseSILConverterToolStripMenuItem});
             this.glossingToolStripMenuItem.Name = "glossingToolStripMenuItem";
-            this.glossingToolStripMenuItem.Size = new System.Drawing.Size(214, 22);
+            this.glossingToolStripMenuItem.Size = new System.Drawing.Size(233, 22);
             this.glossingToolStripMenuItem.Text = "&Glossing";
             // 
             // showToolStripMenuItem
             // 
             this.showToolStripMenuItem.CheckOnClick = true;
             this.showToolStripMenuItem.Name = "showToolStripMenuItem";
-            this.showToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
+            this.showToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
             this.showToolStripMenuItem.Text = "&Show";
             this.showToolStripMenuItem.ToolTipText = "Check this menu item to show the Gloss lookup of the words in the selected rows o" +
-                "f the chart in the chart below";
+    "f the chart in the chart below";
             this.showToolStripMenuItem.CheckStateChanged += new System.EventHandler(this.showToolStripMenuItem_CheckStateChanged);
             // 
             // chooseSILConverterToolStripMenuItem
             // 
             this.chooseSILConverterToolStripMenuItem.Name = "chooseSILConverterToolStripMenuItem";
-            this.chooseSILConverterToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
+            this.chooseSILConverterToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
             this.chooseSILConverterToolStripMenuItem.Text = "&Choose SILConverter";
             this.chooseSILConverterToolStripMenuItem.ToolTipText = "Click this menu item to select the SILConverter to be used for glossing lookup (e" +
-                ".g. AdaptIt Lookup Converter)";
+    ".g. AdaptIt Lookup Converter)";
             this.chooseSILConverterToolStripMenuItem.Click += new System.EventHandler(this.chooseSILConverterToolStripMenuItem_Click);
             // 
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(211, 6);
+            this.toolStripSeparator4.Size = new System.Drawing.Size(230, 6);
             // 
             // defineFontToolStripMenuItem
             // 
@@ -401,13 +402,13 @@ namespace DChartHelper
             this.transliterationToolStripMenuItem1,
             this.glossingToolStripMenuItem1});
             this.defineFontToolStripMenuItem.Name = "defineFontToolStripMenuItem";
-            this.defineFontToolStripMenuItem.Size = new System.Drawing.Size(214, 22);
+            this.defineFontToolStripMenuItem.Size = new System.Drawing.Size(233, 22);
             this.defineFontToolStripMenuItem.Text = "&Define Fonts";
             // 
             // vernacularToolStripMenuItem
             // 
             this.vernacularToolStripMenuItem.Name = "vernacularToolStripMenuItem";
-            this.vernacularToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.vernacularToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
             this.vernacularToolStripMenuItem.Text = "&Vernacular";
             this.vernacularToolStripMenuItem.ToolTipText = "Click here to define the font/color, etc, for the text in the chart";
             this.vernacularToolStripMenuItem.Click += new System.EventHandler(this.vernacularToolStripMenuItem_Click);
@@ -415,19 +416,19 @@ namespace DChartHelper
             // transliterationToolStripMenuItem1
             // 
             this.transliterationToolStripMenuItem1.Name = "transliterationToolStripMenuItem1";
-            this.transliterationToolStripMenuItem1.Size = new System.Drawing.Size(143, 22);
+            this.transliterationToolStripMenuItem1.Size = new System.Drawing.Size(150, 22);
             this.transliterationToolStripMenuItem1.Text = "&Transliteration";
             this.transliterationToolStripMenuItem1.ToolTipText = "Click here to define the font/color, etc, for the transliteration text in the low" +
-                "er chart";
+    "er chart";
             this.transliterationToolStripMenuItem1.Click += new System.EventHandler(this.transliterationToolStripMenuItem1_Click);
             // 
             // glossingToolStripMenuItem1
             // 
             this.glossingToolStripMenuItem1.Name = "glossingToolStripMenuItem1";
-            this.glossingToolStripMenuItem1.Size = new System.Drawing.Size(143, 22);
+            this.glossingToolStripMenuItem1.Size = new System.Drawing.Size(150, 22);
             this.glossingToolStripMenuItem1.Text = "&Glossing";
             this.glossingToolStripMenuItem1.ToolTipText = "Click here to define the font/color, etc, for the glossing text in the lower char" +
-                "t";
+    "t";
             this.glossingToolStripMenuItem1.Click += new System.EventHandler(this.glossingToolStripMenuItem1_Click);
             // 
             // nextWordToolStripMenuItem
@@ -435,7 +436,7 @@ namespace DChartHelper
             this.nextWordToolStripMenuItem.Name = "nextWordToolStripMenuItem";
             this.nextWordToolStripMenuItem.ShortcutKeyDisplayString = "";
             this.nextWordToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-            this.nextWordToolStripMenuItem.Size = new System.Drawing.Size(107, 20);
+            this.nextWordToolStripMenuItem.Size = new System.Drawing.Size(113, 20);
             this.nextWordToolStripMenuItem.Text = "&Skip to next word!";
             this.nextWordToolStripMenuItem.ToolTipText = "Click here to delete the next word the work-space (bottom-most) window";
             this.nextWordToolStripMenuItem.Click += new System.EventHandler(this.nextWordToolStripMenuItem_Click);
@@ -445,7 +446,7 @@ namespace DChartHelper
             this.skipToNextLineToolStripMenuItem.Name = "skipToNextLineToolStripMenuItem";
             this.skipToNextLineToolStripMenuItem.ShortcutKeyDisplayString = "";
             this.skipToNextLineToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Down)));
-            this.skipToNextLineToolStripMenuItem.Size = new System.Drawing.Size(102, 20);
+            this.skipToNextLineToolStripMenuItem.Size = new System.Drawing.Size(108, 20);
             this.skipToNextLineToolStripMenuItem.Text = "Skip to next &Line!";
             this.skipToNextLineToolStripMenuItem.ToolTipText = "Click here to delete the current line in the work-space (bottom-most) window";
             this.skipToNextLineToolStripMenuItem.Click += new System.EventHandler(this.skipToNextLineToolStripMenuItem_Click);
@@ -463,22 +464,22 @@ namespace DChartHelper
             this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.openReadmeToolStripMenuItem});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(40, 20);
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.helpToolStripMenuItem.Text = "&Help";
             // 
             // openReadmeToolStripMenuItem
             // 
             this.openReadmeToolStripMenuItem.Name = "openReadmeToolStripMenuItem";
-            this.openReadmeToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
+            this.openReadmeToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
             this.openReadmeToolStripMenuItem.Text = "&Open Readme";
             this.openReadmeToolStripMenuItem.ToolTipText = "You can also click on an object and press F1 for context sensitive help";
             this.openReadmeToolStripMenuItem.Click += new System.EventHandler(this.openReadmeToolStripMenuItem_Click);
             // 
             // tableLayoutPanel
             // 
-            this.tableLayoutPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableLayoutPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel.ColumnCount = 3;
             this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
@@ -496,7 +497,7 @@ namespace DChartHelper
             this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel.Size = new System.Drawing.Size(767, 301);
+            this.tableLayoutPanel.Size = new System.Drawing.Size(958, 430);
             this.tableLayoutPanel.TabIndex = 1;
             // 
             // richTextBoxText
@@ -506,18 +507,18 @@ namespace DChartHelper
             this.richTextBoxText.Dock = System.Windows.Forms.DockStyle.Fill;
             this.richTextBoxText.Font = new System.Drawing.Font("Arial Unicode MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.helpProvider.SetHelpString(this.richTextBoxText, "");
-            this.richTextBoxText.Location = new System.Drawing.Point(74, 258);
+            this.richTextBoxText.Location = new System.Drawing.Point(74, 387);
             this.richTextBoxText.Name = "richTextBoxText";
             this.richTextBoxText.ReadOnly = true;
             this.tableLayoutPanel.SetRowSpan(this.richTextBoxText, 2);
             this.richTextBoxText.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
             this.helpProvider.SetShowHelp(this.richTextBoxText, true);
-            this.richTextBoxText.Size = new System.Drawing.Size(668, 40);
+            this.richTextBoxText.Size = new System.Drawing.Size(859, 40);
             this.richTextBoxText.TabIndex = 1;
             this.richTextBoxText.Text = "Right click here to paste text from the clipboard (or use File, Open to load a te" +
-                "xt file)";
+    "xt file)";
             this.toolTip.SetToolTip(this.richTextBoxText, "Right click on this box to paste text from the clipboard. Left click to delete th" +
-                    "e next word");
+        "e next word");
             this.richTextBoxText.WordWrap = false;
             // 
             // contextMenuStrip
@@ -529,7 +530,7 @@ namespace DChartHelper
             // buttonPrevParagraph
             // 
             this.buttonPrevParagraph.Image = ((System.Drawing.Image)(resources.GetObject("buttonPrevParagraph.Image")));
-            this.buttonPrevParagraph.Location = new System.Drawing.Point(745, 255);
+            this.buttonPrevParagraph.Location = new System.Drawing.Point(936, 384);
             this.buttonPrevParagraph.Margin = new System.Windows.Forms.Padding(0);
             this.buttonPrevParagraph.Name = "buttonPrevParagraph";
             this.buttonPrevParagraph.Size = new System.Drawing.Size(22, 23);
@@ -540,7 +541,7 @@ namespace DChartHelper
             // buttonNextParagraph
             // 
             this.buttonNextParagraph.Image = ((System.Drawing.Image)(resources.GetObject("buttonNextParagraph.Image")));
-            this.buttonNextParagraph.Location = new System.Drawing.Point(745, 278);
+            this.buttonNextParagraph.Location = new System.Drawing.Point(936, 407);
             this.buttonNextParagraph.Margin = new System.Windows.Forms.Padding(0);
             this.buttonNextParagraph.Name = "buttonNextParagraph";
             this.buttonNextParagraph.Size = new System.Drawing.Size(22, 23);
@@ -564,7 +565,7 @@ namespace DChartHelper
             // splitContainer.Panel2
             // 
             this.splitContainer.Panel2.Controls.Add(this.dataGridViewGloss);
-            this.splitContainer.Size = new System.Drawing.Size(761, 249);
+            this.splitContainer.Size = new System.Drawing.Size(952, 378);
             this.splitContainer.SplitterDistance = 146;
             this.splitContainer.TabIndex = 5;
             // 
@@ -616,15 +617,15 @@ namespace DChartHelper
             dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
             dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dataGridViewChart.RowsDefaultCellStyle = dataGridViewCellStyle4;
-            this.dataGridViewChart.Size = new System.Drawing.Size(761, 146);
+            this.dataGridViewChart.Size = new System.Drawing.Size(952, 146);
             this.dataGridViewChart.TabIndex = 0;
             this.toolTip.SetToolTip(this.dataGridViewChart, "Press F1 for help");
             this.dataGridViewChart.CellMouseUp += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridViewChart_CellMouseUp);
-            this.dataGridViewChart.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.dataGridViewChart_PreviewKeyDown);
             this.dataGridViewChart.ColumnDisplayIndexChanged += new System.Windows.Forms.DataGridViewColumnEventHandler(this.dataGridViewChart_ColumnDisplayIndexChanged);
-            this.dataGridViewChart.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.dataGridViewChart_RowsAdded);
             this.dataGridViewChart.RowHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridViewChart_RowHeaderMouseClick);
+            this.dataGridViewChart.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.dataGridViewChart_RowsAdded);
             this.dataGridViewChart.RowStateChanged += new System.Windows.Forms.DataGridViewRowStateChangedEventHandler(this.dataGridViewChart_RowStateChanged);
+            this.dataGridViewChart.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.dataGridViewChart_PreviewKeyDown);
             // 
             // Ref
             // 
@@ -719,7 +720,7 @@ namespace DChartHelper
             dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
             dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dataGridViewGloss.RowsDefaultCellStyle = dataGridViewCellStyle8;
-            this.dataGridViewGloss.Size = new System.Drawing.Size(761, 99);
+            this.dataGridViewGloss.Size = new System.Drawing.Size(952, 228);
             this.dataGridViewGloss.TabIndex = 4;
             this.toolTip.SetToolTip(this.dataGridViewGloss, "Press F1 for help");
             this.dataGridViewGloss.CellMouseUp += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridViewGloss_CellMouseUp);
@@ -774,7 +775,7 @@ namespace DChartHelper
             // 
             this.label1.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(3, 265);
+            this.label1.Location = new System.Drawing.Point(3, 394);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(65, 13);
             this.label1.TabIndex = 6;
@@ -805,7 +806,7 @@ namespace DChartHelper
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(767, 329);
+            this.ClientSize = new System.Drawing.Size(958, 458);
             this.Controls.Add(this.tableLayoutPanel);
             this.Controls.Add(this.menuStripFile);
             this.HelpButton = true;
@@ -821,6 +822,7 @@ namespace DChartHelper
             this.tableLayoutPanel.PerformLayout();
             this.splitContainer.Panel1.ResumeLayout(false);
             this.splitContainer.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).EndInit();
             this.splitContainer.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewChart)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewGloss)).EndInit();
