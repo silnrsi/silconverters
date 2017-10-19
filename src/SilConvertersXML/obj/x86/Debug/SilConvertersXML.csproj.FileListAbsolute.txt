@@ -1,0 +1,12 @@
+C:\Users\BEaton\Documents\GitHub\SilConverters\output\Debug\SilConvertersXML.exe.config
+C:\Users\BEaton\Documents\GitHub\SilConverters\output\Debug\SilConvertersXML.exe
+C:\Users\BEaton\Documents\GitHub\SilConverters\output\Debug\SilConvertersXML.pdb
+C:\Users\BEaton\Documents\GitHub\SilConverters\src\SilConvertersXML\obj\x86\Debug\SilConvertersXML.csprojResolveAssemblyReference.cache
+C:\Users\BEaton\Documents\GitHub\SilConverters\src\SilConvertersXML\obj\x86\Debug\SilConvertersXML.CreateLimitationForm.resources
+C:\Users\BEaton\Documents\GitHub\SilConverters\src\SilConvertersXML\obj\x86\Debug\SilConvertersXML.XPathFilterForm.resources
+C:\Users\BEaton\Documents\GitHub\SilConverters\src\SilConvertersXML\obj\x86\Debug\SilConvertersXML.Properties.Resources.resources
+C:\Users\BEaton\Documents\GitHub\SilConverters\src\SilConvertersXML\obj\x86\Debug\SilConvertersXML.QueryFixedValueForm.resources
+C:\Users\BEaton\Documents\GitHub\SilConverters\src\SilConvertersXML\obj\x86\Debug\SilConvertersXML.XMLViewForm.resources
+C:\Users\BEaton\Documents\GitHub\SilConverters\src\SilConvertersXML\obj\x86\Debug\SilConvertersXML.csproj.GenerateResource.Cache
+C:\Users\BEaton\Documents\GitHub\SilConverters\src\SilConvertersXML\obj\x86\Debug\SilConvertersXML.exe
+C:\Users\BEaton\Documents\GitHub\SilConverters\src\SilConvertersXML\obj\x86\Debug\SilConvertersXML.pdb

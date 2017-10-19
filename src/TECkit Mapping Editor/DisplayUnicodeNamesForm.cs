@@ -379,7 +379,7 @@ namespace TECkit_Mapping_Editor
             // initialize it with the space padded character and then get the preferred size
             //  (pad with a space on the left to correctly display 'zero forward offset' glyphs
             //  and on the right, so it's centered and looks nicer).
-            btnZoom.Text = String.Format("{0}", aCell.Value.ToString());
+            btnZoom.Text = String.Format("  {0}  ", aCell.Value.ToString());
             Size sz = btnZoom.GetPreferredSize(btnZoom.Size);
             btnZoom.Size = new Size(sz.Width, sz.Height);
             ZoomButtonParent.ResumeLayout();

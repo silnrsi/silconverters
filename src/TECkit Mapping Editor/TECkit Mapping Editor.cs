@@ -34,7 +34,7 @@ namespace TECkit_Mapping_Editor
         string m_strTecNameReal = null, m_strTecNameTemp;
         string m_strMapNameReal = null, m_strMapNameTemp;
         Encoding m_enc;
-        IEncConverter m_aEC = null;
+        internal IEncConverter m_aEC = null;
         private ConvType m_eConvType = ConvType.Legacy_to_from_Unicode;
         internal DisplayUnicodeNamesForm m_formDisplayUnicodeNamesLhs = null;
         internal DisplayUnicodeNamesForm m_formDisplayUnicodeNamesRhs = null;
@@ -998,12 +998,22 @@ namespace TECkit_Mapping_Editor
 
         protected bool CompileRealMap()
         {
-            string strTecName = m_strTecNameReal;
-            TECkitDllWrapper.CompileMap(m_strMapNameReal, ref strTecName);
-            if (strTecName != m_strTecNameReal)
+            try
             {
-                MessageBox.Show(String.Format("oops... the output tec file '{0}' is locked. Close and re-open the program and try again.", m_strTecNameReal), cstrCaption);
-                return false;
+                string strTecName = m_strTecNameReal;
+                TECkitDllWrapper.CompileMap(m_strMapNameReal, ref strTecName);
+                if (strTecName != m_strTecNameReal)
+                {
+                    MessageBox.Show(String.Format("oops... the output tec file '{0}' is locked. Close and re-open the program and try again.", m_strTecNameReal), cstrCaption);
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                textBoxCompilerResults.Text = ex.Message;
+
+                // clear the converter so we don't accidentally call it while we don't have a good map
+                m_aEC = null;
             }
 
             return true;

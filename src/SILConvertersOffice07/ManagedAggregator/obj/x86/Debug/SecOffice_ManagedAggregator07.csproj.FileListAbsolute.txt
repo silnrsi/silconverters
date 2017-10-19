@@ -1,0 +1,4 @@
+C:\Users\BEaton\Documents\GitHub\SilConverters\output\Debug\SecOffice_ManagedAggregator07.dll
+C:\Users\BEaton\Documents\GitHub\SilConverters\output\Debug\SecOffice_ManagedAggregator07.pdb
+C:\Users\BEaton\Documents\GitHub\SilConverters\src\SILConvertersOffice07\ManagedAggregator\obj\x86\Debug\SecOffice_ManagedAggregator07.dll
+C:\Users\BEaton\Documents\GitHub\SilConverters\src\SILConvertersOffice07\ManagedAggregator\obj\x86\Debug\SecOffice_ManagedAggregator07.pdb

@@ -1,0 +1,9 @@
+C:\Users\BEaton\Documents\GitHub\SilConverters\output\Debug\SFMConv.exe.config
+C:\Users\BEaton\Documents\GitHub\SilConverters\output\Debug\SFMConv.exe
+C:\Users\BEaton\Documents\GitHub\SilConverters\output\Debug\SFMConv.pdb
+C:\Users\BEaton\Documents\GitHub\SilConverters\src\BulkSFMConverter\obj\x86\Debug\SFMConv.BaseConverterForm.resources
+C:\Users\BEaton\Documents\GitHub\SilConverters\src\BulkSFMConverter\obj\x86\Debug\SFMConv.SCConvForm.resources
+C:\Users\BEaton\Documents\GitHub\SilConverters\src\BulkSFMConverter\obj\x86\Debug\SFMConv.Properties.Resources.resources
+C:\Users\BEaton\Documents\GitHub\SilConverters\src\BulkSFMConverter\obj\x86\Debug\SFMConv.csproj.GenerateResource.Cache
+C:\Users\BEaton\Documents\GitHub\SilConverters\src\BulkSFMConverter\obj\x86\Debug\SFMConv.exe
+C:\Users\BEaton\Documents\GitHub\SilConverters\src\BulkSFMConverter\obj\x86\Debug\SFMConv.pdb

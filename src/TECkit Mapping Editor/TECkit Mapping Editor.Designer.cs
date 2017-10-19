@@ -744,7 +744,7 @@ namespace TECkit_Mapping_Editor
         #endregion
 
         private System.Windows.Forms.SplitContainer splitContainer1;
-        private System.Windows.Forms.TextBox textBoxCompilerResults;
+        internal System.Windows.Forms.TextBox textBoxCompilerResults;
         internal System.Windows.Forms.RichTextBox richTextBoxMapEditor;
         private System.Windows.Forms.MenuStrip menuStrip;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;

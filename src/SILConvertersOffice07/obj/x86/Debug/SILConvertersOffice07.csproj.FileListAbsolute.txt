@@ -1,0 +1,15 @@
+C:\Users\BEaton\Documents\GitHub\SilConverters\output\Debug\SILConvertersOffice07.dll.config
+C:\Users\BEaton\Documents\GitHub\SilConverters\output\Debug\SILConvertersOffice07.dll
+C:\Users\BEaton\Documents\GitHub\SilConverters\output\Debug\SILConvertersOffice07.pdb
+C:\Users\BEaton\Documents\GitHub\SilConverters\output\Debug\SILConvertersOffice07.tlb
+C:\Users\BEaton\Documents\GitHub\SilConverters\src\SILConvertersOffice07\obj\x86\Debug\SILConvertersOffice07.csprojResolveAssemblyReference.cache
+C:\Users\BEaton\Documents\GitHub\SilConverters\src\SILConvertersOffice07\obj\x86\Debug\SILConvertersOffice.BaseConverterForm.resources
+C:\Users\BEaton\Documents\GitHub\SilConverters\src\SILConvertersOffice07\obj\x86\Debug\SILConvertersOffice.DbFieldSelect.resources
+C:\Users\BEaton\Documents\GitHub\SilConverters\src\SILConvertersOffice07\obj\x86\Debug\SILConvertersOffice.FindReplaceForm.resources
+C:\Users\BEaton\Documents\GitHub\SilConverters\src\SILConvertersOffice07\obj\x86\Debug\SILConvertersOffice.FontConvertersPicker.resources
+C:\Users\BEaton\Documents\GitHub\SilConverters\src\SILConvertersOffice07\obj\x86\Debug\SILConvertersOffice07.RoundTripProcessorForm.resources
+C:\Users\BEaton\Documents\GitHub\SilConverters\src\SILConvertersOffice07\obj\x86\Debug\SILConvertersOffice07.SILConverterProcessorForm.resources
+C:\Users\BEaton\Documents\GitHub\SilConverters\src\SILConvertersOffice07\obj\x86\Debug\SILConvertersOffice07.Properties.Resources.resources
+C:\Users\BEaton\Documents\GitHub\SilConverters\src\SILConvertersOffice07\obj\x86\Debug\SILConvertersOffice07.csproj.GenerateResource.Cache
+C:\Users\BEaton\Documents\GitHub\SilConverters\src\SILConvertersOffice07\obj\x86\Debug\SILConvertersOffice07.dll
+C:\Users\BEaton\Documents\GitHub\SilConverters\src\SILConvertersOffice07\obj\x86\Debug\SILConvertersOffice07.pdb

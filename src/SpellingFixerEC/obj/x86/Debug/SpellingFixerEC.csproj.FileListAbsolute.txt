@@ -1,0 +1,10 @@
+C:\Users\BEaton\Documents\GitHub\SilConverters\output\Debug\SpellingFixerEC.dll
+C:\Users\BEaton\Documents\GitHub\SilConverters\output\Debug\SpellingFixerEC.pdb
+C:\Users\BEaton\Documents\GitHub\SilConverters\src\SpellingFixerEC\obj\x86\Debug\SpellingFixerEC.csprojResolveAssemblyReference.cache
+C:\Users\BEaton\Documents\GitHub\SilConverters\src\SpellingFixerEC\obj\x86\Debug\SpellingFixerEC.LoginSF.resources
+C:\Users\BEaton\Documents\GitHub\SilConverters\src\SpellingFixerEC\obj\x86\Debug\SpellingFixerEC.Properties.Resources.resources
+C:\Users\BEaton\Documents\GitHub\SilConverters\src\SpellingFixerEC\obj\x86\Debug\SpellingFixerEC.QueryGoodSpelling.resources
+C:\Users\BEaton\Documents\GitHub\SilConverters\src\SpellingFixerEC\obj\x86\Debug\SpellingFixerEC.ViewBadGoodPairsDlg.resources
+C:\Users\BEaton\Documents\GitHub\SilConverters\src\SpellingFixerEC\obj\x86\Debug\SpellingFixerEC.csproj.GenerateResource.Cache
+C:\Users\BEaton\Documents\GitHub\SilConverters\src\SpellingFixerEC\obj\x86\Debug\SpellingFixerEC.dll
+C:\Users\BEaton\Documents\GitHub\SilConverters\src\SpellingFixerEC\obj\x86\Debug\SpellingFixerEC.pdb

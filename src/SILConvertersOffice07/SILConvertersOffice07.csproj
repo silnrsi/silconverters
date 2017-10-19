@@ -171,6 +171,9 @@
     </Compile>
     <Compile Include="..\SILConvertersOffice\Properties\Settings.Designer.cs">
       <Link>Settings.Designer.cs</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="..\SILConvertersOffice\PubApp.cs">
       <Link>PubApp.cs</Link>
