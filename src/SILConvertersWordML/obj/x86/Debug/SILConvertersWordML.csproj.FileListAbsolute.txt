@@ -10,3 +10,15 @@ C:\Users\BEaton\Documents\GitHub\SilConverters\src\SILConvertersWordML\obj\x86\D
 C:\Users\BEaton\Documents\GitHub\SilConverters\src\SILConvertersWordML\obj\x86\Debug\SILConvertersWordML.csproj.GenerateResource.Cache
 C:\Users\BEaton\Documents\GitHub\SilConverters\src\SILConvertersWordML\obj\x86\Debug\SILConvertersWordML.exe
 C:\Users\BEaton\Documents\GitHub\SilConverters\src\SILConvertersWordML\obj\x86\Debug\SILConvertersWordML.pdb
+C:\Repositories\SilConverters\output\Debug\SILConvertersWordML.exe.config
+C:\Repositories\SilConverters\output\Debug\SILConvertersWordML.exe
+C:\Repositories\SilConverters\output\Debug\SILConvertersWordML.pdb
+C:\Repositories\SilConverters\src\SILConvertersWordML\obj\x86\Debug\SILConvertersWordML.csprojResolveAssemblyReference.cache
+C:\Repositories\SilConverters\src\SILConvertersWordML\obj\x86\Debug\SILConvertersWordML.AutoSearchOptions.resources
+C:\Repositories\SilConverters\src\SILConvertersWordML\obj\x86\Debug\SILConvertersWordML.BaseConverterForm.resources
+C:\Repositories\SilConverters\src\SILConvertersWordML\obj\x86\Debug\SILConvertersWordML.FilesToOpenListDlg.resources
+C:\Repositories\SilConverters\src\SILConvertersWordML\obj\x86\Debug\SILConvertersWordML.FontsStylesForm.resources
+C:\Repositories\SilConverters\src\SILConvertersWordML\obj\x86\Debug\SILConvertersWordML.Properties.Resources.resources
+C:\Repositories\SilConverters\src\SILConvertersWordML\obj\x86\Debug\SILConvertersWordML.csproj.GenerateResource.Cache
+C:\Repositories\SilConverters\src\SILConvertersWordML\obj\x86\Debug\SILConvertersWordML.exe
+C:\Repositories\SilConverters\src\SILConvertersWordML\obj\x86\Debug\SILConvertersWordML.pdb

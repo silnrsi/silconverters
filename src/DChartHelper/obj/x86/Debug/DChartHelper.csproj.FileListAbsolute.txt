@@ -11,3 +11,16 @@ C:\Users\BEaton\Documents\GitHub\SilConverters\src\DChartHelper\obj\x86\Debug\DC
 C:\Users\BEaton\Documents\GitHub\SilConverters\src\DChartHelper\obj\x86\Debug\DChartHelper.csproj.GenerateResource.Cache
 C:\Users\BEaton\Documents\GitHub\SilConverters\src\DChartHelper\obj\x86\Debug\DChartHelper.exe
 C:\Users\BEaton\Documents\GitHub\SilConverters\src\DChartHelper\obj\x86\Debug\DChartHelper.pdb
+C:\Repositories\SilConverters\output\Debug\DChartHelper.exe.config
+C:\Repositories\SilConverters\output\Debug\DChartHelper.exe
+C:\Repositories\SilConverters\output\Debug\DChartHelper.pdb
+C:\Repositories\SilConverters\src\DChartHelper\obj\x86\Debug\DChartHelper.csprojResolveAssemblyReference.cache
+C:\Repositories\SilConverters\src\DChartHelper\obj\x86\Debug\DChartHelper.AddKBEntry.resources
+C:\Repositories\SilConverters\src\DChartHelper\obj\x86\Debug\DChartHelper.DiscourseChartForm.resources
+C:\Repositories\SilConverters\src\DChartHelper\obj\x86\Debug\DChartHelper.FindWhatDialog.resources
+C:\Repositories\SilConverters\src\DChartHelper\obj\x86\Debug\DChartHelper.PickAmbiguity.resources
+C:\Repositories\SilConverters\src\DChartHelper\obj\x86\Debug\DChartHelper.Properties.Resources.resources
+C:\Repositories\SilConverters\src\DChartHelper\obj\x86\Debug\DChartHelper.QueryFreeTr.resources
+C:\Repositories\SilConverters\src\DChartHelper\obj\x86\Debug\DChartHelper.csproj.GenerateResource.Cache
+C:\Repositories\SilConverters\src\DChartHelper\obj\x86\Debug\DChartHelper.exe
+C:\Repositories\SilConverters\src\DChartHelper\obj\x86\Debug\DChartHelper.pdb

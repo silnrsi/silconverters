@@ -1,0 +1,6 @@
+# output folders
+output/
+# Visual Studio user settings
+.vs/**
+# intermediate object folders
+**/obj/

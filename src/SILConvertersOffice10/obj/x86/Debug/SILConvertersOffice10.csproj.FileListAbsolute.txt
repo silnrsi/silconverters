@@ -12,3 +12,17 @@ C:\Users\BEaton\Documents\GitHub\SilConverters\src\SILConvertersOffice10\obj\x86
 C:\Users\BEaton\Documents\GitHub\SilConverters\src\SILConvertersOffice10\obj\x86\Debug\SILConvertersOffice10.csproj.GenerateResource.Cache
 C:\Users\BEaton\Documents\GitHub\SilConverters\src\SILConvertersOffice10\obj\x86\Debug\SILConvertersOffice10.dll
 C:\Users\BEaton\Documents\GitHub\SilConverters\src\SILConvertersOffice10\obj\x86\Debug\SILConvertersOffice10.pdb
+C:\Repositories\SilConverters\src\SILConvertersOffice10\obj\x86\Debug\SILConvertersOffice10.csprojResolveAssemblyReference.cache
+C:\Repositories\SilConverters\src\SILConvertersOffice10\obj\x86\Debug\SILConvertersOffice.BaseConverterForm.resources
+C:\Repositories\SilConverters\src\SILConvertersOffice10\obj\x86\Debug\SILConvertersOffice.FindReplaceForm.resources
+C:\Repositories\SilConverters\src\SILConvertersOffice10\obj\x86\Debug\SILConvertersOffice.FontConvertersPicker.resources
+C:\Repositories\SilConverters\src\SILConvertersOffice10\obj\x86\Debug\SILConvertersOffice10.RoundTripProcessorForm.resources
+C:\Repositories\SilConverters\src\SILConvertersOffice10\obj\x86\Debug\SILConvertersOffice10.SILConverterProcessorForm.resources
+C:\Repositories\SilConverters\src\SILConvertersOffice10\obj\x86\Debug\SILConvertersOffice10.DbFieldSelect.resources
+C:\Repositories\SilConverters\src\SILConvertersOffice10\obj\x86\Debug\SILConvertersOffice10.Properties.Resources.resources
+C:\Repositories\SilConverters\src\SILConvertersOffice10\obj\x86\Debug\SILConvertersOffice10.csproj.GenerateResource.Cache
+C:\Repositories\SilConverters\src\SILConvertersOffice10\obj\x86\Debug\SILConvertersOffice10.csproj.ResolveComReference.cache
+C:\Repositories\SilConverters\src\SILConvertersOffice10\obj\x86\Debug\Interop.Microsoft.Office.Interop.Publisher.dll
+C:\Repositories\SilConverters\src\SILConvertersOffice10\obj\x86\Debug\Interop.ADOX.dll
+C:\Repositories\SilConverters\src\SILConvertersOffice10\obj\x86\Debug\Interop.Office2013CustomActionsLib.dll
+C:\Repositories\SilConverters\src\SILConvertersOffice10\obj\x86\Debug\Interop.UCAddinLib.dll

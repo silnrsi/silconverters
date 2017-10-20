@@ -1,9 +1,9 @@
-﻿// Created by Microsoft (R) C/C++ Compiler Version 14.00.23918.0 (41dea62d).
+﻿// Created by Microsoft (R) C/C++ Compiler Version 14.00.24215.1 (c8886a1a).
 //
-// c:\users\beaton\documents\github\silconverters\src\silconvertersoffice\comaddinshim03\debug\mscorlib.tlh
+// c:\repositories\silconverters\src\silconvertersoffice\comaddinshim03\debug\mscorlib.tlh
 //
 // C++ source equivalent of Win32 type library mscorlib.tlb
-// compiler-generated file created 04/22/17 at 16:42:35 - DO NOT EDIT!
+// compiler-generated file created 10/20/17 at 16:13:51 - DO NOT EDIT!
 
 #pragma once
 #pragma pack(push, 8)

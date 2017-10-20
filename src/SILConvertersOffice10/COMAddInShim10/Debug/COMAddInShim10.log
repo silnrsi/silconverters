@@ -34,5 +34,6 @@
   CLRLoader.cpp
   Generating Code...
   COMAddInShim10_i.c
-     Creating library C:\Users\BEaton\Documents\GitHub\SilConverters\output\Debug\/SecOffice_COMAddInShim10.lib and object C:\Users\BEaton\Documents\GitHub\SilConverters\output\Debug\/SecOffice_COMAddInShim10.exp
-  COMAddInShim10.vcxproj -> C:\Users\BEaton\Documents\GitHub\SilConverters\output\Debug\SecOffice_COMAddInShim10.dll
+     Creating library C:\Repositories\SilConverters\output\Debug\/SecOffice_COMAddInShim10.lib and object C:\Repositories\SilConverters\output\Debug\/SecOffice_COMAddInShim10.exp
+  COMAddInShim10.vcxproj -> C:\Repositories\SilConverters\output\Debug\SecOffice_COMAddInShim10.dll
+  COMAddInShim10.vcxproj -> C:\Repositories\SilConverters\output\Debug\SecOffice_COMAddInShim10.pdb (Full PDB)

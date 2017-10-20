@@ -8,3 +8,13 @@ C:\Users\BEaton\Documents\GitHub\SilConverters\src\SILConvertersInstaller\obj\x8
 C:\Users\BEaton\Documents\GitHub\SilConverters\src\SILConvertersInstaller\obj\x86\Debug\SILConvertersInstaller.vbproj.GenerateResource.Cache
 C:\Users\BEaton\Documents\GitHub\SilConverters\src\SILConvertersInstaller\obj\x86\Debug\SecOptionsInstaller.exe
 C:\Users\BEaton\Documents\GitHub\SilConverters\src\SILConvertersInstaller\obj\x86\Debug\SecOptionsInstaller.pdb
+C:\Repositories\SilConverters\output\Debug\SecOptionsInstaller.exe.config
+C:\Repositories\SilConverters\output\Debug\SecOptionsInstaller.exe
+C:\Repositories\SilConverters\output\Debug\SecOptionsInstaller.pdb
+C:\Repositories\SilConverters\src\SILConvertersInstaller\obj\x86\Debug\SILConvertersInstaller.vbprojResolveAssemblyReference.cache
+C:\Repositories\SilConverters\src\SILConvertersInstaller\obj\x86\Debug\SILConvertersInstaller.AppFileListDlg.resources
+C:\Repositories\SilConverters\src\SILConvertersInstaller\obj\x86\Debug\SILConvertersInstaller.InstallOptionsDlg.resources
+C:\Repositories\SilConverters\src\SILConvertersInstaller\obj\x86\Debug\SILConvertersInstaller.Resources.resources
+C:\Repositories\SilConverters\src\SILConvertersInstaller\obj\x86\Debug\SILConvertersInstaller.vbproj.GenerateResource.Cache
+C:\Repositories\SilConverters\src\SILConvertersInstaller\obj\x86\Debug\SecOptionsInstaller.exe
+C:\Repositories\SilConverters\src\SILConvertersInstaller\obj\x86\Debug\SecOptionsInstaller.pdb

@@ -1,17 +1,51 @@
-﻿  ConnectProxy.cpp
-c:\users\beaton\documents\github\silconverters\src\silconvertersoffice07\comaddinshim07\connectproxy.h(23): error C2440: 'static_cast': cannot convert from 'CConnectProxy::_ComMapClass *' to 'AddInDesignerObjects::IDTExtensibility2 *'
-  c:\users\beaton\documents\github\silconverters\src\silconvertersoffice07\comaddinshim07\connectproxy.h(23): note: Types pointed to are unrelated; conversion requires reinterpret_cast, C-style cast or function-style cast
-c:\users\beaton\documents\github\silconverters\src\silconvertersoffice07\comaddinshim07\connectproxy.h(26): error C2440: 'initializing': cannot convert from 'ATL::_ATL_CREATORARGFUNC (__stdcall *)' to 'DWORD_PTR'
-  c:\users\beaton\documents\github\silconverters\src\silconvertersoffice07\comaddinshim07\connectproxy.h(26): note: There is no context in which this conversion is possible
-c:\users\beaton\documents\github\silconverters\src\silconvertersoffice07\comaddinshim07\connectproxy.cpp(73): error C2227: left of '->OnConnection' must point to class/struct/union/generic type
-  c:\users\beaton\documents\github\silconverters\src\silconvertersoffice07\comaddinshim07\connectproxy.cpp(73): note: type is 'AddInDesignerObjects::IDTExtensibility2 *'
-c:\users\beaton\documents\github\silconverters\src\silconvertersoffice07\comaddinshim07\connectproxy.cpp(79): error C2227: left of '->OnAddInsUpdate' must point to class/struct/union/generic type
-  c:\users\beaton\documents\github\silconverters\src\silconvertersoffice07\comaddinshim07\connectproxy.cpp(79): note: type is 'AddInDesignerObjects::IDTExtensibility2 *'
-c:\users\beaton\documents\github\silconverters\src\silconvertersoffice07\comaddinshim07\connectproxy.cpp(84): error C2227: left of '->OnStartupComplete' must point to class/struct/union/generic type
-  c:\users\beaton\documents\github\silconverters\src\silconvertersoffice07\comaddinshim07\connectproxy.cpp(84): note: type is 'AddInDesignerObjects::IDTExtensibility2 *'
-c:\users\beaton\documents\github\silconverters\src\silconvertersoffice07\comaddinshim07\connectproxy.cpp(96): error C2227: left of '->OnBeginShutdown' must point to class/struct/union/generic type
-  c:\users\beaton\documents\github\silconverters\src\silconvertersoffice07\comaddinshim07\connectproxy.cpp(96): note: type is 'AddInDesignerObjects::IDTExtensibility2 *'
-c:\users\beaton\documents\github\silconverters\src\silconvertersoffice07\comaddinshim07\connectproxy.cpp(112): error C2227: left of '->OnDisconnection' must point to class/struct/union/generic type
-  c:\users\beaton\documents\github\silconverters\src\silconvertersoffice07\comaddinshim07\connectproxy.cpp(112): note: type is 'AddInDesignerObjects::IDTExtensibility2 *'
-c:\users\beaton\documents\github\silconverters\src\silconvertersoffice07\comaddinshim07\connectproxy.cpp(115): error C2227: left of '->Release' must point to class/struct/union/generic type
-  c:\users\beaton\documents\github\silconverters\src\silconvertersoffice07\comaddinshim07\connectproxy.cpp(115): note: type is 'AddInDesignerObjects::IDTExtensibility2 *'
+﻿  Processing .\COMAddInShim07.idl
+  COMAddInShim07.idl
+  Processing C:\Program Files (x86)\Windows Kits\8.1\Include\um\oaidl.idl
+  oaidl.idl
+  Processing C:\Program Files (x86)\Windows Kits\8.1\Include\um\objidl.idl
+  objidl.idl
+  Processing C:\Program Files (x86)\Windows Kits\8.1\Include\um\unknwn.idl
+  unknwn.idl
+  Processing C:\Program Files (x86)\Windows Kits\8.1\Include\shared\wtypes.idl
+  wtypes.idl
+  Processing C:\Program Files (x86)\Windows Kits\8.1\Include\shared\wtypesbase.idl
+  wtypesbase.idl
+  Processing C:\Program Files (x86)\Windows Kits\8.1\Include\shared\basetsd.h
+  basetsd.h
+  Processing C:\Program Files (x86)\Windows Kits\8.1\Include\shared\guiddef.h
+  guiddef.h
+  Processing C:\Program Files (x86)\Windows Kits\8.1\Include\um\ocidl.idl
+  ocidl.idl
+  Processing C:\Program Files (x86)\Windows Kits\8.1\Include\um\oleidl.idl
+  oleidl.idl
+  Processing C:\Program Files (x86)\Windows Kits\8.1\Include\um\servprov.idl
+  servprov.idl
+  Processing C:\Program Files (x86)\Windows Kits\8.1\Include\um\urlmon.idl
+  urlmon.idl
+  Processing C:\Program Files (x86)\Windows Kits\8.1\Include\um\msxml.idl
+  msxml.idl
+  Processing C:\Program Files (x86)\Windows Kits\8.1\Include\um\oaidl.acf
+  oaidl.acf
+  Processing C:\Program Files (x86)\Windows Kits\8.1\Include\um\ocidl.acf
+  ocidl.acf
+  stdafx.cpp
+  ConnectProxy.cpp
+c:\repositories\silconverters\src\silconvertersoffice07\comaddinshim07\connectproxy.h(23): error C2440: 'static_cast': cannot convert from 'CConnectProxy::_ComMapClass *' to 'AddInDesignerObjects::IDTExtensibility2 *'
+  c:\repositories\silconverters\src\silconvertersoffice07\comaddinshim07\connectproxy.h(23): note: Types pointed to are unrelated; conversion requires reinterpret_cast, C-style cast or function-style cast
+c:\repositories\silconverters\src\silconvertersoffice07\comaddinshim07\connectproxy.h(26): error C2440: 'initializing': cannot convert from 'ATL::_ATL_CREATORARGFUNC (__stdcall *)' to 'DWORD_PTR'
+  c:\repositories\silconverters\src\silconvertersoffice07\comaddinshim07\connectproxy.h(26): note: There is no context in which this conversion is possible
+c:\repositories\silconverters\src\silconvertersoffice07\comaddinshim07\connectproxy.cpp(73): error C2227: left of '->OnConnection' must point to class/struct/union/generic type
+  c:\repositories\silconverters\src\silconvertersoffice07\comaddinshim07\connectproxy.cpp(73): note: type is 'AddInDesignerObjects::IDTExtensibility2 *'
+c:\repositories\silconverters\src\silconvertersoffice07\comaddinshim07\connectproxy.cpp(79): error C2227: left of '->OnAddInsUpdate' must point to class/struct/union/generic type
+  c:\repositories\silconverters\src\silconvertersoffice07\comaddinshim07\connectproxy.cpp(79): note: type is 'AddInDesignerObjects::IDTExtensibility2 *'
+c:\repositories\silconverters\src\silconvertersoffice07\comaddinshim07\connectproxy.cpp(84): error C2227: left of '->OnStartupComplete' must point to class/struct/union/generic type
+  c:\repositories\silconverters\src\silconvertersoffice07\comaddinshim07\connectproxy.cpp(84): note: type is 'AddInDesignerObjects::IDTExtensibility2 *'
+c:\repositories\silconverters\src\silconvertersoffice07\comaddinshim07\connectproxy.cpp(96): error C2227: left of '->OnBeginShutdown' must point to class/struct/union/generic type
+  c:\repositories\silconverters\src\silconvertersoffice07\comaddinshim07\connectproxy.cpp(96): note: type is 'AddInDesignerObjects::IDTExtensibility2 *'
+c:\repositories\silconverters\src\silconvertersoffice07\comaddinshim07\connectproxy.cpp(112): error C2227: left of '->OnDisconnection' must point to class/struct/union/generic type
+  c:\repositories\silconverters\src\silconvertersoffice07\comaddinshim07\connectproxy.cpp(112): note: type is 'AddInDesignerObjects::IDTExtensibility2 *'
+c:\repositories\silconverters\src\silconvertersoffice07\comaddinshim07\connectproxy.cpp(115): error C2227: left of '->Release' must point to class/struct/union/generic type
+  c:\repositories\silconverters\src\silconvertersoffice07\comaddinshim07\connectproxy.cpp(115): note: type is 'AddInDesignerObjects::IDTExtensibility2 *'
+  COMAddInShim07.cpp
+  CLRLoader.cpp
+  Generating Code...

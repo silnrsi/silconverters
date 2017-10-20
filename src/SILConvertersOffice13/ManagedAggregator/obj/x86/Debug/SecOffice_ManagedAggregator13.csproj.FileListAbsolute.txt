@@ -2,3 +2,7 @@ C:\Users\BEaton\Documents\GitHub\SilConverters\output\Debug\SecOffice_ManagedAgg
 C:\Users\BEaton\Documents\GitHub\SilConverters\output\Debug\SecOffice_ManagedAggregator13.pdb
 C:\Users\BEaton\Documents\GitHub\SilConverters\src\SILConvertersOffice13\ManagedAggregator\obj\x86\Debug\SecOffice_ManagedAggregator13.dll
 C:\Users\BEaton\Documents\GitHub\SilConverters\src\SILConvertersOffice13\ManagedAggregator\obj\x86\Debug\SecOffice_ManagedAggregator13.pdb
+C:\Repositories\SilConverters\output\Debug\SecOffice_ManagedAggregator13.dll
+C:\Repositories\SilConverters\output\Debug\SecOffice_ManagedAggregator13.pdb
+C:\Repositories\SilConverters\src\SILConvertersOffice13\ManagedAggregator\obj\x86\Debug\SecOffice_ManagedAggregator13.dll
+C:\Repositories\SilConverters\src\SILConvertersOffice13\ManagedAggregator\obj\x86\Debug\SecOffice_ManagedAggregator13.pdb

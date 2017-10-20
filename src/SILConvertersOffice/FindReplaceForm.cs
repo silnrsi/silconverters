@@ -11,7 +11,10 @@ using ECInterfaces;
 using SilEncConverters40;
 using System.IO;
 using Word = Microsoft.Office.Interop.Word;
-using System.Reflection;                // for Assembly
+using System.Reflection;
+using Microsoft.Office.Interop.Access.Dao;
+
+// for Assembly
 
 namespace SILConvertersOffice
 {

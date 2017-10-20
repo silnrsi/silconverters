@@ -10,3 +10,14 @@ C:\Users\BEaton\Documents\GitHub\SilConverters\src\TECkit Mapping Editor\obj\x86
 C:\Users\BEaton\Documents\GitHub\SilConverters\src\TECkit Mapping Editor\obj\x86\Debug\TECkit Mapping Editor.csproj.GenerateResource.Cache
 C:\Users\BEaton\Documents\GitHub\SilConverters\src\TECkit Mapping Editor\obj\x86\Debug\TECkitMappingEditorU.exe
 C:\Users\BEaton\Documents\GitHub\SilConverters\src\TECkit Mapping Editor\obj\x86\Debug\TECkitMappingEditorU.pdb
+C:\Repositories\SilConverters\output\Debug\TECkitMappingEditorU.exe.config
+C:\Repositories\SilConverters\output\Debug\TECkitMappingEditorU.exe
+C:\Repositories\SilConverters\output\Debug\TECkitMappingEditorU.pdb
+C:\Repositories\SilConverters\src\TECkit Mapping Editor\obj\x86\Debug\TECkit_Mapping_Editor.DisplayUnicodeNamesForm.resources
+C:\Repositories\SilConverters\src\TECkit Mapping Editor\obj\x86\Debug\TECkit_Mapping_Editor.FindReplaceForm.resources
+C:\Repositories\SilConverters\src\TECkit Mapping Editor\obj\x86\Debug\TECkit_Mapping_Editor.Properties.Resources.resources
+C:\Repositories\SilConverters\src\TECkit Mapping Editor\obj\x86\Debug\TECkit_Mapping_Editor.QueryConvTypeDlg.resources
+C:\Repositories\SilConverters\src\TECkit Mapping Editor\obj\x86\Debug\TECkit_Mapping_Editor.TECkitMapEditorForm.resources
+C:\Repositories\SilConverters\src\TECkit Mapping Editor\obj\x86\Debug\TECkit Mapping Editor.csproj.GenerateResource.Cache
+C:\Repositories\SilConverters\src\TECkit Mapping Editor\obj\x86\Debug\TECkitMappingEditorU.exe
+C:\Repositories\SilConverters\src\TECkit Mapping Editor\obj\x86\Debug\TECkitMappingEditorU.pdb

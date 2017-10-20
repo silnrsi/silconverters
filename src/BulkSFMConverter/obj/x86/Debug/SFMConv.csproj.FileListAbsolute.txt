@@ -7,3 +7,13 @@ C:\Users\BEaton\Documents\GitHub\SilConverters\src\BulkSFMConverter\obj\x86\Debu
 C:\Users\BEaton\Documents\GitHub\SilConverters\src\BulkSFMConverter\obj\x86\Debug\SFMConv.csproj.GenerateResource.Cache
 C:\Users\BEaton\Documents\GitHub\SilConverters\src\BulkSFMConverter\obj\x86\Debug\SFMConv.exe
 C:\Users\BEaton\Documents\GitHub\SilConverters\src\BulkSFMConverter\obj\x86\Debug\SFMConv.pdb
+C:\Repositories\SilConverters\output\Debug\SFMConv.exe.config
+C:\Repositories\SilConverters\output\Debug\SFMConv.exe
+C:\Repositories\SilConverters\output\Debug\SFMConv.pdb
+C:\Repositories\SilConverters\src\BulkSFMConverter\obj\x86\Debug\SFMConv.csprojResolveAssemblyReference.cache
+C:\Repositories\SilConverters\src\BulkSFMConverter\obj\x86\Debug\SFMConv.BaseConverterForm.resources
+C:\Repositories\SilConverters\src\BulkSFMConverter\obj\x86\Debug\SFMConv.SCConvForm.resources
+C:\Repositories\SilConverters\src\BulkSFMConverter\obj\x86\Debug\SFMConv.Properties.Resources.resources
+C:\Repositories\SilConverters\src\BulkSFMConverter\obj\x86\Debug\SFMConv.csproj.GenerateResource.Cache
+C:\Repositories\SilConverters\src\BulkSFMConverter\obj\x86\Debug\SFMConv.exe
+C:\Repositories\SilConverters\src\BulkSFMConverter\obj\x86\Debug\SFMConv.pdb
