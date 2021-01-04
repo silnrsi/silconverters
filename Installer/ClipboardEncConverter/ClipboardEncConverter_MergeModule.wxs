@@ -10,7 +10,7 @@
 			<Directory Id="MergeRedirectFolder">
 
                 <Component Id="ClipboardEC.exe" Guid="{A031D80B-38EA-48C6-99A9-F758BDF04D93}">
-                    <File Id="ClipboardEC.exe" Name="ClipboardEC.exe" KeyPath="yes" Assembly=".net" AssemblyManifest="ClipboardEC.exe" AssemblyApplication="ClipboardEC.exe" Source="..\..\output\release\ClipboardEC.exe" />
+                    <File Id="ClipboardEC.exe" Name="ClipboardEC.exe" KeyPath="yes" Assembly=".net" AssemblyManifest="ClipboardEC.exe" AssemblyApplication="ClipboardEC.exe" Source="..\..\output\x86\release\ClipboardEC.exe" />
                     <Shortcut Id="ClipboardEC.exe" Directory="SILConverters" Name="Clipboard EncConverter" Description="Start the Clipboard EncConverter program" IconIndex="0" Show="normal" Target="[#ClipboardEC.exe]" WorkingDirectory="MergeRedirectFolder" Advertise="no" />
                 </Component>
                 

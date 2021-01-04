@@ -32,7 +32,7 @@
     <OldToolsVersion>3.5</OldToolsVersion>
     <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
     <IsWebBootstrapper>false</IsWebBootstrapper>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -53,7 +53,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DefineDebug>true</DefineDebug>
     <DefineTrace>true</DefineTrace>
-    <OutputPath>..\..\output\Debug\</OutputPath>
+    <OutputPath>bin\x86\debug\</OutputPath>
     <BaseAddress>285212672</BaseAddress>
     <WarningLevel>1</WarningLevel>
     <NoWarn>42016,42017,42018,42019,42032,42353,42354,42355</NoWarn>
@@ -62,11 +62,12 @@
     <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
     <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.vb</CodeAnalysisModuleSuppressionsFile>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <DebugSymbols>true</DebugSymbols>
     <DefineTrace>true</DefineTrace>
-    <OutputPath>..\..\output\Release\</OutputPath>
+    <OutputPath>bin\x86\release\</OutputPath>
     <BaseAddress>285212672</BaseAddress>
     <Optimize>true</Optimize>
     <WarningLevel>1</WarningLevel>
@@ -76,13 +77,15 @@
     <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
     <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.vb</CodeAnalysisModuleSuppressionsFile>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ECInterfaces, Version=4.0.0.0, Culture=neutral, PublicKeyToken=f1447bae1e63f485, processorArchitecture=x86">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\release\ECInterfaces.dll</HintPath>
+    <Reference Include="ECInterfaces, Version=4.0.0.0, Culture=neutral, PublicKeyToken=f1447bae1e63f485, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Encoding-Converters-Core.0.2.0\lib\net45\x64\ECInterfaces.dll</HintPath>
     </Reference>
-    <Reference Include="SilEncConverters40, Version=4.0.0.0, Culture=neutral, PublicKeyToken=f1447bae1e63f485, processorArchitecture=x86" />
+    <Reference Include="SilEncConverters40, Version=4.0.0.0, Culture=neutral, PublicKeyToken=f1447bae1e63f485, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Encoding-Converters-Core.0.2.0\lib\net45\x64\SilEncConverters40.dll</HintPath>
+    </Reference>
     <Reference Include="System">
       <Name>System</Name>
     </Reference>
@@ -155,6 +158,7 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="My Project\app.manifest" />
+    <None Include="packages.config" />
     <None Include="SILConvertersInstallerDetails.xsc">
       <DependentUpon>SILConvertersInstallerDetails.xsd</DependentUpon>
     </None>
@@ -197,9 +201,11 @@
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.VisualBasic.targets" />
   <PropertyGroup>
-    <PreBuildEvent>
-    </PreBuildEvent>
-    <PostBuildEvent>
-    </PostBuildEvent>
+    <PreBuildEvent>xcopy /y "$(SolutionDir)packages\Encoding-Converters-Core.0.2.0\runtimes\Win32\*.*" "$(SolutionDir)EC DistFiles\$(PlatformName)\"
+xcopy /s /y "$(SolutionDir)packages\Encoding-Converters-Core.0.2.0\redist\*.*" "$(SolutionDir)EC DistFiles\redist\"
+xcopy /y "$(SolutionDir)packages\Encoding-Converters-Core.0.2.0\MergeModules\*.*" "$(SolutionDir)EC DistFiles\MergeModules\"
+xcopy /y "$(SolutionDir)EC DistFiles\$(PlatformName)\*.*" "$(SolutionDir)output\$(PlatformName)\$(ConfigurationName)\"
+xcopy /s /y "$(SolutionDir)EC DistFiles\redist\*.*" "$(SolutionDir)output\$(PlatformName)\$(ConfigurationName)\"</PreBuildEvent>
+    <PostBuildEvent>xcopy /y "$(TargetDir)*.*" $(SolutionDir)output\$(PlatformName)\$(ConfigurationName)</PostBuildEvent>
   </PropertyGroup>
 </Project>

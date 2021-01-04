@@ -25,7 +25,6 @@
 		<Media Id='21' Cabinet='EC21.cab' EmbedCab='yes' CompressionLevel='high'/>
 		<Media Id='22' Cabinet='EC22.cab' EmbedCab='yes' CompressionLevel='high'/>
 		<Media Id='23' Cabinet='EC23.cab' EmbedCab='yes' CompressionLevel='high'/>
-		<Media Id='24' Cabinet='EC24.cab' EmbedCab='yes' CompressionLevel='high'/>
 		<Media Id='25' Cabinet='EC25.cab' EmbedCab='yes' CompressionLevel='high'/>
 		<Media Id='26' Cabinet='EC26.cab' EmbedCab='yes' CompressionLevel='high'/>
 		<Media Id='27' Cabinet='EC27.cab' EmbedCab='yes' CompressionLevel='high'/>
@@ -54,8 +53,8 @@
             <Merge Id="IndicConverters" Language="1033" SourceFile="..\MergeModules\IndicConverters.msm" DiskId="6"/>
             <Merge Id="Clipboard_EncConverter" Language="1033" SourceFile="..\MergeModules\ClipboardEncConverter.msm" DiskId="7"/>
             <Merge Id="DChartHelper" Language="1033" SourceFile="..\MergeModules\DChartHelperMM.msm" DiskId="8"/>
-            <Merge Id="SEC_ICU" Language="1033" SourceFile="..\MergeModules\SEC_ICU_50.msm" DiskId="9"/>
-            <Merge Id="SCOffice13" Language="1033" SourceFile="..\MergeModules\SCOffice13MM.msm" DiskId="10"/>
+          <Merge Id="SEC_ICU" Language="1033" SourceFile="..\MergeModules\SEC_ICU_40.msm" DiskId="9"/>
+          <Merge Id="SCOffice13" Language="1033" SourceFile="..\MergeModules\SCOffice13MM.msm" DiskId="10"/>
             <Merge Id="SCOffice10" Language="1033" SourceFile="..\MergeModules\SCOffice10MM.msm" DiskId="11"/>
             <Merge Id="SCOffice07" Language="1033" SourceFile="..\MergeModules\SCOffice07MM.msm" DiskId="12"/>
             <Merge Id="SCOffice03" Language="1033" SourceFile="..\MergeModules\SCOffice03MM.msm" DiskId="13"/>
@@ -74,12 +73,8 @@
             <Merge Id="TECkit_Package" Language="1033" SourceFile="..\MergeModules\TECkitPackageMM.msm" DiskId="25"/>
         </DirectoryRef>
         
-        <DirectoryRef Id="Toolbox">
-            <Merge Id="Jump2TbxMergeModule" Language="1033" SourceFile="..\MergeModules\Jump2ToolboxMM.msm" DiskId="24"/>
-        </DirectoryRef>
-        
 		<DirectoryRef Id="AllUserAppDataSIL">
-			<Merge Id="EcFolderACLs" Language="1033" SourceFile="..\ExternalMergeModules\EcFolderACLs.msm" DiskId="1"/>
+			<Merge Id="EcFolderACLsMM" Language="1033" SourceFile="..\..\EC DistFiles\MergeModules\EcFolderACLsMM.msm" DiskId="1"/>
             <Merge Id="CscDot" Language="1033" SourceFile="..\MergeModules\CscDotMM.msm" DiskId="26"/>
             <Merge Id="DcmDot" Language="1033" SourceFile="..\MergeModules\DcmDotMM.msm" DiskId="27"/>
         </DirectoryRef>
@@ -108,9 +103,9 @@
             -->
 		</DirectoryRef>
 		<DirectoryRef Id="SystemFolder">
-			<Merge Id="CRT" Language="1033" SourceFile="..\ExternalMergeModules\Microsoft_VC100_CRT_x86.msm" DiskId="23"/>
-            <Merge Id="MFC" Language="1033" SourceFile="..\ExternalMergeModules\Microsoft_VC100_MFC_x86.msm" DiskId="23"/>
-            <!-- The CRT90 merge module is needed only for the PythonEC (using Python 2.7) merge module:-->
+      <Merge Id="CRT" Language="1033" SourceFile="..\ExternalMergeModules\Microsoft_VC100_CRT_x86.msm" DiskId="23"/>
+      <Merge Id="MFC" Language="1033" SourceFile="..\ExternalMergeModules\Microsoft_VC100_MFC_x86.msm" DiskId="23"/>
+      <!-- The CRT90 merge module is needed only for the PythonEC (using Python 2.7) merge module:-->
 			<Merge Id="CRT90" Language="1033" SourceFile="..\ExternalMergeModules\Microsoft_VC90_CRT_x86.msm" DiskId="23"/> 
         </DirectoryRef>
     </Fragment>

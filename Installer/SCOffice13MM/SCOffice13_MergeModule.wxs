@@ -16,7 +16,7 @@
                     <Class Id="{B11059E8-A4A7-3E1E-88A8-E2DD65B3337E}" Context="InprocServer32" Description="SILConvertersOffice.ConvertFunctions" ThreadingModel="both" Programmable="yes" ForeignServer="mscoree.dll">
                         <ProgId Id="SILConvertersOffice.ConvertFunctions" Description="SILConvertersOffice.ConvertFunctions" />
                     </Class>
-                    <File Id="SILConvertersOffice10.dll" KeyPath="yes" Source="..\..\output\release\SILConvertersOffice13.dll" />
+                    <File Id="SILConvertersOffice10.dll" KeyPath="yes" Source="..\..\output\x86\release\SILConvertersOffice13.dll" />
                     <RegistryValue Root="HKCR" Key="CLSID\{86D18913-CAF0-3129-940A-E1A42F90FE49}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
                     <RegistryValue Root="HKCR" Key="CLSID\{86D18913-CAF0-3129-940A-E1A42F90FE49}\InprocServer32\4.0.0.0" Name="Class" Value="SILConvertersOffice.InstallerRegistrationActions" Type="string" Action="write" />
                     <RegistryValue Root="HKCR" Key="CLSID\{86D18913-CAF0-3129-940A-E1A42F90FE49}\InprocServer32\4.0.0.0" Name="Assembly" Value="SILConvertersOffice13, Version=4.0.0.0, Culture=neutral, PublicKeyToken=f1447bae1e63f485" Type="string" Action="write" />
@@ -87,7 +87,7 @@
                 </Component>
 
                 <Component Id="SecOffice_COMAddInShim13.dll" Guid="{FB6B704D-7D1B-4B9C-8F98-CE8F6BDBA0EC}">
-                    <File Id="SecOffice_COMAddInShim13.dll" KeyPath="yes" Source="..\..\output\release\SecOffice_COMAddInShim13.dll">
+                    <File Id="SecOffice_COMAddInShim13.dll" KeyPath="yes" Source="..\..\output\x86\release\SecOffice_COMAddInShim13.dll">
                         <Class Id="{9FDB0283-1795-4BF4-97E9-84223F3FC8EA}" Context="InprocServer32" Description="SILConvertersOffice13.Connect" ThreadingModel="apartment" Programmable="yes">
                             <ProgId Id="SILConvertersOffice13.Connect" Description="Connect Class" />
                         </Class>
@@ -107,7 +107,7 @@
                 </Component>
 
                 <Component Id="SecOffice_ManagedAggregator13.dll" Guid="{A3A1BC2E-1364-4AC7-AF6A-15D78DDBA82A}">
-                    <File Id="SecOffice_ManagedAggregator13.dll" Name="SecOffice_ManagedAggregator13.dll" Vital="yes" KeyPath="yes" AssemblyManifest="SecOffice_ManagedAggregator13.dll" AssemblyApplication="SecOffice_ManagedAggregator13.dll" Assembly=".net" Source="..\..\output\release\SecOffice_ManagedAggregator13.dll"/>
+                    <File Id="SecOffice_ManagedAggregator13.dll" Name="SecOffice_ManagedAggregator13.dll" Vital="yes" KeyPath="yes" AssemblyManifest="SecOffice_ManagedAggregator13.dll" AssemblyApplication="SecOffice_ManagedAggregator13.dll" Assembly=".net" Source="..\..\output\x86\release\SecOffice_ManagedAggregator13.dll"/>
                 </Component>
 
             </Directory>

@@ -1,17 +1,12 @@
 // #define DefineToTurnOffBackgroundProcessing
 
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
 using ECInterfaces;
 using SilEncConverters40;
-using System.IO;
 using Word = Microsoft.Office.Interop.Word;
-using System.Reflection;                // for Assembly
 
 namespace SILConvertersOffice
 {

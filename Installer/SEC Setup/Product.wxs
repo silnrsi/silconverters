@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-    <Product UpgradeCode="8A50226C-84D0-4CAF-AF8F-B0284643C415" Id="B8CC40C1-1EE9-4FE8-BC9F-F37CD8F60E1C" Name="SIL Encoding Converters 4.0" Manufacturer="SIL International" Language="1033" Version="4.0.0">
-        <Package Id='*' InstallerVersion='300' Compressed='yes' />
+    <Product UpgradeCode="8A50226C-84D0-4CAF-AF8F-B0284643C415" Id="B8CC40C1-1EE9-4FE8-BC9F-F37CD8F60E1C" Name="SIL Encoding Converters 5.0" Manufacturer="SIL International" Language="1033" Version="5.0.0">
+        <Package Id='*' InstallerVersion='301' Compressed='yes' />
         <Condition Message="You need to be an administrator to install this product.">Privileged</Condition>
         <Condition Message="[ProductName] will only run on Windows 2000 or better. You cannot intall it on this machine.">
             <![CDATA[(NOT Version9X) OR (NOT VersionNT OR (VersionNT >= 500))]]>

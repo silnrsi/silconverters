@@ -4,7 +4,7 @@
         <Property Id='EcFeaturesFragment' Value='1'/>
         <Feature Id="Always" Title="Always" Display="hidden" Level="1" AllowAdvertise="no">
             <ComponentRef Id="RemoveFile" />
-            <MergeRef Id="EcFolderACLs"/>
+            <MergeRef Id="EcFolderACLsMM"/>
             <MergeRef Id="ScHelp"/>
         </Feature>
         <Feature Id="SILConverters_client_apps" Title="SIL Converters' client applications" Description="Expand this node to select or deselect individual client applications" Level="3" AllowAdvertise="no">
@@ -48,7 +48,6 @@
                     <MergeRef Id="CscDot"/>
                     <MergeRef Id="SEC_EC"/>
                     <MergeRef Id="SetPath"/>
-                    <MergeRef Id="Jump2TbxMergeModule"/>
                     <MergeRef Id="MS_KB908002_Fix"/>
                     <!--<MergeRef Id="MFC"/>
                     <MergeRef Id="CRT"/>-->

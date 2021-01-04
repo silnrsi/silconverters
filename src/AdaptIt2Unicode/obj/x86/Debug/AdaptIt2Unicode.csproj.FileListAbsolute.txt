@@ -1,9 +1,0 @@
-C:\Users\BEaton\Documents\GitHub\SilConverters\output\debug\AdaptIt2Unicode.exe.config
-C:\Users\BEaton\Documents\GitHub\SilConverters\output\debug\AdaptIt2Unicode.exe
-C:\Users\BEaton\Documents\GitHub\SilConverters\output\debug\AdaptIt2Unicode.pdb
-C:\Users\BEaton\Documents\GitHub\SilConverters\src\AdaptIt2Unicode\obj\x86\Debug\AdaptIt2Unicode.AdaptIt2UnicodeForm.resources
-C:\Users\BEaton\Documents\GitHub\SilConverters\src\AdaptIt2Unicode\obj\x86\Debug\AdaptIt2Unicode.FilteredFieldsForm.resources
-C:\Users\BEaton\Documents\GitHub\SilConverters\src\AdaptIt2Unicode\obj\x86\Debug\AdaptIt2Unicode.Properties.Resources.resources
-C:\Users\BEaton\Documents\GitHub\SilConverters\src\AdaptIt2Unicode\obj\x86\Debug\AdaptIt2Unicode.csproj.GenerateResource.Cache
-C:\Users\BEaton\Documents\GitHub\SilConverters\src\AdaptIt2Unicode\obj\x86\Debug\AdaptIt2Unicode.exe
-C:\Users\BEaton\Documents\GitHub\SilConverters\src\AdaptIt2Unicode\obj\x86\Debug\AdaptIt2Unicode.pdb

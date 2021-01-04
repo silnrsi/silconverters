@@ -14,7 +14,7 @@
             <Directory Id="MergeRedirectFolder">
 
                 <Component Id="SilConvertersXML.exe" Guid="54538A4D-55A6-40ED-BC9A-601835719F31">
-                    <File Id="SilConvertersXML.exe" Name="SilConvertersXML.exe" KeyPath="yes" Assembly=".net" AssemblyManifest="SilConvertersXML.exe" AssemblyApplication="SilConvertersXML.exe" Source="..\..\output\release\SilConvertersXML.exe" />
+                    <File Id="SilConvertersXML.exe" Name="SilConvertersXML.exe" KeyPath="yes" Assembly=".net" AssemblyManifest="SilConvertersXML.exe" AssemblyApplication="SilConvertersXML.exe" Source="..\..\output\x86\release\SilConvertersXML.exe" />
                     <Shortcut Id="SilConvertersXML.exe" Directory="SILConverters" Name="XML Document Converter" Description="Convert your XML documents with SIL Converters" IconIndex="0" Show="normal" Target="[#SilConvertersXML.exe]" WorkingDirectory="MergeRedirectFolder" Advertise="no" />
                 </Component>
 

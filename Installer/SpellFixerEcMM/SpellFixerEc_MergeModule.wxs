@@ -11,7 +11,7 @@
                     <Class Id="{B3256CF8-FA9B-310D-89A6-9268B37A9A72}" Context="InprocServer32" Description="SpellingFixerEC.SpellingFixerEC" ThreadingModel="both" ForeignServer="mscoree.dll">
                         <ProgId Id="SpellingFixerEC.SpellingFixerEC" Description="SpellingFixerEC.SpellingFixerEC" />
                     </Class>
-                    <File Id="SpellingFixerEC.dll" Name="SpellingFixerEC.dll" KeyPath="yes" Assembly=".net" AssemblyManifest="SpellingFixerEC.dll" AssemblyApplication="SpellingFixerEC.dll" Source="..\..\output\release\SpellingFixerEC.dll" />
+                    <File Id="SpellingFixerEC.dll" Name="SpellingFixerEC.dll" KeyPath="yes" Assembly=".net" AssemblyManifest="SpellingFixerEC.dll" AssemblyApplication="SpellingFixerEC.dll" Source="..\..\output\x86\release\SpellingFixerEC.dll" />
                     <RegistryValue Root="HKCR" Key="CLSID\{B3256CF8-FA9B-310D-89A6-9268B37A9A72}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
                     <RegistryValue Root="HKCR" Key="CLSID\{B3256CF8-FA9B-310D-89A6-9268B37A9A72}\InprocServer32\4.0.0.0" Name="Class" Value="SpellingFixerEC.SpellingFixerEC" Type="string" Action="write" />
                     <RegistryValue Root="HKCR" Key="CLSID\{B3256CF8-FA9B-310D-89A6-9268B37A9A72}\InprocServer32\4.0.0.0" Name="Assembly" Value="SpellingFixerEC, Version=4.0.0.0, Culture=neutral, PublicKeyToken=f1447bae1e63f485" Type="string" Action="write" />
@@ -24,7 +24,7 @@
                 </Component>
 
                 <Component Id="SpellingFixerEC.tlb" Guid="6C6530EE-AD9F-4602-A1D6-743FBC489E4F">
-                    <File Id="SpellingFixerEC.tlb" Name="SpellingFixerEC.tlb" KeyPath="yes" Source="..\..\output\release\SpellingFixerEC.tlb">
+                    <File Id="SpellingFixerEC.tlb" Name="SpellingFixerEC.tlb" KeyPath="yes" Source="..\..\output\x86\release\SpellingFixerEC.tlb">
                         <TypeLib Id="{FE18485F-A565-3DA7-AD89-4998AE095D45}" Description="SIL Spelling fixer plug-in (for use with SILConverters)" HelpDirectory="MergeRedirectFolder" Language="0" MajorVersion="4" MinorVersion="0">
                             <Interface Id="{36C6FF0D-92ED-3E87-934F-2394BA3E4683}" Name="_SpellingFixerEC" ProxyStubClassId32="{00020424-0000-0000-C000-000000000046}" />
                         </TypeLib>

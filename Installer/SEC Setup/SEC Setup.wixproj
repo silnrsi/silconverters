@@ -30,7 +30,10 @@
   </ItemGroup>
   <Import Project="$(WixTargetsPath)" />
   <PropertyGroup>
-    <PostBuildEvent>copy "!(TargetPath)" "$(SolutionDir)output\SetupEC.msi"</PostBuildEvent>
+    <PreBuildEvent />
+  </PropertyGroup>
+  <PropertyGroup>
+    <PostBuildEvent>copy "!(TargetPath)" "$(SolutionDir)output\x86\SetupEC.msi"</PostBuildEvent>
   </PropertyGroup>
   <!--
 	To modify your build process, add your task inside one of the targets below and uncomment it.

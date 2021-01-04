@@ -1,0 +1,47 @@
+import "C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um\prsht.idl";
+import "C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um\MsHTML.idl";
+import "C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um\dimm.idl";
+import "C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um\dispex.idl";
+import "C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\shared\dxgitype.idl";
+import "C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\shared\dxgicommon.idl";
+import "C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\shared\dxgiformat.idl";
+import "C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um\MsHtmHst.idl";
+import "C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um\docobj.idl";
+import "C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um\ExDisp.idl";
+import "C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um\ObjSafe.idl";
+
+[
+	object,
+	uuid(ABF112BA-2EB8-4517-A2AF-4DAEC4EB5C1F),
+	dual,
+	helpstring("IToolbox Interface"),
+	pointer_default(unique)
+] 
+#line 14 "c:\\users\\pete_\\source\\repos\\silconverters\\src\\jump2toolbox\\toolbox.h"
+interface IToolbox : IDispatch {
+#line 16 "c:\\users\\pete_\\source\\repos\\silconverters\\src\\jump2toolbox\\toolbox.h"
+	[id(1),helpstring("Jump to a Unicode-encoded target word")] HRESULT  Jump([in] BSTR sTarget);
+	[id(2),helpstring("Jump to a Legacy-encoded target word")] HRESULT  JumpLegacy([in] BSTR sTarget, [in,defaultvalue(0)] LONG cp);
+	[id(3),helpstring("Tell Toolbox to save all files")] HRESULT  SaveAll();
+	[id(4),helpstring("Tell Toolbox to reload all files")] HRESULT  Reload();
+};
+
+
+[ version(1.0), uuid(7CF02E92-A3FB-40D3-AE72-E87E0926680B), helpstring("Jump2Toolbox 1.0 Type Library") ]
+library Jump2Toolbox
+{
+	importlib("stdole2.tlb");
+	importlib("olepro32.dll");
+
+	[
+		version(1.0),
+		uuid(0429E35F-45C6-4C5D-9B02-E32EF5DE36C1),
+		helpstring("Toolbox Class")
+	] 
+#line 35 "c:\\users\\pete_\\source\\repos\\silconverters\\src\\jump2toolbox\\toolbox.h"
+	coclass CToolbox {
+		interface IToolbox;
+	};
+
+}
+

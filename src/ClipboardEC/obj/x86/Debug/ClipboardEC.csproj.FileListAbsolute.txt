@@ -1,8 +1,0 @@
-C:\Users\BEaton\Documents\GitHub\SilConverters\output\Debug\ClipboardEC.exe.config
-C:\Users\BEaton\Documents\GitHub\SilConverters\output\Debug\ClipboardEC.exe
-C:\Users\BEaton\Documents\GitHub\SilConverters\output\Debug\ClipboardEC.pdb
-C:\Users\BEaton\Documents\GitHub\SilConverters\src\ClipboardEC\obj\x86\Debug\ClipboardEC.FormClipboardEncConverter.resources
-C:\Users\BEaton\Documents\GitHub\SilConverters\src\ClipboardEC\obj\x86\Debug\ClipboardEC.csproj.GenerateResource.Cache
-C:\Users\BEaton\Documents\GitHub\SilConverters\src\ClipboardEC\obj\x86\Debug\ClipboardEC.exe
-C:\Users\BEaton\Documents\GitHub\SilConverters\src\ClipboardEC\obj\x86\Debug\ClipboardEC.pdb
-C:\Users\BEaton\Documents\GitHub\SilConverters\src\ClipboardEC\obj\x86\Debug\ClipboardEC.csprojResolveAssemblyReference.cache

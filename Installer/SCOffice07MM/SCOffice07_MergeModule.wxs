@@ -16,7 +16,7 @@
                     <Class Id="{BDA6061B-45B8-3DB9-8211-CC6D02A92F75}" Context="InprocServer32" Description="SILConvertersOffice.InstallerRegistrationActions" ThreadingModel="both" ForeignServer="mscoree.dll">
                         <ProgId Id="SILConvertersOffice.InstallerRegistrationActions" Description="SILConvertersOffice.InstallerRegistrationActions" />
                     </Class>
-                    <File Id="SILConvertersOffice07.dll" KeyPath="yes" Source="..\..\output\release\SILConvertersOffice07.dll" />
+                    <File Id="SILConvertersOffice07.dll" KeyPath="yes" Source="..\..\output\x86\release\SILConvertersOffice07.dll" />
                     <RegistryValue Root="HKCR" Key="CLSID\{3ADDF7E6-29F1-43F5-BF95-06C0579A286B}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
                     <RegistryValue Root="HKCR" Key="CLSID\{3ADDF7E6-29F1-43F5-BF95-06C0579A286B}\InprocServer32\4.0.0.0" Name="Class" Value="SILConvertersOffice07.Connect" Type="string" Action="write" />
                     <RegistryValue Root="HKCR" Key="CLSID\{3ADDF7E6-29F1-43F5-BF95-06C0579A286B}\InprocServer32\4.0.0.0" Name="Assembly" Value="SILConvertersOffice07, Version=4.0.0.0, Culture=neutral, PublicKeyToken=f1447bae1e63f485" Type="string" Action="write" />
@@ -47,7 +47,7 @@
                 </Component>
 
                 <Component Id="SecOffice_COMAddInShim07" Guid="{BFAEF454-F874-4668-B545-4354A2C50FD7}">
-                    <File Id="SecOffice_COMAddInShim07" KeyPath="yes" Source="..\..\output\release\SecOffice_COMAddInShim07.dll">
+                    <File Id="SecOffice_COMAddInShim07" KeyPath="yes" Source="..\..\output\x86\release\SecOffice_COMAddInShim07.dll">
                         <Class Id="{3ADDF7E6-29F1-43F5-BF95-06C0579A286B}" Context="InprocServer32" Description="SILConvertersOffice07.Connect" ThreadingModel="apartment" Programmable="yes">
                             <ProgId Id="SILConvertersOffice07.Connect" Description="Connect Class" />
                         </Class>
@@ -67,7 +67,7 @@
                 </Component>
 
                 <Component Id="SecOffice_ManagedAggregator07.dll" Guid="{51950AE3-0F0C-44DF-8226-63D71116DA54}">
-                    <File Id="SecOffice_ManagedAggregator07.dll" Name="SecOffice_ManagedAggregator07.dll" Vital="yes" KeyPath="yes" AssemblyManifest="SecOffice_ManagedAggregator07.dll" AssemblyApplication="SecOffice_ManagedAggregator07.dll" Assembly=".net" Source="..\..\output\release\SecOffice_ManagedAggregator07.dll"/>
+                    <File Id="SecOffice_ManagedAggregator07.dll" Name="SecOffice_ManagedAggregator07.dll" Vital="yes" KeyPath="yes" AssemblyManifest="SecOffice_ManagedAggregator07.dll" AssemblyApplication="SecOffice_ManagedAggregator07.dll" Assembly=".net" Source="..\..\output\x86\release\SecOffice_ManagedAggregator07.dll"/>
                 </Component>
 
             </Directory>

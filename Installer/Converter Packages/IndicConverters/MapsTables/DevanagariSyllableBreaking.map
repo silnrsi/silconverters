@@ -1,0 +1,154 @@
+﻿; This file was edited using TECkitMappingEditorU.exe v4.0.0.0 on 10/30/2020.
+;   Conversion Type = Unicode_to_from_Unicode
+;   Left-hand side font = Arial Unicode MS;11.25
+;   Right-hand side font = Doulos SIL;11.25
+;   Main Window Position = -6,0,1479,1076
+;   Left-hand side Character Map Window Position = 1456,0,471,420
+;   Right-hand side Character Map Window Position = 1457,411,457,447
+
+; This file was edited using TECkitMappingEditorU.exe v1.0.0.0 on 9/5/2006.
+;   Conversion Type = Unicode_to_from_Unicode
+;   Left-hand side font = Arial Unicode MS;11.25
+;   Right-hand side font = Doulos SIL;11.25
+;   Main Window Position = 0,0,794,768
+;   Left-hand side Character Map Window Position = 794,0,471,420
+
+;DevanagariSyllableBreaking.map
+;Copyright (c) 2020 SIL International.
+
+; Mapping table for converting between Unicode devanagri and an IPA representation
+; (for romanizing)
+;
+
+LHSName                 "UNICODE_DEVANAGARI"
+RHSName                 "UNICODE_DEVANAGARI"
+LHSDescription          "Unicode (Devanagari range)"
+RHSDescription          "Unicode w/ syllable breaks (Devanagari range)"
+Version                 "0.1"
+Contact                 "mailto:bob_eaton@sall.com"
+RegistrationAuthority   "SIL International"
+RegistrationName        "Unicode_Devanagari-Unicode_Devanagari"
+
+Pass(Unicode)
+
+Class[FClessNasals] = ( \
+    devanagari_letter_ka devanagari_letter_qa devanagari_letter_kha devanagari_letter_khha \
+    devanagari_letter_ga devanagari_letter_ghha devanagari_letter_gha \
+    devanagari_letter_ca  devanagari_letter_cha  devanagari_letter_ja  devanagari_letter_za \
+    devanagari_letter_jha devanagari_letter_tta devanagari_letter_ttha \
+    devanagari_letter_dda devanagari_letter_ddha devanagari_letter_ta \
+    devanagari_letter_tha devanagari_letter_da devanagari_letter_dha \
+    devanagari_letter_pa devanagari_letter_pha devanagari_letter_fa devanagari_letter_ba \
+    devanagari_letter_bha devanagari_letter_ya devanagari_letter_ra \
+    devanagari_letter_la devanagari_letter_lla devanagari_letter_llla devanagari_letter_va \
+    devanagari_letter_sha devanagari_letter_ssa devanagari_letter_sa devanagari_letter_ha )
+
+Class [NasalCs] = ( devanagari_letter_nga devanagari_letter_nya devanagari_letter_nna \
+                    devanagari_letter_na devanagari_letter_ma )
+
+Class [FC] = ( [FClessNasals] [NasalCs] ) 
+
+; beware, this class is not the same as the IVowels defined in the next pass (it has *_a also)
+Class[IVowels] = ( \
+     devanagari_letter_a \
+     devanagari_letter_aa \
+     devanagari_letter_i \
+     devanagari_letter_ii \
+     devanagari_letter_u \
+     devanagari_letter_uu \
+     devanagari_letter_vocalic_r \
+     devanagari_letter_e \
+     devanagari_letter_candra_e \
+     devanagari_letter_ai \
+     devanagari_letter_o \
+     devanagari_letter_au \
+)
+
+Class [NasalDiacritics] = ( devanagari_sign_candrabindu devanagari_sign_anusvara )
+
+Class[DVowels] = ( \
+    devanagari_vowel_sign_aa \
+    devanagari_vowel_sign_i \
+    devanagari_vowel_sign_ii \
+    devanagari_vowel_sign_u \
+    devanagari_vowel_sign_uu \
+    devanagari_vowel_sign_vocalic_r \
+    devanagari_vowel_sign_e \
+    devanagari_vowel_sign_candra_o \
+    devanagari_vowel_sign_ai \
+    devanagari_vowel_sign_o \
+    devanagari_vowel_sign_au \
+)
+
+Class[LowDotWallahsCombined] = ( \
+    DEVANAGARI_LETTER_QA \
+    DEVANAGARI_LETTER_KHHA \
+    DEVANAGARI_LETTER_GHHA \
+    DEVANAGARI_LETTER_ZA \
+    DEVANAGARI_LETTER_DDDHA \
+    DEVANAGARI_LETTER_RHA \
+    DEVANAGARI_LETTER_FA \
+    DEVANAGARI_LETTER_YYA \
+)
+
+Class[LowDotWallahs] = ( \
+    DEVANAGARI_LETTER_KA \
+    DEVANAGARI_LETTER_KHA \
+    DEVANAGARI_LETTER_GA \
+    DEVANAGARI_LETTER_JA \
+    DEVANAGARI_LETTER_DDA \
+    DEVANAGARI_LETTER_DDHA \
+    DEVANAGARI_LETTER_PHA \
+    DEVANAGARI_LETTER_YA \
+)
+
+Class [ZWs] = ( zero_width_non_joiner zero_width_joiner )
+
+; normalize the chars with built-in low dots so they always have the dot.
+; (i.e. don't use the composed forms since they were deprecated)
+[LowDotWallahsCombined] > [LowDotWallahs] devanagari_sign_nukta
+
+Class [VelarCs] = ( devanagari_letter_ka devanagari_letter_kha devanagari_letter_ga devanagari_letter_gha \
+                            devanagari_letter_ha )
+Class [PalatalCs] = ( devanagari_letter_ca devanagari_letter_cha devanagari_letter_ja devanagari_letter_jha \
+                            devanagari_letter_sha )
+Class [RetroflexCs] = ( devanagari_letter_tta devanagari_letter_ttha devanagari_letter_dda devanagari_letter_ddha \
+                            devanagari_letter_ssa )
+Class [DentalCs] = ( devanagari_letter_ta devanagari_letter_tha devanagari_letter_da devanagari_letter_dha \
+                        devanagari_letter_sa devanagari_letter_na )
+Class [BilabialCs] = ( devanagari_letter_pa devanagari_letter_pha devanagari_letter_ba devanagari_letter_bha \
+                            devanagari_letter_ma )
+Class [DevSigns] = ( devanagari_sign_avagraha devanagari_sign_visarga devanagari_sign_nukta \
+                        devanagari_danda devanagari_double_danda )
+Class [FlapCs] = ( devanagari_letter_dda devanagari_letter_ddha )
+
+horizontal_ellipsis     <>  horizontal_ellipsis
+
+; rules
+; CV.CV
+([FC])=pos1 / _ [FC] [DVowels] <> @pos1 full_stop
+([FC] [DVowels])=pos1 / _ [FC] [DVowels] <> @pos1 full_stop
+([FC] devanagari_sign_virama [FC] [DVowels])=pos1 / _ [FC] [DVowels] <> @pos1 full_stop
+([FC] [DVowels])=pos1 / _ [FC] devanagari_sign_virama [FC] [DVowels] <> @pos1 full_stop
+([FC] devanagari_sign_virama [FC] [DVowels])=pos1 / _ [FC] devanagari_sign_virama [FC] [DVowels] <> @pos1 full_stop
+
+; CVC.CV
+([FC] [DVowels] [NasalCs] devanagari_sign_virama [ZWs]?)=pos1 / _ [FC] [DVowels] [NasalDiacritics]? <> @pos1 full_stop
+([FC] [DVowels] [FC])=pos1 / _ [FC] [DVowels] <> @pos1 full_stop
+([FC] [DVowels] [FC])=pos1 / _ [FlapCs] devanagari_sign_nukta [DVowels] <> @pos1 full_stop
+
+; (C)V.CVC
+([FC] [DVowels] | [IVowels])=pos1 / _ [FC] [DVowels] [FC] <> @pos1 full_stop
+([FC] [DVowels])=pos1 / _ [FC] [FC] <> @pos1 full_stop
+
+; C(V)|IV.C
+([FC] | [IVowels])=pos1 [FC]=pos2 / _ [FC] [FC]    <>  @pos1 @pos2 full_stop
+([FC] devanagari_sign_virama [FC] [DVowels]? | [IVowels])=pos1 [FC]=pos2 / _ [FC]    <>  @pos1 @pos2 full_stop
+
+
+
+
+
+
+
+

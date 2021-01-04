@@ -7,7 +7,7 @@
 			<Directory Id="MergeRedirectFolder">
 
                 <Component Id="SFMConv.exe" Guid="{4FA70357-2868-4638-A24A-67E11AC529F0}">
-                    <File Id="SFMConv.exe" Name="SFMConv.exe" KeyPath="yes" Assembly=".net" AssemblyManifest="SFMConv.exe" AssemblyApplication="SFMConv.exe" Source="..\..\output\release\SFMConv.exe" />
+                    <File Id="SFMConv.exe" Name="SFMConv.exe" KeyPath="yes" Assembly=".net" AssemblyManifest="SFMConv.exe" AssemblyApplication="SFMConv.exe" Source="..\..\output\x86\release\SFMConv.exe" />
                     <Shortcut Id="SFMConv.exe" Directory="SILConverters" Name="Bulk SFM Converter" Description="Convert your SFM documents with converters in the system repository" IconIndex="0" Show="normal" Target="[#SFMConv.exe]" WorkingDirectory="MergeRedirectFolder" Advertise="no" />
                 </Component>
 

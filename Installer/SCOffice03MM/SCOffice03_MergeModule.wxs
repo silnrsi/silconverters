@@ -16,7 +16,7 @@
                     <Class Id="{8D22729D-C1F0-3F03-902B-F8CBB19D8E73}" Context="InprocServer32" Description="SILConvertersOffice.ConvertFunctions" ThreadingModel="both" Programmable="yes" ForeignServer="mscoree.dll">
                         <ProgId Id="SILConvertersOffice.ConvertFunctions" Description="SILConvertersOffice.ConvertFunctions" />
                     </Class>
-                    <File Id="SILConvertersOffice.dll" KeyPath="yes" Source="..\..\output\release\SILConvertersOffice.dll" />
+                    <File Id="SILConvertersOffice.dll" KeyPath="yes" Source="..\..\output\x86\release\SILConvertersOffice.dll" />
                     <RegistryValue Root="HKCR" Key="CLSID\{31B69269-4301-4522-8446-3C3D3ACF7ABE}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
                     <RegistryValue Root="HKCR" Key="CLSID\{31B69269-4301-4522-8446-3C3D3ACF7ABE}\InprocServer32\4.0.0.0" Name="Class" Value="SILConvertersOffice.Connect" Type="string" Action="write" />
                     <RegistryValue Root="HKCR" Key="CLSID\{31B69269-4301-4522-8446-3C3D3ACF7ABE}\InprocServer32\4.0.0.0" Name="Assembly" Value="SILConvertersOffice, Version=4.0.0.0, Culture=neutral, PublicKeyToken=f1447bae1e63f485" Type="string" Action="write" />
@@ -47,7 +47,7 @@
                 </Component>
 
                 <Component Id="SecOffice_COMAddInShim03.dll" Guid="{A6D3E54E-798B-4B8D-A71C-C80B50E36DE0}">
-                    <File Id="SecOffice_COMAddInShim03.dll" KeyPath="yes" Source="..\..\output\release\SecOffice_COMAddInShim03.dll">
+                    <File Id="SecOffice_COMAddInShim03.dll" KeyPath="yes" Source="..\..\output\x86\release\SecOffice_COMAddInShim03.dll">
                         <Class Id="{31B69269-4301-4522-8446-3C3D3ACF7ABE}" Context="InprocServer32" Description="SILConvertersOffice.Connect" ThreadingModel="apartment" Programmable="yes">
                             <ProgId Id="SILConvertersOffice.Connect" Description="Connect Class" />
                         </Class>
@@ -70,7 +70,7 @@
                 </Component>
 
                 <Component Id="SecOffice_ManagedAggregator03.dll" Guid="{B8FDE108-ACEB-424F-B28D-C88AA4190061}">
-                    <File Id="SecOffice_ManagedAggregator03.dll" Name="SecOffice_ManagedAggregator03.dll" Vital="yes" KeyPath="yes" AssemblyManifest="SecOffice_ManagedAggregator03.dll" AssemblyApplication="SecOffice_ManagedAggregator03.dll" Assembly=".net" Source="..\..\output\release\SecOffice_ManagedAggregator03.dll"/>
+                    <File Id="SecOffice_ManagedAggregator03.dll" Name="SecOffice_ManagedAggregator03.dll" Vital="yes" KeyPath="yes" AssemblyManifest="SecOffice_ManagedAggregator03.dll" AssemblyApplication="SecOffice_ManagedAggregator03.dll" Assembly=".net" Source="..\..\output\x86\release\SecOffice_ManagedAggregator03.dll"/>
                 </Component>
 
                 <Component Id="extensibility.dll" Guid="04F00FED-576D-4B33-B697-0264976885E6">

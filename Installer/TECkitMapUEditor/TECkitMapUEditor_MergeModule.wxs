@@ -7,7 +7,7 @@
 			<Directory Id="MergeRedirectFolder">
 
                 <Component Id="TECkitMappingEditorU.exe" Guid="{0F1CE12B-0F7F-4258-B7E1-7D1E36D1943E}">
-                    <File Id="TECkitMappingEditorU.exe" Name="TECkitMappingEditorU.exe" KeyPath="yes" Assembly=".net" AssemblyManifest="TECkitMappingEditorU.exe" AssemblyApplication="TECkitMappingEditorU.exe" Source="..\..\output\release\TECkitMappingEditorU.exe" />
+                    <File Id="TECkitMappingEditorU.exe" Name="TECkitMappingEditorU.exe" KeyPath="yes" Assembly=".net" AssemblyManifest="TECkitMappingEditorU.exe" AssemblyApplication="TECkitMappingEditorU.exe" Source="..\..\output\x86\release\TECkitMappingEditorU.exe" />
                     <ProgId Id="SIL.TECkitMapEditor" Description="TECkit map for encoding conversion" Icon='TECkitMappingEditorU.exe' IconIndex="0">
                         <Extension Id="map" ContentType="application/teckitmap">
                             <Verb Id="open" Command="Open with TECkit Map Editor" TargetFile="TECkitMappingEditorU.exe" Argument="&quot;%1&quot;"/>

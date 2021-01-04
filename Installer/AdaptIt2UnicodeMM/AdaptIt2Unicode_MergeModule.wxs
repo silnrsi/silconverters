@@ -7,7 +7,7 @@
 			<Directory Id="MergeRedirectFolder">
 
                 <Component Id="AdaptIt2Unicode.exe" Guid="FC11A9E6-7044-48B4-BC13-C93B85BCB092">
-                    <File Id="AdaptIt2Unicode.exe" Name="AdaptIt2Unicode.exe" KeyPath="yes" Assembly=".net" AssemblyManifest="AdaptIt2Unicode.exe" AssemblyApplication="AdaptIt2Unicode.exe" Source="..\..\output\release\AdaptIt2Unicode.exe" />
+                    <File Id="AdaptIt2Unicode.exe" Name="AdaptIt2Unicode.exe" KeyPath="yes" Assembly=".net" AssemblyManifest="AdaptIt2Unicode.exe" AssemblyApplication="AdaptIt2Unicode.exe" Source="..\..\output\x86\release\AdaptIt2Unicode.exe" />
                     <Shortcut Id="AdaptIt2Unicode.exe" Directory="SILConverters" Name="Adapt It to Unicode Project Converter" Description="Start the AdaptIt to Unicode conversion program" IconIndex="0" Show="normal" Target="[#AdaptIt2Unicode.exe]" WorkingDirectory="MergeRedirectFolder" Advertise="no" />
                 </Component>
 
