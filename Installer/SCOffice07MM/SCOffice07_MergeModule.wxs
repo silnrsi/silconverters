@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
 	<Module Id="SCOffice07MM" Language="1033" Version="1.0.0.0">
-		<Package Id="b7553e44-dc9b-41c3-bfd1-ef985cd97045" Comments="Merge Module for the SILConverters for Office 2007 application" Description="Setup for the SILConverters for Office 2007 application" Keywords="SIL Encoding Converters; Microsoft Office" Manufacturer="SIL International" InstallerVersion="200" />
+		<Package Id="b7553e44-dc9b-41c3-bfd1-ef985cd97045" Comments="Merge Module for the SILConverters for Office 2007 application" Description="Setup for the SILConverters for Office 2007 application" Keywords="SIL Encoding Converters; Microsoft Office" Manufacturer="SIL International" InstallerVersion="500" />
 
 		<Directory Id="TARGETDIR" Name="SourceDir">
 			<Directory Id="MergeRedirectFolder">

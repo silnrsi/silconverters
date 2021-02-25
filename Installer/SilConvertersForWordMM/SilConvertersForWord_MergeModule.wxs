@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
 	<Module Id="SilConvertersForWordMM" Language="1033" Version="4.0.0.0">
-		<Package Id="7644c6d7-9b45-400c-b8d5-6e5a85cc245b" Comments="SILConverters' Bulk Word Document Converter" Keywords="SILConverters; Encoding Conversion; SIL; Word" Manufacturer="SIL International" InstallerVersion="200" />
+		<Package Id="7644c6d7-9b45-400c-b8d5-6e5a85cc245b" Comments="SILConverters' Bulk Word Document Converter" Keywords="SILConverters; Encoding Conversion; SIL; Word" 
+             Manufacturer="SIL International" InstallerVersion="500" />
 
 		<Directory Id="TARGETDIR" Name="SourceDir">
 
@@ -21,7 +22,8 @@
             <Directory Id="MergeRedirectFolder">
 
                 <Component Id="SILConvertersWordML.exe" Guid="{9D600B51-A06E-4FF5-8CBD-9E63C95F5192}">
-                    <File Id="SILConvertersWordML.exe" Name="SILConvertersWordML.exe" KeyPath="yes" Assembly=".net" AssemblyManifest="SILConvertersWordML.exe" AssemblyApplication="SILConvertersWordML.exe" Source="..\..\output\x86\release\SILConvertersWordML.exe" />
+                    <File Id="SILConvertersWordML.exe" Name="SILConvertersWordML.exe" KeyPath="yes" Assembly=".net" AssemblyManifest="SILConvertersWordML.exe" 
+                          AssemblyApplication="SILConvertersWordML.exe" Source="..\..\output\x86\release\SILConvertersWordML.exe" />
                     <Shortcut Id="SILConvertersWordML.exe" Directory="SILConverters" Name="Bulk Word Document Converter" Description="Convert your MS Word documents with converters in the system repository" IconIndex="0" Show="normal" Target="[#SILConvertersWordML.exe]" WorkingDirectory="MergeRedirectFolder" Advertise="no" />
                 </Component>
             </Directory>

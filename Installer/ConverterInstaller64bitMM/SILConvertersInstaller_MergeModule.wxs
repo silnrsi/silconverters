@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+    <Module Id="ConverterInstaller64bitMM" Language="1033" Version="4.0.0.0">
+        <Package Id="{C43BF7AD-4CBC-485B-A005-29644B0D5662}" Comments="Merge module for the SILConverters options installer" Description="Program to activate installed (optional) converters" 
+                 InstallerVersion="500" Keywords="SILConverters; Encoding Conversion; Transliteration; EncConverters" Manufacturer="SIL International" 
+                 Platform="x64" />
+
+        <Directory Id="TARGETDIR" Name="SourceDir">
+            <Component Id="MapsTablesPathKey" Guid="DF4417AB-0C82-4751-AE61-F9EBD37F33B6">
+                <RegistryValue Id="MapsTablesPathKey" Root="HKLM" Key="SOFTWARE\SIL\SilEncConverters40\Installer" Name="MapsTablesPath" Value="[SILConverters40]" Type="string" KeyPath="yes" />
+            </Component>
+            <Component Id="InstallerPathKey" Guid="B5436AEB-2C6A-4D82-AF69-34A92D01D097">
+                <RegistryValue Id="InstallerPathKey" Root="HKLM" Key="SOFTWARE\SIL\SilEncConverters40\Installer" Name="InstallerPath" Value="[#SecOptionsInstaller.exe]" Type="string" KeyPath="yes" />
+            </Component>
+
+            <Directory Id="MergeRedirectFolder">
+
+                <Component Id="SecOptionsInstaller.exe" Guid="{C3D3EDF3-C782-4A58-8059-5B096F4D148C}">
+                    <File Id="SecOptionsInstaller.exe" Name="SecOptionsInstaller.exe" KeyPath="yes" Assembly=".net" AssemblyManifest="SecOptionsInstaller.exe" 
+                          AssemblyApplication="SecOptionsInstaller.exe" Source="..\..\output\x64\release\SecOptionsInstaller.exe" />
+                    <Shortcut Id="SecOptionsInstaller.exe" Directory="SILConverters" Name="Launch Converter Options Installer (4.0)" Description="Start the Converter Installer to install specific converters (e.g. SIL IPA93&lt;&gt;UNICODE) into the system repository" IconIndex="0" Show="normal" Target="[#SecOptionsInstaller.exe]" WorkingDirectory="MergeRedirectFolder" Advertise="no" />
+                </Component>
+
+            </Directory>
+
+            <Directory Id="StartMenuFolder" SourceName="Start Menu">
+                <Directory Id="ProgramMenuFolder" SourceName="Programs">
+                    <Directory Id="SILConverters" Name="SIL Converters" />
+                </Directory>
+            </Directory>
+
+            <Directory Id="CommonAppDataFolder" SourceName="AppData">
+                <Directory Id="SIL" Name="SIL">
+                    <Directory Id="SILConverters40" Name="SILConverters40" />
+                </Directory>
+            </Directory>
+        </Directory>
+
+        <!-- I would love to launch this from the installer, but not matter how late in the installer I launch it or with what credentials, since this program calls VBScripts for an object being installed
+             They simply won't work until the installer is dismissed... don't know why. So this has to be done in the 'master installer'
+             <CustomAction Id="LaunchSecOptionsInstaller" Execute="commit" Impersonate="no" Directory="MergeRedirectFolder" ExeCommand="[SystemFolder]cmd.exe /C SecOptionsInstaller.exe" Return="asyncNoWait" />
+             <InstallExecuteSequence>
+                 <Custom Action="LaunchSecOptionsInstaller" Before="InstallFinalize"><![CDATA[NOT Installed]]></Custom>
+             </InstallExecuteSequence>
+        -->
+    </Module>
+</Wix>

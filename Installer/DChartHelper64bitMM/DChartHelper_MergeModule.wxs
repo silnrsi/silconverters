@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+	<Module Id="DChartHelper4064bitMergeModule" Language="1033" Version="4.0.0.0">
+		<Package Id="{FEE2161F-5A5E-4B0A-894F-75E5DA50ACFE}" Comments="Discourse Chart Helper" Keywords="Discourse Analysis; Discourse Charting; SILConverters; SIL" Manufacturer="SIL International" 
+             InstallerVersion="500" 
+             Platform="x64" />
+
+
+		<Directory Id="TARGETDIR" Name="SourceDir">
+
+            <Component Id="xmlOpenWithRegKeys" Guid="{32A6238C-5632-4B43-AD11-826F51253E3A}">
+                <RegistryValue Id="xmlOpenWithRegKeys1" Root="HKCR" Key=".xml\OpenWithList\DChartHelper.exe" Value="" Type="string" KeyPath="yes" />
+                <RegistryValue Id="xmlOpenWithRegKeys2" Root="HKCR" Key=".xml" Value="xmlfile" Type="string" />
+                <RegistryValue Id="xmlOpenWithRegKeys3" Root="HKCR" Key=".xml" Name="PerceivedType" Value="text" Type="string" />
+                <RegistryValue Id="xmlOpenWithRegKeys4" Root="HKCR" Key=".xml" Name="Content Type" Value="text/xml" Type="string" />
+                <RegistryValue Id="xmlOpenWithRegKeys5" Root="HKCR" Key="Applications\DChartHelper.exe\shell\open\command" Value="&quot;[TARGETDIR]DChartHelper.exe&quot; &quot;%1&quot;" Type="string" />
+                <RegistryValue Id="xmlOpenWithRegKeys6" Root="HKCR" Key="Applications\DChartHelper.exe\shell\open" Value="&amp;Open" Type="string" />
+                <RegistryValue Id="xmlOpenWithRegKeys7" Root="HKLM" Key="SOFTWARE\Classes\Applications\DChartHelper.exe\shell\open\command" Value="&quot;[TARGETDIR]DChartHelper.exe&quot; &quot;%1&quot;" Type="string" />
+                <RegistryValue Id="xmlOpenWithRegKeys8" Root="HKLM" Key="SOFTWARE\Classes\Applications\DChartHelper.exe\shell\open" Value="&amp;Open" Type="string" />
+                <RegistryValue Id="xmlOpenWithRegKeys9" Root="HKLM" Key="SOFTWARE\Classes\.xml\OpenWithList\DChartHelper.exe" Value="" Type="string" />
+                <RegistryValue Id="xmlOpenWithRegKeysA" Root="HKLM" Key="SOFTWARE\Classes\.xml" Name="Content Type" Value="text/xml" Type="string" />
+                <RegistryValue Id="xmlOpenWithRegKeysB" Root="HKLM" Key="SOFTWARE\Classes\.xml" Name="PerceivedType" Value="text" Type="string" />
+                <RegistryValue Id="xmlOpenWithRegKeysC" Root="HKLM" Key="SOFTWARE\Classes\.xml" Value="xmlfile" Type="string" />
+            </Component>
+
+            <Directory Id="MergeRedirectFolder">
+
+                <Component Id="DChartHelper.exe" Guid="{DC0C23E6-79E9-4E42-9FE9-D47FCB91751E}">
+                    <File Id="DChartHelper.exe" Name="DChartHelper.exe" KeyPath="yes" Assembly=".net" AssemblyManifest="DChartHelper.exe" AssemblyApplication="DChartHelper.exe" 
+                          Source="..\..\output\x64\release\DChartHelper.exe" />
+                    <Shortcut Id="DChartHelper.exe" Directory="SILConverters" Name="Discourse Chart Helper" Description="Prepare discourse analysis charts" IconIndex="0" Show="normal" Target="[#DChartHelper.exe]" WorkingDirectory="MergeRedirectFolder" Advertise="no" />
+                </Component>
+
+                <Directory Id="SCHelp" Name="Help">
+                    <Component Id="DiscourseChartHelperReadme.pdf" Guid="{2E18A8CD-DCF5-4F03-8D6F-6AF4269B9635}">
+                        <File Id="DiscourseChartHelperReadme.pdf" Name="Discourse Chart Helper Readme.pdf" KeyPath="yes" Source="..\..\src\DChartHelper\Discourse Chart Helper Readme.pdf" />
+                        <Shortcut Id="DiscourseChartHelperReadme.pdf" Directory="DcHelp" Name="Readme for Discourse Chart Helper" Description="View readme/help document for the Discourse Chart Helper application" IconIndex="0" Show="normal" Target="[#DiscourseChartHelperReadme.pdf]" WorkingDirectory="SCHelp" Advertise="no" />
+                    </Component>
+                </Directory>
+            </Directory>
+
+            <Directory Id="StartMenuFolder" SourceName="Start Menu">
+                <Directory Id="ProgramMenuFolder" SourceName="Programs">
+                    <Directory Id="SILConverters" Name="SIL Converters">
+                        <Directory Id="DcHelp" Name="Help" />
+                    </Directory>
+                </Directory>
+            </Directory>
+            
+        </Directory>
+	</Module>
+</Wix>

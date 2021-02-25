@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+    <Module Id="Set_PATH_Environment_Variable_64bit" Language="0" Version="1.0">
+        <Package Id="{970F15FE-1712-4686-882A-F93874A1EE1F}" Keywords="MergeModule, MSI, PATH" Description="Sets the PATH Environment variable for Encoding Converters" 
+                 Manufacturer="SIL International" InstallerVersion="500" Platform="x64" Languages="0" SummaryCodepage="1252" />
+
+        <Directory Id="TARGETDIR" Name="SourceDir">
+            <Directory Id="CommonFiles64Folder" Name="Common">
+                <Component Id="PATH" Guid="{0A0ABCDA-A90F-4207-818C-19C2FB83BA09}">
+                    <Environment Id="PATH" Name="PATH" Action="set" System="yes" Part="first" Value="[CommonFiles64Folder]SIL" />
+                    <!-- The next item is junk to make validation pass on ICE18. -->
+                    <CreateFolder />
+                </Component>
+            </Directory>
+        </Directory>
+    </Module>
+</Wix>

@@ -3,7 +3,7 @@
   <Module Id="SEC_ICU_40MergeModule" Language="1033" Version="1.0.0.0">
     <Package Id="97933895-6192-45da-b21d-0489b69d73da" Keywords="IBM Components for Unicode (ICU); SIL; Encoding Conversion; Transliteration; EncConverters"
              Description="Merge Module for ICU (currently v5.4) corresponding to EncConverter core API v4.0 -- Include in any client application deployment project that wants to include ICU capabilities to EncConverters functionality"
-             Comments="Common installer module for SIL's ICU component for v4.0 of the EncConverter's API" Manufacturer="SIL International" InstallerVersion="200" Languages="1033"
+             Comments="Common installer module for SIL's ICU component for v4.0 of the EncConverter's API" Manufacturer="SIL International" InstallerVersion="500" Languages="1033"
              SummaryCodepage="1252" />
 
     <Directory Id="TARGETDIR" Name="SourceDir">

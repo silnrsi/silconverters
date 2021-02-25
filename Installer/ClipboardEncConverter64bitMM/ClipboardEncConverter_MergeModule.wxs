@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+	<Module Id="ClipboardEncConverter4064bitMergeModule" Language="1033" Version="4.0.0.0">
+		<Package Id="{C0AF5D35-7D08-409D-A6EA-24291DFDD109}" Comments="Merge module containing the Clipboard EncConverter" Description="Installer for the Clipboard EncConverter Plug-in" 
+             Keywords="Encoding Converters; Clipboard; SIL; Unicode" Manufacturer="SIL International" InstallerVersion="500" 
+             Platform="x64" />
+
+		<Directory Id="TARGETDIR" Name="SourceDir">
+            <Component Id="RegKey" Guid="{E0A39E6B-1238-4581-9147-CEB91166439A}">
+                <RegistryValue Id="RegKey" Root="HKLM" Key="Software\SIL\SilEncConverters40\ClipboardEC" Value="" Type="string" KeyPath="yes" />
+            </Component>
+			<Directory Id="MergeRedirectFolder">
+
+                <Component Id="ClipboardEC.exe" Guid="{2E4D0EE2-606C-401F-A1AF-8BD09DF48C27}">
+                    <File Id="ClipboardEC.exe" Name="ClipboardEC.exe" KeyPath="yes" Assembly=".net" AssemblyManifest="ClipboardEC.exe" AssemblyApplication="ClipboardEC.exe" 
+                          Source="..\..\output\x64\release\ClipboardEC.exe" />
+                    <Shortcut Id="ClipboardEC.exe" Directory="SILConverters" Name="Clipboard EncConverter" Description="Start the Clipboard EncConverter program" IconIndex="0" Show="normal" 
+                              Target="[#ClipboardEC.exe]" WorkingDirectory="MergeRedirectFolder" Advertise="no" />
+                </Component>
+                
+			</Directory>
+
+            <Directory Id="StartMenuFolder" SourceName="Start Menu">
+                <Directory Id="ProgramMenuFolder" SourceName="Programs">
+                    <Directory Id="SILConverters" Name="SIL Converters" />
+                </Directory>
+            </Directory>
+            
+        </Directory>
+	</Module>
+</Wix>

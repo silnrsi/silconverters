@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
 	<Module Id="PNG40MergeModule" Language="1033" Version="4.0.0.0">
-		<Package Id="e172c810-6152-4feb-b1ea-73564d066276" Comments="Converters used in Papua New Guinea" Description="Converters used in PNG" Keywords="SILConverters; Encoding Conversion; Transliteration; EncConverters" Manufacturer="SIL International" InstallerVersion="200" />
+		<Package Id="e172c810-6152-4feb-b1ea-73564d066276" Comments="Converters used in Papua New Guinea" Description="Converters used in PNG" Keywords="SILConverters; Encoding Conversion; Transliteration; EncConverters" Manufacturer="SIL International" InstallerVersion="500" />
 
 		<Directory Id="TARGETDIR" Name="SourceDir">
             <Directory Id="CommonAppDataFolder" SourceName="AppData">

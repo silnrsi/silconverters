@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
 	<Module Id="FindPhone2IPA40MergeModule" Language="1033" Version="4.0.0.0">
-		<Package Id="cde3c042-3e92-44f0-a862-6ca48b07c2a0" Comments="Set of converters related to the FindPhone encoding" Description="Encoding Converters related to FindPhone encoding" Keywords="FindPhone; SILConverters; Encoding Conversion; EncConverters" Manufacturer="SIL International" InstallerVersion="200" />
+		<Package Id="cde3c042-3e92-44f0-a862-6ca48b07c2a0" Comments="Set of converters related to the FindPhone encoding" Description="Encoding Converters related to FindPhone encoding" Keywords="FindPhone; SILConverters; Encoding Conversion; EncConverters" Manufacturer="SIL International" InstallerVersion="500" />
 
 		<Directory Id="TARGETDIR" Name="SourceDir">
             <Directory Id="CommonAppDataFolder" SourceName="AppData">

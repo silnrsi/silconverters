@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
     <Module Id="Set_PATH_Environment_Variable" Language="0" Version="1.0">
-        <Package Id="CE24DB4B-6A1C-4BEC-91A8-432FB75AECE7" Keywords="MergeModule, MSI, PATH" Description="Sets the PATH Environment variable for Encoding Converters" Manufacturer="SIL International" InstallerVersion="110" Platform="x86" Languages="0" SummaryCodepage="1252" />
+        <Package Id="CE24DB4B-6A1C-4BEC-91A8-432FB75AECE7" Keywords="MergeModule, MSI, PATH" Description="Sets the PATH Environment variable for Encoding Converters" 
+                 Manufacturer="SIL International" InstallerVersion="500" Platform="x86" Languages="0" SummaryCodepage="1252" />
 
         <Directory Id="TARGETDIR" Name="SourceDir">
             <Directory Id="CommonFilesFolder" Name="Common">

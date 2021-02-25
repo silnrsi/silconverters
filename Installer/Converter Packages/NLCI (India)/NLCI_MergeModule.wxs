@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
 	<Module Id="NLCI_India40MergeModule" Language="1033" Version="4.0.0.0">
-		<Package Id="641f4129-3b21-4fa4-b1f5-411fd6038932" Comments="Encoding converters created by NLCI in India" Description="Converters/transliterators created by NLCI in India" Keywords="SILConverters; Encoding Conversion; WinScript; CDAC; EncConverters" Manufacturer="SIL International" InstallerVersion="200" />
+		<Package Id="641f4129-3b21-4fa4-b1f5-411fd6038932" Comments="Encoding converters created by NLCI in India" Description="Converters/transliterators created by NLCI in India" Keywords="SILConverters; Encoding Conversion; WinScript; CDAC; EncConverters" Manufacturer="SIL International" InstallerVersion="500" />
 
 		<Directory Id="TARGETDIR" Name="SourceDir">
             <Directory Id="CommonAppDataFolder" SourceName="AppData">

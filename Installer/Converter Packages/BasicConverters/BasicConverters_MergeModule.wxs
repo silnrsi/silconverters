@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
     <Module Id="BasicConverters40MergeModule" Language="1033" Version="4.0.0.0">
-        <Package Id="986d0cb0-8d39-4120-a049-eaffdf42c6f9" Comments="Set of basic converters usable to most users" Description="Basic Converters for use in SILConverters' client applications" Keywords="SILConverters; Encoding Conversion; Transliteration; EncConverters" Manufacturer="SIL International" InstallerVersion="200" />
+        <Package Id="986d0cb0-8d39-4120-a049-eaffdf42c6f9" Comments="Set of basic converters usable to most users" Description="Basic Converters for use in SILConverters' client applications" Keywords="SILConverters; Encoding Conversion; Transliteration; EncConverters" Manufacturer="SIL International" InstallerVersion="500" />
 
         <Directory Id="TARGETDIR" Name="SourceDir">
             <Directory Id="CommonAppDataFolder" SourceName="AppData">

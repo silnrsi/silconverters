@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
 	<Module Id="TECkitPackageMM" Language="1033" Version="1.0.0.0">
-		<Package Id="f34b50e8-aec4-46b3-a5e9-660e6a1c9f5d" Comments="Merge module containing the TECkit documentation and executables" Description="TECkit DOCs/EXEs" InstallerVersion="200" Keywords="TECkit, Encoding Conversion" Manufacturer="SIL" />
+		<Package Id="f34b50e8-aec4-46b3-a5e9-660e6a1c9f5d" Comments="Merge module containing the TECkit documentation and executables" Description="TECkit DOCs/EXEs" InstallerVersion="500" 
+             Keywords="TECkit, Encoding Conversion" Manufacturer="SIL" />
 
 		<Directory Id="TARGETDIR" Name="SourceDir">
 			<Directory Id="MergeRedirectFolder">

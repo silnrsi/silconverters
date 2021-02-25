@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
 	<Module Id="Cameroon40MergeModule" Language="1033" Version="4.0.0.0">
-		<Package Id="1812191f-e74f-4b67-960c-bfca75806f8d" Comments="Encoding converters used in Cameroon" Description="Encoding converters for Cameroon encoding" Manufacturer="SIL International" Keywords="SILConverters; Encoding Conversion; CamCam; EncConverters" InstallerVersion="200" />
+		<Package Id="1812191f-e74f-4b67-960c-bfca75806f8d" Comments="Encoding converters used in Cameroon" Description="Encoding converters for Cameroon encoding" Manufacturer="SIL International" Keywords="SILConverters; Encoding Conversion; CamCam; EncConverters" InstallerVersion="500" />
 
 		<Directory Id="TARGETDIR" Name="SourceDir">
             <Directory Id="CommonAppDataFolder" SourceName="AppData">

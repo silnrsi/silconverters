@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
 	<Module Id="East_Africa40MergeModule" Language="1033" Version="4.0.0.0">
-		<Package Id="72c6abaf-2171-4db1-afa2-ab46ac37362b" Comments="Encoding converters used in East Africa" Description="Encoding converters for East Africa" Keywords="SILConverters; Encoding Conversion; East Africa; EncConverters" Manufacturer="SIL International" InstallerVersion="200" />
+		<Package Id="72c6abaf-2171-4db1-afa2-ab46ac37362b" Comments="Encoding converters used in East Africa" Description="Encoding converters for East Africa" Keywords="SILConverters; Encoding Conversion; East Africa; EncConverters" Manufacturer="SIL International" InstallerVersion="500" />
 
 		<Directory Id="TARGETDIR" Name="SourceDir">
             <Directory Id="CommonAppDataFolder" SourceName="AppData">

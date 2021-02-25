@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
 	<Module Id="SagIndic_MergeModule" Language="1033" Version="4.0.0.0">
-		<Package Id="f24ceb12-8d52-4974-859e-ba23da5c6366" Comments="Converters/transliterators used in South Asia Group" Description="Converters/transliterators used in South Asia Group" Manufacturer="SIL International" Keywords="SILConverters; Encoding Conversion; Transliteration; EncConverters" InstallerVersion="200" />
+		<Package Id="f24ceb12-8d52-4974-859e-ba23da5c6366" Comments="Converters/transliterators used in South Asia Group" Description="Converters/transliterators used in South Asia Group" Manufacturer="SIL International" Keywords="SILConverters; Encoding Conversion; Transliteration; EncConverters" InstallerVersion="500" />
 
         <Directory Id="TARGETDIR" Name="SourceDir">
             <Directory Id="CommonAppDataFolder" SourceName="AppData">

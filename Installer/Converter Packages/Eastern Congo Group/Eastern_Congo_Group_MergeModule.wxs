@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
 	<Module Id="Eastern_Congo_Group40MergeModule" Language="1033" Version="4.0.0.0">
-		<Package Id="6162bc4e-4267-43c2-9e8c-2860c6732ad5" Comments="Encoding converters used in Eastern Congo Group" Description="Encoding converters for Eastern Congo Group" Keywords="SILConverters; Encoding Conversion; Eastern Congo Group; EncConverters" Manufacturer="SIL International" InstallerVersion="200" />
+		<Package Id="6162bc4e-4267-43c2-9e8c-2860c6732ad5" Comments="Encoding converters used in Eastern Congo Group" Description="Encoding converters for Eastern Congo Group" Keywords="SILConverters; Encoding Conversion; Eastern Congo Group; EncConverters" Manufacturer="SIL International" InstallerVersion="500" />
 
 		<Directory Id="TARGETDIR" Name="SourceDir">
             <Directory Id="CommonAppDataFolder" SourceName="AppData">

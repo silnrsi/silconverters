@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+	<Module Id="SilConvertersForWord64bitMM" Language="1033" Version="4.0.0.0">
+		<Package Id="{E10000DD-A215-4C79-96E3-E118CD5DF649}" Comments="SILConverters' Bulk Word Document Converter" Keywords="SILConverters; Encoding Conversion; SIL; Word" 
+             Manufacturer="SIL International" InstallerVersion="500" 
+             Platform="x64" />
+
+		<Directory Id="TARGETDIR" Name="SourceDir">
+
+            <Component Id="xmlOpenWithRegKeysCr" Guid="6B391C9F-BA36-4E3D-8C58-55785E03857C">
+
+                <!-- Optional: add an 'Edit with XYZ' to 'right click' even when not associated -->
+                <RegistryValue Root="HKCR" Key="SystemFileAssociations\.doc\shell\edit.SILConvertersWordML.exe" Value="Edit with Bulk Word Document Converter" Type="string" />
+                <RegistryValue Root="HKCR" Key="SystemFileAssociations\.doc\shell\edit.SILConvertersWordML.exe\command" Value="&quot;[#SILConvertersWordML.exe]&quot; &quot;%1&quot;" Type="string" />
+                <RegistryValue Root="HKCR" Key="SystemFileAssociations\.docx\shell\edit.SILConvertersWordML.exe" Value="Edit with Bulk Word Document Converter" Type="string" />
+                <RegistryValue Root="HKCR" Key="SystemFileAssociations\.docx\shell\edit.SILConvertersWordML.exe\command" Value="&quot;[#SILConvertersWordML.exe]&quot; &quot;%1&quot;" Type="string" />
+                <RegistryValue Root="HKCR" Key="SystemFileAssociations\.rtf\shell\edit.SILConvertersWordML.exe" Value="Edit with Bulk Word Document Converter" Type="string" />
+                <RegistryValue Root="HKCR" Key="SystemFileAssociations\.rtf\shell\edit.SILConvertersWordML.exe\command" Value="&quot;[#SILConvertersWordML.exe]&quot; &quot;%1&quot;" Type="string" />
+                <RegistryValue Root="HKCR" Key="SystemFileAssociations\.xml\shell\edit.SILConvertersWordML.exe" Value="Edit with Bulk Word Document Converter" Type="string" />
+                <RegistryValue Root="HKCR" Key="SystemFileAssociations\.xml\shell\edit.SILConvertersWordML.exe\command" Value="&quot;[#SILConvertersWordML.exe]&quot; &quot;%1&quot;" Type="string" />
+            </Component>
+
+            <Directory Id="MergeRedirectFolder">
+
+                <Component Id="SILConvertersWordML.exe" Guid="{FC8227AF-2A3D-452B-BE06-2CBB6B11543B}">
+                    <File Id="SILConvertersWordML.exe" Name="SILConvertersWordML.exe" KeyPath="yes" Assembly=".net" AssemblyManifest="SILConvertersWordML.exe" 
+                          AssemblyApplication="SILConvertersWordML.exe" Source="..\..\output\x64\release\SILConvertersWordML.exe" />
+                    <Shortcut Id="SILConvertersWordML.exe" Directory="SILConverters" Name="Bulk Word Document Converter" Description="Convert your MS Word documents with converters in the system repository" IconIndex="0" Show="normal" Target="[#SILConvertersWordML.exe]" WorkingDirectory="MergeRedirectFolder" Advertise="no" />
+                </Component>
+            </Directory>
+
+            <Directory Id="StartMenuFolder" SourceName="Start Menu">
+                <Directory Id="ProgramMenuFolder" SourceName="Programs">
+                    <Directory Id="SILConverters" Name="SIL Converters" />
+                </Directory>
+            </Directory>
+
+        </Directory>
+	</Module>
+</Wix>

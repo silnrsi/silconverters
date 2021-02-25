@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
 	<Module Id="MS_KB908002_Fix" Language="1033" Version="1.0.0.0">
-		<Package Id="82b48c06-e6b8-4d5a-9eeb-189d36a5145f" Keywords="SILConverters for Office 2003, KB908002, Shared Add-in support fix" Description="MS KB908002 Fix" Manufacturer="SIL International" SummaryCodepage="1252" InstallerVersion="200" />
+		<Package Id="82b48c06-e6b8-4d5a-9eeb-189d36a5145f" Keywords="SILConverters for Office 2003, KB908002, Shared Add-in support fix" Description="MS KB908002 Fix" Manufacturer="SIL International" SummaryCodepage="1252" InstallerVersion="500" />
 
         <Property Id="SIL_KB908002_PRESENT">
             <ComponentSearch Id="AppComp" Guid="232405A0-F32C-4F19-889A-FEE3EC7305C8" Type="directory"/>

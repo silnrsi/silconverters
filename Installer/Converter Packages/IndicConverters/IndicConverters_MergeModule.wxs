@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
 	<Module Id="IndicConverters40MergeModule" Language="1033" Version="4.0.0.0">
-		<Package Id="d0d94060-4d2a-4607-bdaf-94c64c485b41" Comments="Merge module for SILConverters Indic Add-in" Description="Merge Module for SILConverters (Indic Add-in)" Manufacturer="SIL International" Keywords="Technical Hindi Google Group Html converter, TECkit maps, Indic encodings, SILConverters" InstallerVersion="200" />
+		<Package Id="d0d94060-4d2a-4607-bdaf-94c64c485b41" Comments="Merge module for SILConverters Indic Add-in" Description="Merge Module for SILConverters (Indic Add-in)" 
+             Manufacturer="SIL International" Keywords="Technical Hindi Google Group Html converter, TECkit maps, Indic encodings, SILConverters" InstallerVersion="500" />
 
 		<Directory Id="TARGETDIR" Name="SourceDir">
 			<Directory Id="MergeRedirectFolder">

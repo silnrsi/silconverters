@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
 	<Module Id="ICU_Transliterators40MergeModule" Language="1033" Version="4.0.0.0">
-		<Package Id="7a662420-fd5e-4edd-8eb6-7017ab530636" Comments="Set of basic ICU transliterators from different ranges of Unicode to Latin" Description="Basic ICU transliterators from different ranges of Unicode to Latin" Manufacturer="SIL International" Keywords="ICU; SILConverters; Encoding Conversion; Transliteration; EncConverters" InstallerVersion="200" />
+		<Package Id="7a662420-fd5e-4edd-8eb6-7017ab530636" Comments="Set of basic ICU transliterators from different ranges of Unicode to Latin" Description="Basic ICU transliterators from different ranges of Unicode to Latin" Manufacturer="SIL International" Keywords="ICU; SILConverters; Encoding Conversion; Transliteration; EncConverters" InstallerVersion="500" />
 
 		<Directory Id="TARGETDIR" Name="SourceDir">
             <Directory Id="CommonAppDataFolder" SourceName="AppData">

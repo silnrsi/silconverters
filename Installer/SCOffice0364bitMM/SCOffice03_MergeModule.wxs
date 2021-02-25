@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+	<Module Id="SCOffice0364bitMM" Language="1033" Version="1.0.0.0">
+		<Package Id="{74FFDBE9-6F29-4670-9F1A-8CE09F046B72}" Comments="Merge Module for the SILConverters for Office 2003 application" 
+             Description="Setup for the SILConverters for Office 2003 application" Keywords="SIL Encoding Converters; Microsoft Office" Manufacturer="SIL International" 
+             InstallerVersion="500" 
+             Platform="x64" />
+
+
+		<Directory Id="TARGETDIR" Name="SourceDir">
+			<Directory Id="MergeRedirectFolder">
+
+                <Component Id="SILConvertersOffice.dll" Guid="{55CE0F8F-4649-4D08-B405-50678AFB6D55}">
+                    <Class Id="{31B69269-4301-4522-8446-3C3D3ACF7ABE}" Context="InprocServer32" Description="SILConvertersOffice.Connect" ThreadingModel="both" ForeignServer="mscoree.dll">
+                        <ProgId Id="SILConvertersOffice.Connect" Description="SILConvertersOffice.Connect" />
+                    </Class>
+                    <Class Id="{3BD353E2-4106-3561-9AB0-60DA1E9354BA}" Context="InprocServer32" Description="SILConvertersOffice.InstallerRegistrationActions" ThreadingModel="both" ForeignServer="mscoree.dll">
+                        <ProgId Id="SILConvertersOffice.InstallerRegistrationActions" Description="SILConvertersOffice.InstallerRegistrationActions" />
+                    </Class>
+                    <Class Id="{8D22729D-C1F0-3F03-902B-F8CBB19D8E73}" Context="InprocServer32" Description="SILConvertersOffice.ConvertFunctions" ThreadingModel="both" Programmable="yes" ForeignServer="mscoree.dll">
+                        <ProgId Id="SILConvertersOffice.ConvertFunctions" Description="SILConvertersOffice.ConvertFunctions" />
+                    </Class>
+                    <File Id="SILConvertersOffice.dll" KeyPath="yes" Source="..\..\output\x64\release\SILConvertersOffice.dll" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{31B69269-4301-4522-8446-3C3D3ACF7ABE}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{31B69269-4301-4522-8446-3C3D3ACF7ABE}\InprocServer32\4.0.0.0" Name="Class" Value="SILConvertersOffice.Connect" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{31B69269-4301-4522-8446-3C3D3ACF7ABE}\InprocServer32\4.0.0.0" Name="Assembly" Value="SILConvertersOffice, Version=4.0.0.0, Culture=neutral, PublicKeyToken=f1447bae1e63f485" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{31B69269-4301-4522-8446-3C3D3ACF7ABE}\InprocServer32\4.0.0.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{31B69269-4301-4522-8446-3C3D3ACF7ABE}\InprocServer32\4.0.0.0" Name="CodeBase" Value="file:///[#SILConvertersOffice.dll]" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{31B69269-4301-4522-8446-3C3D3ACF7ABE}\InprocServer32" Name="Class" Value="SILConvertersOffice.Connect" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{31B69269-4301-4522-8446-3C3D3ACF7ABE}\InprocServer32" Name="Assembly" Value="SILConvertersOffice, Version=4.0.0.0, Culture=neutral, PublicKeyToken=f1447bae1e63f485" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{31B69269-4301-4522-8446-3C3D3ACF7ABE}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{31B69269-4301-4522-8446-3C3D3ACF7ABE}\InprocServer32" Name="CodeBase" Value="file:///[#SILConvertersOffice.dll]" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{3BD353E2-4106-3561-9AB0-60DA1E9354BA}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{3BD353E2-4106-3561-9AB0-60DA1E9354BA}\InprocServer32\4.0.0.0" Name="Class" Value="SILConvertersOffice.InstallerRegistrationActions" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{3BD353E2-4106-3561-9AB0-60DA1E9354BA}\InprocServer32\4.0.0.0" Name="Assembly" Value="SILConvertersOffice, Version=4.0.0.0, Culture=neutral, PublicKeyToken=f1447bae1e63f485" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{3BD353E2-4106-3561-9AB0-60DA1E9354BA}\InprocServer32\4.0.0.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{3BD353E2-4106-3561-9AB0-60DA1E9354BA}\InprocServer32\4.0.0.0" Name="CodeBase" Value="file:///[#SILConvertersOffice.dll]" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{3BD353E2-4106-3561-9AB0-60DA1E9354BA}\InprocServer32" Name="Class" Value="SILConvertersOffice.InstallerRegistrationActions" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{3BD353E2-4106-3561-9AB0-60DA1E9354BA}\InprocServer32" Name="Assembly" Value="SILConvertersOffice, Version=4.0.0.0, Culture=neutral, PublicKeyToken=f1447bae1e63f485" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{3BD353E2-4106-3561-9AB0-60DA1E9354BA}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{3BD353E2-4106-3561-9AB0-60DA1E9354BA}\InprocServer32" Name="CodeBase" Value="file:///[#SILConvertersOffice.dll]" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{8D22729D-C1F0-3F03-902B-F8CBB19D8E73}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{8D22729D-C1F0-3F03-902B-F8CBB19D8E73}\InprocServer32\4.0.0.0" Name="Class" Value="SILConvertersOffice.ConvertFunctions" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{8D22729D-C1F0-3F03-902B-F8CBB19D8E73}\InprocServer32\4.0.0.0" Name="Assembly" Value="SILConvertersOffice, Version=4.0.0.0, Culture=neutral, PublicKeyToken=f1447bae1e63f485" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{8D22729D-C1F0-3F03-902B-F8CBB19D8E73}\InprocServer32\4.0.0.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{8D22729D-C1F0-3F03-902B-F8CBB19D8E73}\InprocServer32\4.0.0.0" Name="CodeBase" Value="file:///[#SILConvertersOffice.dll]" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{8D22729D-C1F0-3F03-902B-F8CBB19D8E73}\InprocServer32" Name="Class" Value="SILConvertersOffice.ConvertFunctions" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{8D22729D-C1F0-3F03-902B-F8CBB19D8E73}\InprocServer32" Name="Assembly" Value="SILConvertersOffice, Version=4.0.0.0, Culture=neutral, PublicKeyToken=f1447bae1e63f485" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{8D22729D-C1F0-3F03-902B-F8CBB19D8E73}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{8D22729D-C1F0-3F03-902B-F8CBB19D8E73}\InprocServer32" Name="CodeBase" Value="file:///[#SILConvertersOffice.dll]" Type="string" Action="write" />
+                </Component>
+
+                <Component Id="SecOffice_COMAddInShim03.dll" Guid="{4272FF28-0E4C-4DA5-A52B-1596D5EA8EBC}">
+                    <File Id="SecOffice_COMAddInShim03.dll" KeyPath="yes" Source="..\..\output\x64\release\SecOffice_COMAddInShim03.dll">
+                        <Class Id="{31B69269-4301-4522-8446-3C3D3ACF7ABE}" Context="InprocServer32" Description="SILConvertersOffice.Connect" ThreadingModel="apartment" Programmable="yes">
+                            <ProgId Id="SILConvertersOffice.Connect" Description="Connect Class" />
+                        </Class>
+                    </File>
+                </Component>
+
+                <Component Id="SecOffice_COMAddInShim03" Guid="{AF28EC90-8738-45A6-9A4E-D77BDA16667B}">
+                    <RegistryValue Root="HKCU" Key="Software\Microsoft\Office\Access\Addins\SILConvertersOffice.Connect" Name="Description" Value="Providing access to SILConverters from Microsoft Office 2003 applications" Type="string" Action="write" />
+                    <RegistryValue Root="HKCU" Key="Software\Microsoft\Office\Access\Addins\SILConvertersOffice.Connect" Name="FriendlyName" Value="SILConverters for Microsoft Office 2003" Type="string" Action="write" />
+                    <RegistryValue Root="HKCU" Key="Software\Microsoft\Office\Access\Addins\SILConvertersOffice.Connect" Name="LoadBehavior" Value="3" Type="integer" Action="write" />
+                    <RegistryValue Root="HKCU" Key="Software\Microsoft\Office\Excel\Addins\SILConvertersOffice.Connect" Name="Description" Value="Providing access to SILConverters from Microsoft Office 2003 applications" Type="string" Action="write" />
+                    <RegistryValue Root="HKCU" Key="Software\Microsoft\Office\Excel\Addins\SILConvertersOffice.Connect" Name="FriendlyName" Value="SILConverters for Microsoft Office 2003" Type="string" Action="write" />
+                    <RegistryValue Root="HKCU" Key="Software\Microsoft\Office\Excel\Addins\SILConvertersOffice.Connect" Name="LoadBehavior" Value="3" Type="integer" Action="write" />
+                    <RegistryValue Root="HKCU" Key="Software\Microsoft\Office\Publisher\Addins\SILConvertersOffice.Connect" Name="Description" Value="Providing access to SILConverters from Microsoft Office 2003 applications" Type="string" Action="write" />
+                    <RegistryValue Root="HKCU" Key="Software\Microsoft\Office\Publisher\Addins\SILConvertersOffice.Connect" Name="FriendlyName" Value="SILConverters for Microsoft Office 2003" Type="string" Action="write" />
+                    <RegistryValue Root="HKCU" Key="Software\Microsoft\Office\Publisher\Addins\SILConvertersOffice.Connect" Name="LoadBehavior" Value="3" Type="integer" Action="write" />
+                    <RegistryValue Root="HKCU" Key="Software\Microsoft\Office\Word\Addins\SILConvertersOffice.Connect" Name="Description" Value="Providing access to SILConverters from Microsoft Office 2003 applications" Type="string" Action="write" />
+                    <RegistryValue Root="HKCU" Key="Software\Microsoft\Office\Word\Addins\SILConvertersOffice.Connect" Name="FriendlyName" Value="SILConverters for Microsoft Office 2003" Type="string" Action="write" />
+                    <RegistryValue Root="HKCU" Key="Software\Microsoft\Office\Word\Addins\SILConvertersOffice.Connect" Name="LoadBehavior" Value="3" Type="integer" Action="write" />
+                </Component>
+
+                <Component Id="SecOffice_ManagedAggregator03.dll" Guid="{7BE3ED24-F018-4A2E-BD83-81F793284D84}">
+                    <File Id="SecOffice_ManagedAggregator03.dll" Name="SecOffice_ManagedAggregator03.dll" Vital="yes" KeyPath="yes" AssemblyManifest="SecOffice_ManagedAggregator03.dll" 
+                          AssemblyApplication="SecOffice_ManagedAggregator03.dll" Assembly=".net" Source="..\..\output\x64\release\SecOffice_ManagedAggregator03.dll"/>
+                </Component>
+
+                <Component Id="extensibility.dll" Guid="04F00FED-576D-4B33-B697-0264976885E6">
+                    <File Id="extensibility.dll" Name="extensibility.dll" Vital="yes" KeyPath="yes" Source="..\..\src\SILConvertersOffice\DistFiles\extensibility.dll"/>
+                </Component>
+
+            </Directory>
+		</Directory>
+	</Module>
+</Wix>

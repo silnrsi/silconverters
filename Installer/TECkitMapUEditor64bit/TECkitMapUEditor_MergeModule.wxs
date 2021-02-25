@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+	<Module Id="TECkitMapUEditor64bit" Language="1033" Version="4.0.0.0">
+		<Package Id="{15771E00-DFEB-4B79-8F19-019B23A11C30}" Manufacturer="SIL International" Comments="Merge module containing the TECkit Unicode Map Editor" 
+             Description="TECkit Map Unicode Editor" InstallerVersion="500" Keywords="TECkit, Encoding Conversion" 
+             Platform="x64" />
+
+		<Directory Id="TARGETDIR" Name="SourceDir">
+			<Directory Id="MergeRedirectFolder">
+
+                <Component Id="TECkitMappingEditorU.exe" Guid="{6D56E39C-E7DE-4691-B21D-9DAEDD178E0B}">
+                    <File Id="TECkitMappingEditorU.exe" Name="TECkitMappingEditorU.exe" KeyPath="yes" Assembly=".net" AssemblyManifest="TECkitMappingEditorU.exe" 
+                          AssemblyApplication="TECkitMappingEditorU.exe" Source="..\..\output\x64\release\TECkitMappingEditorU.exe" />
+                    <ProgId Id="SIL.TECkitMapEditor" Description="TECkit map for encoding conversion" Icon='TECkitMappingEditorU.exe' IconIndex="0">
+                        <Extension Id="map" ContentType="application/teckitmap">
+                            <Verb Id="open" Command="Open with TECkit Map Editor" TargetFile="TECkitMappingEditorU.exe" Argument="&quot;%1&quot;"/>
+                        </Extension>
+                    </ProgId>
+                    <Shortcut Id="TECkitMappingEditorU.exe" Directory="SILConverters" Name="TECkit Map Unicode Editor" Description="Unicode editor for TECkit maps" IconIndex="0" Show="normal" Target="[#TECkitMappingEditorU.exe]" WorkingDirectory="MergeRedirectFolder" Advertise="no" />
+                </Component>
+
+                <Component Id="UnicodeRanges.xml" Guid="{7B3DC119-E8BB-4FE2-AC94-E35F6A2B9FE7}">
+                    <File Id="UnicodeRanges.xml" Name="UnicodeRanges.xml" KeyPath="yes" Source="..\..\src\TECkit Mapping Editor\UnicodeRanges.xml" />
+                </Component>
+
+            </Directory>
+
+            <Directory Id="StartMenuFolder" SourceName="Start Menu">
+                <Directory Id="ProgramMenuFolder" SourceName="Programs">
+                    <Directory Id="SILConverters" Name="SIL Converters" />
+                </Directory>
+            </Directory>
+
+        </Directory>
+	</Module>
+</Wix>

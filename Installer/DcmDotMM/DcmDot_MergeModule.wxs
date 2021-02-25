@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
 	<Module Id="DcmDotMM" Language="1033" Version="4.0.0.0">
-		<Package Id="d59085a5-5cb5-44e4-aef8-15910ce63bc0" Comments="Data Conversion Macro Word document template" Description="Document Template for using EncConverters in MS Word" InstallerVersion="200" Keywords="SILConverters; Encoding Conversion in MS Word" Manufacturer="SIL" />
+		<Package Id="d59085a5-5cb5-44e4-aef8-15910ce63bc0" Comments="Data Conversion Macro Word document template" Description="Document Template for using EncConverters in MS Word" InstallerVersion="500" Keywords="SILConverters; Encoding Conversion in MS Word" Manufacturer="SIL" />
 
 		<Directory Id="TARGETDIR" Name="SourceDir">
         

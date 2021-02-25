@@ -79,12 +79,36 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <BaseAddress>285212672</BaseAddress>
+    <WarningLevel>1</WarningLevel>
+    <NoWarn>42016,42017,42018,42019,42032,42353,42354,42355</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <BaseAddress>285212672</BaseAddress>
+    <Optimize>true</Optimize>
+    <WarningLevel>1</WarningLevel>
+    <NoWarn>42016,42017,42018,42019,42032,42353,42354,42355</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ECInterfaces, Version=4.0.0.0, Culture=neutral, PublicKeyToken=f1447bae1e63f485, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Encoding-Converters-Core.0.2.0\lib\net45\x64\ECInterfaces.dll</HintPath>
+    <Reference Include="ECInterfaces, Version=4.0.0.0, Culture=neutral, PublicKeyToken=f1447bae1e63f485, processorArchitecture=AMD64">
+      <HintPath>..\..\packages\Encoding-Converters-Core.0.2.6\lib\net45\x64\ECInterfaces.dll</HintPath>
     </Reference>
-    <Reference Include="SilEncConverters40, Version=4.0.0.0, Culture=neutral, PublicKeyToken=f1447bae1e63f485, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Encoding-Converters-Core.0.2.0\lib\net45\x64\SilEncConverters40.dll</HintPath>
+    <Reference Include="SilEncConverters40, Version=4.0.0.0, Culture=neutral, PublicKeyToken=f1447bae1e63f485, processorArchitecture=AMD64">
+      <HintPath>..\..\packages\Encoding-Converters-Core.0.2.6\lib\net45\x64\SilEncConverters40.dll</HintPath>
     </Reference>
     <Reference Include="System">
       <Name>System</Name>
@@ -201,9 +225,9 @@
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.VisualBasic.targets" />
   <PropertyGroup>
-    <PreBuildEvent>xcopy /y "$(SolutionDir)packages\Encoding-Converters-Core.0.2.0\runtimes\Win32\*.*" "$(SolutionDir)EC DistFiles\$(PlatformName)\"
-xcopy /s /y "$(SolutionDir)packages\Encoding-Converters-Core.0.2.0\redist\*.*" "$(SolutionDir)EC DistFiles\redist\"
-xcopy /y "$(SolutionDir)packages\Encoding-Converters-Core.0.2.0\MergeModules\*.*" "$(SolutionDir)EC DistFiles\MergeModules\"
+    <PreBuildEvent>xcopy /y "$(SolutionDir)packages\Encoding-Converters-Core.0.2.6\runtimes\Win32\*.*" "$(SolutionDir)EC DistFiles\$(PlatformName)\"
+xcopy /s /y "$(SolutionDir)packages\Encoding-Converters-Core.0.2.6\redist\*.*" "$(SolutionDir)EC DistFiles\redist\"
+xcopy /s /y "$(SolutionDir)packages\Encoding-Converters-Core.0.2.6\MergeModules\*.*" "$(SolutionDir)EC DistFiles\MergeModules\"
 xcopy /y "$(SolutionDir)EC DistFiles\$(PlatformName)\*.*" "$(SolutionDir)output\$(PlatformName)\$(ConfigurationName)\"
 xcopy /s /y "$(SolutionDir)EC DistFiles\redist\*.*" "$(SolutionDir)output\$(PlatformName)\$(ConfigurationName)\"</PreBuildEvent>
     <PostBuildEvent>xcopy /y "$(TargetDir)*.*" $(SolutionDir)output\$(PlatformName)\$(ConfigurationName)</PostBuildEvent>

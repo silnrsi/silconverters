@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
 	<Module Id="ScHelpMM" Language="1033" Version="4.0.0.0">
-		<Package Id="96c48f87-45fa-42c8-b89b-d2319b9f45b0" Comments="Merge module for the SILConverters Help files" Description="Help files for SILConverters' client applications, transduction engines, and installation process" InstallerVersion="200" Keywords="SIL; EncConverters; Help" Manufacturer="SIL" />
+		<Package Id="96c48f87-45fa-42c8-b89b-d2319b9f45b0" Comments="Merge module for the SILConverters Help files" 
+             Description="Help files for SILConverters' client applications, transduction engines, and installation process" InstallerVersion="500" Keywords="SIL; EncConverters; Help" 
+             Manufacturer="SIL" />
 
 		<Directory Id="TARGETDIR" Name="SourceDir">
 			<Directory Id="MergeRedirectFolder">

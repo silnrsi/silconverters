@@ -38,7 +38,8 @@
     #import <mscorlib.tlb> raw_interfaces_only high_property_prefixes("_get","_put","_putref")
 
     // Imports the MSADDNDR.DLL typelib which we need for IDTExtensibility2.
-    #import "libid:AC0714F2-3D04-11D1-AE7D-00A0C90F26F4" raw_interfaces_only named_guids
+    // doesn't work -- have to use the older one below #import "libid:AC0714F2-3D04-11D1-AE7D-00A0C90F26F4" raw_interfaces_only named_guids
+    #import "..\DistFiles\msaddndr.dll" raw_interfaces_only named_guids
 #pragma warning( default : 4146 )
 #pragma warning( default : 4278 )
 
