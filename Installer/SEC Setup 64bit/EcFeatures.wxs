@@ -67,7 +67,7 @@
                 <MergeRef Id="SEC_EC"/>
                 <MergeRef Id="SCOffice03"/>
                 <MergeRef Id="SEC_ICU"/>
-                <MergeRef Id="CRT100"/>
+                <MergeRef Id="CRT"/>
                 <!--<MergeRef Id="ICU"/>
                 <MergeRef Id="ICUECHelp"/>-->
             </Feature>
@@ -77,7 +77,7 @@
                 <MergeRef Id="SEC_EC"/>
                 <MergeRef Id="SCOffice07"/>
                 <MergeRef Id="SEC_ICU"/>
-                <MergeRef Id="CRT100"/>
+                <MergeRef Id="CRT"/>
               <!--<MergeRef Id="ICU"/>
                 <MergeRef Id="ICUECHelp"/>-->
             </Feature>
@@ -87,7 +87,7 @@
                 <MergeRef Id="SEC_EC"/>
                 <MergeRef Id="SCOffice10"/>
                 <MergeRef Id="SEC_ICU"/>
-                <MergeRef Id="CRT100"/>
+                <MergeRef Id="CRT"/>
               <!--<MergeRef Id="ICU"/>
                 <MergeRef Id="ICUECHelp"/>-->
             </Feature>
@@ -96,7 +96,7 @@
                 <MergeRef Id="SEC_EC"/>
                 <MergeRef Id="SCOffice13"/>
                 <MergeRef Id="SEC_ICU"/>
-                <MergeRef Id="CRT100"/>
+                <MergeRef Id="CRT"/>
               <!--<MergeRef Id="ICU"/>
                 <MergeRef Id="ICUECHelp"/>-->
             </Feature>
@@ -135,7 +135,7 @@
                 <MergeRef Id="MFC"/>
                 <MergeRef Id="CRT"/>
                 <MergeRef Id="SEC_ICU"/>
-                <MergeRef Id="CRT100"/>
+                <MergeRef Id="CRT"/>
             </Feature>
             <Feature Id="Adapt_It" Title="Adapt It" Description="Contains AdaptIt knowledge base-related transducers (i.e. the Lookup converter and the target word guesser)." Display="expand" Level="4" AllowAdvertise="no">
                 <Condition Level="3"><![CDATA[(SIL_ADAPTIT_LEGACY_FOUND OR SIL_ADAPTIT_UNICODE_FOUND) AND NOT REMOVE]]></Condition>
@@ -203,7 +203,7 @@
                 <MergeRef Id="ICUTransliterators"/>
                 <MergeRef Id="SetPath"/>
                 <MergeRef Id="SEC_ICU"/>
-                <MergeRef Id="CRT100"/>
+                <MergeRef Id="CRT"/>
               <!--
                 <MergeRef Id="ICU"/>
                 <MergeRef Id="ICUECHelp"/>

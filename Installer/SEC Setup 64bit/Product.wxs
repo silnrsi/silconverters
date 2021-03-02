@@ -118,9 +118,7 @@
             <RegistrySearch Id="AppReg1" Root="HKLM" Key="SOFTWARE\Python\PythonCore\2.7\InstallPath" Type="raw" />
         </Property>
         <Property Id="SIL_PERL_FOUND">
-            <DirectorySearch Id="AppFile" Path="C:\Perl\bin" Depth="0">
-                <FileSearch Id="AppFile" Name="perl510.dll" />
-            </DirectorySearch>
+          <DirectorySearch Id="AppFile" Path="C:\Perl64" Depth="0" />
         </Property>
         <Property Id="SIL_ADAPTIT_LEGACY_FOUND">
             <DirectorySearch Id="AIProjectFolder" Path="[PersonalFolder]" Depth="0">

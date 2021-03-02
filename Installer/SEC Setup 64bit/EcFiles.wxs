@@ -20,6 +20,7 @@
           </Directory>
         </Directory>
         <Directory Id="SystemFolder" SourceName="System32" />
+        <Directory Id="System64Folder" SourceName="SysWOW64" />
       </Directory>
       <Directory Id="ProgramFiles64Folder">
         <Directory Id="CommonFiles64Folder">
@@ -28,6 +29,7 @@
         </Directory>
         <Directory Id="SIL" Name="SIL">
           <Directory Id="INSTALLDIR" Name="SILConverters" />
+          <Directory Id="TECkit" Name="TECkit" />
           <!-- Place holder for merge modules -->
         </Directory>
         <Directory Id="Toolbox" Name="Toolbox" />
@@ -36,12 +38,6 @@
         <Directory Id="AllUserAppDataSIL" Name="SIL">
           <Directory Id="AllUserAppDataSILConverters40" Name="SILConverters40" />
         </Directory >
-      </Directory>
-      <Directory Id="ProgramFilesFolder" SourceName="Program Files">
-        <Directory Id="SIL32" Name="SIL">
-          <Directory Id="TECkit" Name="TECkit" />
-          <!-- Place holder for (32-bit) TECkit applications from merge module -->
-        </Directory>
       </Directory>
     </Directory>
   </Fragment>

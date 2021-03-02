@@ -53,7 +53,6 @@
       <Merge Id="IndicConverters" Language="1033" SourceFile="..\MergeModules\x86\IndicConverters.msm" DiskId="6"/>
       <Merge Id="Clipboard_EncConverter" Language="1033" SourceFile="..\MergeModules\x86\ClipboardEncConverterMM.msm" DiskId="7"/>
       <Merge Id="DChartHelper" Language="1033" SourceFile="..\MergeModules\x86\DChartHelperMM.msm" DiskId="8"/>
-      <Merge Id="SEC_ICU" Language="1033" SourceFile="..\MergeModules\x86\SEC_ICU_40.msm" DiskId="9"/>
       <Merge Id="SCOffice13" Language="1033" SourceFile="..\MergeModules\x86\SCOffice13MM.msm" DiskId="10"/>
       <Merge Id="SCOffice10" Language="1033" SourceFile="..\MergeModules\x86\SCOffice10MM.msm" DiskId="11"/>
       <Merge Id="SCOffice07" Language="1033" SourceFile="..\MergeModules\x86\SCOffice07MM.msm" DiskId="12"/>
@@ -70,7 +69,7 @@
     </DirectoryRef>
 
     <DirectoryRef Id="TECkit">
-      <Merge Id="TECkit_Package" Language="1033" SourceFile="..\MergeModules\TECkitPackageMM.msm" DiskId="25"/>
+      <Merge Id="TECkit_Package" Language="1033" SourceFile="..\MergeModules\x86\TECkitPackageMM.msm" DiskId="25"/>
     </DirectoryRef>
 
     <DirectoryRef Id="AllUserAppDataSIL">
@@ -96,15 +95,11 @@
       <!--The following merge modules install to the directory: C:\Program Files\Common Files\SIL-->
       <Merge Id="SetPath" Language="1033" SourceFile="..\MergeModules\x86\SetPath.msm" DiskId="1"/>
       <Merge Id="TECkit_DLLs" Language="1033" SourceFile="..\..\EC DistFiles\MergeModules\x86\TECkitDLLsMM.msm" DiskId="40"/>
-      <!--
-            <Merge Id="Managed_Install_Fix" Language="1033" SourceFile="..\ExternalMergeModules\Managed Install Fix.msm" DiskId="2"/>
-			<Merge Id="ICU" Language="1033" SourceFile="Installer\ICU040.msm" DiskId="7"/>
-			<Merge Id="ICUECHelp" Language="1033" SourceFile="Installer\ICUECHelp.msm" DiskId="7"/>
-            -->
+      <Merge Id="SEC_ICU" Language="1033" SourceFile="..\..\EC DistFiles\MergeModules\x86\ICU_40.msm" DiskId="9"/>
     </DirectoryRef>
     <DirectoryRef Id="SystemFolder">
-      <Merge Id="CRT" Language="1033" SourceFile="..\ExternalMergeModules\Microsoft_VC100_CRT_x86.msm" DiskId="23"/>
-      <Merge Id="MFC" Language="1033" SourceFile="..\ExternalMergeModules\Microsoft_VC100_MFC_x86.msm" DiskId="23"/>
+      <Merge Id="CRT" Language="1033" SourceFile="..\ExternalMergeModules\Microsoft_VC142_CRT_x86.msm" DiskId="23"/>
+      <Merge Id="MFC" Language="1033" SourceFile="..\ExternalMergeModules\Microsoft_VC142_MFC_x86.msm" DiskId="23"/>
       <!-- The CRT90 merge module is needed only for the PythonEC (using Python 2.7) merge module:-->
       <Merge Id="CRT90" Language="1033" SourceFile="..\ExternalMergeModules\Microsoft_VC90_CRT_x86.msm" DiskId="23"/>
     </DirectoryRef>
