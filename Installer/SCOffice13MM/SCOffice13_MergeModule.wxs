@@ -8,7 +8,7 @@
 		<Directory Id="TARGETDIR" Name="SourceDir">
 			<Directory Id="MergeRedirectFolder">
 
-                <Component Id="SILConvertersOffice10.dll" Guid="{74FE9840-3B06-4CA8-9A48-76754E9D0FE6}">
+                <Component Id="SILConvertersOffice13.dll" Guid="{74FE9840-3B06-4CA8-9A48-76754E9D0FE6}">
                     <Class Id="{86D18913-CAF0-3129-940A-E1A42F90FE49}" Context="InprocServer32" Description="SILConvertersOffice.InstallerRegistrationActions" ThreadingModel="both" ForeignServer="mscoree.dll">
                         <ProgId Id="SILConvertersOffice.InstallerRegistrationActions" Description="SILConvertersOffice.InstallerRegistrationActions" />
                     </Class>
@@ -18,74 +18,74 @@
                     <Class Id="{B11059E8-A4A7-3E1E-88A8-E2DD65B3337E}" Context="InprocServer32" Description="SILConvertersOffice.ConvertFunctions" ThreadingModel="both" Programmable="yes" ForeignServer="mscoree.dll">
                         <ProgId Id="SILConvertersOffice.ConvertFunctions" Description="SILConvertersOffice.ConvertFunctions" />
                     </Class>
-                    <File Id="SILConvertersOffice10.dll" KeyPath="yes" Source="..\..\output\x86\release\SILConvertersOffice13.dll" />
+                    <File Id="SILConvertersOffice13.dll" KeyPath="yes" Source="..\..\output\x86\release\SILConvertersOffice13.dll" />
                     <RegistryValue Root="HKCR" Key="CLSID\{86D18913-CAF0-3129-940A-E1A42F90FE49}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
                     <RegistryValue Root="HKCR" Key="CLSID\{86D18913-CAF0-3129-940A-E1A42F90FE49}\InprocServer32\4.0.0.0" Name="Class" Value="SILConvertersOffice.InstallerRegistrationActions" Type="string" Action="write" />
                     <RegistryValue Root="HKCR" Key="CLSID\{86D18913-CAF0-3129-940A-E1A42F90FE49}\InprocServer32\4.0.0.0" Name="Assembly" Value="SILConvertersOffice13, Version=4.0.0.0, Culture=neutral, PublicKeyToken=f1447bae1e63f485" Type="string" Action="write" />
                     <RegistryValue Root="HKCR" Key="CLSID\{86D18913-CAF0-3129-940A-E1A42F90FE49}\InprocServer32\4.0.0.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                    <RegistryValue Root="HKCR" Key="CLSID\{86D18913-CAF0-3129-940A-E1A42F90FE49}\InprocServer32\4.0.0.0" Name="CodeBase" Value="file:///[#SILConvertersOffice10.dll]" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{86D18913-CAF0-3129-940A-E1A42F90FE49}\InprocServer32\4.0.0.0" Name="CodeBase" Value="file:///[#SILConvertersOffice13.dll]" Type="string" Action="write" />
                     <RegistryValue Root="HKCR" Key="CLSID\{86D18913-CAF0-3129-940A-E1A42F90FE49}\InprocServer32" Name="Class" Value="SILConvertersOffice.InstallerRegistrationActions" Type="string" Action="write" />
                     <RegistryValue Root="HKCR" Key="CLSID\{86D18913-CAF0-3129-940A-E1A42F90FE49}\InprocServer32" Name="Assembly" Value="SILConvertersOffice13, Version=4.0.0.0, Culture=neutral, PublicKeyToken=f1447bae1e63f485" Type="string" Action="write" />
                     <RegistryValue Root="HKCR" Key="CLSID\{86D18913-CAF0-3129-940A-E1A42F90FE49}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                    <RegistryValue Root="HKCR" Key="CLSID\{86D18913-CAF0-3129-940A-E1A42F90FE49}\InprocServer32" Name="CodeBase" Value="file:///[#SILConvertersOffice10.dll]" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{86D18913-CAF0-3129-940A-E1A42F90FE49}\InprocServer32" Name="CodeBase" Value="file:///[#SILConvertersOffice13.dll]" Type="string" Action="write" />
                     <RegistryValue Root="HKCR" Key="CLSID\{9FDB0283-1795-4BF4-97E9-84223F3FC8EA}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
                     <RegistryValue Root="HKCR" Key="CLSID\{9FDB0283-1795-4BF4-97E9-84223F3FC8EA}\InprocServer32\4.0.0.0" Name="Class" Value="SILConvertersOffice13.Connect" Type="string" Action="write" />
                     <RegistryValue Root="HKCR" Key="CLSID\{9FDB0283-1795-4BF4-97E9-84223F3FC8EA}\InprocServer32\4.0.0.0" Name="Assembly" Value="SILConvertersOffice13, Version=4.0.0.0, Culture=neutral, PublicKeyToken=f1447bae1e63f485" Type="string" Action="write" />
                     <RegistryValue Root="HKCR" Key="CLSID\{9FDB0283-1795-4BF4-97E9-84223F3FC8EA}\InprocServer32\4.0.0.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                    <RegistryValue Root="HKCR" Key="CLSID\{9FDB0283-1795-4BF4-97E9-84223F3FC8EA}\InprocServer32\4.0.0.0" Name="CodeBase" Value="file:///[#SILConvertersOffice10.dll]" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{9FDB0283-1795-4BF4-97E9-84223F3FC8EA}\InprocServer32\4.0.0.0" Name="CodeBase" Value="file:///[#SILConvertersOffice13.dll]" Type="string" Action="write" />
                     <RegistryValue Root="HKCR" Key="CLSID\{9FDB0283-1795-4BF4-97E9-84223F3FC8EA}\InprocServer32" Name="Class" Value="SILConvertersOffice13.Connect" Type="string" Action="write" />
                     <RegistryValue Root="HKCR" Key="CLSID\{9FDB0283-1795-4BF4-97E9-84223F3FC8EA}\InprocServer32" Name="Assembly" Value="SILConvertersOffice13, Version=4.0.0.0, Culture=neutral, PublicKeyToken=f1447bae1e63f485" Type="string" Action="write" />
                     <RegistryValue Root="HKCR" Key="CLSID\{9FDB0283-1795-4BF4-97E9-84223F3FC8EA}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                    <RegistryValue Root="HKCR" Key="CLSID\{9FDB0283-1795-4BF4-97E9-84223F3FC8EA}\InprocServer32" Name="CodeBase" Value="file:///[#SILConvertersOffice10.dll]" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{9FDB0283-1795-4BF4-97E9-84223F3FC8EA}\InprocServer32" Name="CodeBase" Value="file:///[#SILConvertersOffice13.dll]" Type="string" Action="write" />
                     <RegistryValue Root="HKCR" Key="CLSID\{B11059E8-A4A7-3E1E-88A8-E2DD65B3337E}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
                     <RegistryValue Root="HKCR" Key="CLSID\{B11059E8-A4A7-3E1E-88A8-E2DD65B3337E}\InprocServer32\4.0.0.0" Name="Class" Value="SILConvertersOffice.ConvertFunctions" Type="string" Action="write" />
                     <RegistryValue Root="HKCR" Key="CLSID\{B11059E8-A4A7-3E1E-88A8-E2DD65B3337E}\InprocServer32\4.0.0.0" Name="Assembly" Value="SILConvertersOffice13, Version=4.0.0.0, Culture=neutral, PublicKeyToken=f1447bae1e63f485" Type="string" Action="write" />
                     <RegistryValue Root="HKCR" Key="CLSID\{B11059E8-A4A7-3E1E-88A8-E2DD65B3337E}\InprocServer32\4.0.0.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                    <RegistryValue Root="HKCR" Key="CLSID\{B11059E8-A4A7-3E1E-88A8-E2DD65B3337E}\InprocServer32\4.0.0.0" Name="CodeBase" Value="file:///[#SILConvertersOffice10.dll]" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{B11059E8-A4A7-3E1E-88A8-E2DD65B3337E}\InprocServer32\4.0.0.0" Name="CodeBase" Value="file:///[#SILConvertersOffice13.dll]" Type="string" Action="write" />
                     <RegistryValue Root="HKCR" Key="CLSID\{B11059E8-A4A7-3E1E-88A8-E2DD65B3337E}\InprocServer32" Name="Class" Value="SILConvertersOffice.ConvertFunctions" Type="string" Action="write" />
                     <RegistryValue Root="HKCR" Key="CLSID\{B11059E8-A4A7-3E1E-88A8-E2DD65B3337E}\InprocServer32" Name="Assembly" Value="SILConvertersOffice13, Version=4.0.0.0, Culture=neutral, PublicKeyToken=f1447bae1e63f485" Type="string" Action="write" />
                     <RegistryValue Root="HKCR" Key="CLSID\{B11059E8-A4A7-3E1E-88A8-E2DD65B3337E}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                    <RegistryValue Root="HKCR" Key="CLSID\{B11059E8-A4A7-3E1E-88A8-E2DD65B3337E}\InprocServer32" Name="CodeBase" Value="file:///[#SILConvertersOffice10.dll]" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="CLSID\{B11059E8-A4A7-3E1E-88A8-E2DD65B3337E}\InprocServer32" Name="CodeBase" Value="file:///[#SILConvertersOffice13.dll]" Type="string" Action="write" />
                     <RegistryValue Root="HKCR" Key="Record\{149777A8-D40C-3468-B27C-D7AEA2CAA817}\4.0.0.0" Name="Class" Value="Microsoft.Office.Interop.Word.WdCursorType" Type="string" Action="write" />
                     <RegistryValue Root="HKCR" Key="Record\{149777A8-D40C-3468-B27C-D7AEA2CAA817}\4.0.0.0" Name="Assembly" Value="SILConvertersOffice13, Version=4.0.0.0, Culture=neutral, PublicKeyToken=f1447bae1e63f485" Type="string" Action="write" />
                     <RegistryValue Root="HKCR" Key="Record\{149777A8-D40C-3468-B27C-D7AEA2CAA817}\4.0.0.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                    <RegistryValue Root="HKCR" Key="Record\{149777A8-D40C-3468-B27C-D7AEA2CAA817}\4.0.0.0" Name="CodeBase" Value="file:///[#SILConvertersOffice10.dll]" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="Record\{149777A8-D40C-3468-B27C-D7AEA2CAA817}\4.0.0.0" Name="CodeBase" Value="file:///[#SILConvertersOffice13.dll]" Type="string" Action="write" />
                     <RegistryValue Root="HKCR" Key="Record\{384D0656-2A34-36FC-AC92-F2FB3072D0F8}\4.0.0.0" Name="Class" Value="Microsoft.Office.Interop.Access.Dao.UpdateTypeEnum" Type="string" Action="write" />
                     <RegistryValue Root="HKCR" Key="Record\{384D0656-2A34-36FC-AC92-F2FB3072D0F8}\4.0.0.0" Name="Assembly" Value="SILConvertersOffice13, Version=4.0.0.0, Culture=neutral, PublicKeyToken=f1447bae1e63f485" Type="string" Action="write" />
                     <RegistryValue Root="HKCR" Key="Record\{384D0656-2A34-36FC-AC92-F2FB3072D0F8}\4.0.0.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                    <RegistryValue Root="HKCR" Key="Record\{384D0656-2A34-36FC-AC92-F2FB3072D0F8}\4.0.0.0" Name="CodeBase" Value="file:///[#SILConvertersOffice10.dll]" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="Record\{384D0656-2A34-36FC-AC92-F2FB3072D0F8}\4.0.0.0" Name="CodeBase" Value="file:///[#SILConvertersOffice13.dll]" Type="string" Action="write" />
                     <RegistryValue Root="HKCR" Key="Record\{66599BC2-F308-4313-ABE7-E8ECA4B04040}\4.0.0.0" Name="Class" Value="Microsoft.Office.Interop.Publisher.PbTextAutoFitType" Type="string" Action="write" />
                     <RegistryValue Root="HKCR" Key="Record\{66599BC2-F308-4313-ABE7-E8ECA4B04040}\4.0.0.0" Name="Assembly" Value="SILConvertersOffice13, Version=4.0.0.0, Culture=neutral, PublicKeyToken=f1447bae1e63f485" Type="string" Action="write" />
                     <RegistryValue Root="HKCR" Key="Record\{66599BC2-F308-4313-ABE7-E8ECA4B04040}\4.0.0.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                    <RegistryValue Root="HKCR" Key="Record\{66599BC2-F308-4313-ABE7-E8ECA4B04040}\4.0.0.0" Name="CodeBase" Value="file:///[#SILConvertersOffice10.dll]" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="Record\{66599BC2-F308-4313-ABE7-E8ECA4B04040}\4.0.0.0" Name="CodeBase" Value="file:///[#SILConvertersOffice13.dll]" Type="string" Action="write" />
                     <RegistryValue Root="HKCR" Key="Record\{AB46CB4A-D340-3172-B681-3204ABCA661F}\4.0.0.0" Name="Class" Value="Microsoft.Office.Interop.Access.Dao.CommitTransOptionsEnum" Type="string" Action="write" />
                     <RegistryValue Root="HKCR" Key="Record\{AB46CB4A-D340-3172-B681-3204ABCA661F}\4.0.0.0" Name="Assembly" Value="SILConvertersOffice13, Version=4.0.0.0, Culture=neutral, PublicKeyToken=f1447bae1e63f485" Type="string" Action="write" />
                     <RegistryValue Root="HKCR" Key="Record\{AB46CB4A-D340-3172-B681-3204ABCA661F}\4.0.0.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                    <RegistryValue Root="HKCR" Key="Record\{AB46CB4A-D340-3172-B681-3204ABCA661F}\4.0.0.0" Name="CodeBase" Value="file:///[#SILConvertersOffice10.dll]" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="Record\{AB46CB4A-D340-3172-B681-3204ABCA661F}\4.0.0.0" Name="CodeBase" Value="file:///[#SILConvertersOffice13.dll]" Type="string" Action="write" />
                     <RegistryValue Root="HKCR" Key="Record\{B68D62CA-9072-30B1-AC5B-72A05FF19048}\4.0.0.0" Name="Class" Value="Microsoft.Office.Core.MsoControlType" Type="string" Action="write" />
                     <RegistryValue Root="HKCR" Key="Record\{B68D62CA-9072-30B1-AC5B-72A05FF19048}\4.0.0.0" Name="Assembly" Value="SILConvertersOffice13, Version=4.0.0.0, Culture=neutral, PublicKeyToken=f1447bae1e63f485" Type="string" Action="write" />
                     <RegistryValue Root="HKCR" Key="Record\{B68D62CA-9072-30B1-AC5B-72A05FF19048}\4.0.0.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                    <RegistryValue Root="HKCR" Key="Record\{B68D62CA-9072-30B1-AC5B-72A05FF19048}\4.0.0.0" Name="CodeBase" Value="file:///[#SILConvertersOffice10.dll]" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="Record\{B68D62CA-9072-30B1-AC5B-72A05FF19048}\4.0.0.0" Name="CodeBase" Value="file:///[#SILConvertersOffice13.dll]" Type="string" Action="write" />
                     <RegistryValue Root="HKCR" Key="Record\{B6CE0046-20C3-340F-985C-3559E85DC5E1}\4.0.0.0" Name="Class" Value="Microsoft.Office.Interop.Access.Dao.RecordsetTypeEnum" Type="string" Action="write" />
                     <RegistryValue Root="HKCR" Key="Record\{B6CE0046-20C3-340F-985C-3559E85DC5E1}\4.0.0.0" Name="Assembly" Value="SILConvertersOffice13, Version=4.0.0.0, Culture=neutral, PublicKeyToken=f1447bae1e63f485" Type="string" Action="write" />
                     <RegistryValue Root="HKCR" Key="Record\{B6CE0046-20C3-340F-985C-3559E85DC5E1}\4.0.0.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                    <RegistryValue Root="HKCR" Key="Record\{B6CE0046-20C3-340F-985C-3559E85DC5E1}\4.0.0.0" Name="CodeBase" Value="file:///[#SILConvertersOffice10.dll]" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="Record\{B6CE0046-20C3-340F-985C-3559E85DC5E1}\4.0.0.0" Name="CodeBase" Value="file:///[#SILConvertersOffice13.dll]" Type="string" Action="write" />
                     <RegistryValue Root="HKCR" Key="Record\{B8E10C8B-5300-44F7-B454-F98988A5413F}\4.0.0.0" Name="Class" Value="Microsoft.Office.Interop.Publisher.PbReplaceScope" Type="string" Action="write" />
                     <RegistryValue Root="HKCR" Key="Record\{B8E10C8B-5300-44F7-B454-F98988A5413F}\4.0.0.0" Name="Assembly" Value="SILConvertersOffice13, Version=4.0.0.0, Culture=neutral, PublicKeyToken=f1447bae1e63f485" Type="string" Action="write" />
                     <RegistryValue Root="HKCR" Key="Record\{B8E10C8B-5300-44F7-B454-F98988A5413F}\4.0.0.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                    <RegistryValue Root="HKCR" Key="Record\{B8E10C8B-5300-44F7-B454-F98988A5413F}\4.0.0.0" Name="CodeBase" Value="file:///[#SILConvertersOffice10.dll]" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="Record\{B8E10C8B-5300-44F7-B454-F98988A5413F}\4.0.0.0" Name="CodeBase" Value="file:///[#SILConvertersOffice13.dll]" Type="string" Action="write" />
                     <RegistryValue Root="HKCR" Key="Record\{C028BEEF-272E-38E2-9B40-090C7F71F941}\4.0.0.0" Name="Class" Value="Microsoft.Office.Core.MsoButtonStyle" Type="string" Action="write" />
                     <RegistryValue Root="HKCR" Key="Record\{C028BEEF-272E-38E2-9B40-090C7F71F941}\4.0.0.0" Name="Assembly" Value="SILConvertersOffice13, Version=4.0.0.0, Culture=neutral, PublicKeyToken=f1447bae1e63f485" Type="string" Action="write" />
                     <RegistryValue Root="HKCR" Key="Record\{C028BEEF-272E-38E2-9B40-090C7F71F941}\4.0.0.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                    <RegistryValue Root="HKCR" Key="Record\{C028BEEF-272E-38E2-9B40-090C7F71F941}\4.0.0.0" Name="CodeBase" Value="file:///[#SILConvertersOffice10.dll]" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="Record\{C028BEEF-272E-38E2-9B40-090C7F71F941}\4.0.0.0" Name="CodeBase" Value="file:///[#SILConvertersOffice13.dll]" Type="string" Action="write" />
                     <RegistryValue Root="HKCR" Key="Record\{E79666C3-8157-33D4-B26D-C759B7F2CE12}\4.0.0.0" Name="Class" Value="Microsoft.Office.Core.MsoTriState" Type="string" Action="write" />
                     <RegistryValue Root="HKCR" Key="Record\{E79666C3-8157-33D4-B26D-C759B7F2CE12}\4.0.0.0" Name="Assembly" Value="SILConvertersOffice13, Version=4.0.0.0, Culture=neutral, PublicKeyToken=f1447bae1e63f485" Type="string" Action="write" />
                     <RegistryValue Root="HKCR" Key="Record\{E79666C3-8157-33D4-B26D-C759B7F2CE12}\4.0.0.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                    <RegistryValue Root="HKCR" Key="Record\{E79666C3-8157-33D4-B26D-C759B7F2CE12}\4.0.0.0" Name="CodeBase" Value="file:///[#SILConvertersOffice10.dll]" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="Record\{E79666C3-8157-33D4-B26D-C759B7F2CE12}\4.0.0.0" Name="CodeBase" Value="file:///[#SILConvertersOffice13.dll]" Type="string" Action="write" />
                     <RegistryValue Root="HKCR" Key="Record\{EA80CF72-A259-42C7-96F7-BCC35D0917E9}\4.0.0.0" Name="Class" Value="Microsoft.Office.Interop.Publisher.PbSelectionType" Type="string" Action="write" />
                     <RegistryValue Root="HKCR" Key="Record\{EA80CF72-A259-42C7-96F7-BCC35D0917E9}\4.0.0.0" Name="Assembly" Value="SILConvertersOffice13, Version=4.0.0.0, Culture=neutral, PublicKeyToken=f1447bae1e63f485" Type="string" Action="write" />
                     <RegistryValue Root="HKCR" Key="Record\{EA80CF72-A259-42C7-96F7-BCC35D0917E9}\4.0.0.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                    <RegistryValue Root="HKCR" Key="Record\{EA80CF72-A259-42C7-96F7-BCC35D0917E9}\4.0.0.0" Name="CodeBase" Value="file:///[#SILConvertersOffice10.dll]" Type="string" Action="write" />
+                    <RegistryValue Root="HKCR" Key="Record\{EA80CF72-A259-42C7-96F7-BCC35D0917E9}\4.0.0.0" Name="CodeBase" Value="file:///[#SILConvertersOffice13.dll]" Type="string" Action="write" />
                 </Component>
 
                 <Component Id="SecOffice_COMAddInShim13.dll" Guid="{FB6B704D-7D1B-4B9C-8F98-CE8F6BDBA0EC}">
