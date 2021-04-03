@@ -696,7 +696,8 @@ namespace TECkit_Mapping_Editor
             "FE00-FE7F",
             "FE80-FEFF",
             "FF00-FF7F",
-            "FF80-FFFF"});
+            "FF80-FFFF",
+            "11680-116CF"});
             this.comboBoxCodePointRange.Location = new System.Drawing.Point(169, 362);
             this.comboBoxCodePointRange.MaxDropDownItems = 18;
             this.comboBoxCodePointRange.Name = "comboBoxCodePointRange";
@@ -1670,17 +1671,6 @@ namespace TECkit_Mapping_Editor
                 comboBoxCodePointRange.Items.Add(aUS.Name);
 
             comboBoxCodePointRange.SelectedItem = UnicodeSubsetMap.cstrDefSubsetName;
-        }
-    }
-
-    internal class MyDataGridView : System.Windows.Forms.DataGridView
-    {
-        public bool IsVerticalScrollBarVisible
-        {
-            get
-            {
-                return VerticalScrollBar.Visible;
-            }
         }
     }
 }

@@ -81,17 +81,17 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <DebugType>full</DebugType>
-    <PlatformTarget>x64</PlatformTarget>
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <LangVersion>7.3</LangVersion>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="ECInterfaces, Version=4.0.0.0, Culture=neutral, PublicKeyToken=f1447bae1e63f485, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Encoding-Converters-Core.0.2.19\lib\net45\x86\ECInterfaces.dll</HintPath>
+      <HintPath>..\..\packages\Encoding-Converters-Core.0.2.23\lib\net45\x86\ECInterfaces.dll</HintPath>
     </Reference>
     <Reference Include="SilEncConverters40, Version=4.0.0.0, Culture=neutral, PublicKeyToken=f1447bae1e63f485, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Encoding-Converters-Core.0.2.19\lib\net45\x86\SilEncConverters40.dll</HintPath>
+      <HintPath>..\..\packages\Encoding-Converters-Core.0.2.23\lib\net45\x86\SilEncConverters40.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
@@ -115,6 +115,9 @@
     </Compile>
     <Compile Include="FindReplaceForm.Designer.cs">
       <DependentUpon>FindReplaceForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MyDataGridView.cs">
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="QueryConvTypeDlg.cs">
       <SubType>Form</SubType>
@@ -220,6 +223,7 @@
   </Target>
   -->
   <PropertyGroup>
-    <PostBuildEvent>xcopy /y "$(TargetDir)*.*" $(SolutionDir)output\$(PlatformName)\$(ConfigurationName)</PostBuildEvent>
+    <PostBuildEvent>xcopy /y "$(TargetDir)*.*" $(SolutionDir)output\$(PlatformName)\$(ConfigurationName)
+xcopy /y "$(ProjectDir)UnicodeRanges.xml" "$(SolutionDir)output\$(PlatformName)\$(ConfigurationName)"</PostBuildEvent>
   </PropertyGroup>
 </Project>

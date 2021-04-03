@@ -107,10 +107,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="ECInterfaces, Version=4.0.0.0, Culture=neutral, PublicKeyToken=f1447bae1e63f485, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Encoding-Converters-Core.0.2.19\lib\net45\x86\ECInterfaces.dll</HintPath>
+      <HintPath>..\..\packages\Encoding-Converters-Core.0.2.23\lib\net45\x86\ECInterfaces.dll</HintPath>
     </Reference>
     <Reference Include="SilEncConverters40, Version=4.0.0.0, Culture=neutral, PublicKeyToken=f1447bae1e63f485, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Encoding-Converters-Core.0.2.19\lib\net45\x86\SilEncConverters40.dll</HintPath>
+      <HintPath>..\..\packages\Encoding-Converters-Core.0.2.23\lib\net45\x86\SilEncConverters40.dll</HintPath>
     </Reference>
     <Reference Include="System">
       <Name>System</Name>
@@ -227,9 +227,9 @@
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.VisualBasic.targets" />
   <PropertyGroup>
-    <PreBuildEvent>xcopy /y "$(SolutionDir)packages\Encoding-Converters-Core.0.2.19\runtimes\win-$(PlatformName)\native\*.*" "$(SolutionDir)EC DistFiles\$(PlatformName)\"
-xcopy /s /y "$(SolutionDir)packages\Encoding-Converters-Core.0.2.19\redist\*.*" "$(SolutionDir)EC DistFiles\redist\"
-xcopy /s /y "$(SolutionDir)packages\Encoding-Converters-Core.0.2.19\MergeModules\*.*" "$(SolutionDir)EC DistFiles\MergeModules\"
+    <PreBuildEvent>xcopy /y "$(SolutionDir)packages\Encoding-Converters-Core.0.2.23\runtimes\win-$(PlatformName)\native\*.*" "$(SolutionDir)EC DistFiles\$(PlatformName)\"
+xcopy /s /y "$(SolutionDir)packages\Encoding-Converters-Core.0.2.23\redist\*.*" "$(SolutionDir)EC DistFiles\redist\"
+xcopy /s /y "$(SolutionDir)packages\Encoding-Converters-Core.0.2.23\MergeModules\*.*" "$(SolutionDir)EC DistFiles\MergeModules\"
 xcopy /y "$(SolutionDir)EC DistFiles\$(PlatformName)\*.*" "$(SolutionDir)output\$(PlatformName)\$(ConfigurationName)\"
 xcopy /s /y "$(SolutionDir)EC DistFiles\redist\*.*" "$(SolutionDir)output\$(PlatformName)\$(ConfigurationName)\"</PreBuildEvent>
     <PostBuildEvent>xcopy /y "$(TargetDir)*.*" $(SolutionDir)output\$(PlatformName)\$(ConfigurationName)</PostBuildEvent>

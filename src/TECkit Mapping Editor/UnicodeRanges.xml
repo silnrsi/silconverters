@@ -393,4 +393,7 @@
   <UnicodeRange name="Specials">
     <Range begin="FFF0" end="FFFF" />
   </UnicodeRange>
+  <UnicodeRange name="Takri">
+    <Range begin="11680" end="116CF" />
+  </UnicodeRange>
 </UnicodeRanges>

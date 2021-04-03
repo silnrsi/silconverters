@@ -87,10 +87,10 @@
       <HintPath>..\..\EC DistFiles\x86\AIGuesserEC.dll</HintPath>
     </Reference>
     <Reference Include="ECInterfaces, Version=4.0.0.0, Culture=neutral, PublicKeyToken=f1447bae1e63f485, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Encoding-Converters-Core.0.2.19\lib\net45\x86\ECInterfaces.dll</HintPath>
+      <HintPath>..\..\packages\Encoding-Converters-Core.0.2.23\lib\net45\x86\ECInterfaces.dll</HintPath>
     </Reference>
     <Reference Include="SilEncConverters40, Version=4.0.0.0, Culture=neutral, PublicKeyToken=f1447bae1e63f485, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Encoding-Converters-Core.0.2.19\lib\net45\x86\SilEncConverters40.dll</HintPath>
+      <HintPath>..\..\packages\Encoding-Converters-Core.0.2.23\lib\net45\x86\SilEncConverters40.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">

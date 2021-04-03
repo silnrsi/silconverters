@@ -265,6 +265,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <RegisterOutput>true</RegisterOutput>
+      <ShowProgress>LinkVerbose</ShowProgress>
     </Link>
     <PostBuildEvent>
       <Message>Performing post-build tasks</Message>
