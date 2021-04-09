@@ -13,6 +13,7 @@
                         <ProgId Id="SilEncConverters40.TechHindiSiteEncConverter" Description="SilEncConverters40.TechHindiSiteEncConverter" />
                     </Class>
                     <File Id="SilIndicEncConverters40.dll" Name="SilIndicEncConverters40.dll" KeyPath="yes" Source="..\..\..\EC DistFiles\x64\SilIndicEncConverters40.dll" />
+                    <File Id="EnableIndicConvertersInWord.reg" Name="EnableIndicConvertersInWord.reg" Source="..\..\..\Installer\Converter Packages\IndicConverters64bit\EnableIndicConvertersInWord.reg" />
                     <RegistryValue Root="HKCR" Key="CLSID\{0F218E35-EA40-4D56-9FFF-322094B4F412}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
                     <RegistryValue Root="HKCR" Key="CLSID\{0F218E35-EA40-4D56-9FFF-322094B4F412}\InprocServer32\4.0.0.0" Name="Class" Value="SilEncConverters40.TechHindiSiteEncConverter" Type="string" Action="write" />
                     <RegistryValue Root="HKCR" Key="CLSID\{0F218E35-EA40-4D56-9FFF-322094B4F412}\InprocServer32\4.0.0.0" Name="Assembly" Value="SilIndicEncConverters40, Version=4.0.0.0, Culture=neutral, PublicKeyToken=f1447bae1e63f485" Type="string" Action="write" />
@@ -22,6 +23,17 @@
                     <RegistryValue Root="HKCR" Key="CLSID\{0F218E35-EA40-4D56-9FFF-322094B4F412}\InprocServer32" Name="Assembly" Value="SilIndicEncConverters40, Version=4.0.0.0, Culture=neutral, PublicKeyToken=f1447bae1e63f485" Type="string" Action="write" />
                     <RegistryValue Root="HKCR" Key="CLSID\{0F218E35-EA40-4D56-9FFF-322094B4F412}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
                     <RegistryValue Root="HKCR" Key="CLSID\{0F218E35-EA40-4D56-9FFF-322094B4F412}\InprocServer32" Name="CodeBase" Value="file:///[#SilIndicEncConverters40.dll]" Type="string" Action="write" />
+
+                    <!--these are to get the WebBrowser control to use Edge rendering (rather than IE, which on Win10 doesn't want to allow javascript to run, which the IndicConverters are based on)
+                          Gotta add one of these for each possible SILConverter's client. P.S. They seem to work fine on Win 8.1 (i.e. w/o Edge) also. Otherwise, you might need to use a different value
+                          for the Value attribute based on which system it's being installed on. -->
+                    <RegistryValue Root="HKLM" Key="SOFTWARE\Microsoft\Internet Explorer\Main\FeatureControl\FEATURE_BROWSER_EMULATION" Name="AdaptIt2Unicode.exe" Value="12001" Type="integer" Action="write" />
+                    <RegistryValue Root="HKLM" Key="SOFTWARE\Microsoft\Internet Explorer\Main\FeatureControl\FEATURE_BROWSER_EMULATION" Name="ClipboardEC.exe" Value="12001" Type="integer" Action="write" />
+                    <RegistryValue Root="HKLM" Key="SOFTWARE\Microsoft\Internet Explorer\Main\FeatureControl\FEATURE_BROWSER_EMULATION" Name="DChartHelper.exe" Value="12001" Type="integer" Action="write" />
+                    <RegistryValue Root="HKLM" Key="SOFTWARE\Microsoft\Internet Explorer\Main\FeatureControl\FEATURE_BROWSER_EMULATION" Name="SecOptionsInstaller.exe" Value="12001" Type="integer" Action="write" />
+                    <RegistryValue Root="HKLM" Key="SOFTWARE\Microsoft\Internet Explorer\Main\FeatureControl\FEATURE_BROWSER_EMULATION" Name="SFMConv.exe" Value="12001" Type="integer" Action="write" />
+                    <RegistryValue Root="HKLM" Key="SOFTWARE\Microsoft\Internet Explorer\Main\FeatureControl\FEATURE_BROWSER_EMULATION" Name="SILConvertersWordML.exe" Value="12001" Type="integer" Action="write" />
+                    <RegistryValue Root="HKLM" Key="SOFTWARE\Microsoft\Internet Explorer\Main\FeatureControl\FEATURE_BROWSER_EMULATION" Name="SilConvertersXML.exe" Value="12001" Type="integer" Action="write" />
                 </Component>
 
                 <Directory Id="ECFolder" Name="EC">
