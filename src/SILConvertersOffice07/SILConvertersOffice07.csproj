@@ -79,7 +79,7 @@
       <HintPath>DistFiles\dao.dll</HintPath>
     </Reference>
     <Reference Include="ECInterfaces, Version=4.0.0.0, Culture=neutral, PublicKeyToken=f1447bae1e63f485, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Encoding-Converters-Core.0.2.23\lib\net45\x86\ECInterfaces.dll</HintPath>
+      <HintPath>..\..\packages\Encoding-Converters-Core.0.2.28\lib\net45\x86\ECInterfaces.dll</HintPath>
     </Reference>
     <Reference Include="extensibility, Version=7.0.3300.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
       <SpecificVersion>False</SpecificVersion>
@@ -106,7 +106,7 @@
       <HintPath>DistFiles\Office.dll</HintPath>
     </Reference>
     <Reference Include="SilEncConverters40, Version=4.0.0.0, Culture=neutral, PublicKeyToken=f1447bae1e63f485, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Encoding-Converters-Core.0.2.23\lib\net45\x86\SilEncConverters40.dll</HintPath>
+      <HintPath>..\..\packages\Encoding-Converters-Core.0.2.28\lib\net45\x86\SilEncConverters40.dll</HintPath>
     </Reference>
     <Reference Include="System">
       <HintPath>System.dll</HintPath>
