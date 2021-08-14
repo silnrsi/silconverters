@@ -1,21 +1,31 @@
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
-using ECInterfaces;
 using SilEncConverters40;
-using System.Diagnostics;               // Debug
 using System.Runtime.InteropServices;   // DLLImport
-using System.Resources;                 // for ResourceManager
 
 namespace TECkit_Mapping_Editor
 {
     public partial class DisplayUnicodeNamesForm : Form
     {
-        const string cstrStartingRange = "0000-007F";
+        public const string DefaultRange = "0000-007F";
+        private string _range;
+        public string ActiveRange 
+        {
+            get 
+            {
+                return _range;
+            }
+            set 
+            {
+                _range = value;
+                var btn = AddRecentRangeButton(value);
+                if (btn != null)
+                    btnUnicodeRange_Click(btn, null);   // preload the correct list into the range combo box
+            }
+        }
 
         protected enum SendToEditorForms
         {
@@ -34,6 +44,7 @@ namespace TECkit_Mapping_Editor
             this.dataGridViewCharacters.Dock = DockStyle.Fill;
             SetHelpProvider();
             m_bIsLhs = bIsLhs;
+            m_aUSM = new UnicodeSubsetMap();
         }
 
         protected void SetHelpProvider()
@@ -49,7 +60,7 @@ namespace TECkit_Mapping_Editor
         protected Button m_btnZoom = null;
         protected int m_nCodePageLegacy = 0;
 
-        public void Initialize(bool bLegacy, Font font, int nCodePageLegacy)
+        public void Initialize(bool bLegacy, Font font, int nCodePageLegacy, string range)
         {
             if (!Visible)
                 Show();
@@ -60,6 +71,7 @@ namespace TECkit_Mapping_Editor
             m_bIsLegacy = bLegacy;
             m_font = font;
             labelFontName.Text = font.Name;
+            ActiveRange = range;
 
             if (m_bIsLegacy)
             {
@@ -76,15 +88,34 @@ namespace TECkit_Mapping_Editor
             }
             else
             {
-                if (cstrStartingRange == (string)comboBoxCodePointRange.SelectedItem)
+                if (ActiveRange == (string)comboBoxCodePointRange.SelectedItem)
                     comboBoxCodePointRange.SelectedIndex = -1;
 
                 radioButtonByCodePoint.Checked = true;
-                comboBoxCodePointRange.SelectedItem = cstrStartingRange;   // this triggers the InitializeCharMap
+
+                var recentRangeCollection = (m_bIsLhs) 
+                    ? Properties.Settings.Default.RecentRangesLhs
+                    : Properties.Settings.Default.RecentRangesRhs;
+
+                string strRangeToSelect = ActiveRange;
+                var i = recentRangeCollection.Count;
+                if (i > 0)
+                {
+                    while (i-- > 0)
+                    {
+                        strRangeToSelect = recentRangeCollection[i];
+                        AddRecentRangeButton(strRangeToSelect);
+                    }
+                }
+
+                comboBoxCodePointRange.SelectedItem = strRangeToSelect;
+
                 radioButtonDecimal.Visible = radioButtonHexadecimal.Visible = false;
                 groupBoxUnicodeRanges.Visible = flowLayoutPanelRecentRanges.Visible =
                     comboBoxCodePointRange.Visible = flowLayoutPanelChooseByRange.Visible = true;
                 radioButtonUnicodeNames.Checked = radioButtonByCodePoint.Checked = true;
+
+
             }
         }
 
@@ -584,6 +615,8 @@ namespace TECkit_Mapping_Editor
             OnCbSelectedIndexChanged(cbCodePointRange, dataGridViewCharacters, ref m_btnZoom, m_font, m_bIsLegacy);
         }
 
+        const int nMaxRecentRanges = 5;
+
         private void OnCbSelectedIndexChanged(ComboBox cbCodePointRange, MyDataGridView dataGridViewCharacters,
             ref Button btnZoom, Font font, bool bIsLegacy)
         {
@@ -593,22 +626,48 @@ namespace TECkit_Mapping_Editor
 
             ResetCharMap(ref btnZoom, dataGridViewCharacters);
 
-            RadioButton btnToCheck;
-            UnicodeSubset aUS;
-            if ((m_aUSM != null) && m_aUSM.TryGetValue(strValue, out aUS))
+            if ((m_aUSM != null) && m_aUSM.TryGetValue(strValue, out UnicodeSubset aUS))
             {
-                btnToCheck = radioButtonUnicodeSubsets;
                 foreach (KeyValuePair<int, int> aRangeLength in aUS)
                     InitializeCharMap(font, dataGridViewCharacters, aRangeLength.Key, aRangeLength.Value, 0, bIsLegacy);
             }
             else if (radioButtonByCodePoint.Checked)
             {
-                btnToCheck = radioButtonByCodePoint;
                 int nBeginningIndex = Convert.ToInt32(strValue.Substring(0, 4), 16);
                 InitializeCharMap(font, dataGridViewCharacters, nBeginningIndex, 0x80, 0, bIsLegacy);
             }
             else
                 return;
+
+            // otherwise, add a radio button for this range so we can more easily go back to it
+            var btn = AddRecentRangeButton(strValue);
+
+            var recentRangeCollection = (m_bIsLhs)
+                ? Properties.Settings.Default.RecentRangesLhs
+                : Properties.Settings.Default.RecentRangesRhs;
+            UpdateRecentRangeSettings(recentRangeCollection, strValue);
+
+            Properties.Settings.Default.Save();
+
+            if (btn != null)
+                btn.Checked = true;
+
+            Program.SetRangeClue(m_bIsLhs, strValue);
+        }
+
+        private RadioButton AddRecentRangeButton(string strValue)
+        {
+            RadioButton btnToCheck;
+            if ((m_aUSM != null) && m_aUSM.TryGetValue(strValue, out UnicodeSubset aUS))
+            {
+                btnToCheck = radioButtonUnicodeSubsets;
+            }
+            else if (radioButtonByCodePoint.Checked)
+            {
+                btnToCheck = radioButtonByCodePoint;
+            }
+            else
+                return null;
 
             // first see if this range has been added to our list of recently used ranges
             foreach (RadioButton btnUnicodeRange in flowLayoutPanelRecentRanges.Controls)
@@ -616,22 +675,34 @@ namespace TECkit_Mapping_Editor
                 {
                     flowLayoutPanelRecentRanges.Controls.SetChildIndex(btnUnicodeRange, 0);
                     btnUnicodeRange.Checked = true;
-                    return; // found, so just return
+                    return null; // found, so just return
                 }
 
-            // otherwise, add a radio button for this range so we can more easily go back to it
-            RadioButton btn = new RadioButton();
-            btn.AutoSize = true;
-            btn.Name = "radioButton" + strValue;
-            btn.TabStop = true;
-            btn.Text = strValue;
-            btn.UseVisualStyleBackColor = true;
+            RadioButton btn = new RadioButton
+            {
+                AutoSize = true,
+                Name = "radioButton" + strValue,
+                TabStop = true,
+                Text = strValue,
+                UseVisualStyleBackColor = true,
+                Tag = btnToCheck
+            };
             btn.Click += new EventHandler(btnUnicodeRange_Click);
 
             flowLayoutPanelRecentRanges.Controls.Add(btn);
             flowLayoutPanelRecentRanges.Controls.SetChildIndex(btn, 0);
-            btn.Checked = true;
-            btn.Tag = btnToCheck;
+
+            return btn;
+        }
+
+        private static void UpdateRecentRangeSettings(System.Collections.Specialized.StringCollection recentRangeCollection, string strValue)
+        {
+            if (recentRangeCollection.Contains(strValue))
+                recentRangeCollection.Remove(strValue);
+            else if (recentRangeCollection.Count > nMaxRecentRanges)
+                recentRangeCollection.RemoveAt(nMaxRecentRanges);
+
+            recentRangeCollection.Insert(0, strValue);
         }
 
         private void btnUnicodeRange_Click(object sender, EventArgs e)

@@ -12,7 +12,7 @@ namespace TECkit_Mapping_Editor.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.7.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.8.1.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -42,6 +42,28 @@ namespace TECkit_Mapping_Editor.Properties {
             }
             set {
                 this["RevertableFiles"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public global::System.Collections.Specialized.StringCollection RecentRangesLhs {
+            get {
+                return ((global::System.Collections.Specialized.StringCollection)(this["RecentRangesLhs"]));
+            }
+            set {
+                this["RecentRangesLhs"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public global::System.Collections.Specialized.StringCollection RecentRangesRhs {
+            get {
+                return ((global::System.Collections.Specialized.StringCollection)(this["RecentRangesRhs"]));
+            }
+            set {
+                this["RecentRangesRhs"] = value;
             }
         }
     }

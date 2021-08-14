@@ -6,7 +6,6 @@ using System.Diagnostics;           // for Debug
 using System.Drawing;               // Rectangle
 using System.IO;                    // Path
 using System.Runtime.InteropServices;   // DLLImport
-using ECInterfaces;
 using SilEncConverters40;
 
 namespace TECkit_Mapping_Editor
@@ -28,6 +27,10 @@ namespace TECkit_Mapping_Editor
 
             if( Properties.Settings.Default.RecentFiles == null )
                 Properties.Settings.Default.RecentFiles = new System.Collections.Specialized.StringCollection();
+            if( Properties.Settings.Default.RecentRangesLhs == null )
+                Properties.Settings.Default.RecentRangesLhs = new System.Collections.Specialized.StringCollection();
+            if (Properties.Settings.Default.RecentRangesRhs == null)
+                Properties.Settings.Default.RecentRangesRhs = new System.Collections.Specialized.StringCollection();
 
             // wait until we have a reference to the form before doing the initial 
             //  "open" or "new" (which might result in the form's title being set
@@ -137,6 +140,11 @@ namespace TECkit_Mapping_Editor
         internal static void SetBoundsClue(string cstrClueHeader, Rectangle rectBounds)
         {
             m_aForm.SetBoundsClue(cstrClueHeader, rectBounds);
+        }
+
+        internal static void SetRangeClue(bool bIsLhs, string rangeName)
+        {
+            m_aForm.SetRangeClue(bIsLhs, rangeName);
         }
 
         internal static void AddStringToEditor(string str)

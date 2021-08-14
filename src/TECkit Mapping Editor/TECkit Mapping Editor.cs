@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Text;
 using System.Windows.Forms;
 using System.IO;
@@ -9,7 +6,7 @@ using ECInterfaces;
 using SilEncConverters40;
 using System.Drawing;               // for Font
 using System.Diagnostics;           // Debug
-using System.Runtime.InteropServices;   // DLLImport
+using System.Collections.Generic;
 
 namespace TECkit_Mapping_Editor
 {
@@ -24,6 +21,8 @@ namespace TECkit_Mapping_Editor
         const string cstrConvTypeClue = "Conversion Type = ";
         const string cstrLhsFontClue = "Left-hand side font = ";
         const string cstrRhsFontClue = "Right-hand side font = ";
+        const string cstrLhsRangeClue = "Left-hand range = ";
+        const string cstrRhsRangeClue = "Right-hand range = ";
         const string cstrMainFormClue = "Main Window Position = ";
         private const string cstrDeprecatedCodePointFormClue = "Code Point Window Position = ";
         internal const string cstrCodePointFormClueLhs = "Left-hand side Character Map Window Position = ";
@@ -41,6 +40,8 @@ namespace TECkit_Mapping_Editor
         protected FindReplaceForm m_formFindReplace = null;
         protected int m_nCodePageLegacyLhs = 0;
         protected int m_nCodePageLegacyRhs = 0;
+        internal string m_codePointFormRangeLhs = DisplayUnicodeNamesForm.DefaultRange;
+        internal string m_codePointFormRangeRhs = DisplayUnicodeNamesForm.DefaultRange;
 
         public ConvType ConversionType
         {
@@ -185,6 +186,18 @@ namespace TECkit_Mapping_Editor
                     bRhsFontFound = true;
                 }
 
+                nIndex = strLine.IndexOf(cstrLhsRangeClue);
+                if (nIndex != -1)
+                {
+                    m_codePointFormRangeLhs = strLine.Substring(nIndex + cstrLhsRangeClue.Length);
+                }
+
+                nIndex = strLine.IndexOf(cstrRhsRangeClue);
+                if (nIndex != -1)
+                {
+                    m_codePointFormRangeRhs = strLine.Substring(nIndex + cstrRhsRangeClue.Length);
+                }
+
                 nIndex = strLine.IndexOf(cstrLhsCodePageClue);
                 if (nIndex != -1)
                 {
@@ -302,7 +315,7 @@ namespace TECkit_Mapping_Editor
                     catch { }
                 }
 
-                m_formDisplayUnicodeNamesLhs.Initialize(IsLhsLegacy, textBoxSample.Font, m_nCodePageLegacyLhs);
+                m_formDisplayUnicodeNamesLhs.Initialize(IsLhsLegacy, textBoxSample.Font, m_nCodePageLegacyLhs, m_codePointFormRangeLhs);
             }
 
             if (!bUserCancelled && !bRhsFontFound)
@@ -323,7 +336,7 @@ namespace TECkit_Mapping_Editor
                     catch { }
                 }
 
-                m_formDisplayUnicodeNamesRhs.Initialize(IsRhsLegacy, textBoxSampleForward.Font, m_nCodePageLegacyRhs);
+                m_formDisplayUnicodeNamesRhs.Initialize(IsRhsLegacy, textBoxSampleForward.Font, m_nCodePageLegacyRhs, m_codePointFormRangeRhs);
             }
 
             if (!bCodePointFormSizeHasBeenSetLhs)
@@ -341,7 +354,7 @@ namespace TECkit_Mapping_Editor
             if (!bLhsFontFound || !bRhsFontFound || !bCodePointFormSizeHasBeenSetLhs || !bCodePointFormSizeHasBeenSetRhs)
             {
                 // initialize it with our clues
-                string strPrefixHeader = cstrOpeningHeader + String.Format("v{1} on {2}.{0};   {3}{4}{0};   {5}{6};{7}{0};   {8}{9};{10}{0}{11}{0}{12}{0}{13}{0}",
+                string strPrefixHeader = cstrOpeningHeader + String.Format("v{1} on {2}.{0};   {3}{4}{0};   {5}{6};{7}{0};   {8}{9};{10}{0}{11}{0}{12}{0}{13}{0}{14}{0}{15}{0}{16}{0}{17}{0}{0}",
                     Environment.NewLine,
                     Application.ProductVersion,
                     DateTime.Now.ToShortDateString(),
@@ -355,11 +368,11 @@ namespace TECkit_Mapping_Editor
                     textBoxSampleForward.Font.Size,
                     BoundsClueString(cstrMainFormClue, Bounds),
                     BoundsClueString(cstrCodePointFormClueLhs, m_formDisplayUnicodeNamesLhs.Bounds),
-                    BoundsClueString(cstrCodePointFormClueRhs, m_formDisplayUnicodeNamesRhs.Bounds));
-
-                strPrefixHeader += AddCodePageClue(cstrLhsCodePageClue, m_nCodePageLegacyLhs);
-                strPrefixHeader += AddCodePageClue(cstrRhsCodePageClue, m_nCodePageLegacyRhs);
-                strPrefixHeader += String.Format("{0}", Environment.NewLine);
+                    BoundsClueString(cstrCodePointFormClueRhs, m_formDisplayUnicodeNamesRhs.Bounds),
+                    AddClue(cstrLhsCodePageClue, m_nCodePageLegacyLhs),
+                    AddClue(cstrRhsCodePageClue, m_nCodePageLegacyRhs),
+                    AddClue(cstrLhsRangeClue, m_codePointFormRangeLhs),
+                    AddClue(cstrRhsRangeClue, m_codePointFormRangeRhs));
 
                 this.richTextBoxMapEditor.Text = strPrefixHeader + SkipPast0900Header;
                 bModified = true;
@@ -458,7 +471,7 @@ namespace TECkit_Mapping_Editor
             m_formDisplayUnicodeNamesRhs.Location = ptLocation;
 
             // initialize it with our clues
-            this.richTextBoxMapEditor.Text = String.Format("; This file was created by <author> using TECkitMappingEditorU.exe v{1} on {2}.{0};   {3}{4}{0};   {5}{6};{7}{0};   {8}{9};{10}{0}{11}{0}{12}{0}{13}{0}{0}",
+            this.richTextBoxMapEditor.Text = String.Format("; This file was created by <author> using TECkitMappingEditorU.exe v{1} on {2}.{0};   {3}{4}{0};   {5}{6};{7}{0};   {8}{9};{10}{0}{11}{0}{12}{0}{13}{0}{14}{15}{0}{16}{17}{0}{0}",
                 Environment.NewLine,
                 Application.ProductVersion,
                 DateTime.Now.ToShortDateString(),
@@ -472,7 +485,9 @@ namespace TECkit_Mapping_Editor
                 textBoxSampleForward.Font.Size,
                 BoundsClueString(cstrMainFormClue, Bounds),
                 BoundsClueString(cstrCodePointFormClueLhs, m_formDisplayUnicodeNamesLhs.Bounds),
-                BoundsClueString(cstrCodePointFormClueRhs, m_formDisplayUnicodeNamesRhs.Bounds));
+                BoundsClueString(cstrCodePointFormClueRhs, m_formDisplayUnicodeNamesRhs.Bounds),
+                cstrLhsRangeClue, DisplayUnicodeNamesForm.DefaultRange,
+                cstrRhsRangeClue, DisplayUnicodeNamesForm.DefaultRange);
 
             if (IsLhsLegacy)
             {
@@ -804,7 +819,7 @@ namespace TECkit_Mapping_Editor
                         catch { }
                     }
 
-                    m_formDisplayUnicodeNamesLhs.Initialize(IsLhsLegacy, textBoxSample.Font, m_nCodePageLegacyLhs);
+                    m_formDisplayUnicodeNamesLhs.Initialize(IsLhsLegacy, textBoxSample.Font, m_nCodePageLegacyLhs, m_codePointFormRangeLhs);
                 }
 
                 return true;
@@ -840,7 +855,7 @@ namespace TECkit_Mapping_Editor
                         catch { }
                     }
 
-                    m_formDisplayUnicodeNamesRhs.Initialize(IsRhsLegacy, textBoxSampleForward.Font, m_nCodePageLegacyRhs);
+                    m_formDisplayUnicodeNamesRhs.Initialize(IsRhsLegacy, textBoxSampleForward.Font, m_nCodePageLegacyRhs, m_codePointFormRangeRhs);
                 }
             }
         }
@@ -848,17 +863,24 @@ namespace TECkit_Mapping_Editor
         private void SetFontClue(string cstrClueHeader, Font font)
         {
             string[] aStrLines = richTextBoxMapEditor.Lines;
+            var nIndex = FindLine(cstrClueHeader, aStrLines);
+
+            if (nIndex != -1)
+            {
+                aStrLines[nIndex] = String.Format(";   {0}{1};{2}", cstrClueHeader, font.Name, font.Size);
+                richTextBoxMapEditor.Lines = aStrLines;
+                Program.Modified = true;
+            }
+        }
+
+        private int FindLine(string clue, string[] aStrLines)
+        {
             for (int i = 0; i < aStrLines.Length; i++)
             {
-                int nIndex = aStrLines[i].IndexOf(cstrClueHeader);
-                if (nIndex != -1)
-                {
-                    aStrLines[i] = String.Format(";   {0}{1};{2}", cstrClueHeader, font.Name, font.Size);
-                    richTextBoxMapEditor.Lines = aStrLines;
-                    Program.Modified = true;
-                    break;
-                }
+                if (aStrLines[i].Contains(clue))
+                    return i;
             }
+            return -1;
         }
 
         internal bool DoAutoCompile()
@@ -1411,12 +1433,9 @@ namespace TECkit_Mapping_Editor
                         rect.Height);
         }
 
-        protected string AddCodePageClue(string strClueHeader, int nCodePage)
+        protected string AddClue(string strClueHeader, object clue)
         {
-            if (nCodePage != 0)
-                return String.Format(";   {1}{2}{0}", Environment.NewLine, strClueHeader, nCodePage);
-            else
-                return null;
+            return String.Format(";   {0}{1}", strClueHeader, clue);
         }
 
         internal void SetBoundsClue(string strClueHeader, Rectangle rectBounds)
@@ -1450,6 +1469,47 @@ namespace TECkit_Mapping_Editor
                     richTextBoxMapEditor.Select(nCharIndexOfBottomVisibleLine, 0);
                     richTextBoxMapEditor.Select(nSelectionStart, nSelectionLength);
                     break;
+                }
+            }
+        }
+
+        internal void SetRangeClue(bool bIsLhs, string rangeName)
+        {
+            string strClueHeader;
+            if (bIsLhs)
+            {
+                m_codePointFormRangeLhs = rangeName;
+                strClueHeader = cstrLhsRangeClue;
+            }
+            else
+            {
+                m_codePointFormRangeRhs = rangeName;
+                strClueHeader = cstrRhsRangeClue;
+            }
+
+            string[] aStrLines = richTextBoxMapEditor.Lines;
+            var nIndex = FindLine(strClueHeader, aStrLines);
+            if (nIndex != -1)
+            {
+                aStrLines[nIndex] = AddClue(strClueHeader, rangeName);
+                richTextBoxMapEditor.Lines = aStrLines;
+                Program.Modified = true;
+            }
+            else
+            {
+                // this is new, so we put it after the last one
+                nIndex = FindLine(cstrCodePointFormClueRhs, aStrLines);
+                if (nIndex != -1)
+                {
+                    // find the next blank space
+                    while (!String.IsNullOrEmpty(aStrLines[++nIndex].Trim()))
+                        ;
+
+                    // we may have just added the lhs, so make sure the next line isn't that
+                    var newLines = new List<string>(aStrLines);
+                    newLines.Insert(nIndex, AddClue(strClueHeader, rangeName));
+                    richTextBoxMapEditor.Lines = newLines.ToArray();
+                    Program.Modified = true;
                 }
             }
         }

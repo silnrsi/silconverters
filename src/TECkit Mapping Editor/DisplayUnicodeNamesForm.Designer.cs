@@ -1664,13 +1664,8 @@ namespace TECkit_Mapping_Editor
         private void radioButtonUnicodeSubsets_CheckedChanged(object sender, EventArgs e)
         {
             comboBoxCodePointRange.Items.Clear();
-            if (m_aUSM == null)
-                m_aUSM = new UnicodeSubsetMap();
-
             foreach (UnicodeSubset aUS in m_aUSM.Values)
                 comboBoxCodePointRange.Items.Add(aUS.Name);
-
-            comboBoxCodePointRange.SelectedItem = UnicodeSubsetMap.cstrDefSubsetName;
         }
     }
 }

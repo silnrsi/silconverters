@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
-    <StartArguments>"C:\Temp\SEC\Shree550\Manipuri Draft Method A v.03 %28L2U%29.map"</StartArguments>
+    <StartArguments>"C:\Users\pete_\source\repos\SilConverters\Installer\Converter Packages\IndicConverters\MapsTables\DevanagariSyllableBreaking.map"</StartArguments>
   </PropertyGroup>
   <PropertyGroup>
     <PublishUrlHistory>publish\</PublishUrlHistory>
