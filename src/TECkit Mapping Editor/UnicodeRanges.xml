@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <UnicodeRanges>
-  <UnicodeRange name="C0 Controls and Basic Latin">
+  <UnicodeRange name="Basic Latin">
     <Range begin="0000" end="007F" />
   </UnicodeRange>
-  <UnicodeRange name="C1 Controls and Latin-1 Supplement">
+  <UnicodeRange name="Latin-1 Supplement">
     <Range begin="0080" end="00FF" />
   </UnicodeRange>
   <UnicodeRange name="Latin Extended-A">
@@ -50,6 +50,21 @@
   </UnicodeRange>
   <UnicodeRange name="NKo">
     <Range begin="07C0" end="07FF" />
+  </UnicodeRange>
+  <UnicodeRange name="Samaritan">
+    <Range begin="0800" end="083F" />
+  </UnicodeRange>
+  <UnicodeRange name="Mandaic">
+    <Range begin="0840" end="085F" />
+  </UnicodeRange>
+  <UnicodeRange name="Syriac Supplement">
+    <Range begin="0860" end="086F" />
+  </UnicodeRange>
+  <UnicodeRange name="Arabic Extended-B">
+    <Range begin="0870" end="089F" />
+  </UnicodeRange>
+  <UnicodeRange name="Arabic Extended-A">
+    <Range begin="08A0" end="08FF" />
   </UnicodeRange>
   <UnicodeRange name="Devanagari">
     <Range begin="0900" end="097F" />
@@ -102,7 +117,7 @@
   <UnicodeRange name="Ethiopic">
     <Range begin="1200" end="137F" />
   </UnicodeRange>
-  <UnicodeRange name="Ethiopic Supplement ">
+  <UnicodeRange name="Ethiopic Supplement">
     <Range begin="1380" end="139F" />
   </UnicodeRange>
   <UnicodeRange name="Cherokee">
@@ -135,6 +150,9 @@
   <UnicodeRange name="Mongolian">
     <Range begin="1800" end="18AF" />
   </UnicodeRange>
+  <UnicodeRange name="Unified Canadian Aboriginal Syllabics Extended">
+    <Range begin="18B0" end="18FF" />
+  </UnicodeRange>
   <UnicodeRange name="Limbu">
     <Range begin="1900" end="194F" />
   </UnicodeRange>
@@ -150,17 +168,38 @@
   <UnicodeRange name="Buginese">
     <Range begin="1A00" end="1A1F" />
   </UnicodeRange>
+  <UnicodeRange name="Tai Tham">
+    <Range begin="1A20" end="1AAF" />
+  </UnicodeRange>
+  <UnicodeRange name="Combining Diacritical Marks Extended">
+    <Range begin="1AB0" end="1AFF" />
+  </UnicodeRange>
   <UnicodeRange name="Balinese">
     <Range begin="1B00" end="1B7F" />
   </UnicodeRange>
   <UnicodeRange name="Sundanese">
     <Range begin="1B80" end="1BBF" />
   </UnicodeRange>
+  <UnicodeRange name="Batak">
+    <Range begin="1BC0" end="1BFF" />
+  </UnicodeRange>
   <UnicodeRange name="Lepcha">
     <Range begin="1C00" end="1C4F" />
   </UnicodeRange>
   <UnicodeRange name="Ol Chiki">
     <Range begin="1C50" end="1C7F" />
+  </UnicodeRange>
+  <UnicodeRange name="Cyrillic Extended-C">
+    <Range begin="1C80" end="1C8F" />
+  </UnicodeRange>
+  <UnicodeRange name="Georgian Extended">
+    <Range begin="1C90" end="1CBF" />
+  </UnicodeRange>
+  <UnicodeRange name="Sundanese Supplement">
+    <Range begin="1CC0" end="1CCF" />
+  </UnicodeRange>
+  <UnicodeRange name="Vedic Extensions">
+    <Range begin="1CD0" end="1CFF" />
   </UnicodeRange>
   <UnicodeRange name="Phonetic Extensions">
     <Range begin="1D00" end="1D7F" />
@@ -316,19 +355,31 @@
     <Range begin="3300" end="33FF" />
   </UnicodeRange>
   <UnicodeRange name="CJK Unified Ideographs Extension A">
-    <Range begin="3400" end="4DB5" />
+    <Range begin="3400" end="4DBF" />
+  </UnicodeRange>
+  <UnicodeRange name="Yijing Hexagram Symbols">
+    <Range begin="4DC0" end="4DFF" />
   </UnicodeRange>
   <UnicodeRange name="CJK Unified Ideographs">
-    <Range begin="4E00" end="9FBB" />
+    <Range begin="4E00" end="9FFF" />
+  </UnicodeRange>
+  <UnicodeRange name="Yi Syllables">
+    <Range begin="A000" end="A48F" />
   </UnicodeRange>
   <UnicodeRange name="Yi Radicals">
     <Range begin="A490" end="A4CF" />
+  </UnicodeRange>
+  <UnicodeRange name="Lisu">
+    <Range begin="A4D0" end="A4FF" />
   </UnicodeRange>
   <UnicodeRange name="Vai">
     <Range begin="A500" end="A63F" />
   </UnicodeRange>
   <UnicodeRange name="Cyrillic Extended-B">
     <Range begin="A640" end="A69F" />
+  </UnicodeRange>
+  <UnicodeRange name="Bamum">
+    <Range begin="A6A0" end="A6FF" />
   </UnicodeRange>
   <UnicodeRange name="Modifier Tone Letters">
     <Range begin="A700" end="A71F" />
@@ -339,11 +390,17 @@
   <UnicodeRange name="Syloti Nagri">
     <Range begin="A800" end="A82F" />
   </UnicodeRange>
+  <UnicodeRange name="Common Indic Number Forms">
+    <Range begin="A830" end="A83F" />
+  </UnicodeRange>
   <UnicodeRange name="Phags-pa">
     <Range begin="A840" end="A87F" />
   </UnicodeRange>
   <UnicodeRange name="Saurashtra">
     <Range begin="A880" end="A8DF" />
+  </UnicodeRange>
+  <UnicodeRange name="Devanagari Extended">
+    <Range begin="A8E0" end="A8FF" />
   </UnicodeRange>
   <UnicodeRange name="Kayah Li">
     <Range begin="A900" end="A92F" />
@@ -351,17 +408,59 @@
   <UnicodeRange name="Rejang">
     <Range begin="A930" end="A95F" />
   </UnicodeRange>
+  <UnicodeRange name="Hangul Jamo Extended-A">
+    <Range begin="A960" end="A97F" />
+  </UnicodeRange>
+  <UnicodeRange name="Javanese">
+    <Range begin="A980" end="A9DF" />
+  </UnicodeRange>
+  <UnicodeRange name="Myanmar Extended-B">
+    <Range begin="A9E0" end="A9FF" />
+  </UnicodeRange>
   <UnicodeRange name="Cham">
     <Range begin="AA00" end="AA5F" />
   </UnicodeRange>
+  <UnicodeRange name="Myanmar Extended-A">
+    <Range begin="AA60" end="AA7F" />
+  </UnicodeRange>
+  <UnicodeRange name="Tai Viet">
+    <Range begin="AA80" end="AADF" />
+  </UnicodeRange>
+  <UnicodeRange name="Meetei Mayek Extensions">
+    <Range begin="AAE0" end="AAFF" />
+  </UnicodeRange>
+  <UnicodeRange name="Ethiopic Extended-A">
+    <Range begin="AB00" end="AB2F" />
+  </UnicodeRange>
+  <UnicodeRange name="Latin Extended-E">
+    <Range begin="AB30" end="AB6F" />
+  </UnicodeRange>
+  <UnicodeRange name="Cherokee Supplement">
+    <Range begin="AB70" end="ABBF" />
+  </UnicodeRange>
+  <UnicodeRange name="Meetei Mayek">
+    <Range begin="ABC0" end="ABFF" />
+  </UnicodeRange>
   <UnicodeRange name="Hangul Syllables">
-    <Range begin="AC00" end="D7A3" />
+    <Range begin="AC00" end="D7AF" />
+  </UnicodeRange>
+  <UnicodeRange name="Hangul Jamo Extended-B">
+    <Range begin="D7B0" end="D7FF" />
+  </UnicodeRange>
+  <UnicodeRange name="High Surrogates">
+    <Range begin="D800" end="DB7F" />
   </UnicodeRange>
   <UnicodeRange name="High Private Use Surrogates">
     <Range begin="DB80" end="DBFF" />
   </UnicodeRange>
+  <UnicodeRange name="Low Surrogates">
+    <Range begin="DC00" end="DFFF" />
+  </UnicodeRange>
   <UnicodeRange name="Private Use Area">
     <Range begin="E000" end="F8FF" />
+  </UnicodeRange>
+  <UnicodeRange name="CJK Compatibility Ideographs">
+    <Range begin="F900" end="FAFF" />
   </UnicodeRange>
   <UnicodeRange name="Alphabetic Presentation Forms">
     <Range begin="FB00" end="FB4F" />
@@ -372,7 +471,7 @@
   <UnicodeRange name="Variation Selectors">
     <Range begin="FE00" end="FE0F" />
   </UnicodeRange>
-  <UnicodeRange name="Vertical forms">
+  <UnicodeRange name="Vertical Forms">
     <Range begin="FE10" end="FE1F" />
   </UnicodeRange>
   <UnicodeRange name="Combining Half Marks">
@@ -393,7 +492,472 @@
   <UnicodeRange name="Specials">
     <Range begin="FFF0" end="FFFF" />
   </UnicodeRange>
+  <UnicodeRange name="Linear B Syllabary">
+    <Range begin="10000" end="1007F" />
+  </UnicodeRange>
+  <UnicodeRange name="Linear B Ideograms">
+    <Range begin="10080" end="100FF" />
+  </UnicodeRange>
+  <UnicodeRange name="Aegean Numbers">
+    <Range begin="10100" end="1013F" />
+  </UnicodeRange>
+  <UnicodeRange name="Ancient Greek Numbers">
+    <Range begin="10140" end="1018F" />
+  </UnicodeRange>
+  <UnicodeRange name="Ancient Symbols">
+    <Range begin="10190" end="101CF" />
+  </UnicodeRange>
+  <UnicodeRange name="Phaistos Disc">
+    <Range begin="101D0" end="101FF" />
+  </UnicodeRange>
+  <UnicodeRange name="Lycian">
+    <Range begin="10280" end="1029F" />
+  </UnicodeRange>
+  <UnicodeRange name="Carian">
+    <Range begin="102A0" end="102DF" />
+  </UnicodeRange>
+  <UnicodeRange name="Coptic Epact Numbers">
+    <Range begin="102E0" end="102FF" />
+  </UnicodeRange>
+  <UnicodeRange name="Old Italic">
+    <Range begin="10300" end="1032F" />
+  </UnicodeRange>
+  <UnicodeRange name="Gothic">
+    <Range begin="10330" end="1034F" />
+  </UnicodeRange>
+  <UnicodeRange name="Old Permic">
+    <Range begin="10350" end="1037F" />
+  </UnicodeRange>
+  <UnicodeRange name="Ugaritic">
+    <Range begin="10380" end="1039F" />
+  </UnicodeRange>
+  <UnicodeRange name="Old Persian">
+    <Range begin="103A0" end="103DF" />
+  </UnicodeRange>
+  <UnicodeRange name="Deseret">
+    <Range begin="10400" end="1044F" />
+  </UnicodeRange>
+  <UnicodeRange name="Shavian">
+    <Range begin="10450" end="1047F" />
+  </UnicodeRange>
+  <UnicodeRange name="Osmanya">
+    <Range begin="10480" end="104AF" />
+  </UnicodeRange>
+  <UnicodeRange name="Osage">
+    <Range begin="104B0" end="104FF" />
+  </UnicodeRange>
+  <UnicodeRange name="Elbasan">
+    <Range begin="10500" end="1052F" />
+  </UnicodeRange>
+  <UnicodeRange name="Caucasian Albanian">
+    <Range begin="10530" end="1056F" />
+  </UnicodeRange>
+  <UnicodeRange name="Vithkuqi">
+    <Range begin="10570" end="105BF" />
+  </UnicodeRange>
+  <UnicodeRange name="Linear A">
+    <Range begin="10600" end="1077F" />
+  </UnicodeRange>
+  <UnicodeRange name="Latin Extended-F">
+    <Range begin="10780" end="107BF" />
+  </UnicodeRange>
+  <UnicodeRange name="Cypriot Syllabary">
+    <Range begin="10800" end="1083F" />
+  </UnicodeRange>
+  <UnicodeRange name="Imperial Aramaic">
+    <Range begin="10840" end="1085F" />
+  </UnicodeRange>
+  <UnicodeRange name="Palmyrene">
+    <Range begin="10860" end="1087F" />
+  </UnicodeRange>
+  <UnicodeRange name="Nabataean">
+    <Range begin="10880" end="108AF" />
+  </UnicodeRange>
+  <UnicodeRange name="Hatran">
+    <Range begin="108E0" end="108FF" />
+  </UnicodeRange>
+  <UnicodeRange name="Phoenician">
+    <Range begin="10900" end="1091F" />
+  </UnicodeRange>
+  <UnicodeRange name="Lydian">
+    <Range begin="10920" end="1093F" />
+  </UnicodeRange>
+  <UnicodeRange name="Meroitic Hieroglyphs">
+    <Range begin="10980" end="1099F" />
+  </UnicodeRange>
+  <UnicodeRange name="Meroitic Cursive">
+    <Range begin="109A0" end="109FF" />
+  </UnicodeRange>
+  <UnicodeRange name="Kharoshthi">
+    <Range begin="10A00" end="10A5F" />
+  </UnicodeRange>
+  <UnicodeRange name="Old South Arabian">
+    <Range begin="10A60" end="10A7F" />
+  </UnicodeRange>
+  <UnicodeRange name="Old North Arabian">
+    <Range begin="10A80" end="10A9F" />
+  </UnicodeRange>
+  <UnicodeRange name="Manichaean">
+    <Range begin="10AC0" end="10AFF" />
+  </UnicodeRange>
+  <UnicodeRange name="Avestan">
+    <Range begin="10B00" end="10B3F" />
+  </UnicodeRange>
+  <UnicodeRange name="Inscriptional Parthian">
+    <Range begin="10B40" end="10B5F" />
+  </UnicodeRange>
+  <UnicodeRange name="Inscriptional Pahlavi">
+    <Range begin="10B60" end="10B7F" />
+  </UnicodeRange>
+  <UnicodeRange name="Psalter Pahlavi">
+    <Range begin="10B80" end="10BAF" />
+  </UnicodeRange>
+  <UnicodeRange name="Old Turkic">
+    <Range begin="10C00" end="10C4F" />
+  </UnicodeRange>
+  <UnicodeRange name="Old Hungarian">
+    <Range begin="10C80" end="10CFF" />
+  </UnicodeRange>
+  <UnicodeRange name="Hanifi Rohingya">
+    <Range begin="10D00" end="10D3F" />
+  </UnicodeRange>
+  <UnicodeRange name="Rumi Numeral Symbols">
+    <Range begin="10E60" end="10E7F" />
+  </UnicodeRange>
+  <UnicodeRange name="Yezidi">
+    <Range begin="10E80" end="10EBF" />
+  </UnicodeRange>
+  <UnicodeRange name="Old Sogdian">
+    <Range begin="10F00" end="10F2F" />
+  </UnicodeRange>
+  <UnicodeRange name="Sogdian">
+    <Range begin="10F30" end="10F6F" />
+  </UnicodeRange>
+  <UnicodeRange name="Old Uyghur">
+    <Range begin="10F70" end="10FAF" />
+  </UnicodeRange>
+  <UnicodeRange name="Chorasmian">
+    <Range begin="10FB0" end="10FDF" />
+  </UnicodeRange>
+  <UnicodeRange name="Elymaic">
+    <Range begin="10FE0" end="10FFF" />
+  </UnicodeRange>
+  <UnicodeRange name="Brahmi">
+    <Range begin="11000" end="1107F" />
+  </UnicodeRange>
+  <UnicodeRange name="Kaithi">
+    <Range begin="11080" end="110CF" />
+  </UnicodeRange>
+  <UnicodeRange name="Sora Sompeng">
+    <Range begin="110D0" end="110FF" />
+  </UnicodeRange>
+  <UnicodeRange name="Chakma">
+    <Range begin="11100" end="1114F" />
+  </UnicodeRange>
+  <UnicodeRange name="Mahajani">
+    <Range begin="11150" end="1117F" />
+  </UnicodeRange>
+  <UnicodeRange name="Sharada">
+    <Range begin="11180" end="111DF" />
+  </UnicodeRange>
+  <UnicodeRange name="Sinhala Archaic Numbers">
+    <Range begin="111E0" end="111FF" />
+  </UnicodeRange>
+  <UnicodeRange name="Khojki">
+    <Range begin="11200" end="1124F" />
+  </UnicodeRange>
+  <UnicodeRange name="Multani">
+    <Range begin="11280" end="112AF" />
+  </UnicodeRange>
+  <UnicodeRange name="Khudawadi">
+    <Range begin="112B0" end="112FF" />
+  </UnicodeRange>
+  <UnicodeRange name="Grantha">
+    <Range begin="11300" end="1137F" />
+  </UnicodeRange>
+  <UnicodeRange name="Newa">
+    <Range begin="11400" end="1147F" />
+  </UnicodeRange>
+  <UnicodeRange name="Tirhuta">
+    <Range begin="11480" end="114DF" />
+  </UnicodeRange>
+  <UnicodeRange name="Siddham">
+    <Range begin="11580" end="115FF" />
+  </UnicodeRange>
+  <UnicodeRange name="Modi">
+    <Range begin="11600" end="1165F" />
+  </UnicodeRange>
+  <UnicodeRange name="Mongolian Supplement">
+    <Range begin="11660" end="1167F" />
+  </UnicodeRange>
   <UnicodeRange name="Takri">
     <Range begin="11680" end="116CF" />
+  </UnicodeRange>
+  <UnicodeRange name="Ahom">
+    <Range begin="11700" end="1174F" />
+  </UnicodeRange>
+  <UnicodeRange name="Dogra">
+    <Range begin="11800" end="1184F" />
+  </UnicodeRange>
+  <UnicodeRange name="Warang Citi">
+    <Range begin="118A0" end="118FF" />
+  </UnicodeRange>
+  <UnicodeRange name="Dives Akuru">
+    <Range begin="11900" end="1195F" />
+  </UnicodeRange>
+  <UnicodeRange name="Nandinagari">
+    <Range begin="119A0" end="119FF" />
+  </UnicodeRange>
+  <UnicodeRange name="Zanabazar Square">
+    <Range begin="11A00" end="11A4F" />
+  </UnicodeRange>
+  <UnicodeRange name="Soyombo">
+    <Range begin="11A50" end="11AAF" />
+  </UnicodeRange>
+  <UnicodeRange name="Unified Canadian Aboriginal Syllabics Extended-A">
+    <Range begin="11AB0" end="11ABF" />
+  </UnicodeRange>
+  <UnicodeRange name="Pau Cin Hau">
+    <Range begin="11AC0" end="11AFF" />
+  </UnicodeRange>
+  <UnicodeRange name="Bhaiksuki">
+    <Range begin="11C00" end="11C6F" />
+  </UnicodeRange>
+  <UnicodeRange name="Marchen">
+    <Range begin="11C70" end="11CBF" />
+  </UnicodeRange>
+  <UnicodeRange name="Masaram Gondi">
+    <Range begin="11D00" end="11D5F" />
+  </UnicodeRange>
+  <UnicodeRange name="Gunjala Gondi">
+    <Range begin="11D60" end="11DAF" />
+  </UnicodeRange>
+  <UnicodeRange name="Makasar">
+    <Range begin="11EE0" end="11EFF" />
+  </UnicodeRange>
+  <UnicodeRange name="Lisu Supplement">
+    <Range begin="11FB0" end="11FBF" />
+  </UnicodeRange>
+  <UnicodeRange name="Tamil Supplement">
+    <Range begin="11FC0" end="11FFF" />
+  </UnicodeRange>
+  <UnicodeRange name="Cuneiform">
+    <Range begin="12000" end="123FF" />
+  </UnicodeRange>
+  <UnicodeRange name="Cuneiform Numbers and Punctuation">
+    <Range begin="12400" end="1247F" />
+  </UnicodeRange>
+  <UnicodeRange name="Early Dynastic Cuneiform">
+    <Range begin="12480" end="1254F" />
+  </UnicodeRange>
+  <UnicodeRange name="Cypro-Minoan">
+    <Range begin="12F90" end="12FFF" />
+  </UnicodeRange>
+  <UnicodeRange name="Egyptian Hieroglyphs">
+    <Range begin="13000" end="1342F" />
+  </UnicodeRange>
+  <UnicodeRange name="Egyptian Hieroglyph Format Controls">
+    <Range begin="13430" end="1343F" />
+  </UnicodeRange>
+  <UnicodeRange name="Anatolian Hieroglyphs">
+    <Range begin="14400" end="1467F" />
+  </UnicodeRange>
+  <UnicodeRange name="Bamum Supplement">
+    <Range begin="16800" end="16A3F" />
+  </UnicodeRange>
+  <UnicodeRange name="Mro">
+    <Range begin="16A40" end="16A6F" />
+  </UnicodeRange>
+  <UnicodeRange name="Tangsa">
+    <Range begin="16A70" end="16ACF" />
+  </UnicodeRange>
+  <UnicodeRange name="Bassa Vah">
+    <Range begin="16AD0" end="16AFF" />
+  </UnicodeRange>
+  <UnicodeRange name="Pahawh Hmong">
+    <Range begin="16B00" end="16B8F" />
+  </UnicodeRange>
+  <UnicodeRange name="Medefaidrin">
+    <Range begin="16E40" end="16E9F" />
+  </UnicodeRange>
+  <UnicodeRange name="Miao">
+    <Range begin="16F00" end="16F9F" />
+  </UnicodeRange>
+  <UnicodeRange name="Ideographic Symbols and Punctuation">
+    <Range begin="16FE0" end="16FFF" />
+  </UnicodeRange>
+  <UnicodeRange name="Tangut">
+    <Range begin="17000" end="187FF" />
+  </UnicodeRange>
+  <UnicodeRange name="Tangut Components">
+    <Range begin="18800" end="18AFF" />
+  </UnicodeRange>
+  <UnicodeRange name="Khitan Small Script">
+    <Range begin="18B00" end="18CFF" />
+  </UnicodeRange>
+  <UnicodeRange name="Tangut Supplement">
+    <Range begin="18D00" end="18D7F" />
+  </UnicodeRange>
+  <UnicodeRange name="Kana Extended-B">
+    <Range begin="1AFF0" end="1AFFF" />
+  </UnicodeRange>
+  <UnicodeRange name="Kana Supplement">
+    <Range begin="1B000" end="1B0FF" />
+  </UnicodeRange>
+  <UnicodeRange name="Kana Extended-A">
+    <Range begin="1B100" end="1B12F" />
+  </UnicodeRange>
+  <UnicodeRange name="Small Kana Extension">
+    <Range begin="1B130" end="1B16F" />
+  </UnicodeRange>
+  <UnicodeRange name="Nushu">
+    <Range begin="1B170" end="1B2FF" />
+  </UnicodeRange>
+  <UnicodeRange name="Duployan">
+    <Range begin="1BC00" end="1BC9F" />
+  </UnicodeRange>
+  <UnicodeRange name="Shorthand Format Controls">
+    <Range begin="1BCA0" end="1BCAF" />
+  </UnicodeRange>
+  <UnicodeRange name="Znamenny Musical Notation">
+    <Range begin="1CF00" end="1CFCF" />
+  </UnicodeRange>
+  <UnicodeRange name="Byzantine Musical Symbols">
+    <Range begin="1D000" end="1D0FF" />
+  </UnicodeRange>
+  <UnicodeRange name="Musical Symbols">
+    <Range begin="1D100" end="1D1FF" />
+  </UnicodeRange>
+  <UnicodeRange name="Ancient Greek Musical Notation">
+    <Range begin="1D200" end="1D24F" />
+  </UnicodeRange>
+  <UnicodeRange name="Mayan Numerals">
+    <Range begin="1D2E0" end="1D2FF" />
+  </UnicodeRange>
+  <UnicodeRange name="Tai Xuan Jing Symbols">
+    <Range begin="1D300" end="1D35F" />
+  </UnicodeRange>
+  <UnicodeRange name="Counting Rod Numerals">
+    <Range begin="1D360" end="1D37F" />
+  </UnicodeRange>
+  <UnicodeRange name="Mathematical Alphanumeric Symbols">
+    <Range begin="1D400" end="1D7FF" />
+  </UnicodeRange>
+  <UnicodeRange name="Sutton SignWriting">
+    <Range begin="1D800" end="1DAAF" />
+  </UnicodeRange>
+  <UnicodeRange name="Latin Extended-G">
+    <Range begin="1DF00" end="1DFFF" />
+  </UnicodeRange>
+  <UnicodeRange name="Glagolitic Supplement">
+    <Range begin="1E000" end="1E02F" />
+  </UnicodeRange>
+  <UnicodeRange name="Nyiakeng Puachue Hmong">
+    <Range begin="1E100" end="1E14F" />
+  </UnicodeRange>
+  <UnicodeRange name="Toto">
+    <Range begin="1E290" end="1E2BF" />
+  </UnicodeRange>
+  <UnicodeRange name="Wancho">
+    <Range begin="1E2C0" end="1E2FF" />
+  </UnicodeRange>
+  <UnicodeRange name="Ethiopic Extended-B">
+    <Range begin="1E7E0" end="1E7FF" />
+  </UnicodeRange>
+  <UnicodeRange name="Mende Kikakui">
+    <Range begin="1E800" end="1E8DF" />
+  </UnicodeRange>
+  <UnicodeRange name="Adlam">
+    <Range begin="1E900" end="1E95F" />
+  </UnicodeRange>
+  <UnicodeRange name="Indic Siyaq Numbers">
+    <Range begin="1EC70" end="1ECBF" />
+  </UnicodeRange>
+  <UnicodeRange name="Ottoman Siyaq Numbers">
+    <Range begin="1ED00" end="1ED4F" />
+  </UnicodeRange>
+  <UnicodeRange name="Arabic Mathematical Alphabetic Symbols">
+    <Range begin="1EE00" end="1EEFF" />
+  </UnicodeRange>
+  <UnicodeRange name="Mahjong Tiles">
+    <Range begin="1F000" end="1F02F" />
+  </UnicodeRange>
+  <UnicodeRange name="Domino Tiles">
+    <Range begin="1F030" end="1F09F" />
+  </UnicodeRange>
+  <UnicodeRange name="Playing Cards">
+    <Range begin="1F0A0" end="1F0FF" />
+  </UnicodeRange>
+  <UnicodeRange name="Enclosed Alphanumeric Supplement">
+    <Range begin="1F100" end="1F1FF" />
+  </UnicodeRange>
+  <UnicodeRange name="Enclosed Ideographic Supplement">
+    <Range begin="1F200" end="1F2FF" />
+  </UnicodeRange>
+  <UnicodeRange name="Miscellaneous Symbols and Pictographs">
+    <Range begin="1F300" end="1F5FF" />
+  </UnicodeRange>
+  <UnicodeRange name="Emoticons">
+    <Range begin="1F600" end="1F64F" />
+  </UnicodeRange>
+  <UnicodeRange name="Ornamental Dingbats">
+    <Range begin="1F650" end="1F67F" />
+  </UnicodeRange>
+  <UnicodeRange name="Transport and Map Symbols">
+    <Range begin="1F680" end="1F6FF" />
+  </UnicodeRange>
+  <UnicodeRange name="Alchemical Symbols">
+    <Range begin="1F700" end="1F77F" />
+  </UnicodeRange>
+  <UnicodeRange name="Geometric Shapes Extended">
+    <Range begin="1F780" end="1F7FF" />
+  </UnicodeRange>
+  <UnicodeRange name="Supplemental Arrows-C">
+    <Range begin="1F800" end="1F8FF" />
+  </UnicodeRange>
+  <UnicodeRange name="Supplemental Symbols and Pictographs">
+    <Range begin="1F900" end="1F9FF" />
+  </UnicodeRange>
+  <UnicodeRange name="Chess Symbols">
+    <Range begin="1FA00" end="1FA6F" />
+  </UnicodeRange>
+  <UnicodeRange name="Symbols and Pictographs Extended-A">
+    <Range begin="1FA70" end="1FAFF" />
+  </UnicodeRange>
+  <UnicodeRange name="Symbols for Legacy Computing">
+    <Range begin="1FB00" end="1FBFF" />
+  </UnicodeRange>
+  <UnicodeRange name="CJK Unified Ideographs Extension B">
+    <Range begin="20000" end="2A6DF" />
+  </UnicodeRange>
+  <UnicodeRange name="CJK Unified Ideographs Extension C">
+    <Range begin="2A700" end="2B73F" />
+  </UnicodeRange>
+  <UnicodeRange name="CJK Unified Ideographs Extension D">
+    <Range begin="2B740" end="2B81F" />
+  </UnicodeRange>
+  <UnicodeRange name="CJK Unified Ideographs Extension E">
+    <Range begin="2B820" end="2CEAF" />
+  </UnicodeRange>
+  <UnicodeRange name="CJK Unified Ideographs Extension F">
+    <Range begin="2CEB0" end="2EBEF" />
+  </UnicodeRange>
+  <UnicodeRange name="CJK Compatibility Ideographs Supplement">
+    <Range begin="2F800" end="2FA1F" />
+  </UnicodeRange>
+  <UnicodeRange name="CJK Unified Ideographs Extension G">
+    <Range begin="30000" end="3134F" />
+  </UnicodeRange>
+  <UnicodeRange name="Tags">
+    <Range begin="E0000" end="E007F" />
+  </UnicodeRange>
+  <UnicodeRange name="Variation Selectors Supplement">
+    <Range begin="E0100" end="E01EF" />
+  </UnicodeRange>
+  <UnicodeRange name="Supplementary Private Use Area-A">
+    <Range begin="F0000" end="FFFFF" />
+  </UnicodeRange>
+  <UnicodeRange name="Supplementary Private Use Area-B">
+    <Range begin="100000" end="10FFFF" />
   </UnicodeRange>
 </UnicodeRanges>
