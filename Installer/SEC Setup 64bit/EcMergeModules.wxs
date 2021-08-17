@@ -2,110 +2,63 @@
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
   <Fragment Id="EcMergeModulesFragment">
     <Property Id='EcMergeModulesFragment' Value='1'/>
-    <!-- Media item 1 is defined in EC.wxs-->
-    <Media Id='2' Cabinet='EC2.cab' EmbedCab='yes' CompressionLevel='high'/>
-    <Media Id='3' Cabinet='EC3.cab' EmbedCab='yes' CompressionLevel='high'/>
-    <Media Id='4' Cabinet='EC4.cab' EmbedCab='yes' CompressionLevel='high'/>
-    <Media Id='5' Cabinet='EC5.cab' EmbedCab='yes' CompressionLevel='high'/>
-    <Media Id='6' Cabinet='EC6.cab' EmbedCab='yes' CompressionLevel='high'/>
-    <Media Id='7' Cabinet='EC7.cab' EmbedCab='yes' CompressionLevel='high'/>
-    <Media Id='8' Cabinet='EC8.cab' EmbedCab='yes' CompressionLevel='high'/>
-    <Media Id='9' Cabinet='EC9.cab' EmbedCab='yes' CompressionLevel='high'/>
-    <Media Id='10' Cabinet='EC10.cab' EmbedCab='yes' CompressionLevel='high'/>
-    <Media Id='11' Cabinet='EC11.cab' EmbedCab='yes' CompressionLevel='high'/>
-    <Media Id='12' Cabinet='EC12.cab' EmbedCab='yes' CompressionLevel='high'/>
-    <Media Id='13' Cabinet='EC13.cab' EmbedCab='yes' CompressionLevel='high'/>
-    <Media Id='14' Cabinet='EC14.cab' EmbedCab='yes' CompressionLevel='high'/>
-    <Media Id='15' Cabinet='EC15.cab' EmbedCab='yes' CompressionLevel='high'/>
-    <Media Id='16' Cabinet='EC16.cab' EmbedCab='yes' CompressionLevel='high'/>
-    <Media Id='17' Cabinet='EC17.cab' EmbedCab='yes' CompressionLevel='high'/>
-    <Media Id='18' Cabinet='EC18.cab' EmbedCab='yes' CompressionLevel='high'/>
-    <Media Id='19' Cabinet='EC19.cab' EmbedCab='yes' CompressionLevel='high'/>
-    <Media Id='20' Cabinet='EC20.cab' EmbedCab='yes' CompressionLevel='high'/>
-    <Media Id='21' Cabinet='EC21.cab' EmbedCab='yes' CompressionLevel='high'/>
-    <Media Id='22' Cabinet='EC22.cab' EmbedCab='yes' CompressionLevel='high'/>
-    <Media Id='23' Cabinet='EC23.cab' EmbedCab='yes' CompressionLevel='high'/>
-    <Media Id='24' Cabinet='EC24.cab' EmbedCab='yes' CompressionLevel='high'/>
-    <Media Id='25' Cabinet='EC25.cab' EmbedCab='yes' CompressionLevel='high'/>
-    <Media Id='26' Cabinet='EC26.cab' EmbedCab='yes' CompressionLevel='high'/>
-    <Media Id='27' Cabinet='EC27.cab' EmbedCab='yes' CompressionLevel='high'/>
-    <Media Id='28' Cabinet='EC28.cab' EmbedCab='yes' CompressionLevel='high'/>
-    <Media Id='29' Cabinet='EC29.cab' EmbedCab='yes' CompressionLevel='high'/>
-    <Media Id='30' Cabinet='EC30.cab' EmbedCab='yes' CompressionLevel='high'/>
-    <Media Id='31' Cabinet='EC31.cab' EmbedCab='yes' CompressionLevel='high'/>
-    <Media Id='32' Cabinet='EC32.cab' EmbedCab='yes' CompressionLevel='high'/>
-    <Media Id='33' Cabinet='EC33.cab' EmbedCab='yes' CompressionLevel='high'/>
-    <Media Id='34' Cabinet='EC34.cab' EmbedCab='yes' CompressionLevel='high'/>
-    <Media Id='35' Cabinet='EC35.cab' EmbedCab='yes' CompressionLevel='high'/>
-    <Media Id='36' Cabinet='EC36.cab' EmbedCab='yes' CompressionLevel='high'/>
-    <Media Id='37' Cabinet='EC37.cab' EmbedCab='yes' CompressionLevel='high'/>
-    <Media Id='38' Cabinet='EC38.cab' EmbedCab='yes' CompressionLevel='high'/>
-    <Media Id='39' Cabinet='EC39.cab' EmbedCab='yes' CompressionLevel='high'/>
-    <Media Id='40' Cabinet='EC40.cab' EmbedCab='yes' CompressionLevel='high'/>
 
     <DirectoryRef Id="INSTALLDIR">
       <!-- The following merge modules install to the default directory: C:\Program Files\SIL\SILConverters -->
       <Merge Id="SEC_EC" Language="1033" SourceFile="..\..\EC DistFiles\MergeModules\x64\EC_40_64bit_MM.msm" DiskId="1"/>
-      <Merge Id="CcDLLsMM" Language="1033" SourceFile="..\..\EC DistFiles\MergeModules\x64\CcDLLs64bitMM.msm" DiskId="2" />
-      <Merge Id="AIGuesser" Language="1033" SourceFile="..\..\EC DistFiles\MergeModules\x64\AIGuesser64bitMM.msm" DiskId="3"/>
-      <Merge Id="AdaptIt2Unicode" Language="1033" SourceFile="..\MergeModules\x64\AdaptIt2Unicode64bitMM.msm" DiskId="4"/>
-      <Merge Id="ConverterInstaller" Language="1033" SourceFile="..\MergeModules\x64\ConverterInstaller64bitMM.msm" DiskId="5"/>
-      <Merge Id="IndicConverters" Language="1033" SourceFile="..\MergeModules\x64\IndicConverters64bit.msm" DiskId="6"/>
-      <Merge Id="Clipboard_EncConverter" Language="1033" SourceFile="..\MergeModules\x64\ClipboardEncConverter64bitMM.msm" DiskId="7"/>
-      <Merge Id="DChartHelper" Language="1033" SourceFile="..\MergeModules\x64\DChartHelper64bitMM.msm" DiskId="8"/>
-      <Merge Id="SCOffice13" Language="1033" SourceFile="..\MergeModules\x64\SCOffice1364bitMM.msm" DiskId="10"/>
-      <Merge Id="SCOffice10" Language="1033" SourceFile="..\MergeModules\x64\SCOffice1064bitMM.msm" DiskId="11"/>
-      <Merge Id="SCOffice07" Language="1033" SourceFile="..\MergeModules\x64\SCOffice0764bitMM.msm" DiskId="12"/>
-      <Merge Id="SCOffice03" Language="1033" SourceFile="..\MergeModules\x64\SCOffice0364bitMM.msm" DiskId="13"/>
-      <Merge Id="SILConvertersForWord" Language="1033" SourceFile="..\MergeModules\x64\SilConvertersForWord64bitMM.msm" DiskId="14"/>
-      <Merge Id="SFM_Converter" Language="1033" SourceFile="..\MergeModules\x64\SFM Converter 64bit MM.msm" DiskId="15"/>
-      <Merge Id="PerlEC" Language="1033" SourceFile="..\..\EC DistFiles\MergeModules\x64\PerlEc64bitMM.msm" DiskId="16"/>
-      <Merge Id="SEC_PythonEC" Language="1033" SourceFile="..\..\EC DistFiles\MergeModules\x64\PythonEc64bitMM.msm" DiskId="17"/>
-      <Merge Id="TECkitMapUEditor" Language="1033" SourceFile="..\MergeModules\x64\TECkitMapUEditor64bit.msm" DiskId="18"/>
-      <Merge Id="XmlConverters" Language="1033" SourceFile="..\MergeModules\x64\XmlConverters64bitMM.msm" DiskId="19"/>
-      <Merge Id="SpellFixerEc" Language="1033" SourceFile="..\MergeModules\x64\SpellFixerEc64bitMM.msm" DiskId="20"/>
-      <Merge Id="TECkit_Package" Language="1033" SourceFile="..\MergeModules\x64\TECkitPackage64bitMM.msm" DiskId="21"/>
+      <Merge Id="CcDLLsMM" Language="1033" SourceFile="..\..\EC DistFiles\MergeModules\x64\CcDLLs64bitMM.msm" DiskId="1" />
+      <Merge Id="AIGuesser" Language="1033" SourceFile="..\..\EC DistFiles\MergeModules\x64\AIGuesser64bitMM.msm" DiskId="1"/>
+      <Merge Id="AdaptIt2Unicode" Language="1033" SourceFile="..\MergeModules\x64\AdaptIt2Unicode64bitMM.msm" DiskId="1"/>
+      <Merge Id="ConverterInstaller" Language="1033" SourceFile="..\MergeModules\x64\ConverterInstaller64bitMM.msm" DiskId="1"/>
+      <Merge Id="IndicConverters" Language="1033" SourceFile="..\MergeModules\x64\IndicConverters64bit.msm" DiskId="1"/>
+      <Merge Id="Clipboard_EncConverter" Language="1033" SourceFile="..\MergeModules\x64\ClipboardEncConverter64bitMM.msm" DiskId="1"/>
+      <Merge Id="DChartHelper" Language="1033" SourceFile="..\MergeModules\x64\DChartHelper64bitMM.msm" DiskId="1"/>
+      <Merge Id="SCOffice13" Language="1033" SourceFile="..\MergeModules\x64\SCOffice1364bitMM.msm" DiskId="1"/>
+      <Merge Id="SCOffice10" Language="1033" SourceFile="..\MergeModules\x64\SCOffice1064bitMM.msm" DiskId="1"/>
+      <Merge Id="SILConvertersForWord" Language="1033" SourceFile="..\MergeModules\x64\SilConvertersForWord64bitMM.msm" DiskId="1"/>
+      <Merge Id="SFM_Converter" Language="1033" SourceFile="..\MergeModules\x64\SFM Converter 64bit MM.msm" DiskId="1"/>
+      <Merge Id="PerlEC" Language="1033" SourceFile="..\..\EC DistFiles\MergeModules\x64\PerlEc64bitMM.msm" DiskId="1"/>
+      <Merge Id="SEC_PythonEC" Language="1033" SourceFile="..\..\EC DistFiles\MergeModules\x64\PythonEc64bitMM.msm" DiskId="1"/>
+      <Merge Id="TECkitMapUEditor" Language="1033" SourceFile="..\MergeModules\x64\TECkitMapUEditor64bit.msm" DiskId="1"/>
+      <Merge Id="XmlConverters" Language="1033" SourceFile="..\MergeModules\x64\XmlConverters64bitMM.msm" DiskId="1"/>
+      <Merge Id="SpellFixerEc" Language="1033" SourceFile="..\MergeModules\x64\SpellFixerEc64bitMM.msm" DiskId="1"/>
+      <Merge Id="TECkit_Package" Language="1033" SourceFile="..\MergeModules\x64\TECkitPackage64bitMM.msm" DiskId="1"/>
     </DirectoryRef>
 
     <DirectoryRef Id="AllUserAppDataSIL">
-      <Merge Id="ScHelp" Language="1033" SourceFile="..\MergeModules\ScHelpMM.msm" DiskId="22"/>
-      <Merge Id="OO_Ling_Tools" Language="1033" SourceFile="..\MergeModules\OpenOfficeLinguisticToolsMM.msm" DiskId="23"/>
-      <Merge Id="EcFolderACLsMM" Language="1033" SourceFile="..\..\EC DistFiles\MergeModules\EcFolderACLsMM.msm" DiskId="24"/>
-      <Merge Id="CscDot" Language="1033" SourceFile="..\MergeModules\CscDotMM.msm" DiskId="26"/>
-      <Merge Id="DcmDot" Language="1033" SourceFile="..\MergeModules\DcmDotMM.msm" DiskId="27"/>
+      <Merge Id="ScHelp" Language="1033" SourceFile="..\MergeModules\ScHelpMM.msm" DiskId="1"/>
+      <Merge Id="OO_Ling_Tools" Language="1033" SourceFile="..\MergeModules\OpenOfficeLinguisticToolsMM.msm" DiskId="1"/>
+      <Merge Id="EcFolderACLsMM" Language="1033" SourceFile="..\..\EC DistFiles\MergeModules\EcFolderACLsMM.msm" DiskId="1"/>
+      <Merge Id="CscDot" Language="1033" SourceFile="..\MergeModules\CscDotMM.msm" DiskId="1"/>
+      <Merge Id="DcmDot" Language="1033" SourceFile="..\MergeModules\DcmDotMM.msm" DiskId="1"/>
     </DirectoryRef>
     <DirectoryRef Id="AllUserAppDataSILConverters40">
-      <Merge Id="BasicConverters" Language="1033" SourceFile="..\MergeModules\BasicConverters.msm" DiskId="28"/>
-      <Merge Id="SAGIndic" Language="1033" SourceFile="..\MergeModules\SagIndic.msm" DiskId="29"/>
-      <Merge Id="Cameroon" Language="1033" SourceFile="..\MergeModules\Cameroon.msm" DiskId="30"/>
-      <Merge Id="Central_Africa" Language="1033" SourceFile="..\MergeModules\Central Africa.msm" DiskId="31"/>
-      <Merge Id="East_Africa" Language="1033" SourceFile="..\MergeModules\East Africa.msm" DiskId="32"/>
-      <Merge Id="Eastern_Congo_Group" Language="1033" SourceFile="..\MergeModules\Eastern Congo Group.msm" DiskId="33"/>
-      <Merge Id="FindPhone2IPA" Language="1033" SourceFile="..\MergeModules\FindPhone2IPA.msm" DiskId="34"/>
-      <Merge Id="Hebrew" Language="1033" SourceFile="..\MergeModules\Hebrew.msm" DiskId="35"/>
-      <Merge Id="ICUTransliterators" Language="1033" SourceFile="..\MergeModules\ICUTransliterators.msm" DiskId="36"/>
-      <Merge Id="NLCI_India" Language="1033" SourceFile="..\MergeModules\NLCI (India).msm" DiskId="37"/>
-      <Merge Id="PNG" Language="1033" SourceFile="..\MergeModules\PNG.msm" DiskId="38"/>
-      <Merge Id="West_Africa" Language="1033" SourceFile="..\MergeModules\West Africa.msm" DiskId="39"/>
+      <Merge Id="BasicConverters" Language="1033" SourceFile="..\MergeModules\BasicConverters.msm" DiskId="1"/>
+      <Merge Id="SAGIndic" Language="1033" SourceFile="..\MergeModules\SagIndic.msm" DiskId="1"/>
+      <Merge Id="Cameroon" Language="1033" SourceFile="..\MergeModules\Cameroon.msm" DiskId="1"/>
+      <Merge Id="Central_Africa" Language="1033" SourceFile="..\MergeModules\Central Africa.msm" DiskId="1"/>
+      <Merge Id="East_Africa" Language="1033" SourceFile="..\MergeModules\East Africa.msm" DiskId="1"/>
+      <Merge Id="Eastern_Congo_Group" Language="1033" SourceFile="..\MergeModules\Eastern Congo Group.msm" DiskId="1"/>
+      <Merge Id="FindPhone2IPA" Language="1033" SourceFile="..\MergeModules\FindPhone2IPA.msm" DiskId="1"/>
+      <Merge Id="Hebrew" Language="1033" SourceFile="..\MergeModules\Hebrew.msm" DiskId="1"/>
+      <Merge Id="ICUTransliterators" Language="1033" SourceFile="..\MergeModules\ICUTransliterators.msm" DiskId="1"/>
+      <Merge Id="NLCI_India" Language="1033" SourceFile="..\MergeModules\NLCI (India).msm" DiskId="1"/>
+      <Merge Id="PNG" Language="1033" SourceFile="..\MergeModules\PNG.msm" DiskId="1"/>
+      <Merge Id="West_Africa" Language="1033" SourceFile="..\MergeModules\West Africa.msm" DiskId="1"/>
     </DirectoryRef>
     <DirectoryRef Id="CommonFilesFolderSIL">
       <!--The following merge modules install to the directory: C:\Program Files\Common Files\SIL-->
-      <Merge Id="SetPath" Language="1033" SourceFile="..\MergeModules\x64\SetPath.msm" DiskId="25"/>
-      <Merge Id="TECkit_DLLs" Language="1033" SourceFile="..\..\EC DistFiles\MergeModules\x64\TECkit64bitDllsMM.msm" DiskId="40"/>
-      <Merge Id="SEC_ICU" Language="1033" SourceFile="..\..\EC DistFiles\MergeModules\x64\ICU_40_64bit.msm" DiskId="9"/>
-      <!--
-            <Merge Id="Managed_Install_Fix" Language="1033" SourceFile="..\ExternalMergeModules\Managed Install Fix.msm" DiskId="2"/>
-			<Merge Id="ICU" Language="1033" SourceFile="Installer\ICU040.msm" DiskId="7"/>
-			<Merge Id="ICUECHelp" Language="1033" SourceFile="Installer\ICUECHelp.msm" DiskId="7"/>
-            -->
+      <Merge Id="SetPath" Language="1033" SourceFile="..\MergeModules\x64\SetPath.msm" DiskId="1"/>
+      <Merge Id="TECkit_DLLs" Language="1033" SourceFile="..\..\EC DistFiles\MergeModules\x64\TECkit64bitDllsMM.msm" DiskId="1"/>
+      <Merge Id="SEC_ICU" Language="1033" SourceFile="..\..\EC DistFiles\MergeModules\x64\ICU_40_64bit.msm" DiskId="1"/>
     </DirectoryRef>
     <DirectoryRef Id="System64Folder">
-      <Merge Id="CRT" Language="1033" SourceFile="..\ExternalMergeModules\Microsoft_VC142_CRT_x64.msm" DiskId="23"/>
-      <Merge Id="MFC" Language="1033" SourceFile="..\ExternalMergeModules\Microsoft_VC142_MFC_x64.msm" DiskId="23"/>
+      <Merge Id="CRT" Language="1033" SourceFile="..\ExternalMergeModules\Microsoft_VC142_CRT_x64.msm" DiskId="1"/>
+      <Merge Id="MFC" Language="1033" SourceFile="..\ExternalMergeModules\Microsoft_VC142_MFC_x64.msm" DiskId="1"/>
     </DirectoryRef>
     <DirectoryRef Id="SystemFolder">
       <!-- The CRT90 merge module is needed only for the PythonEC (using Python 2.7) merge module:-->
-      <Merge Id="CRT90" Language="1033" SourceFile="..\ExternalMergeModules\Microsoft_VC90_CRT_x86_x64.msm" DiskId="23"/>
+      <Merge Id="CRT90" Language="1033" SourceFile="..\ExternalMergeModules\Microsoft_VC90_CRT_x86_x64.msm" DiskId="1"/>
     </DirectoryRef>
   </Fragment>
 </Wix>

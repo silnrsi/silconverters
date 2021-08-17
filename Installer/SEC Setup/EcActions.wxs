@@ -3,7 +3,7 @@
     <Fragment Id="EcActionsFragment">
         <Property Id='EcActionsFragment' Value='1'/>
         <CustomAction Id="Set_WORD_DOT_FOLDER_for_CSC_Word_template" Return="check" Property="WORD_DOT_FOLDER.288DE69B_4287_4DFA_A10F_3322E3DE0C20" Value="[WORD_DOT_FOLDER]" />
-        <CustomAction Id="Set_WORD_DOT_FOLDER_for_SpellFixer" Return="check" Property="WORD_DOT_FOLDER.C82AE0AC_FBE9_44B9_9D70_5B070989429E" Value="[WORD_DOT_FOLDER]" />
+        <CustomAction Id="Set_WORD_DOT_FOLDER_for_SpellFixer" Return="check" Property="WORD_DOT_FOLDER.FBBB644E_129B_4B3A_B946_A32BC7943DE0" Value="[WORD_DOT_FOLDER]" />
         <CustomAction Id="Set_WORD_DOT_FOLDER_for_Word_Doc_Template" Return="check" Property="WORD_DOT_FOLDER.D59085A5_5CB5_44E4_AEF8_15910CE63BC0" Value="[WORD_DOT_FOLDER]" />
         <CustomAction Id="Set_WORD_DOT_FOLDER_via_Reg" Return="check" Property="WORD_DOT_FOLDER" Value="[WORD_DOT_FOLDER_REG_11]" />
         <CustomAction Id="Set_WORD_DOT_FOLDER_via_Reg12" Return="check" Property="WORD_DOT_FOLDER" Value="[WORD_DOT_FOLDER_REG_12]" />
@@ -19,7 +19,7 @@
             <Custom Action="Set_WORD_DOT_FOLDER_via_Reg12" After="Set_WORD_DOT_FOLDER_via_Reg"><![CDATA[WORD_DOT_FOLDER_REG_12]]></Custom>
             <Custom Action="Set_WORD_DOT_FOLDER_via_Reg14" After="Set_WORD_DOT_FOLDER_via_Reg12"><![CDATA[WORD_DOT_FOLDER_REG_14]]></Custom>
             <Custom Action="Set_WORD_DOT_FOLDER_via_Reg15" After="Set_WORD_DOT_FOLDER_via_Reg14"><![CDATA[WORD_DOT_FOLDER_REG_15]]></Custom>
-            <Custom Action="Set_WORD_DOT_FOLDER_via_startup_folder" After="Set_WORD_DOT_FOLDER_via_Reg14"><![CDATA[WORD_DOT_STARTUP_FOLDER AND NOT WORD_DOT_FOLDER]]>
+            <Custom Action="Set_WORD_DOT_FOLDER_via_startup_folder" After="Set_WORD_DOT_FOLDER_via_Reg15"><![CDATA[WORD_DOT_STARTUP_FOLDER AND NOT WORD_DOT_FOLDER]]>
             </Custom>
             <Custom Action="Set_WORD_DOT_FOLDER_via_folder" After="Set_WORD_DOT_FOLDER_via_startup_folder"><![CDATA[WORD_DOT_FOLDER_FOLDER AND NOT WORD_DOT_STARTUP_FOLDER AND NOT WORD_DOT_FOLDER]]></Custom>
             <Custom Action="Set_WORD_DOT_FOLDER_for_CSC_Word_template" After="RMCCPSearch"><![CDATA[WORD_DOT_FOLDER]]></Custom>
