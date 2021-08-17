@@ -29,8 +29,8 @@
                             <Component Id="silgreek2004_04_27.tec" Guid="{DDED0185-7FCB-42C7-9B20-D5EB18B3B20A}">
                                 <File Id="silgreek2004_04_27.tec" Name="silgreek2004-04-27.tec" KeyPath="yes" Source="MapsTables\silgreek2004-04-27.tec" />
                             </Component>
-                            <Component Id="silipa93.tec.vbs" Guid="{04D1C27A-7AA0-47A3-B7AB-EED503094B01}">
-                                <File Id="silipa93.tec.vbs" Name="silipa93.tec.vbs" KeyPath="yes" Source="MapsTables\silipa93.tec.vbs" />
+                            <Component Id="SIL-IPA93-2001.tec.vbs" Guid="{48CB154E-060C-48DB-AD47-84B9C0797C96}">
+                                <File Id="SIL-IPA93-2001.tec.vbs" Name="SIL-IPA93-2001.tec.vbs" KeyPath="yes" Source="MapsTables\SIL-IPA93-2001.tec.vbs" />
                             </Component>
                             <Component Id="Basic_Converters.xml" Guid="{C13AF622-D01D-4ECE-8B77-88999FF8A4EB}">
                                 <File Id="Basic_Converters.xml" Name="Basic Converters.xml" KeyPath="yes" Source="MapsTables\Basic Converters.xml" />
@@ -89,8 +89,8 @@
                             <Component Id="SILGreek2004_04_27.map" Guid="{BB262014-DD5E-4C0A-A3CF-8EC8DBF872FD}">
                                 <File Id="SILGreek2004_04_27.map" Name="SILGreek2004-04-27.map" KeyPath="yes" Source="MapsTables\SILGreek2004-04-27.map" />
                             </Component>
-                            <Component Id="silipa93.tec" Guid="{789923EB-7841-4C69-9FC4-3C11D378C940}">
-                                <File Id="silipa93.tec" Name="silipa93.tec" KeyPath="yes" Source="MapsTables\silipa93.tec" />
+                            <Component Id="SIL-IPA93-2001.tec" Guid="{4869E5A3-A35D-4011-B098-E9794D9AE983}">
+                                <File Id="SIL-IPA93-2001.tec" Name="SIL-IPA93-2001.tec" KeyPath="yes" Source="MapsTables\SIL-IPA93-2001.tec" />
                             </Component>
                         </Directory>
                     </Directory>

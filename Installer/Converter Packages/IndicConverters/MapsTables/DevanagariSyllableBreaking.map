@@ -1,17 +1,12 @@
 ﻿; This file was edited using TECkitMappingEditorU.exe v4.0.0.0 on 10/30/2020.
 ;   Conversion Type = Unicode_to_from_Unicode
-;   Left-hand side font = Arial Unicode MS;11.25
-;   Right-hand side font = Doulos SIL;11.25
-;   Main Window Position = -6,0,1479,1076
-;   Left-hand side Character Map Window Position = 1456,0,471,420
-;   Right-hand side Character Map Window Position = 1457,411,457,447
-
-; This file was edited using TECkitMappingEditorU.exe v1.0.0.0 on 9/5/2006.
-;   Conversion Type = Unicode_to_from_Unicode
-;   Left-hand side font = Arial Unicode MS;11.25
-;   Right-hand side font = Doulos SIL;11.25
-;   Main Window Position = 0,0,794,768
-;   Left-hand side Character Map Window Position = 794,0,471,420
+;   Left-hand side font = Annapurna SIL;11.25
+;   Right-hand side font = Annapurna SIL;11.25
+;   Main Window Position = 0,0,1435,1040
+;   Left-hand side Character Map Window Position = 1427,0,493,430
+;   Right-hand side Character Map Window Position = 1427,423,493,431
+;   Left-hand range = Devanagari
+;   Right-hand range = Devanagari
 
 ;DevanagariSyllableBreaking.map
 ;Copyright (c) 2020 SIL International.

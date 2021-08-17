@@ -2,10 +2,10 @@
 <SILConvertersInstallerDetails xmlns="http://www.sil.org/computing/schemas/SILConvertersInstallerDetails.xsd">
     <MapsTables>
         <MapTable description="Conversion between SIL IPA93 (as supported by SIL IPA93 font package) and Unicode">
-            <scriptInstall filename="MapsTables\silipa93.tec.vbs" mappingName="SIL IPA93&lt;&gt;UNICODE" converterSpec="MapsTables\silipa93.tec" IsConverterSpecAFile="true" conversionType="LegacyToFromUnicode" implementType="SIL.tec" sampleData="mU)÷êU is kA)ùNgri for boy"></scriptInstall>
+            <scriptInstall filename="MapsTables\SIL-IPA93-2001.tec.vbs" mappingName="SIL IPA93&lt;&gt;UNICODE" converterSpec="MapsTables\SIL-IPA93-2001.tec" IsConverterSpecAFile="true" conversionType="LegacyToFromUnicode" implementType="SIL.tec" sampleData="mU)÷êU is kA)ùNgri for boy"></scriptInstall>
             <FilesToInstall>
                 <FileToInstall filename="MapsTables\SIL-IPA93-2001.map"></FileToInstall>
-                <FileToInstall filename="MapsTables\silipa93.tec"></FileToInstall>
+                <FileToInstall filename="MapsTables\SIL-IPA93-2001.tec"></FileToInstall>
             </FilesToInstall>
         </MapTable>
         <MapTable description="Conversion between SIL IPA (as supported by the 'SIL Encore IPA Fonts 1.2a' font package) data to Unicode and vice versa">
