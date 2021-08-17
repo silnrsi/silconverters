@@ -8,9 +8,9 @@
 		<Directory Id="TARGETDIR" Name="SourceDir">
             
             <Directory Id="WORD_DOT_FOLDER" Name="Word DOT Folder">
-                <Component Id="ConsistentSpellingChecker400.dot" Guid="18CA683D-1653-4E98-BD6C-47E21A2EE5E4">
-                    <File Id="ConsistentSpellingChecker400.dot" Name="Consistent Spelling Checker 400.dot" KeyPath="yes" Source="DistFiles\Consistent Spelling Checker 400.dot" />
-                    <Shortcut Id="ConsistentSpellingChecker400.dot" Directory="SILConvHelp" Name="Help for the Consistent Spelling Checker" Description="Help information for the Consistent Spelling Checker MS Word document template" Show="normal" WorkingDirectory="WORD_DOT_FOLDER" Advertise="yes" />
+                <Component Id="ConsistentSpellingChecker500.dot" Guid="18CA683D-1653-4E98-BD6C-47E21A2EE5E4">
+                    <File Id="ConsistentSpellingChecker500.dot" Name="Consistent Spelling Checker 500.dot" KeyPath="yes" Source="DistFiles\Consistent Spelling Checker 500.dot" />
+                    <Shortcut Id="ConsistentSpellingChecker500.dot" Directory="SILConvHelp" Name="Help for the Consistent Spelling Checker" Description="Help information for the Consistent Spelling Checker MS Word document template" Show="normal" WorkingDirectory="WORD_DOT_FOLDER" Advertise="yes" />
                 </Component>
             </Directory>
 

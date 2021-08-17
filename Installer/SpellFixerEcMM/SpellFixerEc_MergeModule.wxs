@@ -37,7 +37,7 @@
             </Directory>
 
             <Directory Id="WORD_DOT_FOLDER" Name="Word DOT Folder">
-                <Component Id="SpellFixer.dot" Guid="2E6335D3-C438-42F7-8A18-A51C5E3912A9">
+                <Component Id="SpellFixer.dot" Guid="{56498D8E-5A6A-46A8-9AA5-13D022E4E914}">
                     <File Id="SpellFixer.dot" Name="SpellFixer.dot" KeyPath="yes" Source="DistFiles\SpellFixer.dot" />
                     <Shortcut Id="SpellFixer.dot" Directory="SILConvHelp" Name="Help for the SpellFixer macro" Description="Help information for the SpellFixer MS Word document template" Show="normal" WorkingDirectory="WORD_DOT_FOLDER" Advertise="yes" />
                 </Component>

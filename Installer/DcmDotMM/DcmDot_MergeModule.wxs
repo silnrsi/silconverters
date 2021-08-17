@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
 	<Module Id="DcmDotMM" Language="1033" Version="4.0.0.0">
-		<Package Id="d59085a5-5cb5-44e4-aef8-15910ce63bc0" Comments="Data Conversion Macro Word document template" Description="Document Template for using EncConverters in MS Word" InstallerVersion="500" Keywords="SILConverters; Encoding Conversion in MS Word" Manufacturer="SIL" />
+		<Package Id="d59085a5-5cb5-44e4-aef8-15910ce63bc0" Comments="Data Conversion Macro Word document template" Description="Document Template for using EncConverters in MS Word" 
+             InstallerVersion="500" Keywords="SILConverters; Encoding Conversion in MS Word" Manufacturer="SIL" />
 
 		<Directory Id="TARGETDIR" Name="SourceDir">
         
             <Directory Id="WORD_DOT_FOLDER" Name="Word DOT Folder">
-                <Component Id="DataConversionMacro0400.dot" Guid="D0BDA592-89AD-4E2D-AF72-92BF5CA5F51E">
-                    <File Id="DataConversionMacro0400.dot" Name="Data Conversion Macro 0400.dot" KeyPath="yes" Source="DistFiles\Data Conversion Macro 0400.dot" />
-                    <Shortcut Id="DataConversionMacro0400.dot" Directory="SILConvHelp" Name="Help for the Data Conversion Macro" Description="Help information for the Data Conversion Macro MS Word document template" Show="normal" WorkingDirectory="WORD_DOT_FOLDER" Advertise="yes" />
+                <Component Id="DataConversionMacro0500.dot" Guid="D0BDA592-89AD-4E2D-AF72-92BF5CA5F51E">
+                    <File Id="DataConversionMacro0500.dot" Name="Data Conversion Macro 0500.dot" KeyPath="yes" Source="DistFiles\Data Conversion Macro 0500.dot" />
+                    <Shortcut Id="DataConversionMacro0500.dot" Directory="SILConvHelp" Name="Help for the Data Conversion Macro" Description="Help information for the Data Conversion Macro MS Word document template" Show="normal" WorkingDirectory="WORD_DOT_FOLDER" Advertise="yes" />
                 </Component>
             </Directory>
 
