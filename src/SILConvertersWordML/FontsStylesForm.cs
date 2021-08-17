@@ -3,21 +3,17 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
 using Word = Microsoft.Office.Interop.Word;
 using System.IO;
-using System.Xml;
-using System.Xml.XPath;
 using ECInterfaces;
 using SilEncConverters40;
 using System.Runtime.Serialization;                 // for SerializationException
 using System.Runtime.Serialization.Formatters.Soap; // for soap formatter
 using System.Runtime.InteropServices;               // for Marshal
-using System.Diagnostics;							// for Process
+using System.Diagnostics;                           // for Process
+using System.Xml.Linq;
 
 namespace SILConvertersWordML
 {
@@ -441,8 +437,8 @@ namespace SILConvertersWordML
             return doc;
         }
 
-        protected XmlDocument SaveIntermediateXmlFile(ref string strXmlFilename, string strXmlFilenameSuffix,
-            string strDocFilename, bool bSaveXmlOutputInFolder, XmlDocument doc)
+        protected XDocument SaveIntermediateXmlFile(ref string strXmlFilename, string strXmlFilenameSuffix,
+            string strDocFilename, bool bSaveXmlOutputInFolder, XDocument doc)
         {
             try
             {
@@ -450,8 +446,8 @@ namespace SILConvertersWordML
                 {
                     if (doc == null)
                     {
-                        doc = new XmlDocument();
-                        doc.Load(strXmlFilename);
+                        doc = XDocument.Load(strXmlFilename);
+                        // doc.Load(strXmlFilename);
                     }
 
                     int nIndex = strDocFilename.LastIndexOf('.');
