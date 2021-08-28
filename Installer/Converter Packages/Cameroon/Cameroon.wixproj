@@ -32,6 +32,16 @@
   <ItemGroup>
     <Compile Include="Cameroon_MergeModule.wxs" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="MapsTables\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="MapsTables\CamCam2Unicode2007.cct" />
+    <Content Include="MapsTables\Cameroon.xml" />
+    <Content Include="MapsTables\Cameroon2Unicode.tec.vbs" />
+    <Content Include="MapsTables\Cameroon2Unicode2007.map" />
+    <Content Include="MapsTables\Cameroon2Unicode2007.tec" />
+  </ItemGroup>
   <Import Project="$(WixTargetsPath)" />
   <!--
 	To modify your build process, add your task inside one of the targets below and uncomment it.

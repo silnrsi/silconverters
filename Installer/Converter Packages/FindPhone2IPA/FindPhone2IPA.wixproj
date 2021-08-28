@@ -32,6 +32,15 @@
   <ItemGroup>
     <Compile Include="FindPhone2IPA_MergeModule.wxs" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="MapsTables\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="MapsTables\FF2Uni.cct" />
+    <Content Include="MapsTables\FFIPA.CCT" />
+    <Content Include="MapsTables\FindPhone.vbs" />
+    <Content Include="MapsTables\FindPhone2Ipa.xml" />
+  </ItemGroup>
   <Import Project="$(WixTargetsPath)" />
   <!--
 	To modify your build process, add your task inside one of the targets below and uncomment it.

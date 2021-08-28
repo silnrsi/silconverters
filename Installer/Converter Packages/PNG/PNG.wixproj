@@ -32,6 +32,15 @@
   <ItemGroup>
     <Compile Include="PNG_MergeModule.wxs" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="MapsTables\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="MapsTables\PNG.xml" />
+    <Content Include="MapsTables\pngsil.tec.vbs" />
+    <Content Include="MapsTables\SIL-PNG.map" />
+    <Content Include="MapsTables\SIL-PNG.tec" />
+  </ItemGroup>
   <Import Project="$(WixTargetsPath)" />
   <!--
 	To modify your build process, add your task inside one of the targets below and uncomment it.

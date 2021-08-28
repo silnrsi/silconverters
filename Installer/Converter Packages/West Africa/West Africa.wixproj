@@ -32,6 +32,44 @@
   <ItemGroup>
     <Compile Include="WestAfrica_MergeModule.wxs" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="MapsTables\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="MapsTables\93-linb.map" />
+    <Content Include="MapsTables\93-linb.tec" />
+    <Content Include="MapsTables\Abidjan.map" />
+    <Content Include="MapsTables\Abidjan.tec" />
+    <Content Include="MapsTables\Bambara SIL Charis.map" />
+    <Content Include="MapsTables\Bambara SIL Charis.tec" />
+    <Content Include="MapsTables\BF Font Family.map" />
+    <Content Include="MapsTables\BF Font Family.tec" />
+    <Content Include="MapsTables\BF Times.map" />
+    <Content Include="MapsTables\BF Times.tec" />
+    <Content Include="MapsTables\fulfulde.map" />
+    <Content Include="MapsTables\fulfulde.tec" />
+    <Content Include="MapsTables\Ghana.map" />
+    <Content Include="MapsTables\Ghana.tec" />
+    <Content Include="MapsTables\Mali Standard.map" />
+    <Content Include="MapsTables\Mali Standard.tec" />
+    <Content Include="MapsTables\RCIStandard.map" />
+    <Content Include="MapsTables\RCIStandard.tec" />
+    <Content Include="MapsTables\Senufo.map" />
+    <Content Include="MapsTables\Senufo.tec" />
+    <Content Include="MapsTables\SIL-Kar.map" />
+    <Content Include="MapsTables\SIL-Kar.tec" />
+    <Content Include="MapsTables\SILSamogho.map" />
+    <Content Include="MapsTables\SILSamogho.tec" />
+    <Content Include="MapsTables\Songhai.map" />
+    <Content Include="MapsTables\Songhai.tec" />
+    <Content Include="MapsTables\Tbb4.map" />
+    <Content Include="MapsTables\Tbb4.tec" />
+    <Content Include="MapsTables\Tombouctou.map" />
+    <Content Include="MapsTables\Tombouctou.tec" />
+    <Content Include="MapsTables\WAfrica.xml" />
+    <Content Include="MapsTables\Winye.map" />
+    <Content Include="MapsTables\Winye.tec" />
+  </ItemGroup>
   <Import Project="$(WixTargetsPath)" />
   <!--
 	To modify your build process, add your task inside one of the targets below and uncomment it.

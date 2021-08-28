@@ -32,6 +32,35 @@
   <ItemGroup>
     <Compile Include="NLCI_MergeModule.wxs" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="MapsTables\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="MapsTables\NLCI.xml" />
+    <Content Include="MapsTables\PHNindus2UnicodeIPA.map" />
+    <Content Include="MapsTables\PHNindus2UnicodeIPA.tec" />
+    <Content Include="MapsTables\SLOri2UOri.map" />
+    <Content Include="MapsTables\SLOri2UOri.tec" />
+    <Content Include="MapsTables\SLOri2UOri.tec.vbs" />
+    <Content Include="MapsTables\Untitled.map" />
+    <Content Include="MapsTables\WinScrDev.map" />
+    <Content Include="MapsTables\WinScrDev.tec" />
+    <Content Include="MapsTables\WinScrDev.tec.vbs" />
+    <Content Include="MapsTables\WinScrGuj.map" />
+    <Content Include="MapsTables\WinScrGuj.tec" />
+    <Content Include="MapsTables\WinScrGuj.tec.vbs" />
+    <Content Include="MapsTables\WinScrMal.map" />
+    <Content Include="MapsTables\WinScrMal.tec" />
+    <Content Include="MapsTables\WinScrMal.tec.vbs" />
+    <Content Include="MapsTables\WinScrOri.map" />
+    <Content Include="MapsTables\WinScrOri.tec" />
+    <Content Include="MapsTables\WinScrTam.map" />
+    <Content Include="MapsTables\WinScrTam.tec" />
+    <Content Include="MapsTables\WinScrTam.tec.vbs" />
+    <Content Include="MapsTables\WinScrTel.map" />
+    <Content Include="MapsTables\WinScrTel.tec" />
+    <Content Include="MapsTables\WinScrTel.tec.vbs" />
+  </ItemGroup>
   <Import Project="$(WixTargetsPath)" />
   <!--
 	To modify your build process, add your task inside one of the targets below and uncomment it.

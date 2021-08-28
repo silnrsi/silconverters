@@ -23,6 +23,51 @@
   <ItemGroup>
     <Compile Include="IndicConverters_MergeModule.wxs" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="MapsTables\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="EnableIndicConvertersInWord.reg" />
+    <Content Include="krutidev010.pdf" />
+    <Content Include="krutidev011.pdf" />
+    <Content Include="MapsTables\DevanagariSyllableBreaking.map" />
+    <Content Include="MapsTables\GujaratiLS.map" />
+    <Content Include="MapsTables\GujaratiLS.tec" />
+    <Content Include="MapsTables\Himali.xml" />
+    <Content Include="MapsTables\HimaliNew.Map" />
+    <Content Include="MapsTables\HimaliNew.tec" />
+    <Content Include="MapsTables\Himalli Readme.txt" />
+    <Content Include="MapsTables\HimalliLLMac.map" />
+    <Content Include="MapsTables\HimalliLLMac.tec" />
+    <Content Include="MapsTables\HimalliLLPC.map" />
+    <Content Include="MapsTables\HimalliLLPC.tec" />
+    <Content Include="MapsTables\HimalliMac.map" />
+    <Content Include="MapsTables\HimalliMAC.tec" />
+    <Content Include="MapsTables\HimalliPC-1998.map" />
+    <Content Include="MapsTables\HimalliPC-1998.tec" />
+    <Content Include="MapsTables\HimalliPC-2002.map" />
+    <Content Include="MapsTables\HimalliPC-2002.tec" />
+    <Content Include="MapsTables\ISCII Converters.xml" />
+    <Content Include="MapsTables\Kantipur.map" />
+    <Content Include="MapsTables\Kantipur.tec" />
+    <Content Include="MapsTables\KrutiDev010.map" />
+    <Content Include="MapsTables\KrutiDev010.tec" />
+    <Content Include="MapsTables\KrutiDev011.map" />
+    <Content Include="MapsTables\KrutiDev011.tec" />
+    <Content Include="MapsTables\KrutiDev290.map" />
+    <Content Include="MapsTables\KrutiDev290.tec" />
+    <Content Include="MapsTables\Preeti.map" />
+    <Content Include="MapsTables\Preeti.tec" />
+    <Content Include="MapsTables\Shusha.map" />
+    <Content Include="MapsTables\shusha.tec" />
+    <Content Include="MapsTables\TECIndic.xml" />
+    <Content Include="MapsTables\TELAnu2Uni.map" />
+    <Content Include="MapsTables\TELAnu2Uni.tec" />
+    <Content Include="MapsTables\TibA2Uni.map" />
+    <Content Include="MapsTables\TIBA2UNI.tec" />
+    <Content Include="MapsTables\UDev2UIpa.map" />
+    <Content Include="MapsTables\UDev2UIpa.tec" />
+  </ItemGroup>
   <Import Project="$(WixTargetsPath)" />
   <!--
 	To modify your build process, add your task inside one of the targets below and uncomment it.

@@ -32,6 +32,27 @@
   <ItemGroup>
     <Compile Include="Eastern_Congo_Group_MergeModule.wxs" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="MapsTables\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="MapsTables\BheleASCII-Unicode.tec" />
+    <Content Include="MapsTables\BheleASCII-Unicode.tec.vbs" />
+    <Content Include="MapsTables\BUDU-Unicode.tec" />
+    <Content Include="MapsTables\BUDU-Unicode.tec.vbs" />
+    <Content Include="MapsTables\BuduASCII-Unicode.tec" />
+    <Content Include="MapsTables\BuduASCII-Unicode.tec.vbs" />
+    <Content Include="MapsTables\ECG-Unicode.tec" />
+    <Content Include="MapsTables\ECG-Unicode.tec.vbs" />
+    <Content Include="MapsTables\ECG.xml" />
+    <Content Include="MapsTables\Komo-Unicode.tec" />
+    <Content Include="MapsTables\Komo-Unicode.tec.vbs" />
+    <Content Include="MapsTables\KomoASCII-Unicode.tec" />
+    <Content Include="MapsTables\KomoASCII-Unicode.tec.vbs" />
+    <Content Include="MapsTables\Mayogo-Unicode.map" />
+    <Content Include="MapsTables\Mayogo-Unicode.tec" />
+    <Content Include="MapsTables\Mayogo-Unicode.tec.vbs" />
+  </ItemGroup>
   <Import Project="$(WixTargetsPath)" />
   <!--
 	To modify your build process, add your task inside one of the targets below and uncomment it.

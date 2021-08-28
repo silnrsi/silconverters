@@ -33,9 +33,23 @@
     <Compile Include="Hebrew_MergeModule.wxs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="MapsTables\EzraSIL20to25.map" />
+    <Content Include="MapsTables\EzraSIL20to25.tec" />
     <Content Include="MapsTables\Hebrew.xml">
       <Link>Hebrew.xml</Link>
     </Content>
+    <Content Include="MapsTables\r2l_2004.cct" />
+    <Content Include="MapsTables\SIL Ezra.vbs" />
+    <Content Include="MapsTables\SILEzratoUni50.map" />
+    <Content Include="MapsTables\SILEzratoUni50.tec" />
+    <Content Include="MapsTables\SILHebTrans.map" />
+    <Content Include="MapsTables\SILHebTrans.tec" />
+    <Content Include="MapsTables\SILHebTrans.vbs" />
+    <Content Include="MapsTables\SILHebTransCaps.map" />
+    <Content Include="MapsTables\SILHebTransCaps.tec" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="MapsTables\" />
   </ItemGroup>
   <Import Project="$(WixTargetsPath)" />
   <!--

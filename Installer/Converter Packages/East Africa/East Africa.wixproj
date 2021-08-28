@@ -32,6 +32,16 @@
   <ItemGroup>
     <Compile Include="East_Africa_MergeModule.wxs" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="MapsTables\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="MapsTables\Bantu Und.tec" />
+    <Content Include="MapsTables\Bantu Und.tec.vbs" />
+    <Content Include="MapsTables\EAfrica.xml" />
+    <Content Include="MapsTables\Times African.tec" />
+    <Content Include="MapsTables\Times African.tec.vbs" />
+  </ItemGroup>
   <Import Project="$(WixTargetsPath)" />
   <!--
 	To modify your build process, add your task inside one of the targets below and uncomment it.

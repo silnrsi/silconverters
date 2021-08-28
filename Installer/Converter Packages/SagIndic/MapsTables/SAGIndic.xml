@@ -2,7 +2,7 @@
 <SILConvertersInstallerDetails xmlns="http://www.sil.org/computing/schemas/SILConvertersInstallerDetails.xsd">
     <MapsTables>
         <MapTable description="SAG CC table converter between Annapurna and Unicode">
-            <autoInstall mappingName="Annapurna&lt;&gt;UNICODE" converterSpec="MapsTables\ann2unicode.cct" IsConverterSpecAFile="true" implementType="SIL.cc" conversionType="LegacyToUnicode" leftEncoding="SIL-ANNAPURNA-05" rightEncoding="UNICODE" processType="UnicodeEncodingConversion" sampleData="/éLƒç¢/ means 'book' in Hindi"></autoInstall>
+            <autoInstall mappingName="Annapurna&gt;UNICODE" converterSpec="MapsTables\ann2unicode.cct" IsConverterSpecAFile="true" implementType="SIL.cc" conversionType="LegacyToUnicode" leftEncoding="SIL-ANNAPURNA-05" rightEncoding="UNICODE" processType="UnicodeEncodingConversion" sampleData="/éLƒç¢/ means 'book' in Hindi"></autoInstall>
             <FilesToInstall>
                 <FileToInstall filename="MapsTables\ann2unicode.cct"></FileToInstall>
             </FilesToInstall>
