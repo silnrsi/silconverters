@@ -32,6 +32,34 @@
   <ItemGroup>
     <Compile Include="BasicConverters_MergeModule.wxs" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="MapsTables\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="MapsTables\AMPHON.map" />
+    <Content Include="MapsTables\AMPHON.tec" />
+    <Content Include="MapsTables\Basic Converters.xml" />
+    <Content Include="MapsTables\EC Installation Readme.txt" />
+    <Content Include="MapsTables\iso-8859.map" />
+    <Content Include="MapsTables\iso-8859.tec" />
+    <Content Include="MapsTables\r2l_2004.cct" />
+    <Content Include="MapsTables\README.txt" />
+    <Content Include="MapsTables\SIL-IPA-1990.map" />
+    <Content Include="MapsTables\SIL-IPA-1990.tec" />
+    <Content Include="MapsTables\SIL-IPA-1990.tec.vbs" />
+    <Content Include="MapsTables\SIL-IPA93-2001.map" />
+    <Content Include="MapsTables\SIL-IPA93-2001.tec" />
+    <Content Include="MapsTables\SIL-IPA93-2001.tec.vbs" />
+    <Content Include="MapsTables\SILGreek.tec.vbs" />
+    <Content Include="MapsTables\SILGreek2004-04-27.map" />
+    <Content Include="MapsTables\silgreek2004-04-27.tec" />
+    <Content Include="MapsTables\SILPUA.map" />
+    <Content Include="MapsTables\SILPUA.tec" />
+    <Content Include="MapsTables\Windows-SymbolEncodedFont.map" />
+    <Content Include="MapsTables\windows-symbolencodedfont.tec" />
+    <Content Include="MapsTables\Windows-SymbolEncodedFont2SymbolCP.map" />
+    <Content Include="MapsTables\Windows-SymbolEncodedFont2SymbolCP.tec" />
+  </ItemGroup>
   <Import Project="$(WixTargetsPath)" />
   <!--
 	To modify your build process, add your task inside one of the targets below and uncomment it.
