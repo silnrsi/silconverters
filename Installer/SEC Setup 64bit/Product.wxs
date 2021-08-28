@@ -20,6 +20,7 @@
     </Property>
     <Property Id="OFFICE_2010_BITNESS">
       <RegistrySearch Id="Office2010Bitness" Root="HKLM" Key="Software\Microsoft\Office\14.0\Outlook" Name="Bitness" Type="raw" />
+      <RegistrySearch Id="Office2010BitnessWow" Root="HKLM" Key="Software\Wow6432Node\Microsoft\Office\14.0\Outlook" Name="Bitness" Type="raw" />
     </Property>
 
     <Property Id="PUBLISHER_2013_PIA_EXISTS">
