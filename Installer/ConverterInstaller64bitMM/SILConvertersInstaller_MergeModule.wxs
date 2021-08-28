@@ -18,7 +18,7 @@
                 <Component Id="SecOptionsInstaller.exe" Guid="{C3D3EDF3-C782-4A58-8059-5B096F4D148C}">
                     <File Id="SecOptionsInstaller.exe" Name="SecOptionsInstaller.exe" KeyPath="yes" Assembly=".net" AssemblyManifest="SecOptionsInstaller.exe" 
                           AssemblyApplication="SecOptionsInstaller.exe" Source="..\..\output\x64\release\SecOptionsInstaller.exe" />
-                    <Shortcut Id="SecOptionsInstaller.exe" Directory="SILConverters" Name="Launch Converter Options Installer (4.0)" Description="Start the Converter Installer to install specific converters (e.g. SIL IPA93&lt;&gt;UNICODE) into the system repository" IconIndex="0" Show="normal" Target="[#SecOptionsInstaller.exe]" WorkingDirectory="MergeRedirectFolder" Advertise="no" />
+                    <Shortcut Id="SecOptionsInstaller.exe" Directory="SILConverters" Name="Launch Converter Options Installer (5.0)" Description="Start the Converter Installer to install specific converters (e.g. SIL IPA93&lt;&gt;UNICODE) into the system repository" IconIndex="0" Show="normal" Target="[#SecOptionsInstaller.exe]" WorkingDirectory="MergeRedirectFolder" Advertise="no" />
                 </Component>
 
             </Directory>
