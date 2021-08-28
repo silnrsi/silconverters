@@ -1,176 +1,172 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-	<Module Id="IndicConverters40MergeModule" Language="1033" Version="4.0.0.0">
-		<Package Id="d0d94060-4d2a-4607-bdaf-94c64c485b41" Comments="Merge module for SILConverters Indic Add-in" Description="Merge Module for SILConverters (Indic Add-in)" 
+  <Module Id="IndicConverters40MergeModule" Language="1033" Version="4.0.0.0">
+    <Package Id="d0d94060-4d2a-4607-bdaf-94c64c485b41" Comments="Merge module for SILConverters Indic Add-in" Description="Merge Module for SILConverters (Indic Add-in)"
              Manufacturer="SIL International" Keywords="Technical Hindi Google Group Html converter, TECkit maps, Indic encodings, SILConverters" InstallerVersion="500" />
 
-		<Directory Id="TARGETDIR" Name="SourceDir">
-			<Directory Id="MergeRedirectFolder">
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="MergeRedirectFolder">
 
-                <Component Id="SilIndicEncConverters40.dll" Guid="3d6abc4d-1239-4525-881f-b51bda96b39c">
-                    <Class Id="{0F218E35-EA40-4D56-9FFF-322094B4F412}" Context="InprocServer32" Description="SilEncConverters40.TechHindiSiteEncConverter" ThreadingModel="both" ForeignServer="mscoree.dll">
-                        <ProgId Id="SilEncConverters40.TechHindiSiteEncConverter" Description="SilEncConverters40.TechHindiSiteEncConverter" />
-                    </Class>
-                    <File Id="SilIndicEncConverters40.dll" Name="SilIndicEncConverters40.dll" KeyPath="yes" Source="..\..\..\EC DistFiles\x86\SilIndicEncConverters40.dll" />
-                    <File Id="EnableIndicConvertersInWord.reg" Name="EnableIndicConvertersInWord.reg" Source="..\..\..\Installer\Converter Packages\IndicConverters\EnableIndicConvertersInWord.reg" />
-                    <RegistryValue Root="HKCR" Key="CLSID\{0F218E35-EA40-4D56-9FFF-322094B4F412}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
-                    <RegistryValue Root="HKCR" Key="CLSID\{0F218E35-EA40-4D56-9FFF-322094B4F412}\InprocServer32\4.0.0.0" Name="Class" Value="SilEncConverters40.TechHindiSiteEncConverter" Type="string" Action="write" />
-                    <RegistryValue Root="HKCR" Key="CLSID\{0F218E35-EA40-4D56-9FFF-322094B4F412}\InprocServer32\4.0.0.0" Name="Assembly" Value="SilIndicEncConverters40, Version=4.0.0.0, Culture=neutral, PublicKeyToken=f1447bae1e63f485" Type="string" Action="write" />
-                    <RegistryValue Root="HKCR" Key="CLSID\{0F218E35-EA40-4D56-9FFF-322094B4F412}\InprocServer32\4.0.0.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                    <RegistryValue Root="HKCR" Key="CLSID\{0F218E35-EA40-4D56-9FFF-322094B4F412}\InprocServer32\4.0.0.0" Name="CodeBase" Value="file:///[#SilIndicEncConverters40.dll]" Type="string" Action="write" />
-                    <RegistryValue Root="HKCR" Key="CLSID\{0F218E35-EA40-4D56-9FFF-322094B4F412}\InprocServer32" Name="Class" Value="SilEncConverters40.TechHindiSiteEncConverter" Type="string" Action="write" />
-                    <RegistryValue Root="HKCR" Key="CLSID\{0F218E35-EA40-4D56-9FFF-322094B4F412}\InprocServer32" Name="Assembly" Value="SilIndicEncConverters40, Version=4.0.0.0, Culture=neutral, PublicKeyToken=f1447bae1e63f485" Type="string" Action="write" />
-                    <RegistryValue Root="HKCR" Key="CLSID\{0F218E35-EA40-4D56-9FFF-322094B4F412}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                    <RegistryValue Root="HKCR" Key="CLSID\{0F218E35-EA40-4D56-9FFF-322094B4F412}\InprocServer32" Name="CodeBase" Value="file:///[#SilIndicEncConverters40.dll]" Type="string" Action="write" />
+        <Component Id="SilIndicEncConverters40.dll" Guid="3d6abc4d-1239-4525-881f-b51bda96b39c">
+          <Class Id="{0F218E35-EA40-4D56-9FFF-322094B4F412}" Context="InprocServer32" Description="SilEncConverters40.TechHindiSiteEncConverter" ThreadingModel="both" ForeignServer="mscoree.dll">
+            <ProgId Id="SilEncConverters40.TechHindiSiteEncConverter" Description="SilEncConverters40.TechHindiSiteEncConverter" />
+          </Class>
+          <File Id="SilIndicEncConverters40.dll" Name="SilIndicEncConverters40.dll" KeyPath="yes" Source="..\..\..\EC DistFiles\x86\SilIndicEncConverters40.dll" />
+          <File Id="EnableIndicConvertersInWord.reg" Name="EnableIndicConvertersInWord.reg" Source="..\..\..\Installer\Converter Packages\IndicConverters\EnableIndicConvertersInWord.reg" />
+          <RegistryValue Root="HKCR" Key="CLSID\{0F218E35-EA40-4D56-9FFF-322094B4F412}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+          <RegistryValue Root="HKCR" Key="CLSID\{0F218E35-EA40-4D56-9FFF-322094B4F412}\InprocServer32\4.0.0.0" Name="Class" Value="SilEncConverters40.TechHindiSiteEncConverter" Type="string" Action="write" />
+          <RegistryValue Root="HKCR" Key="CLSID\{0F218E35-EA40-4D56-9FFF-322094B4F412}\InprocServer32\4.0.0.0" Name="Assembly" Value="SilIndicEncConverters40, Version=4.0.0.0, Culture=neutral, PublicKeyToken=f1447bae1e63f485" Type="string" Action="write" />
+          <RegistryValue Root="HKCR" Key="CLSID\{0F218E35-EA40-4D56-9FFF-322094B4F412}\InprocServer32\4.0.0.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+          <RegistryValue Root="HKCR" Key="CLSID\{0F218E35-EA40-4D56-9FFF-322094B4F412}\InprocServer32\4.0.0.0" Name="CodeBase" Value="file:///[#SilIndicEncConverters40.dll]" Type="string" Action="write" />
+          <RegistryValue Root="HKCR" Key="CLSID\{0F218E35-EA40-4D56-9FFF-322094B4F412}\InprocServer32" Name="Class" Value="SilEncConverters40.TechHindiSiteEncConverter" Type="string" Action="write" />
+          <RegistryValue Root="HKCR" Key="CLSID\{0F218E35-EA40-4D56-9FFF-322094B4F412}\InprocServer32" Name="Assembly" Value="SilIndicEncConverters40, Version=4.0.0.0, Culture=neutral, PublicKeyToken=f1447bae1e63f485" Type="string" Action="write" />
+          <RegistryValue Root="HKCR" Key="CLSID\{0F218E35-EA40-4D56-9FFF-322094B4F412}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+          <RegistryValue Root="HKCR" Key="CLSID\{0F218E35-EA40-4D56-9FFF-322094B4F412}\InprocServer32" Name="CodeBase" Value="file:///[#SilIndicEncConverters40.dll]" Type="string" Action="write" />
 
-                    <!--these are to get the WebBrowser control to use Edge rendering (rather than IE, which on Win10 doesn't want to allow javascript to run, which the IndicConverters are based on)
+          <!--these are to get the WebBrowser control to use Edge rendering (rather than IE, which on Win10 doesn't want to allow javascript to run, which the IndicConverters are based on)
                         Gotta add one of these for each possible SILConverter's client. P.S. They seem to work fine on Win 8.1 (i.e. w/o Edge) also. Otherwise, you might need to use a different value
                         for the Value attribute based on which system it's being installed on. -->
-                    <RegistryValue Root="HKLM" Key="SOFTWARE\Microsoft\Internet Explorer\Main\FeatureControl\FEATURE_BROWSER_EMULATION" Name="AdaptIt2Unicode.exe" Value="12001" Type="integer" Action="write" />
-                    <RegistryValue Root="HKLM" Key="SOFTWARE\Microsoft\Internet Explorer\Main\FeatureControl\FEATURE_BROWSER_EMULATION" Name="ClipboardEC.exe" Value="12001" Type="integer" Action="write" />
-                    <RegistryValue Root="HKLM" Key="SOFTWARE\Microsoft\Internet Explorer\Main\FeatureControl\FEATURE_BROWSER_EMULATION" Name="DChartHelper.exe" Value="12001" Type="integer" Action="write" />
-                    <RegistryValue Root="HKLM" Key="SOFTWARE\Microsoft\Internet Explorer\Main\FeatureControl\FEATURE_BROWSER_EMULATION" Name="SecOptionsInstaller.exe" Value="12001" Type="integer" Action="write" />
-                    <RegistryValue Root="HKLM" Key="SOFTWARE\Microsoft\Internet Explorer\Main\FeatureControl\FEATURE_BROWSER_EMULATION" Name="SFMConv.exe" Value="12001" Type="integer" Action="write" />
-                    <RegistryValue Root="HKLM" Key="SOFTWARE\Microsoft\Internet Explorer\Main\FeatureControl\FEATURE_BROWSER_EMULATION" Name="SILConvertersWordML.exe" Value="12001" Type="integer" Action="write" />
-                    <RegistryValue Root="HKLM" Key="SOFTWARE\Microsoft\Internet Explorer\Main\FeatureControl\FEATURE_BROWSER_EMULATION" Name="SilConvertersXML.exe" Value="12001" Type="integer" Action="write" />
-                </Component>
+          <RegistryValue Root="HKLM" Key="SOFTWARE\Microsoft\Internet Explorer\Main\FeatureControl\FEATURE_BROWSER_EMULATION" Name="AdaptIt2Unicode.exe" Value="12001" Type="integer" Action="write" />
+          <RegistryValue Root="HKLM" Key="SOFTWARE\Microsoft\Internet Explorer\Main\FeatureControl\FEATURE_BROWSER_EMULATION" Name="ClipboardEC.exe" Value="12001" Type="integer" Action="write" />
+          <RegistryValue Root="HKLM" Key="SOFTWARE\Microsoft\Internet Explorer\Main\FeatureControl\FEATURE_BROWSER_EMULATION" Name="DChartHelper.exe" Value="12001" Type="integer" Action="write" />
+          <RegistryValue Root="HKLM" Key="SOFTWARE\Microsoft\Internet Explorer\Main\FeatureControl\FEATURE_BROWSER_EMULATION" Name="SecOptionsInstaller.exe" Value="12001" Type="integer" Action="write" />
+          <RegistryValue Root="HKLM" Key="SOFTWARE\Microsoft\Internet Explorer\Main\FeatureControl\FEATURE_BROWSER_EMULATION" Name="SFMConv.exe" Value="12001" Type="integer" Action="write" />
+          <RegistryValue Root="HKLM" Key="SOFTWARE\Microsoft\Internet Explorer\Main\FeatureControl\FEATURE_BROWSER_EMULATION" Name="SILConvertersWordML.exe" Value="12001" Type="integer" Action="write" />
+          <RegistryValue Root="HKLM" Key="SOFTWARE\Microsoft\Internet Explorer\Main\FeatureControl\FEATURE_BROWSER_EMULATION" Name="SilConvertersXML.exe" Value="12001" Type="integer" Action="write" />
+        </Component>
 
-                <Directory Id="ECFolder" Name="EC">
-                    <Directory Id="PluginsFolder" Name="Plugins">
-                        <Component Id="SIEC_4.0.0.0_Plugin_Details.xml" Guid="304b6f60-e5f2-43c6-a655-f33367e3fe4d">
-                            <File Id="SIEC_4.0.0.0_Plugin_Details.xml" Name="SIEC 4.0.0.0 Plugin Details.xml" KeyPath="yes" Source="..\..\..\EC DistFiles\redist\EC\Plugins\SIEC 4.0.0.0 Plugin Details.xml"/>
-                        </Component>
-                    </Directory>
-                </Directory>
-            </Directory>
-            <Directory Id="ProgramMenuFolder" SourceName="User's Programs Menu">
-                <Directory Id="SILConverters" Name="SIL Converters">
-                    <Directory Id="UsersSilConvertersHelpMenu" Name="Help" />
-                </Directory>
-            </Directory>
-            <Directory Id="CommonAppDataFolder" SourceName="AppData">
-                <Directory Id="IndicConvertersSIL" Name="SIL">
-                    <Directory Id="SILConverters40" Name="SILConverters40">
-                        <Directory Id="MapsTables" Name="MapsTables">
-                            <Component Id="HimalliMac.map" Guid="24439521-a09c-4c4f-bdbb-2d91941bcb95">
-                                <File Id="HimalliMac.map" Name="HimalliMac.map" KeyPath="yes" Source="MapsTables\HimalliMac.map" />
-                            </Component>
-                            <Component Id="shusha.tec" Guid="37c584d8-7f27-4a9d-a9b7-3f1d22fbea5c">
-                                <File Id="shusha.tec" Name="shusha.tec" KeyPath="yes" Source="MapsTables\shusha.tec" />
-                            </Component>
-                            <Component Id="HimalliPC_1998.tec" Guid="bde2787d-1974-45a5-b886-d0995b34ed23">
-                                <File Id="HimalliPC_1998.tec" Name="HimalliPC-1998.tec" KeyPath="yes" Source="MapsTables\HimalliPC-1998.tec" />
-                            </Component>
-                            <Component Id="KrutiDev290.tec" Guid="5d63e121-1a8f-49cc-a1a0-4d8e916d3853">
-                                <File Id="KrutiDev290.tec" Name="KrutiDev290.tec" KeyPath="yes" Source="MapsTables\KrutiDev290.tec" />
-                            </Component>
-                            <Component Id="TECIndic.xml" Guid="7adcb1ce-dea4-4da6-805e-5c2c555fcff0">
-                                <File Id="TECIndic.xml" Name="TECIndic.xml" KeyPath="yes" Source="MapsTables\TECIndic.xml" />
-                            </Component>
-                            <Component Id="TELAnu2Uni.map" Guid="714de2e6-7fb7-48b4-a158-01ab74b332a5">
-                                <File Id="TELAnu2Uni.map" Name="TELAnu2Uni.map" KeyPath="yes" Source="MapsTables\TELAnu2Uni.map" />
-                            </Component>
-                            <Component Id="HimalliPC_2002.map" Guid="fa2ec9a3-c1f8-4bd9-be63-6d64f65231d5">
-                                <File Id="HimalliPC_2002.map" Name="HimalliPC-2002.map" KeyPath="yes" Source="MapsTables\HimalliPC-2002.map" />
-                            </Component>
-                            <Component Id="KrutiDev010.map" Guid="bb4f5713-4f5e-41f4-bd01-9f130ed884fc">
-                                <File Id="KrutiDev010.map" Name="KrutiDev010.map" KeyPath="yes" Source="MapsTables\KrutiDev010.map" />
-                            </Component>
-                            <Component Id="KrutiDev290.map" Guid="e394ad8e-f94c-4d14-a389-07087ab2e52e">
-                                <File Id="KrutiDev290.map" Name="KrutiDev290.map" KeyPath="yes" Source="MapsTables\KrutiDev290.map" />
-                            </Component>
-                            <Component Id="HimaliNew.tec" Guid="90e272ff-99c4-4c32-89e8-62a0bf7175a5">
-                                <File Id="HimaliNew.tec" Name="HimaliNew.tec" KeyPath="yes" Source="MapsTables\HimaliNew.tec" />
-                            </Component>
-                            <Component Id="Kantipur.map" Guid="da1ba68d-86d7-40bf-aef2-712b79f2cee4">
-                                <File Id="Kantipur.map" Name="Kantipur.map" KeyPath="yes" Source="MapsTables\Kantipur.map" />
-                            </Component>
-                            <Component Id="HimalliLLPC.map" Guid="0bb9c301-8041-45c0-b085-22af45fc7f2d">
-                                <File Id="HimalliLLPC.map" Name="HimalliLLPC.map" KeyPath="yes" Source="MapsTables\HimalliLLPC.map" />
-                            </Component>
-                            <Component Id="GujaratiLS.map" Guid="06eae3bc-39d2-4c3a-b0b7-b4d6f752a988">
-                                <File Id="GujaratiLS.map" Name="GujaratiLS.map" KeyPath="yes" Source="MapsTables\GujaratiLS.map" />
-                            </Component>
-                            <Component Id="Preeti.tec" Guid="66a338d7-f08b-4a70-88c2-e1def78df2f6">
-                                <File Id="Preeti.tec" Name="Preeti.tec" KeyPath="yes" Source="MapsTables\Preeti.tec" />
-                            </Component>
-                            <Component Id="HimalliPC_2002.tec" Guid="3714ab0e-42e0-4d1e-8c58-a29faf7b8345">
-                                <File Id="HimalliPC_2002.tec" Name="HimalliPC-2002.tec" KeyPath="yes" Source="MapsTables\HimalliPC-2002.tec" />
-                            </Component>
-                            <Component Id="HimaliNew.Map" Guid="e918b8fc-426f-46ba-ba8e-e9b947d99eb1">
-                                <File Id="HimaliNew.Map" Name="HimaliNew.Map" KeyPath="yes" Source="MapsTables\HimaliNew.Map" />
-                            </Component>
-                            <Component Id="HimalliLLMac.tec" Guid="9f90721a-15a8-42f9-8f22-50f7a0ec79fa">
-                                <File Id="HimalliLLMac.tec" Name="HimalliLLMac.tec" KeyPath="yes" Source="MapsTables\HimalliLLMac.tec" />
-                            </Component>
-                            <Component Id="GujaratiLS.tec" Guid="ec79aaf0-ca1d-456f-8c1b-49d5f90684e3">
-                                <File Id="GujaratiLS.tec" Name="GujaratiLS.tec" KeyPath="yes" Source="MapsTables\GujaratiLS.tec" />
-                            </Component>
-                            <Component Id="UDev2UIpa.map" Guid="09204b43-f7dc-4fce-af33-2f0819af9c3e">
-                                <File Id="UDev2UIpa.map" Name="UDev2UIpa.map" KeyPath="yes" Source="MapsTables\UDev2UIpa.map" />
-                            </Component>
-                            <Component Id="HimalliMAC.tec" Guid="75389529-61f7-45ce-a16c-4cc4ea38a71a">
-                                <File Id="HimalliMAC.tec" Name="HimalliMAC.tec" KeyPath="yes" Source="MapsTables\HimalliMAC.tec" />
-                            </Component>
-                            <Component Id="TELAnu2Uni.tec" Guid="b1636283-a1cb-4cba-8fa6-0b789cdc6488">
-                                <File Id="TELAnu2Uni.tec" Name="TELAnu2Uni.tec" KeyPath="yes" Source="MapsTables\TELAnu2Uni.tec" />
-                            </Component>
-                            <Component Id="Kantipur.tec" Guid="ef5aac3a-cae9-49ea-be8d-9d8035a10818">
-                                <File Id="Kantipur.tec" Name="Kantipur.tec" KeyPath="yes" Source="MapsTables\Kantipur.tec" />
-                            </Component>
-                            <Component Id="TIBA2UNI.tec" Guid="fb7fdff2-0062-4e19-9b0a-db29a1bc1b0d">
-                                <File Id="TIBA2UNI.tec" Name="TIBA2UNI.tec" KeyPath="yes" Source="MapsTables\TIBA2UNI.tec" />
-                            </Component>
-                            <Component Id="HimalliLLMac.map" Guid="f9ad39c0-d285-484f-b6a4-8758bf0b08aa">
-                                <File Id="HimalliLLMac.map" Name="HimalliLLMac.map" KeyPath="yes" Source="MapsTables\HimalliLLMac.map" />
-                            </Component>
-                            <Component Id="KrutiDev011.tec" Guid="2e8a37b0-0218-4996-b120-dfda8ffb0e29">
-                                <File Id="KrutiDev011.tec" Name="KrutiDev011.tec" KeyPath="yes" Source="MapsTables\KrutiDev011.tec" />
-                            </Component>
-                            <Component Id="KrutiDev011.map" Guid="a66c804d-f41b-46dd-80ad-adde52c13b6b">
-                                <File Id="KrutiDev011.map" Name="KrutiDev011.map" KeyPath="yes" Source="MapsTables\KrutiDev011.map" />
-                            </Component>
-                            <Component Id="Shusha.map" Guid="9db3828d-b9fc-496c-906c-fd7da4aa77b6">
-                                <File Id="Shusha.map" Name="Shusha.map" KeyPath="yes" Source="MapsTables\Shusha.map" />
-                            </Component>
-                            <Component Id="Preeti.map" Guid="6c339c49-8680-4d95-b81b-28049f526595">
-                                <File Id="Preeti.map" Name="Preeti.map" KeyPath="yes" Source="MapsTables\Preeti.map" />
-                            </Component>
-                            <Component Id="ISCII_Converters.xml" Guid="5643875c-73dd-4d14-8b85-77975e1a1243">
-                                <File Id="ISCII_Converters.xml" Name="ISCII Converters.xml" KeyPath="yes" Source="MapsTables\ISCII Converters.xml" />
-                            </Component>
-                            <Component Id="Himalli_Readme.txt" Guid="cfb01e58-b474-4e26-b58f-e439af81d8f4">
-                                <File Id="Himalli_Readme.txt" Name="Himalli Readme.txt" KeyPath="yes" Source="MapsTables\Himalli Readme.txt" />
-                            </Component>
-                            <Component Id="HimalliLLPC.tec" Guid="7cd82158-3a6e-43cf-8eaa-d1a7ffc028dc">
-                                <File Id="HimalliLLPC.tec" Name="HimalliLLPC.tec" KeyPath="yes" Source="MapsTables\HimalliLLPC.tec" />
-                            </Component>
-                            <Component Id="TibA2Uni.map" Guid="97f8c8c7-a900-4160-ad40-96b22ee36478">
-                                <File Id="TibA2Uni.map" Name="TibA2Uni.map" KeyPath="yes" Source="MapsTables\TibA2Uni.map" />
-                            </Component>
-                            <Component Id="UDev2UIpa.tec" Guid="23d44b59-8053-4d73-b549-795c25fb37f5">
-                                <File Id="UDev2UIpa.tec" Name="UDev2UIpa.tec" KeyPath="yes" Source="MapsTables\UDev2UIpa.tec" />
-                            </Component>
-                            <Component Id="HimalliPC_1998.map" Guid="1905a411-5de4-447f-b338-fa838db5062d">
-                                <File Id="HimalliPC_1998.map" Name="HimalliPC-1998.map" KeyPath="yes" Source="MapsTables\HimalliPC-1998.map" />
-                            </Component>
-                            <Component Id="KrutiDev010.tec" Guid="85adc3ee-b50f-4e77-8502-b4d2bd20ef8a">
-                                <File Id="KrutiDev010.tec" Name="KrutiDev010.tec" KeyPath="yes" Source="MapsTables\KrutiDev010.tec" />
-                            </Component>
-                        </Directory>
-                    </Directory>
-                </Directory>
-            </Directory>
-            <Directory Id="CommonFilesFolder" SourceName="Common Files Folder">
-                <Directory Id="SIL" Name="SIL">
-                    <Directory Id="Help" Name="Help">
-                        <Component Id="HelpFile" Guid="1b50c017-4738-4e07-8db1-3e30a9e6d12e">
-                            <File Id="HelpFile" Name="Technical Hindi (Google group) Html Converter Plug-in About box.mht" KeyPath="yes" Source="..\..\..\EC DistFiles\redist\Help\Technical Hindi (Google group) Html Converter Plug-in About box.mht" />
-                            <Shortcut Id="HelpFile" Directory="UsersSilConvertersHelpMenu" Name="Help for Technical Hindi (Google group) Html Converter Plug-in" IconIndex="0" Show="normal" Target="[#HelpFile]" Advertise="no" />
-                        </Component>
-                    </Directory>
-                </Directory>
-            </Directory>
+        <Directory Id="ECFolder" Name="EC">
+          <Directory Id="PluginsFolder" Name="Plugins">
+            <Component Id="SIEC_4.0.0.0_Plugin_Details.xml" Guid="304b6f60-e5f2-43c6-a655-f33367e3fe4d">
+              <File Id="SIEC_4.0.0.0_Plugin_Details.xml" Name="SIEC 4.0.0.0 Plugin Details.xml" KeyPath="yes" Source="..\..\..\EC DistFiles\redist\EC\Plugins\SIEC 4.0.0.0 Plugin Details.xml"/>
+            </Component>
+          </Directory>
         </Directory>
-	</Module>
+      </Directory>
+      <Directory Id="ProgramMenuFolder" SourceName="User's Programs Menu">
+        <Directory Id="SILConverters" Name="SIL Converters">
+          <Directory Id="UsersSilConvertersHelpMenu" Name="Help" />
+        </Directory>
+      </Directory>
+      <Directory Id="CommonAppDataFolder" SourceName="AppData">
+        <Directory Id="IndicConvertersSIL" Name="SIL">
+          <Directory Id="SILConverters40" Name="SILConverters40">
+            <Directory Id="MapsTables" Name="MapsTables">
+              <Component Id="HimalliMac.map" Guid="24439521-a09c-4c4f-bdbb-2d91941bcb95">
+                <File Id="HimalliMac.map" Name="HimalliMac.map" KeyPath="yes" Source="MapsTables\HimalliMac.map" />
+              </Component>
+              <Component Id="shusha.tec" Guid="37c584d8-7f27-4a9d-a9b7-3f1d22fbea5c">
+                <File Id="shusha.tec" Name="shusha.tec" KeyPath="yes" Source="MapsTables\shusha.tec" />
+              </Component>
+              <Component Id="HimalliPC_1998.tec" Guid="bde2787d-1974-45a5-b886-d0995b34ed23">
+                <File Id="HimalliPC_1998.tec" Name="HimalliPC-1998.tec" KeyPath="yes" Source="MapsTables\HimalliPC-1998.tec" />
+              </Component>
+              <Component Id="KrutiDev290.tec" Guid="5d63e121-1a8f-49cc-a1a0-4d8e916d3853">
+                <File Id="KrutiDev290.tec" Name="KrutiDev290.tec" KeyPath="yes" Source="MapsTables\KrutiDev290.tec" />
+              </Component>
+              <Component Id="TECIndic.xml" Guid="7adcb1ce-dea4-4da6-805e-5c2c555fcff0">
+                <File Id="TECIndic.xml" Name="TECIndic.xml" KeyPath="yes" Source="MapsTables\TECIndic.xml" />
+              </Component>
+              <Component Id="TELAnu2Uni.map" Guid="714de2e6-7fb7-48b4-a158-01ab74b332a5">
+                <File Id="TELAnu2Uni.map" Name="TELAnu2Uni.map" KeyPath="yes" Source="MapsTables\TELAnu2Uni.map" />
+              </Component>
+              <Component Id="HimalliPC_2002.map" Guid="fa2ec9a3-c1f8-4bd9-be63-6d64f65231d5">
+                <File Id="HimalliPC_2002.map" Name="HimalliPC-2002.map" KeyPath="yes" Source="MapsTables\HimalliPC-2002.map" />
+              </Component>
+              <Component Id="KrutiDev010.map" Guid="bb4f5713-4f5e-41f4-bd01-9f130ed884fc">
+                <File Id="KrutiDev010.map" Name="KrutiDev010.map" KeyPath="yes" Source="MapsTables\KrutiDev010.map" />
+              </Component>
+              <Component Id="KrutiDev290.map" Guid="e394ad8e-f94c-4d14-a389-07087ab2e52e">
+                <File Id="KrutiDev290.map" Name="KrutiDev290.map" KeyPath="yes" Source="MapsTables\KrutiDev290.map" />
+              </Component>
+              <Component Id="HimaliNew.tec" Guid="90e272ff-99c4-4c32-89e8-62a0bf7175a5">
+                <File Id="HimaliNew.tec" Name="HimaliNew.tec" KeyPath="yes" Source="MapsTables\HimaliNew.tec" />
+              </Component>
+              <Component Id="Kantipur.map" Guid="da1ba68d-86d7-40bf-aef2-712b79f2cee4">
+                <File Id="Kantipur.map" Name="Kantipur.map" KeyPath="yes" Source="MapsTables\Kantipur.map" />
+              </Component>
+              <Component Id="HimalliLLPC.map" Guid="0bb9c301-8041-45c0-b085-22af45fc7f2d">
+                <File Id="HimalliLLPC.map" Name="HimalliLLPC.map" KeyPath="yes" Source="MapsTables\HimalliLLPC.map" />
+              </Component>
+              <Component Id="GujaratiLS.map" Guid="06eae3bc-39d2-4c3a-b0b7-b4d6f752a988">
+                <File Id="GujaratiLS.map" Name="GujaratiLS.map" KeyPath="yes" Source="MapsTables\GujaratiLS.map" />
+              </Component>
+              <Component Id="Preeti.tec" Guid="66a338d7-f08b-4a70-88c2-e1def78df2f6">
+                <File Id="Preeti.tec" Name="Preeti.tec" KeyPath="yes" Source="MapsTables\Preeti.tec" />
+              </Component>
+              <Component Id="HimalliPC_2002.tec" Guid="3714ab0e-42e0-4d1e-8c58-a29faf7b8345">
+                <File Id="HimalliPC_2002.tec" Name="HimalliPC-2002.tec" KeyPath="yes" Source="MapsTables\HimalliPC-2002.tec" />
+              </Component>
+              <Component Id="HimaliNew.Map" Guid="e918b8fc-426f-46ba-ba8e-e9b947d99eb1">
+                <File Id="HimaliNew.Map" Name="HimaliNew.Map" KeyPath="yes" Source="MapsTables\HimaliNew.Map" />
+              </Component>
+              <Component Id="HimalliLLMac.tec" Guid="9f90721a-15a8-42f9-8f22-50f7a0ec79fa">
+                <File Id="HimalliLLMac.tec" Name="HimalliLLMac.tec" KeyPath="yes" Source="MapsTables\HimalliLLMac.tec" />
+              </Component>
+              <Component Id="GujaratiLS.tec" Guid="ec79aaf0-ca1d-456f-8c1b-49d5f90684e3">
+                <File Id="GujaratiLS.tec" Name="GujaratiLS.tec" KeyPath="yes" Source="MapsTables\GujaratiLS.tec" />
+              </Component>
+              <Component Id="UDev2UIpa.map" Guid="09204b43-f7dc-4fce-af33-2f0819af9c3e">
+                <File Id="UDev2UIpa.map" Name="UDev2UIpa.map" KeyPath="yes" Source="MapsTables\UDev2UIpa.map" />
+              </Component>
+              <Component Id="HimalliMAC.tec" Guid="75389529-61f7-45ce-a16c-4cc4ea38a71a">
+                <File Id="HimalliMAC.tec" Name="HimalliMAC.tec" KeyPath="yes" Source="MapsTables\HimalliMAC.tec" />
+              </Component>
+              <Component Id="TELAnu2Uni.tec" Guid="b1636283-a1cb-4cba-8fa6-0b789cdc6488">
+                <File Id="TELAnu2Uni.tec" Name="TELAnu2Uni.tec" KeyPath="yes" Source="MapsTables\TELAnu2Uni.tec" />
+              </Component>
+              <Component Id="Kantipur.tec" Guid="ef5aac3a-cae9-49ea-be8d-9d8035a10818">
+                <File Id="Kantipur.tec" Name="Kantipur.tec" KeyPath="yes" Source="MapsTables\Kantipur.tec" />
+              </Component>
+              <Component Id="TIBA2UNI.tec" Guid="fb7fdff2-0062-4e19-9b0a-db29a1bc1b0d">
+                <File Id="TIBA2UNI.tec" Name="TIBA2UNI.tec" KeyPath="yes" Source="MapsTables\TIBA2UNI.tec" />
+              </Component>
+              <Component Id="HimalliLLMac.map" Guid="f9ad39c0-d285-484f-b6a4-8758bf0b08aa">
+                <File Id="HimalliLLMac.map" Name="HimalliLLMac.map" KeyPath="yes" Source="MapsTables\HimalliLLMac.map" />
+              </Component>
+              <Component Id="KrutiDev011.tec" Guid="2e8a37b0-0218-4996-b120-dfda8ffb0e29">
+                <File Id="KrutiDev011.tec" Name="KrutiDev011.tec" KeyPath="yes" Source="MapsTables\KrutiDev011.tec" />
+              </Component>
+              <Component Id="KrutiDev011.map" Guid="a66c804d-f41b-46dd-80ad-adde52c13b6b">
+                <File Id="KrutiDev011.map" Name="KrutiDev011.map" KeyPath="yes" Source="MapsTables\KrutiDev011.map" />
+              </Component>
+              <Component Id="Shusha.map" Guid="9db3828d-b9fc-496c-906c-fd7da4aa77b6">
+                <File Id="Shusha.map" Name="Shusha.map" KeyPath="yes" Source="MapsTables\Shusha.map" />
+              </Component>
+              <Component Id="Preeti.map" Guid="6c339c49-8680-4d95-b81b-28049f526595">
+                <File Id="Preeti.map" Name="Preeti.map" KeyPath="yes" Source="MapsTables\Preeti.map" />
+              </Component>
+              <Component Id="ISCII_Converters.xml" Guid="5643875c-73dd-4d14-8b85-77975e1a1243">
+                <File Id="ISCII_Converters.xml" Name="ISCII Converters.xml" KeyPath="yes" Source="MapsTables\ISCII Converters.xml" />
+              </Component>
+              <Component Id="Himalli_Readme.txt" Guid="cfb01e58-b474-4e26-b58f-e439af81d8f4">
+                <File Id="Himalli_Readme.txt" Name="Himalli Readme.txt" KeyPath="yes" Source="MapsTables\Himalli Readme.txt" />
+              </Component>
+              <Component Id="HimalliLLPC.tec" Guid="7cd82158-3a6e-43cf-8eaa-d1a7ffc028dc">
+                <File Id="HimalliLLPC.tec" Name="HimalliLLPC.tec" KeyPath="yes" Source="MapsTables\HimalliLLPC.tec" />
+              </Component>
+              <Component Id="TibA2Uni.map" Guid="97f8c8c7-a900-4160-ad40-96b22ee36478">
+                <File Id="TibA2Uni.map" Name="TibA2Uni.map" KeyPath="yes" Source="MapsTables\TibA2Uni.map" />
+              </Component>
+              <Component Id="UDev2UIpa.tec" Guid="23d44b59-8053-4d73-b549-795c25fb37f5">
+                <File Id="UDev2UIpa.tec" Name="UDev2UIpa.tec" KeyPath="yes" Source="MapsTables\UDev2UIpa.tec" />
+              </Component>
+              <Component Id="HimalliPC_1998.map" Guid="1905a411-5de4-447f-b338-fa838db5062d">
+                <File Id="HimalliPC_1998.map" Name="HimalliPC-1998.map" KeyPath="yes" Source="MapsTables\HimalliPC-1998.map" />
+              </Component>
+              <Component Id="KrutiDev010.tec" Guid="85adc3ee-b50f-4e77-8502-b4d2bd20ef8a">
+                <File Id="KrutiDev010.tec" Name="KrutiDev010.tec" KeyPath="yes" Source="MapsTables\KrutiDev010.tec" />
+              </Component>
+            </Directory>
+            <Directory Id="Help" Name="Help">
+              <Component Id="HelpFile" Guid="{2606877B-F9ED-4F4A-8D21-00B10EC8556A}">
+                <File Id="HelpFile" Name="Technical_Hindi_(Google_group)_Html_Converter_Plug-in_About_box.mht" KeyPath="yes" Source="..\..\..\EC DistFiles\redist\Help\Technical_Hindi_(Google_group)_Html_Converter_Plug-in_About_box.mht" />
+                <Shortcut Id="HelpFile" Directory="UsersSilConvertersHelpMenu" Name="Help for Technical Hindi (Google group) Html Converter Plug-in" IconIndex="0" Show="normal" Target="[#HelpFile]" Advertise="no" />
+              </Component>
+            </Directory>
+          </Directory>
+        </Directory>
+      </Directory>
+    </Directory>
+  </Module>
 </Wix>
