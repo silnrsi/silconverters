@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
 	<Module Id="SpellFixerEcMM" Language="1033" Version="1.0.0.0">
-		<Package Id="c82ae0ac-fbe9-44b9-9d70-5b070989429e" Comments="SpellFixer Macro Word document template" 
+		<Package Id="{4D120452-EC32-41D3-B8C4-92C142E4DCC1}" Comments="SpellFixer Macro Word document template" 
              Description="Document Template for doing spelling corrections using EncConverters in MS Word" InstallerVersion="500" Keywords="SILConverters; Spell Fixing in MS Word" 
              Manufacturer="SIL" />
 

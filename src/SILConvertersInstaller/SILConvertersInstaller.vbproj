@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="12.0">
   <PropertyGroup>
     <ProjectType>Local</ProjectType>
     <ProductVersion>9.0.30729</ProductVersion>
@@ -32,7 +32,7 @@
     <OldToolsVersion>3.5</OldToolsVersion>
     <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
     <IsWebBootstrapper>false</IsWebBootstrapper>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -107,10 +107,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="ECInterfaces, Version=4.0.0.0, Culture=neutral, PublicKeyToken=f1447bae1e63f485, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Encoding-Converters-Core.0.3.1\lib\net45\x86\ECInterfaces.dll</HintPath>
+      <HintPath>..\..\packages\Encoding-Converters-Core.0.3.9\lib\net45\x86\ECInterfaces.dll</HintPath>
     </Reference>
     <Reference Include="SilEncConverters40, Version=4.0.0.0, Culture=neutral, PublicKeyToken=f1447bae1e63f485, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Encoding-Converters-Core.0.3.1\lib\net45\x86\SilEncConverters40.dll</HintPath>
+      <HintPath>..\..\packages\Encoding-Converters-Core.0.3.9\lib\net45\x86\SilEncConverters40.dll</HintPath>
     </Reference>
     <Reference Include="System">
       <Name>System</Name>
@@ -227,11 +227,8 @@
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.VisualBasic.targets" />
   <PropertyGroup>
-    <PreBuildEvent>xcopy /y "$(SolutionDir)packages\Encoding-Converters-Core.0.3.1\runtimes\win-$(PlatformName)\native\*.*" "$(SolutionDir)EC DistFiles\$(PlatformName)\"
-xcopy /s /y "$(SolutionDir)packages\Encoding-Converters-Core.0.3.1\redist\*.*" "$(SolutionDir)EC DistFiles\redist\"
-xcopy /s /y "$(SolutionDir)packages\Encoding-Converters-Core.0.3.1\MergeModules\*.*" "$(SolutionDir)EC DistFiles\MergeModules\"
-xcopy /y "$(SolutionDir)EC DistFiles\$(PlatformName)\*.*" "$(SolutionDir)output\$(PlatformName)\$(ConfigurationName)\"
-xcopy /s /y "$(SolutionDir)EC DistFiles\redist\*.*" "$(SolutionDir)output\$(PlatformName)\$(ConfigurationName)\"</PreBuildEvent>
+    <PreBuildEvent>xcopy /y "$(SolutionDir)EcDistFiles\win-$(PlatformName)\native\*.*" "$(SolutionDir)output\$(PlatformName)\$(ConfigurationName)\"
+xcopy /s /y "$(SolutionDir)EcDistFiles\redist\*.*" "$(SolutionDir)output\$(PlatformName)\$(ConfigurationName)\"</PreBuildEvent>
     <PostBuildEvent>xcopy /y "$(TargetDir)*.*" $(SolutionDir)output\$(PlatformName)\$(ConfigurationName)</PostBuildEvent>
   </PropertyGroup>
 </Project>

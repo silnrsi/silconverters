@@ -12,8 +12,8 @@ using System.Resources;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("SIL")]
 [assembly: AssemblyProduct("SpellingFixerEC")]
-[assembly: AssemblyCopyright("Copyright © 2004-2010 SIL. All rights reserved.")]
-[assembly: AssemblyTrademark("Copyright © 2004-2010 SIL. All rights reserved.")]
+[assembly: AssemblyCopyright("Copyright © 2004-2021 SIL. All rights reserved.")]
+[assembly: AssemblyTrademark("Copyright © 2004-2021 SIL. All rights reserved.")]
 [assembly: AssemblyCulture("")]
 
 //
@@ -57,5 +57,5 @@ using System.Resources;
 [assembly: AssemblyDelaySign(false)]
 // [assembly: AssemblyKeyFile("")]
 [assembly: AssemblyKeyName("")]
-[assembly: AssemblyFileVersionAttribute("4.0.1.0")]
+[assembly: AssemblyFileVersion("4.5.0.0")]
 [assembly: NeutralResourcesLanguageAttribute("en")]

@@ -7,6 +7,7 @@ using SilEncConverters40;
 using System.Drawing;               // for Font
 using System.Diagnostics;           // Debug
 using System.Collections.Generic;
+using System.Linq;
 
 namespace TECkit_Mapping_Editor
 {
@@ -30,6 +31,23 @@ namespace TECkit_Mapping_Editor
         const string cstrLhsCodePageClue = "Left-hand side code page = ";
         const string cstrRhsCodePageClue = "Right-hand side code page = ";
 
+        private readonly List<string> _previousPossiblyHeaderLineClues = new List<string>
+        {
+            cstrOpeningHeader,
+            cstrLhsEncAttrKey,
+            cstrRhsEncAttrKey,
+            cstrConvTypeClue,
+            cstrLhsFontClue,
+            cstrRhsFontClue,
+            cstrMainFormClue,
+            cstrDeprecatedCodePointFormClue,
+            cstrCodePointFormClueLhs,
+            cstrCodePointFormClueRhs,
+            cstrLhsCodePageClue,
+            cstrRhsCodePageClue,
+            String.Empty            // so we know when to stop
+        };
+    
         string m_strTecNameReal = null, m_strTecNameTemp;
         string m_strMapNameReal = null, m_strMapNameTemp;
         Encoding m_enc;
@@ -374,7 +392,7 @@ namespace TECkit_Mapping_Editor
                     AddClue(cstrLhsRangeClue, m_codePointFormRangeLhs),
                     AddClue(cstrRhsRangeClue, m_codePointFormRangeRhs));
 
-                this.richTextBoxMapEditor.Text = strPrefixHeader + SkipPast0900Header;
+                this.richTextBoxMapEditor.Text = strPrefixHeader + OriginalTextMinusPreviousHeader;
                 bModified = true;
             }
 
@@ -415,6 +433,38 @@ namespace TECkit_Mapping_Editor
                 return this.richTextBoxMapEditor.Text;
             }
         }
+
+        protected string OriginalTextMinusPreviousHeader
+        {
+            get
+            {
+                // see if we even have a previous header at the top
+                if (richTextBoxMapEditor.Lines[0].IndexOf(cstrOpeningHeader) >= 0)
+                {
+                    // remove any previous header lines
+                    int i = 1;
+                    while (_previousPossiblyHeaderLineClues.Any(c => richTextBoxMapEditor.Lines[i].Contains(c)))
+                    {
+                        // if it was the post-header space, then break
+                        if (String.IsNullOrEmpty(richTextBoxMapEditor.Lines[i++]))
+                            break;
+                    }
+
+                    // skip past any empty lines
+                    while (String.IsNullOrEmpty(richTextBoxMapEditor.Lines[i]))
+                        i++;
+
+                    // find the character index beyond this...
+                    int nIndex = richTextBoxMapEditor.Text.IndexOf(richTextBoxMapEditor.Lines[i]);
+                    if (nIndex >= 0)
+                        return richTextBoxMapEditor.Text.Substring(nIndex); // ... and skip past it
+                }
+
+                // otherwise, we might duplicate the header, but... better that then deleting the user's map
+                return this.richTextBoxMapEditor.Text;
+            }
+        }
+
         private bool m_bLhsLegacy = false;
         public bool IsLhsLegacy
         {

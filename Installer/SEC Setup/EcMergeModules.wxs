@@ -5,10 +5,9 @@
 
     <DirectoryRef Id="INSTALLDIR">
       <!-- The following merge modules install to the default directory: C:\Program Files\SIL\SILConverters -->
-      <Merge Id="SEC_EC" Language="1033" SourceFile="..\..\EC DistFiles\MergeModules\x86\EC_40_MM.msm" DiskId="1"/>
-      <Merge Id="ScHelp" Language="1033" SourceFile="..\MergeModules\ScHelpMM.msm" DiskId="1"/>
-      <Merge Id="CcDLLsMM" Language="1033" SourceFile="..\..\EC DistFiles\MergeModules\x86\CcDLLsMM.msm" DiskId="1" />
-      <Merge Id="AIGuesser" Language="1033" SourceFile="..\..\EC DistFiles\MergeModules\x86\AIGuesserMM.msm" DiskId="1"/>
+      <Merge Id="SEC_EC" Language="1033" SourceFile="..\..\EcDistFiles\MergeModules\x86\EC_40_MM.msm" DiskId="1"/>
+      <Merge Id="CcDLLsMM" Language="1033" SourceFile="..\..\EcDistFiles\MergeModules\x86\CcDLLsMM.msm" DiskId="1" />
+      <Merge Id="AIGuesser" Language="1033" SourceFile="..\..\EcDistFiles\MergeModules\x86\AIGuesserMM.msm" DiskId="1"/>
       <Merge Id="AdaptIt2Unicode" Language="1033" SourceFile="..\MergeModules\x86\AdaptIt2UnicodeMM.msm" DiskId="1"/>
       <Merge Id="ConverterInstaller" Language="1033" SourceFile="..\MergeModules\x86\ConverterInstallerMM.msm" DiskId="1"/>
       <Merge Id="IndicConverters" Language="1033" SourceFile="..\MergeModules\x86\IndicConverters.msm" DiskId="1"/>
@@ -21,20 +20,18 @@
       <Merge Id="SILConvertersForWord" Language="1033" SourceFile="..\MergeModules\x86\SilConvertersForWordMM.msm" DiskId="1"/>
       <Merge Id="MS_KB908002_Fix" Language="1033" SourceFile="..\MergeModules\MS_KB908002_Fix.msm" DiskId="1"/>
       <Merge Id="SFM_Converter" Language="1033" SourceFile="..\MergeModules\x86\SFM Converter MM.msm" DiskId="1"/>
-      <Merge Id="PerlEC" Language="1033" SourceFile="..\..\EC DistFiles\MergeModules\x86\PerlEcMM.msm" DiskId="1"/>
-      <Merge Id="SEC_PythonEC" Language="1033" SourceFile="..\..\EC DistFiles\MergeModules\x86\PythonEcMM.msm" DiskId="1"/>
+      <Merge Id="PerlEC" Language="1033" SourceFile="..\..\EcDistFiles\MergeModules\x86\PerlEcMM.msm" DiskId="1"/>
+      <Merge Id="SEC_PythonEC" Language="1033" SourceFile="..\..\EcDistFiles\MergeModules\x86\PythonEcMM.msm" DiskId="1"/>
       <Merge Id="TECkitMapUEditor" Language="1033" SourceFile="..\MergeModules\x86\TECkitMapUEditor.msm" DiskId="1"/>
       <Merge Id="XmlConverters" Language="1033" SourceFile="..\MergeModules\x86\XmlConvertersMM.msm" DiskId="1"/>
       <Merge Id="SpellFixerEc" Language="1033" SourceFile="..\MergeModules\x86\SpellFixerEcMM.msm" DiskId="1"/>
-      <Merge Id="OO_Ling_Tools" Language="1033" SourceFile="..\MergeModules\OpenOfficeLinguisticToolsMM.msm" DiskId="1"/>
-    </DirectoryRef>
-
-    <DirectoryRef Id="TECkit">
       <Merge Id="TECkit_Package" Language="1033" SourceFile="..\MergeModules\x86\TECkitPackageMM.msm" DiskId="1"/>
     </DirectoryRef>
 
     <DirectoryRef Id="AllUserAppDataSIL">
-      <Merge Id="EcFolderACLsMM" Language="1033" SourceFile="..\..\EC DistFiles\MergeModules\EcFolderACLsMM.msm" DiskId="1"/>
+      <Merge Id="ScHelp" Language="1033" SourceFile="..\MergeModules\ScHelpMM.msm" DiskId="1"/>
+      <Merge Id="OO_Ling_Tools" Language="1033" SourceFile="..\MergeModules\OpenOfficeLinguisticToolsMM.msm" DiskId="1"/>
+      <Merge Id="EcFolderACLsMM" Language="1033" SourceFile="..\..\EcDistFiles\MergeModules\EcFolderACLsMM.msm" DiskId="1"/>
       <Merge Id="CscDot" Language="1033" SourceFile="..\MergeModules\CscDotMM.msm" DiskId="1"/>
       <Merge Id="DcmDot" Language="1033" SourceFile="..\MergeModules\DcmDotMM.msm" DiskId="1"/>
     </DirectoryRef>
@@ -55,8 +52,8 @@
     <DirectoryRef Id="CommonFilesFolderSIL">
       <!--The following merge modules install to the directory: C:\Program Files\Common Files\SIL-->
       <Merge Id="SetPath" Language="1033" SourceFile="..\MergeModules\x86\SetPath.msm" DiskId="1"/>
-      <Merge Id="TECkit_DLLs" Language="1033" SourceFile="..\..\EC DistFiles\MergeModules\x86\TECkitDLLsMM.msm" DiskId="1"/>
-      <Merge Id="SEC_ICU" Language="1033" SourceFile="..\..\EC DistFiles\MergeModules\x86\ICU_40.msm" DiskId="1"/>
+      <Merge Id="TECkit_DLLs" Language="1033" SourceFile="..\..\EcDistFiles\MergeModules\x86\TECkitDLLsMM.msm" DiskId="1"/>
+      <Merge Id="SEC_ICU" Language="1033" SourceFile="..\..\EcDistFiles\MergeModules\x86\ICU_40.msm" DiskId="1"/>
     </DirectoryRef>
     <DirectoryRef Id="SystemFolder">
       <Merge Id="CRT" Language="1033" SourceFile="..\ExternalMergeModules\Microsoft_VC142_CRT_x86.msm" DiskId="1"/>

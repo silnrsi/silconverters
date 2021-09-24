@@ -11,8 +11,8 @@ using System.Resources;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("SIL")]
 [assembly: AssemblyProduct("SILConvertersOffice13")]
-[assembly: AssemblyCopyright("Copyright © 2010-2013 SIL. All rights reserved.")]
-[assembly: AssemblyTrademark("Copyright © 2010-2013 SIL. All rights reserved.")]
+[assembly: AssemblyCopyright("Copyright © 2010-2021 SIL. All rights reserved.")]
+[assembly: AssemblyTrademark("Copyright © 2010-2021 SIL. All rights reserved.")]
 [assembly: AssemblyCulture("")]
 
 //

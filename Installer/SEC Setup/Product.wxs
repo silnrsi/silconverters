@@ -1,13 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-  <Product UpgradeCode="8A50226C-84D0-4CAF-AF8F-B0284643C415" Id="B8CC40C1-1EE9-4FE8-BC9F-F37CD8F60E1C" Name="SIL Encoding Converters 5.0" Manufacturer="SIL International" Language="1033" Version="5.0.0">
-    <Package Id='*' InstallerVersion="500" Compressed='yes' />
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"
+     xmlns:netfx="http://schemas.microsoft.com/wix/NetFxExtension">
+  <Product Id="*" UpgradeCode="8A50226C-84D0-4CAF-AF8F-B0284643C415" Name="SIL Converters 5.0" Manufacturer="SIL International" 
+           Language="1033" Version="5.0.0">
+    <Package InstallerVersion="500" Compressed="yes" InstallScope="perMachine" />
+    
     <Condition Message="You need to be an administrator to install this product.">Privileged</Condition>
     <Condition Message="[ProductName] will only run on Windows 2000 or better. You cannot intall it on this machine.">
       <![CDATA[(NOT Version9X) OR (NOT VersionNT OR (VersionNT >= 500))]]>
     </Condition>
 
+    <Icon Id="Installer.ico" SourceFile="Installer.ico"/>
+    <Property Id="ARPPRODUCTICON" Value="Installer.ico" />
+
+    <Property Id="REINSTALLMODE" Value="amus" />
+
+    <MajorUpgrade Schedule='afterInstallInitialize'
+                  DowngradeErrorMessage="A newer version of [ProductName] is already installed."
+                  AllowSameVersionUpgrades="yes" />
+
     <MediaTemplate EmbedCab="yes" CompressionLevel="high" />
+
+    <!-- Require .NET 4.6.1+ -->
+    <PropertyRef Id="WIX_IS_NETFRAMEWORK_461_OR_LATER_INSTALLED"/>
+    <Condition Message="This application requires .NET Framework 4.6.1 or later. Please install the .NET Framework then run this installer again.">
+      <![CDATA[Installed OR WIX_IS_NETFRAMEWORK_461_OR_LATER_INSTALLED]]>
+    </Condition>
 
     <Property Id="OFFICE_2016_BITNESS">
       <RegistrySearch Id="Office2016Bitness" Root="HKLM" Key="Software\Microsoft\Office\16.0\Outlook" Name="Bitness" Type="raw" />
@@ -71,6 +89,8 @@
     <Property Id="WORD_DOT_FOLDER_REG_15">
       <RegistrySearch Id="AppReg4" Root="HKCU" Key="Software\Microsoft\Office\15.0\Common\General" Name="UserTemplates" Type="directory" />
     </Property>
+    <!--Office 2019/365, etc., don't seem to have a UserTemplates ^
+        Nor is there a new version of the following DLLs for higher versions-->
     <Property Id="COMPONENTEXISTS_EXCEL_13_PIA">
       <DirectorySearch Id="AppFileExcel13" Path="[WindowsFolder]assembly\GAC_MSIL\Microsoft.Office.Interop.Excel\15.0.0.0__71e9bce111e9429c" Depth="0">
         <FileSearch Id="AppFileExcel13" Name="Microsoft.Office.Interop.Excel.dll" />
@@ -138,15 +158,21 @@
       </DirectorySearch>
     </Property>
 
-    <Property Id="ALLUSERS"><![CDATA[1]]></Property>
     <Property Id="OfficePIAWarningWord"><![CDATA[The "Bulk Word Document Converter" add-in requires the Microsoft Office Primary Interop Assemblies (PIAs).]]></Property>
     <Property Id="OfficePIAWarningOffice"><![CDATA[The "SILConverters for Office" add-in requires the Microsoft Office Primary Interop Assemblies (PIAs).]]></Property>
     <Property Id="OfficePIAWarning"><![CDATA[The web page that shows how they can be installed either from your Office 2003/2007/2010 CD/DVD or via a (4MB) download is: http://msdn2.microsoft.com/en-us/library/aa159923(office.11).aspx]]></Property>
 
-    <PropertyRef Id='EcUIFragment'/>
     <PropertyRef Id='EcFilesFragment'/>
     <PropertyRef Id='EcFeaturesFragment'/>
     <PropertyRef Id='EcMergeModulesFragment'/>
     <PropertyRef Id='EcActionsFragment'/>
+
+    <Property Id="INSTALLLEVEL"><![CDATA[3]]></Property>
+    <WixVariable Id="WixUILicenseRtf" Value="License.rtf" />
+    <WixVariable Id="WixUIDialogBmp" Value="MSIBackground.bmp" />
+    <Property Id="WIXUI_INSTALLDIR" Value="INSTALLDIR" />
+    <UIRef Id="WixUI_FeatureTree"/>
+
+    <Property Id="REBOOT" Value="Force"></Property>
   </Product>
 </Wix>

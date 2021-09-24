@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="12.0">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
@@ -12,7 +12,7 @@
     <NoStandardLibraries>false</NoStandardLibraries>
     <AssemblyName>SILConvertersOffice13</AssemblyName>
     <RootNamespace>SILConvertersOffice13</RootNamespace>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <ApplicationIcon>TRFFC17.ICO</ApplicationIcon>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>FieldWorks.snk</AssemblyOriginatorKeyFile>
@@ -76,11 +76,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="AIGuesserEC">
-      <HintPath>..\..\EC DistFiles\x64\AIGuesserEC.dll</HintPath>
+      <HintPath>..\..\EcDistFiles\win-x64\AIGuesserEC.dll</HintPath>
     </Reference>
     <Reference Include="ECInterfaces, Version=4.0.0.0, Culture=neutral, PublicKeyToken=f1447bae1e63f485, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Encoding-Converters-Core.0.3.1\lib\net45\x86\ECInterfaces.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>..\..\packages\Encoding-Converters-Core.0.3.9\lib\net45\x86\ECInterfaces.dll</HintPath>
     </Reference>
     <Reference Include="extensibility, Version=7.0.3300.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
       <SpecificVersion>False</SpecificVersion>
@@ -113,8 +112,7 @@
       <HintPath>DistFiles13\OFFICE.DLL</HintPath>
     </Reference>
     <Reference Include="SilEncConverters40, Version=4.0.0.0, Culture=neutral, PublicKeyToken=f1447bae1e63f485, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Encoding-Converters-Core.0.3.1\lib\net45\x86\SilEncConverters40.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>..\..\packages\Encoding-Converters-Core.0.3.9\lib\net45\x86\SilEncConverters40.dll</HintPath>
     </Reference>
     <Reference Include="System">
       <HintPath>System.dll</HintPath>

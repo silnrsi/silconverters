@@ -10,8 +10,8 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("SIL")]
 [assembly: AssemblyProduct("DChartHelper")]
-[assembly: AssemblyCopyright("Copyright ©  2006-2010 SIL. All rights reserved.")]
-[assembly: AssemblyTrademark("Copyright ©  2006-2010 SIL. All rights reserved.")]
+[assembly: AssemblyCopyright("Copyright © 2006-2021 SIL. All rights reserved.")]
+[assembly: AssemblyTrademark("Copyright © 2006-2021 SIL. All rights reserved.")]
 [assembly: AssemblyCulture("")]
 
 // Setting ComVisible to false makes the types in this assembly not visible 
@@ -29,5 +29,5 @@ using System.Runtime.InteropServices;
 //      Build Number
 //      Revision
 //
-[assembly: AssemblyVersion("4.0.0.0")]
-[assembly: AssemblyFileVersion("4.0.0.0")]
+[assembly: AssemblyVersion("5.0.0.0")]
+[assembly: AssemblyFileVersion("5.0.0.0")]

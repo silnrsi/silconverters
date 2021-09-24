@@ -3,8 +3,6 @@
 	<Module Id="CscDotMM" Language="1033" Version="1.0.0.0">
 		<Package Id="288de69b-4287-4dfa-a10f-3322e3de0c20" Comments="Consistent Spelling Checker Macro Word document template" Description="Document Template for doing spelling corrections using EncConverters in MS Word" InstallerVersion="500" Keywords="SILConverters; Spell Fixing in MS Word" Manufacturer="SIL" />
         
-        <Dependency RequiredId="Jump2ToolboxMM.AB272286_9BBB_481A_99AE_65DFAAF8D04C" RequiredLanguage="1033" RequiredVersion="4.0.0.0" />
-        
 		<Directory Id="TARGETDIR" Name="SourceDir">
             
             <Directory Id="WORD_DOT_FOLDER" Name="Word DOT Folder">

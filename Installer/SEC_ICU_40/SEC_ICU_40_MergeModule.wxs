@@ -11,13 +11,13 @@
 
         <!-- note that the EC-related ICU DLLs (now) are in the EC_40_MergeModule.wxs script, but these are the actual ICU (from IBM) bits -->
         <Component Id="icudt54.dll" Guid="{C07121B2-0CBF-4CB4-85D3-10A47F947977}">
-          <File Id="icudt54.dll" Name="icudt54.dll" KeyPath="yes" Source="..\..\EC DistFiles\x86\icudt54.dll"/>
+          <File Id="icudt54.dll" Name="icudt54.dll" KeyPath="yes" Source="..\..\EcDistFiles\x86\icudt54.dll"/>
         </Component>
         <Component Id="icuin54.dll" Guid="{E0C16A69-9075-49B6-B5DF-2DF5C427A1B0}">
-          <File Id="icuin54.dll" Name="icuin54.dll" KeyPath="yes" Source="..\..\EC DistFiles\x86\icuin54.dll"/>
+          <File Id="icuin54.dll" Name="icuin54.dll" KeyPath="yes" Source="..\..\EcDistFiles\x86\icuin54.dll"/>
         </Component>
         <Component Id="icuuc54.dll" Guid="{E43C6380-A976-4ADA-A56E-3F7046435F03}">
-          <File Id="icuuc54.dll" Name="icuuc54.dll" KeyPath="yes" Source="..\..\EC DistFiles\x86\icuuc54.dll"/>
+          <File Id="icuuc54.dll" Name="icuuc54.dll" KeyPath="yes" Source="..\..\EcDistFiles\x86\icuuc54.dll"/>
         </Component>
 
       </Directory>
