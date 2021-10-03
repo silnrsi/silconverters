@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\..\..\packages\Encoding-Converters-Core.0.3.20\build\Encoding-Converters-Core.props" Condition="Exists('..\..\..\packages\Encoding-Converters-Core.0.3.20\build\Encoding-Converters-Core.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -11,7 +12,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>TestBwdc</RootNamespace>
     <AssemblyName>TestBwdc</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <TargetFrameworkProfile />
@@ -74,11 +75,11 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="ECInterfaces, Version=4.0.0.0, Culture=neutral, PublicKeyToken=f1447bae1e63f485, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\Encoding-Converters-Core.0.3.9\lib\net45\x86\ECInterfaces.dll</HintPath>
+      <HintPath>..\..\..\packages\Encoding-Converters-Core.0.3.20\lib\net48\x86\ECInterfaces.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="SilEncConverters40, Version=4.0.0.0, Culture=neutral, PublicKeyToken=f1447bae1e63f485, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\Encoding-Converters-Core.0.3.9\lib\net45\x86\SilEncConverters40.dll</HintPath>
+      <HintPath>..\..\..\packages\Encoding-Converters-Core.0.3.20\lib\net48\x86\SilEncConverters40.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
@@ -110,6 +111,156 @@
     <Compile Include="XmlUtilities.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="EcDistFiles\redist\EC\Plugins\AI 4.0.0.0 Plugin Details.xml" />
+    <Content Include="EcDistFiles\redist\EC\Plugins\CC 4.0.0.0 Plugin Details.xml" />
+    <Content Include="EcDistFiles\redist\EC\Plugins\EC 4.0.0.0 Plugin Details.xml" />
+    <Content Include="EcDistFiles\redist\EC\Plugins\IcuEC 4.0.0.0 Plugin Details.xml" />
+    <Content Include="EcDistFiles\redist\EC\Plugins\PerlEC 4.0.0.0 Plugin Details.xml" />
+    <Content Include="EcDistFiles\redist\EC\Plugins\PythonEC 4.0.0.0 Plugin Details.xml" />
+    <Content Include="EcDistFiles\redist\EC\Plugins\SIEC 4.0.0.0 Plugin Details.xml" />
+    <Content Include="EcDistFiles\redist\Help\AdaptIt_Plug-in_About_box.htm" />
+    <Content Include="EcDistFiles\redist\Help\AdaptIt_Plug-in_About_box_files\filelist.xml" />
+    <Content Include="EcDistFiles\redist\Help\AdaptIt_Plug-in_About_box_files\header.htm" />
+    <Content Include="EcDistFiles\redist\Help\AdaptIt_Plug-in_About_box_files\image001.png" />
+    <Content Include="EcDistFiles\redist\Help\AdaptIt_Plug-in_About_box_files\image002.jpg" />
+    <Content Include="EcDistFiles\redist\Help\AdaptIt_Plug-in_About_box_files\image003.png" />
+    <Content Include="EcDistFiles\redist\Help\AdaptIt_Plug-in_About_box_files\image004.jpg" />
+    <Content Include="EcDistFiles\redist\Help\AdaptIt_Plug-in_About_box_files\image005.png" />
+    <Content Include="EcDistFiles\redist\Help\AdaptIt_Plug-in_About_box_files\image006.jpg" />
+    <Content Include="EcDistFiles\redist\Help\AdaptIt_Plug-in_About_box_files\image007.png" />
+    <Content Include="EcDistFiles\redist\Help\AdaptIt_Plug-in_About_box_files\image008.jpg" />
+    <Content Include="EcDistFiles\redist\Help\AdaptIt_Plug-in_About_box_files\image009.png" />
+    <Content Include="EcDistFiles\redist\Help\AdaptIt_Plug-in_About_box_files\image010.jpg" />
+    <Content Include="EcDistFiles\redist\Help\AdaptIt_Plug-in_About_box_files\image011.png" />
+    <Content Include="EcDistFiles\redist\Help\AdaptIt_Plug-in_About_box_files\image012.jpg" />
+    <Content Include="EcDistFiles\redist\Help\CantReadMhtFiles.htm" />
+    <Content Include="EcDistFiles\redist\Help\CC_Table_Plug-in_About_box.htm" />
+    <Content Include="EcDistFiles\redist\Help\CC_Table_Plug-in_About_box_files\filelist.xml" />
+    <Content Include="EcDistFiles\redist\Help\CC_Table_Plug-in_About_box_files\image001.png" />
+    <Content Include="EcDistFiles\redist\Help\CC_Table_Plug-in_About_box_files\image002.jpg" />
+    <Content Include="EcDistFiles\redist\Help\CC_Table_Plug-in_About_box_files\image003.png" />
+    <Content Include="EcDistFiles\redist\Help\CC_Table_Plug-in_About_box_files\image004.jpg" />
+    <Content Include="EcDistFiles\redist\Help\CC_Table_Plug-in_About_box_files\image007.png" />
+    <Content Include="EcDistFiles\redist\Help\CC_Table_Plug-in_About_box_files\image008.jpg" />
+    <Content Include="EcDistFiles\redist\Help\Code_Page_Converter_Plug-in_About_box.htm" />
+    <Content Include="EcDistFiles\redist\Help\Code_Page_Converter_Plug-in_About_box_files\filelist.xml" />
+    <Content Include="EcDistFiles\redist\Help\Code_Page_Converter_Plug-in_About_box_files\header.htm" />
+    <Content Include="EcDistFiles\redist\Help\Code_Page_Converter_Plug-in_About_box_files\image001.png" />
+    <Content Include="EcDistFiles\redist\Help\Code_Page_Converter_Plug-in_About_box_files\image002.jpg" />
+    <Content Include="EcDistFiles\redist\Help\Code_Page_Converter_Plug-in_About_box_files\image003.png" />
+    <Content Include="EcDistFiles\redist\Help\Code_Page_Converter_Plug-in_About_box_files\image004.jpg" />
+    <Content Include="EcDistFiles\redist\Help\Code_Page_Converter_Plug-in_About_box_files\image007.png" />
+    <Content Include="EcDistFiles\redist\Help\Code_Page_Converter_Plug-in_About_box_files\image008.jpg" />
+    <Content Include="EcDistFiles\redist\Help\Compound_Converter_Plug-in_About_box.htm" />
+    <Content Include="EcDistFiles\redist\Help\Compound_Converter_Plug-in_About_box_files\filelist.xml" />
+    <Content Include="EcDistFiles\redist\Help\Compound_Converter_Plug-in_About_box_files\image001.jpg" />
+    <Content Include="EcDistFiles\redist\Help\Compound_Converter_Plug-in_About_box_files\image005.png" />
+    <Content Include="EcDistFiles\redist\Help\Compound_Converter_Plug-in_About_box_files\image006.jpg" />
+    <Content Include="EcDistFiles\redist\Help\Compound_Converter_Plug-in_About_box_files\image007.png" />
+    <Content Include="EcDistFiles\redist\Help\Fallback_Converter_Plug-in_About_box.htm" />
+    <Content Include="EcDistFiles\redist\Help\Fallback_Converter_Plug-in_About_box_files\filelist.xml" />
+    <Content Include="EcDistFiles\redist\Help\Fallback_Converter_Plug-in_About_box_files\image003.png" />
+    <Content Include="EcDistFiles\redist\Help\Fallback_Converter_Plug-in_About_box_files\image004.jpg" />
+    <Content Include="EcDistFiles\redist\Help\Fallback_Converter_Plug-in_About_box_files\image005.jpg" />
+    <Content Include="EcDistFiles\redist\Help\Fallback_Converter_Plug-in_About_box_files\image007.png" />
+    <Content Include="EcDistFiles\redist\Help\ICU_Boundary_Analysis-Break_Iterator_Converter_About_box.htm" />
+    <Content Include="EcDistFiles\redist\Help\ICU_Boundary_Analysis-Break_Iterator_Converter_About_box_files\colorschememapping.xml" />
+    <Content Include="EcDistFiles\redist\Help\ICU_Boundary_Analysis-Break_Iterator_Converter_About_box_files\filelist.xml" />
+    <Content Include="EcDistFiles\redist\Help\ICU_Boundary_Analysis-Break_Iterator_Converter_About_box_files\image001.png" />
+    <Content Include="EcDistFiles\redist\Help\ICU_Boundary_Analysis-Break_Iterator_Converter_About_box_files\image002.jpg" />
+    <Content Include="EcDistFiles\redist\Help\ICU_Boundary_Analysis-Break_Iterator_Converter_About_box_files\image003.png" />
+    <Content Include="EcDistFiles\redist\Help\ICU_Boundary_Analysis-Break_Iterator_Converter_About_box_files\image004.jpg" />
+    <Content Include="EcDistFiles\redist\Help\ICU_Boundary_Analysis-Break_Iterator_Converter_About_box_files\image005.png" />
+    <Content Include="EcDistFiles\redist\Help\ICU_Boundary_Analysis-Break_Iterator_Converter_About_box_files\image006.jpg" />
+    <Content Include="EcDistFiles\redist\Help\ICU_Boundary_Analysis-Break_Iterator_Converter_About_box_files\item0012.xml" />
+    <Content Include="EcDistFiles\redist\Help\ICU_Boundary_Analysis-Break_Iterator_Converter_About_box_files\props013.xml" />
+    <Content Include="EcDistFiles\redist\Help\ICU_Converters_Plug-in_About_box.htm" />
+    <Content Include="EcDistFiles\redist\Help\ICU_Converters_Plug-in_About_box_files\filelist.xml" />
+    <Content Include="EcDistFiles\redist\Help\ICU_Converters_Plug-in_About_box_files\image001.png" />
+    <Content Include="EcDistFiles\redist\Help\ICU_Converters_Plug-in_About_box_files\image002.jpg" />
+    <Content Include="EcDistFiles\redist\Help\ICU_Converters_Plug-in_About_box_files\image003.png" />
+    <Content Include="EcDistFiles\redist\Help\ICU_Converters_Plug-in_About_box_files\image004.jpg" />
+    <Content Include="EcDistFiles\redist\Help\ICU_Converters_Plug-in_About_box_files\image007.png" />
+    <Content Include="EcDistFiles\redist\Help\ICU_Converters_Plug-in_About_box_files\image008.jpg" />
+    <Content Include="EcDistFiles\redist\Help\ICU_Regular_Expression_Plug-in_About_box.htm" />
+    <Content Include="EcDistFiles\redist\Help\ICU_Regular_Expression_Plug-in_About_box_files\colorschememapping.xml" />
+    <Content Include="EcDistFiles\redist\Help\ICU_Regular_Expression_Plug-in_About_box_files\filelist.xml" />
+    <Content Include="EcDistFiles\redist\Help\ICU_Regular_Expression_Plug-in_About_box_files\image001.png" />
+    <Content Include="EcDistFiles\redist\Help\ICU_Regular_Expression_Plug-in_About_box_files\image002.jpg" />
+    <Content Include="EcDistFiles\redist\Help\ICU_Regular_Expression_Plug-in_About_box_files\image003.png" />
+    <Content Include="EcDistFiles\redist\Help\ICU_Regular_Expression_Plug-in_About_box_files\image004.jpg" />
+    <Content Include="EcDistFiles\redist\Help\ICU_Regular_Expression_Plug-in_About_box_files\image005.png" />
+    <Content Include="EcDistFiles\redist\Help\ICU_Regular_Expression_Plug-in_About_box_files\image006.jpg" />
+    <Content Include="EcDistFiles\redist\Help\ICU_Regular_Expression_Plug-in_About_box_files\image007.png" />
+    <Content Include="EcDistFiles\redist\Help\ICU_Regular_Expression_Plug-in_About_box_files\image008.jpg" />
+    <Content Include="EcDistFiles\redist\Help\ICU_Regular_Expression_Plug-in_About_box_files\item0014.xml" />
+    <Content Include="EcDistFiles\redist\Help\ICU_Regular_Expression_Plug-in_About_box_files\props015.xml" />
+    <Content Include="EcDistFiles\redist\Help\ICU_Transliterators_Plug-in_About_box.htm" />
+    <Content Include="EcDistFiles\redist\Help\ICU_Transliterators_Plug-in_About_box_files\colorschememapping.xml" />
+    <Content Include="EcDistFiles\redist\Help\ICU_Transliterators_Plug-in_About_box_files\filelist.xml" />
+    <Content Include="EcDistFiles\redist\Help\ICU_Transliterators_Plug-in_About_box_files\image001.png" />
+    <Content Include="EcDistFiles\redist\Help\ICU_Transliterators_Plug-in_About_box_files\image002.jpg" />
+    <Content Include="EcDistFiles\redist\Help\ICU_Transliterators_Plug-in_About_box_files\image003.png" />
+    <Content Include="EcDistFiles\redist\Help\ICU_Transliterators_Plug-in_About_box_files\image004.jpg" />
+    <Content Include="EcDistFiles\redist\Help\ICU_Transliterators_Plug-in_About_box_files\image005.png" />
+    <Content Include="EcDistFiles\redist\Help\ICU_Transliterators_Plug-in_About_box_files\image006.jpg" />
+    <Content Include="EcDistFiles\redist\Help\Perl_Expression_Plug-in_About_box.htm" />
+    <Content Include="EcDistFiles\redist\Help\Perl_Expression_Plug-in_About_box_files\filelist.xml" />
+    <Content Include="EcDistFiles\redist\Help\Perl_Expression_Plug-in_About_box_files\header.htm" />
+    <Content Include="EcDistFiles\redist\Help\Perl_Expression_Plug-in_About_box_files\image001.png" />
+    <Content Include="EcDistFiles\redist\Help\Perl_Expression_Plug-in_About_box_files\image003.png" />
+    <Content Include="EcDistFiles\redist\Help\Perl_Expression_Plug-in_About_box_files\image004.jpg" />
+    <Content Include="EcDistFiles\redist\Help\Perl_Expression_Plug-in_About_box_files\image005.png" />
+    <Content Include="EcDistFiles\redist\Help\Perl_Expression_Plug-in_About_box_files\image006.jpg" />
+    <Content Include="EcDistFiles\redist\Help\Perl_Expression_Plug-in_About_box_files\image007.jpg" />
+    <Content Include="EcDistFiles\redist\Help\Python_Script_Plug-in_About_box.htm" />
+    <Content Include="EcDistFiles\redist\Help\Python_Script_Plug-in_About_box_files\colorschememapping.xml" />
+    <Content Include="EcDistFiles\redist\Help\Python_Script_Plug-in_About_box_files\filelist.xml" />
+    <Content Include="EcDistFiles\redist\Help\Python_Script_Plug-in_About_box_files\header.htm" />
+    <Content Include="EcDistFiles\redist\Help\Python_Script_Plug-in_About_box_files\image001.png" />
+    <Content Include="EcDistFiles\redist\Help\Python_Script_Plug-in_About_box_files\image002.jpg" />
+    <Content Include="EcDistFiles\redist\Help\Python_Script_Plug-in_About_box_files\image003.png" />
+    <Content Include="EcDistFiles\redist\Help\Python_Script_Plug-in_About_box_files\image004.jpg" />
+    <Content Include="EcDistFiles\redist\Help\Python_Script_Plug-in_About_box_files\image005.png" />
+    <Content Include="EcDistFiles\redist\Help\Python_Script_Plug-in_About_box_files\image006.jpg" />
+    <Content Include="EcDistFiles\redist\Help\Technical_Hindi_%28Google_group%29_Html_Converter_Plug-in_About_box.htm" />
+    <Content Include="EcDistFiles\redist\Help\Technical_Hindi_%28Google_group%29_Html_Converter_Plug-in_About_box_files\colorschememapping.xml" />
+    <Content Include="EcDistFiles\redist\Help\Technical_Hindi_%28Google_group%29_Html_Converter_Plug-in_About_box_files\filelist.xml" />
+    <Content Include="EcDistFiles\redist\Help\Technical_Hindi_%28Google_group%29_Html_Converter_Plug-in_About_box_files\image001.png" />
+    <Content Include="EcDistFiles\redist\Help\Technical_Hindi_%28Google_group%29_Html_Converter_Plug-in_About_box_files\image002.jpg" />
+    <Content Include="EcDistFiles\redist\Help\Technical_Hindi_%28Google_group%29_Html_Converter_Plug-in_About_box_files\image003.png" />
+    <Content Include="EcDistFiles\redist\Help\Technical_Hindi_%28Google_group%29_Html_Converter_Plug-in_About_box_files\image004.jpg" />
+    <Content Include="EcDistFiles\redist\Help\Technical_Hindi_%28Google_group%29_Html_Converter_Plug-in_About_box_files\image005.png" />
+    <Content Include="EcDistFiles\redist\Help\Technical_Hindi_%28Google_group%29_Html_Converter_Plug-in_About_box_files\image006.jpg" />
+    <Content Include="EcDistFiles\redist\Help\Technical_Hindi_%28Google_group%29_Html_Converter_Plug-in_About_box_files\image007.png" />
+    <Content Include="EcDistFiles\redist\Help\Technical_Hindi_%28Google_group%29_Html_Converter_Plug-in_About_box_files\image008.jpg" />
+    <Content Include="EcDistFiles\redist\Help\Technical_Hindi_%28Google_group%29_Html_Converter_Plug-in_About_box_files\image009.png" />
+    <Content Include="EcDistFiles\redist\Help\Technical_Hindi_%28Google_group%29_Html_Converter_Plug-in_About_box_files\image010.jpg" />
+    <Content Include="EcDistFiles\redist\Help\Technical_Hindi_%28Google_group%29_Html_Converter_Plug-in_About_box_files\image011.png" />
+    <Content Include="EcDistFiles\redist\Help\Technical_Hindi_%28Google_group%29_Html_Converter_Plug-in_About_box_files\image012.jpg" />
+    <Content Include="EcDistFiles\redist\Help\Technical_Hindi_%28Google_group%29_Html_Converter_Plug-in_About_box_files\image013.png" />
+    <Content Include="EcDistFiles\redist\Help\Technical_Hindi_%28Google_group%29_Html_Converter_Plug-in_About_box_files\image014.jpg" />
+    <Content Include="EcDistFiles\redist\Help\TECkit_Map_Plug-in_About_box.htm" />
+    <Content Include="EcDistFiles\redist\Help\TECkit_Map_Plug-in_About_box_files\filelist.xml" />
+    <Content Include="EcDistFiles\redist\Help\TECkit_Map_Plug-in_About_box_files\image001.png" />
+    <Content Include="EcDistFiles\redist\Help\TECkit_Map_Plug-in_About_box_files\image002.jpg" />
+    <Content Include="EcDistFiles\redist\Help\TECkit_Map_Plug-in_About_box_files\image003.png" />
+    <Content Include="EcDistFiles\redist\Help\TECkit_Map_Plug-in_About_box_files\image004.jpg" />
+    <Content Include="EcDistFiles\redist\Help\TECkit_Map_Plug-in_About_box_files\image007.png" />
+    <Content Include="EcDistFiles\redist\Help\TECkit_Map_Plug-in_About_box_files\image008.jpg" />
+    <Content Include="redist\Help\AdaptIt_Plug-in_About_box.htm" />
+    <Content Include="redist\Help\CC_Table_Plug-in_About_box.htm" />
+    <Content Include="redist\Help\Code_Page_Converter_Plug-in_About_box.htm" />
+    <Content Include="redist\Help\Compound_Converter_Plug-in_About_box.htm" />
+    <Content Include="redist\Help\Fallback_Converter_Plug-in_About_box.htm" />
+    <Content Include="redist\Help\ICU_Boundary_Analysis-Break_Iterator_Converter_About_box.htm" />
+    <Content Include="redist\Help\ICU_Converters_Plug-in_About_box.htm" />
+    <Content Include="redist\Help\ICU_Regular_Expression_Plug-in_About_box.htm" />
+    <Content Include="redist\Help\ICU_Transliterators_Plug-in_About_box.htm" />
+    <Content Include="redist\Help\Perl_Expression_Plug-in_About_box.htm" />
+    <Content Include="redist\Help\Python_Script_Plug-in_About_box.htm" />
+    <Content Include="redist\Help\Technical_Hindi_%28Google_group%29_Html_Converter_Plug-in_About_box.htm" />
+    <Content Include="redist\Help\TECkit_Map_Plug-in_About_box.htm" />
     <Content Include="TestFile1.xml" />
     <Content Include="TestFile2.xml" />
   </ItemGroup>
@@ -126,12 +277,63 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="EcDistFiles\MergeModules\EcFolderACLsMM.msm" />
+    <None Include="EcDistFiles\MergeModules\x64\AIGuesser64bitMM.msm" />
+    <None Include="EcDistFiles\MergeModules\x64\CcDLLs64bitMM.msm" />
+    <None Include="EcDistFiles\MergeModules\x64\EC_40_64bit_MM.msm" />
+    <None Include="EcDistFiles\MergeModules\x64\ICU_40_64bit.msm" />
+    <None Include="EcDistFiles\MergeModules\x64\PerlEc64bitMM.msm" />
+    <None Include="EcDistFiles\MergeModules\x64\PythonEc64bitMM.msm" />
+    <None Include="EcDistFiles\MergeModules\x64\TECkit64bitDllsMM.msm" />
+    <None Include="EcDistFiles\MergeModules\x86\AIGuesserMM.msm" />
+    <None Include="EcDistFiles\MergeModules\x86\CcDLLsMM.msm" />
+    <None Include="EcDistFiles\MergeModules\x86\EcFireFox.msm" />
+    <None Include="EcDistFiles\MergeModules\x86\EcFireFox64.msm" />
+    <None Include="EcDistFiles\MergeModules\x86\EC_40_MM.msm" />
+    <None Include="EcDistFiles\MergeModules\x86\ICU_40.msm" />
+    <None Include="EcDistFiles\MergeModules\x86\PerlEcMM.msm" />
+    <None Include="EcDistFiles\MergeModules\x86\PythonEcMM.msm" />
+    <None Include="EcDistFiles\MergeModules\x86\TECkitDLLsMM.msm" />
+    <None Include="EcDistFiles\redist\Help\AdaptIt_Plug-in_About_box.mht" />
+    <None Include="EcDistFiles\redist\Help\CC_Table_Plug-in_About_box.mht" />
+    <None Include="EcDistFiles\redist\Help\Code_Page_Converter_Plug-in_About_box.mht" />
+    <None Include="EcDistFiles\redist\Help\Compound_Converter_Plug-in_About_box.mht" />
+    <None Include="EcDistFiles\redist\Help\Fallback_Converter_Plug-in_About_box.mht" />
+    <None Include="EcDistFiles\redist\Help\Help for SIL Converters.doc" />
+    <None Include="EcDistFiles\redist\Help\Help for SIL Converters.pdf" />
+    <None Include="EcDistFiles\redist\Help\ICU_Boundary_Analysis-Break_Iterator_Converter_About_box.mht" />
+    <None Include="EcDistFiles\redist\Help\ICU_Boundary_Analysis-Break_Iterator_Converter_About_box_files\themedata.thmx" />
+    <None Include="EcDistFiles\redist\Help\ICU_Converters_Plug-in_About_box.mht" />
+    <None Include="EcDistFiles\redist\Help\ICU_Regular_Expression_Plug-in_About_box.mht" />
+    <None Include="EcDistFiles\redist\Help\ICU_Regular_Expression_Plug-in_About_box_files\themedata.thmx" />
+    <None Include="EcDistFiles\redist\Help\ICU_Transliterators_Plug-in_About_box.mht" />
+    <None Include="EcDistFiles\redist\Help\ICU_Transliterators_Plug-in_About_box_files\themedata.thmx" />
+    <None Include="EcDistFiles\redist\Help\Instructional Content 2005.dot" />
+    <None Include="EcDistFiles\redist\Help\Perl_Expression_Plug-in_About_box.mht" />
+    <None Include="EcDistFiles\redist\Help\Python_Script_Plug-in_About_box.mht" />
+    <None Include="EcDistFiles\redist\Help\Python_Script_Plug-in_About_box_files\themedata.thmx" />
+    <None Include="EcDistFiles\redist\Help\sfconv.1.pdf" />
+    <None Include="EcDistFiles\redist\Help\SILConverters Installation Help.doc" />
+    <None Include="EcDistFiles\redist\Help\SILConverters Installation Help.pdf" />
+    <None Include="EcDistFiles\redist\Help\Technical_Hindi_%28Google_group%29_Html_Converter_Plug-in_About_box.mht" />
+    <None Include="EcDistFiles\redist\Help\Technical_Hindi_%28Google_group%29_Html_Converter_Plug-in_About_box_files\themedata.thmx" />
+    <None Include="EcDistFiles\redist\Help\teckit_compile.1.pdf" />
+    <None Include="EcDistFiles\redist\Help\TECkit_Language.pdf" />
+    <None Include="EcDistFiles\redist\Help\TECkit_Map_Plug-in_About_box.mht" />
+    <None Include="EcDistFiles\redist\Help\TECkit_Tools.pdf" />
+    <None Include="EcDistFiles\redist\Help\txtconv.1.pdf" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>xcopy /y "$(TargetDir)*.*" $(SolutionDir)output\$(PlatformName)\$(ConfigurationName)</PostBuildEvent>
   </PropertyGroup>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\..\..\packages\Encoding-Converters-Core.0.3.20\build\Encoding-Converters-Core.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\packages\Encoding-Converters-Core.0.3.20\build\Encoding-Converters-Core.props'))" />
+  </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

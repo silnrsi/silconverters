@@ -9,18 +9,18 @@
 
                 <Component Id="TECkitTools_exe" Guid="{24DD7D99-FE1F-46AC-81DA-941F5C5E8128}">
                     <Shortcut Id="TECkitFolder" Name="TECkit Utilities Folder" Directory="TECkitMenu" Target="[MergeRedirectFolder]" WorkingDirectory="MergeRedirectFolder" Description="Opens a Explorer Window to the folder where the TECkit command line programs are installed" />
-                    <File Id="SFconv.exe" Name="SFconv.exe" Source="..\..\EcDistFiles\win-x86\native\SFconv.exe" />
-                    <File Id="TECkit_Compile.exe" Name="TECkit_Compile.exe" Source="..\..\EcDistFiles\win-x86\native\TECkit_Compile.exe" />
-                    <File Id="TxtConv.exe" Name="TxtConv.exe" Source="..\..\EcDistFiles\win-x86\native\TxtConv.exe" />
+                    <File Id="SFconv.exe" Name="SFconv.exe" Source="$(var.EcDistFilesPath)\win-x86\native\SFconv.exe" />
+                    <File Id="TECkit_Compile.exe" Name="TECkit_Compile.exe" Source="$(var.EcDistFilesPath)\win-x86\native\TECkit_Compile.exe" />
+                    <File Id="TxtConv.exe" Name="TxtConv.exe" Source="$(var.EcDistFilesPath)\win-x86\native\TxtConv.exe" />
                 </Component>
 
                 <Directory Id="TkHelp" Name="Help">
                     <Component Id="TECkit_Tools.pdf" Guid="{767AC627-D839-4154-B545-F7E48CB6010B}">
-                        <File Id="TECkit_Tools.pdf" Name="TECkit_Tools.pdf" KeyPath="yes" Source="..\..\EcDistFiles\redist\Help\TECkit_Tools.pdf" />
+                        <File Id="TECkit_Tools.pdf" Name="TECkit_Tools.pdf" KeyPath="yes" Source="$(var.EcDistFilesPath)\redist\Help\TECkit_Tools.pdf" />
                         <Shortcut Id="TECkit_Tools.pdf" Directory="TkMenuHelp" Name="TECkit tools" Description="Help on TECkit Tools" Show="normal" Target="[#TECkit_Tools.pdf]" WorkingDirectory="TkHelp" Advertise="no" />
                     </Component>
                     <Component Id="TECkit_Language.pdf" Guid="{BEA62261-96D8-4DF4-8C53-F4AA45FDE6B2}">
-                        <File Id="TECkit_Language.pdf" Name="TECkit_Language.pdf" KeyPath="yes" Source="..\..\EcDistFiles\redist\Help\TECkit_Language.pdf" />
+                        <File Id="TECkit_Language.pdf" Name="TECkit_Language.pdf" KeyPath="yes" Source="$(var.EcDistFilesPath)\redist\Help\TECkit_Language.pdf" />
                         <Shortcut Id="TECkit_Language.pdf" Directory="TkMenuHelp" Name="TECkit Language" Description="Help on TECkit Language" Show="normal" Target="[#TECkit_Language.pdf]" WorkingDirectory="TkHelp" Advertise="no" />
                     </Component>
                 </Directory>

@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"
+     xmlns:bal="http://schemas.microsoft.com/wix/BalExtension"
+     xmlns:util="http://schemas.microsoft.com/wix/UtilExtension"
      xmlns:netfx="http://schemas.microsoft.com/wix/NetFxExtension">
+
   <Product Id="*" UpgradeCode="8A50226C-84D0-4CAF-AF8F-B0284643C415" Name="SIL Converters 5.0" Manufacturer="SIL International" 
            Language="1033" Version="5.0.0">
     <Package InstallerVersion="500" Compressed="yes" InstallScope="perMachine" />
@@ -21,12 +24,13 @@
 
     <MediaTemplate EmbedCab="yes" CompressionLevel="high" />
 
-    <!-- Require .NET 4.6.1+ -->
+    <!-- Require .NET 4.6.1+ UPDATE: see .NET 4.8 below
     <PropertyRef Id="WIX_IS_NETFRAMEWORK_461_OR_LATER_INSTALLED"/>
     <Condition Message="This application requires .NET Framework 4.6.1 or later. Please install the .NET Framework then run this installer again.">
       <![CDATA[Installed OR WIX_IS_NETFRAMEWORK_461_OR_LATER_INSTALLED]]>
     </Condition>
-
+    -->
+    
     <Property Id="OFFICE_2016_BITNESS">
       <RegistrySearch Id="Office2016Bitness" Root="HKLM" Key="Software\Microsoft\Office\16.0\Outlook" Name="Bitness" Type="raw" />
     </Property>

@@ -11,7 +11,7 @@
           <Class Id="{0F218E35-EA40-4D56-9FFF-322094B4F412}" Context="InprocServer32" Description="SilEncConverters40.TechHindiSiteEncConverter" ThreadingModel="both" ForeignServer="mscoree.dll">
             <ProgId Id="SilEncConverters40.TechHindiSiteEncConverter" Description="SilEncConverters40.TechHindiSiteEncConverter" />
           </Class>
-          <File Id="SilIndicEncConverters40.dll" Name="SilIndicEncConverters40.dll" KeyPath="yes" Source="..\..\..\EcDistFiles\win-x86\native\SilIndicEncConverters40.dll" />
+          <File Id="SilIndicEncConverters40.dll" Name="SilIndicEncConverters40.dll" KeyPath="yes" Source="$(var.EcDistFilesPath)\win-x86\native\SilIndicEncConverters40.dll" />
           <File Id="EnableIndicConvertersInWord.reg" Name="EnableIndicConvertersInWord.reg" Source="..\..\..\Installer\Converter Packages\IndicConverters\EnableIndicConvertersInWord.reg" />
           <RegistryValue Root="HKCR" Key="CLSID\{0F218E35-EA40-4D56-9FFF-322094B4F412}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
           <RegistryValue Root="HKCR" Key="CLSID\{0F218E35-EA40-4D56-9FFF-322094B4F412}\InprocServer32\4.0.0.0" Name="Class" Value="SilEncConverters40.TechHindiSiteEncConverter" Type="string" Action="write" />
@@ -38,7 +38,7 @@
         <Directory Id="ECFolder" Name="EC">
           <Directory Id="PluginsFolder" Name="Plugins">
             <Component Id="SIEC_4.0.0.0_Plugin_Details.xml" Guid="304b6f60-e5f2-43c6-a655-f33367e3fe4d">
-              <File Id="SIEC_4.0.0.0_Plugin_Details.xml" Name="SIEC 4.0.0.0 Plugin Details.xml" KeyPath="yes" Source="..\..\..\EcDistFiles\redist\EC\Plugins\SIEC 4.0.0.0 Plugin Details.xml"/>
+              <File Id="SIEC_4.0.0.0_Plugin_Details.xml" Name="SIEC 4.0.0.0 Plugin Details.xml" KeyPath="yes" Source="$(var.EcDistFilesPath)\redist\EC\Plugins\SIEC 4.0.0.0 Plugin Details.xml"/>
             </Component>
           </Directory>
         </Directory>
@@ -160,7 +160,7 @@
             </Directory>
             <Directory Id="Help" Name="Help">
               <Component Id="HelpFile" Guid="{2606877B-F9ED-4F4A-8D21-00B10EC8556A}">
-                <File Id="HelpFile" Name="Technical_Hindi_(Google_group)_Html_Converter_Plug-in_About_box.mht" KeyPath="yes" Source="..\..\..\EcDistFiles\redist\Help\Technical_Hindi_(Google_group)_Html_Converter_Plug-in_About_box.mht" />
+                <File Id="HelpFile" Name="Technical_Hindi_(Google_group)_Html_Converter_Plug-in_About_box.mht" KeyPath="yes" Source="$(var.EcDistFilesPath)\redist\Help\Technical_Hindi_(Google_group)_Html_Converter_Plug-in_About_box.mht" />
                 <Shortcut Id="HelpFile" Directory="UsersSilConvertersHelpMenu" Name="Help for Technical Hindi (Google group) Html Converter Plug-in" IconIndex="0" Show="normal" Target="[#HelpFile]" Advertise="no" />
               </Component>
             </Directory>
