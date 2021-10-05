@@ -358,6 +358,11 @@ Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "SEC Setup 64bit", "Installe
 EndProject
 Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "TECkitPackageMM64bit", "Installer\TECkitPackage64bitMM\TECkitPackageMM64bit.wixproj", "{583CF928-C5BE-4518-9B5C-A8A7745BEE37}"
 EndProject
+Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "SetupSILConverters", "Installer\SetupSILConverters\SetupSILConverters.wixproj", "{496C70F6-D12A-42C9-A892-ACE1C6981F52}"
+	ProjectSection(ProjectDependencies) = postProject
+		{348850E8-5C84-4C77-BA1A-220C6E48FA6E} = {348850E8-5C84-4C77-BA1A-220C6E48FA6E}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -813,6 +818,12 @@ Global
 		{583CF928-C5BE-4518-9B5C-A8A7745BEE37}.Release|x64.ActiveCfg = Release|x64
 		{583CF928-C5BE-4518-9B5C-A8A7745BEE37}.Release|x64.Build.0 = Release|x64
 		{583CF928-C5BE-4518-9B5C-A8A7745BEE37}.Release|x86.ActiveCfg = Release|x64
+		{496C70F6-D12A-42C9-A892-ACE1C6981F52}.Debug|x64.ActiveCfg = Debug|x86
+		{496C70F6-D12A-42C9-A892-ACE1C6981F52}.Debug|x86.ActiveCfg = Debug|x86
+		{496C70F6-D12A-42C9-A892-ACE1C6981F52}.Release|x64.ActiveCfg = Release|x64
+		{496C70F6-D12A-42C9-A892-ACE1C6981F52}.Release|x64.Build.0 = Release|x64
+		{496C70F6-D12A-42C9-A892-ACE1C6981F52}.Release|x86.ActiveCfg = Release|x86
+		{496C70F6-D12A-42C9-A892-ACE1C6981F52}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -882,6 +893,7 @@ Global
 		{41D5C15A-DDC1-45FA-9EBF-3D08D04E3E9E} = {84121E67-E37B-4C69-810B-E3DC1C06F54A}
 		{69CB9E94-E875-4B29-AB69-3BBFE8D467E8} = {BD599637-791D-41A6-9B5F-233032353630}
 		{583CF928-C5BE-4518-9B5C-A8A7745BEE37} = {84121E67-E37B-4C69-810B-E3DC1C06F54A}
+		{496C70F6-D12A-42C9-A892-ACE1C6981F52} = {BD599637-791D-41A6-9B5F-233032353630}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0BE575CA-E157-41CC-B2F3-97DC5D97E61C}
