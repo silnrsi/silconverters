@@ -6,7 +6,6 @@
       <ComponentRef Id="RemoveFile" />
       <MergeRef Id="EcFolderACLsMM"/>
       <MergeRef Id="ScHelp"/>
-      <MergeRef Id="EcFireFox" />
     </Feature>
     <Feature Id="SILConverters_client_apps" Title="SIL Converters' client applications" Description="Expand this node to select or deselect individual client applications" Level="3" AllowAdvertise="no">
       <Feature Id="Clipboard_EncConverter" Title="Clipboard Encoding Converter " Description="The Clipboard EncConverter allows you to convert data on the clipboard with one of the converters in the system repository (e.g. TECkit, CC, etc)." Display="expand" Level="3" AllowAdvertise="no">
@@ -261,6 +260,9 @@
                 <MergeRef Id="TECkit_DOCs"/>
             </Feature>
 -->
+    </Feature>
+    <Feature Id="UseMozillaFirefox" Title="Use Mozilla Firefox" Description="Select this item if you want the SILConverters to use Firefox (instead of Internet Explorer) e.g. for the TechHindiSite Indic converters (which works better in newer versions of MS Office)" Level="4" AllowAdvertise="no">
+      <MergeRef Id="EcFirefox"/>
     </Feature>
   </Fragment>
 </Wix>

@@ -6,7 +6,6 @@
     <DirectoryRef Id="INSTALLDIR">
       <!-- The following merge modules install to the default directory: C:\Program Files\SIL\SILConverters -->
       <Merge Id="SEC_EC" Language="1033" SourceFile="$(var.EcDistFilesPath)\MergeModules\x86\EC_40_MM.msm" DiskId="1"/>
-      <Merge Id="EcFireFox" Language="1033" SourceFile="$(var.EcDistFilesPath)\MergeModules\x86\EcFireFox.msm" DiskId="1"/>
       <Merge Id="CcDLLsMM" Language="1033" SourceFile="$(var.EcDistFilesPath)\MergeModules\x86\CcDLLsMM.msm" DiskId="1" />
       <Merge Id="AIGuesser" Language="1033" SourceFile="$(var.EcDistFilesPath)\MergeModules\x86\AIGuesserMM.msm" DiskId="1"/>
       <Merge Id="AdaptIt2Unicode" Language="1033" SourceFile="..\MergeModules\x86\AdaptIt2UnicodeMM.msm" DiskId="1"/>
@@ -27,7 +26,10 @@
       <Merge Id="XmlConverters" Language="1033" SourceFile="..\MergeModules\x86\XmlConvertersMM.msm" DiskId="1"/>
       <Merge Id="SpellFixerEc" Language="1033" SourceFile="..\MergeModules\x86\SpellFixerEcMM.msm" DiskId="1"/>
       <Merge Id="TECkit_Package" Language="1033" SourceFile="..\MergeModules\x86\TECkitPackageMM.msm" DiskId="1"/>
-      <Merge Id="EcFireFox" Language="1033" SourceFile="$(var.EcDistFilesPath)\MergeModules\x86\FireFox.msm" DiskId="1"/>
+    </DirectoryRef>
+
+    <DirectoryRef Id="Firefox">
+      <Merge Id="EcFirefox" Language="1033" SourceFile="$(var.EcDistFilesPath)\MergeModules\x86\EcFireFox.msm" DiskId="1"/>
     </DirectoryRef>
 
     <DirectoryRef Id="AllUserAppDataSIL">

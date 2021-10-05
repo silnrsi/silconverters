@@ -28,7 +28,9 @@
           <!-- Place holder for merge modules -->
         </Directory>
         <Directory Id="SIL" Name="SIL">
-          <Directory Id="INSTALLDIR" Name="SILConverters" />
+          <Directory Id="INSTALLDIR" Name="SILConverters">
+            <Directory Id="Firefox" Name="FireFox64" />
+          </Directory>
           <Directory Id="TECkit" Name="TECkit" />
           <!-- Place holder for merge modules -->
         </Directory>

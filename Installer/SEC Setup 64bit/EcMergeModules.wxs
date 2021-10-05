@@ -23,7 +23,10 @@
       <Merge Id="XmlConverters" Language="1033" SourceFile="..\MergeModules\x64\XmlConverters64bitMM.msm" DiskId="1"/>
       <Merge Id="SpellFixerEc" Language="1033" SourceFile="..\MergeModules\x64\SpellFixerEc64bitMM.msm" DiskId="1"/>
       <Merge Id="TECkit_Package" Language="1033" SourceFile="..\MergeModules\x64\TECkitPackage64bitMM.msm" DiskId="1"/>
-      <Merge Id="EcFireFox" Language="1033" SourceFile="$(var.EcDistFilesPath)\MergeModules\x64\FireFox64.msm" DiskId="1"/>
+    </DirectoryRef>
+
+    <DirectoryRef Id="Firefox">
+      <Merge Id="EcFirefox" Language="1033" SourceFile="$(var.EcDistFilesPath)\MergeModules\x64\EcFireFox64.msm" DiskId="1"/>
     </DirectoryRef>
 
     <DirectoryRef Id="AllUserAppDataSIL">
