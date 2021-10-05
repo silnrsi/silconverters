@@ -160,10 +160,34 @@
               </Component>
             </Directory>
             <Directory Id="Help" Name="Help">
-              <Component Id="HelpFile" Guid="{2606877B-F9ED-4F4A-8D21-00B10EC8556A}">
-                <File Id="HelpFile" Name="Technical_Hindi_(Google_group)_Html_Converter_Plug-in_About_box.mht" KeyPath="yes" Source="$(var.EcDistFilesPath)\redist\Help\Technical_Hindi_(Google_group)_Html_Converter_Plug-in_About_box.mht" />
-                <Shortcut Id="HelpFile" Directory="UsersSilConvertersHelpMenu" Name="Help for Technical Hindi (Google group) Html Converter Plug-in" IconIndex="0" Show="normal" Target="[#HelpFile]" Advertise="no" />
+
+              <!--Technical Hindi (Google group) Html Converter Help-->
+              <Component Id="TechHindiHelp.htm" Guid="{FD05F25A-E3C5-43F4-8A68-9D50EA1ECC7B}">
+                <File Id="TechHindiHelp.htm" Name="Technical_Hindi_(Google_group)_Html_Converter_Plug-in_About_box.htm" KeyPath="yes" Source="$(var.EcDistFilesPath)\redist\Help\Technical_Hindi_(Google_group)_Html_Converter_Plug-in_About_box.htm"/>
+                <Shortcut Id="TechHindiHelpHtm" Directory="UsersSilConvertersHelpMenu" Name="Technical Hindi Google Group Converters Help" Description="View help document for the Technical Hindi Google Group Converters Plug-in" IconIndex="0" Show="normal" Target="[#TechHindiHelp.htm]" WorkingDirectory="Help" Advertise="no" />
               </Component>
+              <Directory Id="Technical_Hindi_Html_Converter_Plugin_About_box" Name="Technical_Hindi_(Google_group)_Html_Converter_Plug-in_About_box_files">
+                <Component Id="Technical_Hindi_Html_Converter_Plugin_About_boxComp" Guid="{974458DB-B7AE-4F32-8437-4E71C37F45F7}">
+                  <File Id="thc_filelist.xml" Name="filelist.xml" KeyPath="yes" Source="$(var.EcDistFilesPath)\redist\Help\Technical_Hindi_(Google_group)_Html_Converter_Plug-in_About_box_files\filelist.xml"/>
+                  <File Id="thc_colorschememapping.xml" Name="colorschememapping.xml" Source="$(var.EcDistFilesPath)\redist\Help\Technical_Hindi_(Google_group)_Html_Converter_Plug-in_About_box_files\colorschememapping.xml"/>
+                  <File Id="thc_themedata.thmx" Name="themedata.thmx" Source="$(var.EcDistFilesPath)\redist\Help\Technical_Hindi_(Google_group)_Html_Converter_Plug-in_About_box_files\themedata.thmx"/>
+                  <File Id="thc_image001.png" Name="image001.png" Source="$(var.EcDistFilesPath)\redist\Help\Technical_Hindi_(Google_group)_Html_Converter_Plug-in_About_box_files\image001.png"/>
+                  <File Id="thc_image002.jpg" Name="image002.jpg" Source="$(var.EcDistFilesPath)\redist\Help\Technical_Hindi_(Google_group)_Html_Converter_Plug-in_About_box_files\image002.jpg"/>
+                  <File Id="thc_image003.png" Name="image003.png" Source="$(var.EcDistFilesPath)\redist\Help\Technical_Hindi_(Google_group)_Html_Converter_Plug-in_About_box_files\image003.png"/>
+                  <File Id="thc_image004.jpg" Name="image004.jpg" Source="$(var.EcDistFilesPath)\redist\Help\Technical_Hindi_(Google_group)_Html_Converter_Plug-in_About_box_files\image004.jpg"/>
+                  <File Id="thc_image005.png" Name="image005.png" Source="$(var.EcDistFilesPath)\redist\Help\Technical_Hindi_(Google_group)_Html_Converter_Plug-in_About_box_files\image005.png"/>
+                  <File Id="thc_image006.jpg" Name="image006.jpg" Source="$(var.EcDistFilesPath)\redist\Help\Technical_Hindi_(Google_group)_Html_Converter_Plug-in_About_box_files\image006.jpg"/>
+                  <File Id="thc_image007.png" Name="image007.png" Source="$(var.EcDistFilesPath)\redist\Help\Technical_Hindi_(Google_group)_Html_Converter_Plug-in_About_box_files\image007.png"/>
+                  <File Id="thc_image008.jpg" Name="image008.jpg" Source="$(var.EcDistFilesPath)\redist\Help\Technical_Hindi_(Google_group)_Html_Converter_Plug-in_About_box_files\image008.jpg"/>
+                  <File Id="thc_image009.png" Name="image009.png" Source="$(var.EcDistFilesPath)\redist\Help\Technical_Hindi_(Google_group)_Html_Converter_Plug-in_About_box_files\image009.png"/>
+                  <File Id="thc_image010.jpg" Name="image010.jpg" Source="$(var.EcDistFilesPath)\redist\Help\Technical_Hindi_(Google_group)_Html_Converter_Plug-in_About_box_files\image010.jpg"/>
+                  <File Id="thc_image011.png" Name="image011.png" Source="$(var.EcDistFilesPath)\redist\Help\Technical_Hindi_(Google_group)_Html_Converter_Plug-in_About_box_files\image011.png"/>
+                  <File Id="thc_image012.jpg" Name="image012.jpg" Source="$(var.EcDistFilesPath)\redist\Help\Technical_Hindi_(Google_group)_Html_Converter_Plug-in_About_box_files\image012.jpg"/>
+                  <File Id="thc_image013.png" Name="image013.png" Source="$(var.EcDistFilesPath)\redist\Help\Technical_Hindi_(Google_group)_Html_Converter_Plug-in_About_box_files\image013.png"/>
+                  <File Id="thc_image014.jpg" Name="image014.jpg" Source="$(var.EcDistFilesPath)\redist\Help\Technical_Hindi_(Google_group)_Html_Converter_Plug-in_About_box_files\image014.jpg"/>
+                </Component>
+              </Directory>
+
             </Directory>
           </Directory>
         </Directory>
