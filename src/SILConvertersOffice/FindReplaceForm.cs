@@ -36,8 +36,6 @@ namespace SILConvertersOffice
             InitializeComponent();
             m_doc = doc;
 
-            // progressBar.Maximum = m_doc.DocumentEnd;
-
             // make sure these exist so don't throw an error later when we try to add to them
             if (Properties.Settings.Default.RecentFindWhat == null)
                 Properties.Settings.Default.RecentFindWhat = new System.Collections.Specialized.StringCollection();
@@ -89,7 +87,7 @@ namespace SILConvertersOffice
             if (String.IsNullOrEmpty(ecTextBoxFindWhat.Text))
                 throw new ApplicationException("Enter a regular expression in the 'Find what' box");
 
-            m_doc.Document.Application.System.Cursor = Microsoft.Office.Interop.Word.WdCursorType.wdCursorWait; // be sure to turn it off in backgroundWorker_RunWorkerCompleted
+            m_doc.Document.Application.System.Cursor = Word.WdCursorType.wdCursorWait; // be sure to turn it off in backgroundWorker_RunWorkerCompleted
 
             // if there's no processor (e.g. initially, change of Find What or Replace With text)...
             if (m_aWordByWordProcessor == null)
@@ -126,7 +124,10 @@ namespace SILConvertersOffice
                 System.Diagnostics.Debug.Assert(m_doc.theRangeToSearch != null);
 
                 if (m_eSearchAreaType == SearchAreaType.eWholeDocument)
+                {
+                    System.Diagnostics.Debug.WriteLine("progressBar.Maximum = m_doc.theRangeToSearch.End");
                     progressBar.Maximum = m_doc.theRangeToSearch.End;
+                }
             }
             else if (m_aWordByWordProcessor.IsFound && (eFormButton == FormButtons.Next))
             {
@@ -135,6 +136,7 @@ namespace SILConvertersOffice
 
             m_doc.theSearchProcessor = m_aWordByWordProcessor;
 
+            System.Diagnostics.Debug.WriteLine("progressBar.Visible = true;");
             progressBar.Visible = true; // be sure to turn it off during backgroundWorker_RunWorkerCompleted
             this.buttonCancel.Text = cstrStop;
 
@@ -169,8 +171,14 @@ namespace SILConvertersOffice
             // for us the "progress" is a new range of the document we're searching thru
             int nValue = (int)e.ProgressPercentage;
             if (nValue > progressBar.Maximum)
+            {
                 progressBar.Maximum = nValue;
-            progressBar.Value = nValue;
+            }
+
+            progressBar.BeginInvoke(
+                (MethodInvoker)delegate () {
+                    progressBar.Value = nValue;
+                });
         }
 
         private void backgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -264,18 +272,30 @@ namespace SILConvertersOffice
             }
 
         ExitRoutine:
-            this.buttonCancel.Text = cstrClose;
-            progressBar.Visible = false;
-            m_doc.Document.Application.System.Cursor = Microsoft.Office.Interop.Word.WdCursorType.wdCursorNormal;
+            buttonCancel.BeginInvoke(
+                (MethodInvoker)delegate () {
+                    buttonCancel.Text = cstrClose;
+                });
+            System.Diagnostics.Debug.WriteLine("progressBar.Visible = false");
+            progressBar.BeginInvoke(
+                (MethodInvoker)delegate ()
+                {
+                    progressBar.Visible = false;
+                });
+            m_doc.Document.Application.System.Cursor = Word.WdCursorType.wdCursorNormal;
         }
 
         public new void Show()
         {
             Word.Range aRange = m_doc.Document.Application.Selection.Words.First;
             this.ecTextBoxFindWhat.Text = aRange.Text;
+
+#if SetFontsToSelectedTextRangeFont
+            // I dont think I want to do this, because if it's a legacy font, it 
             this.ecTextBoxFindWhat.Font = this.comboBoxFindWhat.Font =
                 this.ecTextBoxReplaceWith.Font = this.comboBoxReplaceWith.Font =
                 new Font(aRange.Font.Name, 12);
+#endif
             base.Show();
         }
 
@@ -569,10 +589,10 @@ namespace SILConvertersOffice
                     aRunRange.Start = SearchAreaStart;
 
                 // the replacement string is easy. It's just whatever's in the one'th element of the Split array.
-                string strReplacementString = astrSegments[1];
+                string strReplacementString = (astrSegments.Length > 1) ? astrSegments[1] : null;
 
                 // There might be some stuff between the end of the replacement and the end of the input string.
-                string strStuffFollowingMatch = astrSegments[2];   // may be null
+                string strStuffFollowingMatch = (astrSegments.Length > 2) ? astrSegments[2] : null;   // may be null
 
                 // get the index to the end of the 'Find what' string
                 int nEndOfFindWhatSelection;

@@ -245,7 +245,7 @@ namespace SILConvertersOffice13
             Debug.Assert(astrs.Length == 3);
             string strClassName = String.Format("{0}.{1}", astrs[0], astrs[1]);
             string strMethodName = astrs[2];
-#if DEBUG
+#if false
             MessageBox.Show(String.Format("Button_Clicked: control.Id: '{0}', while Application: '{1}', strClassName: '{2}'; strMethodName: '{3}'",
                 control.Id, Application, strClassName, strMethodName));
 #endif
