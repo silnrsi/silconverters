@@ -61,7 +61,9 @@ namespace SILConvertersWordML
             // mapFontNames2Iterator, has one iterator for each unique font (across all docs). If there's
             //  only one doc, then it's already loaded. But if there's more than one doc, then we have to treat each 
             //  one as if by itself (which unfortunately means empty the collection and requery)
-            if (!Program.IsOnlyOneDoc)
+            // UPDATE (2021-10-08): even for one, we need to resent it, bkz it's possible the user clicked thru some samples
+            //  so it wouldn't start at the beginning
+            // if (!Program.IsOnlyOneDoc)
             {
                 MapIteratorList = new MapIteratorListLinq();
                 InitializeIteratorsCustomFontNames();
