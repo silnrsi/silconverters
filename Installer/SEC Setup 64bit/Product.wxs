@@ -175,6 +175,5 @@
     <Property Id="WIXUI_INSTALLDIR" Value="INSTALLDIR" />
     <UIRef Id="WixUI_FeatureTree"/>
 
-    <Property Id="REBOOT" Value="Force"></Property>
   </Product>
 </Wix>
