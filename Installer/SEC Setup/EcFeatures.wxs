@@ -261,7 +261,7 @@
             </Feature>
 -->
     </Feature>
-    <Feature Id="UseMozillaFirefox" Title="Use Mozilla Firefox" Description="Select this item if you want the SILConverters to use Firefox (instead of Internet Explorer) e.g. for the TechHindiSite Indic converters (which works better in newer versions of MS Office)" Level="4" AllowAdvertise="no">
+    <Feature Id="UseMozillaFirefox" Title="Use Mozilla Firefox" Description="Select this item if you want the SILConverters to use Firefox (instead of Internet Explorer) e.g. for the TechHindiSite Indic converters (which works better in newer versions of MS Office)" Level="3" AllowAdvertise="no">
       <MergeRef Id="EcFirefox"/>
     </Feature>
   </Fragment>
