@@ -56,5 +56,5 @@ jobs:
       if: ${{ success() && matrix.build_configuration == 'Release' }}
       uses: actions/upload-artifact@v2.2.4
       with: 
-        name: silconverters-installers.latest
-        path: output/${{matrix.platform}}/*.exe
+        name: silconverters-installers.${{matrix.platform}}.latest
+        path: output/${{matrix.platform}}/SetupSILConverters_${{matrix.platform}}.${{github.run_number}}.exe
