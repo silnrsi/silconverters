@@ -33,11 +33,10 @@ jobs:
     - name: Fetch nuget dependecies
       run: nuget restore "${{env.SOLUTION_FILE_PATH}}"
 
-    - name: Set compiler environment (needed for tlbexp.exe)
-      shell: cmd
-      run: |
-          call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\Tools\VsDevCmd.bat" -no_logo -arch=${{ matrix.platform }}
-
+    - uses: ilammy/msvc-dev-cmd@v1
+      with:
+        arch: ${{ matrix.platform }}
+        
     - name: Build
       working-directory: ${{env.GITHUB_WORKSPACE}}
       # Add additional options to the MSBuild command line here (like platform or verbosity level).
