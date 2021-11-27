@@ -48,17 +48,13 @@ jobs:
     #- name: Test
     #  run: output/Win32/${{matrix.build_configuration}}/RunTests.exe
 
-    - name: rename installers
+    - name: rename installer
       if: ${{ success() && matrix.build_configuration == 'Release' }}
-      run: |
-        cp "output/x86/SetupSILConverters_x86.exe" "output/x86/SetupSILConverters_x86.${{github.run_number}}.exe"
-        cp "output/x64/SetupSILConverters_x64.exe" "output/x64/SetupSILConverters_x64.${{github.run_number}}.exe"
+      run: cp "output/${{matrix.platform}}/SetupSILConverters_${{matrix.platform}}.exe" "output/${{matrix.platform}}/SetupSILConverters_${{matrix.platform}}.${{github.run_number}}.exe"
 
     - name: publish artifact
       if: ${{ success() && matrix.build_configuration == 'Release' }}
       uses: actions/upload-artifact@v2.2.4
       with: 
         name: silconverters-installers.latest
-        path: |
-          output/x86/*.exe
-          output/x64/*.exe
+        path: output/${{matrix.platform}}/*.exe
