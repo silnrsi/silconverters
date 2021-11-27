@@ -218,7 +218,7 @@
     <PreBuildEvent>
     </PreBuildEvent>
     <PostBuildEvent>call "$(DevEnvDir)..\Tools\VsDevCmd.bat"
-tlbexp.exe "$(TargetFileName)" /win64 /out:"$(TargetName).tlb"
+tlbexp.exe "$(TargetFileName)" /out:"$(TargetName).tlb"
 xcopy /y "$(TargetDir)*.*" $(SolutionDir)output\$(PlatformName)\$(ConfigurationName)</PostBuildEvent>
   </PropertyGroup>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
