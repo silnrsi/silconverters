@@ -377,6 +377,13 @@ Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "SetupSILConverters", "Insta
 		{348850E8-5C84-4C77-BA1A-220C6E48FA6E} = {348850E8-5C84-4C77-BA1A-220C6E48FA6E}
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{98EE519A-E7DE-42C2-8856-727E5CE8766C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{C22EEAE5-C719-4664-85FA-B933344EB109}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\build.yml = .github\workflows\build.yml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -908,6 +915,7 @@ Global
 		{69CB9E94-E875-4B29-AB69-3BBFE8D467E8} = {BD599637-791D-41A6-9B5F-233032353630}
 		{583CF928-C5BE-4518-9B5C-A8A7745BEE37} = {84121E67-E37B-4C69-810B-E3DC1C06F54A}
 		{496C70F6-D12A-42C9-A892-ACE1C6981F52} = {BD599637-791D-41A6-9B5F-233032353630}
+		{C22EEAE5-C719-4664-85FA-B933344EB109} = {98EE519A-E7DE-42C2-8856-727E5CE8766C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0BE575CA-E157-41CC-B2F3-97DC5D97E61C}
