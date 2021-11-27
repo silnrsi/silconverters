@@ -4,13 +4,13 @@
      xmlns:util="http://schemas.microsoft.com/wix/UtilExtension"
      xmlns:netfx="http://schemas.microsoft.com/wix/NetFxExtension">
 
-  <Bundle 	Name='$(var.ApplicationName) $(var.TruncatedVersion)'
-			      Version='$(var.VersionNumber)'
-			      UpgradeCode='$(var.UpgradeCode)'
-			      Tag='$(var.ApplicationName)'
-			      IconSourceFile='..\SEC Setup\Installer.ico'
-			      Copyright='Copyright © $(var.Year), $(var.Manufacturer)'
-			      Manufacturer='$(var.Manufacturer)'>
+  <Bundle     Name='$(var.ApplicationName) $(var.TruncatedVersion)'
+                  Version='$(var.VersionNumber)'
+                  UpgradeCode='$(var.UpgradeCode)'
+                  Tag='$(var.ApplicationName)'
+                  IconSourceFile='..\SEC Setup\Installer.ico'
+                  Copyright='Copyright © $(var.Year), $(var.Manufacturer)'
+                  Manufacturer='$(var.Manufacturer)'>
 
     <bal:Condition Message="XP is no longer supported."> (VersionNT &gt;= v6.0) </bal:Condition>
     <BootstrapperApplicationRef Id="WixStandardBootstrapperApplication.RtfLicense">
@@ -36,21 +36,21 @@
   <?else ?>
   <?define msiFilename = "SetupSILConverters.msi" ?>
   <?endif ?>
-  
+
   <Fragment Id='AppFragment'>
     <PackageGroup Id='AppPackageGroup'>
       <MsiPackage Id='AppMsiPackage'
-					DisplayName='$(var.ApplicationName) $(var.VersionNumber)'
-					DisplayInternalUI='yes'
-					ForcePerMachine='yes'
-					InstallCondition='1'
-					SourceFile='$(var.SolutionDir)output\$(var.Platform)\$(var.msiFilename)'
-					Visible='yes'
-					Vital='yes'>
+                    DisplayName='$(var.ApplicationName) $(var.VersionNumber)'
+                    DisplayInternalUI='yes'
+                    ForcePerMachine='yes'
+                    InstallCondition='1'
+                    SourceFile='$(var.SolutionDir)output\$(var.Platform)\$(var.msiFilename)'
+                    Visible='yes'
+                    Vital='yes'>
 
       </MsiPackage>
     </PackageGroup>
-    
+
   </Fragment>
 
   <!-- .NET 4.8 -->
@@ -61,25 +61,25 @@
     <util:RegistrySearch Root="HKLM" Key="SOFTWARE\Microsoft\Net Framework Setup\NDP\v4\Full" Value="Release" Variable="Netfx4FullRelease" />
     <util:RegistrySearch Root="HKLM" Key="SOFTWARE\Microsoft\Net Framework Setup\NDP\v4\Full" Value="Release" Variable="Netfx4x64FullRelease" Win64="yes" />
     <WixVariable Id="NetFx48OrLaterDetectCondition" Overridable="yes"
-		  Value="(Netfx4FullRelease &gt;= $(var.NetFx48MinRelease)) AND (NOT VersionNT64 OR (Netfx4x64FullRelease &gt;= $(var.NetFx48MinRelease)))" />
+          Value="(Netfx4FullRelease &gt;= $(var.NetFx48MinRelease)) AND (NOT VersionNT64 OR (Netfx4x64FullRelease &gt;= $(var.NetFx48MinRelease)))" />
     <WixVariable Id="NetFx48WebInstallCondition" Value="" Overridable="yes" />
     <WixVariable Id="NetFx48WebPackageDirectory" Value="redist\" Overridable="yes" />
 
     <PackageGroup Id="NetFx48Web">
       <ExePackage Id="NetFx48Web"
-			  InstallCommand="/q /norestart /ChainingPackage &quot;[WixBundleName]&quot; /log &quot;[NetFx48FullLog].html&quot;"
-			  RepairCommand="/q /norestart /repair /ChainingPackage &quot;[WixBundleName]&quot; /log &quot;[NetFx48FullLog].html&quot;"
-			  UninstallCommand="/uninstall /q /norestart /ChainingPackage &quot;[WixBundleName]&quot; /log &quot;[NetFx48FullLog].html&quot;"
-			  PerMachine="yes"
-			  DetectCondition="!(wix.NetFx48OrLaterDetectCondition)"
-			  InstallCondition="!(wix.NetFx48WebInstallCondition)"
-			  Vital="yes"
-			  Permanent="yes"
-			  Protocol="netfx4"
-			  DownloadUrl="$(var.NetFx48WebLink)"
-			  LogPathVariable="NetFx48FullLog"
-			  Compressed="no"
-			  Name="!(wix.NetFx48WebPackageDirectory)ndp48-web.exe">
+              InstallCommand="/q /norestart /ChainingPackage &quot;[WixBundleName]&quot; /log &quot;[NetFx48FullLog].html&quot;"
+              RepairCommand="/q /norestart /repair /ChainingPackage &quot;[WixBundleName]&quot; /log &quot;[NetFx48FullLog].html&quot;"
+              UninstallCommand="/uninstall /q /norestart /ChainingPackage &quot;[WixBundleName]&quot; /log &quot;[NetFx48FullLog].html&quot;"
+              PerMachine="yes"
+              DetectCondition="!(wix.NetFx48OrLaterDetectCondition)"
+              InstallCondition="!(wix.NetFx48WebInstallCondition)"
+              Vital="yes"
+              Permanent="yes"
+              Protocol="netfx4"
+              DownloadUrl="$(var.NetFx48WebLink)"
+              LogPathVariable="NetFx48FullLog"
+              Compressed="no"
+              Name="!(wix.NetFx48WebPackageDirectory)ndp48-web.exe">
         <RemotePayload
           Description="Microsoft .NET Framework 4.8 Setup"
           Hash="4181398AA1FD5190155AC3A388434E5F7EA0B667"

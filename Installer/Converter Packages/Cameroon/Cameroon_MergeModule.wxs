@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-	<Module Id="Cameroon40MergeModule" Language="1033" Version="4.0.0.0">
-		<Package Id="1812191f-e74f-4b67-960c-bfca75806f8d" Comments="Encoding converters used in Cameroon" Description="Encoding converters for Cameroon encoding" Manufacturer="SIL International" Keywords="SILConverters; Encoding Conversion; CamCam; EncConverters" InstallerVersion="500" />
+  <Module Id="Cameroon40MergeModule" Language="1033" Version="4.0.0.0">
+    <Package Id="1812191f-e74f-4b67-960c-bfca75806f8d" Comments="Encoding converters used in Cameroon" Description="Encoding converters for Cameroon encoding" Manufacturer="SIL International" Keywords="SILConverters; Encoding Conversion; CamCam; EncConverters" InstallerVersion="500" />
 
-		<Directory Id="TARGETDIR" Name="SourceDir">
-            <Directory Id="CommonAppDataFolder" SourceName="AppData">
-                <Directory Id="SIL" Name="SIL">
-                    <Directory Id="SILConverters40" Name="SILConverters40">
-                        <Directory Id="MapsTables" Name="MapsTables">
-                            <Component Id="Cameroon2Unicode.tec.vbs" Guid="3301865a-c130-4970-9982-428ad32aa5a5">
-                                <File Id="Cameroon2Unicode.tec.vbs" Name="Cameroon2Unicode.tec.vbs" KeyPath="yes" Source="MapsTables\Cameroon2Unicode.tec.vbs" />
-                            </Component>
-                            <Component Id="Cameroon.xml" Guid="0080a1bd-c848-4a68-9766-278c53ca4773">
-                                <File Id="Cameroon.xml" Name="Cameroon.xml" KeyPath="yes" Source="MapsTables\Cameroon.xml" />
-                            </Component>
-                            <Component Id="Cameroon2Unicode2007.map" Guid="e55f8dc6-71bc-48da-9bee-06fecb08f2e3">
-                                <File Id="Cameroon2Unicode2007.map" Name="Cameroon2Unicode2007.map" KeyPath="yes" Source="MapsTables\Cameroon2Unicode2007.map" />
-                            </Component>
-                            <Component Id="Cameroon2Unicode2007.tec" Guid="4a7c1e9f-7545-4eb0-beec-81b26b447606">
-                                <File Id="Cameroon2Unicode2007.tec" Name="Cameroon2Unicode2007.tec" KeyPath="yes" Source="MapsTables\Cameroon2Unicode2007.tec" />
-                            </Component>
-                        </Directory>
-                    </Directory>
-                </Directory>
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="CommonAppDataFolder" SourceName="AppData">
+        <Directory Id="SIL" Name="SIL">
+          <Directory Id="SILConverters40" Name="SILConverters40">
+            <Directory Id="MapsTables" Name="MapsTables">
+              <Component Id="Cameroon2Unicode.tec.vbs" Guid="3301865a-c130-4970-9982-428ad32aa5a5">
+                <File Id="Cameroon2Unicode.tec.vbs" Name="Cameroon2Unicode.tec.vbs" KeyPath="yes" Source="MapsTables\Cameroon2Unicode.tec.vbs" />
+              </Component>
+              <Component Id="Cameroon.xml" Guid="0080a1bd-c848-4a68-9766-278c53ca4773">
+                <File Id="Cameroon.xml" Name="Cameroon.xml" KeyPath="yes" Source="MapsTables\Cameroon.xml" />
+              </Component>
+              <Component Id="Cameroon2Unicode2007.map" Guid="e55f8dc6-71bc-48da-9bee-06fecb08f2e3">
+                <File Id="Cameroon2Unicode2007.map" Name="Cameroon2Unicode2007.map" KeyPath="yes" Source="MapsTables\Cameroon2Unicode2007.map" />
+              </Component>
+              <Component Id="Cameroon2Unicode2007.tec" Guid="4a7c1e9f-7545-4eb0-beec-81b26b447606">
+                <File Id="Cameroon2Unicode2007.tec" Name="Cameroon2Unicode2007.tec" KeyPath="yes" Source="MapsTables\Cameroon2Unicode2007.tec" />
+              </Component>
             </Directory>
+          </Directory>
         </Directory>
-	</Module>
+      </Directory>
+    </Directory>
+  </Module>
 </Wix>

@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-	<Module Id="PNG40MergeModule" Language="1033" Version="4.0.0.0">
-		<Package Id="e172c810-6152-4feb-b1ea-73564d066276" Comments="Converters used in Papua New Guinea" Description="Converters used in PNG" Keywords="SILConverters; Encoding Conversion; Transliteration; EncConverters" Manufacturer="SIL International" InstallerVersion="500" />
+  <Module Id="PNG40MergeModule" Language="1033" Version="4.0.0.0">
+    <Package Id="e172c810-6152-4feb-b1ea-73564d066276" Comments="Converters used in Papua New Guinea" Description="Converters used in PNG" Keywords="SILConverters; Encoding Conversion; Transliteration; EncConverters" Manufacturer="SIL International" InstallerVersion="500" />
 
-		<Directory Id="TARGETDIR" Name="SourceDir">
-            <Directory Id="CommonAppDataFolder" SourceName="AppData">
-                <Directory Id="SIL" Name="SIL">
-                    <Directory Id="SILConverters40" Name="SILConverters40">
-                        <Directory Id="MapsTables" Name="MapsTables">
-                            <Component Id="SIL_PNG.map" Guid="75aed886-2435-4d1a-861c-ab9d95ea45b3">
-                                <File Id="SIL_PNG.map" Name="SIL-PNG.map" KeyPath="yes" Source="MapsTables\SIL-PNG.map" />
-                            </Component>
-                            <Component Id="SIL_PNG.tec" Guid="85c5b81e-24c2-4b9f-9dcb-67b4a5ab5962">
-                                <File Id="SIL_PNG.tec" Name="SIL-PNG.tec" KeyPath="yes" Source="MapsTables\SIL-PNG.tec" />
-                            </Component>
-                            <Component Id="PNG.xml" Guid="0fab7d8a-d3db-492c-9475-6daf5456285d">
-                                <File Id="PNG.xml" Name="PNG.xml" KeyPath="yes" Source="MapsTables\PNG.xml" />
-                            </Component>
-                            <Component Id="pngsil.tec.vbs" Guid="8152a4d4-0474-45d9-ae3e-2e17f9282a51">
-                                <File Id="pngsil.tec.vbs" Name="pngsil.tec.vbs" KeyPath="yes" Source="MapsTables\pngsil.tec.vbs" />
-                            </Component>                            
-                        </Directory>
-                    </Directory>
-                </Directory>
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="CommonAppDataFolder" SourceName="AppData">
+        <Directory Id="SIL" Name="SIL">
+          <Directory Id="SILConverters40" Name="SILConverters40">
+            <Directory Id="MapsTables" Name="MapsTables">
+              <Component Id="SIL_PNG.map" Guid="75aed886-2435-4d1a-861c-ab9d95ea45b3">
+                <File Id="SIL_PNG.map" Name="SIL-PNG.map" KeyPath="yes" Source="MapsTables\SIL-PNG.map" />
+              </Component>
+              <Component Id="SIL_PNG.tec" Guid="85c5b81e-24c2-4b9f-9dcb-67b4a5ab5962">
+                <File Id="SIL_PNG.tec" Name="SIL-PNG.tec" KeyPath="yes" Source="MapsTables\SIL-PNG.tec" />
+              </Component>
+              <Component Id="PNG.xml" Guid="0fab7d8a-d3db-492c-9475-6daf5456285d">
+                <File Id="PNG.xml" Name="PNG.xml" KeyPath="yes" Source="MapsTables\PNG.xml" />
+              </Component>
+              <Component Id="pngsil.tec.vbs" Guid="8152a4d4-0474-45d9-ae3e-2e17f9282a51">
+                <File Id="pngsil.tec.vbs" Name="pngsil.tec.vbs" KeyPath="yes" Source="MapsTables\pngsil.tec.vbs" />
+              </Component>
             </Directory>
+          </Directory>
         </Directory>
-	</Module>
+      </Directory>
+    </Directory>
+  </Module>
 </Wix>

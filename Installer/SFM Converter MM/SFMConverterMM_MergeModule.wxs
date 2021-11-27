@@ -1,26 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-	<Module Id="SFM_Converter_MM" Language="1033" Version="4.0.0.0">
-		<Package Id="3e3aa61d-6d0a-4e0d-8b7b-d059df36b5c5" Manufacturer="SIL International" Comments="Merge module containing the Bulk SFM Converter" 
-             Description="Convert SFM documents using SILConverters" InstallerVersion="500" Keywords="SFM, TECkit, Encoding Conversion" />
+  <Module Id="SFM_Converter_MM" Language="1033" Version="4.0.0.0">
+    <Package Id="3e3aa61d-6d0a-4e0d-8b7b-d059df36b5c5" Manufacturer="SIL International" Comments="Merge module containing the Bulk SFM Converter"
+         Description="Convert SFM documents using SILConverters" InstallerVersion="500" Keywords="SFM, TECkit, Encoding Conversion" />
 
-		<Directory Id="TARGETDIR" Name="SourceDir">
-			<Directory Id="MergeRedirectFolder">
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="MergeRedirectFolder">
 
-                <Component Id="SFMConv.exe" Guid="{4FA70357-2868-4638-A24A-67E11AC529F0}">
-                    <File Id="SFMConv.exe" Name="SFMConv.exe" KeyPath="yes" Assembly=".net" AssemblyManifest="SFMConv.exe" AssemblyApplication="SFMConv.exe" 
-                          Source="..\..\output\x86\release\SFMConv.exe" />
-                    <Shortcut Id="SFMConv.exe" Directory="SILConverters" Name="Bulk SFM Converter" Description="Convert your SFM documents with converters in the system repository" IconIndex="0" Show="normal" Target="[#SFMConv.exe]" WorkingDirectory="MergeRedirectFolder" Advertise="no" />
-                </Component>
+        <Component Id="SFMConv.exe" Guid="{4FA70357-2868-4638-A24A-67E11AC529F0}">
+          <File Id="SFMConv.exe" Name="SFMConv.exe" KeyPath="yes" Assembly=".net" AssemblyManifest="SFMConv.exe" AssemblyApplication="SFMConv.exe"
+                Source="..\..\output\x86\release\SFMConv.exe" />
+          <Shortcut Id="SFMConv.exe" Directory="SILConverters" Name="Bulk SFM Converter" Description="Convert your SFM documents with converters in the system repository" IconIndex="0" Show="normal" Target="[#SFMConv.exe]" WorkingDirectory="MergeRedirectFolder" Advertise="no" />
+        </Component>
 
-            </Directory>
+      </Directory>
 
-            <Directory Id="StartMenuFolder" SourceName="Start Menu">
-                <Directory Id="ProgramMenuFolder" SourceName="Programs">
-                    <Directory Id="SILConverters" Name="SIL Converters" />
-                </Directory>
-            </Directory>
-
+      <Directory Id="StartMenuFolder" SourceName="Start Menu">
+        <Directory Id="ProgramMenuFolder" SourceName="Programs">
+          <Directory Id="SILConverters" Name="SIL Converters" />
         </Directory>
-	</Module>
+      </Directory>
+
+    </Directory>
+  </Module>
 </Wix>
