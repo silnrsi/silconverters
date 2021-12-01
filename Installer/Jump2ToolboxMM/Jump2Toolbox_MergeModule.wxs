@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-	<Module Id="Jump2ToolboxMM" Language="1033" Version="4.0.0.0">
-		<Package Id="ab272286-9bbb-481a-99ae-65dfaaf8d04c" Comments="COM helper for jumping to Toolbox" Description="Jump to Toolbox" InstallerVersion="200" Keywords="Toolbox; Jump Focus" Languages="1033" Manufacturer="SIL" />
+  <Module Id="Jump2ToolboxMM" Language="1033" Version="4.0.0.0">
+    <Package Id="ab272286-9bbb-481a-99ae-65dfaaf8d04c" Comments="COM helper for jumping to Toolbox" Description="Jump to Toolbox" InstallerVersion="200" Keywords="Toolbox; Jump Focus" Languages="1033" Manufacturer="SIL" />
 
-		<Directory Id="TARGETDIR" Name="SourceDir">
-			<Directory Id="MergeRedirectFolder">
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="MergeRedirectFolder">
 
-                <Component Id="Jump2Toolbox.dll" Guid="3B56025C-60F5-4AD5-9D9D-5D9EADA6C983">
-                    <File Id="Jump2Toolbox.dll" Name="Jump2Toolbox.dll" KeyPath="yes" Source="..\..\output\x86\release\Jump2Toolbox.dll">
-                        <TypeLib Id="{7CF02E92-A3FB-40D3-AE72-E87E0926680B}" Description="Jump2Toolbox 1.0 Type Library" HelpDirectory="MergeRedirectFolder" Language="0" MajorVersion="1" MinorVersion="0">
-                            <AppId Description="Jump2Toolbox" Id="{7CF02E92-A3FB-40D3-AE72-E87E0926680B}">
-                                <Class Id="{0429E35F-45C6-4C5D-9B02-E32EF5DE36C1}" Context="InprocServer32" Description="CToolbox Object" ThreadingModel="apartment" Programmable="yes">
-                                    <ProgId Id="Toolbox.Jump.2" Description="CToolbox Object">
-                                        <ProgId Id="Toolbox.Jump" Description="CToolbox Object" />
-                                    </ProgId>
-                                </Class>
-                            </AppId>
-                            <Interface Id="{ABF112BA-2EB8-4517-A2AF-4DAEC4EB5C1F}" Name="IToolbox" ProxyStubClassId32="{00020424-0000-0000-C000-000000000046}" />
-                        </TypeLib>
-                    </File>
-                    <RegistryValue Root="HKCR" Key="AppID\Jump2Toolbox.DLL" Name="AppID" Value="{7CF02E92-A3FB-40D3-AE72-E87E0926680B}" Type="string" Action="write" />
-                </Component>
+        <Component Id="Jump2Toolbox.dll" Guid="3B56025C-60F5-4AD5-9D9D-5D9EADA6C983">
+          <File Id="Jump2Toolbox.dll" Name="Jump2Toolbox.dll" KeyPath="yes" Source="..\..\output\x86\release\Jump2Toolbox.dll">
+            <TypeLib Id="{7CF02E92-A3FB-40D3-AE72-E87E0926680B}" Description="Jump2Toolbox 1.0 Type Library" HelpDirectory="MergeRedirectFolder" Language="0" MajorVersion="1" MinorVersion="0">
+              <AppId Description="Jump2Toolbox" Id="{7CF02E92-A3FB-40D3-AE72-E87E0926680B}">
+                <Class Id="{0429E35F-45C6-4C5D-9B02-E32EF5DE36C1}" Context="InprocServer32" Description="CToolbox Object" ThreadingModel="apartment" Programmable="yes">
+                  <ProgId Id="Toolbox.Jump.2" Description="CToolbox Object">
+                    <ProgId Id="Toolbox.Jump" Description="CToolbox Object" />
+                  </ProgId>
+                </Class>
+              </AppId>
+              <Interface Id="{ABF112BA-2EB8-4517-A2AF-4DAEC4EB5C1F}" Name="IToolbox" ProxyStubClassId32="{00020424-0000-0000-C000-000000000046}" />
+            </TypeLib>
+          </File>
+          <RegistryValue Root="HKCR" Key="AppID\Jump2Toolbox.DLL" Name="AppID" Value="{7CF02E92-A3FB-40D3-AE72-E87E0926680B}" Type="string" Action="write" />
+        </Component>
 
-            </Directory>
-		</Directory>
-	</Module>
+      </Directory>
+    </Directory>
+  </Module>
 </Wix>

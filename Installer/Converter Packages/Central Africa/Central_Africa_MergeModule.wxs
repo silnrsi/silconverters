@@ -1,32 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-	<Module Id="Central_Africa40MergeModule" Language="1033" Version="4.0.0.0">
-		<Package Id="b086580c-ffd8-4cd3-acff-08b81775ccfc" Comments="Encoding converters used in Central Africa" Description="Encoding converters for Central Africa" Keywords="SILConverters; Encoding Conversion; Central Africa; EncConverters" Manufacturer="SIL International" InstallerVersion="500" />
+  <Module Id="Central_Africa40MergeModule" Language="1033" Version="4.0.0.0">
+    <Package Id="b086580c-ffd8-4cd3-acff-08b81775ccfc" Comments="Encoding converters used in Central Africa" Description="Encoding converters for Central Africa" Keywords="SILConverters; Encoding Conversion; Central Africa; EncConverters" Manufacturer="SIL International" InstallerVersion="500" />
 
-		<Directory Id="TARGETDIR" Name="SourceDir">
-            <Directory Id="CommonAppDataFolder" SourceName="AppData">
-                <Directory Id="SIL" Name="SIL">
-                    <Directory Id="SILConverters40" Name="SILConverters40">
-                        <Directory Id="MapsTables" Name="MapsTables">
-                            <Component Id="MarcelNgbaka.tec" Guid="2e651a18-a738-493c-ad5d-61468edf836c">
-                                <File Id="MarcelNgbaka.tec" Name="MarcelNgbaka.tec" KeyPath="yes" Source="MapsTables\MarcelNgbaka.tec" />
-                            </Component>
-                            <Component Id="angb4.map" Guid="305e0e7b-eeb9-4d38-aa75-271294ebee02">
-                                <File Id="angb4.map" Name="angb4.map" KeyPath="yes" Source="MapsTables\angb4.map" />
-                            </Component>
-                            <Component Id="angb4.tec" Guid="c1ccefaa-2789-43cc-81b9-3ba2759bd8d9">
-                                <File Id="angb4.tec" Name="angb4.tec" KeyPath="yes" Source="MapsTables\angb4.tec" />
-                            </Component>
-                            <Component Id="CAfrica.xml" Guid="50e2cf65-5a7b-47bc-910b-3c787cb4c8f4">
-                                <File Id="CAfrica.xml" Name="CAfrica.xml" KeyPath="yes" Source="MapsTables\CAfrica.xml" />
-                            </Component>
-                            <Component Id="MarcelNgbaka.map" Guid="9ad1cf40-bbc2-4363-ba3e-f3c7e434f3e8">
-                                <File Id="MarcelNgbaka.map" Name="MarcelNgbaka.map" KeyPath="yes" Source="MapsTables\MarcelNgbaka.map" />
-                            </Component>
-                        </Directory>
-                    </Directory>
-                </Directory>
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="CommonAppDataFolder" SourceName="AppData">
+        <Directory Id="SIL" Name="SIL">
+          <Directory Id="SILConverters40" Name="SILConverters40">
+            <Directory Id="MapsTables" Name="MapsTables">
+              <Component Id="MarcelNgbaka.tec" Guid="2e651a18-a738-493c-ad5d-61468edf836c">
+                <File Id="MarcelNgbaka.tec" Name="MarcelNgbaka.tec" KeyPath="yes" Source="MapsTables\MarcelNgbaka.tec" />
+              </Component>
+              <Component Id="angb4.map" Guid="305e0e7b-eeb9-4d38-aa75-271294ebee02">
+                <File Id="angb4.map" Name="angb4.map" KeyPath="yes" Source="MapsTables\angb4.map" />
+              </Component>
+              <Component Id="angb4.tec" Guid="c1ccefaa-2789-43cc-81b9-3ba2759bd8d9">
+                <File Id="angb4.tec" Name="angb4.tec" KeyPath="yes" Source="MapsTables\angb4.tec" />
+              </Component>
+              <Component Id="CAfrica.xml" Guid="50e2cf65-5a7b-47bc-910b-3c787cb4c8f4">
+                <File Id="CAfrica.xml" Name="CAfrica.xml" KeyPath="yes" Source="MapsTables\CAfrica.xml" />
+              </Component>
+              <Component Id="MarcelNgbaka.map" Guid="9ad1cf40-bbc2-4363-ba3e-f3c7e434f3e8">
+                <File Id="MarcelNgbaka.map" Name="MarcelNgbaka.map" KeyPath="yes" Source="MapsTables\MarcelNgbaka.map" />
+              </Component>
             </Directory>
+          </Directory>
         </Directory>
-	</Module>
+      </Directory>
+    </Directory>
+  </Module>
 </Wix>

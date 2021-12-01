@@ -1,75 +1,75 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-	<Module Id="SagIndic_MergeModule" Language="1033" Version="4.0.0.0">
-		<Package Id="f24ceb12-8d52-4974-859e-ba23da5c6366" Comments="Converters/transliterators used in South Asia Group" Description="Converters/transliterators used in South Asia Group" Manufacturer="SIL International" Keywords="SILConverters; Encoding Conversion; Transliteration; EncConverters" InstallerVersion="500" />
+  <Module Id="SagIndic_MergeModule" Language="1033" Version="4.0.0.0">
+    <Package Id="f24ceb12-8d52-4974-859e-ba23da5c6366" Comments="Converters/transliterators used in South Asia Group" Description="Converters/transliterators used in South Asia Group" Manufacturer="SIL International" Keywords="SILConverters; Encoding Conversion; Transliteration; EncConverters" InstallerVersion="500" />
 
-        <Directory Id="TARGETDIR" Name="SourceDir">
-            <Directory Id="CommonAppDataFolder" SourceName="AppData">
-                <Directory Id="SIL" Name="SIL">
-                    <Directory Id="SILConverters40" Name="SILConverters40">
-                        <Directory Id="MapsTables" Name="MapsTables">
-                            <Component Id="Ori2Uni_AkrutiOriSarala99.map" Guid="e3e8db4c-da73-4ada-a051-49b1cd6b349e">
-                                <File Id="Ori2Uni_AkrutiOriSarala99.map" Name="Ori2Uni_AkrutiOriSarala99.map" KeyPath="yes" Source="MapsTables\Ori2Uni_AkrutiOriSarala99.map" />
-                            </Component>
-                            <Component Id="SAGIPA2Uni.tec.vbs" Guid="76abfe1e-9e07-4a41-86cc-d4aaf2fe7e43">
-                                <File Id="SAGIPA2Uni.tec.vbs" Name="SAGIPA2Uni.tec.vbs" KeyPath="yes" Source="MapsTables\SAGIPA2Uni.tec.vbs" />
-                            </Component>
-                            <Component Id="SAGIndic.xml" Guid="1abbf15b-3210-4ab6-a838-26fdeaabcb75">
-                                <File Id="SAGIndic.xml" Name="SAGIndic.xml" KeyPath="yes" Source="MapsTables\SAGIndic.xml" />
-                            </Component>
-                            <Component Id="SAGIPS2Uni.tec" Guid="93d5972c-a807-48ea-bd9e-5a87fad83b66">
-                                <File Id="SAGIPS2Uni.tec" Name="SAGIPS2Uni.tec" KeyPath="yes" Source="MapsTables\SAGIPS2Uni.tec" />
-                            </Component>
-                            <Component Id="WinDTS.tec" Guid="26a7d3eb-c4bd-4d7c-b7ac-6f4b8bba8084">
-                                <File Id="WinDTS.tec" Name="WinDTS.tec" KeyPath="yes" Source="MapsTables\WinDTS.tec" />
-                            </Component>
-                            <Component Id="annapurna.tec.vbs" Guid="27229490-d01c-479c-a7d7-a1d8f95bc930">
-                                <File Id="annapurna.tec.vbs" Name="annapurna.tec.vbs" KeyPath="yes" Source="MapsTables\annapurna.tec.vbs" />
-                            </Component>
-                            <Component Id="Annapurna.map" Guid="2aeeb93d-2b2e-4984-8325-6ab4fc7596f2">
-                                <File Id="Annapurna.map" Name="Annapurna.map" KeyPath="yes" Source="MapsTables\Annapurna.map" />
-                            </Component>
-                            <Component Id="SAGIPS2Uni.map" Guid="520c7bd3-047b-4b9e-8de8-70e59c748fe5">
-                                <File Id="SAGIPS2Uni.map" Name="SAGIPS2Uni.map" KeyPath="yes" Source="MapsTables\SAGIPS2Uni.map" />
-                            </Component>
-                            <Component Id="Ori2Uni_AkrutiOriSarala99.tec.vbs" Guid="f20ce3e2-4eb5-491c-8526-468652ea671c">
-                                <File Id="Ori2Uni_AkrutiOriSarala99.tec.vbs" Name="Ori2Uni_AkrutiOriSarala99.tec.vbs" KeyPath="yes" Source="MapsTables\Ori2Uni_AkrutiOriSarala99.tec.vbs" />
-                            </Component>
-                            <Component Id="WinDTS.MAP" Guid="35b54d4a-e7de-482f-82f2-d6a4a3101bc0">
-                                <File Id="WinDTS.MAP" Name="WinDTS.MAP" KeyPath="yes" Source="MapsTables\WinDTS.MAP" />
-                            </Component>
-                            <Component Id="TRom2Uni.map" Guid="56f62a40-7983-46f2-b3b9-916a8afacc77">
-                                <File Id="TRom2Uni.map" Name="TRom2Uni.map" KeyPath="yes" Source="MapsTables\TRom2Uni.map" />
-                            </Component>
-                            <Component Id="Ori2Uni_AkrutiOriSarala99.tec" Guid="8f1a853f-d897-4442-9b58-83e7b521ca3a">
-                                <File Id="Ori2Uni_AkrutiOriSarala99.tec" Name="Ori2Uni_AkrutiOriSarala99.tec" KeyPath="yes" Source="MapsTables\Ori2Uni_AkrutiOriSarala99.tec" />
-                            </Component>
-                            <Component Id="SAGIPS2Uni.tec.vbs" Guid="8215b967-58c7-4379-809f-963a1ac45fc2">
-                                <File Id="SAGIPS2Uni.tec.vbs" Name="SAGIPS2Uni.tec.vbs" KeyPath="yes" Source="MapsTables\SAGIPS2Uni.tec.vbs" />
-                            </Component>
-                            <Component Id="annapurna.tec" Guid="38be6759-3949-4236-8d98-cb433f98e8f2">
-                                <File Id="annapurna.tec" Name="annapurna.tec" KeyPath="yes" Source="MapsTables\annapurna.tec" />
-                            </Component>
-                            <Component Id="ann2unicode.cct" Guid="3e2fba75-989d-41f9-97a7-04c42e3700ee">
-                                <File Id="ann2unicode.cct" Name="ann2unicode.cct" KeyPath="yes" Source="MapsTables\ann2unicode.cct" />
-                            </Component>
-                            <Component Id="TRom2Uni.tec.vbs" Guid="02b56faf-c654-44a9-a988-18c693c1a23b">
-                                <File Id="TRom2Uni.tec.vbs" Name="TRom2Uni.tec.vbs" KeyPath="yes" Source="MapsTables\TRom2Uni.tec.vbs" />
-                            </Component>
-                            <Component Id="SAGIPA2Uni.tec" Guid="3e218363-6c76-4f90-9acf-b533cd3436a0">
-                                <File Id="SAGIPA2Uni.tec" Name="SAGIPA2Uni.tec" KeyPath="yes" Source="MapsTables\SAGIPA2Uni.tec" />
-                            </Component>
-                            <Component Id="TRom2Uni.tec" Guid="1d7e7a9f-358e-463e-bb9f-1f97d7761fd7">
-                                <File Id="TRom2Uni.tec" Name="TRom2Uni.tec" KeyPath="yes" Source="MapsTables\TRom2Uni.tec" />
-                            </Component>
-                            <Component Id="SAGIPA2Uni.map" Guid="2505f40a-a50d-4c9b-a0c5-c9e405ad9f1a">
-                                <File Id="SAGIPA2Uni.map" Name="SAGIPA2Uni.map" KeyPath="yes" Source="MapsTables\SAGIPA2Uni.map" />
-                            </Component>
-                        </Directory>
-                    </Directory>
-                </Directory>
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="CommonAppDataFolder" SourceName="AppData">
+        <Directory Id="SIL" Name="SIL">
+          <Directory Id="SILConverters40" Name="SILConverters40">
+            <Directory Id="MapsTables" Name="MapsTables">
+              <Component Id="Ori2Uni_AkrutiOriSarala99.map" Guid="e3e8db4c-da73-4ada-a051-49b1cd6b349e">
+                <File Id="Ori2Uni_AkrutiOriSarala99.map" Name="Ori2Uni_AkrutiOriSarala99.map" KeyPath="yes" Source="MapsTables\Ori2Uni_AkrutiOriSarala99.map" />
+              </Component>
+              <Component Id="SAGIPA2Uni.tec.vbs" Guid="76abfe1e-9e07-4a41-86cc-d4aaf2fe7e43">
+                <File Id="SAGIPA2Uni.tec.vbs" Name="SAGIPA2Uni.tec.vbs" KeyPath="yes" Source="MapsTables\SAGIPA2Uni.tec.vbs" />
+              </Component>
+              <Component Id="SAGIndic.xml" Guid="1abbf15b-3210-4ab6-a838-26fdeaabcb75">
+                <File Id="SAGIndic.xml" Name="SAGIndic.xml" KeyPath="yes" Source="MapsTables\SAGIndic.xml" />
+              </Component>
+              <Component Id="SAGIPS2Uni.tec" Guid="93d5972c-a807-48ea-bd9e-5a87fad83b66">
+                <File Id="SAGIPS2Uni.tec" Name="SAGIPS2Uni.tec" KeyPath="yes" Source="MapsTables\SAGIPS2Uni.tec" />
+              </Component>
+              <Component Id="WinDTS.tec" Guid="26a7d3eb-c4bd-4d7c-b7ac-6f4b8bba8084">
+                <File Id="WinDTS.tec" Name="WinDTS.tec" KeyPath="yes" Source="MapsTables\WinDTS.tec" />
+              </Component>
+              <Component Id="annapurna.tec.vbs" Guid="27229490-d01c-479c-a7d7-a1d8f95bc930">
+                <File Id="annapurna.tec.vbs" Name="annapurna.tec.vbs" KeyPath="yes" Source="MapsTables\annapurna.tec.vbs" />
+              </Component>
+              <Component Id="Annapurna.map" Guid="2aeeb93d-2b2e-4984-8325-6ab4fc7596f2">
+                <File Id="Annapurna.map" Name="Annapurna.map" KeyPath="yes" Source="MapsTables\Annapurna.map" />
+              </Component>
+              <Component Id="SAGIPS2Uni.map" Guid="520c7bd3-047b-4b9e-8de8-70e59c748fe5">
+                <File Id="SAGIPS2Uni.map" Name="SAGIPS2Uni.map" KeyPath="yes" Source="MapsTables\SAGIPS2Uni.map" />
+              </Component>
+              <Component Id="Ori2Uni_AkrutiOriSarala99.tec.vbs" Guid="f20ce3e2-4eb5-491c-8526-468652ea671c">
+                <File Id="Ori2Uni_AkrutiOriSarala99.tec.vbs" Name="Ori2Uni_AkrutiOriSarala99.tec.vbs" KeyPath="yes" Source="MapsTables\Ori2Uni_AkrutiOriSarala99.tec.vbs" />
+              </Component>
+              <Component Id="WinDTS.MAP" Guid="35b54d4a-e7de-482f-82f2-d6a4a3101bc0">
+                <File Id="WinDTS.MAP" Name="WinDTS.MAP" KeyPath="yes" Source="MapsTables\WinDTS.MAP" />
+              </Component>
+              <Component Id="TRom2Uni.map" Guid="56f62a40-7983-46f2-b3b9-916a8afacc77">
+                <File Id="TRom2Uni.map" Name="TRom2Uni.map" KeyPath="yes" Source="MapsTables\TRom2Uni.map" />
+              </Component>
+              <Component Id="Ori2Uni_AkrutiOriSarala99.tec" Guid="8f1a853f-d897-4442-9b58-83e7b521ca3a">
+                <File Id="Ori2Uni_AkrutiOriSarala99.tec" Name="Ori2Uni_AkrutiOriSarala99.tec" KeyPath="yes" Source="MapsTables\Ori2Uni_AkrutiOriSarala99.tec" />
+              </Component>
+              <Component Id="SAGIPS2Uni.tec.vbs" Guid="8215b967-58c7-4379-809f-963a1ac45fc2">
+                <File Id="SAGIPS2Uni.tec.vbs" Name="SAGIPS2Uni.tec.vbs" KeyPath="yes" Source="MapsTables\SAGIPS2Uni.tec.vbs" />
+              </Component>
+              <Component Id="annapurna.tec" Guid="38be6759-3949-4236-8d98-cb433f98e8f2">
+                <File Id="annapurna.tec" Name="annapurna.tec" KeyPath="yes" Source="MapsTables\annapurna.tec" />
+              </Component>
+              <Component Id="ann2unicode.cct" Guid="3e2fba75-989d-41f9-97a7-04c42e3700ee">
+                <File Id="ann2unicode.cct" Name="ann2unicode.cct" KeyPath="yes" Source="MapsTables\ann2unicode.cct" />
+              </Component>
+              <Component Id="TRom2Uni.tec.vbs" Guid="02b56faf-c654-44a9-a988-18c693c1a23b">
+                <File Id="TRom2Uni.tec.vbs" Name="TRom2Uni.tec.vbs" KeyPath="yes" Source="MapsTables\TRom2Uni.tec.vbs" />
+              </Component>
+              <Component Id="SAGIPA2Uni.tec" Guid="3e218363-6c76-4f90-9acf-b533cd3436a0">
+                <File Id="SAGIPA2Uni.tec" Name="SAGIPA2Uni.tec" KeyPath="yes" Source="MapsTables\SAGIPA2Uni.tec" />
+              </Component>
+              <Component Id="TRom2Uni.tec" Guid="1d7e7a9f-358e-463e-bb9f-1f97d7761fd7">
+                <File Id="TRom2Uni.tec" Name="TRom2Uni.tec" KeyPath="yes" Source="MapsTables\TRom2Uni.tec" />
+              </Component>
+              <Component Id="SAGIPA2Uni.map" Guid="2505f40a-a50d-4c9b-a0c5-c9e405ad9f1a">
+                <File Id="SAGIPA2Uni.map" Name="SAGIPA2Uni.map" KeyPath="yes" Source="MapsTables\SAGIPA2Uni.map" />
+              </Component>
             </Directory>
+          </Directory>
         </Directory>
+      </Directory>
+    </Directory>
 
-    </Module>
+  </Module>
 </Wix>

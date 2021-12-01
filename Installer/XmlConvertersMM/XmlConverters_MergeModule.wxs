@@ -1,33 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-	<Module Id="XmlConvertersMM" Language="1033" Version="4.0.0.0">
-		<Package Id="4b5d716f-f3eb-4685-b562-def3ac079781" Comments="Merge module containing the XML Converters program" Description="Convert XML documents using SILConverters" 
-             InstallerVersion="500" Keywords="SILConverters; XML; Encoding Conversion; XPath" Manufacturer="SIL" />
+  <Module Id="XmlConvertersMM" Language="1033" Version="4.0.0.0">
+    <Package Id="4b5d716f-f3eb-4685-b562-def3ac079781" Comments="Merge module containing the XML Converters program" Description="Convert XML documents using SILConverters"
+         InstallerVersion="500" Keywords="SILConverters; XML; Encoding Conversion; XPath" Manufacturer="SIL" />
 
-		<Directory Id="TARGETDIR" Name="SourceDir">
+    <Directory Id="TARGETDIR" Name="SourceDir">
 
-            <Component Id="xmlOpenWithRegKeysCr" Guid="5D841F12-4667-4AB4-AE5F-3AF86E146D5D">
-                <!-- Optional: add an 'Edit with XYZ' to 'right click' even when not associated -->
-                <RegistryValue Root="HKCR" Key="SystemFileAssociations\.xml\shell\edit.SilConvertersXML.exe" Value="Edit with SilConverters for XML" Type="string" />
-                <RegistryValue Root="HKCR" Key="SystemFileAssociations\.xml\shell\edit.SilConvertersXML.exe\command" Value="&quot;[#SilConvertersXML.exe]&quot; &quot;%1&quot;" Type="string" />
-            </Component>
+      <Component Id="xmlOpenWithRegKeysCr" Guid="5D841F12-4667-4AB4-AE5F-3AF86E146D5D">
+        <!-- Optional: add an 'Edit with XYZ' to 'right click' even when not associated -->
+        <RegistryValue Root="HKCR" Key="SystemFileAssociations\.xml\shell\edit.SilConvertersXML.exe" Value="Edit with SilConverters for XML" Type="string" />
+        <RegistryValue Root="HKCR" Key="SystemFileAssociations\.xml\shell\edit.SilConvertersXML.exe\command" Value="&quot;[#SilConvertersXML.exe]&quot; &quot;%1&quot;" Type="string" />
+      </Component>
 
-            <Directory Id="MergeRedirectFolder">
+      <Directory Id="MergeRedirectFolder">
 
-                <Component Id="SilConvertersXML.exe" Guid="54538A4D-55A6-40ED-BC9A-601835719F31">
-                    <File Id="SilConvertersXML.exe" Name="SilConvertersXML.exe" KeyPath="yes" Assembly=".net" AssemblyManifest="SilConvertersXML.exe" 
-                          AssemblyApplication="SilConvertersXML.exe" Source="..\..\output\x86\release\SilConvertersXML.exe" />
-                    <Shortcut Id="SilConvertersXML.exe" Directory="SILConverters" Name="XML Document Converter" Description="Convert your XML documents with SIL Converters" IconIndex="0" Show="normal" Target="[#SilConvertersXML.exe]" WorkingDirectory="MergeRedirectFolder" Advertise="no" />
-                </Component>
+        <Component Id="SilConvertersXML.exe" Guid="54538A4D-55A6-40ED-BC9A-601835719F31">
+          <File Id="SilConvertersXML.exe" Name="SilConvertersXML.exe" KeyPath="yes" Assembly=".net" AssemblyManifest="SilConvertersXML.exe"
+                AssemblyApplication="SilConvertersXML.exe" Source="..\..\output\x86\release\SilConvertersXML.exe" />
+          <Shortcut Id="SilConvertersXML.exe" Directory="SILConverters" Name="XML Document Converter" Description="Convert your XML documents with SIL Converters" IconIndex="0" Show="normal" Target="[#SilConvertersXML.exe]" WorkingDirectory="MergeRedirectFolder" Advertise="no" />
+        </Component>
 
-            </Directory>
+      </Directory>
 
-            <Directory Id="StartMenuFolder" SourceName="Start Menu">
-                <Directory Id="ProgramMenuFolder" SourceName="Programs">
-                    <Directory Id="SILConverters" Name="SIL Converters" />
-                </Directory>
-            </Directory>
-            
+      <Directory Id="StartMenuFolder" SourceName="Start Menu">
+        <Directory Id="ProgramMenuFolder" SourceName="Programs">
+          <Directory Id="SILConverters" Name="SIL Converters" />
         </Directory>
-	</Module>
+      </Directory>
+
+    </Directory>
+  </Module>
 </Wix>
