@@ -101,13 +101,8 @@
       </Feature>
     </Feature>
     <Feature Id="Transduction_Engines" Title="Transduction Engines" Description="Expand this node to select or deselect individual transduction engines" Level="3" AllowAdvertise="no">
-      <Feature Id="Python_2.7" Title="Python Script Functions 2.7" Description="Python plug-in to use Python functions for text transduction. Requires a separately-installed distribution of Python v2.7.x." Level="4" AllowAdvertise="no">
-        <Condition Level="3"><![CDATA[SIL_PYTHON_FOUND AND NOT REMOVE]]></Condition>
-        <MergeRef Id="SEC_PythonEC"/>
-        <MergeRef Id="SetPath"/>
-        <MergeRef Id="MFC"/>
-        <MergeRef Id="CRT"/>
-        <MergeRef Id="CRT90"/>
+      <Feature Id="BingTranslator" Title="Bing Translator" Description="Use the Bing Translator for text transduction. Requires an internet connection." Display="expand" Level="3" AllowAdvertise="no">
+        <MergeRef Id="EcTranslators" />
       </Feature>
       <Feature Id="TECkit_DLLs" Title="TECkit" Description="Contains the TECkit conversion and compiling engines (DLLs). Select this component if you intend to use TECkit for encoding conversion or other transduction processing." Display="expand" Level="3" AllowAdvertise="no">
         <MergeRef Id="TECkit_DLLs"/>
@@ -133,6 +128,14 @@
       <Feature Id="Perl_5.12" Title="Perl Expressions" Description="Perl plug-in to use Perl expressions for text transduction. Requires a separately-installed Perl distribution." Display="expand" Level="4" AllowAdvertise="no">
         <Condition Level="3"><![CDATA[SIL_PERL_FOUND AND NOT REMOVE]]></Condition>
         <MergeRef Id="PerlEC"/>
+      </Feature>
+      <Feature Id="Python_2.7" Title="Python Script Functions 2.7" Description="Python plug-in to use Python functions for text transduction. Requires a separately-installed distribution of Python v2.7.x." Level="4" AllowAdvertise="no">
+        <Condition Level="3"><![CDATA[SIL_PYTHON_FOUND AND NOT REMOVE]]></Condition>
+        <MergeRef Id="SEC_PythonEC"/>
+        <MergeRef Id="SetPath"/>
+        <MergeRef Id="MFC"/>
+        <MergeRef Id="CRT"/>
+        <MergeRef Id="CRT90"/>
       </Feature>
     </Feature>
     <Feature Id="Maps_and_Tables" Title="Maps and Tables" Description="Select sub-items to place individual converter sets on your machine. Note: a utility will run after installation, with which you can install the converters in the system repository." Level="3" AllowAdvertise="no">

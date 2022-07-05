@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="12.0">
-  <Import Project="..\..\packages\Encoding-Converters-Core.0.4.1\build\Encoding-Converters-Core.props" Condition="Exists('..\..\packages\Encoding-Converters-Core.0.4.1\build\Encoding-Converters-Core.props')" />
+  <Import Project="..\..\packages\Encoding-Converters-Core.0.5.0\build\Encoding-Converters-Core.props" Condition="Exists('..\..\packages\Encoding-Converters-Core.0.5.0\build\Encoding-Converters-Core.props')" />
   <PropertyGroup>
     <ProjectType>Local</ProjectType>
     <ProductVersion>9.0.30729</ProductVersion>
@@ -106,16 +106,20 @@
     <Reference Include="CcEC">
       <HintPath>$(EcDistFilesPath)\win-$(Platform)\native\CcEC.dll</HintPath>
     </Reference>
-    <Reference Include="ECInterfaces, Version=4.0.0.0, Culture=neutral, PublicKeyToken=f1447bae1e63f485, processorArchitecture=x86" Condition="('$(Platform)' == 'x86' or '$(Platform)' == 'AnyCPU') and ('$(OS)'=='Windows_NT')">
+    <Reference  Include="ECInterfaces, Version=4.0.0.0, Culture=neutral, PublicKeyToken=f1447bae1e63f485, processorArchitecture=x86"
+					Condition="('$(Platform)' == 'x86' or '$(Platform)' == 'AnyCPU') and ('$(OS)'=='Windows_NT')">
       <HintPath>$(EcLibFilesPath)\net48\x86\ECInterfaces.dll</HintPath>
     </Reference>
-    <Reference Include="ECInterfaces, Version=4.0.0.0, Culture=neutral, PublicKeyToken=f1447bae1e63f485, processorArchitecture=x64" Condition="('$(Platform)' == 'x64') and ('$(OS)'=='Windows_NT')">
+    <Reference	Include="ECInterfaces, Version=4.0.0.0, Culture=neutral, PublicKeyToken=f1447bae1e63f485, processorArchitecture=x64"
+					Condition="('$(Platform)' == 'x64') and ('$(OS)'=='Windows_NT')">
       <HintPath>$(EcLibFilesPath)\net48\x64\ECInterfaces.dll</HintPath>
     </Reference>
-    <Reference Include="SilEncConverters40, Version=4.0.0.0, Culture=neutral, PublicKeyToken=f1447bae1e63f485, processorArchitecture=x86" Condition="('$(Platform)' == 'x86' or '$(Platform)' == 'AnyCPU') and ('$(OS)'=='Windows_NT')">
+    <Reference  Include="SilEncConverters40, Version=4.0.0.0, Culture=neutral, PublicKeyToken=f1447bae1e63f485, processorArchitecture=x86"
+					Condition="('$(Platform)' == 'x86' or '$(Platform)' == 'AnyCPU') and ('$(OS)'=='Windows_NT')">
       <HintPath>$(EcLibFilesPath)\net48\x86\SilEncConverters40.dll</HintPath>
     </Reference>
-    <Reference Include="SilEncConverters40, Version=4.0.0.0, Culture=neutral, PublicKeyToken=f1447bae1e63f485, processorArchitecture=x64" Condition="('$(Platform)' == 'x64') and ('$(OS)'=='Windows_NT')">
+    <Reference  Include="SilEncConverters40, Version=4.0.0.0, Culture=neutral, PublicKeyToken=f1447bae1e63f485, processorArchitecture=x64"
+					Condition="('$(Platform)' == 'x64') and ('$(OS)'=='Windows_NT')">
       <HintPath>$(EcLibFilesPath)\net48\x64\SilEncConverters40.dll</HintPath>
     </Reference>
     <Reference Include="System">
@@ -225,6 +229,6 @@ xcopy /y "$(TargetDir)*.*" $(SolutionDir)output\$(PlatformName)\$(ConfigurationN
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\..\packages\Encoding-Converters-Core.0.4.1\build\Encoding-Converters-Core.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Encoding-Converters-Core.0.4.1\build\Encoding-Converters-Core.props'))" />
+    <Error Condition="!Exists('..\..\packages\Encoding-Converters-Core.0.5.0\build\Encoding-Converters-Core.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Encoding-Converters-Core.0.5.0\build\Encoding-Converters-Core.props'))" />
   </Target>
 </Project>

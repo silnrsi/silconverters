@@ -26,6 +26,7 @@
       <Merge Id="XmlConverters" Language="1033" SourceFile="..\MergeModules\x86\XmlConvertersMM.msm" DiskId="1"/>
       <Merge Id="SpellFixerEc" Language="1033" SourceFile="..\MergeModules\x86\SpellFixerEcMM.msm" DiskId="1"/>
       <Merge Id="TECkit_Package" Language="1033" SourceFile="..\MergeModules\x86\TECkitPackageMM.msm" DiskId="1"/>
+      <Merge Id="EcTranslators" Language="1033" SourceFile="$(var.EcDistFilesPath)\MergeModules\x86\EcTranslatorsMM.msm" DiskId="1"/>
     </DirectoryRef>
 
     <DirectoryRef Id="Firefox">
