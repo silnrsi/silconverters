@@ -1,14 +1,19 @@
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
-using ECInterfaces;
 using SilEncConverters40;
 
 namespace SILConvertersOffice
 {
+    internal interface IBaseConverterForm
+    {
+        bool SkipIdenticalValues { get; }
+        string ForwardString { get; set; }
+
+        FormButtons Show(FontConverter aThisFC, string strInput, string strOutput);
+    }
+
     internal enum FormButtons
     {
         None,
@@ -17,7 +22,8 @@ namespace SILConvertersOffice
         ReplaceEvery,
         ReplaceAll,
         Cancel,
-        Redo
+        Redo,
+        Copy
     }
 
     internal partial class BaseConverterForm : Form

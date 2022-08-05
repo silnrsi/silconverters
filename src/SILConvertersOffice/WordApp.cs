@@ -230,6 +230,29 @@ namespace SILConvertersOffice
             }
         }
 
+#if BUILD_FOR_OFF12 || BUILD_FOR_OFF14 || BUILD_FOR_OFF15
+        public void ConvertParagraphs_Click(Office.IRibbonControl control)
+#else
+        void ConvertParagraphs_Click(Microsoft.Office.Core.CommandBarButton Ctrl, ref bool CancelDefault)
+#endif
+        {
+            if (!HookDocumentClose(Application.ActiveDocument))
+                return;
+
+            try
+            {
+                WordSelectionDocument doc = new WordSelectionDocument(Application.ActiveDocument, OfficeTextDocument.ProcessingType.eIsoFormattedRun);
+                OfficeDocumentProcessor aSelectionProcessor = new OfficeDocumentProcessor((FontConverters)null, new SILConvertersOffice.TranslationHelperForm());
+
+                if (aSelectionProcessor != null)
+                    doc.ProcessWordByWord(aSelectionProcessor, OfficeTextDocument.ProcessingType.eIsoFormattedRun);
+            }
+            catch (Exception ex)
+            {
+                DisplayException(ex);
+            }
+        }
+
         FindReplaceForm m_formFindReplace = null;
 
 #if BUILD_FOR_OFF12 || BUILD_FOR_OFF14 || BUILD_FOR_OFF15

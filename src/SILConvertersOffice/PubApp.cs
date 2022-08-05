@@ -273,7 +273,7 @@ namespace SILConvertersOffice
             get { return (Application.Version == "12.0"); }
         }
 
-        protected OfficeDocumentProcessor GetDocumentProcessor(FontConverters aFCs, BaseConverterForm form)
+        protected OfficeDocumentProcessor GetDocumentProcessor(FontConverters aFCs, IBaseConverterForm form)
         {
             return (IsPublisher2003) ?
                     new OfficeDocumentProcessor(aFCs, form) :   // Publisher 2003
@@ -287,7 +287,7 @@ namespace SILConvertersOffice
     /// </summary>
     internal class PubDocumentProcessor : OfficeDocumentProcessor
     {
-        public PubDocumentProcessor(FontConverters aFCs, BaseConverterForm form)
+        public PubDocumentProcessor(FontConverters aFCs, IBaseConverterForm form)
             : base(aFCs, form)
         {
         }

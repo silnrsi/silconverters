@@ -1,6 +1,7 @@
 #define Csc30   // turn off CSC30 features
 
 using System;
+using System.Collections.Generic;
 using System.Windows.Forms;             // for DialogResult
 using Word = Microsoft.Office.Interop.Word;
 /*
@@ -145,6 +146,8 @@ namespace SILConvertersOffice
             return true;
         }
 
+        private List<Char> ParagraphEndings = new List<char> { '\n', '\r' };    // w/ text files, they have both
+
         public bool ProcessParagraphsIsoFormat(OfficeDocumentProcessor aWordProcessor, Word.Paragraphs aParagraphs)
 		{
 			foreach (Word.Paragraph aParagraph in aParagraphs)
@@ -179,25 +182,36 @@ namespace SILConvertersOffice
 
 					} while (!MixedCharacterFormatting(aRunRange));
 
-					aRunRange.EndIndex--;	// back up one
-				}
-				else 
-				{
-					// the whole paragraph seems to be iso formatted, so exclude the paragraph end and
-					// process it as a whole unit
-					aRunRange.EndIndex--;
-					if (!aWordProcessor.Process(aRunRange, ref nCharIndex))
-					{
-						aWordProcessor.LeftOvers = aRunRange;
-						return false;
-					}
-				}
-			}
+                    TrimParagraphEnding(aRunRange); // back up one
+                }
+				else
+                {
+                    // the whole paragraph seems to be iso formatted, so exclude the paragraph end and
+                    // process it as a whole unit
+                    TrimParagraphEnding(aRunRange);
+
+                    if (!aWordProcessor.Process(aRunRange, ref nCharIndex))
+                    {
+                        aWordProcessor.LeftOvers = aRunRange;
+                        return false;
+                    }
+                }
+            }
 
 			return true;
 		}
 
-		protected bool MixedCharacterFormatting(OfficeRange aRange)
+        private void TrimParagraphEnding(WordRange aRunRange)
+        {
+            // w/ text files, they have both
+            do
+            {
+                aRunRange.EndIndex--;
+            }
+            while ((aRunRange.Text != null) && (aRunRange.Text.Length >= aRunRange.EndIndex) && ParagraphEndings.Contains(aRunRange.Text[aRunRange.EndIndex - 1]));
+        }
+
+        protected bool MixedCharacterFormatting(OfficeRange aRange)
 		{
             Word.Range thisRange = ((WordRange)aRange).RangeBasedOn;
             /*

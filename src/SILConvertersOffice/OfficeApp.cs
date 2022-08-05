@@ -486,7 +486,7 @@ namespace SILConvertersOffice
         protected Dictionary<string, string> m_mapCheckedInputStrings = new Dictionary<string, string>();
         protected FontConverter m_aFC = null;
         protected FontConverters m_aFCs = null;
-        protected BaseConverterForm m_formDisplayValues = null;
+        protected IBaseConverterForm m_formDisplayValues = null;
         protected bool m_bReplaceAll = false;
         protected bool m_bAutoReplace = false;
         private OfficeRange m_rangeLast = null;  // if cancel is done, so we can pick up where we left off
@@ -499,7 +499,7 @@ namespace SILConvertersOffice
         /// </summary>
         /// <param name="aFCs"></param>
         /// <param name="form"></param>
-        public OfficeDocumentProcessor(FontConverters aFCs, BaseConverterForm form)
+        public OfficeDocumentProcessor(FontConverters aFCs, IBaseConverterForm form)
         {
             m_aFCs = aFCs;
             Form = form;
@@ -513,7 +513,7 @@ namespace SILConvertersOffice
         /// </summary>
         /// <param name="aFC"></param>
         /// <param name="form"></param>
-        public OfficeDocumentProcessor(FontConverter aFC, BaseConverterForm form)
+        public OfficeDocumentProcessor(FontConverter aFC, IBaseConverterForm form)
         {
             m_aFC = aFC;
             Form = form;
@@ -525,7 +525,7 @@ namespace SILConvertersOffice
         /// This results in the user being prompted
         /// </summary>
         /// <param name="form"></param>
-        public OfficeDocumentProcessor(BaseConverterForm form)
+        public OfficeDocumentProcessor(IBaseConverterForm form)
         {
             Form = form;
             Process = CompareInputOutputProcess;    // good default
@@ -546,7 +546,7 @@ namespace SILConvertersOffice
             set { m_aWordProcessor = value; }
         }
 
-        public BaseConverterForm Form
+        public IBaseConverterForm Form
         {
             get { return m_formDisplayValues; }
             set { m_formDisplayValues = value; }

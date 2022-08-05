@@ -12,6 +12,8 @@
             size="large" onAction="Button_Clicked" screentip="Click this item to check a bidirectional converter's round-trip capability" />
           <button id="SILConvertersOffice.WordApp.Reset_Click" label="Reset"
             size="large" onAction="Button_Clicked" screentip="Reset the unfinished conversion processes" />
+          <button id="SILConvertersOffice.WordApp.ConvertParagraphs_Click" label="Convert by paragraph"
+            size="large" onAction="Button_Clicked" screentip="Click this item to convert the document from the cursor on down, paragraph-by-paragraph" />
         </group>
       </tab>
     </tabs>
