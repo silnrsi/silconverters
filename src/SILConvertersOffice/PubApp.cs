@@ -44,6 +44,8 @@ namespace SILConvertersOffice
         private Office.CommandBarButton ThisStoryConvertBtn;
         private Office.CommandBarButton SelectionConvertBtn;
         private Office.CommandBarButton ResetMenuBtn;
+        private Office.CommandBarButton ConvertParagraphsIsoFormatMenu;
+        private Office.CommandBarButton ConvertParagraphsMenu;
 
         public override void LoadMenu()
         {
@@ -66,6 +68,14 @@ namespace SILConvertersOffice
                 AddMenu(ref ResetMenuBtn, NewMenuBar, "&Reset",
                     "Reset the unfinished conversion processes",
                     new Microsoft.Office.Core._CommandBarButtonEvents_ClickEventHandler(Reset_Click));
+
+                AddMenu(ref ConvertParagraphsIsoFormatMenu, NewMenuBar, "Convert by &paragraph (iso formatted)",
+                    "Click this item to convert the document from the cursor on down, paragraph-by-paragraph, but in chunks that keep the formatting the same (which might ruin the Translation if using Bing or DeepL translators)",
+                    new Microsoft.Office.Core._CommandBarButtonEvents_ClickEventHandler(ConvertParagraphs_Click));
+
+                AddMenu(ref ConvertParagraphsMenu, NewMenuBar, "Convert by paragraph",
+                    "Click this item to convert the document from the cursor on down, paragraph-by-paragraph, ignoring formatting (so formatting will be lost, but you'll get whole paragraphs translated as a unit)",
+                    new Microsoft.Office.Core._CommandBarButtonEvents_ClickEventHandler(ConvertParagraphs_IgnoreStyle_Click));
             }
             catch (Exception ex)
             {
@@ -261,6 +271,55 @@ namespace SILConvertersOffice
             m_aWordByWordFontProcessor = null;
             m_aThisStoryWordByWordFontProcessor = null;
         }
+
+#if BUILD_FOR_OFF12 || BUILD_FOR_OFF14 || BUILD_FOR_OFF15
+        public void ConvertParagraphs_Click(Office.IRibbonControl control)
+        {
+            ParagraphByParagraph(OfficeTextDocument.ProcessingType.eIsoFormattedRun);
+        }
+#endif
+
+#if BUILD_FOR_OFF14 || BUILD_FOR_OFF15
+#else
+        void ConvertParagraphs_Click(Microsoft.Office.Core.CommandBarButton Ctrl, ref bool CancelDefault)
+        {
+            ParagraphByParagraph(OfficeTextDocument.ProcessingType.eIsoFormattedRun);
+        }
+#endif
+
+        private void ParagraphByParagraph(OfficeTextDocument.ProcessingType eIsoFormattedRun)
+        {
+            try
+            {
+                if (!HookDocumentClose(Application.ActiveDocument))
+                    return;
+
+                PubRangeDocument doc = new PubRangeDocument(Application.ActiveDocument, eIsoFormattedRun);
+                OfficeDocumentProcessor aSelectionProcessor = GetDocumentProcessor((FontConverters)null, new SILConvertersOffice.TranslationHelperForm());
+
+                if (aSelectionProcessor != null)
+                    doc.ProcessWordByWord(aSelectionProcessor, OfficeTextDocument.ProcessingType.eIsoFormattedRun);
+            }
+            catch (Exception ex)
+            {
+                DisplayException(ex);
+            }
+        }
+
+#if BUILD_FOR_OFF12 || BUILD_FOR_OFF14 || BUILD_FOR_OFF15
+        public void ConvertParagraphs_IgnoreStyle_Click(Office.IRibbonControl control)
+        {
+            ParagraphByParagraph(OfficeTextDocument.ProcessingType.eParagraphByParagraph);
+        }
+#endif
+
+#if BUILD_FOR_OFF14 || BUILD_FOR_OFF15
+#else
+        void ConvertParagraphs_IgnoreStyle_Click(Microsoft.Office.Core.CommandBarButton Ctrl, ref bool CancelDefault)
+        {
+            ParagraphByParagraph(OfficeTextDocument.ProcessingType.eParagraphByParagraph);
+        }
+#endif
 
         protected bool IsPublisher2003
         {

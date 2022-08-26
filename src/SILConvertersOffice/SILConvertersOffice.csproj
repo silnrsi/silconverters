@@ -84,6 +84,9 @@
     <Reference Include="adodb, Version=7.0.3300.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
       <SpecificVersion>False</SpecificVersion>
     </Reference>
+    <Reference Include="BackTranslationHelper">
+      <HintPath>$(EcDistFilesPath)\win-$(Platform)\native\BackTranslationHelper.dll</HintPath>
+    </Reference>
     <Reference Include="DAO, Version=10.0.4504.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>DistFiles\DAO.DLL</HintPath>
@@ -294,12 +297,6 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\BackTranslationHelper\BackTranslationHelper.csproj">
-      <Project>{3e74ce98-6558-4af0-bb0c-c7e436208b1b}</Project>
-      <Name>BackTranslationHelper</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSHARP.Targets" />
   <PropertyGroup>

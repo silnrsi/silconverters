@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Text.RegularExpressions;
 using System.Xml;
 using System.Xml.Linq;
 
@@ -15,7 +14,7 @@ namespace SILConvertersWordML
         public readonly static XNamespace wx = "http://schemas.microsoft.com/office/word/2003/auxHint";
         public readonly static XNamespace wsp = "http://schemas.microsoft.com/office/word/2003/wordml/sp2";
 
-        public static DocXmlDocument GetXmlDocument(ref string strXmlFilename, string strDocFilename, bool bSaveXmlOutputInFolder)
+        public static DocXmlDocument GetXmlDocument(ref string strXmlFilename, string strDocFilename, bool bSaveXmlOutputInFolder, bool combineRunsIntoIsoformattedParagraph)
         {
             // get the XDocument we're going to go through
             var doc = XDocument.Load(strXmlFilename);
@@ -25,6 +24,12 @@ namespace SILConvertersWordML
 
             // pre-process the file and combine the identically formatted runs of text within a paragraph
             CombineIsoFormattedRuns(doc);
+
+            // pre-process the file and combine all the subsequent runs in a paragraph into the first run of the paragraph
+            //  this is primarily for Translator type converters like Bing or DeepL, which work best with full sentences,
+            //  but it also will clobber any intra paragraph formatting
+            if (combineRunsIntoIsoformattedParagraph)
+                CombineAllRunsIntoSingleRun(doc);
 
             var thisDoc = new WordLinqDocument
                               {
@@ -130,6 +135,118 @@ namespace SILConvertersWordML
         {
             return new XElement(wx + "font",
                                 new XAttribute(wx + "val", fontName));
+        }
+
+        /// <summary>
+        /// This method will combine the w:t element values of sibling w:r elements into the first w:t element of the paragraph
+        /// clobbering all intra-paragraph formatting, but causing the entire paragraph to be converted as a unit (best for 
+        /// translator type converters like Bing or DeepL)
+        /// </summary>
+        /// <param name="doc">the XDocument to modify</param>
+        public static void CombineAllRunsIntoSingleRun(XDocument doc)
+        {
+            /*  this is roughly what we're trying to combine. 
+          <w:p wsp:rsidR="00123714" wsp:rsidRPr="00F44BD1" wsp:rsidRDefault="00123714" wsp:rsidP="00AC4DAD">
+            <w:pPr>
+              <w:pStyle w:val="ListParagraph" />
+              <w:widowControl w:val="off" />
+              <w:listPr>
+                <w:ilvl w:val="0" />
+                <w:ilfo w:val="3" />
+                <wx:t wx:val="1." />
+                <wx:font wx:val="Times New Roman" />
+              </w:listPr>
+              <w:pBdr>
+                <w:top w:val="nil" />
+                <w:left w:val="nil" />
+                <w:bottom w:val="nil" />
+                <w:right w:val="nil" />
+                <w:between w:val="nil" />
+              </w:pBdr>
+              <w:rPr>
+                <w:rFonts w:fareast="Times New Roman" w:cs="Times New Roman" />
+                <w:color w:val="2F5496" />
+                <w:lang w:fareast="ZH-CN" />
+              </w:rPr>
+            </w:pPr>
+            <w:r wsp:rsidRPr="00F44BD1">
+              <w:rPr>
+                <w:rFonts w:ascii="Gungsuh" w:fareast="Gungsuh" w:h-ansi="Gungsuh" w:cs="Gungsuh" />
+                <wx:font wx:val="Gungsuh" />
+                <w:color w:val="2F5496" />
+                <w:lang w:fareast="ZH-CN" />
+              </w:rPr>
+              <w:t>仔</w:t>
+            </w:r>
+            <w:r wsp:rsidRPr="00F44BD1">
+              <w:rPr>
+                <w:rFonts w:ascii="SimSun" w:h-ansi="SimSun" w:cs="SimSun" w:hint="fareast" />
+                <wx:font wx:val="SimSun" />
+                <w:color w:val="2F5496" />
+                <w:lang w:fareast="ZH-CN" />
+              </w:rPr>
+              <w:t>细阅读</w:t>
+            </w:r>
+            <w:r wsp:rsidRPr="00F44BD1">
+              <w:rPr>
+                <w:rFonts w:ascii="Gungsuh" w:fareast="Gungsuh" w:h-ansi="Gungsuh" w:cs="Gungsuh" w:hint="fareast" />
+                <wx:font wx:val="Gungsuh" />
+                <w:color w:val="2F5496" />
+                <w:lang w:fareast="ZH-CN" />
+              </w:rPr>
+              <w:t>本</w:t>
+            </w:r>
+
+            into a single run with all the text concatenated:
+
+            <w:r wsp:rsidRPr="00F44BD1">
+              <w:rPr>
+                <w:rFonts w:ascii="Gungsuh" w:fareast="Gungsuh" w:h-ansi="Gungsuh" w:cs="Gungsuh" />
+                <wx:font wx:val="Gungsuh" />
+                <w:color w:val="2F5496" />
+                <w:lang w:fareast="ZH-CN" />
+              </w:rPr>
+              <w:t>仔细阅读本</w:t>
+            </w:r>
+            */
+            // first get all the 'p'aragraphs, so we can find sibling 'r'uns
+            Debug.Assert(doc.Root != null, "doc.Root != null");
+            var paragraphs = doc.Root.Descendants(w + "p").ToList();
+            foreach (var paragraph in paragraphs)
+            {
+                // now get the sibling runs (via 'Elements'; rather than 'Descendents', since they are direct children)
+                // var runs = paragraph.Elements(w + "r").ToList();
+                // UPDATE: I'm uncomfortable with joining runs that are broken up by something else... just saw this:
+                // <w:r>
+                //   <w:t>PH11 Introduction to Phonology</w:t>
+                // </w:r>
+                // <aml:annotation aml:id="33" w:type="Word.Bookmark.End" />
+                // <w:r>
+                //   <w:t> (GRAD DIP)</w:t>
+                // </w:r>
+                // SO, grab Elements; rather than just "w:r"s
+                var runs = paragraph.Elements().ToList();
+                if (runs.Count <= 1)
+                    continue;
+
+                // get the 1st one that is a w:r and has text (if there's anything before this one, then those
+                //  will remain as they are in the document...)
+                var firstRun = runs.FirstOrDefault(e => (e.Name == w + "r") && (Get_t(e) != null));
+                if (firstRun == null)
+                    continue;
+
+                XElement textOfNextRun, textOfFirstRun = Get_t(firstRun);
+                for (var i = runs.IndexOf(firstRun) + 1; i < runs.Count; i++)
+                {
+                    // combine the text of any subsequent "w:r"s that have text into the text field of the 1st one
+                    var nextRun = runs[i];
+                    if ((nextRun.Name == w + "r") && ((textOfNextRun = Get_t(nextRun)) != null))
+                        textOfFirstRun.Value += textOfNextRun.Value;
+
+                    // anything else (and any after the 1st one) are removed
+                    nextRun.Remove();
+                }
+            }
         }
 
         /// <summary>

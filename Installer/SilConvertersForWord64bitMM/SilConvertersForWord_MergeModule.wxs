@@ -27,6 +27,12 @@
                 AssemblyApplication="SILConvertersWordML.exe" Source="..\..\output\x64\release\SILConvertersWordML.exe" />
           <Shortcut Id="SILConvertersWordML.exe" Directory="SILConverters" Name="Bulk Word Document Converter" Description="Convert your MS Word documents with converters in the system repository" IconIndex="0" Show="normal" Target="[#SILConvertersWordML.exe]" WorkingDirectory="MergeRedirectFolder" Advertise="no" />
         </Component>
+
+        <Component Id="SILConvertersWordML.exe.config" Guid="{9E416C40-7BF4-479F-9068-7314F85DB29A}">
+          <File Id="SILConvertersWordML.exe.config" Name="SILConvertersWordML.exe.config" Vital="yes" KeyPath="yes"
+                Source="..\..\output\x64\release\SILConvertersWordML.exe.config" />
+        </Component>
+
       </Directory>
 
       <Directory Id="StartMenuFolder" SourceName="Start Menu">

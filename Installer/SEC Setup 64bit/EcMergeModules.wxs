@@ -30,6 +30,10 @@
       <Merge Id="EcFirefox" Language="1033" SourceFile="$(var.EcDistFilesPath)\MergeModules\x64\EcFireFox64.msm" DiskId="1"/>
     </DirectoryRef>
 
+    <DirectoryRef Id="Paratext9">
+      <Merge Id="ParatextBackTranslationHelperPlugin" Language="1033" SourceFile="..\MergeModules\x64\ParatextBackTranslationHelperPlugin64bitMM.msm" DiskId="1"/>
+    </DirectoryRef>
+
     <DirectoryRef Id="AllUserAppDataSIL">
       <Merge Id="ScHelp" Language="1033" SourceFile="..\MergeModules\ScHelpMM.msm" DiskId="1"/>
       <Merge Id="OO_Ling_Tools" Language="1033" SourceFile="..\MergeModules\OpenOfficeLinguisticToolsMM.msm" DiskId="1"/>

@@ -127,7 +127,7 @@
       </Feature>
     </Feature>
     <Feature Id="Transduction_Engines" Title="Transduction Engines" Description="Expand this node to select or deselect individual transduction engines" Level="3" AllowAdvertise="no">
-      <Feature Id="BingTranslator" Title="Bing Translator" Description="Use the Bing Translator for text transduction. Requires an internet connection." Display="expand" Level="3" AllowAdvertise="no">
+      <Feature Id="BingTranslator" Title="Bing/DeepL Translators" Description="Use the Bing or DeepL Translator for text translation. Requires an internet connection." Display="expand" Level="3" AllowAdvertise="no">
         <MergeRef Id="EcTranslators" />
       </Feature>
       <Feature Id="TECkit_DLLs" Title="TECkit" Description="Contains the TECkit conversion and compiling engines (DLLs). Select this component if you intend to use TECkit for encoding conversion or other transduction processing." Display="expand" Level="3" AllowAdvertise="no">

@@ -1,7 +1,5 @@
 ﻿using BackTranslationHelper;
-using ECInterfaces;
 using Paratext.PluginInterfaces;
-using SIL.Windows.Forms.FileDialogExtender;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -10,42 +8,75 @@ using System.Windows.Forms;
 
 namespace SIL.ParatextBackTranslationHelperPlugin
 {
-    public partial class BackTranslationHelperForm : Form, IBackTranslationHelperDataSource, IMessageFilter
+    public partial class BackTranslationHelperForm : Form, IBackTranslationHelperDataSource
     {
-        private SplashScreenForm splashScreen;
-        private IProject _projectNameSource;
-        private IProject _projectNameTarget;
+        private const string FrameTextFormat = "Back Translating from {0} - {1} in verse: {2}";
+
+        private IProject _projectSource;
+        private IProject _projectTarget;
         private IProjectLanguage _languageSource;
         private IProjectLanguage _languageTarget;
         private IKeyboard _keyboardTarget;
-        private IVerseRef _verseReference;
-        private List<IUSFMToken> _usfmTokensSource;
         private IPluginHost _host;
         private ParatextBackTranslationHelperPlugin _plugin;
         private Action<BackTranslationHelperModel> _updateControls;
         private BackTranslationHelperModel _model;
         private IWriteLock _writeLock = null;
+        private Action<IVerseRef> _setSyncReferenceGroup;
 
-        public BackTranslationHelperForm(IPluginHost host, ParatextBackTranslationHelperPlugin plugin, SplashScreenForm splashScreen, IProject projectNameParent, IProject projectNameDaughter, 
-            IProjectLanguage languageSource, IProjectLanguage languageTarget, IEncConverter theEc)
+        /// <summary>
+        /// the current verse we're processing. (this generally is the 1st of a range if it is a combined verse).
+        /// See _verseReferenceLast below.
+        /// </summary>
+        private IVerseRef _verseReference;
+
+        /// <summary>
+        /// the current verse(s) we're processing. This comes from the USFMTokens, so it could be, e.g. Acts 1:2-5
+        /// </summary>
+        private IVerseRef _versesReference;
+
+        /// <summary>
+        /// this is set to the last verse of a range (i.e. 5 if the USFM markers were from Acts 1:2-5), 
+        /// so that when we say "GetNextVerse", it gives us the next verse (rather than 2->3 and getting 
+        /// the same verses)
+        /// </summary>
+        private IVerseRef _verseReferenceLast;
+
+        /// <summary>
+        /// this contains the tokens from the source project, but just the verse(s) that we're processing (e.g. v1 or could be v2-5)
+        /// Key is the [BookCode]_[ChapterNum]_[VerseNum] (e.g. ACT_1_1)
+        /// </summary>
+        private Dictionary<string, List<IUSFMToken>> _usfmTokensSource { get; set; } = new Dictionary<string, List<IUSFMToken>>();
+
+        /// <summary>
+        /// this contains the tokens from the target project, for all the verses in the current chapter (we need the whole chapter,
+        /// because we have to Put the entire chapter when we go to write it
+        /// </summary>
+        private Dictionary<string, SortedDictionary<IVerseRef, List<IUSFMToken>>> _usfmTokensTarget { get; set; } = new Dictionary<string, SortedDictionary<IVerseRef, List<IUSFMToken>>>();
+
+        public BackTranslationHelperForm(IPluginHost host, ParatextBackTranslationHelperPlugin plugin, Action<IVerseRef> setSyncReferenceGroup,
+            IVerseRef initialVerseReference, IProject projectSource, IProject projectTarget, IProjectLanguage languageSource, IProjectLanguage languageTarget)
         {
+            InitializeComponent();
+
             _host = host;
             _plugin = plugin;
-            _host.VerseRefChanged += _host_VerseRefChanged;
-            InitializeComponent();
+            _versesReference = _verseReferenceLast = _verseReference = initialVerseReference;
+            _setSyncReferenceGroup = setSyncReferenceGroup;
+            _projectSource = projectSource;
+            _projectTarget = projectTarget;
+            _languageSource = languageSource;
+            _languageTarget = languageTarget;
+            _keyboardTarget = _projectTarget.VernacularKeyboard;
 
             // this form is the implementation of the way to get get data
             backTranslationHelperCtrl.BackTranslationHelperDataSource = this;
-            backTranslationHelperCtrl.TheTranslators.Add(theEc);
 
-            Text = String.Format(Text, projectNameParent, projectNameDaughter);
+            _host.VerseRefChanged += host_VerseRefChanged;
+            _projectSource.ScriptureDataChanged += ScriptureDataChangedHandlerSource;
+            _projectTarget.ScriptureDataChanged += ScriptureDataChangedHandlerTarget;
 
-            this.splashScreen = splashScreen;
-            _projectNameSource = projectNameParent;
-            _projectNameTarget = projectNameDaughter;
-            _languageSource = languageSource;
-            _languageTarget = languageTarget;
-            _keyboardTarget = _projectNameTarget.VernacularKeyboard;
+            Text = GetFrameText(_projectSource, _projectTarget, _verseReference);
             Location = Properties.Settings.Default.WindowLocation;
             WindowState = Properties.Settings.Default.DefaultWindowState;
             if (MinimumSize.Height <= Properties.Settings.Default.WindowSize.Height &&
@@ -53,14 +84,28 @@ namespace SIL.ParatextBackTranslationHelperPlugin
             {
                 Size = Properties.Settings.Default.WindowSize;
             }
-
-            splashScreen.Close();
-            backTranslationHelperCtrl.Focus();
         }
 
-        private void _host_VerseRefChanged(IPluginHost sender, IVerseRef newReference, SyncReferenceGroup group)
+        private static string GetFrameText(IProject projectSource, IProject projectTarget, IVerseRef versesReference)
         {
-            GetNewReference(newReference);
+            return String.Format(FrameTextFormat, projectSource, projectTarget, versesReference);
+        }
+
+        private void ScriptureDataChangedHandlerSource(IProject sender, int bookNum, int chapterNum)
+        {
+            Unlock();
+        }
+
+        private void ScriptureDataChangedHandlerTarget(IProject sender, int bookNum, int chapterNum)
+        {
+            Unlock();
+        }
+
+        private void host_VerseRefChanged(IPluginHost sender, IVerseRef newReference, SyncReferenceGroup group)
+        {
+            // since this will initialize the _verseReference, which is intended to be the first of a series of verses...
+            var newRef = (newReference.RepresentsMultipleVerses) ? newReference.AllVerses.First() : newReference;
+            GetNewReference(newRef);
         }
 
         private void GetNewReference(IVerseRef newReference)
@@ -69,11 +114,12 @@ namespace SIL.ParatextBackTranslationHelperPlugin
             _verseReference = newReference;
             BackTranslationHelperModel model = null;    // means query the interface to get the data
             backTranslationHelperCtrl.GetNewData(ref model);
-            ParatextBackTranslationHelperPlugin.InvokeOnMainWindowIfNotNull(() => UpdateData(model));
+            UpdateData(model);
         }
 
         private void UpdateData(BackTranslationHelperModel model)
         {
+            Text = GetFrameText(_projectSource, _projectTarget, _versesReference);
             _model = model;
             backTranslationHelperCtrl.Initialize(true);
             _updateControls(_model);
@@ -107,42 +153,86 @@ namespace SIL.ParatextBackTranslationHelperPlugin
                 var model = new BackTranslationHelperModel
                 {
                     SourceData = CurrentSourceData ?? "<source data empty>",
-                    TargetDataExisting = CurrentTargetData,
+                    TargetData = CurrentTargetData,
+                    TargetDataPreExisting = true,
                     TargetsPossible = new List<TargetPossible>()
                 };
                 return model;
             }
         }
 
-        private string _lastSourceString;
         private string CurrentSourceData
         {
             get
             {
-                // get them all, bkz we have to write them all
-                _usfmTokensSource = _projectNameSource.GetUSFMTokens(_verseReference.BookNum, _verseReference.ChapterNum).ToList();
-                var data = _usfmTokensSource.OfType<IUSFMTextToken>().Where(t => t.IsPublishableVernacular && IsMatchingVerse(t.VerseRef, _verseReference)).ToList();
-                var textValues = data.Select(t => t.Text);
-                _lastSourceString = string.Join(Environment.NewLine, textValues);
-                return _lastSourceString;
+                var key = GetSourceUsfmTokenKey(_verseReference);
+                if (!_usfmTokensSource.TryGetValue(key, out List<IUSFMToken> tokens))
+                {
+                    tokens = _projectSource.GetUSFMTokens(_verseReference.BookNum, _verseReference.ChapterNum, _verseReference.VerseNum).ToList();
+                    _usfmTokensSource.Add(key, tokens);
+                }
+
+                var data = tokens.OfType<IUSFMTextToken>()
+                                 .Where(t => t.IsPublishableVernacular && IsMatchingVerse(t.VerseRef, _verseReference))
+                                 .ToDictionary(ta => ta, ta => ta.VerseRef);
+
+                var textValues = data.Select(t => t.Key.Text);
+                var sourceString = string.Join(Environment.NewLine, textValues);
+
+                // set the verse reference to the last of a combined set of verses (which we can only get from the USFM markers)
+                _versesReference = data.Values.First();
+                _verseReferenceLast = (_versesReference.RepresentsMultipleVerses)
+                                        ? _versesReference.AllVerses.Last()
+                                        : _verseReference;
+
+                return sourceString;
             }
+        }
+
+        private string GetSourceUsfmTokenKey(IVerseRef verseReference)
+        {
+            // get the key to see if we already have this data (TODO: add a 'it was changed in Ptx', so we can remove it from this collection)
+            return $"{verseReference.BookNum}_{verseReference.ChapterNum}_{verseReference.VerseNum}";
         }
 
         private string CurrentTargetData
         {
             get
             {
-                _writeLock = _projectNameTarget.RequestWriteLock(_plugin, ReleaseRequested, _verseReference.BookNum, _verseReference.ChapterNum);
+                _writeLock = _projectTarget.RequestWriteLock(_plugin, ReleaseRequested, _verseReference.BookNum, _verseReference.ChapterNum);
                 if (_writeLock == null)
                 {
                     // if this fails to return something, it means we can't edit it
+                    MessageBox.Show($"You don't have edit privilege on this chapter: {_verseReference}");
                 }
-                var data = _projectNameTarget.GetUSFMTokens(_verseReference.BookNum, _verseReference.ChapterNum).OfType<IUSFMTextToken>().ToList();
-                var publishable = data.Where(t => t.IsPublishableVernacular && IsMatchingVerse(t.VerseRef, _verseReference));
-                var values = publishable.Select(t => t.Text);
+                var verseKey = GetTargetUsfmTokenKey(_verseReference);
+                if (!_usfmTokensTarget.TryGetValue(verseKey, out SortedDictionary<IVerseRef, List<IUSFMToken>> vrefTokens))
+                {
+                    var chapterTokens = _projectTarget.GetUSFMTokens(_verseReference.BookNum, _verseReference.ChapterNum).ToList();
+                    var dict = chapterTokens.GroupBy(t => t.VerseRef, t => t, (key, g) => new { VerseRef = key, USFMTokens = g.ToList() })
+                                            .ToDictionary(t => t.VerseRef, t => t.USFMTokens);
+                    vrefTokens = new SortedDictionary<IVerseRef, List<IUSFMToken>>(dict);
+                    _usfmTokensTarget.Add(verseKey, vrefTokens);
+                }
+
+                if (!vrefTokens.ContainsKey(_verseReference))
+                    return null;
+
+                var tokens = vrefTokens[_verseReference];
+                var data = tokens.OfType<IUSFMTextToken>()
+                                 .Where(t => t.IsPublishableVernacular && IsMatchingVerse(t.VerseRef, _verseReference));
+
+                var values = data.Select(t => t.Text);
                 var verseData = string.Join(Environment.NewLine, values);
                 return verseData;
             }
+        }
+
+        private string GetTargetUsfmTokenKey(IVerseRef verseReference)
+        {
+
+            // get the key, which for the target data is the entire chapter (we have to Put as a whole chapter)
+            return $"{verseReference.BookNum}_{verseReference.ChapterNum}";
         }
 
         private bool IsMatchingVerse(IVerseRef verseReferenceFromToken, IVerseRef verseReference)
@@ -164,6 +254,7 @@ namespace SIL.ParatextBackTranslationHelperPlugin
         }
 
         private ButtonPressed _buttonPressed;
+
         void IBackTranslationHelperDataSource.ButtonPressed(ButtonPressed button)
         {
             _buttonPressed = button;
@@ -171,6 +262,7 @@ namespace SIL.ParatextBackTranslationHelperPlugin
 
         void IBackTranslationHelperDataSource.Cancel()
         {
+            Close();
         }
 
         void IBackTranslationHelperDataSource.SetDataUpdateProc(Action<BackTranslationHelperModel> updateControls)
@@ -186,6 +278,11 @@ namespace SIL.ParatextBackTranslationHelperPlugin
         void IBackTranslationHelperDataSource.MoveToNext()
         {
             _buttonPressed = ButtonPressed.MoveToNext;
+
+            _verseReference = _verseReferenceLast.GetNextVerse(_projectSource);
+
+            // Set the sync group our window belongs to:
+            _setSyncReferenceGroup(_verseReference);
         }
 
         void IBackTranslationHelperDataSource.WriteToTarget(string text)
@@ -200,55 +297,161 @@ namespace SIL.ParatextBackTranslationHelperPlugin
             //      ... in which case, we put one line of each translated version into one of the text tokens
             //  3) there are more lines of text translated than there were in Paratext
             //      ... in which case, we'll duplicate the last text token and push the extra lines in it
-            var translatedValues = text?.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries)
-                                        .Where(s => !String.IsNullOrEmpty(s?.Trim()))
+            var translatedValues = text?.Split(new[] { Environment.NewLine }, StringSplitOptions.None)
                                         .ToList();
             if (!translatedValues.Any())    // nothing to do
                 return;
 
             // go thru all the ones we had and put the translated text into the text ones and transfer the non-text ones in order into the list to Put
+            var key = GetTargetUsfmTokenKey(_verseReference);
+            if (!_usfmTokensTarget.TryGetValue(key, out SortedDictionary<IVerseRef, List<IUSFMToken>> vrefTokensTarget))
+            {
+                RequeryWarning();
+                return;
+            }
+
+            // get the USFM tokens for the corresponding verse in the target project (if we don't have at least 1 IUSFMTextToken...
+            if (!vrefTokensTarget.TryGetValue(_versesReference, out List<IUSFMToken> tokensTarget) ||
+                !tokensTarget.Any(t => t is IUSFMTextToken))
+            {
+                // ... it could be that the user didn't put in any verse number/paragraphs/text yet... so just make a copy of the source tokens
+                //  which will be replaced w/ the translated text below
+                key = GetSourceUsfmTokenKey(_verseReference);
+                if (!_usfmTokensSource.TryGetValue(key, out tokensTarget))
+                {
+                    // if we didn't find those, then we'll have to start over
+                    RequeryWarning();
+                    return;
+                }
+
+                // it may have some verses, but they're are no IUSFMTextTokens among them...
+                if (vrefTokensTarget.ContainsKey(_verseReference))
+                    vrefTokensTarget[_verseReference] = tokensTarget;
+                else
+                    vrefTokensTarget.Add(_versesReference, tokensTarget);
+            }
+
+            // tokensTarget now contains just the tokens for the current verse
             var i = 0;
-            TextToken newToken = null;
-            var usfmTokensTarget = new List<IUSFMToken>();
-            foreach (var token in _usfmTokensSource)
+            var purgeConsecutiveParagraphs = false;
+            TextToken latestTextToken = null;
+            var updatedTokens = new List<IUSFMToken>();
+            foreach (var token in tokensTarget)
             {
                 IUSFMToken updatedToken = token;
-                if ((token is IUSFMTextToken textToken) && textToken.IsPublishableVernacular && (textToken.VerseRef.ToString() == _verseReference.ToString()))
+                if ((token is IUSFMTextToken textToken) && textToken.IsPublishableVernacular && IsMatchingVerse(textToken.VerseRef, _verseReference))
                 {
                     if (i >= translatedValues.Count)
+                    {
+                        // this means the source had multiple paragraphs, but the target doesn't, which means we'll have 1 too many paragraph markers
+                        purgeConsecutiveParagraphs = true;
                         continue;
+                    }
 
-                    newToken = new TextToken(textToken)
+                    latestTextToken = new TextToken(textToken)
                     {
                         Text = translatedValues[i++]
                     };
-                    updatedToken = newToken;
+                    updatedToken = latestTextToken;
                 }
-                usfmTokensTarget.Add(updatedToken);
+                updatedTokens.Add(updatedToken);
             }
 
-            // if there are still some we haven't processed, then put them in copies of the last one we did
-            System.Diagnostics.Debug.Assert(newToken != null, "This should be able to happen, bkz we should have at least 1");
-            while (translatedValues.Count < i)
+            if (latestTextToken == null)
             {
-                var newTextToken = new TextToken(newToken)
-                {
-                    Text = translatedValues[i++]
-                };
-                usfmTokensTarget.Add(newTextToken);
+                // this means the target (and source) verse had no IUSFMTextToken in it
+                // so there's nothing to do?
+                return;
             }
+
+            // deal w/ the case where the user has either fewer or more paragraphs than the source
+            if (purgeConsecutiveParagraphs)
+            {
+                var curr = updatedTokens.FirstOrDefault(t => IsParagraphToken(t));
+                if (curr != null)
+                {
+                    for (var j = updatedTokens.IndexOf(curr) + 1; j < updatedTokens.Count; j++)
+                    {
+                        var next = updatedTokens[j];
+                        if (IsParagraphToken(next))
+                            updatedTokens.Remove(curr);
+                        curr = next;
+                    }
+                }
+            }
+            else
+            {
+                // if there are still some translated portions we haven't processed yet, then insert them as copies of the last one we did
+                //  just after the last one we did (w/ a paragraph token before it).
+                while (translatedValues.Count > i)
+                {
+                    // if there are other markers *after* the last text token (e.g. a final paragraph token), then put the text (along
+                    //  with a preceding paragraph token) just after the last text token we added above
+                    var insertionIndex = updatedTokens.IndexOf(latestTextToken) + 1;
+                    updatedTokens.Insert(insertionIndex++, ParagraphToken(latestTextToken));
+
+                    latestTextToken = new TextToken(latestTextToken)
+                    {
+                        Text = translatedValues[i++]
+                    };
+                    updatedTokens.Insert(insertionIndex, latestTextToken);
+                }
+            }
+
+            vrefTokensTarget[_versesReference] = updatedTokens;
 
             try
             {
                 if (_writeLock == null) // it shouldn't be, but if it is, this should warn the user that it isn't going to work
-                    _writeLock = _projectNameTarget.RequestWriteLock(_plugin, ReleaseRequested, _verseReference.BookNum, _verseReference.ChapterNum);
+                    _writeLock = _projectTarget.RequestWriteLock(_plugin, ReleaseRequested, _verseReference.BookNum, _verseReference.ChapterNum);
 
-                _projectNameTarget.PutUSFMTokens(_writeLock, usfmTokensTarget, _verseReference.BookNum);
+                var tokens = vrefTokensTarget.SelectMany(d => d.Value).ToList();
+                _projectTarget.PutUSFMTokens(_writeLock, tokens, _verseReference.BookNum);
+                Unlock();
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Exception caught:\n{ex.Message}");
             }
+        }
+
+        public IUSFMToken ParagraphToken(TextToken previousTextToken)
+        {
+            // see if we can find a list that has one (check the source first, since target is likely to be lacking)
+            var tokens = _usfmTokensSource.Values.FirstOrDefault(l => l.Any(t => IsParagraphToken(t))) ??
+                         _usfmTokensTarget.Values.SelectMany(d => d.Values)
+                                                 .FirstOrDefault(l => l.Any(t => IsParagraphToken(t)));
+
+            var paragraphToken = (IUSFMMarkerToken)tokens.FirstOrDefault(t => IsParagraphToken(t)) ??
+                                    new MarkerToken
+                                    {
+                                        Type = MarkerType.Paragraph,
+                                        Marker = "p",
+                                        IsPublishableVernacular = true,
+                                        IsScripture = true,
+                                        VerseOffset = previousTextToken.VerseOffset + previousTextToken.Text.Length,
+                                        VerseRef = previousTextToken.VerseRef
+                                    };
+
+            return new MarkerToken(paragraphToken, previousTextToken.VerseOffset + previousTextToken.Text.Length, previousTextToken.VerseRef);
+        }
+
+        private static List<string> _paragraphMarkers = new List<string> { "p", "m" };
+
+        private static bool IsParagraphToken(IUSFMToken token)
+        {
+            return (token is IUSFMMarkerToken markerToken) && (markerToken.Type == MarkerType.Paragraph) && _paragraphMarkers.Contains(markerToken.Marker);
+        }
+
+        private void RequeryWarning()
+        {
+            // if we don't already have it... it's probably because something was changed in the project
+            // TODO: do something! (probably just need to Initialize and UpdateData, so we'll have requeried everything)
+            var res = MessageBox.Show("It seems that something might have changed in the target project, which requires us to requery. Click 'Yes' to requery and start again. Click 'No' if you want to close this box (and copy the current text if you made changes for next time).",
+                                      ParatextBackTranslationHelperPlugin.pluginName, MessageBoxButtons.YesNo);
+
+            if (res == DialogResult.Yes)
+                GetNewReference(_verseReference);
         }
 
         protected override void OnShown(EventArgs e)
@@ -257,10 +460,6 @@ namespace SIL.ParatextBackTranslationHelperPlugin
             // On Windows XP, TXL comes up underneath Paratext. See if this fixes it:
             TopMost = true;
             TopMost = false;
-            Application.AddMessageFilter(this);
-
-            var activeWindowState = _host.ActiveWindowState;
-            _verseReference = activeWindowState.VerseRef;
             GetNewReference(_verseReference);
         }
 
@@ -279,6 +478,9 @@ namespace SIL.ParatextBackTranslationHelperPlugin
             Properties.Settings.Default.WindowLocation = Location;
             Properties.Settings.Default.WindowSize = Size;
             Properties.Settings.Default.Save();
+
+            _host.VerseRefChanged -= host_VerseRefChanged;
+            Dispose();
         }
 
         private void Unlock()
@@ -286,206 +488,9 @@ namespace SIL.ParatextBackTranslationHelperPlugin
             if (_writeLock != null)
             {
                 IWriteLock temp = _writeLock;
+                _writeLock = null;  // to prevent it being called twice while freeing the lock
                 temp.Dispose();
-                _writeLock = null;
             }
         }
-
-        public bool PreFilterMessage(ref Message m)
-        {
-            /*
-            if (m.Msg == (int)Msg.WM_LBUTTONDOWN &&
-                IsPointInSelectedTextInTranslationEditingControl(MousePosition))
-            {
-                // We support both move and copy, but we don't need to handle the result because
-                // we really only support move if the text is moved to a new location within the
-                // TextControl, in which case the "destination" code handles the entire operation,
-                // including removing the existing selected text.
-                TextControl.DoDragDrop(TextControl.SelectedText, DragDropEffects.Copy | DragDropEffects.Move);
-                return true;
-            }
-            */
-            return false;
-        }
-#if false
-        /// ------------------------------------------------------------------------------------
-        /// <summary>
-        /// Determines whether the given point is contained within the selected region of text
-        /// in the text control that is currently being used to edit the Translation.
-        /// </summary>
-        /// <param name="position">Point (typically a mouse position) relative to screen</param>
-        /// ------------------------------------------------------------------------------------
-        private bool IsPointInSelectedTextInTranslationEditingControl(Point position)
-        {
-            if (!EditingTranslation || TextControl.SelectedText.Length == 0)
-                return false;
-
-            var topLeft = TextControl.PointToScreen(new Point(TextControl.ClientRectangle.Top, TextControl.ClientRectangle.Left));
-            var bottom = TextControl.PointToScreen(new Point(0, TextControl.ClientRectangle.Bottom)).Y;
-            if (position.Y >= topLeft.Y && position.Y <= bottom)
-            {
-                var dxStartOfSelection = TextControl.PointToScreen(new Point(
-                    (TextControl.SelectionStart == 0 ? TextControl.ClientRectangle.Left :
-                    TextControl.GetPositionFromCharIndex(TextControl.SelectionStart - 1).X), 0)).X;
-                var limSelection = TextControl.SelectionStart + TextControl.SelectionLength;
-                var dxEndOfSelection = TextControl.PointToScreen(new Point(TextControl.Location.X +
-                    (limSelection == TextControl.Text.Length ? TextControl.ClientSize.Width :
-                    TextControl.GetPositionFromCharIndex(limSelection).X), 0)).X;
-
-                if (position.X >= dxStartOfSelection && position.X <= dxEndOfSelection)
-                    return true;
-            }
-            return false;
-        }
-
-        /// ------------------------------------------------------------------------------------
-        /// <summary>
-        /// Handles DragOver and DragEnter events
-        /// </summary>
-        /// ------------------------------------------------------------------------------------
-        private void TextControl_Drag(object sender, DragEventArgs e)
-        {
-            if ((e.AllowedEffect & (DragDropEffects.Move)) > 0 &&
-                (e.Data.GetDataPresent(DataFormats.StringFormat, false)))
-            {
-                // For now, we can safely assume that any "string" that
-                // allows move is originating in the same TextControl because any
-                // text from an outside app will not come in as a StringFormat
-                // object and no other control in Transcelerator supports
-                // moving string data.
-                e.Effect = DragDropEffects.Move;
-            }
-            else if ((e.AllowedEffect & (DragDropEffects.Copy)) > 0 &&
-                (e.Data.GetDataPresent(DataFormats.StringFormat, false) ||
-                e.Data.GetDataPresent(DataFormats.UnicodeText, false) ||
-                e.Data.GetDataPresent(DataFormats.Text, false)))
-            {
-                e.Effect = DragDropEffects.Copy;
-            }
-        }
-
-        /// ------------------------------------------------------------------------------------
-        /// <summary>
-        /// Handles GiveFeedback event to show the user where the text will be dropped.
-        /// </summary>
-        /// ------------------------------------------------------------------------------------
-        void TextControl_GiveFeedback(object sender, GiveFeedbackEventArgs e)
-        {
-            if (!m_fEnableDragDrop && e.Effect == DragDropEffects.Move)
-            {
-                e.UseDefaultCursors = false;
-            }
-            //var ichInsert = TextControl.GetCharIndexFromPosition(TextControl.PointToClient(MousePosition));
-
-            //if (e.Effect == DragDropEffects.Move && TextControl.SelectionLength > 0 &&
-            //    ichInsert >= TextControl.SelectionStart &&
-            //    ichInsert <= TextControl.SelectionStart + TextControl.SelectionLength)
-            //{
-            //    // Dropping selected text onto itself just removes the selection.
-            //    e.UseDefaultCursors = false; // TODO: This doesn't do anything!
-            //    return;
-            //}
-            //e.UseDefaultCursors = true;
-            //// TODO: Need to return early (just do default behavior) if not over the TextControl
-            //// TODO: Draw special insertion point to show where dropped text would go.
-            //Debug.WriteLine("Insert position: " + ichInsert);
-        }
-
-        /// ------------------------------------------------------------------------------------
-        /// <summary>
-        /// Handles DragDrop event to complete the copy or move.
-        /// </summary>
-        /// ------------------------------------------------------------------------------------
-        private void TextControl_DragDrop(object sender, DragEventArgs e)
-        {
-            var ichInsert = TextControl.GetCharIndexFromPosition(TextControl.PointToClient(new Point(e.X, e.Y)));
-
-            if (!m_fEnableDragDrop)
-            {
-                TextControl.SelectionStart = ichInsert;
-                TextControl.SelectionLength = 0;
-                return;
-            }
-
-            bool fMove = e.Effect == DragDropEffects.Move;
-
-            if ((fMove || e.Effect == DragDropEffects.Copy) &&
-                (e.Data.GetDataPresent(DataFormats.StringFormat, false) ||
-                e.Data.GetDataPresent(DataFormats.UnicodeText, false) ||
-                e.Data.GetDataPresent(DataFormats.Text, false)))
-            {
-                string text = ((string)e.Data.GetData(DataFormats.StringFormat));
-
-                if (fMove && TextControl.SelectionLength > 0 &&
-                    ichInsert >= TextControl.SelectionStart &&
-                    ichInsert <= TextControl.SelectionStart + TextControl.SelectionLength)
-                {
-                    // Don't try to move selected text onto itself. Instead just remove selection.
-                    // This allows a simple click to behave properly.
-                    TextControl.SelectionStart = ichInsert;
-                    TextControl.SelectionLength = 0;
-                    return;
-                }
-
-                if (text.Length > 0)
-                {
-                    var textBefore = TextControl.Text.Substring(0, ichInsert);
-                    var textAfter = TextControl.Text.Substring(ichInsert);
-                    var removeStart = TextControl.SelectionStart;
-                    var removeLen = TextControl.SelectionLength;
-                    if (ichInsert <= removeStart)
-                        removeStart += text.Length;
-                    else // post-adjust the insert location 
-                        ichInsert -= text.Length;
-                    TextControl.Text = textBefore + text + textAfter;
-                    if (removeLen > 0)
-                    {
-                        // We need to handle removal of originally selected text because
-                        // the code where the drag-drop originates assumes we will (it
-                        // treats any copy/move as a copy because we don't want dragging
-                        // from TXL to Word, for example, to result in a move.  
-                        TextControl.Text = TextControl.Text.Remove(removeStart, removeLen);
-                        // Now select the moved text
-                        TextControl.SelectionStart = ichInsert;
-                        TextControl.SelectionLength = text.Length;
-                    }
-                }
-            }
-        }
-#endif
-    }
-
-    class TextToken : IUSFMTextToken
-    {
-        public TextToken(IUSFMTextToken token)
-        {
-            Text = token.Text;
-            VerseRef = token.VerseRef;
-            VerseOffset = token.VerseOffset;
-            IsSpecial = token.IsSpecial;
-            IsFigure = token.IsFigure;
-            IsFootnoteOrCrossReference = token.IsFootnoteOrCrossReference;
-            IsScripture = token.IsScripture;
-            IsMetadata = token.IsMetadata;
-            IsPublishableVernacular = token.IsPublishableVernacular;
-        }
-
-        public string Text { get; set; }
-
-        public IVerseRef VerseRef { get; set; }
-
-        public int VerseOffset { get; set; }
-
-        public bool IsSpecial { get; set; }
-
-        public bool IsFigure { get; set; }
-
-        public bool IsFootnoteOrCrossReference { get; set; }
-
-        public bool IsScripture { get; set; }
-
-        public bool IsMetadata { get; set; }
-
-        public bool IsPublishableVernacular { get; set; }
     }
 }

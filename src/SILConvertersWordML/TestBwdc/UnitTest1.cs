@@ -458,9 +458,875 @@ namespace TestBwdc
             AssertEqual(strResult, cstrOutput);
         }
 
+        [TestMethod]
+        public void TestingCombiningRunsIntoSingleIsoFormattedParagraph()
+        {
+            // from temp\BWDC\Bobby\41MATSCK.doc
+            const string cstr = @"<w:p wsp:rsidR='00123714' wsp:rsidRPr='00F44BD1' wsp:rsidRDefault='00123714' wsp:rsidP='00AC4DAD'>
+<w:pPr>
+  <w:pStyle w:val='ListParagraph' />
+  <w:widowControl w:val='off' />
+  <w:listPr>
+	<w:ilvl w:val='0' />
+	<w:ilfo w:val='3' />
+	<wx:t wx:val='1.' />
+	<wx:font wx:val='Times New Roman' />
+  </w:listPr>
+  <w:pBdr>
+	<w:top w:val='nil' />
+	<w:left w:val='nil' />
+	<w:bottom w:val='nil' />
+	<w:right w:val='nil' />
+	<w:between w:val='nil' />
+  </w:pBdr>
+  <w:rPr>
+	<w:rFonts w:fareast='Times New Roman' w:cs='Times New Roman' />
+	<w:color w:val='2F5496' />
+	<w:lang w:fareast='ZH-CN' />
+  </w:rPr>
+</w:pPr>
+<w:r wsp:rsidRPr='00F44BD1'>
+  <w:rPr>
+	<w:rFonts w:ascii='Gungsuh' w:fareast='Gungsuh' w:h-ansi='Gungsuh' w:cs='Gungsuh' />
+	<wx:font wx:val='Gungsuh' />
+	<w:color w:val='2F5496' />
+	<w:lang w:fareast='ZH-CN' />
+  </w:rPr>
+  <w:t>仔</w:t>
+</w:r>
+<w:r wsp:rsidRPr='00F44BD1'>
+  <w:rPr>
+	<w:rFonts w:ascii='SimSun' w:h-ansi='SimSun' w:cs='SimSun' w:hint='fareast' />
+	<wx:font wx:val='SimSun' />
+	<w:color w:val='2F5496' />
+	<w:lang w:fareast='ZH-CN' />
+  </w:rPr>
+  <w:t>细阅读</w:t>
+</w:r>
+<w:r wsp:rsidRPr='00F44BD1'>
+  <w:rPr>
+	<w:rFonts w:ascii='Gungsuh' w:fareast='Gungsuh' w:h-ansi='Gungsuh' w:cs='Gungsuh' w:hint='fareast' />
+	<wx:font wx:val='Gungsuh' />
+	<w:color w:val='2F5496' />
+	<w:lang w:fareast='ZH-CN' />
+  </w:rPr>
+  <w:t>本</w:t>
+</w:r>
+<w:r wsp:rsidRPr='00F44BD1'>
+  <w:rPr>
+	<w:rFonts w:ascii='SimSun' w:h-ansi='SimSun' w:cs='SimSun' w:hint='fareast' />
+	<wx:font wx:val='SimSun' />
+	<w:color w:val='2F5496' />
+	<w:lang w:fareast='ZH-CN' />
+  </w:rPr>
+  <w:t>资</w:t>
+</w:r>
+<w:r wsp:rsidRPr='00F44BD1'>
+  <w:rPr>
+	<w:rFonts w:ascii='Gungsuh' w:fareast='Gungsuh' w:h-ansi='Gungsuh' w:cs='Gungsuh' w:hint='fareast' />
+	<wx:font wx:val='Gungsuh' />
+	<w:color w:val='2F5496' />
+	<w:lang w:fareast='ZH-CN' />
+  </w:rPr>
+  <w:t>料后面的</w:t>
+</w:r>
+<w:r wsp:rsidRPr='00F44BD1'>
+  <w:rPr>
+	<w:rFonts w:ascii='Gungsuh' w:fareast='Gungsuh' w:h-ansi='Gungsuh' w:cs='Gungsuh' />
+	<wx:font wx:val='Gungsuh' />
+	<w:color w:val='2F5496' />
+	<w:lang w:fareast='ZH-CN' />
+  </w:rPr>
+  <w:t> '</w:t>
+</w:r>
+<w:r wsp:rsidRPr='00F44BD1'>
+  <w:rPr>
+	<w:rFonts w:ascii='SimSun' w:h-ansi='SimSun' w:cs='SimSun' w:hint='fareast' />
+	<wx:font wx:val='SimSun' />
+	<w:color w:val='2F5496' />
+	<w:lang w:fareast='ZH-CN' />
+  </w:rPr>
+  <w:t>组织医</w:t>
+</w:r>
+<w:r wsp:rsidRPr='00F44BD1'>
+  <w:rPr>
+	<w:rFonts w:ascii='Gungsuh' w:fareast='Gungsuh' w:h-ansi='Gungsuh' w:cs='Gungsuh' w:hint='fareast' />
+	<wx:font wx:val='Gungsuh' />
+	<w:color w:val='2F5496' />
+	<w:lang w:fareast='ZH-CN' />
+  </w:rPr>
+  <w:t>治小</w:t>
+</w:r>
+<w:r wsp:rsidRPr='00F44BD1'>
+  <w:rPr>
+	<w:rFonts w:ascii='SimSun' w:h-ansi='SimSun' w:cs='SimSun' w:hint='fareast' />
+	<wx:font wx:val='SimSun' />
+	<w:color w:val='2F5496' />
+	<w:lang w:fareast='ZH-CN' />
+  </w:rPr>
+  <w:t>组</w:t>
+</w:r>
+<w:r wsp:rsidRPr='00F44BD1'>
+  <w:rPr>
+	<w:rFonts w:ascii='Gungsuh' w:fareast='Gungsuh' w:h-ansi='Gungsuh' w:cs='Gungsuh' />
+	<wx:font wx:val='Gungsuh' />
+	<w:color w:val='2F5496' />
+	<w:lang w:fareast='ZH-CN' />
+  </w:rPr>
+  <w:t> '部分。</w:t>
+</w:r>
+<w:r wsp:rsidRPr='00F44BD1'>
+  <w:rPr>
+	<w:rFonts w:ascii='SimSun' w:h-ansi='SimSun' w:cs='SimSun' w:hint='fareast' />
+	<wx:font wx:val='SimSun' />
+	<w:color w:val='2F5496' />
+	<w:lang w:fareast='ZH-CN' />
+  </w:rPr>
+  <w:t>它</w:t>
+</w:r>
+<w:r wsp:rsidRPr='00F44BD1'>
+  <w:rPr>
+	<w:rFonts w:ascii='Gungsuh' w:fareast='Gungsuh' w:h-ansi='Gungsuh' w:cs='Gungsuh' w:hint='fareast' />
+	<wx:font wx:val='Gungsuh' />
+	<w:color w:val='2F5496' />
+	<w:lang w:fareast='ZH-CN' />
+  </w:rPr>
+  <w:t>包含了如何使用本</w:t>
+</w:r>
+<w:r wsp:rsidRPr='00F44BD1'>
+  <w:rPr>
+	<w:rFonts w:ascii='SimSun' w:h-ansi='SimSun' w:cs='SimSun' w:hint='fareast' />
+	<wx:font wx:val='SimSun' />
+	<w:color w:val='2F5496' />
+	<w:lang w:fareast='ZH-CN' />
+  </w:rPr>
+  <w:t>资</w:t>
+</w:r>
+<w:r wsp:rsidRPr='00F44BD1'>
+  <w:rPr>
+	<w:rFonts w:ascii='Gungsuh' w:fareast='Gungsuh' w:h-ansi='Gungsuh' w:cs='Gungsuh' w:hint='fareast' />
+	<wx:font wx:val='Gungsuh' />
+	<w:color w:val='2F5496' />
+	<w:lang w:fareast='ZH-CN' />
+  </w:rPr>
+  <w:t>料</w:t>
+</w:r>
+<w:r wsp:rsidRPr='00F44BD1'>
+  <w:rPr>
+	<w:rFonts w:ascii='SimSun' w:h-ansi='SimSun' w:cs='SimSun' w:hint='fareast' />
+	<wx:font wx:val='SimSun' />
+	<w:color w:val='2F5496' />
+	<w:lang w:fareast='ZH-CN' />
+  </w:rPr>
+  <w:t>来</w:t>
+</w:r>
+<w:r wsp:rsidRPr='00F44BD1'>
+  <w:rPr>
+	<w:rFonts w:ascii='Gungsuh' w:fareast='Gungsuh' w:h-ansi='Gungsuh' w:cs='Gungsuh' />
+	<wx:font wx:val='Gungsuh' />
+	<w:color w:val='2F5496' />
+	<w:lang w:fareast='ZH-CN' />
+  </w:rPr>
+  <w:t>管理不同</w:t>
+</w:r>
+<w:r wsp:rsidRPr='00F44BD1'>
+  <w:rPr>
+	<w:rFonts w:ascii='SimSun' w:h-ansi='SimSun' w:cs='SimSun' w:hint='fareast' />
+	<wx:font wx:val='SimSun' />
+	<w:color w:val='2F5496' />
+	<w:lang w:fareast='ZH-CN' />
+  </w:rPr>
+  <w:t>规</w:t>
+</w:r>
+<w:r wsp:rsidRPr='00F44BD1'>
+  <w:rPr>
+	<w:rFonts w:ascii='Gungsuh' w:fareast='Gungsuh' w:h-ansi='Gungsuh' w:cs='Gungsuh' w:hint='fareast' />
+	<wx:font wx:val='Gungsuh' />
+	<w:color w:val='2F5496' />
+	<w:lang w:fareast='ZH-CN' />
+  </w:rPr>
+  <w:t>模的小</w:t>
+</w:r>
+<w:r wsp:rsidRPr='00F44BD1'>
+  <w:rPr>
+	<w:rFonts w:ascii='SimSun' w:h-ansi='SimSun' w:cs='SimSun' w:hint='fareast' />
+	<wx:font wx:val='SimSun' />
+	<w:color w:val='2F5496' />
+	<w:lang w:fareast='ZH-CN' />
+  </w:rPr>
+  <w:t>组</w:t>
+</w:r>
+<w:r wsp:rsidRPr='00F44BD1'>
+  <w:rPr>
+	<w:rFonts w:ascii='Gungsuh' w:fareast='Gungsuh' w:h-ansi='Gungsuh' w:cs='Gungsuh' w:hint='fareast' />
+	<wx:font wx:val='Gungsuh' />
+	<w:color w:val='2F5496' />
+	<w:lang w:fareast='ZH-CN' />
+  </w:rPr>
+  <w:t>的</w:t>
+</w:r>
+<w:r wsp:rsidRPr='00F44BD1'>
+  <w:rPr>
+	<w:rFonts w:ascii='SimSun' w:h-ansi='SimSun' w:cs='SimSun' w:hint='fareast' />
+	<wx:font wx:val='SimSun' />
+	<w:color w:val='2F5496' />
+	<w:lang w:fareast='ZH-CN' />
+  </w:rPr>
+  <w:t>讨论</w:t>
+</w:r>
+<w:r wsp:rsidRPr='00F44BD1'>
+  <w:rPr>
+	<w:rFonts w:ascii='Gungsuh' w:fareast='Gungsuh' w:h-ansi='Gungsuh' w:cs='Gungsuh' w:hint='fareast' />
+	<wx:font wx:val='Gungsuh' />
+	<w:color w:val='2F5496' />
+	<w:lang w:fareast='ZH-CN' />
+  </w:rPr>
+  <w:t>、空</w:t>
+</w:r>
+<w:r wsp:rsidRPr='00F44BD1'>
+  <w:rPr>
+	<w:rFonts w:ascii='SimSun' w:h-ansi='SimSun' w:cs='SimSun' w:hint='fareast' />
+	<wx:font wx:val='SimSun' />
+	<w:color w:val='2F5496' />
+	<w:lang w:fareast='ZH-CN' />
+  </w:rPr>
+  <w:t>间</w:t>
+</w:r>
+<w:r wsp:rsidR='005E14B7' wsp:rsidRPr='00F44BD1'>
+  <w:rPr>
+	<w:rFonts w:ascii='Gungsuh' w:h-ansi='Gungsuh' w:cs='Gungsuh' w:hint='fareast' />
+	<wx:font wx:val='SimSun' />
+	<w:color w:val='2F5496' />
+	<w:lang w:fareast='ZH-CN' />
+  </w:rPr>
+  <w:t>安排</w:t>
+</w:r>
+<w:r wsp:rsidRPr='00F44BD1'>
+  <w:rPr>
+	<w:rFonts w:ascii='Gungsuh' w:fareast='Gungsuh' w:h-ansi='Gungsuh' w:cs='Gungsuh' />
+	<wx:font wx:val='Gungsuh' />
+	<w:color w:val='2F5496' />
+	<w:lang w:fareast='ZH-CN' />
+  </w:rPr>
+  <w:t>、</w:t>
+</w:r>
+<w:r wsp:rsidRPr='00F44BD1'>
+  <w:rPr>
+	<w:rFonts w:ascii='SimSun' w:h-ansi='SimSun' w:cs='SimSun' w:hint='fareast' />
+	<wx:font wx:val='SimSun' />
+	<w:color w:val='2F5496' />
+	<w:lang w:fareast='ZH-CN' />
+  </w:rPr>
+  <w:t>时间</w:t>
+</w:r>
+<w:r wsp:rsidR='005E14B7' wsp:rsidRPr='00CC49E5'>
+  <w:rPr>
+	<w:rFonts w:ascii='DengXian' w:h-ansi='DengXian' w:cs='Gungsuh' w:hint='fareast' />
+	<wx:font wx:val='SimSun' />
+	<w:color w:val='2F5496' />
+	<w:lang w:fareast='ZH-CN' />
+  </w:rPr>
+  <w:t>管理</w:t>
+</w:r>
+<w:r wsp:rsidRPr='00F44BD1'>
+  <w:rPr>
+	<w:rFonts w:ascii='Gungsuh' w:fareast='Gungsuh' w:h-ansi='Gungsuh' w:cs='Gungsuh' />
+	<wx:font wx:val='Gungsuh' />
+	<w:color w:val='2F5496' />
+	<w:lang w:fareast='ZH-CN' />
+  </w:rPr>
+  <w:t>以及其他重要的原</w:t>
+</w:r>
+<w:r wsp:rsidRPr='00F44BD1'>
+  <w:rPr>
+	<w:rFonts w:ascii='SimSun' w:h-ansi='SimSun' w:cs='SimSun' w:hint='fareast' />
+	<wx:font wx:val='SimSun' />
+	<w:color w:val='2F5496' />
+	<w:lang w:fareast='ZH-CN' />
+  </w:rPr>
+  <w:t>则说明</w:t>
+</w:r>
+
+<w:r wsp:rsidRPr='00F44BD1'>
+  <w:rPr>
+	<w:rFonts w:ascii='Gungsuh' w:fareast='Gungsuh' w:h-ansi='Gungsuh' w:cs='Gungsuh' />
+	<wx:font wx:val='Gungsuh' />
+	<w:color w:val='2F5496' />
+	<w:lang w:fareast='ZH-CN' />
+  </w:rPr>
+  <w:t>，</w:t>
+</w:r>
+<w:r wsp:rsidRPr='00F44BD1'>
+  <w:rPr>
+	<w:rFonts w:ascii='SimSun' w:h-ansi='SimSun' w:cs='SimSun' w:hint='fareast' />
+	<wx:font wx:val='SimSun' />
+	<w:color w:val='2F5496' />
+	<w:lang w:fareast='ZH-CN' />
+  </w:rPr>
+  <w:t>这</w:t>
+</w:r>
+<w:r wsp:rsidRPr='00F44BD1'>
+  <w:rPr>
+	<w:rFonts w:ascii='Gungsuh' w:fareast='Gungsuh' w:h-ansi='Gungsuh' w:cs='Gungsuh' w:hint='fareast' />
+	<wx:font wx:val='Gungsuh' />
+	<w:color w:val='2F5496' />
+	<w:lang w:fareast='ZH-CN' />
+  </w:rPr>
+  <w:t>些都</w:t>
+</w:r>
+<w:r wsp:rsidRPr='00F44BD1'>
+  <w:rPr>
+	<w:rFonts w:ascii='SimSun' w:h-ansi='SimSun' w:cs='SimSun' w:hint='fareast' />
+	<wx:font wx:val='SimSun' />
+	<w:color w:val='2F5496' />
+	<w:lang w:fareast='ZH-CN' />
+  </w:rPr>
+  <w:t>将</w:t>
+</w:r>
+<w:r wsp:rsidRPr='00F44BD1'>
+  <w:rPr>
+	<w:rFonts w:ascii='Gungsuh' w:fareast='Gungsuh' w:h-ansi='Gungsuh' w:cs='Gungsuh' w:hint='fareast' />
+	<wx:font wx:val='Gungsuh' />
+	<w:color w:val='2F5496' />
+	<w:lang w:fareast='ZH-CN' />
+  </w:rPr>
+  <w:t>有助于</w:t>
+</w:r>
+<w:r wsp:rsidRPr='00F44BD1'>
+  <w:rPr>
+	<w:rFonts w:ascii='SimSun' w:h-ansi='SimSun' w:cs='SimSun' w:hint='fareast' />
+	<wx:font wx:val='SimSun' />
+	<w:color w:val='2F5496' />
+	<w:lang w:fareast='ZH-CN' />
+  </w:rPr>
+  <w:t>你带领</w:t>
+</w:r>
+<w:r wsp:rsidRPr='00F44BD1'>
+  <w:rPr>
+	<w:rFonts w:ascii='Gungsuh' w:fareast='Gungsuh' w:h-ansi='Gungsuh' w:cs='Gungsuh' w:hint='fareast' />
+	<wx:font wx:val='Gungsuh' />
+	<w:color w:val='2F5496' />
+	<w:lang w:fareast='ZH-CN' />
+  </w:rPr>
+  <w:t>小</w:t>
+</w:r>
+<aml:annotation aml:id='33' w:type='Word.Bookmark.End' />
+<w:r wsp:rsidRPr='00F44BD1'>
+  <w:rPr>
+	<w:rFonts w:ascii='SimSun' w:h-ansi='SimSun' w:cs='SimSun' w:hint='fareast' />
+	<wx:font wx:val='SimSun' />
+	<w:color w:val='2F5496' />
+	<w:lang w:fareast='ZH-CN' />
+  </w:rPr>
+  <w:t>组</w:t>
+</w:r>
+<w:r wsp:rsidRPr='00F44BD1'>
+  <w:rPr>
+	<w:rFonts w:ascii='Gungsuh' w:fareast='Gungsuh' w:h-ansi='Gungsuh' w:cs='Gungsuh' w:hint='fareast' />
+	<wx:font wx:val='Gungsuh' />
+	<w:color w:val='2F5496' />
+	<w:lang w:fareast='ZH-CN' />
+  </w:rPr>
+  <w:t>。</w:t>
+</w:r>
+</w:p>
+";
+            const string cstrOutput =
+@"<w:p wsp:rsidR='00123714' wsp:rsidRPr='00F44BD1' wsp:rsidRDefault='00123714' wsp:rsidP='00AC4DAD'>
+	<w:pPr>
+	  <w:pStyle w:val='ListParagraph' />
+	  <w:widowControl w:val='off' />
+	  <w:listPr>
+		<w:ilvl w:val='0' />
+		<w:ilfo w:val='3' />
+		<wx:t wx:val='1.' />
+		<wx:font wx:val='Times New Roman' />
+	  </w:listPr>
+	  <w:pBdr>
+		<w:top w:val='nil' />
+		<w:left w:val='nil' />
+		<w:bottom w:val='nil' />
+		<w:right w:val='nil' />
+		<w:between w:val='nil' />
+	  </w:pBdr>
+	  <w:rPr>
+		<w:rFonts w:fareast='Times New Roman' w:cs='Times New Roman' />
+		<w:color w:val='2F5496' />
+		<w:lang w:fareast='ZH-CN' />
+	  </w:rPr>
+	</w:pPr>
+	<w:r wsp:rsidRPr='00F44BD1'>
+	  <w:rPr>
+		<w:rFonts w:ascii='Gungsuh' w:fareast='Gungsuh' w:h-ansi='Gungsuh' w:cs='Gungsuh' />
+		<wx:font wx:val='Gungsuh' />
+		<w:color w:val='2F5496' />
+		<w:lang w:fareast='ZH-CN' />
+	  </w:rPr>
+	  <w:t>仔细阅读本资料后面的 '组织医治小组 '部分。它包含了如何使用本资料来管理不同规模的小组的讨论、空间安排、时间管理以及其他重要的原则说明，这些都将有助于你带领小组。</w:t>
+	</w:r>
+</w:p>
+";
+
+            var strInput = String.Format(Properties.Resources.TestFile2,
+                                         cstr);
+            var doc = XDocument.Parse(strInput);
+            WordLinqDocument.CombineAllRunsIntoSingleRun(doc);
+            var strResult = doc.Root.Descendants(WordLinqDocument.w + "p")
+                                    .FirstOrDefault()
+                                    .ToString();
+            AssertEqual(strResult, cstrOutput);
+        }
+
+        [TestMethod]
+        public void TestingCombiningRunsIntoSingleIsoFormattedParagraph_With_Initial_Non_WT_runs()
+        {
+            // from temp\BWDC\Bobby\41MATSCK.doc
+            const string cstr = @"<w:p wsp:rsidR='00123714' wsp:rsidRPr='00F44BD1' wsp:rsidRDefault='00123714' wsp:rsidP='00AC4DAD'>
+<w:pPr>
+  <w:pStyle w:val='ListParagraph' />
+  <w:widowControl w:val='off' />
+  <w:listPr>
+	<w:ilvl w:val='0' />
+	<w:ilfo w:val='3' />
+	<wx:t wx:val='1.' />
+	<wx:font wx:val='Times New Roman' />
+  </w:listPr>
+  <w:pBdr>
+	<w:top w:val='nil' />
+	<w:left w:val='nil' />
+	<w:bottom w:val='nil' />
+	<w:right w:val='nil' />
+	<w:between w:val='nil' />
+  </w:pBdr>
+  <w:rPr>
+	<w:rFonts w:fareast='Times New Roman' w:cs='Times New Roman' />
+	<w:color w:val='2F5496' />
+	<w:lang w:fareast='ZH-CN' />
+  </w:rPr>
+</w:pPr>
+<aml:annotation aml:id='33' w:type='Word.Bookmark.End' />
+<w:r wsp:rsidRPr='00F44BD1'>
+  <w:rPr>
+	<w:rFonts w:ascii='Gungsuh' w:fareast='Gungsuh' w:h-ansi='Gungsuh' w:cs='Gungsuh' />
+	<wx:font wx:val='Gungsuh' />
+	<w:color w:val='2F5496' />
+	<w:lang w:fareast='ZH-CN' />
+  </w:rPr>
+</w:r>
+<w:r wsp:rsidRPr='00F44BD1'>
+  <w:rPr>
+	<w:rFonts w:ascii='Gungsuh' w:fareast='Gungsuh' w:h-ansi='Gungsuh' w:cs='Gungsuh' />
+	<wx:font wx:val='Gungsuh' />
+	<w:color w:val='2F5496' />
+	<w:lang w:fareast='ZH-CN' />
+  </w:rPr>
+  <w:t>仔</w:t>
+</w:r>
+<w:r wsp:rsidRPr='00F44BD1'>
+  <w:rPr>
+	<w:rFonts w:ascii='Gungsuh' w:fareast='Gungsuh' w:h-ansi='Gungsuh' w:cs='Gungsuh' />
+	<wx:font wx:val='Gungsuh' />
+	<w:color w:val='2F5496' />
+	<w:lang w:fareast='ZH-CN' />
+  </w:rPr>
+</w:r>
+<w:r wsp:rsidRPr='00F44BD1'>
+  <w:rPr>
+	<w:rFonts w:ascii='SimSun' w:h-ansi='SimSun' w:cs='SimSun' w:hint='fareast' />
+	<wx:font wx:val='SimSun' />
+	<w:color w:val='2F5496' />
+	<w:lang w:fareast='ZH-CN' />
+  </w:rPr>
+  <w:t>细阅读</w:t>
+</w:r>
+<w:r wsp:rsidRPr='00F44BD1'>
+  <w:rPr>
+	<w:rFonts w:ascii='Gungsuh' w:fareast='Gungsuh' w:h-ansi='Gungsuh' w:cs='Gungsuh' w:hint='fareast' />
+	<wx:font wx:val='Gungsuh' />
+	<w:color w:val='2F5496' />
+	<w:lang w:fareast='ZH-CN' />
+  </w:rPr>
+  <w:t>本</w:t>
+</w:r>
+<w:r wsp:rsidRPr='00F44BD1'>
+  <w:rPr>
+	<w:rFonts w:ascii='SimSun' w:h-ansi='SimSun' w:cs='SimSun' w:hint='fareast' />
+	<wx:font wx:val='SimSun' />
+	<w:color w:val='2F5496' />
+	<w:lang w:fareast='ZH-CN' />
+  </w:rPr>
+  <w:t>资</w:t>
+</w:r>
+<w:r wsp:rsidRPr='00F44BD1'>
+  <w:rPr>
+	<w:rFonts w:ascii='Gungsuh' w:fareast='Gungsuh' w:h-ansi='Gungsuh' w:cs='Gungsuh' w:hint='fareast' />
+	<wx:font wx:val='Gungsuh' />
+	<w:color w:val='2F5496' />
+	<w:lang w:fareast='ZH-CN' />
+  </w:rPr>
+  <w:t>料后面的</w:t>
+</w:r>
+<w:r wsp:rsidRPr='00F44BD1'>
+  <w:rPr>
+	<w:rFonts w:ascii='Gungsuh' w:fareast='Gungsuh' w:h-ansi='Gungsuh' w:cs='Gungsuh' />
+	<wx:font wx:val='Gungsuh' />
+	<w:color w:val='2F5496' />
+	<w:lang w:fareast='ZH-CN' />
+  </w:rPr>
+  <w:t> '</w:t>
+</w:r>
+<w:r wsp:rsidRPr='00F44BD1'>
+  <w:rPr>
+	<w:rFonts w:ascii='SimSun' w:h-ansi='SimSun' w:cs='SimSun' w:hint='fareast' />
+	<wx:font wx:val='SimSun' />
+	<w:color w:val='2F5496' />
+	<w:lang w:fareast='ZH-CN' />
+  </w:rPr>
+  <w:t>组织医</w:t>
+</w:r>
+<w:r wsp:rsidRPr='00F44BD1'>
+  <w:rPr>
+	<w:rFonts w:ascii='Gungsuh' w:fareast='Gungsuh' w:h-ansi='Gungsuh' w:cs='Gungsuh' w:hint='fareast' />
+	<wx:font wx:val='Gungsuh' />
+	<w:color w:val='2F5496' />
+	<w:lang w:fareast='ZH-CN' />
+  </w:rPr>
+  <w:t>治小</w:t>
+</w:r>
+<w:r wsp:rsidRPr='00F44BD1'>
+  <w:rPr>
+	<w:rFonts w:ascii='SimSun' w:h-ansi='SimSun' w:cs='SimSun' w:hint='fareast' />
+	<wx:font wx:val='SimSun' />
+	<w:color w:val='2F5496' />
+	<w:lang w:fareast='ZH-CN' />
+  </w:rPr>
+  <w:t>组</w:t>
+</w:r>
+<w:r wsp:rsidRPr='00F44BD1'>
+  <w:rPr>
+	<w:rFonts w:ascii='Gungsuh' w:fareast='Gungsuh' w:h-ansi='Gungsuh' w:cs='Gungsuh' />
+	<wx:font wx:val='Gungsuh' />
+	<w:color w:val='2F5496' />
+	<w:lang w:fareast='ZH-CN' />
+  </w:rPr>
+  <w:t> '部分。</w:t>
+</w:r>
+<w:r wsp:rsidRPr='00F44BD1'>
+  <w:rPr>
+	<w:rFonts w:ascii='SimSun' w:h-ansi='SimSun' w:cs='SimSun' w:hint='fareast' />
+	<wx:font wx:val='SimSun' />
+	<w:color w:val='2F5496' />
+	<w:lang w:fareast='ZH-CN' />
+  </w:rPr>
+  <w:t>它</w:t>
+</w:r>
+<w:r wsp:rsidRPr='00F44BD1'>
+  <w:rPr>
+	<w:rFonts w:ascii='Gungsuh' w:fareast='Gungsuh' w:h-ansi='Gungsuh' w:cs='Gungsuh' w:hint='fareast' />
+	<wx:font wx:val='Gungsuh' />
+	<w:color w:val='2F5496' />
+	<w:lang w:fareast='ZH-CN' />
+  </w:rPr>
+  <w:t>包含了如何使用本</w:t>
+</w:r>
+<w:r wsp:rsidRPr='00F44BD1'>
+  <w:rPr>
+	<w:rFonts w:ascii='SimSun' w:h-ansi='SimSun' w:cs='SimSun' w:hint='fareast' />
+	<wx:font wx:val='SimSun' />
+	<w:color w:val='2F5496' />
+	<w:lang w:fareast='ZH-CN' />
+  </w:rPr>
+  <w:t>资</w:t>
+</w:r>
+<w:r wsp:rsidRPr='00F44BD1'>
+  <w:rPr>
+	<w:rFonts w:ascii='Gungsuh' w:fareast='Gungsuh' w:h-ansi='Gungsuh' w:cs='Gungsuh' w:hint='fareast' />
+	<wx:font wx:val='Gungsuh' />
+	<w:color w:val='2F5496' />
+	<w:lang w:fareast='ZH-CN' />
+  </w:rPr>
+  <w:t>料</w:t>
+</w:r>
+<w:r wsp:rsidRPr='00F44BD1'>
+  <w:rPr>
+	<w:rFonts w:ascii='SimSun' w:h-ansi='SimSun' w:cs='SimSun' w:hint='fareast' />
+	<wx:font wx:val='SimSun' />
+	<w:color w:val='2F5496' />
+	<w:lang w:fareast='ZH-CN' />
+  </w:rPr>
+  <w:t>来</w:t>
+</w:r>
+<w:r wsp:rsidRPr='00F44BD1'>
+  <w:rPr>
+	<w:rFonts w:ascii='Gungsuh' w:fareast='Gungsuh' w:h-ansi='Gungsuh' w:cs='Gungsuh' />
+	<wx:font wx:val='Gungsuh' />
+	<w:color w:val='2F5496' />
+	<w:lang w:fareast='ZH-CN' />
+  </w:rPr>
+  <w:t>管理不同</w:t>
+</w:r>
+<w:r wsp:rsidRPr='00F44BD1'>
+  <w:rPr>
+	<w:rFonts w:ascii='SimSun' w:h-ansi='SimSun' w:cs='SimSun' w:hint='fareast' />
+	<wx:font wx:val='SimSun' />
+	<w:color w:val='2F5496' />
+	<w:lang w:fareast='ZH-CN' />
+  </w:rPr>
+  <w:t>规</w:t>
+</w:r>
+<w:r wsp:rsidRPr='00F44BD1'>
+  <w:rPr>
+	<w:rFonts w:ascii='Gungsuh' w:fareast='Gungsuh' w:h-ansi='Gungsuh' w:cs='Gungsuh' w:hint='fareast' />
+	<wx:font wx:val='Gungsuh' />
+	<w:color w:val='2F5496' />
+	<w:lang w:fareast='ZH-CN' />
+  </w:rPr>
+  <w:t>模的小</w:t>
+</w:r>
+<w:r wsp:rsidRPr='00F44BD1'>
+  <w:rPr>
+	<w:rFonts w:ascii='SimSun' w:h-ansi='SimSun' w:cs='SimSun' w:hint='fareast' />
+	<wx:font wx:val='SimSun' />
+	<w:color w:val='2F5496' />
+	<w:lang w:fareast='ZH-CN' />
+  </w:rPr>
+  <w:t>组</w:t>
+</w:r>
+<w:r wsp:rsidRPr='00F44BD1'>
+  <w:rPr>
+	<w:rFonts w:ascii='Gungsuh' w:fareast='Gungsuh' w:h-ansi='Gungsuh' w:cs='Gungsuh' w:hint='fareast' />
+	<wx:font wx:val='Gungsuh' />
+	<w:color w:val='2F5496' />
+	<w:lang w:fareast='ZH-CN' />
+  </w:rPr>
+  <w:t>的</w:t>
+</w:r>
+<w:r wsp:rsidRPr='00F44BD1'>
+  <w:rPr>
+	<w:rFonts w:ascii='SimSun' w:h-ansi='SimSun' w:cs='SimSun' w:hint='fareast' />
+	<wx:font wx:val='SimSun' />
+	<w:color w:val='2F5496' />
+	<w:lang w:fareast='ZH-CN' />
+  </w:rPr>
+  <w:t>讨论</w:t>
+</w:r>
+<w:r wsp:rsidRPr='00F44BD1'>
+  <w:rPr>
+	<w:rFonts w:ascii='Gungsuh' w:fareast='Gungsuh' w:h-ansi='Gungsuh' w:cs='Gungsuh' w:hint='fareast' />
+	<wx:font wx:val='Gungsuh' />
+	<w:color w:val='2F5496' />
+	<w:lang w:fareast='ZH-CN' />
+  </w:rPr>
+  <w:t>、空</w:t>
+</w:r>
+<w:r wsp:rsidRPr='00F44BD1'>
+  <w:rPr>
+	<w:rFonts w:ascii='SimSun' w:h-ansi='SimSun' w:cs='SimSun' w:hint='fareast' />
+	<wx:font wx:val='SimSun' />
+	<w:color w:val='2F5496' />
+	<w:lang w:fareast='ZH-CN' />
+  </w:rPr>
+  <w:t>间</w:t>
+</w:r>
+<w:r wsp:rsidR='005E14B7' wsp:rsidRPr='00F44BD1'>
+  <w:rPr>
+	<w:rFonts w:ascii='Gungsuh' w:h-ansi='Gungsuh' w:cs='Gungsuh' w:hint='fareast' />
+	<wx:font wx:val='SimSun' />
+	<w:color w:val='2F5496' />
+	<w:lang w:fareast='ZH-CN' />
+  </w:rPr>
+  <w:t>安排</w:t>
+</w:r>
+<w:r wsp:rsidRPr='00F44BD1'>
+  <w:rPr>
+	<w:rFonts w:ascii='Gungsuh' w:fareast='Gungsuh' w:h-ansi='Gungsuh' w:cs='Gungsuh' />
+	<wx:font wx:val='Gungsuh' />
+	<w:color w:val='2F5496' />
+	<w:lang w:fareast='ZH-CN' />
+  </w:rPr>
+  <w:t>、</w:t>
+</w:r>
+<w:r wsp:rsidRPr='00F44BD1'>
+  <w:rPr>
+	<w:rFonts w:ascii='SimSun' w:h-ansi='SimSun' w:cs='SimSun' w:hint='fareast' />
+	<wx:font wx:val='SimSun' />
+	<w:color w:val='2F5496' />
+	<w:lang w:fareast='ZH-CN' />
+  </w:rPr>
+  <w:t>时间</w:t>
+</w:r>
+<w:r wsp:rsidR='005E14B7' wsp:rsidRPr='00CC49E5'>
+  <w:rPr>
+	<w:rFonts w:ascii='DengXian' w:h-ansi='DengXian' w:cs='Gungsuh' w:hint='fareast' />
+	<wx:font wx:val='SimSun' />
+	<w:color w:val='2F5496' />
+	<w:lang w:fareast='ZH-CN' />
+  </w:rPr>
+  <w:t>管理</w:t>
+</w:r>
+<w:r wsp:rsidRPr='00F44BD1'>
+  <w:rPr>
+	<w:rFonts w:ascii='Gungsuh' w:fareast='Gungsuh' w:h-ansi='Gungsuh' w:cs='Gungsuh' />
+	<wx:font wx:val='Gungsuh' />
+	<w:color w:val='2F5496' />
+	<w:lang w:fareast='ZH-CN' />
+  </w:rPr>
+  <w:t>以及其他重要的原</w:t>
+</w:r>
+<w:r wsp:rsidRPr='00F44BD1'>
+  <w:rPr>
+	<w:rFonts w:ascii='SimSun' w:h-ansi='SimSun' w:cs='SimSun' w:hint='fareast' />
+	<wx:font wx:val='SimSun' />
+	<w:color w:val='2F5496' />
+	<w:lang w:fareast='ZH-CN' />
+  </w:rPr>
+  <w:t>则说明</w:t>
+</w:r>
+
+<w:r wsp:rsidRPr='00F44BD1'>
+  <w:rPr>
+	<w:rFonts w:ascii='Gungsuh' w:fareast='Gungsuh' w:h-ansi='Gungsuh' w:cs='Gungsuh' />
+	<wx:font wx:val='Gungsuh' />
+	<w:color w:val='2F5496' />
+	<w:lang w:fareast='ZH-CN' />
+  </w:rPr>
+  <w:t>，</w:t>
+</w:r>
+<w:r wsp:rsidRPr='00F44BD1'>
+  <w:rPr>
+	<w:rFonts w:ascii='SimSun' w:h-ansi='SimSun' w:cs='SimSun' w:hint='fareast' />
+	<wx:font wx:val='SimSun' />
+	<w:color w:val='2F5496' />
+	<w:lang w:fareast='ZH-CN' />
+  </w:rPr>
+  <w:t>这</w:t>
+</w:r>
+<w:r wsp:rsidRPr='00F44BD1'>
+  <w:rPr>
+	<w:rFonts w:ascii='Gungsuh' w:fareast='Gungsuh' w:h-ansi='Gungsuh' w:cs='Gungsuh' w:hint='fareast' />
+	<wx:font wx:val='Gungsuh' />
+	<w:color w:val='2F5496' />
+	<w:lang w:fareast='ZH-CN' />
+  </w:rPr>
+  <w:t>些都</w:t>
+</w:r>
+<w:r wsp:rsidRPr='00F44BD1'>
+  <w:rPr>
+	<w:rFonts w:ascii='SimSun' w:h-ansi='SimSun' w:cs='SimSun' w:hint='fareast' />
+	<wx:font wx:val='SimSun' />
+	<w:color w:val='2F5496' />
+	<w:lang w:fareast='ZH-CN' />
+  </w:rPr>
+  <w:t>将</w:t>
+</w:r>
+<w:r wsp:rsidRPr='00F44BD1'>
+  <w:rPr>
+	<w:rFonts w:ascii='Gungsuh' w:fareast='Gungsuh' w:h-ansi='Gungsuh' w:cs='Gungsuh' w:hint='fareast' />
+	<wx:font wx:val='Gungsuh' />
+	<w:color w:val='2F5496' />
+	<w:lang w:fareast='ZH-CN' />
+  </w:rPr>
+  <w:t>有助于</w:t>
+</w:r>
+<w:r wsp:rsidRPr='00F44BD1'>
+  <w:rPr>
+	<w:rFonts w:ascii='SimSun' w:h-ansi='SimSun' w:cs='SimSun' w:hint='fareast' />
+	<wx:font wx:val='SimSun' />
+	<w:color w:val='2F5496' />
+	<w:lang w:fareast='ZH-CN' />
+  </w:rPr>
+  <w:t>你带领</w:t>
+</w:r>
+<w:r wsp:rsidRPr='00F44BD1'>
+  <w:rPr>
+	<w:rFonts w:ascii='Gungsuh' w:fareast='Gungsuh' w:h-ansi='Gungsuh' w:cs='Gungsuh' w:hint='fareast' />
+	<wx:font wx:val='Gungsuh' />
+	<w:color w:val='2F5496' />
+	<w:lang w:fareast='ZH-CN' />
+  </w:rPr>
+  <w:t>小</w:t>
+</w:r>
+<aml:annotation aml:id='33' w:type='Word.Bookmark.End' />
+<w:r wsp:rsidRPr='00F44BD1'>
+  <w:rPr>
+	<w:rFonts w:ascii='SimSun' w:h-ansi='SimSun' w:cs='SimSun' w:hint='fareast' />
+	<wx:font wx:val='SimSun' />
+	<w:color w:val='2F5496' />
+	<w:lang w:fareast='ZH-CN' />
+  </w:rPr>
+  <w:t>组</w:t>
+</w:r>
+<w:r wsp:rsidRPr='00F44BD1'>
+  <w:rPr>
+	<w:rFonts w:ascii='Gungsuh' w:fareast='Gungsuh' w:h-ansi='Gungsuh' w:cs='Gungsuh' w:hint='fareast' />
+	<wx:font wx:val='Gungsuh' />
+	<w:color w:val='2F5496' />
+	<w:lang w:fareast='ZH-CN' />
+  </w:rPr>
+  <w:t>。</w:t>
+</w:r>
+</w:p>
+";
+            const string cstrOutput =
+@"<w:p wsp:rsidR='00123714' wsp:rsidRPr='00F44BD1' wsp:rsidRDefault='00123714' wsp:rsidP='00AC4DAD'>
+	<w:pPr>
+	  <w:pStyle w:val='ListParagraph' />
+	  <w:widowControl w:val='off' />
+	  <w:listPr>
+		<w:ilvl w:val='0' />
+		<w:ilfo w:val='3' />
+		<wx:t wx:val='1.' />
+		<wx:font wx:val='Times New Roman' />
+	  </w:listPr>
+	  <w:pBdr>
+		<w:top w:val='nil' />
+		<w:left w:val='nil' />
+		<w:bottom w:val='nil' />
+		<w:right w:val='nil' />
+		<w:between w:val='nil' />
+	  </w:pBdr>
+	  <w:rPr>
+		<w:rFonts w:fareast='Times New Roman' w:cs='Times New Roman' />
+		<w:color w:val='2F5496' />
+		<w:lang w:fareast='ZH-CN' />
+	  </w:rPr>
+	</w:pPr>
+    <aml:annotation aml:id='33' w:type='Word.Bookmark.End' />
+    <w:r wsp:rsidRPr='00F44BD1'>
+      <w:rPr>
+	    <w:rFonts w:ascii='Gungsuh' w:fareast='Gungsuh' w:h-ansi='Gungsuh' w:cs='Gungsuh' />
+	    <wx:font wx:val='Gungsuh' />
+	    <w:color w:val='2F5496' />
+	    <w:lang w:fareast='ZH-CN' />
+      </w:rPr>
+    </w:r>
+	<w:r wsp:rsidRPr='00F44BD1'>
+	  <w:rPr>
+		<w:rFonts w:ascii='Gungsuh' w:fareast='Gungsuh' w:h-ansi='Gungsuh' w:cs='Gungsuh' />
+		<wx:font wx:val='Gungsuh' />
+		<w:color w:val='2F5496' />
+		<w:lang w:fareast='ZH-CN' />
+	  </w:rPr>
+	  <w:t>仔细阅读本资料后面的 '组织医治小组 '部分。它包含了如何使用本资料来管理不同规模的小组的讨论、空间安排、时间管理以及其他重要的原则说明，这些都将有助于你带领小组。</w:t>
+	</w:r>
+</w:p>
+";
+
+            var strInput = String.Format(Properties.Resources.TestFile2,
+                                         cstr);
+            var doc = XDocument.Parse(strInput);
+            WordLinqDocument.CombineAllRunsIntoSingleRun(doc);
+            var strResult = doc.Root.Descendants(WordLinqDocument.w + "p")
+                                    .FirstOrDefault()
+                                    .ToString();
+            AssertEqual(strResult, cstrOutput);
+        }
+
         public void AssertEqual(string str1, string str2)
         {
-            Assert.IsTrue(XmlUtilities.AreXmlElementsEqual(RemoveNameSpaces(str1), RemoveNameSpaces(str2)));
+            string ours = RemoveNameSpaces(str1);
+            string theirs = RemoveNameSpaces(str2);
+            Assert.IsTrue(XmlUtilities.AreXmlElementsEqual(ours, theirs));
         }
 
         [TestMethod]

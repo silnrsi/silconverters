@@ -34,9 +34,9 @@ namespace SILConvertersOffice
             set
             {
                 System.Diagnostics.Debug.Assert(_model != null);
-                _model.TargetDataEditable = value;
+                _model.TargetData = value;
                 if (!_model.TargetsPossible.Any())
-                    _model.TargetsPossible.Add(new TargetPossible { TargetData = value, FillButtonEnabled = true, PossibleIndex = 0, TranslatorName = _theFontsAndEncConverter.DirectableEncConverter.Name });
+                    _model.TargetsPossible.Add(new TargetPossible { TargetData = value, PossibleIndex = 0, TranslatorName = _theFontsAndEncConverter.DirectableEncConverter.Name });
                 // TODO: fix this
                 _updateDataProc(_model);
             }
@@ -52,19 +52,26 @@ namespace SILConvertersOffice
             _model = new BackTranslationHelperModel
             {
                 SourceData = sourceText,
-                TargetDataEditable = targetText,
+                TargetData = targetText,
+                TargetDataPreExisting = false,  // we don't have an original version of the target (unless someday we allow side-by-side processing of 2 word docs)
+
+                // the control we're sending this to may have other EncConverters associated w/ this font, but we only have the one. So add it
+                //  here and when it gets initialized below, it may add other conversions done at that time
                 TargetsPossible = new List<TargetPossible> 
                 { 
-                    new TargetPossible { TargetData = targetText, FillButtonEnabled = true, PossibleIndex = 0, TranslatorName = _theFontsAndEncConverter.DirectableEncConverter.Name } 
+                    new TargetPossible { TargetData = targetText, PossibleIndex = 0, TranslatorName = _theFontsAndEncConverter.DirectableEncConverter.Name } 
                 },
             };
 
             // this form is the implementation of the way to get get data
             backTranslationHelperCtrl.BackTranslationHelperDataSource = this;
-            backTranslationHelperCtrl.TheTranslators.Add(_theFontsAndEncConverter.DirectableEncConverter.GetEncConverter);
+            if (!backTranslationHelperCtrl.TheTranslators.Any(t => t.Name == _theFontsAndEncConverter.DirectableEncConverter.GetEncConverter.Name))
+                backTranslationHelperCtrl.TheTranslators.Add(_theFontsAndEncConverter.DirectableEncConverter.GetEncConverter);
+
             backTranslationHelperCtrl.Initialize(displayExistingTargetTranslation: false);
-            
+
             // TODO: fix this
+            backTranslationHelperCtrl.GetNewData(ref _model);
             _updateDataProc(_model);
 
             // get some info to show in the title bar
@@ -146,7 +153,10 @@ namespace SILConvertersOffice
         private void TranslationHelperForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             // only allow Cancel or ReplaceEvery
-            if ((ButtonPressed != FormButtons.ReplaceEvery) && (ButtonPressed != FormButtons.Cancel))
+            if ((ButtonPressed != FormButtons.ReplaceEvery) &&
+                (ButtonPressed != FormButtons.ReplaceOnce) &&
+                (ButtonPressed != FormButtons.Cancel) && 
+                (ButtonPressed != FormButtons.Next))
                 e.Cancel = true;
         }
 
@@ -154,6 +164,24 @@ namespace SILConvertersOffice
         {
             if (Enum.TryParse(button.ToString(), out FormButtons result))
                 ButtonPressed = result;
+            else
+            {
+                switch(button.ToString())
+                {
+                    case "MoveToNext":
+                        ButtonPressed = FormButtons.Next;
+                        break;
+                    case "WriteToTarget":
+                        ButtonPressed = FormButtons.ReplaceOnce;
+                        break;
+                    case "Cancel":
+                        ButtonPressed = FormButtons.Cancel;
+                        break;
+                    case "Skip":
+                        ButtonPressed = FormButtons.Next;
+                        break;
+                }
+            }
         }
     }
 }

@@ -48,6 +48,11 @@
           <RegistryValue Root="HKCR" Key="CLSID\{8D22729D-C1F0-3F03-902B-F8CBB19D8E73}\InprocServer32" Name="CodeBase" Value="file:///[#SILConvertersOffice.dll]" Type="string" Action="write" />
         </Component>
 
+        <Component Id="SILConvertersOffice.dll.config" Guid="{1911B9FA-5DA9-4AC8-AAE6-021295F4FCEA}">
+          <File Id="SILConvertersOffice.dll.config" Name="SILConvertersOffice.dll.config" Vital="yes" KeyPath="yes"
+                Source="..\..\output\x86\release\SILConvertersOffice.dll.config" />
+        </Component>
+
         <Component Id="SecOffice_COMAddInShim03.dll" Guid="{A6D3E54E-798B-4B8D-A71C-C80B50E36DE0}">
           <File Id="SecOffice_COMAddInShim03.dll" KeyPath="yes" Source="..\..\output\x86\release\SecOffice_COMAddInShim03.dll">
             <Class Id="{31B69269-4301-4522-8446-3C3D3ACF7ABE}" Context="InprocServer32" Description="SILConvertersOffice.Connect" ThreadingModel="apartment" Programmable="yes">

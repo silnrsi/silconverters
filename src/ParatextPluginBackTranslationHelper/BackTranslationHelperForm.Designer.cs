@@ -29,6 +29,7 @@ namespace SIL.ParatextBackTranslationHelperPlugin
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BackTranslationHelperForm));
             this.backTranslationHelperCtrl = new BackTranslationHelper.BackTranslationHelperCtrl();
             this.SuspendLayout();
             // 
@@ -37,10 +38,11 @@ namespace SIL.ParatextBackTranslationHelperPlugin
             this.backTranslationHelperCtrl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.backTranslationHelperCtrl.AutoSize = true;
+            this.backTranslationHelperCtrl.AutoSize = false;
             this.backTranslationHelperCtrl.Location = new System.Drawing.Point(0, 0);
             this.backTranslationHelperCtrl.Name = "backTranslationHelperCtrl";
-            this.backTranslationHelperCtrl.Size = new System.Drawing.Size(775, 425);
+            this.backTranslationHelperCtrl.NewTargetTexts = ((System.Collections.Generic.List<BackTranslationHelper.TargetPossible>)(resources.GetObject("backTranslationHelperCtrl.NewTargetTexts")));
+            this.backTranslationHelperCtrl.Size = new System.Drawing.Size(790, 449);
             this.backTranslationHelperCtrl.TabIndex = 1;
             // 
             // BackTranslationHelperForm
@@ -50,11 +52,10 @@ namespace SIL.ParatextBackTranslationHelperPlugin
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.backTranslationHelperCtrl);
             this.Name = "BackTranslationHelperForm";
-            this.Text = "Back Translating from {0} - {1}";
+            this.Text = "Back Translating from {0} - {1} in verse: {2}";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.BackTranslationHelperForm_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
-
         }
 
         #endregion

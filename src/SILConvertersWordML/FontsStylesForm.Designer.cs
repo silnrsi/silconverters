@@ -32,6 +32,11 @@ namespace SILConvertersWordML
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FontsStylesForm));
             this.tableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             this.dataGridView = new System.Windows.Forms.DataGridView();
+            this.ColumnFont = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnSampleData = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnConverter = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.ColumnResults = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnTargetFont = new System.Windows.Forms.DataGridViewButtonColumn();
             this.toolStrip = new System.Windows.Forms.ToolStrip();
             this.toolStripButtonOpen = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonAutoSearch = new System.Windows.Forms.ToolStripButton();
@@ -71,11 +76,7 @@ namespace SILConvertersWordML
             this.fontDialog = new System.Windows.Forms.FontDialog();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.helpProvider = new System.Windows.Forms.HelpProvider();
-            this.ColumnFont = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnSampleData = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnConverter = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.ColumnResults = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnTargetFont = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.combineIntoIsoformattedParagraphToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.toolStrip.SuspendLayout();
@@ -125,6 +126,50 @@ namespace SILConvertersWordML
             this.dataGridView.Size = new System.Drawing.Size(657, 355);
             this.dataGridView.TabIndex = 1;
             this.dataGridView.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView_CellMouseClick);
+            // 
+            // ColumnFont
+            // 
+            this.ColumnFont.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.ColumnFont.HeaderText = "Font";
+            this.ColumnFont.Name = "ColumnFont";
+            this.ColumnFont.ReadOnly = true;
+            this.ColumnFont.ToolTipText = "The name of the font to apply the conversion to";
+            this.ColumnFont.Width = 53;
+            // 
+            // ColumnSampleData
+            // 
+            this.ColumnSampleData.HeaderText = "Example Data";
+            this.ColumnSampleData.Name = "ColumnSampleData";
+            this.ColumnSampleData.ReadOnly = true;
+            this.ColumnSampleData.ToolTipText = "This column shows sample data for the given font (click a cell in this column to " +
+    "see the next occurrence)";
+            // 
+            // ColumnConverter
+            // 
+            this.ColumnConverter.HeaderText = "Converter";
+            this.ColumnConverter.Name = "ColumnConverter";
+            this.ColumnConverter.ReadOnly = true;
+            this.ColumnConverter.ToolTipText = "Click a cell in this column to associate a system converter with the correspondin" +
+    "g font (use right-click to repeat the last converter selected)";
+            // 
+            // ColumnResults
+            // 
+            this.ColumnResults.HeaderText = "Example Results";
+            this.ColumnResults.Name = "ColumnResults";
+            this.ColumnResults.ReadOnly = true;
+            this.ColumnResults.ToolTipText = "This column shows a preview of what the output would look like after the conversi" +
+    "on";
+            // 
+            // ColumnTargetFont
+            // 
+            this.ColumnTargetFont.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.ColumnTargetFont.HeaderText = "Apply Font";
+            this.ColumnTargetFont.Name = "ColumnTargetFont";
+            this.ColumnTargetFont.ReadOnly = true;
+            this.ColumnTargetFont.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.ColumnTargetFont.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.ColumnTargetFont.ToolTipText = "The name of the font to apply to the converted text";
+            this.ColumnTargetFont.Width = 82;
             // 
             // toolStrip
             // 
@@ -438,7 +483,8 @@ namespace SILConvertersWordML
             this.advancedToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.singlestepConversionToolStripMenuItem,
             this.leaveXMLFileInFolderToolStripMenuItem,
-            this.useLinqToolStripMenuItem});
+            this.useLinqToolStripMenuItem,
+            this.combineIntoIsoformattedParagraphToolStripMenuItem});
             this.advancedToolStripMenuItem.Name = "advancedToolStripMenuItem";
             this.advancedToolStripMenuItem.Size = new System.Drawing.Size(72, 20);
             this.advancedToolStripMenuItem.Text = "&Advanced";
@@ -447,7 +493,7 @@ namespace SILConvertersWordML
             // 
             this.singlestepConversionToolStripMenuItem.CheckOnClick = true;
             this.singlestepConversionToolStripMenuItem.Name = "singlestepConversionToolStripMenuItem";
-            this.singlestepConversionToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
+            this.singlestepConversionToolStripMenuItem.Size = new System.Drawing.Size(280, 22);
             this.singlestepConversionToolStripMenuItem.Text = "&Single-step conversion";
             this.singlestepConversionToolStripMenuItem.ToolTipText = "Check this item to see the result of the conversion one \'run\' at a time";
             this.singlestepConversionToolStripMenuItem.CheckStateChanged += new System.EventHandler(this.singlestepConversionToolStripMenuItem_CheckStateChanged);
@@ -456,7 +502,7 @@ namespace SILConvertersWordML
             // 
             this.leaveXMLFileInFolderToolStripMenuItem.CheckOnClick = true;
             this.leaveXMLFileInFolderToolStripMenuItem.Name = "leaveXMLFileInFolderToolStripMenuItem";
-            this.leaveXMLFileInFolderToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
+            this.leaveXMLFileInFolderToolStripMenuItem.Size = new System.Drawing.Size(280, 22);
             this.leaveXMLFileInFolderToolStripMenuItem.Text = "&Leave XML files in folder ";
             this.leaveXMLFileInFolderToolStripMenuItem.ToolTipText = resources.GetString("leaveXMLFileInFolderToolStripMenuItem.ToolTipText");
             // 
@@ -466,7 +512,7 @@ namespace SILConvertersWordML
             this.useLinqToolStripMenuItem.CheckOnClick = true;
             this.useLinqToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.useLinqToolStripMenuItem.Name = "useLinqToolStripMenuItem";
-            this.useLinqToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
+            this.useLinqToolStripMenuItem.Size = new System.Drawing.Size(280, 22);
             this.useLinqToolStripMenuItem.Text = "&Use Linq";
             this.useLinqToolStripMenuItem.ToolTipText = "Check this menu to have the \'Linq\' technology attempt to do the conversion (may y" +
     "ield a different result if the normal approach doesn\'t work)";
@@ -482,49 +528,13 @@ namespace SILConvertersWordML
             this.saveFileDialog.RestoreDirectory = true;
             this.saveFileDialog.SupportMultiDottedExtensions = true;
             // 
-            // ColumnFont
+            // combineIntoIsoformattedParagraphToolStripMenuItem
             // 
-            this.ColumnFont.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.ColumnFont.HeaderText = "Font";
-            this.ColumnFont.Name = "ColumnFont";
-            this.ColumnFont.ReadOnly = true;
-            this.ColumnFont.ToolTipText = "The name of the font to apply the conversion to";
-            this.ColumnFont.Width = 53;
-            // 
-            // ColumnSampleData
-            // 
-            this.ColumnSampleData.HeaderText = "Example Data";
-            this.ColumnSampleData.Name = "ColumnSampleData";
-            this.ColumnSampleData.ReadOnly = true;
-            this.ColumnSampleData.ToolTipText = "This column shows sample data for the given font (click a cell in this column to " +
-    "see the next occurrence)";
-            // 
-            // ColumnConverter
-            // 
-            this.ColumnConverter.HeaderText = "Converter";
-            this.ColumnConverter.Name = "ColumnConverter";
-            this.ColumnConverter.ReadOnly = true;
-            this.ColumnConverter.ToolTipText = "Click a cell in this column to associate a system converter with the correspondin" +
-    "g font (use right-click to repeat the last converter selected)";
-            // 
-            // ColumnResults
-            // 
-            this.ColumnResults.HeaderText = "Example Results";
-            this.ColumnResults.Name = "ColumnResults";
-            this.ColumnResults.ReadOnly = true;
-            this.ColumnResults.ToolTipText = "This column shows a preview of what the output would look like after the conversi" +
-    "on";
-            // 
-            // ColumnTargetFont
-            // 
-            this.ColumnTargetFont.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.ColumnTargetFont.HeaderText = "Apply Font";
-            this.ColumnTargetFont.Name = "ColumnTargetFont";
-            this.ColumnTargetFont.ReadOnly = true;
-            this.ColumnTargetFont.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.ColumnTargetFont.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.ColumnTargetFont.ToolTipText = "The name of the font to apply to the converted text";
-            this.ColumnTargetFont.Width = 82;
+            this.combineIntoIsoformattedParagraphToolStripMenuItem.CheckOnClick = true;
+            this.combineIntoIsoformattedParagraphToolStripMenuItem.Name = "combineIntoIsoformattedParagraphToolStripMenuItem";
+            this.combineIntoIsoformattedParagraphToolStripMenuItem.Size = new System.Drawing.Size(280, 22);
+            this.combineIntoIsoformattedParagraphToolStripMenuItem.Text = "&Combine into iso-formatted paragraph";
+            this.combineIntoIsoformattedParagraphToolStripMenuItem.ToolTipText = resources.GetString("combineIntoIsoformattedParagraphToolStripMenuItem.ToolTipText");
             // 
             // FontsStylesForm
             // 
@@ -599,6 +609,7 @@ namespace SILConvertersWordML
         private System.Windows.Forms.DataGridViewButtonColumn ColumnConverter;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnResults;
         private System.Windows.Forms.DataGridViewButtonColumn ColumnTargetFont;
+        private System.Windows.Forms.ToolStripMenuItem combineIntoIsoformattedParagraphToolStripMenuItem;
     }
 }
 

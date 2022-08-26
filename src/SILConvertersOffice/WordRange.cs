@@ -38,8 +38,26 @@ namespace SILConvertersOffice
             // But only if this isn't a zero-length range
             if (basedOnRange.Start != basedOnRange.End)
             {
-                Word.Range aRange = m_theRangeBasedOn.Characters.First;
-                m_nOffset = aRange.End - aRange.Text.Length;
+                Word.Range aRange = null;
+#if BUILD_FOR_OFF12 || BUILD_FOR_OFF14 || BUILD_FOR_OFF15
+                if ((m_theRangeBasedOn.ContentControls.Count > 0) && (m_theRangeBasedOn.Text != null))
+                {
+                    // [0] doesn't want to work, so try this for getting the 1st contentcontrol
+                    foreach (Word.ContentControl cc in m_theRangeBasedOn.ContentControls)
+                    {
+                        aRange = cc.Range;
+                        break;
+                    }
+                }
+                else
+#endif
+                {
+                    aRange = m_theRangeBasedOn.Characters.First;
+                }
+
+                m_nOffset = (aRange.Text != null)
+                                ? aRange.End - aRange.Text.Length
+                                : aRange.End - basedOnRange.Text.Length;    // this isn't right, but... not sure how to calculate it at this point...
             }
         }
 

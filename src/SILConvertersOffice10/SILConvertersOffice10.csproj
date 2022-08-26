@@ -90,6 +90,9 @@
     <Reference Include="SilEncConverters40, Version=4.0.0.0, Culture=neutral, PublicKeyToken=f1447bae1e63f485, processorArchitecture=x64" Condition="('$(Platform)' == 'x64') and ('$(OS)'=='Windows_NT')">
       <HintPath>$(EcLibFilesPath)\net48\x64\SilEncConverters40.dll</HintPath>
     </Reference>
+    <Reference Include="BackTranslationHelper">
+      <HintPath>$(EcDistFilesPath)\win-$(Platform)\native\BackTranslationHelper.dll</HintPath>
+    </Reference>
     <Reference Include="extensibility, Version=7.0.3300.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
       <SpecificVersion>False</SpecificVersion>
       <EmbedInteropTypes>True</EmbedInteropTypes>
@@ -287,6 +290,9 @@
     <EmbeddedResource Include="..\SILConvertersOffice07\RibbonWord.xml" />
     <EmbeddedResource Include="..\SILConvertersOffice07\RibbonExcel.xml" />
     <EmbeddedResource Include="..\SILConvertersOffice07\RibbonPublisher.xml" />
+    <EmbeddedResource Include="..\SILConvertersOffice\TranslationHelperForm.resx">
+      <DependentUpon>TranslationHelperForm.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\SILConvertersOffice\Properties\Settings.settings">
@@ -319,12 +325,6 @@
       <ProductName>Windows Installer 3.1</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\BackTranslationHelper\BackTranslationHelper.csproj">
-      <Project>{3e74ce98-6558-4af0-bb0c-c7e436208b1b}</Project>
-      <Name>BackTranslationHelper</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSHARP.Targets" />
   <PropertyGroup>

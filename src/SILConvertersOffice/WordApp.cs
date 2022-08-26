@@ -81,6 +81,8 @@ namespace SILConvertersOffice
         private Office.CommandBarButton FindReplaceMenu;
         private Office.CommandBarButton RoundTripCheckMenu;
         private Office.CommandBarButton ResetMenu;
+        private Office.CommandBarButton ConvertByParagraphMenu;
+        private Office.CommandBarButton ConvertByParagraphMenuIgnoreFormatting;
 
         public override void LoadMenu()
         {
@@ -103,6 +105,14 @@ namespace SILConvertersOffice
                 AddMenu(ref ResetMenu, NewMenuBar, "&Reset",
                     "Reset the unfinished conversion processes",
                     new Microsoft.Office.Core._CommandBarButtonEvents_ClickEventHandler(Reset_Click));
+
+                AddMenu(ref ConvertByParagraphMenu, NewMenuBar, "Convert by paragraph (&iso formatted)",
+                    "Click this item to convert the document from the cursor on down, paragraph-by-paragraph, but in chunks that keep the formatting the same",
+                    new Microsoft.Office.Core._CommandBarButtonEvents_ClickEventHandler(ConvertParagraphs_Click));
+
+                AddMenu(ref ConvertByParagraphMenuIgnoreFormatting, NewMenuBar, "Convert by &paragraph",
+                    "Click this item to convert the document from the cursor on down, paragraph-by-paragraph, ignoring formatting (so formatting will be lost, but you'll get whole paragraphs translated as a unit)",
+                    new Microsoft.Office.Core._CommandBarButtonEvents_ClickEventHandler(ConvertParagraphs_IgnoreStyle_Click));
 
 #if !TurnOffBitheadFeatures
                 ProcessDocumentPopup = (Office.CommandBarPopup)NewMenuBar.Controls.Add(Office.MsoControlType.msoControlPopup, missing, missing, missing, true);
@@ -236,21 +246,39 @@ namespace SILConvertersOffice
         void ConvertParagraphs_Click(Microsoft.Office.Core.CommandBarButton Ctrl, ref bool CancelDefault)
 #endif
         {
-            if (!HookDocumentClose(Application.ActiveDocument))
-                return;
+            ParagraphByParagraph(OfficeTextDocument.ProcessingType.eIsoFormattedRun);
+        }
 
+        private void ParagraphByParagraph(OfficeTextDocument.ProcessingType processingType)
+        {
             try
             {
-                WordSelectionDocument doc = new WordSelectionDocument(Application.ActiveDocument, OfficeTextDocument.ProcessingType.eIsoFormattedRun);
+                if (!HookDocumentClose(Application.ActiveDocument))
+                    return;
+
+                WordSelectionDocument doc = new WordSelectionDocument(Application.ActiveDocument, processingType);
                 OfficeDocumentProcessor aSelectionProcessor = new OfficeDocumentProcessor((FontConverters)null, new SILConvertersOffice.TranslationHelperForm());
 
                 if (aSelectionProcessor != null)
-                    doc.ProcessWordByWord(aSelectionProcessor, OfficeTextDocument.ProcessingType.eIsoFormattedRun);
+                {
+                    // start where the cursor is currently
+                    aSelectionProcessor.LeftOvers = doc.SelectionRange;
+                    doc.ProcessWordByWord(aSelectionProcessor, processingType);
+                }
             }
             catch (Exception ex)
             {
                 DisplayException(ex);
             }
+        }
+
+#if BUILD_FOR_OFF12 || BUILD_FOR_OFF14 || BUILD_FOR_OFF15
+        public void ConvertParagraphs_IgnoreStyle_Click(Office.IRibbonControl control)
+#else
+        void ConvertParagraphs_IgnoreStyle_Click(Microsoft.Office.Core.CommandBarButton Ctrl, ref bool CancelDefault)
+#endif
+        {
+            ParagraphByParagraph(OfficeTextDocument.ProcessingType.eParagraphByParagraph);
         }
 
         FindReplaceForm m_formFindReplace = null;

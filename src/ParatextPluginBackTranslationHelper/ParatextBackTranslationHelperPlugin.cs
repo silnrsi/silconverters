@@ -7,15 +7,7 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Windows.Forms;
-using DesktopAnalytics;
-using ECInterfaces;
-using L10NSharp;
 using Paratext.PluginInterfaces;
-using SIL.IO;
-using SIL.Reporting;
-using SIL.Windows.Forms.Keyboarding;
-using SIL.Windows.Forms.Reporting;
-using SilEncConverters40;
 
 namespace SIL.ParatextBackTranslationHelperPlugin
 {
@@ -29,7 +21,9 @@ namespace SIL.ParatextBackTranslationHelperPlugin
 		public string Publisher => "SIL/UBS";
 
 		private static IPluginHost _host;
-#if UseWebForm	// can be used to switch to using a web-browser based display (if your OS doesn't support WinForm controls)
+		private static IParatextChildState _state;
+
+#if UseWebForm    // can be used to switch to using a web-browser based display (if your OS doesn't support WinForm controls) -- not fully functional though...
 		private static BackTranslationHelperWebForm _mainWindow;
 #else
 		private static BackTranslationHelperForm _mainWindow;
@@ -37,7 +31,6 @@ namespace SIL.ParatextBackTranslationHelperPlugin
 		private static ParatextBackTranslationHelperPlugin _this;
 		private static IProject _projectNameParent;
 		private static IProject _projectNameDaughter;
-		private static SplashScreenForm _splashScreen;
 
 		public ParatextBackTranslationHelperPlugin()
         {
@@ -120,7 +113,30 @@ namespace SIL.ParatextBackTranslationHelperPlugin
 		/// </summary>
 		private static void Run(IPluginHost host, IParatextChildState state)
 		{
-            lock (_this)
+#if true
+			Application.EnableVisualStyles();
+			_host = host;
+			_state = state;
+
+			InitializeProjects(host, ref _projectNameParent, ref _projectNameDaughter);
+
+			if ((_projectNameParent == null) || (_projectNameDaughter == null))
+				throw new ApplicationException($"Source ('{_projectNameParent}') or Target ('{_projectNameDaughter}') project not selected. Can't continue!");
+
+			_host.Log(_this, "Starting " + pluginName);
+
+			var initialVerseReference = state.VerseRef;
+
+			Action<IVerseRef> syncReferenceGroup = verseReference =>
+			{
+				_host.SetReferenceForSyncGroup(verseReference, state.SyncReferenceGroup);
+			};
+
+			var formToShow = _mainWindow = new BackTranslationHelperForm(_host, _this, syncReferenceGroup, initialVerseReference, 
+											_projectNameParent, _projectNameDaughter, _projectNameParent.Language, _projectNameDaughter.Language);
+			formToShow.Show();
+#else
+			lock (_this)
             {
                 if (_host != null)
                 {
@@ -130,20 +146,14 @@ namespace SIL.ParatextBackTranslationHelperPlugin
                 }
             }
 
-            //var activeProjectName = host.ActiveWindowState?.Project?.ShortName;
-            //string message = string.IsNullOrEmpty(activeProjectName) ?
-            //	"You clicked the menu item when there was no active project." :
-            //	$"You clicked the menu item while the {activeProjectName} project was active.";
-
-            //MessageBox.Show(message, pluginName, MessageBoxButtons.OK, MessageBoxIcon.Information);
-
             try
             {
                 Application.EnableVisualStyles();
 
                 _host = host;
+				_state = state;
 
-                InitializeProjects(host, ref _projectNameParent, ref _projectNameDaughter);
+				InitializeProjects(host, ref _projectNameParent, ref _projectNameDaughter);
 
                 if ((_projectNameParent == null) || (_projectNameDaughter == null))
                     throw new ApplicationException($"Source ('{_projectNameParent}') or Target ('{_projectNameDaughter}') project not selected. Can't continue!");
@@ -164,25 +174,27 @@ namespace SIL.ParatextBackTranslationHelperPlugin
                 {
                 }
 
-				var theEc = BackTranslationHelper.BackTranslationHelperCtrl.QueryTranslator();
-
                 // SetUpLocalization(preferredUiLocale);
 
-                var mainUIThread = new Thread(() =>
+                var initialVerseReference = state.VerseRef;
+
+				Action<IVerseRef> syncReferenceGroup = verseReference =>
+				{
+					_host.SetReferenceForSyncGroup(verseReference, state.SyncReferenceGroup);
+				};
+
+				var mainUIThread = new Thread(() =>
                 {
-					// InitializeErrorHandling();
+                    // InitializeErrorHandling();
 
 #if UseWebForm  // can be used to switch to using a web-browser based display (if your OS doesn't support WinForm controls)
                     BackTranslationHelperWebForm formToShow;
 #else
-					BackTranslationHelperForm formToShow;
+                    BackTranslationHelperForm formToShow;
 #endif
-					lock (_this)
+                    lock (_this)
                     {
-                        _splashScreen = new SplashScreenForm();
-                        _splashScreen.Show();
-
-                        KeyboardController.Initialize();
+                        // KeyboardController.Initialize();
 
                         Action<bool> activateKeyboard = vern =>
                         {
@@ -208,42 +220,29 @@ namespace SIL.ParatextBackTranslationHelperPlugin
                                 host.DefaultKeyboard?.Activate();
                         };
 
-                        //var fileAccessor = new ParatextDataFileAccessor(fileId => _host.GetPlugInData(_this, m_projectName, fileId),
-                        //	(fileId, reader) => _host.PutPlugInData(_this, m_projectName, fileId, reader),
-                        //	fileId => _host.GetPlugInDataLastModifiedTime(_this, m_projectName, fileId));
+						//var fileAccessor = new ParatextDataFileAccessor(fileId => _host.GetPlugInData(_this, m_projectName, fileId),
+						//	(fileId, reader) => _host.PutPlugInData(_this, m_projectName, fileId, reader),
+						//	fileId => _host.GetPlugInDataLastModifiedTime(_this, m_projectName, fileId));
 
-                        //bool fEnableDragDrop = true;
-                        //try
-                        //{
-                        //	string dragDropSetting = _host.GetApplicationSetting("EnableDragAndDrop");
-                        //	if (dragDropSetting != null)
-                        //		fEnableDragDrop = bool.Parse(dragDropSetting);
-                        //}
-                        //catch (Exception)
-                        //{
-                        //}
+						//bool fEnableDragDrop = true;
+						//try
+						//{
+						//	string dragDropSetting = _host.GetApplicationSetting("EnableDragAndDrop");
+						//	if (dragDropSetting != null)
+						//		fEnableDragDrop = bool.Parse(dragDropSetting);
+						//}
+						//catch (Exception)
+						//{
+						//}
 
-                        formToShow = _mainWindow =
+						formToShow = _mainWindow =
 #if UseWebForm  // can be used to switch to using a web-browser based display (if your OS doesn't support WinForm controls)
 						new BackTranslationHelperWebForm
 #else
-						new BackTranslationHelperForm
+                        new BackTranslationHelperForm
 #endif
-						(_host, _this, _splashScreen, _projectNameParent,
-                            _projectNameDaughter, _projectNameParent.Language, _projectNameDaughter.Language, theEc.GetEncConverter);
-                        //_projectNameParent.Sett
-                        //() => _host.GetFactoryKeyTerms(kMajorList, "en", 01001001, 66022021),
-                        //termId => _host.GetProjectTermRenderings(m_projectName, termId, true),
-                        //_host.GetProjectFont(m_projectName),
-                        //_host.GetProjectLanguageId(m_projectName, "generate templates"),
-                        //_host.GetProjectSetting(m_projectName, "Language"), _host.GetProjectRtoL(m_projectName),
-                        //fileAccessor, _host.GetScriptureExtractor(m_projectName, ExtractorType.USFX),
-                        //() => _host.GetCssStylesheet(m_projectName), _host.ApplicationName,
-                        //new ScrVers(_host, TxlCore.kEnglishVersificationName),
-                        //new ScrVers(_host, _host.GetProjectVersificationName(m_projectName)), startRef,
-                        //endRef, currRef, activateKeyboard, termId => _host.GetTermOccurrences(kMajorList, m_projectName, termId),
-                        //terms => _host.LookUpKeyTerm(m_projectName, terms), fEnableDragDrop, preferredUiLocale);
-                        _splashScreen = null;
+                        (_host, _this, state, syncReferenceGroup, initialVerseReference, _projectNameParent,
+                            _projectNameDaughter, _projectNameParent.Language, _projectNameDaughter.Language);
                     }
 
 #if DEBUG
@@ -268,9 +267,9 @@ namespace SIL.ParatextBackTranslationHelperPlugin
                         formToShow.ShowDialog();
                     }
 #else
-					formToShow.ShowDialog();
+                    formToShow.ShowDialog();
 #endif
-					_host.Log(_this, "Closing " + pluginName);
+                    _host.Log(_this, "Closing " + pluginName);
                     Environment.Exit(0);
                 });
                 mainUIThread.Name = pluginName;
@@ -282,12 +281,13 @@ namespace SIL.ParatextBackTranslationHelperPlugin
             }
             catch (Exception e)
 			{
-				MessageBox.Show(string.Format(LocalizationManager.GetString("General.ErrorStarting", "Error occurred attempting to start {0}: ",
-					"Param is \"Transcelerator\" (plugin name)"), pluginName) + e.Message);
+				MessageBox.Show(string.Format("General.ErrorStarting: Error occurred attempting to start {0}: ",
+					"Param is \"ParatextBackTranslationHelper\" (plugin name)"), pluginName + e.Message);
 				_host = null;	// so we can be called again, but not twice (i.e. two dialogs)
 				// not sure why we'd want to throw...
 				//  throw;
 			}
+#endif
 		}
 
         private static void LoadEncConverterClassesFromLocalFolder(string asdg)
@@ -352,6 +352,7 @@ namespace SIL.ParatextBackTranslationHelperPlugin
 			return null;
 		}
 
+		/*
 		public static bool InvokeOnMainWindowIfNotNull(Action action)
 		{
 			lock (_this)
@@ -367,6 +368,7 @@ namespace SIL.ParatextBackTranslationHelperPlugin
 			}
 			return false;
 		}
+		*/
 
 		//public void RequestShutdown()
 		//{
@@ -385,6 +387,7 @@ namespace SIL.ParatextBackTranslationHelperPlugin
 		//	}
 		//}
 
+		/*
 		public void Activate(string activeProjectName)
 		{
 			if (_mainWindow != null)
@@ -433,12 +436,14 @@ namespace SIL.ParatextBackTranslationHelperPlugin
 			lock (this)
 			{
 				if (_mainWindow.InvokeRequired)
-					_mainWindow.Invoke(action);
+					_mainWindow.Invoke(action);     // _mainWindow is the thread my dialog was created/run on
 				else
 					action();
 			}
 		}
+		*/
 
+		/*
 		private static void InitializeErrorHandling()
 		{
 			ErrorReport.SetErrorReporter(new WinFormsErrorReporter());
@@ -470,5 +475,6 @@ namespace SIL.ParatextBackTranslationHelperPlugin
 				installedStringFileFolder, relativeSettingPathForLocalizationFolder, new Icon(FileLocationUtilities.GetFileDistributedWithApplication("TXL no TXL.ico")), emailAddress,
 				"SIL.Transcelerator", "SIL.Utils");
 		}
+		*/
 	}
 }

@@ -18,6 +18,11 @@
                     Target="[#ClipboardEC.exe]" WorkingDirectory="MergeRedirectFolder" Advertise="no" />
         </Component>
 
+        <Component Id="ClipboardEC.exe.config" Guid="{8358FB12-D823-40A7-BD5B-94155CF7801C}">
+          <File Id="ClipboardEC.exe.config" Name="ClipboardEC.exe.config" Vital="yes" KeyPath="yes" 
+                Source="..\..\output\x64\release\ClipboardEC.exe.config" />
+        </Component>
+
       </Directory>
 
       <Directory Id="StartMenuFolder" SourceName="Start Menu">

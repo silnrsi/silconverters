@@ -35,6 +35,7 @@
           <!-- Place holder for merge modules -->
         </Directory>
         <Directory Id="Toolbox" Name="Toolbox" />
+        <Directory Id="Paratext9" Name="Paratext 9" />
       </Directory>
       <Directory Id="CommonAppDataFolder" SourceName="AppData">
         <Directory Id="AllUserAppDataSIL" Name="SIL">
