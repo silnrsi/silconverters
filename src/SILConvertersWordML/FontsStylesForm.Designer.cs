@@ -515,7 +515,7 @@ namespace SILConvertersWordML
             this.useLinqToolStripMenuItem.Size = new System.Drawing.Size(280, 22);
             this.useLinqToolStripMenuItem.Text = "&Use Linq";
             this.useLinqToolStripMenuItem.ToolTipText = "Check this menu to have the \'Linq\' technology attempt to do the conversion (may y" +
-    "ield a different result if the normal approach doesn\'t work)";
+    "ield a different result if the normal approach doesn\'t work). Check this menu before opening the document.";
             // 
             // fontDialog
             // 
