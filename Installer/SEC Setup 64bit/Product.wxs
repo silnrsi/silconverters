@@ -2,7 +2,7 @@
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"
      xmlns:netfx="http://schemas.microsoft.com/wix/NetFxExtension">
   <Product Id="*" UpgradeCode="{0F7D5D72-E9F3-40BB-9748-D388C70096CD}" Name="SIL Converters 5.1 (x64)" Manufacturer="SIL International"
-           Language="1033" Version="5.0.0" >
+           Language="1033" Version="5.1.0" >
     <Package InstallerVersion="500" Compressed='yes' InstallScope="perMachine"
              Platform="x64" />
 
@@ -134,9 +134,7 @@
       </DirectorySearch>
     </Property>
     <Property Id="COMPONENTEXISTS_PARATEXT_9">
-      <DirectorySearch Id="Paratext9" Path="[ProgramFiles64Folder]Paratext 9" Depth="0">
-        <DirectorySearch Id="Paratext9" Depth="0" />
-      </DirectorySearch>
+      <DirectorySearch Id="Paratext9Installed" Path="[ProgramFiles64Folder]Paratext 9" Depth="0" />
     </Property>
     <Property Id="WORD_DOT_STARTUP_FOLDER">
       <DirectorySearch Id="AppDirSigFile1" Path="[AppDataFolder]Microsoft\Word\STARTUP" Depth="0">
