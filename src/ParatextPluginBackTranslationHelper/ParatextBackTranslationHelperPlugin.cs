@@ -13,9 +13,9 @@ namespace SIL.ParatextBackTranslationHelperPlugin
 {
     public class ParatextBackTranslationHelperPlugin : IParatextStandalonePlugin
 	{
-		public const string pluginName = "Back Translation Helper";
+		public const string PluginName = "Back Translation Helper";
 		public const string emailAddress = "silconverters_support@sil.org";
-		public string Name => pluginName;
+		public string Name => PluginName;
 		public Version Version => new Version(1, 0);
 		public string VersionString => Version.ToString();
 		public string Publisher => "SIL/UBS";
@@ -83,7 +83,7 @@ namespace SIL.ParatextBackTranslationHelperPlugin
 		{
 			get
 			{
-				var entry = new PluginMenuEntry($"&{pluginName}...", Run, PluginMenuLocation.ScrTextTools);
+				var entry = new PluginMenuEntry($"&{PluginName}...", Run, PluginMenuLocation.ScrTextTools);
 				entry.LocalizedTextNeeded += delegate (string defaultText, string locale)
 				{
 					switch (locale)
@@ -123,7 +123,7 @@ namespace SIL.ParatextBackTranslationHelperPlugin
 			if ((_projectNameParent == null) || (_projectNameDaughter == null))
 				throw new ApplicationException($"Source ('{_projectNameParent}') or Target ('{_projectNameDaughter}') project not selected. Can't continue!");
 
-			_host.Log(_this, "Starting " + pluginName);
+			_host.Log(_this, "Starting " + PluginName);
 
 			var initialVerseReference = state.VerseRef;
 

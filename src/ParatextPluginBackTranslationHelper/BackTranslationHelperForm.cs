@@ -113,8 +113,28 @@ namespace SIL.ParatextBackTranslationHelperPlugin
             Unlock();
             _verseReference = newReference;
             BackTranslationHelperModel model = null;    // means query the interface to get the data
-            backTranslationHelperCtrl.GetNewData(ref model);
-            UpdateData(model);
+            var cursor = Cursor;
+            try
+            {
+                Cursor = Cursors.WaitCursor;
+                backTranslationHelperCtrl.GetNewData(ref model);
+                UpdateData(model);
+            }
+            catch (Exception ex)
+            {
+                var error = ex.Message;
+                while (ex.InnerException != null)
+                {
+                    error += Environment.NewLine + Environment.NewLine + ex.InnerException.Message;
+                    ex = ex.InnerException;
+                }
+
+                MessageBox.Show(error, ParatextBackTranslationHelperPlugin.PluginName);
+            }
+            finally
+            {
+                Cursor = cursor;
+            }
         }
 
         private void UpdateData(BackTranslationHelperModel model)
@@ -448,7 +468,7 @@ namespace SIL.ParatextBackTranslationHelperPlugin
             // if we don't already have it... it's probably because something was changed in the project
             // TODO: do something! (probably just need to Initialize and UpdateData, so we'll have requeried everything)
             var res = MessageBox.Show("It seems that something might have changed in the target project, which requires us to requery. Click 'Yes' to requery and start again. Click 'No' if you want to close this box (and copy the current text if you made changes for next time).",
-                                      ParatextBackTranslationHelperPlugin.pluginName, MessageBoxButtons.YesNo);
+                                      ParatextBackTranslationHelperPlugin.PluginName, MessageBoxButtons.YesNo);
 
             if (res == DialogResult.Yes)
                 GetNewReference(_verseReference);

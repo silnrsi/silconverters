@@ -8,6 +8,7 @@ using System.Reflection;                // for InvokeMember
 using Office = Microsoft.Office.Core;
 using ECInterfaces;
 using SilEncConverters40;
+using BackTranslationHelper;
 
 namespace SILConvertersOffice
 {

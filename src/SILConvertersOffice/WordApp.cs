@@ -61,6 +61,15 @@ namespace SILConvertersOffice
             get { return (Word.Application)base.Application; }
         }
 
+        public void SetCursorToWaiting()
+        {
+            Application.System.Cursor = Word.WdCursorType.wdCursorWait;
+        }
+        public void SetCursorToDefault()
+        {
+            Application.System.Cursor = Word.WdCursorType.wdCursorNormal;
+        }
+
 #if BUILD_FOR_OFF15
         public override string GetCustomUI()
         {
