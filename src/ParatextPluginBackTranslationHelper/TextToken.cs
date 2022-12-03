@@ -1,39 +1,35 @@
 ﻿using Paratext.PluginInterfaces;
+using System.Dynamic;
 
 namespace SIL.ParatextBackTranslationHelperPlugin
 {
-    public class TextToken : IUSFMTextToken
+    public class TextToken : TokenBase, IUSFMTextToken
     {
         public TextToken(IUSFMTextToken token)
+            : base(token.VerseRef, token.IsSpecial, token.IsFigure, token.IsFootnoteOrCrossReference, token.IsScripture, token.IsMetadata, 
+                  token.IsPublishableVernacular, token.VerseOffset)
         {
             Text = token.Text;
-            VerseRef = token.VerseRef;
-            VerseOffset = token.VerseOffset;
-            IsSpecial = token.IsSpecial;
-            IsFigure = token.IsFigure;
-            IsFootnoteOrCrossReference = token.IsFootnoteOrCrossReference;
-            IsScripture = token.IsScripture;
-            IsMetadata = token.IsMetadata;
-            IsPublishableVernacular = token.IsPublishableVernacular;
+        }
+
+        /// <summary>
+        /// ctor for testing
+        /// </summary>
+        /// <param name="expandoToken"></param>
+        public TextToken(ExpandoObject expandoToken) :
+            base((IVerseRef)TestVerseReference.ToIVerseRef(((dynamic)expandoToken).VerseRef),
+                 (bool)(((dynamic)expandoToken).IsSpecial),
+                 (bool)(((dynamic)expandoToken).IsFigure),
+                 (bool)(((dynamic)expandoToken).IsFootnoteOrCrossReference),
+                 (bool)(((dynamic)expandoToken).IsScripture),
+                 (bool)(((dynamic)expandoToken).IsMetadata),
+                 (bool)(((dynamic)expandoToken).IsPublishableVernacular),
+                 (int)(((dynamic)expandoToken).VerseOffset))
+        {
+            Text = (string)((dynamic)expandoToken).Text;
         }
 
         public string Text { get; set; }
-
-        public IVerseRef VerseRef { get; set; }
-
-        public int VerseOffset { get; set; }
-
-        public bool IsSpecial { get; set; }
-
-        public bool IsFigure { get; set; }
-
-        public bool IsFootnoteOrCrossReference { get; set; }
-
-        public bool IsScripture { get; set; }
-
-        public bool IsMetadata { get; set; }
-
-        public bool IsPublishableVernacular { get; set; }
 
         public override string ToString()
         {

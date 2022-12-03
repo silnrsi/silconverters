@@ -1,0 +1,13 @@
+{
+  "BookCode": "ACT",
+  "BookNum": 44,
+  "ChapterNum": 1,
+  "VerseNum": 0,
+  "BBBCCCVVV": 44001000,
+  "Versification": {
+    "Type": 4,
+    "IsCustomized": false
+  },
+  "RepresentsMultipleVerses": false,
+  "AllVerses": []
+}

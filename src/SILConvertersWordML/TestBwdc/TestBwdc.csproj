@@ -1,6 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\..\..\packages\Encoding-Converters-Core.0.5.1\build\Encoding-Converters-Core.props" Condition="Exists('..\..\..\packages\Encoding-Converters-Core.0.5.1\build\Encoding-Converters-Core.props')" />
+  <Import Project="..\..\..\packages\NUnit3TestAdapter.4.3.1\build\net35\NUnit3TestAdapter.props" Condition="Exists('..\..\..\packages\NUnit3TestAdapter.4.3.1\build\net35\NUnit3TestAdapter.props')" />
+  <Import Project="..\..\..\packages\NUnit.3.13.3\build\NUnit.props" Condition="Exists('..\..\..\packages\NUnit.3.13.3\build\NUnit.props')" />
+  <Import Project="..\..\..\packages\Encoding-Converters-Core.0.5.2\build\Encoding-Converters-Core.props" Condition="Exists('..\..\..\packages\Encoding-Converters-Core.0.5.2\build\Encoding-Converters-Core.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -74,27 +76,31 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Reference  Include="ECInterfaces, Version=4.0.0.0, Culture=neutral, PublicKeyToken=f1447bae1e63f485, processorArchitecture=x86"
-					Condition="('$(Platform)' == 'x86' or '$(Platform)' == 'AnyCPU') and ('$(OS)'=='Windows_NT')">
-      <HintPath>$(EcLibFilesPath)\net48\x86\ECInterfaces.dll</HintPath>
+    <Reference Include="ECInterfaces, Version=4.0.0.0, Culture=neutral, PublicKeyToken=f1447bae1e63f485, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Encoding-Converters-Core.0.5.2\lib\net48\x86\ECInterfaces.dll</HintPath>
     </Reference>
-    <Reference	Include="ECInterfaces, Version=4.0.0.0, Culture=neutral, PublicKeyToken=f1447bae1e63f485, processorArchitecture=x64"
-					Condition="('$(Platform)' == 'x64') and ('$(OS)'=='Windows_NT')">
-      <HintPath>$(EcLibFilesPath)\net48\x64\ECInterfaces.dll</HintPath>
+    <Reference Include="EmbeddedUiPluginInterfaces, Version=2.0.21.0, Culture=neutral, PublicKeyToken=583bede96b7c94a3, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\ParatextEmbeddedUiPluginInterfaces.2.0.21\lib\net48\EmbeddedUiPluginInterfaces.dll</HintPath>
     </Reference>
-    <Reference  Include="SilEncConverters40, Version=4.0.0.0, Culture=neutral, PublicKeyToken=f1447bae1e63f485, processorArchitecture=x86"
-					Condition="('$(Platform)' == 'x86' or '$(Platform)' == 'AnyCPU') and ('$(OS)'=='Windows_NT')">
-      <HintPath>$(EcLibFilesPath)\net48\x86\SilEncConverters40.dll</HintPath>
-    </Reference>
-    <Reference  Include="SilEncConverters40, Version=4.0.0.0, Culture=neutral, PublicKeyToken=f1447bae1e63f485, processorArchitecture=x64"
-					Condition="('$(Platform)' == 'x64') and ('$(OS)'=='Windows_NT')">
-      <HintPath>$(EcLibFilesPath)\net48\x64\SilEncConverters40.dll</HintPath>
-    </Reference>
+    <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework, Version=3.13.3.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\NUnit.3.13.3\lib\net45\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="PluginInterfaces, Version=2.0.21.0, Culture=neutral, PublicKeyToken=583bede96b7c94a3, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\ParatextPluginInterfaces.2.0.21\lib\netstandard2.0\PluginInterfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="SilEncConverters40, Version=4.0.0.0, Culture=neutral, PublicKeyToken=f1447bae1e63f485, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Encoding-Converters-Core.0.5.2\lib\net48\x86\SilEncConverters40.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
@@ -115,7 +121,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="UnitTest1.cs" />
+    <Compile Include="TestFiles\TestModel.cs" />
+    <Compile Include="UnitTest_PtxBackTrHelper.cs" />
+    <Compile Include="UnitTest_BulkWordDocConverter.cs" />
     <Compile Include="XmlDiff.cs" />
     <Compile Include="XmlInput.cs" />
     <Compile Include="XmlUtilities.cs" />
@@ -271,16 +279,36 @@
     <Content Include="redist\Help\Python_Script_Plug-in_About_box.htm" />
     <Content Include="redist\Help\Technical_Hindi_%28Google_group%29_Html_Converter_Plug-in_About_box.htm" />
     <Content Include="redist\Help\TECkit_Map_Plug-in_About_box.htm" />
-    <Content Include="TestFile1.xml" />
-    <Content Include="TestFile2.xml" />
+    <Content Include="TestFiles\BulkWordDocConverter\TestFile1.xml" />
+    <Content Include="TestFiles\BulkWordDocConverter\TestFile2.xml" />
+    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\SingleVerse\MultiplePoeticParagraphs\MultiplePoeticParagraphsMissingInTarget\MultiplePoeticParagraphsMissingInTarget_TranslatedText.txt" />
+    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\MultipleVerses\MultipleVersesAndParagraphsMiTJoinedIntoOneParagraphs\MultipleVersesAndParagraphsMiTJoinedIntoOneParagraphs_TranslatedText.txt" />
+    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\MultipleVerses\MultipleVersesAndParagraphsJoinedIntoOneParagraphs\MultipleVersesAndParagraphsJoinedIntoOneParagraphs_TranslatedText.txt" />
+    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\SingleVerse\MultipleParagraphs\MultipleParagraphsJoinedIntoOneParagraphs\MultipleParagraphsJoinedIntoOneParagraphs_TranslatedText.txt" />
+    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\SingleVerse\MultipleParagraphs\MultipleParagraphsMiTJoinedIntoOneParagraphs\MultipleParagraphsMiTJoinedIntoOneParagraphs_TranslatedText.txt" />
+    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\SingleVerse\MultipleParagraphs\MultipleParagraphsMissingInTarget\MultipleParagraphsMissingInTarget_TranslatedText.txt" />
+    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\SingleVerse\Simple\SingleVerseSplitIntoTwoParagraphs\SingleVerseSplitIntoTwoParagraphs_TranslatedText.txt" />
+    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\SingleVerse\SimpleParagraph\SimpleParagraphVerseMiTSplitIntoTwoParagraphs\SimpleParagraphVerseMiTSplitIntoTwoParagraphs_TranslatedText.txt" />
+    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\SingleVerse\SimpleParagraph\SimpleParagraphVerseSplitIntoTwoParagraphs\SimpleParagraphVerseSplitIntoTwoParagraphs_TranslatedText.txt" />
+    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\SingleVerse\SimpleParagraph\SimpleParagraphVerseMissingInTarget\SimpleParagraphVerseMissingInTarget_TranslatedText.txt" />
+    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\SingleVerse\Simple\SingleVerseMiTSplitIntoTwoParagraphs\SingleVerseMiTSplitIntoTwoParagraphs_TranslatedText.txt" />
+    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\SingleVerse\Complex\PartialOverwriteText\Complex_PartialOverwriteText_TranslatedText.txt" />
+    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\SingleVerse\Complex\PartialOverwriteMarker\Complex_PartialOverwriteMarker_TranslatedText.txt" />
+    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\SingleVerse\Complex\MissingInTarget\Complex_MissingInTarget_TranslatedText.txt" />
+    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\MultipleVerses\MultipleVersesMissingInTarget\MultipleVersesMissingInTarget_TranslatedText.txt" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\ParatextPluginBackTranslationHelper\ParatextPluginBackTranslationHelper.csproj">
+      <Project>{0BFFA5D9-FF49-4F16-BBC6-27F9394341A5}</Project>
+      <Name>ParatextPluginBackTranslationHelper</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SILConvertersWordML.csproj">
       <Project>{909c3757-ef5f-4639-b208-e1ee82570585}</Project>
       <Name>SILConvertersWordML</Name>
@@ -333,7 +361,59 @@
     <None Include="EcDistFiles\redist\Help\TECkit_Tools.pdf" />
     <None Include="EcDistFiles\redist\Help\txtconv.1.pdf" />
     <None Include="packages.config" />
+    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\SingleVerse\Simple\SingleVerse_TokensSource.json" />
+    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\SingleVerse\Simple\SingleVerseMissingInTarget\SingleVerseMissingInTarget_TokensTarget.json" />
+    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\SingleVerse\Simple\SingleVerseMissingInTarget\SingleVerseMissingInTarget_TokensTargetUpdate.json" />
+    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\SingleVerse\Simple\SingleVerse_VerseReference.json" />
+    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\MultipleVerses\MultipleVerses_TokensSource.json" />
+    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\MultipleVerses\MultipleVersesMissingInTarget\MultipleVersesMissingInTarget_TokensTarget.json" />
+    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\MultipleVerses\MultipleVersesMissingInTarget\MultipleVersesMissingInTarget_TokensTargetUpdate.json" />
+    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\MultipleVerses\MultipleVerses_VerseReference.json" />
+    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\MultipleVerses\MultipleVerses_VersesReference.json" />
+    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\SingleVerse\Simple\SingleVerse_VersesReference.json" />
+    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\SingleVerse\Simple\SingleVerseMissingInTarget\SingleVerseMissingInTarget_TranslatedText.txt" />
+    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\SingleVerse\Complex\MissingInTarget\Complex_MissingInTarget_TokensTarget.json" />
+    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\SingleVerse\Complex\MissingInTarget\Complex_MissingInTarget_TokensTargetUpdate.json" />
+    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\SingleVerse\Complex\Complex_SingleVerse_TokensSource.json" />
+    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\SingleVerse\Complex\Complex_SingleVerse_VerseReference.json" />
+    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\SingleVerse\Complex\Complex_SingleVerse_VersesReference.json" />
+    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\SingleVerse\Complex\PartialOverwriteMarker\Complex_PartialOverwriteMarker_TokensTarget.json" />
+    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\SingleVerse\Complex\PartialOverwriteMarker\Complex_PartialOverwriteMarker_TokensTargetUpdate.json" />
+    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\SingleVerse\Complex\PartialOverwriteText\Complex_PartialOverwriteText_TokensTarget.json" />
+    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\SingleVerse\Complex\PartialOverwriteText\Complex_PartialOverwriteText_TokensTargetUpdate.json" />
+    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\SingleVerse\Simple\SingleVerseMiTSplitIntoTwoParagraphs\SingleVerseMiTSplitIntoTwoParagraphs_TokensTarget.json" />
+    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\SingleVerse\Simple\SingleVerseMiTSplitIntoTwoParagraphs\SingleVerseMiTSplitIntoTwoParagraphs_TokensTargetUpdate.json" />
+    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\SingleVerse\SimpleParagraph\SimpleParagraphVerse_TokensSource.json" />
+    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\SingleVerse\SimpleParagraph\SimpleParagraphVerse_VerseReference.json" />
+    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\SingleVerse\SimpleParagraph\SimpleParagraphVerse_VersesReference.json" />
+    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\SingleVerse\SimpleParagraph\SimpleParagraphVerseMissingInTarget\SimpleParagraphVerseMissingInTarget_TokensTarget.json" />
+    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\SingleVerse\SimpleParagraph\SimpleParagraphVerseMissingInTarget\SimpleParagraphVerseMissingInTarget_TokensTargetUpdate.json" />
+    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\SingleVerse\SimpleParagraph\SimpleParagraphVerseSplitIntoTwoParagraphs\SimpleParagraphVerseSplitIntoTwoParagraphs_TokensTarget.json" />
+    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\SingleVerse\SimpleParagraph\SimpleParagraphVerseSplitIntoTwoParagraphs\SimpleParagraphVerseSplitIntoTwoParagraphs_TokensTargetUpdate.json" />
+    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\SingleVerse\SimpleParagraph\SimpleParagraphVerseMiTSplitIntoTwoParagraphs\SimpleParagraphVerseMiTSplitIntoTwoParagraphs_TokensTarget.json" />
+    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\SingleVerse\SimpleParagraph\SimpleParagraphVerseMiTSplitIntoTwoParagraphs\SimpleParagraphVerseMiTSplitIntoTwoParagraphs_TokensTargetUpdate.json" />
+    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\SingleVerse\Simple\SingleVerseSplitIntoTwoParagraphs\SingleVerseSplitIntoTwoParagraphs_TokensTarget.json" />
+    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\SingleVerse\Simple\SingleVerseSplitIntoTwoParagraphs\SingleVerseSplitIntoTwoParagraphs_TokensTargetUpdate.json" />
+    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\SingleVerse\MultipleParagraphs\MultipleParagraphs_TokensSource.json" />
+    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\SingleVerse\MultipleParagraphs\MultipleParagraphs_VerseReference.json" />
+    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\SingleVerse\MultipleParagraphs\MultipleParagraphs_VersesReference.json" />
+    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\SingleVerse\MultipleParagraphs\MultipleParagraphsMissingInTarget\MultipleParagraphsMissingInTarget_TokensTarget.json" />
+    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\SingleVerse\MultipleParagraphs\MultipleParagraphsMissingInTarget\MultipleParagraphsMissingInTarget_TokensTargetUpdate.json" />
+    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\SingleVerse\MultipleParagraphs\MultipleParagraphsMiTJoinedIntoOneParagraphs\MultipleParagraphsMiTJoinedIntoOneParagraphs_TokensTarget.json" />
+    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\SingleVerse\MultipleParagraphs\MultipleParagraphsMiTJoinedIntoOneParagraphs\MultipleParagraphsMiTJoinedIntoOneParagraphs_TokensTargetUpdate.json" />
+    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\SingleVerse\MultipleParagraphs\MultipleParagraphsJoinedIntoOneParagraphs\MultipleParagraphsJoinedIntoOneParagraphs_TokensTarget.json" />
+    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\SingleVerse\MultipleParagraphs\MultipleParagraphsJoinedIntoOneParagraphs\MultipleParagraphsJoinedIntoOneParagraphs_TokensTargetUpdate.json" />
+    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\MultipleVerses\MultipleVersesAndParagraphsJoinedIntoOneParagraphs\MultipleVersesAndParagraphsJoinedIntoOneParagraphs_TokensTarget.json" />
+    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\MultipleVerses\MultipleVersesAndParagraphsJoinedIntoOneParagraphs\MultipleVersesAndParagraphsJoinedIntoOneParagraphs_TokensTargetUpdate.json" />
+    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\MultipleVerses\MultipleVersesAndParagraphsMiTJoinedIntoOneParagraphs\MultipleVersesAndParagraphsMiTJoinedIntoOneParagraphs_TokensTarget.json" />
+    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\MultipleVerses\MultipleVersesAndParagraphsMiTJoinedIntoOneParagraphs\MultipleVersesAndParagraphsMiTJoinedIntoOneParagraphs_TokensTargetUpdate.json" />
+    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\SingleVerse\MultiplePoeticParagraphs\MultiplePoeticParagraphs_TokensSource.json" />
+    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\SingleVerse\MultiplePoeticParagraphs\MultiplePoeticParagraphs_VerseReference.json" />
+    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\SingleVerse\MultiplePoeticParagraphs\MultiplePoeticParagraphs_VersesReference.json" />
+    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\SingleVerse\MultiplePoeticParagraphs\MultiplePoeticParagraphsMissingInTarget\MultiplePoeticParagraphsMissingInTarget_TokensTarget.json" />
+    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\SingleVerse\MultiplePoeticParagraphs\MultiplePoeticParagraphsMissingInTarget\MultiplePoeticParagraphsMissingInTarget_TokensTargetUpdate.json" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>xcopy /y "$(TargetDir)*.*" $(SolutionDir)output\$(PlatformName)\$(ConfigurationName)</PostBuildEvent>
@@ -342,8 +422,15 @@
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\..\..\packages\Encoding-Converters-Core.0.5.1\build\Encoding-Converters-Core.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\packages\Encoding-Converters-Core.0.5.1\build\Encoding-Converters-Core.props'))" />
+    <Error Condition="!Exists('..\..\..\packages\Encoding-Converters-Core.0.5.2\build\Encoding-Converters-Core.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\packages\Encoding-Converters-Core.0.5.2\build\Encoding-Converters-Core.props'))" />
+    <Error Condition="!Exists('..\..\..\packages\NUnit.3.13.3\build\NUnit.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\packages\NUnit.3.13.3\build\NUnit.props'))" />
+    <Error Condition="!Exists('..\..\..\packages\NUnit3TestAdapter.4.3.1\build\net35\NUnit3TestAdapter.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\packages\NUnit3TestAdapter.4.3.1\build\net35\NUnit3TestAdapter.props'))" />
   </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties testfiles_4ptxbacktrhelper_4singleverse_4complex_4missingintarget_4complex_3missingintarget_3tokenstargetupdate_1json__JsonSchema="https://geojson.org/schema/GeoJSON.json" />
+    </VisualStudio>
+  </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

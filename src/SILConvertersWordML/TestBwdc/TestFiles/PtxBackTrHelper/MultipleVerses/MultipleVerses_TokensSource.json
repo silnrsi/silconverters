@@ -1,0 +1,532 @@
+{
+  "44_001_001": [
+    {
+      "Type": 2,
+      "Marker": "v",
+      "Attributes": [],
+      "Data": "1",
+      "EndMarker": null,
+      "Token": {
+        "Type": 2,
+        "Marker": "v",
+        "Text": null,
+        "Attributes": null,
+        "Data": "1",
+        "EndMarker": null,
+        "NestlessMarker": "v",
+        "HasData": true,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "ACT",
+        "BookNum": 44,
+        "ChapterNum": 1,
+        "VerseNum": 1,
+        "BBBCCCVVV": 44001001,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": false,
+        "AllVerses": []
+      },
+      "VerseOffset": 0,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": true,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    },
+    {
+      "Text": "Beloved Theopilus, whatever Jesus kept on doing and also teaching on this earth, for the exposition of all those things, I wrote the first book for you. ",
+      "Token": {
+        "Type": 3,
+        "Marker": null,
+        "Text": "Beloved Theopilus, whatever Jesus kept on doing and also teaching on this earth, for the exposition of all those things, I wrote the first book for you. ",
+        "Attributes": null,
+        "Data": null,
+        "EndMarker": null,
+        "NestlessMarker": null,
+        "HasData": false,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "ACT",
+        "BookNum": 44,
+        "ChapterNum": 1,
+        "VerseNum": 1,
+        "BBBCCCVVV": 44001001,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": false,
+        "AllVerses": []
+      },
+      "VerseOffset": 5,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": true,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    }
+  ],
+  "44_001_002": [
+    {
+      "Type": 2,
+      "Marker": "v",
+      "Attributes": [],
+      "Data": "2-5",
+      "EndMarker": null,
+      "Token": {
+        "Type": 2,
+        "Marker": "v",
+        "Text": null,
+        "Attributes": null,
+        "Data": "2-5",
+        "EndMarker": null,
+        "NestlessMarker": "v",
+        "HasData": true,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "ACT",
+        "BookNum": 44,
+        "ChapterNum": 1,
+        "VerseNum": 2,
+        "BBBCCCVVV": 44001002,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": true,
+        "AllVerses": [
+          {
+            "BookCode": "ACT",
+            "BookNum": 44,
+            "ChapterNum": 1,
+            "VerseNum": 2,
+            "BBBCCCVVV": 44001002,
+            "Versification": {
+              "Type": 4,
+              "IsCustomized": false
+            },
+            "RepresentsMultipleVerses": false,
+            "AllVerses": []
+          },
+          {
+            "BookCode": "ACT",
+            "BookNum": 44,
+            "ChapterNum": 1,
+            "VerseNum": 3,
+            "BBBCCCVVV": 44001003,
+            "Versification": {
+              "Type": 4,
+              "IsCustomized": false
+            },
+            "RepresentsMultipleVerses": false,
+            "AllVerses": []
+          },
+          {
+            "BookCode": "ACT",
+            "BookNum": 44,
+            "ChapterNum": 1,
+            "VerseNum": 4,
+            "BBBCCCVVV": 44001004,
+            "Versification": {
+              "Type": 4,
+              "IsCustomized": false
+            },
+            "RepresentsMultipleVerses": false,
+            "AllVerses": []
+          },
+          {
+            "BookCode": "ACT",
+            "BookNum": 44,
+            "ChapterNum": 1,
+            "VerseNum": 5,
+            "BBBCCCVVV": 44001005,
+            "Versification": {
+              "Type": 4,
+              "IsCustomized": false
+            },
+            "RepresentsMultipleVerses": false,
+            "AllVerses": []
+          }
+        ]
+      },
+      "VerseOffset": 0,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": true,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    },
+    {
+      "Text": "He, having born trouble on the cross and having died, became alive again on the third day. For forty days he appeared to his disciples. With the power of the Holy Spirit to do beyond the normal, he kept on giving spiritual instructions and telling about the kingdom of God. So that, from all of these things, they would get the proof that he really had become alive. ",
+      "Token": {
+        "Type": 3,
+        "Marker": null,
+        "Text": "He, having born trouble on the cross and having died, became alive again on the third day. For forty days he appeared to his disciples. With the power of the Holy Spirit to do beyond the normal, he kept on giving spiritual instructions and telling about the kingdom of God. So that, from all of these things, they would get the proof that he really had become alive. ",
+        "Attributes": null,
+        "Data": null,
+        "EndMarker": null,
+        "NestlessMarker": null,
+        "HasData": false,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "ACT",
+        "BookNum": 44,
+        "ChapterNum": 1,
+        "VerseNum": 2,
+        "BBBCCCVVV": 44001002,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": true,
+        "AllVerses": [
+          {
+            "BookCode": "ACT",
+            "BookNum": 44,
+            "ChapterNum": 1,
+            "VerseNum": 2,
+            "BBBCCCVVV": 44001002,
+            "Versification": {
+              "Type": 4,
+              "IsCustomized": false
+            },
+            "RepresentsMultipleVerses": false,
+            "AllVerses": []
+          },
+          {
+            "BookCode": "ACT",
+            "BookNum": 44,
+            "ChapterNum": 1,
+            "VerseNum": 3,
+            "BBBCCCVVV": 44001003,
+            "Versification": {
+              "Type": 4,
+              "IsCustomized": false
+            },
+            "RepresentsMultipleVerses": false,
+            "AllVerses": []
+          },
+          {
+            "BookCode": "ACT",
+            "BookNum": 44,
+            "ChapterNum": 1,
+            "VerseNum": 4,
+            "BBBCCCVVV": 44001004,
+            "Versification": {
+              "Type": 4,
+              "IsCustomized": false
+            },
+            "RepresentsMultipleVerses": false,
+            "AllVerses": []
+          },
+          {
+            "BookCode": "ACT",
+            "BookNum": 44,
+            "ChapterNum": 1,
+            "VerseNum": 5,
+            "BBBCCCVVV": 44001005,
+            "Versification": {
+              "Type": 4,
+              "IsCustomized": false
+            },
+            "RepresentsMultipleVerses": false,
+            "AllVerses": []
+          }
+        ]
+      },
+      "VerseOffset": 7,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": true,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    },
+    {
+      "Type": 3,
+      "Marker": "p",
+      "Attributes": [],
+      "Data": null,
+      "EndMarker": null,
+      "Token": {
+        "Type": 4,
+        "Marker": "p",
+        "Text": null,
+        "Attributes": null,
+        "Data": null,
+        "EndMarker": "p*",
+        "NestlessMarker": "p",
+        "HasData": false,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "ACT",
+        "BookNum": 44,
+        "ChapterNum": 1,
+        "VerseNum": 2,
+        "BBBCCCVVV": 44001002,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": true,
+        "AllVerses": [
+          {
+            "BookCode": "ACT",
+            "BookNum": 44,
+            "ChapterNum": 1,
+            "VerseNum": 2,
+            "BBBCCCVVV": 44001002,
+            "Versification": {
+              "Type": 4,
+              "IsCustomized": false
+            },
+            "RepresentsMultipleVerses": false,
+            "AllVerses": []
+          },
+          {
+            "BookCode": "ACT",
+            "BookNum": 44,
+            "ChapterNum": 1,
+            "VerseNum": 3,
+            "BBBCCCVVV": 44001003,
+            "Versification": {
+              "Type": 4,
+              "IsCustomized": false
+            },
+            "RepresentsMultipleVerses": false,
+            "AllVerses": []
+          },
+          {
+            "BookCode": "ACT",
+            "BookNum": 44,
+            "ChapterNum": 1,
+            "VerseNum": 4,
+            "BBBCCCVVV": 44001004,
+            "Versification": {
+              "Type": 4,
+              "IsCustomized": false
+            },
+            "RepresentsMultipleVerses": false,
+            "AllVerses": []
+          },
+          {
+            "BookCode": "ACT",
+            "BookNum": 44,
+            "ChapterNum": 1,
+            "VerseNum": 5,
+            "BBBCCCVVV": 44001005,
+            "Versification": {
+              "Type": 4,
+              "IsCustomized": false
+            },
+            "RepresentsMultipleVerses": false,
+            "AllVerses": []
+          }
+        ]
+      },
+      "VerseOffset": 374,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": true,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    },
+    {
+      "Text": "Before being taken up to heaven, one time when he was with his specially chosen apostles, he said to them, “Saint John used to give baptism with water, but, after a few days, God will give you baptism with the Holy Spirit. For this reason, aside from Jerusalem city, don’t go anywhere for now. But stay here until God sends his Holy Spirit to you, the promise of which he has made and about which I have already told you before. ",
+      "Token": {
+        "Type": 3,
+        "Marker": null,
+        "Text": "Before being taken up to heaven, one time when he was with his specially chosen apostles, he said to them, “Saint John used to give baptism with water, but, after a few days, God will give you baptism with the Holy Spirit. For this reason, aside from Jerusalem city, don’t go anywhere for now. But stay here until God sends his Holy Spirit to you, the promise of which he has made and about which I have already told you before. ",
+        "Attributes": null,
+        "Data": null,
+        "EndMarker": null,
+        "NestlessMarker": null,
+        "HasData": false,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "ACT",
+        "BookNum": 44,
+        "ChapterNum": 1,
+        "VerseNum": 2,
+        "BBBCCCVVV": 44001002,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": true,
+        "AllVerses": [
+          {
+            "BookCode": "ACT",
+            "BookNum": 44,
+            "ChapterNum": 1,
+            "VerseNum": 2,
+            "BBBCCCVVV": 44001002,
+            "Versification": {
+              "Type": 4,
+              "IsCustomized": false
+            },
+            "RepresentsMultipleVerses": false,
+            "AllVerses": []
+          },
+          {
+            "BookCode": "ACT",
+            "BookNum": 44,
+            "ChapterNum": 1,
+            "VerseNum": 3,
+            "BBBCCCVVV": 44001003,
+            "Versification": {
+              "Type": 4,
+              "IsCustomized": false
+            },
+            "RepresentsMultipleVerses": false,
+            "AllVerses": []
+          },
+          {
+            "BookCode": "ACT",
+            "BookNum": 44,
+            "ChapterNum": 1,
+            "VerseNum": 4,
+            "BBBCCCVVV": 44001004,
+            "Versification": {
+              "Type": 4,
+              "IsCustomized": false
+            },
+            "RepresentsMultipleVerses": false,
+            "AllVerses": []
+          },
+          {
+            "BookCode": "ACT",
+            "BookNum": 44,
+            "ChapterNum": 1,
+            "VerseNum": 5,
+            "BBBCCCVVV": 44001005,
+            "Versification": {
+              "Type": 4,
+              "IsCustomized": false
+            },
+            "RepresentsMultipleVerses": false,
+            "AllVerses": []
+          }
+        ]
+      },
+      "VerseOffset": 377,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": true,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    },
+    {
+      "Type": 3,
+      "Marker": "p",
+      "Attributes": [],
+      "Data": null,
+      "EndMarker": null,
+      "Token": {
+        "Type": 4,
+        "Marker": "p",
+        "Text": null,
+        "Attributes": null,
+        "Data": null,
+        "EndMarker": "p*",
+        "NestlessMarker": "p",
+        "HasData": false,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "ACT",
+        "BookNum": 44,
+        "ChapterNum": 1,
+        "VerseNum": 2,
+        "BBBCCCVVV": 44001002,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": true,
+        "AllVerses": [
+          {
+            "BookCode": "ACT",
+            "BookNum": 44,
+            "ChapterNum": 1,
+            "VerseNum": 2,
+            "BBBCCCVVV": 44001002,
+            "Versification": {
+              "Type": 4,
+              "IsCustomized": false
+            },
+            "RepresentsMultipleVerses": false,
+            "AllVerses": []
+          },
+          {
+            "BookCode": "ACT",
+            "BookNum": 44,
+            "ChapterNum": 1,
+            "VerseNum": 3,
+            "BBBCCCVVV": 44001003,
+            "Versification": {
+              "Type": 4,
+              "IsCustomized": false
+            },
+            "RepresentsMultipleVerses": false,
+            "AllVerses": []
+          },
+          {
+            "BookCode": "ACT",
+            "BookNum": 44,
+            "ChapterNum": 1,
+            "VerseNum": 4,
+            "BBBCCCVVV": 44001004,
+            "Versification": {
+              "Type": 4,
+              "IsCustomized": false
+            },
+            "RepresentsMultipleVerses": false,
+            "AllVerses": []
+          },
+          {
+            "BookCode": "ACT",
+            "BookNum": 44,
+            "ChapterNum": 1,
+            "VerseNum": 5,
+            "BBBCCCVVV": 44001005,
+            "Versification": {
+              "Type": 4,
+              "IsCustomized": false
+            },
+            "RepresentsMultipleVerses": false,
+            "AllVerses": []
+          }
+        ]
+      },
+      "VerseOffset": 806,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": true,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    }
+  ]
+}

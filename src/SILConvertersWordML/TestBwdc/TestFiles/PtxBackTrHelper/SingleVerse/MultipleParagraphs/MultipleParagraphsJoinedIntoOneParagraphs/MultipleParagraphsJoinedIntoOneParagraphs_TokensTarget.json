@@ -1,0 +1,565 @@
+{
+  "44_002": {
+    "44_002_000": [
+      {
+        "Type": 1,
+        "Marker": "c",
+        "Attributes": [],
+        "Data": "2",
+        "EndMarker": null,
+        "Token": {
+          "Type": 1,
+          "Marker": "c",
+          "Text": null,
+          "Attributes": null,
+          "Data": "2",
+          "EndMarker": null,
+          "NestlessMarker": "c",
+          "HasData": true,
+          "HasAttributes": false,
+          "HasNonDefaultAttribute": false
+        },
+        "VerseRef": {
+          "BookCode": "ACT",
+          "BookNum": 44,
+          "ChapterNum": 2,
+          "VerseNum": 0,
+          "BBBCCCVVV": 44002000,
+          "Versification": {
+            "Type": 4,
+            "IsCustomized": false
+          },
+          "RepresentsMultipleVerses": false,
+          "AllVerses": []
+        },
+        "VerseOffset": 0,
+        "IsSpecial": false,
+        "IsFigure": false,
+        "IsFootnoteOrCrossReference": false,
+        "IsScripture": true,
+        "IsMetadata": false,
+        "IsPublishableVernacular": true
+      }
+    ],
+    "44_002_030": [
+      {
+        "Type": 2,
+        "Marker": "v",
+        "Attributes": [],
+        "Data": "30",
+        "EndMarker": null,
+        "Token": {
+          "Type": 2,
+          "Marker": "v",
+          "Text": null,
+          "Attributes": null,
+          "Data": "30",
+          "EndMarker": null,
+          "NestlessMarker": "v",
+          "HasData": true,
+          "HasAttributes": false,
+          "HasNonDefaultAttribute": false
+        },
+        "VerseRef": {
+          "BookCode": "ACT",
+          "BookNum": 44,
+          "ChapterNum": 2,
+          "VerseNum": 30,
+          "BBBCCCVVV": 44002030,
+          "Versification": {
+            "Type": 4,
+            "IsCustomized": false
+          },
+          "RepresentsMultipleVerses": false,
+          "AllVerses": []
+        },
+        "VerseOffset": 0,
+        "IsSpecial": false,
+        "IsFigure": false,
+        "IsFootnoteOrCrossReference": false,
+        "IsScripture": true,
+        "IsMetadata": false,
+        "IsPublishableVernacular": true
+      },
+      {
+        "Text": "क्योंकि वह भी एक भविष्यद्वक्ता था। ",
+        "Token": {
+          "Type": 3,
+          "Marker": null,
+          "Text": "क्योंकि वह भी एक भविष्यद्वक्ता था। ",
+          "Attributes": null,
+          "Data": null,
+          "EndMarker": null,
+          "NestlessMarker": null,
+          "HasData": false,
+          "HasAttributes": false,
+          "HasNonDefaultAttribute": false
+        },
+        "VerseRef": {
+          "BookCode": "ACT",
+          "BookNum": 44,
+          "ChapterNum": 2,
+          "VerseNum": 30,
+          "BBBCCCVVV": 44002030,
+          "Versification": {
+            "Type": 4,
+            "IsCustomized": false
+          },
+          "RepresentsMultipleVerses": false,
+          "AllVerses": []
+        },
+        "VerseOffset": 6,
+        "IsSpecial": false,
+        "IsFigure": false,
+        "IsFootnoteOrCrossReference": false,
+        "IsScripture": true,
+        "IsMetadata": false,
+        "IsPublishableVernacular": true
+      },
+      {
+        "Type": 3,
+        "Marker": "p",
+        "Attributes": [],
+        "Data": null,
+        "EndMarker": null,
+        "Token": {
+          "Type": 4,
+          "Marker": "p",
+          "Text": null,
+          "Attributes": null,
+          "Data": null,
+          "EndMarker": "p*",
+          "NestlessMarker": "p",
+          "HasData": false,
+          "HasAttributes": false,
+          "HasNonDefaultAttribute": false
+        },
+        "VerseRef": {
+          "BookCode": "ACT",
+          "BookNum": 44,
+          "ChapterNum": 2,
+          "VerseNum": 30,
+          "BBBCCCVVV": 44002030,
+          "Versification": {
+            "Type": 4,
+            "IsCustomized": false
+          },
+          "RepresentsMultipleVerses": false,
+          "AllVerses": []
+        },
+        "VerseOffset": 41,
+        "IsSpecial": false,
+        "IsFigure": false,
+        "IsFootnoteOrCrossReference": false,
+        "IsScripture": true,
+        "IsMetadata": false,
+        "IsPublishableVernacular": true
+      },
+      {
+        "Text": "एक बार, परमेश्वर ने दाऊद के साथ वाचा बाँधी थी, उसने यह प्रतिज्ञा की थी: ",
+        "Token": {
+          "Type": 3,
+          "Marker": null,
+          "Text": "एक बार, परमेश्वर ने दाऊद के साथ वाचा बाँधी थी, उसने यह प्रतिज्ञा की थी: ",
+          "Attributes": null,
+          "Data": null,
+          "EndMarker": null,
+          "NestlessMarker": null,
+          "HasData": false,
+          "HasAttributes": false,
+          "HasNonDefaultAttribute": false
+        },
+        "VerseRef": {
+          "BookCode": "ACT",
+          "BookNum": 44,
+          "ChapterNum": 2,
+          "VerseNum": 30,
+          "BBBCCCVVV": 44002030,
+          "Versification": {
+            "Type": 4,
+            "IsCustomized": false
+          },
+          "RepresentsMultipleVerses": false,
+          "AllVerses": []
+        },
+        "VerseOffset": 44,
+        "IsSpecial": false,
+        "IsFigure": false,
+        "IsFootnoteOrCrossReference": false,
+        "IsScripture": true,
+        "IsMetadata": false,
+        "IsPublishableVernacular": true
+      },
+      {
+        "Type": 3,
+        "Marker": "q1",
+        "Attributes": [],
+        "Data": null,
+        "EndMarker": null,
+        "Token": {
+          "Type": 4,
+          "Marker": "q1",
+          "Text": null,
+          "Attributes": null,
+          "Data": null,
+          "EndMarker": "q1*",
+          "NestlessMarker": "q1",
+          "HasData": false,
+          "HasAttributes": false,
+          "HasNonDefaultAttribute": false
+        },
+        "VerseRef": {
+          "BookCode": "ACT",
+          "BookNum": 44,
+          "ChapterNum": 2,
+          "VerseNum": 30,
+          "BBBCCCVVV": 44002030,
+          "Versification": {
+            "Type": 4,
+            "IsCustomized": false
+          },
+          "RepresentsMultipleVerses": false,
+          "AllVerses": []
+        },
+        "VerseOffset": 116,
+        "IsSpecial": false,
+        "IsFigure": false,
+        "IsFootnoteOrCrossReference": false,
+        "IsScripture": true,
+        "IsMetadata": false,
+        "IsPublishableVernacular": true
+      },
+      {
+        "Text": "'मैं एक आदमी बैठाऊँगा। ",
+        "Token": {
+          "Type": 3,
+          "Marker": null,
+          "Text": "'मैं एक आदमी बैठाऊँगा। ",
+          "Attributes": null,
+          "Data": null,
+          "EndMarker": null,
+          "NestlessMarker": null,
+          "HasData": false,
+          "HasAttributes": false,
+          "HasNonDefaultAttribute": false
+        },
+        "VerseRef": {
+          "BookCode": "ACT",
+          "BookNum": 44,
+          "ChapterNum": 2,
+          "VerseNum": 30,
+          "BBBCCCVVV": 44002030,
+          "Versification": {
+            "Type": 4,
+            "IsCustomized": false
+          },
+          "RepresentsMultipleVerses": false,
+          "AllVerses": []
+        },
+        "VerseOffset": 120,
+        "IsSpecial": false,
+        "IsFigure": false,
+        "IsFootnoteOrCrossReference": false,
+        "IsScripture": true,
+        "IsMetadata": false,
+        "IsPublishableVernacular": true
+      },
+      {
+        "Type": 3,
+        "Marker": "q2",
+        "Attributes": [],
+        "Data": null,
+        "EndMarker": null,
+        "Token": {
+          "Type": 4,
+          "Marker": "q2",
+          "Text": null,
+          "Attributes": null,
+          "Data": null,
+          "EndMarker": "q2*",
+          "NestlessMarker": "q2",
+          "HasData": false,
+          "HasAttributes": false,
+          "HasNonDefaultAttribute": false
+        },
+        "VerseRef": {
+          "BookCode": "ACT",
+          "BookNum": 44,
+          "ChapterNum": 2,
+          "VerseNum": 30,
+          "BBBCCCVVV": 44002030,
+          "Versification": {
+            "Type": 4,
+            "IsCustomized": false
+          },
+          "RepresentsMultipleVerses": false,
+          "AllVerses": []
+        },
+        "VerseOffset": 143,
+        "IsSpecial": false,
+        "IsFigure": false,
+        "IsFootnoteOrCrossReference": false,
+        "IsScripture": true,
+        "IsMetadata": false,
+        "IsPublishableVernacular": true
+      },
+      {
+        "Text": "अपने सिंहासन पर अपनी परिवार रेखा के बीच से। ",
+        "Token": {
+          "Type": 3,
+          "Marker": null,
+          "Text": "अपने सिंहासन पर अपनी परिवार रेखा के बीच से। ",
+          "Attributes": null,
+          "Data": null,
+          "EndMarker": null,
+          "NestlessMarker": null,
+          "HasData": false,
+          "HasAttributes": false,
+          "HasNonDefaultAttribute": false
+        },
+        "VerseRef": {
+          "BookCode": "ACT",
+          "BookNum": 44,
+          "ChapterNum": 2,
+          "VerseNum": 30,
+          "BBBCCCVVV": 44002030,
+          "Versification": {
+            "Type": 4,
+            "IsCustomized": false
+          },
+          "RepresentsMultipleVerses": false,
+          "AllVerses": []
+        },
+        "VerseOffset": 147,
+        "IsSpecial": false,
+        "IsFigure": false,
+        "IsFootnoteOrCrossReference": false,
+        "IsScripture": true,
+        "IsMetadata": false,
+        "IsPublishableVernacular": true
+      },
+      {
+        "Type": 4,
+        "Marker": "rq",
+        "Attributes": [],
+        "Data": null,
+        "EndMarker": "rq*",
+        "Token": {
+          "Type": 5,
+          "Marker": "rq",
+          "Text": null,
+          "Attributes": null,
+          "Data": null,
+          "EndMarker": "rq*",
+          "NestlessMarker": "rq",
+          "HasData": false,
+          "HasAttributes": false,
+          "HasNonDefaultAttribute": false
+        },
+        "VerseRef": {
+          "BookCode": "ACT",
+          "BookNum": 44,
+          "ChapterNum": 2,
+          "VerseNum": 30,
+          "BBBCCCVVV": 44002030,
+          "Versification": {
+            "Type": 4,
+            "IsCustomized": false
+          },
+          "RepresentsMultipleVerses": false,
+          "AllVerses": []
+        },
+        "VerseOffset": 191,
+        "IsSpecial": false,
+        "IsFigure": false,
+        "IsFootnoteOrCrossReference": false,
+        "IsScripture": false,
+        "IsMetadata": false,
+        "IsPublishableVernacular": true
+      },
+      {
+        "Text": "Psa 132:11 ",
+        "Token": {
+          "Type": 3,
+          "Marker": null,
+          "Text": "Psa 132:11 ",
+          "Attributes": null,
+          "Data": null,
+          "EndMarker": null,
+          "NestlessMarker": null,
+          "HasData": false,
+          "HasAttributes": false,
+          "HasNonDefaultAttribute": false
+        },
+        "VerseRef": {
+          "BookCode": "ACT",
+          "BookNum": 44,
+          "ChapterNum": 2,
+          "VerseNum": 30,
+          "BBBCCCVVV": 44002030,
+          "Versification": {
+            "Type": 4,
+            "IsCustomized": false
+          },
+          "RepresentsMultipleVerses": false,
+          "AllVerses": []
+        },
+        "VerseOffset": 195,
+        "IsSpecial": false,
+        "IsFigure": false,
+        "IsFootnoteOrCrossReference": false,
+        "IsScripture": false,
+        "IsMetadata": false,
+        "IsPublishableVernacular": true
+      },
+      {
+        "Type": 6,
+        "Marker": "rq*",
+        "Attributes": [],
+        "Data": null,
+        "EndMarker": null,
+        "Token": {
+          "Type": 7,
+          "Marker": "rq*",
+          "Text": null,
+          "Attributes": null,
+          "Data": null,
+          "EndMarker": null,
+          "NestlessMarker": "rq*",
+          "HasData": false,
+          "HasAttributes": false,
+          "HasNonDefaultAttribute": false
+        },
+        "VerseRef": {
+          "BookCode": "ACT",
+          "BookNum": 44,
+          "ChapterNum": 2,
+          "VerseNum": 30,
+          "BBBCCCVVV": 44002030,
+          "Versification": {
+            "Type": 4,
+            "IsCustomized": false
+          },
+          "RepresentsMultipleVerses": false,
+          "AllVerses": []
+        },
+        "VerseOffset": 206,
+        "IsSpecial": false,
+        "IsFigure": false,
+        "IsFootnoteOrCrossReference": false,
+        "IsScripture": true,
+        "IsMetadata": false,
+        "IsPublishableVernacular": true
+      },
+      {
+        "Text": " ",
+        "Token": {
+          "Type": 3,
+          "Marker": null,
+          "Text": " ",
+          "Attributes": null,
+          "Data": null,
+          "EndMarker": null,
+          "NestlessMarker": null,
+          "HasData": false,
+          "HasAttributes": false,
+          "HasNonDefaultAttribute": false
+        },
+        "VerseRef": {
+          "BookCode": "ACT",
+          "BookNum": 44,
+          "ChapterNum": 2,
+          "VerseNum": 30,
+          "BBBCCCVVV": 44002030,
+          "Versification": {
+            "Type": 4,
+            "IsCustomized": false
+          },
+          "RepresentsMultipleVerses": false,
+          "AllVerses": []
+        },
+        "VerseOffset": 210,
+        "IsSpecial": false,
+        "IsFigure": false,
+        "IsFootnoteOrCrossReference": false,
+        "IsScripture": true,
+        "IsMetadata": false,
+        "IsPublishableVernacular": true
+      },
+      {
+        "Type": 3,
+        "Marker": "m",
+        "Attributes": [],
+        "Data": null,
+        "EndMarker": null,
+        "Token": {
+          "Type": 4,
+          "Marker": "m",
+          "Text": null,
+          "Attributes": null,
+          "Data": null,
+          "EndMarker": "m*",
+          "NestlessMarker": "m",
+          "HasData": false,
+          "HasAttributes": false,
+          "HasNonDefaultAttribute": false
+        },
+        "VerseRef": {
+          "BookCode": "ACT",
+          "BookNum": 44,
+          "ChapterNum": 2,
+          "VerseNum": 30,
+          "BBBCCCVVV": 44002030,
+          "Versification": {
+            "Type": 4,
+            "IsCustomized": false
+          },
+          "RepresentsMultipleVerses": false,
+          "AllVerses": []
+        },
+        "VerseOffset": 211,
+        "IsSpecial": false,
+        "IsFigure": false,
+        "IsFootnoteOrCrossReference": false,
+        "IsScripture": true,
+        "IsMetadata": false,
+        "IsPublishableVernacular": true
+      },
+      {
+        "Text": "\"हम जानते हैं कि जो सिंहासन पर बैठेगा वह मसीहा है, जिसकी हम प्रतीक्षा कर रहे हैं। ",
+        "Token": {
+          "Type": 3,
+          "Marker": null,
+          "Text": "\"हम जानते हैं कि जो सिंहासन पर बैठेगा वह मसीहा है, जिसकी हम प्रतीक्षा कर रहे हैं। ",
+          "Attributes": null,
+          "Data": null,
+          "EndMarker": null,
+          "NestlessMarker": null,
+          "HasData": false,
+          "HasAttributes": false,
+          "HasNonDefaultAttribute": false
+        },
+        "VerseRef": {
+          "BookCode": "ACT",
+          "BookNum": 44,
+          "ChapterNum": 2,
+          "VerseNum": 30,
+          "BBBCCCVVV": 44002030,
+          "Versification": {
+            "Type": 4,
+            "IsCustomized": false
+          },
+          "RepresentsMultipleVerses": false,
+          "AllVerses": []
+        },
+        "VerseOffset": 214,
+        "IsSpecial": false,
+        "IsFigure": false,
+        "IsFootnoteOrCrossReference": false,
+        "IsScripture": true,
+        "IsMetadata": false,
+        "IsPublishableVernacular": true
+      }
+    ]
+  }
+}

@@ -1,0 +1,1369 @@
+{
+  "44_001_000": [
+    {
+      "Type": 0,
+      "Marker": "id",
+      "Attributes": [],
+      "Data": "ACT",
+      "EndMarker": null,
+      "Token": {
+        "Type": 0,
+        "Marker": "id",
+        "Text": null,
+        "Attributes": null,
+        "Data": "ACT",
+        "EndMarker": null,
+        "NestlessMarker": "id",
+        "HasData": true,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "ACT",
+        "BookNum": 44,
+        "ChapterNum": 1,
+        "VerseNum": 0,
+        "BBBCCCVVV": 44001000,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": false,
+        "AllVerses": []
+      },
+      "VerseOffset": 0,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": false,
+      "IsMetadata": true,
+      "IsPublishableVernacular": false
+    },
+    {
+      "Text": "Act01.txt Kangri Pahari 2007 KNI TR Committee ",
+      "Token": {
+        "Type": 3,
+        "Marker": null,
+        "Text": "Act01.txt Kangri Pahari 2007 KNI TR Committee ",
+        "Attributes": null,
+        "Data": null,
+        "EndMarker": null,
+        "NestlessMarker": null,
+        "HasData": false,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "ACT",
+        "BookNum": 44,
+        "ChapterNum": 1,
+        "VerseNum": 0,
+        "BBBCCCVVV": 44001000,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": false,
+        "AllVerses": []
+      },
+      "VerseOffset": 8,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": false,
+      "IsMetadata": true,
+      "IsPublishableVernacular": false
+    },
+    {
+      "Type": 3,
+      "Marker": "sts",
+      "Attributes": [],
+      "Data": null,
+      "EndMarker": null,
+      "Token": {
+        "Type": 4,
+        "Marker": "sts",
+        "Text": null,
+        "Attributes": null,
+        "Data": null,
+        "EndMarker": "sts*",
+        "NestlessMarker": "sts",
+        "HasData": false,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "ACT",
+        "BookNum": 44,
+        "ChapterNum": 1,
+        "VerseNum": 0,
+        "BBBCCCVVV": 44001000,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": false,
+        "AllVerses": []
+      },
+      "VerseOffset": 54,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": false,
+      "IsMetadata": true,
+      "IsPublishableVernacular": false
+    },
+    {
+      "Text": "5th review complete -- ready for publication ",
+      "Token": {
+        "Type": 3,
+        "Marker": null,
+        "Text": "5th review complete -- ready for publication ",
+        "Attributes": null,
+        "Data": null,
+        "EndMarker": null,
+        "NestlessMarker": null,
+        "HasData": false,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "ACT",
+        "BookNum": 44,
+        "ChapterNum": 1,
+        "VerseNum": 0,
+        "BBBCCCVVV": 44001000,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": false,
+        "AllVerses": []
+      },
+      "VerseOffset": 59,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": false,
+      "IsMetadata": true,
+      "IsPublishableVernacular": false
+    },
+    {
+      "Type": 3,
+      "Marker": "h",
+      "Attributes": [],
+      "Data": null,
+      "EndMarker": null,
+      "Token": {
+        "Type": 4,
+        "Marker": "h",
+        "Text": null,
+        "Attributes": null,
+        "Data": null,
+        "EndMarker": "h*",
+        "NestlessMarker": "h",
+        "HasData": false,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "ACT",
+        "BookNum": 44,
+        "ChapterNum": 1,
+        "VerseNum": 0,
+        "BBBCCCVVV": 44001000,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": false,
+        "AllVerses": []
+      },
+      "VerseOffset": 104,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": false,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    },
+    {
+      "Text": "प्रेरितों के काम का लेखा-जोखा ",
+      "Token": {
+        "Type": 3,
+        "Marker": null,
+        "Text": "प्रेरितों के काम का लेखा-जोखा ",
+        "Attributes": null,
+        "Data": null,
+        "EndMarker": null,
+        "NestlessMarker": null,
+        "HasData": false,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "ACT",
+        "BookNum": 44,
+        "ChapterNum": 1,
+        "VerseNum": 0,
+        "BBBCCCVVV": 44001000,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": false,
+        "AllVerses": []
+      },
+      "VerseOffset": 107,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": false,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    },
+    {
+      "Type": 3,
+      "Marker": "toc1",
+      "Attributes": [],
+      "Data": null,
+      "EndMarker": null,
+      "Token": {
+        "Type": 4,
+        "Marker": "toc1",
+        "Text": null,
+        "Attributes": null,
+        "Data": null,
+        "EndMarker": "toc1*",
+        "NestlessMarker": "toc1",
+        "HasData": false,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "ACT",
+        "BookNum": 44,
+        "ChapterNum": 1,
+        "VerseNum": 0,
+        "BBBCCCVVV": 44001000,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": false,
+        "AllVerses": []
+      },
+      "VerseOffset": 137,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": false,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    },
+    {
+      "Text": "प्रेरितों के काम ",
+      "Token": {
+        "Type": 3,
+        "Marker": null,
+        "Text": "प्रेरितों के काम ",
+        "Attributes": null,
+        "Data": null,
+        "EndMarker": null,
+        "NestlessMarker": null,
+        "HasData": false,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "ACT",
+        "BookNum": 44,
+        "ChapterNum": 1,
+        "VerseNum": 0,
+        "BBBCCCVVV": 44001000,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": false,
+        "AllVerses": []
+      },
+      "VerseOffset": 143,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": false,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    },
+    {
+      "Type": 3,
+      "Marker": "toc2",
+      "Attributes": [],
+      "Data": null,
+      "EndMarker": null,
+      "Token": {
+        "Type": 4,
+        "Marker": "toc2",
+        "Text": null,
+        "Attributes": null,
+        "Data": null,
+        "EndMarker": "toc2*",
+        "NestlessMarker": "toc2",
+        "HasData": false,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "ACT",
+        "BookNum": 44,
+        "ChapterNum": 1,
+        "VerseNum": 0,
+        "BBBCCCVVV": 44001000,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": false,
+        "AllVerses": []
+      },
+      "VerseOffset": 160,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": false,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    },
+    {
+      "Text": "प्रेरित ",
+      "Token": {
+        "Type": 3,
+        "Marker": null,
+        "Text": "प्रेरित ",
+        "Attributes": null,
+        "Data": null,
+        "EndMarker": null,
+        "NestlessMarker": null,
+        "HasData": false,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "ACT",
+        "BookNum": 44,
+        "ChapterNum": 1,
+        "VerseNum": 0,
+        "BBBCCCVVV": 44001000,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": false,
+        "AllVerses": []
+      },
+      "VerseOffset": 166,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": false,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    },
+    {
+      "Type": 3,
+      "Marker": "toc3",
+      "Attributes": [],
+      "Data": null,
+      "EndMarker": null,
+      "Token": {
+        "Type": 4,
+        "Marker": "toc3",
+        "Text": null,
+        "Attributes": null,
+        "Data": null,
+        "EndMarker": "toc3*",
+        "NestlessMarker": "toc3",
+        "HasData": false,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "ACT",
+        "BookNum": 44,
+        "ChapterNum": 1,
+        "VerseNum": 0,
+        "BBBCCCVVV": 44001000,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": false,
+        "AllVerses": []
+      },
+      "VerseOffset": 174,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": false,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    },
+    {
+      "Text": "प्रेरित ",
+      "Token": {
+        "Type": 3,
+        "Marker": null,
+        "Text": "प्रेरित ",
+        "Attributes": null,
+        "Data": null,
+        "EndMarker": null,
+        "NestlessMarker": null,
+        "HasData": false,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "ACT",
+        "BookNum": 44,
+        "ChapterNum": 1,
+        "VerseNum": 0,
+        "BBBCCCVVV": 44001000,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": false,
+        "AllVerses": []
+      },
+      "VerseOffset": 180,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": false,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    },
+    {
+      "Type": 3,
+      "Marker": "mt",
+      "Attributes": [],
+      "Data": null,
+      "EndMarker": null,
+      "Token": {
+        "Type": 4,
+        "Marker": "mt",
+        "Text": null,
+        "Attributes": null,
+        "Data": null,
+        "EndMarker": "mt*",
+        "NestlessMarker": "mt",
+        "HasData": false,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "ACT",
+        "BookNum": 44,
+        "ChapterNum": 1,
+        "VerseNum": 0,
+        "BBBCCCVVV": 44001000,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": false,
+        "AllVerses": []
+      },
+      "VerseOffset": 188,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": false,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    },
+    {
+      "Text": "प्रेरितों के काम का लेखा-जोखा ",
+      "Token": {
+        "Type": 3,
+        "Marker": null,
+        "Text": "प्रेरितों के काम का लेखा-जोखा ",
+        "Attributes": null,
+        "Data": null,
+        "EndMarker": null,
+        "NestlessMarker": null,
+        "HasData": false,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "ACT",
+        "BookNum": 44,
+        "ChapterNum": 1,
+        "VerseNum": 0,
+        "BBBCCCVVV": 44001000,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": false,
+        "AllVerses": []
+      },
+      "VerseOffset": 192,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": false,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    },
+    {
+      "Type": 1,
+      "Marker": "c",
+      "Attributes": [],
+      "Data": "1",
+      "EndMarker": null,
+      "Token": {
+        "Type": 1,
+        "Marker": "c",
+        "Text": null,
+        "Attributes": null,
+        "Data": "1",
+        "EndMarker": null,
+        "NestlessMarker": "c",
+        "HasData": true,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "ACT",
+        "BookNum": 44,
+        "ChapterNum": 1,
+        "VerseNum": 0,
+        "BBBCCCVVV": 44001000,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": false,
+        "AllVerses": []
+      },
+      "VerseOffset": 222,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": true,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    },
+    {
+      "Type": 3,
+      "Marker": "s",
+      "Attributes": [],
+      "Data": null,
+      "EndMarker": null,
+      "Token": {
+        "Type": 4,
+        "Marker": "s",
+        "Text": null,
+        "Attributes": null,
+        "Data": null,
+        "EndMarker": "s*",
+        "NestlessMarker": "s",
+        "HasData": false,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "ACT",
+        "BookNum": 44,
+        "ChapterNum": 1,
+        "VerseNum": 0,
+        "BBBCCCVVV": 44001000,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": false,
+        "AllVerses": []
+      },
+      "VerseOffset": 227,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": false,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    },
+    {
+      "Text": "यीशु का स्वर्ग में जाना ",
+      "Token": {
+        "Type": 3,
+        "Marker": null,
+        "Text": "यीशु का स्वर्ग में जाना ",
+        "Attributes": null,
+        "Data": null,
+        "EndMarker": null,
+        "NestlessMarker": null,
+        "HasData": false,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "ACT",
+        "BookNum": 44,
+        "ChapterNum": 1,
+        "VerseNum": 0,
+        "BBBCCCVVV": 44001000,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": false,
+        "AllVerses": []
+      },
+      "VerseOffset": 230,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": false,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    },
+    {
+      "Type": 3,
+      "Marker": "p",
+      "Attributes": [],
+      "Data": null,
+      "EndMarker": null,
+      "Token": {
+        "Type": 4,
+        "Marker": "p",
+        "Text": null,
+        "Attributes": null,
+        "Data": null,
+        "EndMarker": "p*",
+        "NestlessMarker": "p",
+        "HasData": false,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "ACT",
+        "BookNum": 44,
+        "ChapterNum": 1,
+        "VerseNum": 0,
+        "BBBCCCVVV": 44001000,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": false,
+        "AllVerses": []
+      },
+      "VerseOffset": 254,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": true,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    }
+  ],
+  "44_001_001": [
+    {
+      "Type": 2,
+      "Marker": "v",
+      "Attributes": [],
+      "Data": "1",
+      "EndMarker": null,
+      "Token": {
+        "Type": 2,
+        "Marker": "v",
+        "Text": null,
+        "Attributes": null,
+        "Data": "1",
+        "EndMarker": null,
+        "NestlessMarker": "v",
+        "HasData": true,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "ACT",
+        "BookNum": 44,
+        "ChapterNum": 1,
+        "VerseNum": 1,
+        "BBBCCCVVV": 44001001,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": false,
+        "AllVerses": []
+      },
+      "VerseOffset": 0,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": true,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    },
+    {
+      "Text": "प्रिय थियोपिलस, यीशु इस पृथ्वी पर जो कुछ भी करता रहा और सिखाता भी रहा, उन सभी चीजों की व्याख्या के लिए, मैंने तुम्हारे लिए पहली पुस्तक लिखी। ",
+      "Token": {
+        "Type": 3,
+        "Marker": null,
+        "Text": "प्रिय थियोपिलस, यीशु इस पृथ्वी पर जो कुछ भी करता रहा और सिखाता भी रहा, उन सभी चीजों की व्याख्या के लिए, मैंने तुम्हारे लिए पहली पुस्तक लिखी। ",
+        "Attributes": null,
+        "Data": null,
+        "EndMarker": null,
+        "NestlessMarker": null,
+        "HasData": false,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "ACT",
+        "BookNum": 44,
+        "ChapterNum": 1,
+        "VerseNum": 1,
+        "BBBCCCVVV": 44001001,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": false,
+        "AllVerses": []
+      },
+      "VerseOffset": 5,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": true,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    }
+  ],
+  "44_001_002-005": [
+    {
+      "Type": 2,
+      "Marker": "v",
+      "Attributes": [],
+      "Data": "2-5",
+      "EndMarker": null,
+      "Token": {
+        "Type": 2,
+        "Marker": "v",
+        "Text": null,
+        "Attributes": null,
+        "Data": "2-5",
+        "EndMarker": null,
+        "NestlessMarker": "v",
+        "HasData": true,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "ACT",
+        "BookNum": 44,
+        "ChapterNum": 1,
+        "VerseNum": 2,
+        "BBBCCCVVV": 44001002,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": true,
+        "AllVerses": [
+          {
+            "BookCode": "ACT",
+            "BookNum": 44,
+            "ChapterNum": 1,
+            "VerseNum": 2,
+            "BBBCCCVVV": 44001002,
+            "Versification": {
+              "Type": 4,
+              "IsCustomized": false
+            },
+            "RepresentsMultipleVerses": false,
+            "AllVerses": []
+          },
+          {
+            "BookCode": "ACT",
+            "BookNum": 44,
+            "ChapterNum": 1,
+            "VerseNum": 3,
+            "BBBCCCVVV": 44001003,
+            "Versification": {
+              "Type": 4,
+              "IsCustomized": false
+            },
+            "RepresentsMultipleVerses": false,
+            "AllVerses": []
+          },
+          {
+            "BookCode": "ACT",
+            "BookNum": 44,
+            "ChapterNum": 1,
+            "VerseNum": 4,
+            "BBBCCCVVV": 44001004,
+            "Versification": {
+              "Type": 4,
+              "IsCustomized": false
+            },
+            "RepresentsMultipleVerses": false,
+            "AllVerses": []
+          },
+          {
+            "BookCode": "ACT",
+            "BookNum": 44,
+            "ChapterNum": 1,
+            "VerseNum": 5,
+            "BBBCCCVVV": 44001005,
+            "Versification": {
+              "Type": 4,
+              "IsCustomized": false
+            },
+            "RepresentsMultipleVerses": false,
+            "AllVerses": []
+          }
+        ]
+      },
+      "VerseOffset": 0,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": true,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    },
+    {
+      "Text": "वह, क्रूस पर परेशानी पैदा करने और मरने के बाद, तीसरे दिन फिर से जीवित हो गया। चालीस दिनों तक वह अपने शिष्यों को दिखाई दिया। पवित्र आत्मा की सामान्य से परे काम करने की शक्ति के साथ, वह आध्यात्मिक निर्देश देता रहा और परमेश्वर के राज्य के बारे में बताता रहा। ताकि, इन सभी बातों से, उन्हें सबूत मिले कि वह वास्तव में जीवित हो गया था। ",
+      "Token": {
+        "Type": 3,
+        "Marker": null,
+        "Text": "वह, क्रूस पर परेशानी पैदा करने और मरने के बाद, तीसरे दिन फिर से जीवित हो गया। चालीस दिनों तक वह अपने शिष्यों को दिखाई दिया। पवित्र आत्मा की सामान्य से परे काम करने की शक्ति के साथ, वह आध्यात्मिक निर्देश देता रहा और परमेश्वर के राज्य के बारे में बताता रहा। ताकि, इन सभी बातों से, उन्हें सबूत मिले कि वह वास्तव में जीवित हो गया था। ",
+        "Attributes": null,
+        "Data": null,
+        "EndMarker": null,
+        "NestlessMarker": null,
+        "HasData": false,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "ACT",
+        "BookNum": 44,
+        "ChapterNum": 1,
+        "VerseNum": 2,
+        "BBBCCCVVV": 44001002,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": true,
+        "AllVerses": [
+          {
+            "BookCode": "ACT",
+            "BookNum": 44,
+            "ChapterNum": 1,
+            "VerseNum": 2,
+            "BBBCCCVVV": 44001002,
+            "Versification": {
+              "Type": 4,
+              "IsCustomized": false
+            },
+            "RepresentsMultipleVerses": false,
+            "AllVerses": []
+          },
+          {
+            "BookCode": "ACT",
+            "BookNum": 44,
+            "ChapterNum": 1,
+            "VerseNum": 3,
+            "BBBCCCVVV": 44001003,
+            "Versification": {
+              "Type": 4,
+              "IsCustomized": false
+            },
+            "RepresentsMultipleVerses": false,
+            "AllVerses": []
+          },
+          {
+            "BookCode": "ACT",
+            "BookNum": 44,
+            "ChapterNum": 1,
+            "VerseNum": 4,
+            "BBBCCCVVV": 44001004,
+            "Versification": {
+              "Type": 4,
+              "IsCustomized": false
+            },
+            "RepresentsMultipleVerses": false,
+            "AllVerses": []
+          },
+          {
+            "BookCode": "ACT",
+            "BookNum": 44,
+            "ChapterNum": 1,
+            "VerseNum": 5,
+            "BBBCCCVVV": 44001005,
+            "Versification": {
+              "Type": 4,
+              "IsCustomized": false
+            },
+            "RepresentsMultipleVerses": false,
+            "AllVerses": []
+          }
+        ]
+      },
+      "VerseOffset": 7,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": true,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    },
+    {
+      "Type": 3,
+      "Marker": "p",
+      "Attributes": [],
+      "Data": null,
+      "EndMarker": null,
+      "Token": {
+        "Type": 4,
+        "Marker": "p",
+        "Text": null,
+        "Attributes": null,
+        "Data": null,
+        "EndMarker": "p*",
+        "NestlessMarker": "p",
+        "HasData": false,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "ACT",
+        "BookNum": 44,
+        "ChapterNum": 1,
+        "VerseNum": 2,
+        "BBBCCCVVV": 44001002,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": true,
+        "AllVerses": [
+          {
+            "BookCode": "ACT",
+            "BookNum": 44,
+            "ChapterNum": 1,
+            "VerseNum": 2,
+            "BBBCCCVVV": 44001002,
+            "Versification": {
+              "Type": 4,
+              "IsCustomized": false
+            },
+            "RepresentsMultipleVerses": false,
+            "AllVerses": []
+          },
+          {
+            "BookCode": "ACT",
+            "BookNum": 44,
+            "ChapterNum": 1,
+            "VerseNum": 3,
+            "BBBCCCVVV": 44001003,
+            "Versification": {
+              "Type": 4,
+              "IsCustomized": false
+            },
+            "RepresentsMultipleVerses": false,
+            "AllVerses": []
+          },
+          {
+            "BookCode": "ACT",
+            "BookNum": 44,
+            "ChapterNum": 1,
+            "VerseNum": 4,
+            "BBBCCCVVV": 44001004,
+            "Versification": {
+              "Type": 4,
+              "IsCustomized": false
+            },
+            "RepresentsMultipleVerses": false,
+            "AllVerses": []
+          },
+          {
+            "BookCode": "ACT",
+            "BookNum": 44,
+            "ChapterNum": 1,
+            "VerseNum": 5,
+            "BBBCCCVVV": 44001005,
+            "Versification": {
+              "Type": 4,
+              "IsCustomized": false
+            },
+            "RepresentsMultipleVerses": false,
+            "AllVerses": []
+          }
+        ]
+      },
+      "VerseOffset": 337,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": true,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    },
+    {
+      "Text": "स्वर्ग ले जाने से पहले, एक बार जब वह अपने विशेष रूप से चुने हुए प्रेरितों के साथ था, तो उसने उनसे कहा, \"संत यूहन्ना पानी के साथ बपतिस्मा देते थे, लेकिन, कुछ दिनों के बाद, परमेश्वर आपको पवित्र आत्मा के साथ बपतिस्मा देगा। इस कारण से, यरूशलेम शहर के अलावा, अभी के लिए कहीं भी मत जाओ। परन्तु यहाँ तब तक रहो जब तक परमेश्वर अपने पवित्र आत्मा को तुम्हारे पास नहीं भेजता, वह प्रतिज्ञा जो उसने की है और जिसके बारे में मैंने तुम्हें पहले ही बता दिया है। ",
+      "Token": {
+        "Type": 3,
+        "Marker": null,
+        "Text": "स्वर्ग ले जाने से पहले, एक बार जब वह अपने विशेष रूप से चुने हुए प्रेरितों के साथ था, तो उसने उनसे कहा, \"संत यूहन्ना पानी के साथ बपतिस्मा देते थे, लेकिन, कुछ दिनों के बाद, परमेश्वर आपको पवित्र आत्मा के साथ बपतिस्मा देगा। इस कारण से, यरूशलेम शहर के अलावा, अभी के लिए कहीं भी मत जाओ। परन्तु यहाँ तब तक रहो जब तक परमेश्वर अपने पवित्र आत्मा को तुम्हारे पास नहीं भेजता, वह प्रतिज्ञा जो उसने की है और जिसके बारे में मैंने तुम्हें पहले ही बता दिया है। ",
+        "Attributes": null,
+        "Data": null,
+        "EndMarker": null,
+        "NestlessMarker": null,
+        "HasData": false,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "ACT",
+        "BookNum": 44,
+        "ChapterNum": 1,
+        "VerseNum": 2,
+        "BBBCCCVVV": 44001002,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": true,
+        "AllVerses": [
+          {
+            "BookCode": "ACT",
+            "BookNum": 44,
+            "ChapterNum": 1,
+            "VerseNum": 2,
+            "BBBCCCVVV": 44001002,
+            "Versification": {
+              "Type": 4,
+              "IsCustomized": false
+            },
+            "RepresentsMultipleVerses": false,
+            "AllVerses": []
+          },
+          {
+            "BookCode": "ACT",
+            "BookNum": 44,
+            "ChapterNum": 1,
+            "VerseNum": 3,
+            "BBBCCCVVV": 44001003,
+            "Versification": {
+              "Type": 4,
+              "IsCustomized": false
+            },
+            "RepresentsMultipleVerses": false,
+            "AllVerses": []
+          },
+          {
+            "BookCode": "ACT",
+            "BookNum": 44,
+            "ChapterNum": 1,
+            "VerseNum": 4,
+            "BBBCCCVVV": 44001004,
+            "Versification": {
+              "Type": 4,
+              "IsCustomized": false
+            },
+            "RepresentsMultipleVerses": false,
+            "AllVerses": []
+          },
+          {
+            "BookCode": "ACT",
+            "BookNum": 44,
+            "ChapterNum": 1,
+            "VerseNum": 5,
+            "BBBCCCVVV": 44001005,
+            "Versification": {
+              "Type": 4,
+              "IsCustomized": false
+            },
+            "RepresentsMultipleVerses": false,
+            "AllVerses": []
+          }
+        ]
+      },
+      "VerseOffset": 340,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": true,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    },
+    {
+      "Type": 3,
+      "Marker": "p",
+      "Attributes": [],
+      "Data": null,
+      "EndMarker": null,
+      "Token": {
+        "Type": 4,
+        "Marker": "p",
+        "Text": null,
+        "Attributes": null,
+        "Data": null,
+        "EndMarker": "p*",
+        "NestlessMarker": "p",
+        "HasData": false,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "ACT",
+        "BookNum": 44,
+        "ChapterNum": 1,
+        "VerseNum": 2,
+        "BBBCCCVVV": 44001002,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": true,
+        "AllVerses": [
+          {
+            "BookCode": "ACT",
+            "BookNum": 44,
+            "ChapterNum": 1,
+            "VerseNum": 2,
+            "BBBCCCVVV": 44001002,
+            "Versification": {
+              "Type": 4,
+              "IsCustomized": false
+            },
+            "RepresentsMultipleVerses": false,
+            "AllVerses": []
+          },
+          {
+            "BookCode": "ACT",
+            "BookNum": 44,
+            "ChapterNum": 1,
+            "VerseNum": 3,
+            "BBBCCCVVV": 44001003,
+            "Versification": {
+              "Type": 4,
+              "IsCustomized": false
+            },
+            "RepresentsMultipleVerses": false,
+            "AllVerses": []
+          },
+          {
+            "BookCode": "ACT",
+            "BookNum": 44,
+            "ChapterNum": 1,
+            "VerseNum": 4,
+            "BBBCCCVVV": 44001004,
+            "Versification": {
+              "Type": 4,
+              "IsCustomized": false
+            },
+            "RepresentsMultipleVerses": false,
+            "AllVerses": []
+          },
+          {
+            "BookCode": "ACT",
+            "BookNum": 44,
+            "ChapterNum": 1,
+            "VerseNum": 5,
+            "BBBCCCVVV": 44001005,
+            "Versification": {
+              "Type": 4,
+              "IsCustomized": false
+            },
+            "RepresentsMultipleVerses": false,
+            "AllVerses": []
+          }
+        ]
+      },
+      "VerseOffset": 784,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": true,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    }
+  ],
+  "44_001_006": [
+    {
+      "Type": 2,
+      "Marker": "v",
+      "Attributes": [],
+      "Data": "6",
+      "EndMarker": null,
+      "Token": {
+        "Type": 2,
+        "Marker": "v",
+        "Text": null,
+        "Attributes": null,
+        "Data": "6",
+        "EndMarker": null,
+        "NestlessMarker": "v",
+        "HasData": true,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "ACT",
+        "BookNum": 44,
+        "ChapterNum": 1,
+        "VerseNum": 6,
+        "BBBCCCVVV": 44001006,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": false,
+        "AllVerses": []
+      },
+      "VerseOffset": 0,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": true,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    },
+    {
+      "Text": "फिर एक दिन, जब वे जैतून के पेड़ों की पहाड़ी पर इकट्ठे हुए, तो उन्होंने यीशु से पूछा, ",
+      "VerseRef": {
+        "BookCode": "ACT",
+        "BookNum": 44,
+        "ChapterNum": 1,
+        "VerseNum": 6,
+        "BBBCCCVVV": 44001006,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": false,
+        "AllVerses": []
+      },
+      "VerseOffset": 5,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": true,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    },
+    {
+      "Type": 3,
+      "Marker": "p",
+      "Attributes": [],
+      "Data": null,
+      "EndMarker": null,
+      "Token": {
+        "Type": 4,
+        "Marker": "p",
+        "Text": null,
+        "Attributes": null,
+        "Data": null,
+        "EndMarker": "p*",
+        "NestlessMarker": "p",
+        "HasData": false,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "ACT",
+        "BookNum": 44,
+        "ChapterNum": 1,
+        "VerseNum": 6,
+        "BBBCCCVVV": 44001006,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": false,
+        "AllVerses": []
+      },
+      "VerseOffset": 228,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": true,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    },
+    {
+      "Text": "\"प्रभु जी! अब, क्या आप इस्राएल के लोगों को रोमन साम्राज्य से मुक्त होने और उन्हें राज्य सिंहासन वापस देने का कारण बनेंगे? ",
+      "VerseRef": {
+        "BookCode": "ACT",
+        "BookNum": 44,
+        "ChapterNum": 1,
+        "VerseNum": 6,
+        "BBBCCCVVV": 44001006,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": false,
+        "AllVerses": []
+      },
+      "VerseOffset": 5,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": true,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    },
+    {
+      "Type": 3,
+      "Marker": "p",
+      "Attributes": [],
+      "Data": null,
+      "EndMarker": null,
+      "Token": {
+        "Type": 4,
+        "Marker": "p",
+        "Text": null,
+        "Attributes": null,
+        "Data": null,
+        "EndMarker": "p*",
+        "NestlessMarker": "p",
+        "HasData": false,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "ACT",
+        "BookNum": 44,
+        "ChapterNum": 1,
+        "VerseNum": 6,
+        "BBBCCCVVV": 44001006,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": false,
+        "AllVerses": []
+      },
+      "VerseOffset": 212,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": true,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    }
+  ]
+}

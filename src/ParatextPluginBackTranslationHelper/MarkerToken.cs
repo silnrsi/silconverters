@@ -1,28 +1,43 @@
 ﻿using Paratext.PluginInterfaces;
 using System;
 using System.Collections.Generic;
+using System.Dynamic;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace SIL.ParatextBackTranslationHelperPlugin
 {
-    class MarkerToken : IUSFMMarkerToken
+    public class MarkerToken : TokenBase, IUSFMMarkerToken
     {
-        public MarkerToken() { }
+        public MarkerToken(IVerseRef verseRef, bool isScripture, bool isPublishableVernacular, int verseOffset)
+            : base (verseRef, false, false, false, isScripture, false, isPublishableVernacular, verseOffset) 
+        { 
+        }
 
         public MarkerToken(IUSFMMarkerToken paragraphToken, int verseOffset, IVerseRef verseRef)
+            : base(verseRef, paragraphToken.IsSpecial, paragraphToken.IsFigure, paragraphToken.IsFootnoteOrCrossReference,
+                   paragraphToken.IsScripture, paragraphToken.IsMetadata, paragraphToken.IsPublishableVernacular, verseOffset)
         {
+            Marker = paragraphToken.Marker ?? "p";  // default to paragraph
             Type = paragraphToken.Type;
-            Marker = "p";
             Attributes = paragraphToken.Attributes;
             Data = paragraphToken.Data;
             EndMarker = paragraphToken.EndMarker;
-            VerseRef = verseRef;
-            IsSpecial = paragraphToken.IsSpecial;
-            IsFigure = paragraphToken.IsFigure;
-            IsFootnoteOrCrossReference = paragraphToken.IsFootnoteOrCrossReference;
-            IsScripture = paragraphToken.IsScripture;
-            IsMetadata = paragraphToken.IsMetadata;
-            VerseOffset = verseOffset;
-            IsPublishableVernacular = paragraphToken.IsPublishableVernacular;
+        }
+
+        public MarkerToken(ExpandoObject expandoToken) :
+            base((IVerseRef)TestVerseReference.ToIVerseRef(((dynamic)expandoToken).VerseRef),
+                 (bool)(((dynamic)expandoToken).IsSpecial),
+                 (bool)(((dynamic)expandoToken).IsFigure),
+                 (bool)(((dynamic)expandoToken).IsFootnoteOrCrossReference),
+                 (bool)(((dynamic)expandoToken).IsScripture),
+                 (bool)(((dynamic)expandoToken).IsMetadata),
+                 (bool)(((dynamic)expandoToken).IsPublishableVernacular),
+                 (int)(((dynamic)expandoToken).VerseOffset))
+        {
+            Marker = (string)((dynamic)expandoToken).Marker;
+            Type = (MarkerType)((dynamic)expandoToken).Type;
+            Data = (string)((dynamic)expandoToken).Data;
+            EndMarker = (string)((dynamic)expandoToken).EndMarker;
         }
 
         public MarkerType Type { get; set; }
@@ -35,20 +50,9 @@ namespace SIL.ParatextBackTranslationHelperPlugin
 
         public string EndMarker { get; set; }
 
-        public IVerseRef VerseRef { get; set; }
-
-        public int VerseOffset { get; set; }
-
-        public bool IsSpecial { get; set; }
-
-        public bool IsFigure { get; set; }
-
-        public bool IsFootnoteOrCrossReference { get; set; }
-
-        public bool IsScripture { get; set; }
-
-        public bool IsMetadata { get; set; }
-
-        public bool IsPublishableVernacular { get; set; }
+        public override string ToString()
+        {
+            return $@"\{Marker}";
+        }
     }
 }

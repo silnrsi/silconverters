@@ -1,0 +1,117 @@
+{
+  "44_001_006": [
+    {
+      "Type": 2,
+      "Marker": "v",
+      "Attributes": [],
+      "Data": "6",
+      "EndMarker": null,
+      "Token": {
+        "Type": 2,
+        "Marker": "v",
+        "Text": null,
+        "Attributes": null,
+        "Data": "6",
+        "EndMarker": null,
+        "NestlessMarker": "v",
+        "HasData": true,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "ACT",
+        "BookNum": 44,
+        "ChapterNum": 1,
+        "VerseNum": 6,
+        "BBBCCCVVV": 44001006,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": false,
+        "AllVerses": []
+      },
+      "VerseOffset": 0,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": true,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    },
+    {
+      "Text": "Then one day, when they had gathered on the hill of the olive trees, they asked Jesus, “Lord jii! Now, will you cause the Israeli people to be free from the Roman empire and cause them to be given back the kingdom throne?” ",
+      "Token": {
+        "Type": 3,
+        "Marker": null,
+        "Text": "Then one day, when they had gathered on the hill of the olive trees, they asked Jesus, “Lord jii! Now, will you cause the Israeli people to be free from the Roman empire and cause them to be given back the kingdom throne?” ",
+        "Attributes": null,
+        "Data": null,
+        "EndMarker": null,
+        "NestlessMarker": null,
+        "HasData": false,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "ACT",
+        "BookNum": 44,
+        "ChapterNum": 1,
+        "VerseNum": 6,
+        "BBBCCCVVV": 44001006,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": false,
+        "AllVerses": []
+      },
+      "VerseOffset": 5,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": true,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    },
+    {
+      "Type": 3,
+      "Marker": "p",
+      "Attributes": [],
+      "Data": null,
+      "EndMarker": null,
+      "Token": {
+        "Type": 4,
+        "Marker": "p",
+        "Text": null,
+        "Attributes": null,
+        "Data": null,
+        "EndMarker": "p*",
+        "NestlessMarker": "p",
+        "HasData": false,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "ACT",
+        "BookNum": 44,
+        "ChapterNum": 1,
+        "VerseNum": 6,
+        "BBBCCCVVV": 44001006,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": false,
+        "AllVerses": []
+      },
+      "VerseOffset": 228,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": true,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    }
+  ]
+}
