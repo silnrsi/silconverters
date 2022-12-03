@@ -6,6 +6,7 @@ using System.Text;
 using Office = Microsoft.Office.Core;
 using Word = Microsoft.Office.Interop.Word;
 using System.Windows.Forms;                     // for DialogResult
+using static SILConvertersOffice.OfficeTextDocument;
 
 namespace SILConvertersOffice
 {
@@ -250,6 +251,15 @@ namespace SILConvertersOffice
         }
 
 #if BUILD_FOR_OFF12 || BUILD_FOR_OFF14 || BUILD_FOR_OFF15
+        public void SelectionConvertParagraph_Click(Office.IRibbonControl control)
+#else
+        void SelectionConvertParagraph_Click(Microsoft.Office.Core.CommandBarButton Ctrl, ref bool CancelDefault)
+#endif
+        {
+            ParagraphByParagraph(OfficeTextDocument.ProcessingType.eParagraphByParagraph);
+        }
+
+#if BUILD_FOR_OFF12 || BUILD_FOR_OFF14 || BUILD_FOR_OFF15
         public void ConvertParagraphs_Click(Office.IRibbonControl control)
 #else
         void ConvertParagraphs_Click(Microsoft.Office.Core.CommandBarButton Ctrl, ref bool CancelDefault)
@@ -258,6 +268,7 @@ namespace SILConvertersOffice
             ParagraphByParagraph(OfficeTextDocument.ProcessingType.eIsoFormattedRun);
         }
 
+        private OfficeDocumentProcessor m_officeDocumentProcessor = null;
         private void ParagraphByParagraph(OfficeTextDocument.ProcessingType processingType)
         {
             try
@@ -265,15 +276,16 @@ namespace SILConvertersOffice
                 if (!HookDocumentClose(Application.ActiveDocument))
                     return;
 
-                WordSelectionDocument doc = new WordSelectionDocument(Application.ActiveDocument, processingType);
-                OfficeDocumentProcessor aSelectionProcessor = new OfficeDocumentProcessor((FontConverters)null, new SILConvertersOffice.TranslationHelperForm());
+                var doc = new WordSelectionDocument(Application.ActiveDocument, processingType);
+                
+                // keep reusing the same doc processor (in case we're doing sub-paragraph selections and have already specified which cnvtr to use for a given font)
+                //  user must click the 'Reset' button, if they want to be requiried about which cnvtr to use
+                if (m_officeDocumentProcessor == null)
+                    m_officeDocumentProcessor = new OfficeDocumentProcessor((FontConverters)null, new SILConvertersOffice.TranslationHelperForm());
 
-                if (aSelectionProcessor != null)
-                {
-                    // start where the cursor is currently
-                    aSelectionProcessor.LeftOvers = doc.SelectionRange;
-                    doc.ProcessWordByWord(aSelectionProcessor, processingType);
-                }
+                // start where the cursor is currently
+                m_officeDocumentProcessor.LeftOvers = doc.SelectionRange;
+                doc.ProcessWordByWord(m_officeDocumentProcessor, processingType);
             }
             catch (Exception ex)
             {
@@ -353,6 +365,7 @@ namespace SILConvertersOffice
                 m_formFindReplace.Close();
             m_formFindReplace = null;
             m_aRoundTripCheckWordProcessor = null;
+            m_officeDocumentProcessor = null;
         }
 
 #if BUILD_FOR_OFF12 || BUILD_FOR_OFF14 || BUILD_FOR_OFF15

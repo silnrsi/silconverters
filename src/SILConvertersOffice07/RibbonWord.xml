@@ -4,8 +4,10 @@
     <tabs>
       <tab id="SILConvertersAddInWord" label="SIL Converters">
         <group id="SILConvertersAddInWordGroup" label="SIL Converters">
-          <button id="SILConvertersOffice.WordApp.SelectionConvert_Click" label="Convert selection"
-            size="large" onAction="Button_Clicked" screentip="Click this item to convert the selected text" />
+          <button id="SILConvertersOffice.WordApp.SelectionConvert_Click" label="Convert selection (word-by-word)"
+            size="large" onAction="Button_Clicked" screentip="Click this item to convert the selected text word-by-word" />
+          <button id="SILConvertersOffice.WordApp.SelectionConvertParagraph_Click" label="Convert selection"
+            size="large" onAction="Button_Clicked" screentip="Click this item to convert the selected text as a unit" />
           <button id="SILConvertersOffice.WordApp.FindReplace_Click" label="Regex find/replace"
             size="large" onAction="Button_Clicked" screentip="Click this item to search the document using Regular Expression syntax" />
           <button id="SILConvertersOffice.WordApp.RoundTripCheck_Click" label="Check round-trip conversion"

@@ -53,7 +53,7 @@ namespace SILConvertersOffice
             {
                 SourceData = sourceText,
                 TargetData = targetText,
-                TargetDataPreExisting = false,  // we don't have an original version of the target (unless someday we allow side-by-side processing of 2 word docs)
+                TargetDataPreExisting = null,  // we don't have an original version of the target (unless someday we allow side-by-side processing of 2 word docs)
 
                 // the control we're sending this to may have other EncConverters associated w/ this font, but we only have the one. So add it
                 //  here and when it gets initialized below, it may add other conversions done at that time
@@ -104,11 +104,11 @@ namespace SILConvertersOffice
             _updateDataProc = updateDataProc;
         }
 
-        public void MoveToNext()
+        void IBackTranslationHelperDataSource.MoveToNext()
         {
             Close();
         }
-
+ 
         protected FormButtons m_btnPressed = FormButtons.None;
         public FormButtons ButtonPressed
         {
@@ -145,9 +145,10 @@ namespace SILConvertersOffice
             }
         }
 
-        public void Cancel()
+        void IBackTranslationHelperDataSource.Cancel()
         {
             ButtonPressed = FormButtons.Cancel;
+            Close();
         }
 
         private void TranslationHelperForm_FormClosing(object sender, FormClosingEventArgs e)

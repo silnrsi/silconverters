@@ -53,8 +53,10 @@ namespace SILConvertersOffice
         {
             if (eType == ProcessingType.eParagraphByParagraph)
             {
-                // don't want to bother with the "do you want to restart where you left off" question for this approach
-                return ProcessParagraphsIgnoreFormatting(aWordProcessor, Document.Paragraphs);
+                if (aWordProcessor.AreLeftOvers && (aWordProcessor.LeftOvers.Start != aWordProcessor.LeftOvers.End))
+                    return ProcessSelectionIgnoreFormatting(aWordProcessor, Document.Application.Selection);
+                else
+                    return ProcessParagraphsIgnoreFormatting(aWordProcessor, Document.Paragraphs);
             }
             else
             {
@@ -74,6 +76,20 @@ namespace SILConvertersOffice
                 else
                     throw new ApplicationException($"Unknown ProcessingType: {eType}");
             }
+        }
+
+        protected bool ProcessSelectionIgnoreFormatting(OfficeDocumentProcessor aWordProcessor, Word.Selection selection)
+        {
+            // if multiple paragraphs...
+            int nCharIndex = 0;
+            WordParagraphs aParagraphRanges = new WordParagraphs(selection);
+            foreach (Word.Range aRange in aParagraphRanges)
+            {
+                WordRange aThisParagraph = new WordRange(aRange);
+                if (!ProcessWholeRange(aWordProcessor, aThisParagraph, nCharIndex))
+                    return false;
+            }
+            return true;
         }
 
         protected bool ProcessParagraphsIgnoreFormatting(OfficeDocumentProcessor aWordProcessor, Word.Paragraphs aParagraphs)
