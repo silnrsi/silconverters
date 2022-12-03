@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\..\packages\Encoding-Converters-Core.0.5.1\build\Encoding-Converters-Core.props" Condition="Exists('..\..\packages\Encoding-Converters-Core.0.5.1\build\Encoding-Converters-Core.props')" />
+  <Import Project="..\..\packages\Encoding-Converters-Core.0.5.2\build\Encoding-Converters-Core.props" Condition="Exists('..\..\packages\Encoding-Converters-Core.0.5.2\build\Encoding-Converters-Core.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -121,6 +121,7 @@
     <Compile Include="BackTranslationHelperForm.Designer.cs">
       <DependentUpon>BackTranslationHelperForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="VerseRef.cs" />
     <Compile Include="MarkerToken.cs" />
     <Compile Include="ParatextBackTranslationHelperPlugin.cs" />
     <Compile Include="ProjectListForm.cs">
@@ -143,6 +144,7 @@
     <Compile Include="SplashScreenForm.designer.cs">
       <DependentUpon>SplashScreenForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="TokenBase.cs" />
     <Compile Include="TextToken.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -183,12 +185,6 @@
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('..\..\packages\Encoding-Converters-Core.0.5.1\build\Encoding-Converters-Core.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Encoding-Converters-Core.0.5.1\build\Encoding-Converters-Core.props'))" />
-  </Target>
   <PropertyGroup>
     <PostBuildEvent>IF NOT "$(ConfigurationName)" == "Debug" goto nocopy
 IF "%25ParatextInstallDir%25" == "" goto nocopy
@@ -206,4 +202,10 @@ ren "%25ParatextInstallDir%25\plugins\$(ProjectName)\$(TargetFileName)" "$(Proje
 
 :nocopy</PostBuildEvent>
   </PropertyGroup>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\..\packages\Encoding-Converters-Core.0.5.2\build\Encoding-Converters-Core.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Encoding-Converters-Core.0.5.2\build\Encoding-Converters-Core.props'))" />
+  </Target>
 </Project>
