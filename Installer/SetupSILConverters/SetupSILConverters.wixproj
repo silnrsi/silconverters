@@ -77,4 +77,15 @@
 	<Target Name="AfterBuild">
 	</Target>
 	-->
+  <Target Name="SignBuild">
+    <PropertyGroup>
+      <MsiFile>$(TargetName)_$(PlatformName)$(TargetExt)</MsiFile>
+      <SolutionDir>$(MSBuildStartupDirectory)\</SolutionDir>
+      <BaseBuildDir>$(SolutionDir)build\</BaseBuildDir>
+      <OutputDir>$(SolutionDir)output\</OutputDir>
+      <BaseBuildArgs>"$(OutputDir)$(MsiFile)"</BaseBuildArgs>
+    </PropertyGroup>
+    <Message Text="MsiFile: $(MsiFile), SolutionDir: $(SolutionDir), BaseBuildDir: $(BaseBuildDir), OutputDir: $(OutputDir), BaseBuildArgs: $(BaseBuildArgs), BuildingInsideVisualStudio: $(BuildingInsideVisualStudio), MSBuildStartupDirectory: $(MSBuildStartupDirectory)" />
+    <Exec WorkingDirectory="$(BaseBuildDir)" Command="$(BaseBuildDir)buildBaseInstaller.bat $(BaseBuildArgs)" />
+  </Target>
 </Project>
