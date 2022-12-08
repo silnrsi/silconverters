@@ -71,9 +71,9 @@ jobs:
       if: ${{ success() && matrix.build_configuration == 'Release' }}
       run: cp "output/${{matrix.platform}}/SetupSILConverters_${{matrix.platform}}.exe" "output/${{matrix.platform}}/SetupSILConverters_${{matrix.platform}}.${{github.run_number}}.exe"
 
-    - name: publish artifact
+    - name: Upload a Build Artifact
       if: ${{ success() && matrix.build_configuration == 'Release' }}
-      uses: actions/upload-artifact@v2.2.4
-      with: 
+      uses: actions/upload-artifact@v3.1.1
+      with:
         name: silconverters-installers.${{matrix.platform}}.latest
         path: output/${{matrix.platform}}/SetupSILConverters_${{matrix.platform}}.${{github.run_number}}.exe
