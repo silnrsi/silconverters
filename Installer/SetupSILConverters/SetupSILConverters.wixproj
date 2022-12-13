@@ -83,7 +83,7 @@
     <PropertyGroup>
       <ExeFile>$(TargetName)_$(PlatformName)$(TargetExt)</ExeFile>
       <BaseBuildDir>$(SolutionDir)build\</BaseBuildDir>
-      <OutputDir>$(SolutionDir)output\</OutputDir>
+      <OutputDir>$(SolutionDir)output\$(PlatformName)\</OutputDir>
       <BaseBuildArgs>"$(OutputDir)$(ExeFile)" UseInsignia</BaseBuildArgs>
     </PropertyGroup>
     <Message Text="ExeFile: $(ExeFile), SolutionDir: $(SolutionDir), BaseBuildDir: $(BaseBuildDir), OutputDir: $(OutputDir), BaseBuildArgs: $(BaseBuildArgs), BuildingInsideVisualStudio: $(BuildingInsideVisualStudio), MSBuildStartupDirectory: $(MSBuildStartupDirectory)" />

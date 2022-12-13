@@ -8,7 +8,7 @@
     <ProductVersion>3.7</ProductVersion>
     <ProjectGuid>{69CB9E94-E875-4B29-AB69-3BBFE8D467E8}</ProjectGuid>
     <SchemaVersion>2.0</SchemaVersion>
-    <OutputName>SetupSILConverters64</OutputName>
+    <OutputName>SetupSILConverters_x64</OutputName>
     <OutputType>Package</OutputType>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
@@ -71,10 +71,10 @@
 	-->
   <Target Name="SignBuild">
     <PropertyGroup>
-      <MsiFile>$(TargetName)_$(PlatformName)$(TargetExt)</MsiFile>
+      <MsiFile>$(TargetFileName)</MsiFile>
       <SolutionDir>$(MSBuildStartupDirectory)\</SolutionDir>
       <BaseBuildDir>$(SolutionDir)build\</BaseBuildDir>
-      <OutputDir>$(SolutionDir)output\</OutputDir>
+      <OutputDir>$(SolutionDir)output\$(PlatformName)\</OutputDir>
       <BaseBuildArgs>"$(OutputDir)$(MsiFile)"</BaseBuildArgs>
     </PropertyGroup>
     <Message Text="MsiFile: $(MsiFile), SolutionDir: $(SolutionDir), BaseBuildDir: $(BaseBuildDir), OutputDir: $(OutputDir), BaseBuildArgs: $(BaseBuildArgs), BuildingInsideVisualStudio: $(BuildingInsideVisualStudio), MSBuildStartupDirectory: $(MSBuildStartupDirectory)" />
