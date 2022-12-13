@@ -217,9 +217,14 @@
   <PropertyGroup>
     <PreBuildEvent>
     </PreBuildEvent>
-    <PostBuildEvent>call "$(DevEnvDir)..\Tools\VsDevCmd.bat"
-tlbexp.exe "$(TargetFileName)" /out:"$(TargetName).tlb"
-xcopy /y "$(TargetDir)*.*" $(SolutionDir)output\$(PlatformName)\$(ConfigurationName)</PostBuildEvent>
+    <WindowsSDK_ExecutablePath_x86 Condition="'$(WindowsSDK_ExecutablePath_x86)' == '' and '$(Platform)' == 'x86'">C:\Program Files (x86)\Microsoft SDKs\Windows\v10.0A\bin\NETFX 4.8 Tools\</WindowsSDK_ExecutablePath_x86>
+    <WindowsSDK_ExecutablePath_x64 Condition="'$(WindowsSDK_ExecutablePath_x64)' == '' and '$(Platform)' == 'x64'">C:\Program Files (x86)\Microsoft SDKs\Windows\v10.0A\bin\NETFX 4.8 Tools\x64\</WindowsSDK_ExecutablePath_x64>
+    <WindowsSDK_ExecutablePath Condition="'$(Platform)' == 'x86'">$(WindowsSDK_ExecutablePath_x86)</WindowsSDK_ExecutablePath>
+    <WindowsSDK_ExecutablePath Condition="'$(Platform)' == 'x64'">$(WindowsSDK_ExecutablePath_x64)</WindowsSDK_ExecutablePath>
+    <PostBuildEvent>
+      rem call "$(WindowsSDK_ExecutablePath)VsDevCmd.bat"
+      "$(WindowsSDK_ExecutablePath)tlbexp.exe" "$(TargetFileName)" /out:"$(TargetName).tlb"
+      xcopy /y "$(TargetDir)*.*" $(SolutionDir)output\$(PlatformName)\$(ConfigurationName)</PostBuildEvent>
   </PropertyGroup>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
