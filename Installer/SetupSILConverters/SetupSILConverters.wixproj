@@ -81,7 +81,7 @@
 	-->
   <Target Name="SignBuild">
     <PropertyGroup>
-      <ExeFile>$(TargetName)_$(PlatformName)$(TargetExt)</ExeFile>
+      <ExeFile>$(TargetName)_$(PlatformName)_$(TruncatedVersion)$(TargetExt)</ExeFile>
       <BaseBuildDir>$(SolutionDir)build\</BaseBuildDir>
       <OutputDir>$(SolutionDir)output\$(PlatformName)\</OutputDir>
       <BaseBuildArgs>"$(OutputDir)$(ExeFile)" UseInsignia</BaseBuildArgs>
