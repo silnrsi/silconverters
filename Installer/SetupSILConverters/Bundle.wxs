@@ -32,9 +32,9 @@
   </Bundle>
 
   <?if $(var.Platform) = x64 ?>
-  <?define msiFilename = "SetupSILConverters64.msi" ?>
+  <?define msiFilename = "SetupSILConverters_x64.msi" ?>
   <?else ?>
-  <?define msiFilename = "SetupSILConverters.msi" ?>
+  <?define msiFilename = "SetupSILConverters_x86.msi" ?>
   <?endif ?>
 
   <Fragment Id='AppFragment'>
