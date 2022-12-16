@@ -205,6 +205,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>IF NOT "$(ConfigurationName)" == "Debug" goto nocopy
+IF NOT "$(PlatformName)" == "x64" goto nocopy
 IF "%25ParatextInstallDir%25" == "" goto nocopy
 IF NOT EXIST "%25ParatextInstallDir%25" goto nocopy
 
