@@ -71,7 +71,7 @@
     <PropertyGroup>
       <CmdLineArgs>"$(TargetPath)" "$(SolutionDir)output\$(PlatformName)\$(TargetName)_$(TruncatedVersion)_$(PlatformName)$(TargetExt)"</CmdLineArgs>
     </PropertyGroup>
-    <Message Text="TestBobValue: $(TestBobValue), CmdLineArgs: $(CmdLineArgs), TruncatedVersion: $(TruncatedVersion), ExeFile: $(ExeFile), SolutionDir: $(SolutionDir), BaseBuildDir: $(BaseBuildDir), OutputDir: $(OutputDir), BaseBuildArgs: $(BaseBuildArgs), BuildingInsideVisualStudio: $(BuildingInsideVisualStudio), MSBuildStartupDirectory: $(MSBuildStartupDirectory)" />
+    <Message Text="CmdLineArgs: $(CmdLineArgs), TruncatedVersion: $(TruncatedVersion), ExeFile: $(ExeFile), SolutionDir: $(SolutionDir), BaseBuildDir: $(BaseBuildDir), OutputDir: $(OutputDir), BaseBuildArgs: $(BaseBuildArgs), BuildingInsideVisualStudio: $(BuildingInsideVisualStudio), MSBuildStartupDirectory: $(MSBuildStartupDirectory)" />
     <Exec Command="copy $(CmdLineArgs)" />
   </Target>
   <!--
