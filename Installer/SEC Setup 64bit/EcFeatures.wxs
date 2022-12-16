@@ -58,12 +58,12 @@
         <MergeRef Id="SEC_EC"/>
         <MergeRef Id="SetPath"/>
       </Feature>
-      <Feature Id="Bulk_Word_Document_Converter" Title="Bulk Word Document Converter" Description="The Bulk Word document converter allows you to convert one or more Word documents using a converter in the system repository. Requires Word 2003, 2007, 2010, or 2013." Display="expand" Level="4" AllowAdvertise="no">
+      <Feature Id="Bulk_Word_Document_Converter" Title="Bulk Word Document Converter" Description="The Bulk Word document converter allows you to convert one or more Word documents using converters in the system repository. Works with Word 2003, 07, 10, 13, 16, 19, or 365." Display="expand" Level="4" AllowAdvertise="no">
         <Condition Level="3"><![CDATA[COMPONENTEXISTS_WORD_03_PIA OR COMPONENTEXISTS_WORD_07_PIA OR COMPONENTEXISTS_WORD_10_PIA OR COMPONENTEXISTS_WORD_13_PIA]]></Condition>
         <MergeRef Id="SEC_EC"/>
         <MergeRef Id="SILConvertersForWord"/>
       </Feature>
-      <Feature Id="SILConverters_for_Office10" Title="SILConverters for Office 2010" Description="Provides SILConverter support in Publisher, Excel, and Access (as well as a few developer helps in Word). Requires 64-bit Office 2010." Level="4" AllowAdvertise="no">
+      <Feature Id="SILConverters_for_Office10" Title="SILConverters for Office 2010" Description="Provides SILConverter support in Publisher, Excel, and Access (as well as a few developer helps in Word). Works with x64 versions of Office 2010, 13, 16, 19, or 365." Level="4" AllowAdvertise="no">
         <Condition Level="3"><![CDATA[(OFFICE_2010_BITNESS = "x64") AND ((COMPONENTEXISTS_WORD_10_PIA) OR (COMPONENTEXISTS_EXCEL_10_PIA) OR (ACCESS_2010_PIA_EXISTS) OR (PUBLISHER_2010_PIA_EXISTS))]]></Condition>
         <Condition Level="0"><![CDATA[NOT ((COMPONENTEXISTS_WORD_10_PIA) OR (COMPONENTEXISTS_EXCEL_10_PIA) OR (ACCESS_2010_PIA_EXISTS) OR (PUBLISHER_2010_PIA_EXISTS))]]></Condition>
         <MergeRef Id="SEC_EC"/>
@@ -71,7 +71,7 @@
         <MergeRef Id="SEC_ICU"/>
         <MergeRef Id="CRT"/>
       </Feature>
-      <Feature Id="SILConverters_for_Office13" Title="SILConverters for Office 2013" Description="Provides SILConverter support in Publisher, Excel, and Access (as well as a few developer helps in Word). Requires 64-bit Office 2013." Level="4" AllowAdvertise="no">
+      <Feature Id="SILConverters_for_Office13" Title="SILConverters for Office 2013" Description="Provides SILConverter support in Publisher, Excel, and Access (as well as a few developer helps in Word). Works with x64 versions of Office 2010, 13, 16, 19, or 365." Level="4" AllowAdvertise="no">
         <Condition Level="3"><![CDATA[(OFFICE_2013_BITNESS = "x64") AND ((COMPONENTEXISTS_WORD_13_PIA) OR (COMPONENTEXISTS_EXCEL_13_PIA) OR (ACCESS_2013_PIA_EXISTS) OR (PUBLISHER_2013_PIA_EXISTS))]]></Condition>
         <Condition Level="0"><![CDATA[OFFICE_2016_BITNESS OR (NOT ((COMPONENTEXISTS_WORD_13_PIA) OR (COMPONENTEXISTS_EXCEL_13_PIA) OR (ACCESS_2013_PIA_EXISTS) OR (PUBLISHER_2013_PIA_EXISTS)))]]></Condition>
         <MergeRef Id="SEC_EC"/>
@@ -79,7 +79,7 @@
         <MergeRef Id="SEC_ICU"/>
         <MergeRef Id="CRT"/>
       </Feature>
-      <Feature Id="SILConverters_for_Office16" Title="SILConverters for Office 2016/2019/365" Description="Provides SILConverter support in Publisher, Excel, and Access (as well as a few developer helps in Word). Requires 64-bit Office 2016/2019/365." Level="4" AllowAdvertise="no">
+      <Feature Id="SILConverters_for_Office16" Title="SILConverters for Office 2016/2019/365" Description="Provides SILConverter support in Publisher, Excel, and Access (as well as a few developer helps in Word). Works with x64 versions of Office 2010, 13, 16, 19, or 365." Level="4" AllowAdvertise="no">
         <Condition Level="3"><![CDATA[(OFFICE_2016_BITNESS = "x64") AND ((COMPONENTEXISTS_WORD_13_PIA) OR (COMPONENTEXISTS_EXCEL_13_PIA) OR (ACCESS_2013_PIA_EXISTS) OR (PUBLISHER_2013_PIA_EXISTS))]]></Condition>
         <Condition Level="0"><![CDATA[OFFICE_2013_BITNESS OR (NOT ((COMPONENTEXISTS_WORD_13_PIA) OR (COMPONENTEXISTS_EXCEL_13_PIA) OR (ACCESS_2013_PIA_EXISTS) OR (PUBLISHER_2013_PIA_EXISTS)))]]></Condition>
         <MergeRef Id="SEC_EC"/>
