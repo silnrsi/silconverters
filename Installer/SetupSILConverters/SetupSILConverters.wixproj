@@ -10,7 +10,6 @@
     <SchemaVersion>2.0</SchemaVersion>
     <OutputName>SetupSILConverters</OutputName>
     <OutputType>Bundle</OutputType>
-    <TruncatedVersion Condition=" '$(TruncatedVersion)' == '' ">5.1</TruncatedVersion>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
   </PropertyGroup>
