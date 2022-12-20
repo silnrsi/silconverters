@@ -15,7 +15,8 @@ namespace SIL.ParatextBackTranslationHelperPlugin
 {
     public partial class BackTranslationHelperForm : Form, IBackTranslationHelperDataSource
     {
-        private const string FrameTextFormat = "Back Translating from {0} - {1} in verse: {2}";
+        private const string FrameTextFormat = "Back Translating from {0} in verse: {1}";
+        private const string ProjectNameFormat = "{0} - {1}";
 
         private readonly IProject _projectSource;
         private readonly IProject _projectTarget;
@@ -95,7 +96,12 @@ namespace SIL.ParatextBackTranslationHelperPlugin
 
         private static string GetFrameText(IProject projectSource, IProject projectTarget, IVerseRef versesReference)
         {
-            return String.Format(FrameTextFormat, projectSource, projectTarget, versesReference);
+            return String.Format(FrameTextFormat, GetProjectName(projectSource, projectTarget), versesReference);
+        }
+
+        private static string GetProjectName(IProject projectSource, IProject projectTarget)
+        {
+            return String.Format(ProjectNameFormat, projectSource, projectTarget);
         }
 
         private void ScriptureDataChangedHandlerSource(IProject sender, int bookNum, int chapterNum)
@@ -280,7 +286,23 @@ namespace SIL.ParatextBackTranslationHelperPlugin
         {
             get
             {
-                return Text;
+                return GetProjectName(_projectSource, _projectTarget);
+            }
+        }
+
+        bool IBackTranslationHelperDataSource.SourceLanguageRightToLeft
+        {
+            get
+            {
+                return _projectSource.Language.IsRtoL;
+            }
+        }
+
+        bool IBackTranslationHelperDataSource.TargetLanguageRightToLeft
+        {
+            get
+            {
+                return _projectTarget.Language.IsRtoL;
             }
         }
 

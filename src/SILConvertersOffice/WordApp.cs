@@ -20,6 +20,8 @@ namespace SILConvertersOffice
 
     internal class WordApp : OfficeApp
     {
+        public static WordApp CurrentWordApp { get; set; }
+
 #if !TurnOffBitheadFeatures
         private Office.CommandBarPopup ProcessDocumentPopup;
         // private Office.CommandBarButton ParagraphByParagraphMenu;
@@ -55,6 +57,7 @@ namespace SILConvertersOffice
         public WordApp(object app)
             : base(app)
         {
+            CurrentWordApp = this;
         }
 
         public new Word.Application Application
@@ -62,13 +65,19 @@ namespace SILConvertersOffice
             get { return (Word.Application)base.Application; }
         }
 
-        public void SetCursorToWaiting()
+        public static void SetCursorToWaiting()
         {
-            Application.System.Cursor = Word.WdCursorType.wdCursorWait;
+            CurrentWordApp.Application.System.Cursor = Word.WdCursorType.wdCursorWait;
         }
-        public void SetCursorToDefault()
+
+        public static void SetCursorToDefault()
         {
-            Application.System.Cursor = Word.WdCursorType.wdCursorNormal;
+            CurrentWordApp.Application.System.Cursor = Word.WdCursorType.wdCursorNormal;
+        }
+
+        public static bool SelectionIsRightAligned
+        {
+            get { return (CurrentWordApp?.Application?.ActiveDocument?.Application?.Selection?.ParagraphFormat.Alignment == Word.WdParagraphAlignment.wdAlignParagraphRight); }
         }
 
 #if BUILD_FOR_OFF15

@@ -44,6 +44,7 @@ namespace SILConvertersOffice
 
         FormButtons IBaseConverterForm.Show(FontConverter fontConverter, string sourceText, string targetText)
         {
+            WordApp.SetCursorToWaiting();
             ButtonPressed = FormButtons.Cancel; // reset and be pessimistic
 
             _theFontsAndEncConverter = fontConverter;
@@ -77,6 +78,7 @@ namespace SILConvertersOffice
             // get some info to show in the title bar
             this.Text = String.Format("{0}: {1}", OfficeApp.cstrCaption, _theFontsAndEncConverter?.ToString());
 
+            WordApp.SetCursorToDefault();
             var res = ShowDialog();
 
             return ButtonPressed;
@@ -142,6 +144,22 @@ namespace SILConvertersOffice
             get
             {
                 return _theFontsAndEncConverter?.ToString();
+            }
+        }
+
+        bool IBackTranslationHelperDataSource.SourceLanguageRightToLeft
+        {
+            get
+            {
+                return WordApp.SelectionIsRightAligned;
+            }
+        }
+
+        bool IBackTranslationHelperDataSource.TargetLanguageRightToLeft
+        {
+            get
+            {
+                return false;
             }
         }
 
