@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\..\packages\Encoding-Converters-Core.0.5.3\build\Encoding-Converters-Core.props" Condition="Exists('..\..\packages\Encoding-Converters-Core.0.5.3\build\Encoding-Converters-Core.props')" />
+  <Import Project="..\..\packages\Encoding-Converters-Core.0.5.4\build\Encoding-Converters-Core.props" Condition="Exists('..\..\packages\Encoding-Converters-Core.0.5.4\build\Encoding-Converters-Core.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -192,7 +192,7 @@
     <None Include="Resources\Image1.bmp" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="C:\Users\pete_\source\repos\SilConverters\packages\Encoding-Converters-Core.0.5.1\build\..\runtimes\EcDistFiles\redist\EC\Plugins\AI 4.0.0.0 Plugin Details.xml">
+    <Content Include="C:\Users\pete_\source\repos\SilConverters\packages\Encoding-Converters-Core.0.5.4\build\..\runtimes\EcDistFiles\redist\EC\Plugins\AI 4.0.0.0 Plugin Details.xml">
       <Link>EcPlugins\AI 4.0.0.0 Plugin Details.xml</Link>
     </Content>
     <Content Include="$(EcDistFilesPath)\redist\EC\Plugins\EC 4.0.0.0 Plugin Details.xml">
@@ -224,6 +224,6 @@ ren "%25ParatextInstallDir%25\plugins\$(ProjectName)\$(TargetFileName)" "$(Proje
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\..\packages\Encoding-Converters-Core.0.5.3\build\Encoding-Converters-Core.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Encoding-Converters-Core.0.5.3\build\Encoding-Converters-Core.props'))" />
+    <Error Condition="!Exists('..\..\packages\Encoding-Converters-Core.0.5.4\build\Encoding-Converters-Core.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Encoding-Converters-Core.0.5.4\build\Encoding-Converters-Core.props'))" />
   </Target>
 </Project>
