@@ -25,10 +25,29 @@ jobs:
 
     steps:
     - name: Checkout
-      uses: actions/checkout@v2
+      uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b # v3.0.2
+      with:
+        fetch-depth: 0 # fetch full history for GitVersion
 
-    - name: Add MSBuild to PATH
-      uses: microsoft/setup-msbuild@v1.0.2
+    - name: Setup .NET
+      uses: actions/setup-dotnet@c0d4ad69d8bd405d234f1c9166d383b7a4f69ed8 # v2.1.0
+      with:
+        dotnet-version: 6.0.x
+
+    #- name: Restore
+    #  run: dotnet restore
+      
+    - name: setup-msbuild
+      uses: microsoft/setup-msbuild@v1.1.3
+      with:
+        # Folder location of where vswhere.exe is located if a self-hosted agent
+        vswhere-path: # optional
+        # Version of Visual Studio to search; defaults to latest if not specified
+        vs-version: # optional
+        # Enable searching for pre-release versions of Visual Studio/MSBuild
+        vs-prerelease: # optional
+        # The preferred processor architecture of MSBuild. Can be either "x86" or "x64". "x64" is only available from Visual Studio version 17.0 and later.
+        msbuild-architecture: x64 # optional, default is x86
 
     - name: Fetch nuget dependecies
       run: nuget restore "${{env.SOLUTION_FILE_PATH}}"
@@ -48,13 +67,14 @@ jobs:
     #- name: Test
     #  run: output/Win32/${{matrix.build_configuration}}/RunTests.exe
 
-    - name: rename installer
-      if: ${{ success() && matrix.build_configuration == 'Release' }}
-      run: cp "output/${{matrix.platform}}/SetupSILConverters_${{matrix.platform}}.exe" "output/${{matrix.platform}}/SetupSILConverters_${{matrix.platform}}.${{github.run_number}}.exe"
+    # now that we're building on TeamCity (to sign it), this isn't needed
+    #- name: rename installer
+    #  if: ${{ success() && matrix.build_configuration == 'Release' }}
+    #  run: cp "output/${{matrix.platform}}/SetupSILConverters_${{matrix.platform}}.exe" "output/${{matrix.platform}}/SetupSILConverters_${{matrix.platform}}.${{github.run_number}}.exe"
 
-    - name: publish artifact
-      if: ${{ success() && matrix.build_configuration == 'Release' }}
-      uses: actions/upload-artifact@v2.2.4
-      with: 
-        name: silconverters-installers.${{matrix.platform}}.latest
-        path: output/${{matrix.platform}}/SetupSILConverters_${{matrix.platform}}.${{github.run_number}}.exe
+    #- name: Upload a Build Artifact
+    #  if: ${{ success() && matrix.build_configuration == 'Release' }}
+    #  uses: actions/upload-artifact@v3.1.1
+    #  with:
+    #    name: silconverters-installers.${{matrix.platform}}.latest
+    #    path: output/${{matrix.platform}}/SetupSILConverters_${{matrix.platform}}.${{github.run_number}}.exe

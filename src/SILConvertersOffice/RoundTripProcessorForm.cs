@@ -9,7 +9,7 @@ using SilEncConverters40;
 
 namespace SILConvertersOffice
 {
-    internal partial class RoundTripProcessorForm : SILConvertersOffice.SILConverterProcessorForm
+    internal partial class RoundTripProcessorForm : SILConverterProcessorForm, IBaseConverterForm
     {
         public RoundTripProcessorForm()
         {
@@ -88,7 +88,7 @@ namespace SILConvertersOffice
         {
         }
 
-        protected override FormButtons ConvertProcessing(OfficeRange aWordRange, FontConverter aThisFC, string strInput, ref int nCharIndex, ref string strReplace)
+        protected override FormButtons ConvertProcessing(OfficeRange aWordRange, FontConverter aThisFC, string strInput, ref string strReplace)
         {
             // here's the meat of the RoundTripChecker engine: process the word both in the 
             // forward and reverse directions and compare the 2nd output with the input

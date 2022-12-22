@@ -6,8 +6,8 @@
     <Directory Id="TARGETDIR" Name="SourceDir">
       <Directory Id="MergeRedirectFolder">
 
-        <Component Id="LinguisticTools2.2.oxt" Guid="770D3851-231F-405C-A8CC-12CC662F8AF3">
-          <File Id="LinguisticTools2.2.oxt" Name="LinguisticTools-2.2.oxt" Vital="yes" KeyPath="yes" Source="DistFiles\LinguisticTools-2.2.oxt" />
+        <Component Id="LinguisticTools4.0.2.oxt" Guid="770D3851-231F-405C-A8CC-12CC662F8AF3">
+          <File Id="LinguisticTools4.0.2.oxt" Name="LinguisticTools-4.0.2.oxt" Vital="yes" KeyPath="yes" Source="DistFiles\LinguisticTools-4.0.2.oxt" />
         </Component>
 
       </Directory>

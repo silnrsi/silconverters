@@ -88,6 +88,11 @@
           <RegistryValue Root="HKCR" Key="Record\{EA80CF72-A259-42C7-96F7-BCC35D0917E9}\4.0.0.0" Name="CodeBase" Value="file:///[#SILConvertersOffice13.dll]" Type="string" Action="write" />
         </Component>
 
+        <Component Id="SILConvertersOffice13.dll.config" Guid="{4A86C3F9-86F2-4F3F-A479-1D68E8E0FE0B}">
+          <File Id="SILConvertersOffice13.dll.config" Name="SILConvertersOffice13.dll.config" Vital="yes" KeyPath="yes"
+                Source="..\..\output\x86\release\SILConvertersOffice13.dll.config" />
+        </Component>
+
         <Component Id="SecOffice_COMAddInShim13.dll" Guid="{FB6B704D-7D1B-4B9C-8F98-CE8F6BDBA0EC}">
           <File Id="SecOffice_COMAddInShim13.dll" KeyPath="yes" Source="..\..\output\x86\release\SecOffice_COMAddInShim13.dll">
             <Class Id="{9FDB0283-1795-4BF4-97E9-84223F3FC8EA}" Context="InprocServer32" Description="SILConvertersOffice13.Connect" ThreadingModel="apartment" Programmable="yes">

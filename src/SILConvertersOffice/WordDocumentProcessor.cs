@@ -1,6 +1,7 @@
 #define Csc30   // turn off CSC30 features
 
 using System;
+using System.Collections.Generic;
 using System.Windows.Forms;             // for DialogResult
 using Word = Microsoft.Office.Interop.Word;
 /*
@@ -50,22 +51,84 @@ namespace SILConvertersOffice
 
 		public override bool ProcessWordByWord(OfficeDocumentProcessor aWordProcessor, ProcessingType eType)
         {
-            if (aWordProcessor.AreLeftOvers)
+            if (eType == ProcessingType.eParagraphByParagraph)
             {
-                DialogResult res = MessageBox.Show("Click 'Yes' to restart where you left off, 'No' to start over at the top, and 'Cancel' to quit", OfficeApp.cstrCaption, MessageBoxButtons.YesNoCancel);
-                if (res == DialogResult.No)
-                    aWordProcessor.LeftOvers = null;
-                if (res == DialogResult.Cancel)
-                    return true;
+                if (aWordProcessor.AreLeftOvers && (aWordProcessor.LeftOvers.Start != aWordProcessor.LeftOvers.End))
+                    return ProcessSelectionIgnoreFormatting(aWordProcessor, Document.Application.Selection);
+                else
+                    return ProcessParagraphsIgnoreFormatting(aWordProcessor, Document.Paragraphs);
             }
+            else
+            {
+                if (aWordProcessor.AreLeftOvers)
+                {
+                    DialogResult res = MessageBox.Show("Click 'Yes' to restart where you left off, 'No' to start over at the top, and 'Cancel' to quit", OfficeApp.cstrCaption, MessageBoxButtons.YesNoCancel);
+                    if (res == DialogResult.No)
+                        aWordProcessor.LeftOvers = null;
+                    if (res == DialogResult.Cancel)
+                        return true;
+                }
 
-			if (eType == ProcessingType.eWordByWord)
-				return ProcessParagraphs(aWordProcessor, Document.Paragraphs);
-			else
-				return ProcessParagraphsIsoFormat(aWordProcessor, Document.Paragraphs);
+                if (eType == ProcessingType.eWordByWord)
+                    return ProcessParagraphs(aWordProcessor, Document.Paragraphs);
+                else if (eType == ProcessingType.eIsoFormattedRun)
+                    return ProcessParagraphsIsoFormat(aWordProcessor, Document.Paragraphs);
+                else
+                    throw new ApplicationException($"Unknown ProcessingType: {eType}");
+            }
         }
 
-		protected bool ProcessParagraphs(OfficeDocumentProcessor aWordProcessor, Word.Paragraphs aParagraphs)
+        protected bool ProcessSelectionIgnoreFormatting(OfficeDocumentProcessor aWordProcessor, Word.Selection selection)
+        {
+            // if multiple paragraphs...
+            int nCharIndex = 0;
+            WordParagraphs aParagraphRanges = new WordParagraphs(selection);
+            foreach (Word.Range aRange in aParagraphRanges)
+            {
+                WordRange aThisParagraph = new WordRange(aRange);
+                if (!ProcessWholeRange(aWordProcessor, aThisParagraph, nCharIndex))
+                    return false;
+            }
+            return true;
+        }
+
+        protected bool ProcessParagraphsIgnoreFormatting(OfficeDocumentProcessor aWordProcessor, Word.Paragraphs aParagraphs)
+        {
+            foreach (Word.Paragraph aParagraph in aParagraphs)
+            {
+                // get the Range object for this paragraph
+                Word.Range aParagraphRange = aParagraph.Range;
+
+                // if we're picking up where we left off and we're not there yet...
+                int nCharIndex = 0;
+                if (aWordProcessor.AreLeftOvers)
+                {
+                    if (aWordProcessor.LeftOvers.Start > aParagraphRange.End)
+                        continue;   // skip to the next paragraph
+
+                    nCharIndex = aWordProcessor.LeftOvers.StartIndex;
+                    aWordProcessor.LeftOvers = null; // turn off "left overs"
+                }
+
+#if BUILD_FOR_OFF12 || BUILD_FOR_OFF14 || BUILD_FOR_OFF15
+                // if there are any ContentControls in this paragraph, we need to get rid of them or the
+                // processor won't deal with them properly (they're going to go away anyway with this
+                // approach of processing entire paragraphs in one go), so it shouldn't matter much).
+                if (aParagraphRange.ContentControls.Count > 0)
+                {
+                    foreach (Word.ContentControl cc in aParagraphRange.ContentControls)
+                        cc.Delete(DeleteContents: false);   // remove the control, but not the text
+                }
+#endif
+
+                WordRange aThisParagraph = new WordRange(aParagraphRange);
+                if (!ProcessWholeRange(aWordProcessor, aThisParagraph, nCharIndex))
+                    return false;
+            }
+
+            return true;
+        }
+        protected bool ProcessParagraphs(OfficeDocumentProcessor aWordProcessor, Word.Paragraphs aParagraphs)
         {
             foreach (Word.Paragraph aParagraph in aParagraphs)
             {
@@ -145,6 +208,8 @@ namespace SILConvertersOffice
             return true;
         }
 
+        private List<Char> ParagraphEndings = new List<char> { '\n', '\r' };    // w/ text files, they have both
+
         public bool ProcessParagraphsIsoFormat(OfficeDocumentProcessor aWordProcessor, Word.Paragraphs aParagraphs)
 		{
 			foreach (Word.Paragraph aParagraph in aParagraphs)
@@ -179,25 +244,36 @@ namespace SILConvertersOffice
 
 					} while (!MixedCharacterFormatting(aRunRange));
 
-					aRunRange.EndIndex--;	// back up one
-				}
-				else 
-				{
-					// the whole paragraph seems to be iso formatted, so exclude the paragraph end and
-					// process it as a whole unit
-					aRunRange.EndIndex--;
-					if (!aWordProcessor.Process(aRunRange, ref nCharIndex))
-					{
-						aWordProcessor.LeftOvers = aRunRange;
-						return false;
-					}
-				}
-			}
+                    TrimParagraphEnding(aRunRange); // back up one
+                }
+				else
+                {
+                    // the whole paragraph seems to be iso formatted, so exclude the paragraph end and
+                    // process it as a whole unit
+                    TrimParagraphEnding(aRunRange);
+
+                    if (!aWordProcessor.Process(aRunRange, ref nCharIndex))
+                    {
+                        aWordProcessor.LeftOvers = aRunRange;
+                        return false;
+                    }
+                }
+            }
 
 			return true;
 		}
 
-		protected bool MixedCharacterFormatting(OfficeRange aRange)
+        private void TrimParagraphEnding(WordRange aRunRange)
+        {
+            // w/ text files, they have both
+            do
+            {
+                aRunRange.EndIndex--;
+            }
+            while ((aRunRange.Text != null) && (aRunRange.Text.Length >= aRunRange.EndIndex) && ParagraphEndings.Contains(aRunRange.Text[aRunRange.EndIndex - 1]));
+        }
+
+        protected bool MixedCharacterFormatting(OfficeRange aRange)
 		{
             Word.Range thisRange = ((WordRange)aRange).RangeBasedOn;
             /*

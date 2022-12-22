@@ -9,7 +9,7 @@ using SilEncConverters40;
 
 namespace SILConvertersOffice
 {
-    internal partial class SILConverterProcessorForm : SILConvertersOffice.BaseConverterForm
+    internal partial class SILConverterProcessorForm : BaseConverterForm, IBaseConverterForm
     {
         public SILConverterProcessorForm()
         {

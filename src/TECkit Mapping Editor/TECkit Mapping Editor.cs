@@ -521,7 +521,7 @@ namespace TECkit_Mapping_Editor
             m_formDisplayUnicodeNamesRhs.Location = ptLocation;
 
             // initialize it with our clues
-            this.richTextBoxMapEditor.Text = String.Format("; This file was created by <author> using TECkitMappingEditorU.exe v{1} on {2}.{0};   {3}{4}{0};   {5}{6};{7}{0};   {8}{9};{10}{0}{11}{0}{12}{0}{13}{0}{14}{15}{0}{16}{17}{0}{0}",
+            this.richTextBoxMapEditor.Text = String.Format("; This file was created by <author> using TECkitMappingEditorU.exe v{1} on {2}.{0};   {3}{4}{0};   {5}{6};{7}{0};   {8}{9};{10}{0}{11}{0}{12}{0}{13}{0};   {14}{15}{0};   {16}{17}{0}{0}",
                 Environment.NewLine,
                 Application.ProductVersion,
                 DateTime.Now.ToShortDateString(),

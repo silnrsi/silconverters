@@ -1,0 +1,45 @@
+{
+  "44_002": {
+    "44_002_000": [
+      {
+        "Type": 1,
+        "Marker": "c",
+        "Attributes": [],
+        "Data": "2",
+        "EndMarker": null,
+        "Token": {
+          "Type": 1,
+          "Marker": "c",
+          "Text": null,
+          "Attributes": null,
+          "Data": "2",
+          "EndMarker": null,
+          "NestlessMarker": "c",
+          "HasData": true,
+          "HasAttributes": false,
+          "HasNonDefaultAttribute": false
+        },
+        "VerseRef": {
+          "BookCode": "ACT",
+          "BookNum": 44,
+          "ChapterNum": 2,
+          "VerseNum": 0,
+          "BBBCCCVVV": 44002000,
+          "Versification": {
+            "Type": 4,
+            "IsCustomized": false
+          },
+          "RepresentsMultipleVerses": false,
+          "AllVerses": []
+        },
+        "VerseOffset": 0,
+        "IsSpecial": false,
+        "IsFigure": false,
+        "IsFootnoteOrCrossReference": false,
+        "IsScripture": true,
+        "IsMetadata": false,
+        "IsPublishableVernacular": true
+      }
+    ]
+  }
+}

@@ -430,7 +430,8 @@ namespace SILConvertersWordML
             var bUsingLinq = useLinqToolStripMenuItem.Checked;
             var doc = bUsingLinq
                           ? WordLinqDocument.GetXmlDocument(ref strXmlFilename, strDocFilename,
-                                                            leaveXMLFileInFolderToolStripMenuItem.Checked)
+                                                            leaveXMLFileInFolderToolStripMenuItem.Checked,
+                                                            combineIntoIsoformattedParagraphToolStripMenuItem.Checked)
                           : Word03MLDocument.GetXmlDocument(ref strXmlFilename, strDocFilename,
                                                             leaveXMLFileInFolderToolStripMenuItem.Checked);
 

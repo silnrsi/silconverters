@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="12.0">
-  <Import Project="..\..\packages\Encoding-Converters-Core.0.4.1\build\Encoding-Converters-Core.props" Condition="Exists('..\..\packages\Encoding-Converters-Core.0.4.1\build\Encoding-Converters-Core.props')" />
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="16.0">
+  <Import Project="..\..\packages\Encoding-Converters-Core.0.5.4\build\Encoding-Converters-Core.props" Condition="Exists('..\..\packages\Encoding-Converters-Core.0.5.4\build\Encoding-Converters-Core.props')" />
   <PropertyGroup>
     <ProjectType>Local</ProjectType>
     <ProductVersion>9.0.30729</ProductVersion>
@@ -217,14 +217,19 @@
   <PropertyGroup>
     <PreBuildEvent>
     </PreBuildEvent>
-    <PostBuildEvent>call "$(DevEnvDir)..\Tools\VsDevCmd.bat"
-tlbexp.exe "$(TargetFileName)" /out:"$(TargetName).tlb"
-xcopy /y "$(TargetDir)*.*" $(SolutionDir)output\$(PlatformName)\$(ConfigurationName)</PostBuildEvent>
+    <WindowsSDK_ExecutablePath_x86 Condition="'$(WindowsSDK_ExecutablePath_x86)' == '' and '$(Platform)' == 'x86'">C:\Program Files (x86)\Microsoft SDKs\Windows\v10.0A\bin\NETFX 4.8 Tools\</WindowsSDK_ExecutablePath_x86>
+    <WindowsSDK_ExecutablePath_x64 Condition="'$(WindowsSDK_ExecutablePath_x64)' == '' and '$(Platform)' == 'x64'">C:\Program Files (x86)\Microsoft SDKs\Windows\v10.0A\bin\NETFX 4.8 Tools\x64\</WindowsSDK_ExecutablePath_x64>
+    <WindowsSDK_ExecutablePath Condition="'$(Platform)' == 'x86'">$(WindowsSDK_ExecutablePath_x86)</WindowsSDK_ExecutablePath>
+    <WindowsSDK_ExecutablePath Condition="'$(Platform)' == 'x64'">$(WindowsSDK_ExecutablePath_x64)</WindowsSDK_ExecutablePath>
+    <PostBuildEvent>
+      rem call "$(WindowsSDK_ExecutablePath)VsDevCmd.bat"
+      "$(WindowsSDK_ExecutablePath)tlbexp.exe" "$(TargetFileName)" /out:"$(TargetName).tlb"
+      xcopy /y "$(TargetDir)*.*" $(SolutionDir)output\$(PlatformName)\$(ConfigurationName)</PostBuildEvent>
   </PropertyGroup>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\..\packages\Encoding-Converters-Core.0.4.1\build\Encoding-Converters-Core.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Encoding-Converters-Core.0.4.1\build\Encoding-Converters-Core.props'))" />
+    <Error Condition="!Exists('..\..\packages\Encoding-Converters-Core.0.5.4\build\Encoding-Converters-Core.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Encoding-Converters-Core.0.5.4\build\Encoding-Converters-Core.props'))" />
   </Target>
 </Project>

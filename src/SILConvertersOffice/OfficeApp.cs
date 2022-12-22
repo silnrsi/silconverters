@@ -8,6 +8,7 @@ using System.Reflection;                // for InvokeMember
 using Office = Microsoft.Office.Core;
 using ECInterfaces;
 using SilEncConverters40;
+using BackTranslationHelper;
 
 namespace SILConvertersOffice
 {
@@ -293,6 +294,7 @@ namespace SILConvertersOffice
         protected const char chNL = '\r';
         protected const char chFootnote = '\u0002';
         protected const char chSpace = ' ';
+        protected const char chNonBreakingSpace = '\u00A0';
         protected const char chFormFeed = '\f';
 		protected const char chCellBreak = '\u0007';
 		protected const char chInlineGraphics = '\u0001';
@@ -307,13 +309,13 @@ namespace SILConvertersOffice
         protected static char[] m_achParagraphTerminators = new char[] { chNL };
 
         // ... however, we do need the processor to skip past it so it doesn't get clobbered... so treat it like whitespace...
-        // protected static char[] m_achWhiteSpace = new char[] { chSpace, chTab, chFootnote };
-        protected static char[] m_achWhiteSpace = new char[] { chSpace, chTab, chFootnote, chFormFeed };
-        protected static char[] m_achWordTerminators = new char[] { chSpace, chTab, chNL, chFootnote, chFormFeed };
+        // protected static char[] m_achWhiteSpace = new char[] { chSpace, chTab, chFootnote, chNonBreakingSpace };
+        protected static char[] m_achWhiteSpace = new char[] { chSpace, chTab, chFootnote, chFormFeed, chNonBreakingSpace };
+        protected static char[] m_achWordTerminators = new char[] { chSpace, chTab, chNL, chFootnote, chFormFeed, chNonBreakingSpace };
 #else
         protected static char[] m_achParagraphTerminators = new char[] { chNL, chFormFeed };
-        protected static char[] m_achWhiteSpace = new char[] { chSpace, chTab, chFootnote };
-        protected static char[] m_achWordTerminators = new char[] { chSpace, chTab, chNL, chFootnote };
+        protected static char[] m_achWhiteSpace = new char[] { chSpace, chTab, chFootnote, chNonBreakingSpace };
+        protected static char[] m_achWordTerminators = new char[] { chSpace, chTab, chNL, chFootnote, chNonBreakingSpace };
 #endif
 
         public OfficeDocument(object doc)
@@ -335,7 +337,8 @@ namespace SILConvertersOffice
 		public enum ProcessingType
 		{
 			eWordByWord,
-			eIsoFormattedRun
+			eIsoFormattedRun,
+            eParagraphByParagraph
 		}
 
         public OfficeTextDocument(object doc, ProcessingType eType)
@@ -429,9 +432,6 @@ namespace SILConvertersOffice
 
 			while ((nCharIndex < nLength) && (strText.IndexOfAny(m_achParagraphTerminators, nCharIndex, 1) == -1))
 			{
-				// get a copy of the range to work with
-				OfficeRange aWordRange = Duplicate(aParagraphRange);
-
 				// skip past initial spaces
 				while ((nCharIndex < nLength) && (strText.IndexOfAny(m_achWhiteSpace, nCharIndex, 1) != -1))
 					nCharIndex++;
@@ -441,28 +441,32 @@ namespace SILConvertersOffice
 				{
 					if (strText.IndexOfAny(m_achParagraphTerminators, nCharIndex, 1) == -1)
 					{
-						// set the start index
-						aWordRange.StartIndex = nCharIndex;
+                        // set the start index
+                        aParagraphRange.StartIndex = nCharIndex;
 
-						// run through the characters in the word (i.e. until, space, NL, etc)
-						while ((nCharIndex < nLength) && (strText.IndexOfAny(m_achWordTerminators, nCharIndex, 1) == -1))
-							nCharIndex++;
+                        // get the font of the 1st character
+                        aParagraphRange.EndIndex = nCharIndex + 1;
+                        var fontName = aParagraphRange.FontName;
 
-						// set the end of the range after the first space after the word (but not for NL)
-						if (++nCharIndex >= nLength)
-							--nCharIndex;
+                        // run through from the end of the paragraph (i.e. to remove NL, etc)
+                        nCharIndex = nLength - 1;
+                        while (strText.IndexOfAny(m_achParagraphTerminators, nCharIndex, 1) != -1)
+                            nCharIndex--;
 
-						aWordRange.EndIndex = nCharIndex;
+                        aParagraphRange.EndIndex = ++nCharIndex;
 
 						// make sure the word has text (sometimes it doesn't)
-						if (aWordRange.Text == null)  // e.g. Figure "1" returns a null Text string
-							// if it does, see if it's "First Character" has any text (which it does in this case)
-							aWordRange.DealWithNullText();
+						if (aParagraphRange.Text == null)  // e.g. Figure "1" returns a null Text string
+                                                           // if it does, see if it's "First Character" has any text (which it does in this case)
+                            aParagraphRange.DealWithNullText();
 
-						// finally check it.
-						if (!aWordProcessor.Process(aWordRange, ref nCharIndex))
+                        // set the range to the font determined above
+                        aParagraphRange.FontName = fontName;
+
+                        // finally check it.
+                        if (!aWordProcessor.Process(aParagraphRange, ref nCharIndex))
 						{
-							aWordProcessor.LeftOvers = aWordRange;
+							aWordProcessor.LeftOvers = aParagraphRange;
 							return false;
 						}
 					}
@@ -486,7 +490,7 @@ namespace SILConvertersOffice
         protected Dictionary<string, string> m_mapCheckedInputStrings = new Dictionary<string, string>();
         protected FontConverter m_aFC = null;
         protected FontConverters m_aFCs = null;
-        protected BaseConverterForm m_formDisplayValues = null;
+        protected IBaseConverterForm m_formDisplayValues = null;
         protected bool m_bReplaceAll = false;
         protected bool m_bAutoReplace = false;
         private OfficeRange m_rangeLast = null;  // if cancel is done, so we can pick up where we left off
@@ -499,7 +503,7 @@ namespace SILConvertersOffice
         /// </summary>
         /// <param name="aFCs"></param>
         /// <param name="form"></param>
-        public OfficeDocumentProcessor(FontConverters aFCs, BaseConverterForm form)
+        public OfficeDocumentProcessor(FontConverters aFCs, IBaseConverterForm form)
         {
             m_aFCs = aFCs;
             Form = form;
@@ -513,7 +517,7 @@ namespace SILConvertersOffice
         /// </summary>
         /// <param name="aFC"></param>
         /// <param name="form"></param>
-        public OfficeDocumentProcessor(FontConverter aFC, BaseConverterForm form)
+        public OfficeDocumentProcessor(FontConverter aFC, IBaseConverterForm form)
         {
             m_aFC = aFC;
             Form = form;
@@ -525,7 +529,7 @@ namespace SILConvertersOffice
         /// This results in the user being prompted
         /// </summary>
         /// <param name="form"></param>
-        public OfficeDocumentProcessor(BaseConverterForm form)
+        public OfficeDocumentProcessor(IBaseConverterForm form)
         {
             Form = form;
             Process = CompareInputOutputProcess;    // good default
@@ -546,7 +550,7 @@ namespace SILConvertersOffice
             set { m_aWordProcessor = value; }
         }
 
-        public BaseConverterForm Form
+        public IBaseConverterForm Form
         {
             get { return m_formDisplayValues; }
             set { m_formDisplayValues = value; }
@@ -594,7 +598,7 @@ namespace SILConvertersOffice
             aWordRange.FontName = strFontName;
         }
 
-        protected virtual FormButtons ConvertProcessing(OfficeRange aWordRange, FontConverter aThisFC, string strInput, ref int nCharIndex, ref string strReplace)
+        protected virtual FormButtons ConvertProcessing(OfficeRange aWordRange, FontConverter aThisFC, string strInput, ref string strReplace)
         {
             // here's the meat of the WordShowConversionDiffProcessor engine: only process
             //  the word if the input is different from the converted output
@@ -657,7 +661,7 @@ namespace SILConvertersOffice
                 string strReplace = null;
                 if (!m_mapCheckedInputStrings.TryGetValue(strInput, out strReplace))
                 {
-                    res = ConvertProcessing(aWordRange, aThisFC, strInput, ref nCharIndex, ref strReplace);
+                    res = ConvertProcessing(aWordRange, aThisFC, strInput, ref strReplace);
 
                     if (res == FormButtons.Cancel)
                         return false;

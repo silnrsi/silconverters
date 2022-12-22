@@ -1,0 +1,66 @@
+{
+  "BookCode": "ACT",
+  "BookNum": 44,
+  "ChapterNum": 1,
+  "VerseNum": 2,
+  "BBBCCCVVV": 44001002,
+  "Versification": {
+    "Type": 4,
+    "IsCustomized": false
+  },
+  "RepresentsMultipleVerses": true,
+  "AllVerses": [
+    {
+      "BookCode": "ACT",
+      "BookNum": 44,
+      "ChapterNum": 1,
+      "VerseNum": 2,
+      "BBBCCCVVV": 44001002,
+      "Versification": {
+        "Type": 4,
+        "IsCustomized": false
+      },
+      "RepresentsMultipleVerses": false,
+      "AllVerses": []
+    },
+    {
+      "BookCode": "ACT",
+      "BookNum": 44,
+      "ChapterNum": 1,
+      "VerseNum": 3,
+      "BBBCCCVVV": 44001003,
+      "Versification": {
+        "Type": 4,
+        "IsCustomized": false
+      },
+      "RepresentsMultipleVerses": false,
+      "AllVerses": []
+    },
+    {
+      "BookCode": "ACT",
+      "BookNum": 44,
+      "ChapterNum": 1,
+      "VerseNum": 4,
+      "BBBCCCVVV": 44001004,
+      "Versification": {
+        "Type": 4,
+        "IsCustomized": false
+      },
+      "RepresentsMultipleVerses": false,
+      "AllVerses": []
+    },
+    {
+      "BookCode": "ACT",
+      "BookNum": 44,
+      "ChapterNum": 1,
+      "VerseNum": 5,
+      "BBBCCCVVV": 44001005,
+      "Versification": {
+        "Type": 4,
+        "IsCustomized": false
+      },
+      "RepresentsMultipleVerses": false,
+      "AllVerses": []
+    }
+  ]
+}
