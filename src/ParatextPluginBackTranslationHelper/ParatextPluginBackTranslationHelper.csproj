@@ -176,6 +176,7 @@
   <ItemGroup>
     <EmbeddedResource Include="BackTranslationHelperForm.resx">
       <DependentUpon>BackTranslationHelperForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="ProjectListForm.resx">
       <DependentUpon>ProjectListForm.cs</DependentUpon>
@@ -212,8 +213,7 @@ IF NOT EXIST "%25ParatextInstallDir%25\plugins\$(ProjectName)\$(ProjectName).ptx
 del "%25ParatextInstallDir%25\plugins\$(ProjectName)\$(ProjectName).ptxplg"
 :nodelete
 
-@echo Copying files to '%25ParatextInstallDir%25\plugins\$(ProjectName)
-' folder
+@echo Copying files to '%25ParatextInstallDir%25\plugins\$(ProjectName)' folder
 xcopy "$(TargetDir)" "%25ParatextInstallDir%25\plugins\$(ProjectName)" /y /i
 
 ren "%25ParatextInstallDir%25\plugins\$(ProjectName)\$(TargetFileName)" "$(ProjectName).ptxplg"

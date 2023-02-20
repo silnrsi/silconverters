@@ -28,7 +28,7 @@ namespace SILConvertersOffice
             get
             {
                 // TODO: fix this
-                return backTranslationHelperCtrl.NewTargetTexts.FirstOrDefault()?.TargetData;
+                return backTranslationHelperCtrl.GetNewTargetTexts().FirstOrDefault()?.TargetData;
             }
 
             set

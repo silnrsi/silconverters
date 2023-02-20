@@ -43,7 +43,6 @@ namespace SILConvertersOffice
             this.backTranslationHelperCtrl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.backTranslationHelperCtrl.Location = new System.Drawing.Point(0, 0);
             this.backTranslationHelperCtrl.Name = "backTranslationHelperCtrl";
-            this.backTranslationHelperCtrl.NewTargetTexts = ((System.Collections.Generic.List<BackTranslationHelper.TargetPossible>)(resources.GetObject("backTranslationHelperCtrl.NewTargetTexts")));
             this.backTranslationHelperCtrl.Size = new System.Drawing.Size(790, 449);
             this.backTranslationHelperCtrl.TabIndex = 0;
             // 

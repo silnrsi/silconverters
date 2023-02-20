@@ -29,7 +29,6 @@ namespace SIL.ParatextBackTranslationHelperPlugin
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BackTranslationHelperForm));
             this.backTranslationHelperCtrl = new BackTranslationHelper.BackTranslationHelperCtrl();
             this.SuspendLayout();
             // 
@@ -41,7 +40,6 @@ namespace SIL.ParatextBackTranslationHelperPlugin
             this.backTranslationHelperCtrl.AutoSize = false;
             this.backTranslationHelperCtrl.Location = new System.Drawing.Point(0, 0);
             this.backTranslationHelperCtrl.Name = "backTranslationHelperCtrl";
-            this.backTranslationHelperCtrl.NewTargetTexts = ((System.Collections.Generic.List<BackTranslationHelper.TargetPossible>)(resources.GetObject("backTranslationHelperCtrl.NewTargetTexts")));
             this.backTranslationHelperCtrl.Size = new System.Drawing.Size(790, 449);
             this.backTranslationHelperCtrl.TabIndex = 1;
             // 
@@ -53,6 +51,8 @@ namespace SIL.ParatextBackTranslationHelperPlugin
             this.Controls.Add(this.backTranslationHelperCtrl);
             this.Name = "BackTranslationHelperForm";
             this.Text = "Back Translating from {0} - {1} in verse: {2}";
+            this.Activated += new System.EventHandler(this.BackTranslationHelperForm_Activated);
+            this.Deactivate += new System.EventHandler(this.BackTranslationHelperForm_Deactivate);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.BackTranslationHelperForm_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();

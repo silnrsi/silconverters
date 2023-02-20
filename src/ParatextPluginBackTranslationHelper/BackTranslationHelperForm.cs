@@ -1,6 +1,8 @@
 ﻿// Uncomment this define to enable code that helps in test creation for a new scenario
 //  See UnitTest_PtxBackTrHelper::It_Can_Determine_Correct_Update_To_Target_Project in the TestBwdc project for details
+#if DEBUG
 #define SerializeToCreateTestFiles
+#endif
 
 using BackTranslationHelper;
 using Paratext.PluginInterfaces;
@@ -29,6 +31,7 @@ namespace SIL.ParatextBackTranslationHelperPlugin
         private BackTranslationHelperModel _model;
         private IWriteLock _writeLock = null;
         private readonly Action<IVerseRef> _setSyncReferenceGroup;
+        private bool _isNotInFocus;
 
         /// <summary>
         /// the current verse we're processing. (this generally is the 1st of a range if it is a combined verse).
@@ -119,7 +122,15 @@ namespace SIL.ParatextBackTranslationHelperPlugin
 
         private void Host_VerseRefChanged(IPluginHost sender, IVerseRef newReference, SyncReferenceGroup group)
         {
-            // since this will initialize the _verseReference, which is intended to be the first of a series of verses...
+            // since this will initialize the _verseReference, which is intended to be the first
+            //  of a series of verses...
+            // UPDATE: but not if the Form isn't in focus (so we don't thrash around converting stuff while
+            //  the user may be editing stuff in Ptx)
+            if (_isNotInFocus && backTranslationHelperCtrl.IsModified)
+            {
+                return;
+            }
+
             var newRef = (newReference.RepresentsMultipleVerses) ? newReference.AllVerses.First() : newReference;
             GetNewReference(newRef);
         }
@@ -186,11 +197,12 @@ namespace SIL.ParatextBackTranslationHelperPlugin
         {
             get
             {
+                var currentTargetData = CurrentTargetData;
                 var model = new BackTranslationHelperModel
                 {
                     SourceData = CurrentSourceData ?? "<source data empty>",
-                    TargetData = CurrentTargetData,
-                    TargetDataPreExisting = CurrentTargetData,
+                    TargetData = currentTargetData,
+                    TargetDataPreExisting = currentTargetData,
                     TargetsPossible = new List<TargetPossible>()
                 };
                 return model;
@@ -671,6 +683,36 @@ namespace SIL.ParatextBackTranslationHelperPlugin
                 _writeLock = null;  // to prevent it being called twice while freeing the lock
                 temp.Dispose();
             }
+        }
+
+        private void BackTranslationHelperForm_Deactivate(object sender, EventArgs e)
+        {
+            // if we lose focus, it's possible that the user switched to Ptx to make some edits,
+            //  so purge the source and target tokens which would force us to requery them
+            _isNotInFocus = true;
+
+            System.Diagnostics.Debug.WriteLine($"BackTranslationHelperForm_Deactivate: _isNotInFocus = '{_isNotInFocus}'");
+
+            /*
+             * New plan: don't move from the current verse if it's modified. but this is now handled in GetNewReference
+            var keyBookChapterVerse = GetBookChapterVerseKey(_verseReference);
+            if (UsfmTokensSource.ContainsKey(keyBookChapterVerse))
+            {
+                UsfmTokensSource.Remove(keyBookChapterVerse);
+            }
+
+            var bookChapterKey = GetBookChapterKey(_verseReference);
+            if (UsfmTokensTarget.ContainsKey(bookChapterKey))
+            {
+                UsfmTokensTarget.Remove(bookChapterKey);
+            }
+            */
+        }
+
+        private void BackTranslationHelperForm_Activated(object sender, EventArgs e)
+        {
+            _isNotInFocus = false;
+            System.Diagnostics.Debug.WriteLine($"BackTranslationHelperForm_Activated: _isNotInFocus = '{_isNotInFocus}'");
         }
     }
 }
