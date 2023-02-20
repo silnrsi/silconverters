@@ -25,6 +25,7 @@ namespace SpellingFixerEC
     {
         public const string cstrAttributeFontToUse = "SpellingFixer Display Font";
         public const string cstrAttributeFontSizeToUse = "SpellingFixer Display Font Size";
+        public const string cstrAttributeFontRightToLeft = "SpellingFixer Display Right to Left";
         public const string cstrAttributeWordBoundaryDelimiter = "SpellingFixer Word Boundary Delimiter";
         public const string cstrAttributeNonWordChars = "SpellingFixer punctuation and whitespace characters";
         public const string cstrDefaultPunctuationAndWhitespace = "' ' tab nl '.' ',' '!' ':' ';' '-' \"'\" '\"' '‘' '’' '“' '”' '(' ')' '[' ']' '{' '}'";
@@ -46,6 +47,8 @@ namespace SpellingFixerEC
         private string m_strConverterSpec;
         private string m_strEncConverterName;
         private bool m_bLegacy;
+        private bool m_isRightToLeft;
+
         private int m_cp = 1252;
 
         // leave a default constructor which *doesn't* automatically log-in to a project for 
@@ -67,6 +70,7 @@ namespace SpellingFixerEC
                 m_bLegacy = login.IsLegacy;
                 if (m_bLegacy)
                     m_cp = login.CpToUse;
+                m_isRightToLeft = login.IsRightToLeft;
                 m_strConverterSpec = login.ConverterSpec;
                 SpellFixerEncConverterName = login.EncConverterName;
                 WordBoundaryDelimiter = login.WordBoundaryDelimiter;
@@ -85,6 +89,7 @@ namespace SpellingFixerEC
                 m_bLegacy = login.IsLegacy;
                 if (m_bLegacy)
                     m_cp = login.CpToUse;
+                m_isRightToLeft = login.IsRightToLeft;
                 m_strConverterSpec = login.ConverterSpec;
                 SpellFixerEncConverterName = login.EncConverterName;
                 WordBoundaryDelimiter = login.WordBoundaryDelimiter;
@@ -97,10 +102,12 @@ namespace SpellingFixerEC
         public SpellingFixerEC(string strProjectName, Font font, string strConverterSpec, string strEncConverterName,
             [Optional, DefaultParameterValue(SpellingFixerEC.cstrDefaultWordBoundaryDelimiter)] string strWordBoundaryDelimiter,
             [Optional, DefaultParameterValue(cstrDefaultPunctuationAndWhitespace)] string strPunctuationAndWhiteSpace,
-            [Optional, DefaultParameterValue(false)] bool bLegacy, [Optional, DefaultParameterValue(1252)] int cp)
+            [Optional, DefaultParameterValue(false)] bool bLegacy, [Optional, DefaultParameterValue(1252)] int cp,
+            [Optional, DefaultParameterValue(false)] bool bRightToLeft)
         {
             m_font = font;
             m_bLegacy = bLegacy;
+            m_isRightToLeft = bRightToLeft;
             if (m_bLegacy)
                 m_cp = cp;
             m_strConverterSpec = strConverterSpec;
@@ -167,6 +174,12 @@ namespace SpellingFixerEC
             set { m_strWordBoundaryDelimiter = value; }
         }
 
+        private bool IsRightToLeft
+        {
+            get { return m_isRightToLeft; }
+            set { m_isRightToLeft = value; }
+        }
+
         private string PunctuationAndWhiteSpace
         {
             get { return m_strNonWordChars; }
@@ -201,8 +214,12 @@ namespace SpellingFixerEC
 
         protected void QueryAndAppend(string strBadWord)
         {
+#if !OldDialogs
+            var aQuery = new QueryFindReplaceDialog(m_font);
+#else
             QueryGoodSpelling aQuery = new QueryGoodSpelling(m_font);
-            if (aQuery.ShowDialog(strBadWord, strBadWord, strBadWord, false) == DialogResult.OK)
+#endif
+            if (aQuery.ShowDialog(strBadWord, strBadWord, strBadWord, IsRightToLeft, WordBoundaryDelimiter, false) == DialogResult.OK)
             {
                 // if it was legacy encoded, then we need to convert the data to narrow using
                 //  the code page the user specified (or we got out of the repository)
@@ -210,7 +227,7 @@ namespace SpellingFixerEC
 
                 // get a stream writer for these encoding and append
                 StreamWriter sw = new StreamWriter(m_strConverterSpec, true, enc);
-                sw.WriteLine(FormatSubstitutionRule(aQuery.BadSpelling, aQuery.GoodSpelling, WordBoundaryDelimiter, strBadWord));
+                sw.WriteLine(FormatSubstitutionRule(aQuery.FindWhat, aQuery.ReplaceWith, WordBoundaryDelimiter, strBadWord));
                 sw.Flush();
                 sw.Close();
             }
@@ -365,8 +382,12 @@ namespace SpellingFixerEC
                     else if ((nFoundIndex >= 0) && (nFoundIndex < myTable.Rows.Count))
                     {
                         DataRow row = myTable.Rows[nFoundIndex];
+#if !OldDialogs
+                        var aQuery = new QueryFindReplaceDialog(m_font);
+#else
                         QueryGoodSpelling aQuery = new QueryGoodSpelling(m_font);
-                        DialogResult res = aQuery.ShowDialog((string)row[strColumnLhs], (string)row[strColumnRhs], GetComment(row), true);
+#endif
+                        DialogResult res = aQuery.ShowDialog((string)row[strColumnLhs], (string)row[strColumnRhs], GetComment(row), IsRightToLeft, WordBoundaryDelimiter, true);
                         bool bRewrite = false;
                         if (res == DialogResult.Abort)
                         {
@@ -377,14 +398,14 @@ namespace SpellingFixerEC
 
                         // if the user clicks OK and has made a change...
                         if ((res == DialogResult.OK)
-                            && (((string)row[strColumnLhs] != aQuery.BadSpelling)
-                                || ((string)row[strColumnRhs] != aQuery.GoodSpelling)
+                            && (((string)row[strColumnLhs] != aQuery.FindWhat)
+                                || ((string)row[strColumnRhs] != aQuery.ReplaceWith)
                                 )
                         )
                         {
                             // update the table and rewrite
-                            row[strColumnLhs] = aQuery.BadSpelling;
-                            row[strColumnRhs] = aQuery.GoodSpelling;
+                            row[strColumnLhs] = aQuery.FindWhat;
+                            row[strColumnRhs] = aQuery.ReplaceWith;
                             row[strColumnCmt] = strWord;
                             bRewrite = true;
                         }
@@ -421,7 +442,7 @@ namespace SpellingFixerEC
                     DialogResult res = DialogResult.Cancel;
                     try
                     {
-                        ViewBadGoodPairsDlg dlg = new ViewBadGoodPairsDlg(myTable, m_font);
+                        ViewBadGoodPairsDlg dlg = new ViewBadGoodPairsDlg(myTable, m_font, WordBoundaryDelimiter, IsRightToLeft);
                         res = dlg.ShowDialog();
                     }
 #if DEBUG

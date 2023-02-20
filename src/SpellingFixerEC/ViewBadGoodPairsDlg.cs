@@ -22,10 +22,15 @@ namespace SpellingFixerEC
 
         const int cnBadSpelling = 0;
         const int cnGoodSpelling = 1;
+        private string _wordBoundaryDelimiter;
+        private bool _isRightToLeft;
 
-        internal ViewBadGoodPairsDlg(DataTable myTable, Font font)
+        internal ViewBadGoodPairsDlg(DataTable myTable, Font font, string wordBoundaryDelimiter, bool isRightToLeft)
         {
             InitializeComponent();
+
+            _wordBoundaryDelimiter = wordBoundaryDelimiter;
+            _isRightToLeft = isRightToLeft;
 
             // for this ctor, the columns from the datatable
             this.dataGridView.Columns.Clear();
@@ -413,8 +418,13 @@ namespace SpellingFixerEC
             string strBadValue = (string)theBadCell.Value;
             string strGoodValue = (string)theGoodCell.Value;
 
+#if !OldDialogs
+            var aQuery = new QueryFindReplaceDialog(dataGridView.RowsDefaultCellStyle.Font);
+#else
             QueryGoodSpelling aQuery = new QueryGoodSpelling(dataGridView.RowsDefaultCellStyle.Font);
-            DialogResult res = aQuery.ShowDialog(strBadValue, strGoodValue, strBadValue, (strBadValue != null));
+#endif
+            DialogResult res = aQuery.ShowDialog(strBadValue, strGoodValue, strBadValue,
+                                        _isRightToLeft, _wordBoundaryDelimiter, (strBadValue != null));
             if (res == DialogResult.Abort)
             {
                 // this means delete
@@ -439,10 +449,10 @@ namespace SpellingFixerEC
                 //    o both columns were non-null and now the 'bad' value (only) is changed
                 //      ->  change the bad value in the row
                 //      ->  change the bad value in the bad2good list
-                if (String.IsNullOrEmpty(aQuery.BadSpelling) || String.IsNullOrEmpty(aQuery.GoodSpelling))
+                if (String.IsNullOrEmpty(aQuery.FindWhat) || String.IsNullOrEmpty(aQuery.ReplaceWith))
                 {
                     // if either of them are null...
-                    throw new ApplicationException("The 'Bad' and 'Good' forms are not allowed to be nothing!");
+                    throw new ApplicationException("The 'Find What' and 'Replace With' values are not allowed to be nothing!");
                 }
 #if !TurnOffSF30
                 /* I don't recall what I was thinking about this one. Sometimes having the good and bad spelling
@@ -460,8 +470,8 @@ namespace SpellingFixerEC
 #endif
                 {
                     // Legacy SpellFixer
-                    theBadCell.Value = aQuery.BadSpelling;
-                    theGoodCell.Value = aQuery.GoodSpelling;
+                    theBadCell.Value = aQuery.FindWhat;
+                    theGoodCell.Value = aQuery.ReplaceWith;
                 }
 #if !TurnOffSF30
                 else if (String.IsNullOrEmpty(strBadValue) && m_mapBad2Good.ContainsKey(aQuery.BadSpelling))

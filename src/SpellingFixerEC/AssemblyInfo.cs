@@ -8,12 +8,12 @@ using System.Resources;
 // associated with an assembly.
 //
 [assembly: AssemblyTitle("SIL Spelling fixer plug-in")]
-[assembly: AssemblyDescription("SIL Spelling fixer plug-in (for use with EncConverters)")]
+[assembly: AssemblyDescription("SIL Spelling fixer plug-in (for use with EncConverters). A GUI wrapper on CC (Consistent changes)")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("SIL")]
 [assembly: AssemblyProduct("SpellingFixerEC")]
-[assembly: AssemblyCopyright("Copyright © 2004-2021 SIL. All rights reserved.")]
-[assembly: AssemblyTrademark("Copyright © 2004-2021 SIL. All rights reserved.")]
+[assembly: AssemblyCopyright("Copyright © 2004-2023 SIL. All rights reserved.")]
+[assembly: AssemblyTrademark("Copyright © 2004-2023 SIL. All rights reserved.")]
 [assembly: AssemblyCulture("")]
 
 //
@@ -27,7 +27,7 @@ using System.Resources;
 // You can specify all the values or you can default the Revision and Build Numbers 
 // by using the '*' as shown below:
 
-[assembly: AssemblyVersion("4.0.0.0")]
+[assembly: AssemblyVersion("5.0.0.0")]
 
 //
 // In order to sign your assembly you must specify a key to use. Refer to the 
@@ -57,5 +57,5 @@ using System.Resources;
 [assembly: AssemblyDelaySign(false)]
 // [assembly: AssemblyKeyFile("")]
 [assembly: AssemblyKeyName("")]
-[assembly: AssemblyFileVersion("4.5.0.0")]
+[assembly: AssemblyFileVersion("5.0.0.0")]
 [assembly: NeutralResourcesLanguageAttribute("en")]

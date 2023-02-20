@@ -43,6 +43,7 @@ namespace SpellingFixerEC
         private System.ComponentModel.IContainer components;
 
         private bool    m_bLegacy;
+        private bool    m_isRightToleft;
         private int     m_cp = 1252;
         private Font    m_font;
         private string  m_strConverterSpec;
@@ -60,6 +61,7 @@ namespace SpellingFixerEC
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox textBoxAddlPunctuation;
         private string  m_strNonWordCharacters;
+        private CheckBox checkBoxRtL;
         private string  cstrProjectMostRecentProject = "MostRecentProject";
 
 		public LoginSF()
@@ -151,6 +153,11 @@ namespace SpellingFixerEC
             get { return m_strWordBoundaryDelimiter; }
         }
 
+        public bool IsRightToLeft
+        {
+            get { return m_isRightToleft; }
+        }
+
         public string Punctuation
         {
             get { return m_strNonWordCharacters; }
@@ -179,7 +186,7 @@ namespace SpellingFixerEC
 		private void InitializeComponent()
 		{
             this.components = new System.ComponentModel.Container();
-            System.Resources.ResourceManager resources = new System.Resources.ResourceManager(typeof(LoginSF));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LoginSF));
             this.checkedListBoxProjects = new System.Windows.Forms.CheckedListBox();
             this.buttonOK = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
@@ -205,27 +212,29 @@ namespace SpellingFixerEC
             this.menuItemDeleteAll = new System.Windows.Forms.MenuItem();
             this.menuItemEdit = new System.Windows.Forms.MenuItem();
             this.labelInstructions = new System.Windows.Forms.Label();
+            this.checkBoxRtL = new System.Windows.Forms.CheckBox();
             this.groupBoxNewProject.SuspendLayout();
             this.SuspendLayout();
             // 
             // checkedListBoxProjects
             // 
             this.checkedListBoxProjects.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.checkedListBoxProjects.Location = new System.Drawing.Point(16, 16);
+            this.checkedListBoxProjects.Location = new System.Drawing.Point(32, 30);
             this.checkedListBoxProjects.Name = "checkedListBoxProjects";
-            this.checkedListBoxProjects.Size = new System.Drawing.Size(360, 154);
+            this.checkedListBoxProjects.Size = new System.Drawing.Size(720, 256);
             this.checkedListBoxProjects.TabIndex = 0;
             this.checkedListBoxProjects.ThreeDCheckBoxes = true;
             this.toolTips.SetToolTip(this.checkedListBoxProjects, "List of existing projects");
-            this.checkedListBoxProjects.DoubleClick += new System.EventHandler(this.checkedListBoxProjects_DoubleClick);
             this.checkedListBoxProjects.SelectedIndexChanged += new System.EventHandler(this.checkedListBoxProjects_SelectedIndexChanged);
+            this.checkedListBoxProjects.DoubleClick += new System.EventHandler(this.checkedListBoxProjects_DoubleClick);
             this.checkedListBoxProjects.MouseUp += new System.Windows.Forms.MouseEventHandler(this.checkedListBoxProjects_MouseUp);
             // 
             // buttonOK
             // 
-            this.buttonOK.Location = new System.Drawing.Point(115, 464);
+            this.buttonOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonOK.Location = new System.Drawing.Point(230, 913);
             this.buttonOK.Name = "buttonOK";
-            this.buttonOK.Size = new System.Drawing.Size(75, 24);
+            this.buttonOK.Size = new System.Drawing.Size(150, 44);
             this.buttonOK.TabIndex = 11;
             this.buttonOK.Text = "OK";
             this.toolTips.SetToolTip(this.buttonOK, "Click to use the checked project");
@@ -233,10 +242,11 @@ namespace SpellingFixerEC
             // 
             // buttonCancel
             // 
+            this.buttonCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.buttonCancel.Location = new System.Drawing.Point(203, 464);
+            this.buttonCancel.Location = new System.Drawing.Point(406, 913);
             this.buttonCancel.Name = "buttonCancel";
-            this.buttonCancel.Size = new System.Drawing.Size(75, 24);
+            this.buttonCancel.Size = new System.Drawing.Size(150, 44);
             this.buttonCancel.TabIndex = 12;
             this.buttonCancel.Text = "Cancel";
             this.toolTips.SetToolTip(this.buttonCancel, "Click to cancel this operation");
@@ -244,19 +254,18 @@ namespace SpellingFixerEC
             // 
             // labelName
             // 
-            this.labelName.Location = new System.Drawing.Point(32, 216);
+            this.labelName.Location = new System.Drawing.Point(64, 399);
             this.labelName.Name = "labelName";
-            this.labelName.Size = new System.Drawing.Size(56, 23);
+            this.labelName.Size = new System.Drawing.Size(112, 42);
             this.labelName.TabIndex = 1;
             this.labelName.Text = "&Name:";
             // 
             // textBoxNewProjectName
             // 
-            this.textBoxNewProjectName.Location = new System.Drawing.Point(88, 216);
+            this.textBoxNewProjectName.Location = new System.Drawing.Point(176, 399);
             this.textBoxNewProjectName.Name = "textBoxNewProjectName";
-            this.textBoxNewProjectName.Size = new System.Drawing.Size(272, 20);
+            this.textBoxNewProjectName.Size = new System.Drawing.Size(544, 31);
             this.textBoxNewProjectName.TabIndex = 2;
-            this.textBoxNewProjectName.Text = "";
             this.toolTips.SetToolTip(this.textBoxNewProjectName, "Enter the name of a new projects (e.g. \'Hindi\')");
             this.textBoxNewProjectName.TextChanged += new System.EventHandler(this.textBoxNewProjectName_TextChanged);
             // 
@@ -266,9 +275,9 @@ namespace SpellingFixerEC
             this.checkBoxUnicode.Checked = true;
             this.checkBoxUnicode.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBoxUnicode.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.checkBoxUnicode.Location = new System.Drawing.Point(16, 120);
+            this.checkBoxUnicode.Location = new System.Drawing.Point(32, 222);
             this.checkBoxUnicode.Name = "checkBoxUnicode";
-            this.checkBoxUnicode.Size = new System.Drawing.Size(72, 24);
+            this.checkBoxUnicode.Size = new System.Drawing.Size(144, 44);
             this.checkBoxUnicode.TabIndex = 7;
             this.checkBoxUnicode.Text = "&Unicode:";
             this.toolTips.SetToolTip(this.checkBoxUnicode, "Check this if the data is Unicode-encoded (otherwise, it is Legacy-encoded)");
@@ -276,9 +285,9 @@ namespace SpellingFixerEC
             // 
             // buttonAddNewProject
             // 
-            this.buttonAddNewProject.Location = new System.Drawing.Point(116, 224);
+            this.buttonAddNewProject.Location = new System.Drawing.Point(232, 468);
             this.buttonAddNewProject.Name = "buttonAddNewProject";
-            this.buttonAddNewProject.Size = new System.Drawing.Size(128, 23);
+            this.buttonAddNewProject.Size = new System.Drawing.Size(256, 42);
             this.buttonAddNewProject.TabIndex = 10;
             this.buttonAddNewProject.Text = "&Add New Project";
             this.toolTips.SetToolTip(this.buttonAddNewProject, "Click to add new project");
@@ -286,6 +295,10 @@ namespace SpellingFixerEC
             // 
             // groupBoxNewProject
             // 
+            this.groupBoxNewProject.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBoxNewProject.Controls.Add(this.checkBoxRtL);
             this.groupBoxNewProject.Controls.Add(this.textBoxAddlPunctuation);
             this.groupBoxNewProject.Controls.Add(this.label2);
             this.groupBoxNewProject.Controls.Add(this.textBoxWordBoundaryDelimiter);
@@ -298,82 +311,80 @@ namespace SpellingFixerEC
             this.groupBoxNewProject.Controls.Add(this.textBoxCP);
             this.groupBoxNewProject.Controls.Add(this.listBoxFontSize);
             this.groupBoxNewProject.Controls.Add(this.buttonAddNewProject);
-            this.groupBoxNewProject.Location = new System.Drawing.Point(16, 184);
+            this.groupBoxNewProject.Location = new System.Drawing.Point(32, 340);
             this.groupBoxNewProject.Name = "groupBoxNewProject";
-            this.groupBoxNewProject.Size = new System.Drawing.Size(360, 264);
+            this.groupBoxNewProject.Size = new System.Drawing.Size(720, 549);
             this.groupBoxNewProject.TabIndex = 9;
             this.groupBoxNewProject.TabStop = false;
             this.groupBoxNewProject.Text = "New Project";
             // 
             // textBoxAddlPunctuation
             // 
-            this.textBoxAddlPunctuation.Location = new System.Drawing.Point(232, 184);
+            this.textBoxAddlPunctuation.Location = new System.Drawing.Point(464, 394);
             this.textBoxAddlPunctuation.Name = "textBoxAddlPunctuation";
-            this.textBoxAddlPunctuation.Size = new System.Drawing.Size(112, 20);
+            this.textBoxAddlPunctuation.Size = new System.Drawing.Size(224, 31);
             this.textBoxAddlPunctuation.TabIndex = 14;
-            this.textBoxAddlPunctuation.Text = "";
             this.toolTips.SetToolTip(this.textBoxAddlPunctuation, "Enter any additional punctuation or whitespace characters needed for this languag" +
-                "e, separated by spaces");
+        "e, separated by spaces");
             // 
             // label2
             // 
-            this.label2.Location = new System.Drawing.Point(16, 184);
+            this.label2.Location = new System.Drawing.Point(32, 394);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(208, 24);
+            this.label2.Size = new System.Drawing.Size(416, 44);
             this.label2.TabIndex = 13;
             this.label2.Text = "Additional &punctuation and whitespace:";
             // 
             // textBoxWordBoundaryDelimiter
             // 
-            this.textBoxWordBoundaryDelimiter.Location = new System.Drawing.Point(232, 152);
+            this.textBoxWordBoundaryDelimiter.Location = new System.Drawing.Point(464, 335);
             this.textBoxWordBoundaryDelimiter.Name = "textBoxWordBoundaryDelimiter";
-            this.textBoxWordBoundaryDelimiter.Size = new System.Drawing.Size(24, 20);
+            this.textBoxWordBoundaryDelimiter.Size = new System.Drawing.Size(48, 31);
             this.textBoxWordBoundaryDelimiter.TabIndex = 12;
-            this.textBoxWordBoundaryDelimiter.Text = SpellingFixerEC.cstrDefaultWordBoundaryDelimiter;
-            this.toolTips.SetToolTip(this.textBoxWordBoundaryDelimiter, "Enter the character(s) to use as a word boundary delimiter (e.g. with a delimiter" +
-                " of \"#\", you can enter the \"bad spelling\" words like: #car#, which will only mat" +
-                "ch if the search string is \"car\", but not \"cars\" or \"sportscar\")");
+            this.textBoxWordBoundaryDelimiter.Text = "#";
+            this.toolTips.SetToolTip(this.textBoxWordBoundaryDelimiter, resources.GetString("textBoxWordBoundaryDelimiter.ToolTip"));
             this.textBoxWordBoundaryDelimiter.TextChanged += new System.EventHandler(this.textBoxWordBoundaryDelimiter_TextChanged);
             // 
             // label1
             // 
-            this.label1.Location = new System.Drawing.Point(16, 154);
+            this.label1.Location = new System.Drawing.Point(32, 338);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(136, 16);
+            this.label1.Size = new System.Drawing.Size(272, 30);
             this.label1.TabIndex = 11;
             this.label1.Text = "&Word boundary delimiter:";
             // 
             // labelFont
             // 
-            this.labelFont.Location = new System.Drawing.Point(16, 64);
+            this.labelFont.Location = new System.Drawing.Point(32, 118);
             this.labelFont.Name = "labelFont";
+            this.labelFont.Size = new System.Drawing.Size(200, 43);
             this.labelFont.TabIndex = 3;
             this.labelFont.Text = "&Font:";
             // 
             // comboBoxFont
             // 
             this.comboBoxFont.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxFont.Location = new System.Drawing.Point(24, 88);
+            this.comboBoxFont.Location = new System.Drawing.Point(48, 162);
             this.comboBoxFont.Name = "comboBoxFont";
-            this.comboBoxFont.Size = new System.Drawing.Size(232, 21);
+            this.comboBoxFont.Size = new System.Drawing.Size(464, 33);
             this.comboBoxFont.TabIndex = 4;
             this.toolTips.SetToolTip(this.comboBoxFont, "Choose the font to be used for displaying the words whose spelling is to be corre" +
-                "cted (e.g. \'Arial Unicode MS\')");
+        "cted (e.g. \'Arial Unicode MS\')");
             this.comboBoxFont.SelectedIndexChanged += new System.EventHandler(this.comboBoxFont_SelectedIndexChanged);
             // 
             // labelFontSize
             // 
-            this.labelFontSize.Location = new System.Drawing.Point(264, 64);
+            this.labelFontSize.Location = new System.Drawing.Point(528, 118);
             this.labelFontSize.Name = "labelFontSize";
-            this.labelFontSize.Size = new System.Drawing.Size(64, 23);
+            this.labelFontSize.Size = new System.Drawing.Size(128, 43);
             this.labelFontSize.TabIndex = 5;
             this.labelFontSize.Text = "Font &Size:";
             // 
             // labelCP
             // 
-            this.labelCP.Location = new System.Drawing.Point(120, 120);
+            this.labelCP.Location = new System.Drawing.Point(240, 222);
             this.labelCP.Name = "labelCP";
-            this.labelCP.Size = new System.Drawing.Size(80, 23);
+            this.labelCP.Size = new System.Drawing.Size(160, 42);
             this.labelCP.TabIndex = 8;
             this.labelCP.Text = "&Code page:";
             this.labelCP.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -381,39 +392,39 @@ namespace SpellingFixerEC
             // 
             // textBoxCP
             // 
-            this.textBoxCP.Location = new System.Drawing.Point(200, 120);
+            this.textBoxCP.Location = new System.Drawing.Point(400, 222);
             this.textBoxCP.Name = "textBoxCP";
-            this.textBoxCP.Size = new System.Drawing.Size(56, 20);
+            this.textBoxCP.Size = new System.Drawing.Size(112, 31);
             this.textBoxCP.TabIndex = 9;
-            this.textBoxCP.Text = "";
             this.toolTips.SetToolTip(this.textBoxCP, "Enter the code page used by this legacy font");
             this.textBoxCP.Visible = false;
             this.textBoxCP.TextChanged += new System.EventHandler(this.textBoxCP_TextChanged);
             // 
             // listBoxFontSize
             // 
+            this.listBoxFontSize.ItemHeight = 25;
             this.listBoxFontSize.Items.AddRange(new object[] {
-                                                                 "8",
-                                                                 "9",
-                                                                 "10",
-                                                                 "10.5",
-                                                                 "11",
-                                                                 "12",
-                                                                 "14",
-                                                                 "16",
-                                                                 "18",
-                                                                 "20",
-                                                                 "22",
-                                                                 "24",
-                                                                 "26",
-                                                                 "28",
-                                                                 "36",
-                                                                 "48",
-                                                                 "72"});
-            this.listBoxFontSize.Location = new System.Drawing.Point(272, 88);
+            "8",
+            "9",
+            "10",
+            "10.5",
+            "11",
+            "12",
+            "14",
+            "16",
+            "18",
+            "20",
+            "22",
+            "24",
+            "26",
+            "28",
+            "36",
+            "48",
+            "72"});
+            this.listBoxFontSize.Location = new System.Drawing.Point(544, 162);
             this.listBoxFontSize.Name = "listBoxFontSize";
             this.listBoxFontSize.ScrollAlwaysVisible = true;
-            this.listBoxFontSize.Size = new System.Drawing.Size(72, 82);
+            this.listBoxFontSize.Size = new System.Drawing.Size(144, 129);
             this.listBoxFontSize.TabIndex = 6;
             this.toolTips.SetToolTip(this.listBoxFontSize, "Choose the font size");
             this.listBoxFontSize.SelectedIndexChanged += new System.EventHandler(this.listBoxFontSize_SelectedIndexChanged);
@@ -427,10 +438,10 @@ namespace SpellingFixerEC
             // contextMenu
             // 
             this.contextMenu.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
-                                                                                        this.menuItemClick,
-                                                                                        this.menuItemDelete,
-                                                                                        this.menuItemDeleteAll,
-                                                                                        this.menuItemEdit});
+            this.menuItemClick,
+            this.menuItemDelete,
+            this.menuItemDeleteAll,
+            this.menuItemEdit});
             // 
             // menuItemClick
             // 
@@ -459,18 +470,29 @@ namespace SpellingFixerEC
             // 
             // labelInstructions
             // 
-            this.labelInstructions.Location = new System.Drawing.Point(32, 64);
+            this.labelInstructions.Location = new System.Drawing.Point(64, 118);
             this.labelInstructions.Name = "labelInstructions";
-            this.labelInstructions.Size = new System.Drawing.Size(336, 64);
+            this.labelInstructions.Size = new System.Drawing.Size(672, 118);
             this.labelInstructions.TabIndex = 13;
             this.labelInstructions.Text = "Fill in the details below and click the Add New Project button.";
+            // 
+            // checkBoxRtL
+            // 
+            this.checkBoxRtL.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.checkBoxRtL.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.checkBoxRtL.Location = new System.Drawing.Point(37, 272);
+            this.checkBoxRtL.Name = "checkBoxRtL";
+            this.checkBoxRtL.Size = new System.Drawing.Size(195, 44);
+            this.checkBoxRtL.TabIndex = 15;
+            this.checkBoxRtL.Text = "&Right-to-Left";
+            this.toolTips.SetToolTip(this.checkBoxRtL, "Check this if the data is right-to-left");
             // 
             // LoginSF
             // 
             this.AcceptButton = this.buttonOK;
-            this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
+            this.AutoScaleBaseSize = new System.Drawing.Size(10, 24);
             this.CancelButton = this.buttonCancel;
-            this.ClientSize = new System.Drawing.Size(392, 502);
+            this.ClientSize = new System.Drawing.Size(788, 981);
             this.Controls.Add(this.checkedListBoxProjects);
             this.Controls.Add(this.labelName);
             this.Controls.Add(this.textBoxNewProjectName);
@@ -482,7 +504,9 @@ namespace SpellingFixerEC
             this.Name = "LoginSF";
             this.Text = "Choose or Add New Fix Spelling Project";
             this.groupBoxNewProject.ResumeLayout(false);
+            this.groupBoxNewProject.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 		#endregion
@@ -721,7 +745,9 @@ namespace SpellingFixerEC
 
             // get the delimiter for word boundaries and disallow the /"/ character
             m_strWordBoundaryDelimiter = this.textBoxWordBoundaryDelimiter.Text;
-            if( m_strWordBoundaryDelimiter.IndexOf('"') != -1 )
+            m_isRightToleft = checkBoxRtL.Checked;
+
+            if ( m_strWordBoundaryDelimiter.IndexOf('"') != -1 )
             {
                 MessageBox.Show("Can't use the double-quote character for the word boundary delimiter",SpellingFixerEC.cstrCaption);
                 return;
@@ -851,6 +877,7 @@ namespace SpellingFixerEC
             // add this 'displaying font' information to the converter as properties/attributes
             ECAttributes aECAttrs = aECs.Attributes(strEncConverterName,AttributeType.Converter);
             aECAttrs.Add(SpellingFixerEC.cstrAttributeFontToUse,font.Name);
+            aECAttrs.Add(SpellingFixerEC.cstrAttributeFontRightToLeft, m_isRightToleft);
             aECAttrs.Add(SpellingFixerEC.cstrAttributeFontSizeToUse, font.Size);
             aECAttrs.Add(SpellingFixerEC.cstrAttributeWordBoundaryDelimiter, m_strWordBoundaryDelimiter);
             aECAttrs.Add(SpellingFixerEC.cstrAttributeNonWordChars, m_strNonWordCharacters);
@@ -948,7 +975,17 @@ namespace SpellingFixerEC
         {
             // get the EncConverter that should have been added above by 'AddNewProject' button
             EncConverters aECs = new EncConverters();
-            IEncConverter aEC = aECs[FullName(strProjectName)];
+            var converterName = strProjectName;
+            if (strProjectName.StartsWith(SpellingFixerEC.cstrSFConverterPrefix))
+            {
+                strProjectName = strProjectName.Substring(SpellingFixerEC.cstrSFConverterPrefix.Length);
+            }
+            else
+            {
+                converterName = FullName(strProjectName);
+            }
+
+            IEncConverter aEC = aECs[converterName];
             if( aEC != null )
             {
                 m_strEncConverterName = aEC.Name;
@@ -956,6 +993,7 @@ namespace SpellingFixerEC
                 ECAttributes aECAttrs = aECs.Attributes(aEC.Name,AttributeType.Converter);
                 string strFontName = aECAttrs[SpellingFixerEC.cstrAttributeFontToUse];
                 string sFontSize = aECAttrs[SpellingFixerEC.cstrAttributeFontSizeToUse];
+                m_isRightToleft = aECAttrs.ContainsKey(SpellingFixerEC.cstrAttributeFontRightToLeft) && (aECAttrs[SpellingFixerEC.cstrAttributeFontRightToLeft] == "true");
                 m_strWordBoundaryDelimiter = aECAttrs[SpellingFixerEC.cstrAttributeWordBoundaryDelimiter];
                 m_strNonWordCharacters = aECAttrs[SpellingFixerEC.cstrAttributeNonWordChars];
 
@@ -992,7 +1030,7 @@ namespace SpellingFixerEC
                     m_cp = aECs.CodePage(strFontName);
 
                 RegistryKey keyLastSFProject = Registry.CurrentUser.CreateSubKey(cstrProjectMemoryKey);
-                keyLastSFProject.SetValue(cstrProjectMostRecentProject,strProjectName);
+                keyLastSFProject.SetValue(cstrProjectMostRecentProject, strProjectName);
                 return true;
             }
 
@@ -1131,6 +1169,7 @@ namespace SpellingFixerEC
 
                     string strFontName = aECAttrs[SpellingFixerEC.cstrAttributeFontToUse];
                     string sFontSize = aECAttrs[SpellingFixerEC.cstrAttributeFontSizeToUse];
+                    m_isRightToleft = aECAttrs.ContainsKey(SpellingFixerEC.cstrAttributeFontRightToLeft) && (aECAttrs[SpellingFixerEC.cstrAttributeFontRightToLeft] == "true");
                     m_strWordBoundaryDelimiter = aECAttrs[SpellingFixerEC.cstrAttributeWordBoundaryDelimiter];
                     m_strNonWordCharacters = aECAttrs[SpellingFixerEC.cstrAttributeNonWordChars];
 
@@ -1160,6 +1199,8 @@ namespace SpellingFixerEC
                 this.labelCP.Visible = this.textBoxCP.Visible = true;
                 this.textBoxCP.Text = aECs.CodePage(strFontName).ToString();
             }
+
+            checkBoxRtL.Checked = m_isRightToleft;
 
             // update the "Add New Project" button to say "Update Project"
             this.groupBoxNewProject.Text = "Edit Project Settings";
