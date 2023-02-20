@@ -184,6 +184,7 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="SplashScreenForm.resx">
       <DependentUpon>SplashScreenForm.cs</DependentUpon>
@@ -202,6 +203,8 @@
     <Content Include="$(EcDistFilesPath)\redist\EC\Plugins\Translators 4.0.0.0 Plugin Details.xml">
       <Link>EcPlugins\Translators 4.0.0.0 Plugin Details.xml</Link>
     </Content>
+    <None Include="Resources\pindown13.bmp" />
+    <None Include="Resources\pindown1.bmp" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
