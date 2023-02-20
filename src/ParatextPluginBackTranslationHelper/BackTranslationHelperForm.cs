@@ -49,16 +49,19 @@ namespace SIL.ParatextBackTranslationHelperPlugin
         private IVerseRef _verseReferenceLast;
 
         /// <summary>
-        /// this contains the tokens from the source project, but just the verse(s) that we're processing (e.g. v1 or could be v2-5)
+        /// this contains the tokens from the source project, but just the verse(s) that we're processing (e.g. v1 
+        /// or could be v2-5)
         /// Key is the [BookNum]_[ChapterNum]_[VerseNum] (e.g. ACT_001_001)
         /// </summary>
         private Dictionary<string, List<IUSFMToken>> UsfmTokensSource { get; set; } = new Dictionary<string, List<IUSFMToken>>();
 
         /// <summary>
-        /// this contains the tokens from the target project, for all the verses in the current chapter (we need the whole chapter,
-        /// because we have to Put the entire chapter when we go to write it.
+        /// this contains the tokens from the target project, for all the verses in the current chapter (we need the 
+        /// whole chapter,because we have to Put the entire chapter when we go to write it.
         /// Key is the [BookNum]_[ChapterNum] (e.g. 44_001)
-        /// Key2 (of the SortedDictionary) is [BookNum]_[ChapterNum]_[VerseNum] (e.g. ACT_001_001)
+        /// Key2 (of the SortedDictionary) is [BookNum]_[ChapterNum]_[VerseNum] (e.g. ACT_001_001
+        /// Note: beware that this could be out of date if the user edits the verse (or another) in Ptx after 
+        /// we pulled these values. Cause it to requery if we lose focus.
         /// </summary>
         private Dictionary<string, SortedDictionary<string, List<IUSFMToken>>> UsfmTokensTarget { get; set; } = new Dictionary<string, SortedDictionary<string, List<IUSFMToken>>>();
 
@@ -232,6 +235,7 @@ namespace SIL.ParatextBackTranslationHelperPlugin
                     // if this fails to return something, it means we can't edit it
                     MessageBox.Show($"You don't have edit privilege on this chapter: {_verseReference}");
                 }
+
                 var bookChapterKey = GetBookChapterKey(_verseReference);
                 if (!UsfmTokensTarget.TryGetValue(bookChapterKey, out SortedDictionary<string, List<IUSFMToken>> vrefTokens))
                 {
@@ -243,6 +247,13 @@ namespace SIL.ParatextBackTranslationHelperPlugin
                 }
 
                 var bookChapterVerseKey = GetBookChapterVerseKey(_verseReference);
+
+                // issue: if Ptx is in "I'm just a single verse" mode (e.g. clicking up/down in the combo box at the top)
+                //  then this will show a single verse even if the text is a multi-verse situation
+                //  (e.g. 42_001_006, while the key in vrefTokens might be: 42_001_006-007). So figure out
+                //  which one it *should* be so we can find a hit in vrefTokens
+                bookChapterVerseKey = TriangulateBookChapterVerseKey(bookChapterVerseKey, vrefTokens);
+
                 if (!vrefTokens.ContainsKey(bookChapterVerseKey))
                     return null;
 
@@ -254,6 +265,15 @@ namespace SIL.ParatextBackTranslationHelperPlugin
                 var verseData = string.Join(Environment.NewLine, values);
                 return verseData;
             }
+        }
+
+        private static string TriangulateBookChapterVerseKey(string bookChapterVerseKey, SortedDictionary<string, List<IUSFMToken>> vrefTokens)
+        {
+            if (vrefTokens.ContainsKey(bookChapterVerseKey))
+                return bookChapterVerseKey;
+
+            var vrefTokenKey = vrefTokens.FirstOrDefault(t => t.Value.Any(v => v.VerseRef.AllVerses.Any(sv => GetBookChapterVerseKey(sv) == bookChapterVerseKey))).Key;
+            return vrefTokenKey;
         }
 
         private static string GetBookChapterKey(IVerseRef verseReference)
