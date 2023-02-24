@@ -129,9 +129,7 @@ namespace SIL.ParatextBackTranslationHelperPlugin
             // UPDATE: but not if the Form isn't in focus (so we don't thrash around converting stuff while
             //  the user may be editing stuff in Ptx)
             if (_isNotInFocus && backTranslationHelperCtrl.IsModified)
-            {
                 return;
-            }
 
             var newRef = (newReference.RepresentsMultipleVerses) ? newReference.AllVerses.First() : newReference;
             GetNewReference(newRef);
@@ -663,7 +661,7 @@ namespace SIL.ParatextBackTranslationHelperPlugin
             {
                 GetNewReference(verseReference);
                 return true;
-        }
+            }
 
             return false;
         }
@@ -712,27 +710,38 @@ namespace SIL.ParatextBackTranslationHelperPlugin
 
             System.Diagnostics.Debug.WriteLine($"PtxBTH: BackTranslationHelperForm_Deactivate: _isNotInFocus = '{_isNotInFocus}', IsModified: {backTranslationHelperCtrl.IsModified}, _verseReference: {_verseReference}");
 
-            /*
-             * New plan: don't move from the current verse if it's modified. but this is now handled in GetNewReference
-            var keyBookChapterVerse = GetBookChapterVerseKey(_verseReference);
+            // if nothing's been changed, then no need to show it as needing to be requeried
+            // WRONG: if they edit something while deactivated, we won’t query it again if we don’t clear it
+            //if (!backTranslationHelperCtrl.IsModified)
+            //    return;
+        }
+
+        private void PurgeSourceData(IVerseRef verseReference)
+        {
+            var keyBookChapterVerse = GetBookChapterVerseKey(verseReference);
             if (UsfmTokensSource.ContainsKey(keyBookChapterVerse))
             {
                 UsfmTokensSource.Remove(keyBookChapterVerse);
             }
-
-            System.Diagnostics.Debug.WriteLine($"PtxBTH: BackTranslationHelperForm_Activated: _isNotInFocus = '{_isNotInFocus}', IsModified: {backTranslationHelperCtrl.IsModified}, _verseReference: {_verseReference}");
-            var bookChapterKey = GetBookChapterKey(_verseReference);
-            if (UsfmTokensTarget.ContainsKey(bookChapterKey))
-            {
-                UsfmTokensTarget.Remove(bookChapterKey);
-            }
-            */
         }
 
         private void BackTranslationHelperForm_Activated(object sender, EventArgs e)
         {
             _isNotInFocus = false;
-            System.Diagnostics.Debug.WriteLine($"BackTranslationHelperForm_Activated: _isNotInFocus = '{_isNotInFocus}'");
+            System.Diagnostics.Debug.WriteLine($"PtxBTH: BackTranslationHelperForm_Activated: _isNotInFocus = '{_isNotInFocus}', IsModified: {backTranslationHelperCtrl.IsModified}, _verseReference: {_verseReference}");
+
+            // make the source and target data stale, and trigger a requery...
+            PurgeSourceData(_verseReference);
+
+            var bookChapterKey = GetBookChapterKey(_verseReference);
+            if (UsfmTokensTarget.ContainsKey(bookChapterKey))
+            {
+                UsfmTokensTarget.Remove(bookChapterKey);
+            }
+
+            // unless we were editing it, and then force it to stay the same
+            if (backTranslationHelperCtrl.IsModified)
+                return;
 
             GetNewReference(_verseReference);
         }
