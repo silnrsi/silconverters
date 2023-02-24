@@ -856,11 +856,20 @@ namespace ClipboardEC
                     try
                     {
                         IEncConverter aEC = aECs[strText];
-                        strOutput = this.ConvertData(aEC,strInput);
-                        // if( strOutput != null )
-                        //     strText += String.Format(":\t{0}", strOutput);
+
+                        // if it's a Translator type, then hold off calling to the internet for conversion
+                        //  which takes time and is possibly unnecessary), put in a dummy result to see if 
+                        //  that's really what they want
+                        if (IsOnlineTranslator(aEC))
+                        {
+                            strOutput = $"Click to convert w/ {aEC.Name}";
+                        }
+                        else
+                        {
+                            strOutput = this.ConvertData(aEC, strInput);
+                        }
                     }
-                    catch(Exception e)
+                    catch (Exception e)
                     {
                         // since this is just a 'preview' (and exceptions can be expected), don't
                         //  allow them to be throw up.
@@ -876,6 +885,20 @@ namespace ClipboardEC
                 menuItem.Click += new EventHandler(ConverterClick);
                 this.contextMenuStripEC.Items.Insert(0,menuItem);
             }
+        }
+
+        private static bool IsOnlineTranslator(IEncConverter aEC)
+        {
+            var isOnlineTranslator = (aEC.ProcessType & (int)ProcessTypeFlags.Translation) == (int)ProcessTypeFlags.Translation;
+
+            // it could still be if it's a primary-fallback or daisy-chain converter that has one (but there's no interface way
+            //  to get at the individual converters... :-( (and changing the interface would just break existing clients)
+            if ((aEC.ImplementType == EncConverters.strTypeSILcomp) || (aEC.ImplementType == EncConverters.strTypeSILfallback))
+            {
+                isOnlineTranslator = true;  // for now...
+            }
+
+            return isOnlineTranslator;
         }
 
         private void NormalizeClick(Object sender, EventArgs e)
