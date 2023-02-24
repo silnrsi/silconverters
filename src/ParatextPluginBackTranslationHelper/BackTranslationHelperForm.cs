@@ -89,15 +89,6 @@ namespace SIL.ParatextBackTranslationHelperPlugin
             _host.VerseRefChanged += Host_VerseRefChanged;
             _projectSource.ScriptureDataChanged += ScriptureDataChangedHandlerSource;
             _projectTarget.ScriptureDataChanged += ScriptureDataChangedHandlerTarget;
-
-            Text = GetFrameText(_projectSource, _projectTarget, _verseReference);
-            Location = Properties.Settings.Default.WindowLocation;
-            WindowState = Properties.Settings.Default.DefaultWindowState;
-            if (MinimumSize.Height <= Properties.Settings.Default.WindowSize.Height &&
-                MinimumSize.Width <= Properties.Settings.Default.WindowSize.Width)
-            {
-                Size = Properties.Settings.Default.WindowSize;
-            }
         }
 
         private static string GetFrameText(IProject projectSource, IProject projectTarget, IVerseRef versesReference)
@@ -670,6 +661,18 @@ namespace SIL.ParatextBackTranslationHelperPlugin
         {
             base.OnShown(e);
             GetNewReference(_verseReference);
+        }
+
+        private void BackTranslationHelperForm_Load(object sender, EventArgs e)
+        {
+            Text = GetFrameText(_projectSource, _projectTarget, _verseReference);
+            Location = Properties.Settings.Default.WindowLocation;
+            WindowState = Properties.Settings.Default.DefaultWindowState;
+            if (MinimumSize.Height <= Properties.Settings.Default.WindowSize.Height &&
+                MinimumSize.Width <= Properties.Settings.Default.WindowSize.Width)
+            {
+                Size = Properties.Settings.Default.WindowSize;
+            }
         }
 
         private void BackTranslationHelperForm_FormClosing(object sender, FormClosingEventArgs e)
