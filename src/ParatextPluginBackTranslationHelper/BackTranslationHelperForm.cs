@@ -122,6 +122,8 @@ namespace SIL.ParatextBackTranslationHelperPlugin
 
         private void Host_VerseRefChanged(IPluginHost sender, IVerseRef newReference, SyncReferenceGroup group)
         {
+            System.Diagnostics.Debug.WriteLine($"PtxBTH: In Host_VerseRefChanged {newReference} & {group}, _isNotInFocus: {_isNotInFocus}, IsModified: {backTranslationHelperCtrl.IsModified}");
+
             // since this will initialize the _verseReference, which is intended to be the first
             //  of a series of verses...
             // UPDATE: but not if the Form isn't in focus (so we don't thrash around converting stuff while
@@ -216,8 +218,13 @@ namespace SIL.ParatextBackTranslationHelperPlugin
                 var keyBookChapterVerse = GetBookChapterVerseKey(_verseReference);
                 if (!UsfmTokensSource.TryGetValue(keyBookChapterVerse, out List<IUSFMToken> tokens))
                 {
+                    System.Diagnostics.Debug.WriteLine($"PtxBTH: Loading UsfmTokensSource for {keyBookChapterVerse}");
                     tokens = _projectSource.GetUSFMTokens(_verseReference.BookNum, _verseReference.ChapterNum, _verseReference.VerseNum).ToList();
                     UsfmTokensSource.Add(keyBookChapterVerse, tokens);
+                }
+                else
+                {
+                    System.Diagnostics.Debug.WriteLine($"PtxBTH: Already load UsfmTokensSource for {keyBookChapterVerse}");
                 }
 
                 var data = tokens.OfType<IUSFMTextToken>()
@@ -251,11 +258,16 @@ namespace SIL.ParatextBackTranslationHelperPlugin
                 var bookChapterKey = GetBookChapterKey(_verseReference);
                 if (!UsfmTokensTarget.TryGetValue(bookChapterKey, out SortedDictionary<string, List<IUSFMToken>> vrefTokens))
                 {
+                    System.Diagnostics.Debug.WriteLine($"PtxBTH: Loading UsfmTokensTarget for {bookChapterKey}");
                     var chapterTokens = _projectTarget.GetUSFMTokens(_verseReference.BookNum, _verseReference.ChapterNum).ToList();
                     var dict = chapterTokens.GroupBy(t => t.VerseRef, t => t, (key, g) => new { VerseRef = key, USFMTokens = g.ToList() })
                                             .ToDictionary(t => GetBookChapterVerseKey(t.VerseRef), t => t.USFMTokens);
                     vrefTokens = new SortedDictionary<string, List<IUSFMToken>>(dict);
                     UsfmTokensTarget.Add(bookChapterKey, vrefTokens);
+                }
+                else
+                {
+                    System.Diagnostics.Debug.WriteLine($"PtxBTH: Already load UsfmTokensTarget for {bookChapterKey}");
                 }
 
                 var bookChapterVerseKey = GetBookChapterVerseKey(_verseReference);
@@ -357,7 +369,7 @@ namespace SIL.ParatextBackTranslationHelperPlugin
 
         void IBackTranslationHelperDataSource.Log(string message)
         {
-            _host.Log(_plugin, message);
+            _host.Log(_plugin, $"PtxBTH: {message}");
         }
 
         void IBackTranslationHelperDataSource.MoveToNext()
@@ -374,6 +386,8 @@ namespace SIL.ParatextBackTranslationHelperPlugin
         {
             try
             {
+                System.Diagnostics.Debug.WriteLine("PtxBTH: In WriteToTarget");
+
                 _buttonPressed = ButtonPressed.WriteToTarget;
 
                 var vrefTokensTarget = CalculateTargetTokens(_verseReference, _versesReference, text, UsfmTokensSource, UsfmTokensTarget);
@@ -696,7 +710,7 @@ namespace SIL.ParatextBackTranslationHelperPlugin
             //  so purge the source and target tokens which would force us to requery them
             _isNotInFocus = true;
 
-            System.Diagnostics.Debug.WriteLine($"BackTranslationHelperForm_Deactivate: _isNotInFocus = '{_isNotInFocus}'");
+            System.Diagnostics.Debug.WriteLine($"PtxBTH: BackTranslationHelperForm_Deactivate: _isNotInFocus = '{_isNotInFocus}', IsModified: {backTranslationHelperCtrl.IsModified}, _verseReference: {_verseReference}");
 
             /*
              * New plan: don't move from the current verse if it's modified. but this is now handled in GetNewReference
@@ -706,6 +720,7 @@ namespace SIL.ParatextBackTranslationHelperPlugin
                 UsfmTokensSource.Remove(keyBookChapterVerse);
             }
 
+            System.Diagnostics.Debug.WriteLine($"PtxBTH: BackTranslationHelperForm_Activated: _isNotInFocus = '{_isNotInFocus}', IsModified: {backTranslationHelperCtrl.IsModified}, _verseReference: {_verseReference}");
             var bookChapterKey = GetBookChapterKey(_verseReference);
             if (UsfmTokensTarget.ContainsKey(bookChapterKey))
             {
