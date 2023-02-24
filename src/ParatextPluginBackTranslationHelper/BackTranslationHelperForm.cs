@@ -370,7 +370,7 @@ namespace SIL.ParatextBackTranslationHelperPlugin
             _setSyncReferenceGroup(_verseReference);
         }
 
-        void IBackTranslationHelperDataSource.WriteToTarget(string text)
+        bool IBackTranslationHelperDataSource.WriteToTarget(string text)
         {
             try
             {
@@ -379,8 +379,9 @@ namespace SIL.ParatextBackTranslationHelperPlugin
                 var vrefTokensTarget = CalculateTargetTokens(_verseReference, _versesReference, text, UsfmTokensSource, UsfmTokensTarget);
                 if (vrefTokensTarget == null)
                 {
-                    RequeryWarning(_verseReference);
-                    return; // nothing to do
+                    var result = RequeryWarning(_verseReference);
+                    System.Diagnostics.Debug.WriteLine($"PtxBTH: RequeryWarning returned {result}");
+                    return result;
                 }
 
                 if (_writeLock == null) // it shouldn't be, but if it is, this should warn the user that it isn't going to work
@@ -389,11 +390,13 @@ namespace SIL.ParatextBackTranslationHelperPlugin
                 var tokens = vrefTokensTarget.SelectMany(d => d.Value).ToList();
                 _projectTarget.PutUSFMTokens(_writeLock, tokens, _verseReference.BookNum);
                 Unlock();
+                return true;
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Exception caught:\n{ex.Message}");
             }
+            return false;
         }
 
         /// <summary>
@@ -635,15 +638,20 @@ namespace SIL.ParatextBackTranslationHelperPlugin
             return (token is IUSFMMarkerToken markerToken) && (markerToken.Type == MarkerType.Paragraph) && _paragraphMarkers.Contains(markerToken.Marker);
         }
 
-        private void RequeryWarning(IVerseRef verseReference)
+        private bool RequeryWarning(IVerseRef verseReference)
         {
             // if we don't already have it... it's probably because something was changed in the project
             // TODO: do something! (probably just need to Initialize and UpdateData, so we'll have requeried everything)
-            var res = MessageBox.Show("It seems that something might have changed in the target project, which requires us to requery. Click 'Yes' to requery and start again. Click 'No' if you want to close this box (and copy the current text if you made changes for next time).",
+            var res = MessageBox.Show("Something might have changed in the source or target projects, which requires us to requery. If you have made changes, you'll want to click 'No', so you can copy the changes to the clipboard first. Then try again, and click 'Yes' next time to requery the projects after which you can paste your changes and continue.",
                                       ParatextBackTranslationHelperPlugin.PluginName, MessageBoxButtons.YesNo);
 
             if (res == DialogResult.Yes)
+            {
                 GetNewReference(verseReference);
+                return true;
+        }
+
+            return false;
         }
 
         protected override void OnShown(EventArgs e)

@@ -95,10 +95,11 @@ namespace SILConvertersOffice
             // TODO: 
         }
 
-        public void WriteToTarget(string text)
+        public bool WriteToTarget(string text)
         {
             ButtonPressed = FormButtons.ReplaceEvery;
             Close();
+            return true;
         }
 
         public void SetDataUpdateProc(Action<BackTranslationHelperModel> updateDataProc)
