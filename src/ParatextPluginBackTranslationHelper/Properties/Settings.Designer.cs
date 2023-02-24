@@ -58,17 +58,5 @@ namespace SIL.ParatextBackTranslationHelperPlugin.Properties {
                 this["WindowSize"] = value;
             }
         }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool PinnedToTop {
-            get {
-                return ((bool)(this["PinnedToTop"]));
-            }
-            set {
-                this["PinnedToTop"] = value;
-            }
-        }
     }
 }

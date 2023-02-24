@@ -649,13 +649,6 @@ namespace SIL.ParatextBackTranslationHelperPlugin
         protected override void OnShown(EventArgs e)
         {
             base.OnShown(e);
-
-            if (Properties.Settings.Default.PinnedToTop)
-            {
-                buttonPinToTop.Image = global::SIL.ParatextBackTranslationHelperPlugin.Properties.Resources.pindown;
-                this.TopMost = true;
-            }
-
             GetNewReference(_verseReference);
         }
 
@@ -717,17 +710,8 @@ namespace SIL.ParatextBackTranslationHelperPlugin
         {
             _isNotInFocus = false;
             System.Diagnostics.Debug.WriteLine($"BackTranslationHelperForm_Activated: _isNotInFocus = '{_isNotInFocus}'");
-        }
 
-        private void ButtonPinToTop_Click(object sender, EventArgs e)
-        {
-            var newCheckState = !Properties.Settings.Default.PinnedToTop;
-            Properties.Settings.Default.PinnedToTop = newCheckState;
-            Properties.Settings.Default.Save();
-            this.TopMost = newCheckState;
-            buttonPinToTop.Image = (newCheckState)
-                                    ? global::SIL.ParatextBackTranslationHelperPlugin.Properties.Resources.pindown
-                                    : global::SIL.ParatextBackTranslationHelperPlugin.Properties.Resources.pinup;
+            GetNewReference(_verseReference);
         }
     }
 }
