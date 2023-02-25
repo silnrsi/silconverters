@@ -382,13 +382,23 @@ namespace SIL.ParatextBackTranslationHelperPlugin
                 var vrefTokensTarget = CalculateTargetTokens(_verseReference, _versesReference, text, UsfmTokensSource, UsfmTokensTarget);
                 if (vrefTokensTarget == null)
                 {
-                    var result = RequeryWarning(_verseReference);
-                    System.Diagnostics.Debug.WriteLine($"PtxBTH: RequeryWarning returned {result}");
-                    return result;
+                    // if we don't already have it... it's probably because something was changed in the project
+                    //  external to this form (we lose the data if we get activated).
+                    System.Diagnostics.Debug.WriteLine($"PtxBTH: RequeryWarning");
+
+                    // Note: if the Target Translation textbox has modified data, the current implementation shouldn't
+                    //  overwrite it (see UpdateData in BackTranslationHelperCtrl.cs, which shows that if it's
+                    //  modified, it will get it from the edit box instead of the model... i.e. won't change it)
+                    // So if we don't have it, just requery the data and return false (so we don't move on)
+                    GetNewReference(_verseReference);
+
+                    // by returning false, we prevent it from doing 'next' if that's the button the user clicked,
+                    //  while resetting the IsModified status, so they can click 'Next' next time and have the edited
+                    //  text written to Ptx
+                    return false;
                 }
 
-                if (_writeLock == null) // it shouldn't be, but if it is, this should warn the user that it isn't going to work
-                    _writeLock = _projectTarget.RequestWriteLock(_plugin, ReleaseRequested, _verseReference.BookNum, _verseReference.ChapterNum);
+                _writeLock ??= _projectTarget.RequestWriteLock(_plugin, ReleaseRequested, _verseReference.BookNum, _verseReference.ChapterNum);
 
                 var tokens = vrefTokensTarget.SelectMany(d => d.Value).ToList();
                 _projectTarget.PutUSFMTokens(_writeLock, tokens, _verseReference.BookNum);
@@ -639,22 +649,6 @@ namespace SIL.ParatextBackTranslationHelperPlugin
         private static bool IsParagraphToken(IUSFMToken token)
         {
             return (token is IUSFMMarkerToken markerToken) && (markerToken.Type == MarkerType.Paragraph) && _paragraphMarkers.Contains(markerToken.Marker);
-        }
-
-        private bool RequeryWarning(IVerseRef verseReference)
-        {
-            // if we don't already have it... it's probably because something was changed in the project
-            // TODO: do something! (probably just need to Initialize and UpdateData, so we'll have requeried everything)
-            var res = MessageBox.Show("Something might have changed in the source or target projects, which requires us to requery. If you have made changes, you'll want to click 'No', so you can copy the changes to the clipboard first. Then try again, and click 'Yes' next time to requery the projects after which you can paste your changes and continue.",
-                                      ParatextBackTranslationHelperPlugin.PluginName, MessageBoxButtons.YesNo);
-
-            if (res == DialogResult.Yes)
-            {
-                GetNewReference(verseReference);
-                return true;
-            }
-
-            return false;
         }
 
         protected override void OnShown(EventArgs e)
