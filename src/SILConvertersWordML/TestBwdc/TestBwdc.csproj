@@ -84,25 +84,25 @@
     <Reference Include="ECInterfaces, Version=4.0.0.0, Culture=neutral, PublicKeyToken=f1447bae1e63f485, processorArchitecture=x64" Condition="('$(Platform)' == 'x64') and ('$(OS)'=='Windows_NT')">
       <HintPath>$(EcLibFilesPath)\net48\x64\ECInterfaces.dll</HintPath>
     </Reference>
+    <Reference Include="EmbeddedUiPluginInterfaces, Version=2.0.23.0, Culture=neutral, PublicKeyToken=583bede96b7c94a3, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\ParatextEmbeddedUiPluginInterfaces.2.0.23\lib\net48\EmbeddedUiPluginInterfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Newtonsoft.Json.13.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="PluginInterfaces, Version=2.0.23.0, Culture=neutral, PublicKeyToken=583bede96b7c94a3, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\ParatextPluginInterfaces.2.0.23\lib\netstandard2.0\PluginInterfaces.dll</HintPath>
+    </Reference>
     <Reference Include="SilEncConverters40, Version=4.0.0.0, Culture=neutral, PublicKeyToken=f1447bae1e63f485, processorArchitecture=x86" Condition="('$(Platform)' == 'x86' or '$(Platform)' == 'AnyCPU') and ('$(OS)'=='Windows_NT')">
       <HintPath>$(EcLibFilesPath)\net48\x86\SilEncConverters40.dll</HintPath>
     </Reference>
     <Reference Include="SilEncConverters40, Version=4.0.0.0, Culture=neutral, PublicKeyToken=f1447bae1e63f485, processorArchitecture=x64" Condition="('$(Platform)' == 'x64') and ('$(OS)'=='Windows_NT')">
       <HintPath>$(EcLibFilesPath)\net48\x64\SilEncConverters40.dll</HintPath>
     </Reference>
-    <Reference Include="EmbeddedUiPluginInterfaces, Version=2.0.21.0, Culture=neutral, PublicKeyToken=583bede96b7c94a3, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\ParatextEmbeddedUiPluginInterfaces.2.0.21\lib\net48\EmbeddedUiPluginInterfaces.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
-    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="nunit.framework, Version=3.13.3.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\NUnit.3.13.3\lib\net45\nunit.framework.dll</HintPath>
-    </Reference>
-    <Reference Include="PluginInterfaces, Version=2.0.21.0, Culture=neutral, PublicKeyToken=583bede96b7c94a3, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\ParatextPluginInterfaces.2.0.21\lib\netstandard2.0\PluginInterfaces.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
