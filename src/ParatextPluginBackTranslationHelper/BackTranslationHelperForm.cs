@@ -101,14 +101,39 @@ namespace SIL.ParatextBackTranslationHelperPlugin
             return String.Format(ProjectNameFormat, projectSource, projectTarget);
         }
 
+        private bool IsDirty(IVerseRef verseReference, int bookNum, int chapterNum)
+        {
+            return ((bookNum == 0) || (verseReference.BookNum == bookNum)) && ((chapterNum == 0) || (verseReference.ChapterNum == chapterNum));
+        }
+
         private void ScriptureDataChangedHandlerSource(IProject sender, int bookNum, int chapterNum)
         {
-            Unlock();
+            System.Diagnostics.Debug.WriteLine($"PtxBTH: ScriptureDataChangedHandlerSource: bookNum = '{bookNum}', chapterNum = ‘{chapterNum}‘, IsModified: {backTranslationHelperCtrl.IsModified}, _verseReference: {_verseReference}");
+
+            // if the change was in the chapter we're processing, then clear what we think the data is, so we'll repull it later
+            if (IsDirty(_verseReference, bookNum, chapterNum))
+                UsfmTokensSource.Clear();
         }
 
         private void ScriptureDataChangedHandlerTarget(IProject sender, int bookNum, int chapterNum)
         {
-            Unlock();
+            System.Diagnostics.Debug.WriteLine($"PtxBTH: ScriptureDataChangedHandlerTarget: bookNum = '{bookNum}', chapterNum = ‘{chapterNum}‘, IsModified: {backTranslationHelperCtrl.IsModified}, _verseReference: {_verseReference}, _isChangingTarget: {_isChangingTarget}");
+            if (_isChangingTarget)  // if we're the ones who changed it, then ignore
+                return;
+
+            // if the change was in the chapter we're processing, then clear what we think the data is, so we'll repull it later
+            if (IsDirty(_verseReference, bookNum, chapterNum))
+                UsfmTokensTarget.Clear();
+
+#if TriedAndFailed
+            // UPDATE: Ptx by definition has the write lock right now, so we can't call GetNewReference here
+            //  Go back to calling it in Activate
+            // unless we were editing it, and then force it to stay the same
+            if (backTranslationHelperCtrl.IsModified)
+                return;
+
+            GetNewReference(_verseReference);
+#endif
         }
 
         private void Host_VerseRefChanged(IPluginHost sender, IVerseRef newReference, SyncReferenceGroup group)
@@ -213,7 +238,7 @@ namespace SIL.ParatextBackTranslationHelperPlugin
                 }
                 else
                 {
-                    System.Diagnostics.Debug.WriteLine($"PtxBTH: Already load UsfmTokensSource for {keyBookChapterVerse}");
+                    System.Diagnostics.Debug.WriteLine($"PtxBTH: Already have UsfmTokensSource for {keyBookChapterVerse}");
                 }
 
                 var data = tokens.OfType<IUSFMTextToken>()
@@ -256,7 +281,7 @@ namespace SIL.ParatextBackTranslationHelperPlugin
                 }
                 else
                 {
-                    System.Diagnostics.Debug.WriteLine($"PtxBTH: Already load UsfmTokensTarget for {bookChapterKey}");
+                    System.Diagnostics.Debug.WriteLine($"PtxBTH: Already have UsfmTokensTarget for {bookChapterKey}");
                 }
 
                 var bookChapterVerseKey = GetBookChapterVerseKey(_verseReference);
@@ -371,6 +396,8 @@ namespace SIL.ParatextBackTranslationHelperPlugin
             _setSyncReferenceGroup(_verseReference);
         }
 
+        private bool _isChangingTarget { get; set; }
+
         bool IBackTranslationHelperDataSource.WriteToTarget(string text)
         {
             try
@@ -398,9 +425,11 @@ namespace SIL.ParatextBackTranslationHelperPlugin
                     return false;
                 }
 
+                _isChangingTarget = true;
                 _writeLock ??= _projectTarget.RequestWriteLock(_plugin, ReleaseRequested, _verseReference.BookNum, _verseReference.ChapterNum);
 
                 var tokens = vrefTokensTarget.SelectMany(d => d.Value).ToList();
+
                 _projectTarget.PutUSFMTokens(_writeLock, tokens, _verseReference.BookNum);
                 Unlock();
                 return true;
@@ -408,6 +437,10 @@ namespace SIL.ParatextBackTranslationHelperPlugin
             catch (Exception ex)
             {
                 MessageBox.Show($"Exception caught:\n{ex.Message}");
+            }
+            finally
+            {
+                _isChangingTarget = false;
             }
             return false;
         }
@@ -727,6 +760,8 @@ namespace SIL.ParatextBackTranslationHelperPlugin
             _isNotInFocus = false;
             System.Diagnostics.Debug.WriteLine($"PtxBTH: BackTranslationHelperForm_Activated: _isNotInFocus = '{_isNotInFocus}', IsModified: {backTranslationHelperCtrl.IsModified}, _verseReference: {_verseReference}");
 
+#if false
+            // THIS is now done in ScriptureDataChangedHandlerSource & ScriptureDataChangedHandlerTarget
             // make the source and target data stale, and trigger a requery...
             PurgeSourceData(_verseReference);
 
@@ -735,6 +770,7 @@ namespace SIL.ParatextBackTranslationHelperPlugin
             {
                 UsfmTokensTarget.Remove(bookChapterKey);
             }
+#endif
 
             // unless we were editing it, and then force it to stay the same
             if (backTranslationHelperCtrl.IsModified)
