@@ -16,7 +16,7 @@ namespace SIL.ParatextBackTranslationHelperPlugin
 		public const string PluginName = "Back Translation Helper";
 		public const string emailAddress = "silconverters_support@sil.org";
 		public string Name => PluginName;
-		public Version Version => new Version(1, 0);
+		public Version Version => new(1, 0);
 		public string VersionString => Version.ToString();
 		public string Publisher => "SIL/UBS";
 

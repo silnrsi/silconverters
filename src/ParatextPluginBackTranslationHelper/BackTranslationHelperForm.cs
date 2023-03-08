@@ -117,8 +117,8 @@ namespace SIL.ParatextBackTranslationHelperPlugin
 
         private void ScriptureDataChangedHandlerTarget(IProject sender, int bookNum, int chapterNum)
         {
-            System.Diagnostics.Debug.WriteLine($"PtxBTH: ScriptureDataChangedHandlerTarget: bookNum = '{bookNum}', chapterNum = ‘{chapterNum}‘, IsModified: {backTranslationHelperCtrl.IsModified}, _verseReference: {_verseReference}, _isChangingTarget: {_isChangingTarget}");
-            if (_isChangingTarget)  // if we're the ones who changed it, then ignore
+            System.Diagnostics.Debug.WriteLine($"PtxBTH: ScriptureDataChangedHandlerTarget: bookNum = '{bookNum}', chapterNum = ‘{chapterNum}‘, IsModified: {backTranslationHelperCtrl.IsModified}, _verseReference: {_verseReference}, _isChangingTarget: {AreWeChangingTheTarget}");
+            if (AreWeChangingTheTarget)  // if we're the ones who changed it, then ignore
                 return;
 
             // if the change was in the chapter we're processing, then clear what we think the data is, so we'll repull it later
@@ -396,7 +396,7 @@ namespace SIL.ParatextBackTranslationHelperPlugin
             _setSyncReferenceGroup(_verseReference);
         }
 
-        private bool _isChangingTarget { get; set; }
+        private bool AreWeChangingTheTarget { get; set; }
 
         bool IBackTranslationHelperDataSource.WriteToTarget(string text)
         {
@@ -425,7 +425,7 @@ namespace SIL.ParatextBackTranslationHelperPlugin
                     return false;
                 }
 
-                _isChangingTarget = true;
+                AreWeChangingTheTarget = true;
                 _writeLock ??= _projectTarget.RequestWriteLock(_plugin, ReleaseRequested, _verseReference.BookNum, _verseReference.ChapterNum);
 
                 var tokens = vrefTokensTarget.SelectMany(d => d.Value).ToList();
@@ -440,7 +440,7 @@ namespace SIL.ParatextBackTranslationHelperPlugin
             }
             finally
             {
-                _isChangingTarget = false;
+                AreWeChangingTheTarget = false;
             }
             return false;
         }
@@ -677,17 +677,11 @@ namespace SIL.ParatextBackTranslationHelperPlugin
             return new MarkerToken(paragraphToken, previousTextToken.VerseOffset + previousTextToken.Text.Length, previousTextToken.VerseRef);
         }
 
-        private static readonly List<string> _paragraphMarkers = new List<string> { "p", "m" };
+        private static readonly List<string> _paragraphMarkers = new() { "p", "m" };
 
         private static bool IsParagraphToken(IUSFMToken token)
         {
             return (token is IUSFMMarkerToken markerToken) && (markerToken.Type == MarkerType.Paragraph) && _paragraphMarkers.Contains(markerToken.Marker);
-        }
-
-        protected override void OnShown(EventArgs e)
-        {
-            base.OnShown(e);
-            GetNewReference(_verseReference);
         }
 
         private void BackTranslationHelperForm_Load(object sender, EventArgs e)
@@ -744,15 +738,6 @@ namespace SIL.ParatextBackTranslationHelperPlugin
             // WRONG: if they edit something while deactivated, we won’t query it again if we don’t clear it
             //if (!backTranslationHelperCtrl.IsModified)
             //    return;
-        }
-
-        private void PurgeSourceData(IVerseRef verseReference)
-        {
-            var keyBookChapterVerse = GetBookChapterVerseKey(verseReference);
-            if (UsfmTokensSource.ContainsKey(keyBookChapterVerse))
-            {
-                UsfmTokensSource.Remove(keyBookChapterVerse);
-            }
         }
 
         private void BackTranslationHelperForm_Activated(object sender, EventArgs e)
