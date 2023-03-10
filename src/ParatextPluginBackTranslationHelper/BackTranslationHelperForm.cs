@@ -484,117 +484,68 @@ namespace SIL.ParatextBackTranslationHelperPlugin
             if ((translatedValues == null) || !translatedValues.Any())    // nothing to do
                 return null;
 
-            // go thru all the ones we had and put the translated text into the text ones and transfer the non-text ones in order into the list to Put
+            // get the relevant target token collection (for the verse we're editing), so we can replace them.
             var keyBookChapter = GetBookChapterKey(verseReference);
             if (!usfmTokensTarget.TryGetValue(keyBookChapter, out SortedDictionary<string, List<IUSFMToken>> vrefTokensTarget))
-            {
                 return null;
-            }
 
-            // get the source project tokens (in case we need to copy from them)
+            // get the source project tokens (so we can use those in the target project)
+            // if by chance, there are non, then it must be that we marked them 'dirty', so just return mull 
+            //  to have them be requeried
             var keyBookChapterVerse = GetBookChapterVerseKey(verseReference);
-            var sourceTokensFound = usfmTokensSource.TryGetValue(keyBookChapterVerse, out List<IUSFMToken> tokensSource);
-
-            var keyBookChapterVerses = GetBookChapterVerseKey(versesReference);
-            // get the USFM tokens for the corresponding verse in the target project (if we don't have at least 1 IUSFMTextToken...
-            if (!vrefTokensTarget.TryGetValue(keyBookChapterVerses, out List<IUSFMToken> tokensTarget) ||
-                !tokensTarget.Any(t => t is IUSFMTextToken))
-            {
-                // ... it could be that the user didn't put in any verse number/paragraphs/text yet... so just make a copy of the source tokens
-                //  which will be replaced w/ the translated text below
-                if (!sourceTokensFound)
-                {
-                    // if we didn't find those, then we'll have to start over
+            if (!usfmTokensSource.TryGetValue(keyBookChapterVerse, out List<IUSFMToken> tokensSource))
                     return null;
-                }
-                else
-                    tokensTarget = tokensSource;
 
-                // it may have some verses, but no IUSFMTextTokens among them...
+            // NB: for reasons that are not clear, I was trying to maintain the markers that were in the target project 
+            //  and put the translated lines in those... but the entire point of this plugin is to make a back translation
+            //  of the *source* project. So why wouldn't I just use the source project's tokens and put the translated 
+            //  bits in them.
+            //  There may be fewer translated lines in the 'Target Translation' box than there were IUSFMTextToken in
+            //  the source -- esp. if it the user started with the data from the existing Target project. But we'll just
+            //  have to warn the user thru the UI of that issue.
+            //  Bottom line, fit the translated lines into the IUSFMTextToken tokens of the *source* project in order 
+            //  (until we run out), and if there are more translated lines than IUSFMTextToken tokens, just add them as
+            //  '\p's and let the user edit them in Paratext after we write them out to the target project
+            // BUT one issue does arise: if the source has a multiple combined verses and the target doesn't (or vice-versa)
+            //  then we'll need to purge the existing (target) verse(s) so we can add the new (source-based) ones.
+
+            // get the reference to the USFM tokens for the corresponding verse in the target project. If we don't
+            //  have any, it probably means that the user didn't have any data in the target project yet... But 
+            //  it doesn't really matter, bkz we're just going to replace them with a copy of the source tokens
+            //  anyway, which will be replaced w/ the translated text below
+            var keyBookChapterVerses = GetBookChapterVerseKey(versesReference);
+            var tokensTarget = tokensSource;
                 if (vrefTokensTarget.ContainsKey(keyBookChapterVerse))
-                    vrefTokensTarget[keyBookChapterVerse] = tokensTarget;
+                vrefTokensTarget[keyBookChapterVerse] = tokensSource;
                 else
-                    vrefTokensTarget.Add(keyBookChapterVerses, tokensTarget);
-            }
+                vrefTokensTarget.Add(keyBookChapterVerses, tokensSource);
 
-            // tokensTarget now contains just the tokens for the current verse
+            // go thru all the ones we had and put the translated text into the text ones and transfer the non-text ones in order into the list to Put
             var i = 0;
-            var purgedSomeParagraphs = false;
-            var lastTokenWasText = false;
             TextToken latestTextToken = null;
             var updatedTokens = new List<IUSFMToken>();
-            var countFewerTextTokensInTranslation = (tokensTarget.Count(t => t is IUSFMTextToken) - translatedValues.Count);
             foreach (var token in tokensTarget)
             {
                 IUSFMToken updatedToken = token;
                 if ((token is IUSFMTextToken textToken) && textToken.IsPublishableVernacular && IsMatchingVerse((IVerseRef)textToken.VerseRef, verseReference))
                 {
-                    if ((i >= translatedValues.Count) || (purgedSomeParagraphs && lastTokenWasText))
-                    {
-                        // this means the source had multiple paragraphs, so ignore this unnecessary (source) text token
-                        purgedSomeParagraphs = true;
-                        continue;
-                    }
-
                     latestTextToken = new TextToken(textToken)
                     {
-                        Text = translatedValues[i++]
+                        Text = (i >= translatedValues.Count)
+                                    ? String.Empty              // empty the source text, bkz we ran out of translated lines
+                                    : translatedValues[i++]
                     };
                     updatedToken = latestTextToken;
                 }
 
-                // if we have fewer lines than the source had, then skip adding any more paragraph markers unless it's the final token
-                if ((countFewerTextTokensInTranslation > 0) && IsParagraphToken(token) && (!IsParagraphToken(tokensTarget.Last()) || (token != tokensTarget.Last())))
-                {
-                    // this means we want to skip this paragraph token
-                    purgedSomeParagraphs = true;
-                    countFewerTextTokensInTranslation--;
-                    continue;
-                }
-
-                lastTokenWasText = IsScriptureTextToken(updatedToken);
                 updatedTokens.Add(updatedToken);
             }
 
-            if (latestTextToken == null)
-            {
-                // this means the target (and source) verse had no IUSFMTextToken in it
-                // so there's nothing to do?
-                return null;
-            }
-
-            // if there are still some translated portions we haven't processed yet, then insert them as copies of the last one we did
-            //  just after the last one we did (w/ a paragraph token before it).
-            // if there are other markers *after* the last text token (e.g. a final paragraph token), then put the text (along
-            //  with a preceding paragraph token) just after the last text token we added above
+            // if there are still some translated portions we haven't processed yet, then insert them as copies of the last text 
+            //  one we did just after the last one we did (w/ a paragraph token before it).
             var insertionIndex = updatedTokens.Count;
-            var lastTokenIsParagraph = IsParagraphToken(updatedTokens.Last());
-            if (lastTokenIsParagraph)
-                insertionIndex--;
-
             while (translatedValues.Count > i)
             {
-                // first skip past any markers common to both (but not if the final one was a \p
-                if (!lastTokenIsParagraph)
-                    SkipPastIdenticalTokens(tokensSource, updatedTokens, ref insertionIndex);
-
-                // if the source has one or more (non-scripture) markers at the next insertion point, we want to add them here.
-                //  But the 'NextTokenFromSource*' function below will return a newly created paragraph (e.g. to put before 
-                //  a translated lines) if we run out of stuff in the source. In that case, only do this loop once
-                var isInsertedParagraph = false;
-                do
-                {
-                    // first see if the next token in the source is a marker
-                    isInsertedParagraph = NextTokenFromSourceOrTemplateParagraphMarker(out IUSFMToken marker);
-
-                    // if it's a text token, then skip adding it here and add it as a text token below
-                    if (IsScriptureTextToken(marker))
-                        break;
-
-                    // add the non-text (read: marker) token first (and repeat of there are others)
-                    updatedTokens.Insert(insertionIndex++, marker);
-                } while (!isInsertedParagraph);
-                    
                 // using the last text token we saw in the target as a template (which could possibly be from the source (read: untranslated)),
                 //  create a new one w/ the next translated value
                 latestTextToken = new TextToken(latestTextToken)
@@ -605,15 +556,6 @@ namespace SIL.ParatextBackTranslationHelperPlugin
                 updatedTokens.Insert(insertionIndex++, latestTextToken);
             }
 
-            // in case the last one in the target happens to be common...
-            SkipPastIdenticalTokens(tokensSource, updatedTokens, ref insertionIndex);
-
-            // add any remaining ones that are in the source, but not in the target
-            while (!purgedSomeParagraphs && (insertionIndex < tokensSource.Count))
-            {
-                updatedTokens.Add(tokensSource[insertionIndex++]);
-            }
-
             vrefTokensTarget[keyBookChapterVerses] = updatedTokens;
 
 #if SerializeToCreateTestFiles
@@ -621,6 +563,7 @@ namespace SIL.ParatextBackTranslationHelperPlugin
 #endif
 
             return vrefTokensTarget;
+        }
 
             // local function (to reduce the number of parameters needing to be passed)
             bool NextTokenFromSourceOrTemplateParagraphMarker(out IUSFMToken marker)
@@ -644,20 +587,6 @@ namespace SIL.ParatextBackTranslationHelperPlugin
                                                });
         }
 #endif
-
-        private static bool IsScriptureTextToken(IUSFMToken token)
-        {
-            return (token is IUSFMTextToken textToken) && textToken.IsPublishableVernacular;
-        }
-
-        private static void SkipPastIdenticalTokens(List<IUSFMToken> tokensSource, List<IUSFMToken> updatedTokens, ref int insertionIndex)
-        {
-            while ((insertionIndex < updatedTokens.Count) && (insertionIndex < tokensSource.Count) &&
-                   (updatedTokens[insertionIndex].ToString() == tokensSource[insertionIndex].ToString()))
-            {
-                insertionIndex++;
-            }
-        }
 
         public static IUSFMToken ParagraphToken(Dictionary<string, List<IUSFMToken>> usfmTokensSource, 
             Dictionary<string, SortedDictionary<string, List<IUSFMToken>>> usfmTokensTarget, TextToken previousTextToken)
