@@ -59,6 +59,16 @@ namespace SIL.ParatextBackTranslationHelperPlugin
         private Dictionary<string, List<IUSFMToken>> UsfmTokensSource { get; set; } = new Dictionary<string, List<IUSFMToken>>();
 
         /// <summary>
+        /// The number of text lines in the source data (i.e. the number of IUSFMTextTokens in the verse(s))
+        /// </summary>
+        private int SourceDataLineCount { get; set; }
+
+        /// <summary>
+        /// This contains the list of marker tokens immediately preceding the text tokens in the source data
+        /// </summary>
+        private List<IUSFMMarkerToken> TextTokenMarkersSource { get; set; } = new List<IUSFMMarkerToken>();
+
+        /// <summary>
         /// this contains the tokens from the target project, for all the verses in the current chapter (we need the 
         /// whole chapter,because we have to Put the entire chapter when we go to write it.
         /// Key is the [BookNum]_[ChapterNum] (e.g. 44_001)
@@ -85,10 +95,24 @@ namespace SIL.ParatextBackTranslationHelperPlugin
 
             // this form is the implementation of the way to get get data
             backTranslationHelperCtrl.BackTranslationHelperDataSource = this;
+            backTranslationHelperCtrl.RegisterForNotification(BackTranslationHelperCtrl.SubscribeableEventKeyTargetBackTranslationTextChanged,
+                                                              TargetBackTranslationTextChanged);
 
             _host.VerseRefChanged += Host_VerseRefChanged;
             _projectSource.ScriptureDataChanged += ScriptureDataChangedHandlerSource;
             _projectTarget.ScriptureDataChanged += ScriptureDataChangedHandlerTarget;
+        }
+
+        private void TargetBackTranslationTextChanged(string value)
+        {
+            var translatedCount = GetTranslatedLines(value).Count;
+            if (SourceDataLineCount != translatedCount)
+            {
+                // TODO: add a tooltip to show how the currently translated lines will be put into the source project markers
+                textBoxStatus.Text = $"There are currently {translatedCount} lines of text in the Target Translation box vs. {SourceDataLineCount} text lines in the source verse (one for each of these markers: {String.Join(",", TextTokenMarkersSource.Select(m => $"\\{m.Marker}"))})";
+            }
+            else
+                textBoxStatus.Clear();
         }
 
         private static string GetFrameText(IProject projectSource, IProject projectTarget, IVerseRef versesReference)
@@ -245,7 +269,11 @@ namespace SIL.ParatextBackTranslationHelperPlugin
                                  .Where(t => t.IsPublishableVernacular && IsMatchingVerse(t.VerseRef, _verseReference))
                                  .ToDictionary(ta => ta, ta => ta.VerseRef);
 
+                TextTokenMarkersSource = GetTextTokenMarkers(tokens, data.Keys.ToList());
+
                 var textValues = data.Select(t => t.Key.Text);
+                SourceDataLineCount = textValues.Count();
+
                 var sourceString = string.Join(Environment.NewLine, textValues);
 
                 // set the verse reference to the last of a combined set of verses (which we can only get from the USFM markers)
@@ -256,6 +284,24 @@ namespace SIL.ParatextBackTranslationHelperPlugin
 
                 return sourceString;
             }
+        }
+
+        private List<IUSFMMarkerToken> GetTextTokenMarkers(List<IUSFMToken> tokens, List<IUSFMTextToken> textTokens)
+        {
+            IUSFMMarkerToken lastMarkerToken = null;
+            var textTokenMarkers = new List<IUSFMMarkerToken>();
+            foreach (var token in tokens)
+            {
+                if (token is IUSFMMarkerToken)
+                {
+                    lastMarkerToken = token as IUSFMMarkerToken;
+                }
+                else if (textTokens.Contains(token) && (lastMarkerToken != null))
+                {
+                    textTokenMarkers.Add(lastMarkerToken);
+                }
+            }
+            return textTokenMarkers;
         }
 
         private string CurrentTargetData
@@ -479,8 +525,7 @@ namespace SIL.ParatextBackTranslationHelperPlugin
             //      ... in which case, we put one line of each translated version into one of the text tokens
             //  3) there are more lines of text translated than there were in Paratext
             //      ... in which case, we'll duplicate the last text token and push the extra lines in it
-            var translatedValues = text?.Split(new[] { Environment.NewLine }, StringSplitOptions.None)
-                                        .ToList();
+            var translatedValues = GetTranslatedLines(text);
             if ((translatedValues == null) || !translatedValues.Any())    // nothing to do
                 return null;
 
@@ -494,7 +539,7 @@ namespace SIL.ParatextBackTranslationHelperPlugin
             //  to have them be requeried
             var keyBookChapterVerse = GetBookChapterVerseKey(verseReference);
             if (!usfmTokensSource.TryGetValue(keyBookChapterVerse, out List<IUSFMToken> tokensSource))
-                    return null;
+                return null;
 
             // NB: for reasons that are not clear, I was trying to maintain the markers that were in the target project 
             //  and put the translated lines in those... but the entire point of this plugin is to make a back translation
@@ -515,9 +560,9 @@ namespace SIL.ParatextBackTranslationHelperPlugin
             //  anyway, which will be replaced w/ the translated text below
             var keyBookChapterVerses = GetBookChapterVerseKey(versesReference);
             var tokensTarget = tokensSource;
-                if (vrefTokensTarget.ContainsKey(keyBookChapterVerse))
+            if (vrefTokensTarget.ContainsKey(keyBookChapterVerse))
                 vrefTokensTarget[keyBookChapterVerse] = tokensSource;
-                else
+            else
                 vrefTokensTarget.Add(keyBookChapterVerses, tokensSource);
 
             // go thru all the ones we had and put the translated text into the text ones and transfer the non-text ones in order into the list to Put
@@ -565,15 +610,10 @@ namespace SIL.ParatextBackTranslationHelperPlugin
             return vrefTokensTarget;
         }
 
-            // local function (to reduce the number of parameters needing to be passed)
-            bool NextTokenFromSourceOrTemplateParagraphMarker(out IUSFMToken marker)
-            {
-                var isFromSource = (tokensSource.Count > insertionIndex);
-                marker = isFromSource 
-                            ? tokensSource[insertionIndex]
-                            : ParagraphToken(usfmTokensSource, usfmTokensTarget, latestTextToken);  // fall back to a paragraph marker
-                return !isFromSource || IsParagraphToken(marker);   // negative means isInsertedParagraph (or if the next one in the source was a paragraph)
-            }
+        private static List<string> GetTranslatedLines(string text)
+        {
+            return text?.Split(new[] { Environment.NewLine }, StringSplitOptions.None)
+                                        .ToList();
         }
 
 #if SerializeToCreateTestFiles
