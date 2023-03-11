@@ -104,6 +104,8 @@
         <MergeRef Id="SEC_EC"/>
         <MergeRef Id="ParatextBackTranslationHelperPlugin"/>
         <MergeRef Id="EcTranslators"/>
+        <MergeRef Id="SpellFixerEc"/>
+        <MergeRef Id="SetPath"/>
       </Feature>
     </Feature>
     <Feature Id="Transduction_Engines" Title="Transduction Engines" Description="Expand this node to select or deselect individual transduction engines" Level="3" AllowAdvertise="no">
