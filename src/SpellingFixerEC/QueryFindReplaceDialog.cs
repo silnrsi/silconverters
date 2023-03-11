@@ -31,7 +31,7 @@ namespace SpellingFixerEC
         {
             get
             {
-                return (_isBoundaryInitial) ? BoundaryCharacter : String.Empty;
+                return (IsBoundaryInitial) ? BoundaryCharacter : String.Empty;
             }
         }
 
@@ -39,7 +39,7 @@ namespace SpellingFixerEC
         {
             get
             {
-                return (_isBoundaryFinal) ? BoundaryCharacter : String.Empty;
+                return (IsBoundaryFinal) ? BoundaryCharacter : String.Empty;
             }
         }
 
@@ -47,7 +47,7 @@ namespace SpellingFixerEC
         {
             InitializeComponent();
 
-            textBoxFindWord.Font = font = 
+            textBoxFindWord.Font = 
                 textBoxOriginalWord.Font =
                 textBoxWordBoundaryFindText.Font = 
                 textBoxReplaceWord.Font = font;
@@ -58,13 +58,13 @@ namespace SpellingFixerEC
         {
             if (findWhat?.StartsWith(boundaryCharacter) ?? false)
             {
-                _isBoundaryInitial = checkBoxWordInitial.Checked = true;
+                IsBoundaryInitial = checkBoxWordInitial.Checked = true;
                 findWhat = findWhat.Substring(1);
             }
 
             if (findWhat?.EndsWith(boundaryCharacter) ?? false)
             {
-                _isBoundaryFinal = checkBoxWordFinal.Checked = true;
+                IsBoundaryFinal = checkBoxWordFinal.Checked = true;
                 findWhat = findWhat.Substring(0, findWhat.Length - 1);
             }
 
@@ -111,16 +111,17 @@ namespace SpellingFixerEC
 
         private void UpdateUniCodes(string strInputString)
         {
-            int nLenString = strInputString.Length;
-
-            string strWhole = null, strPiece = null, strUPiece = null;
+            string strWhole = null;
             foreach (char ch in strInputString)
             {
+                string strPiece;
                 if (ch == 0)   // sometimes it's null (esp. for utf32)
+                {
                     strPiece = "nul (u0000)  ";
+                }
                 else
                 {
-                    strUPiece = String.Format("{0:X}", (int)ch);
+                    var strUPiece = String.Format("{0:X}", (int)ch);
 
                     // left pad with 0's (there may be a better way to do this, but 
                     //  I don't know what it is)
@@ -134,41 +135,41 @@ namespace SpellingFixerEC
             labelUnicodeCodes.Text = strWhole;
         }
 
-        private void checkBoxWordBoundary_CheckedChanged(object sender, EventArgs e)
+        private void CheckBoxWordBoundary_CheckedChanged(object sender, EventArgs e)
         {
             UpdateFindWhatDisplay();
         }
 
-        private void textBoxFindWord_TextChanged(object sender, EventArgs e)
+        private void TextBoxFindWord_TextChanged(object sender, EventArgs e)
         {
             FindWhat = textBoxFindWord.Text;
             UpdateFindWhatDisplay();
             UpdateUniCodes(textBoxFindWord.Text);
         }
 
-        private void textBoxReplaceWord_TextChanged(object sender, EventArgs e)
+        private void TextBoxReplaceWord_TextChanged(object sender, EventArgs e)
         {
             UpdateUniCodes(textBoxReplaceWord.Text);
             ReplaceWith = textBoxReplaceWord.Text;
         }
 
-        private void textBoxFindWord_Enter(object sender, EventArgs e)
+        private void TextBoxFindWord_Enter(object sender, EventArgs e)
         {
             UpdateUniCodes(textBoxFindWord.Text);
         }
 
-        private void textBoxReplaceWord_Enter(object sender, EventArgs e)
+        private void TextBoxReplaceWord_Enter(object sender, EventArgs e)
         {
             UpdateUniCodes(textBoxReplaceWord.Text);
         }
 
-        private bool _isBoundaryInitial { get; set; }
-        private bool _isBoundaryFinal { get; set; }
+        private bool IsBoundaryInitial { get; set; }
+        private bool IsBoundaryFinal { get; set; }
 
         private void UpdateFindWhatDisplay()
         {
-            _isBoundaryInitial = checkBoxWordInitial.Checked;
-            _isBoundaryFinal = checkBoxWordFinal.Checked;
+            IsBoundaryInitial = checkBoxWordInitial.Checked;
+            IsBoundaryFinal = checkBoxWordFinal.Checked;
 
             textBoxWordBoundaryFindText.Text = FindWhat;
         }
@@ -182,7 +183,7 @@ namespace SpellingFixerEC
             }
         }
 
-        private void buttonDelete_Click(object sender, EventArgs e)
+        private void ButtonDelete_Click(object sender, EventArgs e)
         {
             Close();    // button has DialogResult.Abort associated w/ it, which triggers the caller to delete
         }

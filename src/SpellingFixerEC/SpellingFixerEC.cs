@@ -46,10 +46,7 @@ namespace SpellingFixerEC
         private string m_strNonWordChars;
         private string m_strConverterSpec;
         private string m_strEncConverterName;
-        private bool m_bLegacy;
         private bool m_isRightToLeft;
-
-        private int m_cp = 1252;
 
         // leave a default constructor which *doesn't* automatically log-in to a project for 
         //  COM clients that want to use CscProject via SelectProject below.
@@ -63,13 +60,10 @@ namespace SpellingFixerEC
         /// </summary>
         public void LoginProject()
         {
-            LoginSF login = new LoginSF();
+            var login = new LoginSF();
             if (login.ShowDialog() == DialogResult.OK)
             {
                 m_font = login.FontToUse;
-                m_bLegacy = login.IsLegacy;
-                if (m_bLegacy)
-                    m_cp = login.CpToUse;
                 m_isRightToLeft = login.IsRightToLeft;
                 m_strConverterSpec = login.ConverterSpec;
                 SpellFixerEncConverterName = login.EncConverterName;
@@ -82,13 +76,10 @@ namespace SpellingFixerEC
 
         public SpellingFixerEC(string strProjectName)
         {
-            LoginSF login = new LoginSF();
+            var login = new LoginSF();
             if (login.LoadProject(strProjectName))
             {
                 m_font = login.FontToUse;
-                m_bLegacy = login.IsLegacy;
-                if (m_bLegacy)
-                    m_cp = login.CpToUse;
                 m_isRightToLeft = login.IsRightToLeft;
                 m_strConverterSpec = login.ConverterSpec;
                 SpellFixerEncConverterName = login.EncConverterName;
@@ -106,10 +97,7 @@ namespace SpellingFixerEC
             [Optional, DefaultParameterValue(false)] bool bRightToLeft)
         {
             m_font = font;
-            m_bLegacy = bLegacy;
             m_isRightToLeft = bRightToLeft;
-            if (m_bLegacy)
-                m_cp = cp;
             m_strConverterSpec = strConverterSpec;
             SpellFixerEncConverterName = strEncConverterName;
             WordBoundaryDelimiter = strWordBoundaryDelimiter;
@@ -150,8 +138,8 @@ namespace SpellingFixerEC
                 if (m_strEncConverterName == null)
                     return null;
 
-                EncConverters aECs = new EncConverters();
-                IEncConverter aEC = null;
+                var aECs = new EncConverters();
+                IEncConverter aEC;
                 if (aECs.ContainsKey(m_strEncConverterName))
                     aEC = aECs[m_strEncConverterName];
                 else
@@ -159,9 +147,9 @@ namespace SpellingFixerEC
                     aEC = new CcEncConverter();
                     string strDummy = null;
                     int nProcType = 0;
-                    ConvType eConvType = (m_bLegacy) ? ConvType.Legacy_to_Legacy : ConvType.Unicode_to_Unicode;
+                    var eConvType = ConvType.Unicode_to_Unicode;
                     aEC.Initialize(m_strEncConverterName, m_strConverterSpec, ref strDummy, ref strDummy,
-                        ref eConvType, ref nProcType, m_cp, m_cp, true);
+                        ref eConvType, ref nProcType, 0, 0, true);
                 }
 
                 return aEC;
@@ -196,9 +184,8 @@ namespace SpellingFixerEC
             // even if the file exists, it might have no rules, so double-check
             if (File.Exists(m_strConverterSpec))
             {
-                DataTable myTable;
                 Encoding enc = GetEncoding;
-                if (    !InitializeDataTableFromCCTable(m_strConverterSpec, enc, WordBoundaryDelimiter, out myTable)
+                if (    !InitializeDataTableFromCCTable(m_strConverterSpec, enc, WordBoundaryDelimiter, out DataTable myTable)
                     ||  (myTable.Rows.Count > 0))
                 {
                     return; // don't query for a record if there are already spelling corrections in the file
@@ -206,7 +193,7 @@ namespace SpellingFixerEC
             }
             else
             {
-                LoginSF.CreateCCTable(m_strConverterSpec, SpellFixerEncConverterName, PunctuationAndWhiteSpace, null, !this.m_bLegacy);
+                LoginSF.CreateCCTable(m_strConverterSpec, SpellFixerEncConverterName, PunctuationAndWhiteSpace);
             }
 
             QueryAndAppend(strBadWord);
@@ -226,7 +213,7 @@ namespace SpellingFixerEC
                 Encoding enc = GetEncoding;
 
                 // get a stream writer for these encoding and append
-                StreamWriter sw = new StreamWriter(m_strConverterSpec, true, enc);
+                var sw = new StreamWriter(m_strConverterSpec, true, enc);
                 sw.WriteLine(FormatSubstitutionRule(aQuery.FindWhat, aQuery.ReplaceWith, WordBoundaryDelimiter, strBadWord));
                 sw.Flush();
                 sw.Close();
@@ -259,7 +246,7 @@ namespace SpellingFixerEC
             }
             else
             {
-                LoginSF.CreateCCTable(m_strConverterSpec, SpellFixerEncConverterName, PunctuationAndWhiteSpace, null, !this.m_bLegacy);
+                LoginSF.CreateCCTable(m_strConverterSpec, SpellFixerEncConverterName, PunctuationAndWhiteSpace);
             }
 
             QueryAndAppend(strBadWord);
@@ -288,7 +275,7 @@ namespace SpellingFixerEC
             }
             else
             {
-                LoginSF.CreateCCTable(m_strConverterSpec, SpellFixerEncConverterName, PunctuationAndWhiteSpace, null, !this.m_bLegacy);
+                LoginSF.CreateCCTable(m_strConverterSpec, SpellFixerEncConverterName, PunctuationAndWhiteSpace);
             }
 
             // if it was legacy encoded, then we need to convert the data to narrow using
@@ -296,7 +283,7 @@ namespace SpellingFixerEC
             Encoding enc = GetEncoding;
 
             // get a stream writer for this encoding and append
-            StreamWriter sw = new StreamWriter(m_strConverterSpec, true, enc);
+            var sw = new StreamWriter(m_strConverterSpec, true, enc);
             sw.WriteLine(FormatSubstitutionRule(strBadWord, strReplacement, WordBoundaryDelimiter, strBadWord));
             sw.Flush();
             sw.Close();
@@ -311,9 +298,8 @@ namespace SpellingFixerEC
                 CleanWord(ref strWord);
 
                 // Open the CC table that has the mappings and put them in a DataTable.
-                DataTable myTable;
                 Encoding enc = GetEncoding;
-                if (InitializeDataTableFromCCTable(m_strConverterSpec, enc, WordBoundaryDelimiter, out myTable))
+                if (InitializeDataTableFromCCTable(m_strConverterSpec, enc, WordBoundaryDelimiter, out DataTable myTable))
                 {
                     // temporary filename for temporary CC tables (to check portions of the file at a time)
                     string strTempName = Path.GetTempFileName();
@@ -413,7 +399,6 @@ namespace SpellingFixerEC
                         if (bRewrite)
                         {
                             // write the newly updated DataTable
-                            LoginSF.ReWriteCCTableHeader(m_strConverterSpec, PunctuationAndWhiteSpace, enc);
                             AppendCCTableFromDataTable(m_strConverterSpec, enc, WordBoundaryDelimiter, PunctuationAndWhiteSpace, myTable);
                         }
                     }
@@ -429,20 +414,19 @@ namespace SpellingFixerEC
                 // Open the CC table that has the mappings and put them in a DataTable.
                 if (!File.Exists(m_strConverterSpec))
                 {
-                    LoginSF.CreateCCTable(m_strConverterSpec, SpellFixerEncConverterName, PunctuationAndWhiteSpace, null, !this.m_bLegacy);
+                    LoginSF.CreateCCTable(m_strConverterSpec, SpellFixerEncConverterName, PunctuationAndWhiteSpace);
                 }
 
                 // if it was legacy encoded, then we need to convert the data to narrow using
                 //  the code page the user specified (or we got out of the repository)
                 Encoding enc = GetEncoding;
-                DataTable myTable;
-                if (InitializeDataTableFromCCTable(m_strConverterSpec, enc, WordBoundaryDelimiter, out myTable))
+                if (InitializeDataTableFromCCTable(m_strConverterSpec, enc, WordBoundaryDelimiter, out DataTable myTable))
                 {
                     // now put up an editable grid with this data.
                     DialogResult res = DialogResult.Cancel;
                     try
                     {
-                        ViewBadGoodPairsDlg dlg = new ViewBadGoodPairsDlg(myTable, m_font, WordBoundaryDelimiter, IsRightToLeft);
+                        var dlg = new ViewBadGoodPairsDlg(myTable, m_font, WordBoundaryDelimiter, IsRightToLeft);
                         res = dlg.ShowDialog();
                     }
 #if DEBUG
@@ -456,7 +440,6 @@ namespace SpellingFixerEC
 
                     if (res == DialogResult.OK)
                     {
-                        LoginSF.ReWriteCCTableHeader(m_strConverterSpec, PunctuationAndWhiteSpace, enc);
                         AppendCCTableFromDataTable(m_strConverterSpec, enc, WordBoundaryDelimiter, PunctuationAndWhiteSpace, myTable);
                     }
                 }
@@ -467,19 +450,7 @@ namespace SpellingFixerEC
         {
             get
             {
-                // if it was legacy encoded, then we need to convert the data to narrow using
-                //  the code page the user specified (or we got out of the repository)
-                Encoding enc = null;
-                if (m_bLegacy)
-                {
-                    int cp = m_cp;
-                    if (m_cp == EncConverters.cnSymbolFontCodePage)
-                        cp = EncConverters.cnIso8859_1CodePage;
-                    enc = Encoding.GetEncoding(cp);
-                }
-                else
-                    enc = new UTF8Encoding();
-
+                var enc = new UTF8Encoding();
                 return enc;
             }
         }
@@ -488,7 +459,7 @@ namespace SpellingFixerEC
         {
             get
             {
-                DataTable myTable = new DataTable("SpellingFixesList");
+                var myTable = new DataTable("SpellingFixesList");
                 myTable.Columns.Add(new DataColumn(strColumnLhs, typeof(string)));
                 myTable.Columns.Add(new DataColumn(strColumnRhs, typeof(string)));
                 myTable.Columns.Add(new DataColumn(strColumnCmt, typeof(string)));
@@ -502,8 +473,8 @@ namespace SpellingFixerEC
             // then strip off invalid chars (that sometimes come in from Word)
             if (str != null)
             {
-                int nIndexBadChar = 0;
                 char[] aBadChars = new char[] { '\r', '\n' };
+                int nIndexBadChar;
                 while ((nIndexBadChar = str.IndexOfAny(aBadChars)) != -1)
                     str = str.Remove(nIndexBadChar, 1);
             }
@@ -527,7 +498,7 @@ namespace SpellingFixerEC
         {
             string strDummy = null;
             int lProcessType = (int)SpellingFixerEC.SFProcessType;
-            ConvType eConvType = (m_bLegacy) ? ConvType.Legacy_to_Legacy : ConvType.Unicode_to_Unicode;
+            var eConvType = ConvType.Unicode_to_Unicode;
             aEC.Initialize("dummyname", strFileName, ref strDummy, ref strDummy, ref eConvType, ref lProcessType, 0, 0, true);
             return (aEC.Convert(strWord) != strWord);
         }
@@ -536,20 +507,6 @@ namespace SpellingFixerEC
         {
             this.WriteCCTableFromDataTable(strFileName, enc, tblData, nTableIndex, nNumRows);
             return ChaChaChaChaChanges(aEC, strFileName, strWord);
-        }
-
-        private void GetPortionOfTable(DataTable myTable, int nIndex, int nLength, ref DataTable tblTestingRules)
-        {
-            tblTestingRules.Clear();
-            for (int i = nIndex; (nLength-- > 0); nIndex++)
-            {
-                DataRow row = myTable.Rows[nIndex];
-                DataRow newRow = tblTestingRules.NewRow();
-                newRow[strColumnLhs] = row[strColumnLhs];
-                newRow[strColumnRhs] = row[strColumnRhs];
-                newRow[strColumnCmt] = row[strColumnCmt];
-                tblTestingRules.Rows.Add(newRow);
-            }
         }
 
         internal static string FormatSubstitutionRule(string strBad, string strGood, string strWordBoundaryDelimiter, string strCommentWord)
@@ -603,14 +560,18 @@ namespace SpellingFixerEC
             string strConverterSpec,
             Encoding enc,
             string strWordBoundaryDelimiter,
-            string strPunctuationAndWhiteSpace,
+            string strNonWordCharacters,
             DataTable myTable
             )
         {
-            // get a stream writer to write the new pairs
-            StreamWriter sw = new StreamWriter(strConverterSpec, true, enc);
+            int rowCount = myTable.Rows.Count;
 
-            AppendCCTableFromDataTable(sw, strWordBoundaryDelimiter, strPunctuationAndWhiteSpace, myTable, 0, myTable.Rows.Count);
+            LoginSF.ReWriteCCTableHeader(strConverterSpec, strNonWordCharacters, enc, rowCount > 0);
+
+            // get a stream writer to write the new pairs
+            var sw = new StreamWriter(strConverterSpec, true, enc);
+
+            AppendCCTableFromDataTable(sw, strWordBoundaryDelimiter, myTable, 0, rowCount);
 
             sw.Flush();
             sw.Close();
@@ -621,9 +582,9 @@ namespace SpellingFixerEC
             if (File.Exists(strFilename))
                 File.Delete(strFilename);
 
-            StreamWriter sw = new StreamWriter(strFilename, false, enc);
-            LoginSF.CreateCCTable(sw, SpellFixerEncConverterName, PunctuationAndWhiteSpace, null, !m_bLegacy);
-            AppendCCTableFromDataTable(sw, WordBoundaryDelimiter, PunctuationAndWhiteSpace, tbl, nTableIndex, nNumRows);
+            var sw = new StreamWriter(strFilename, false, enc);
+            LoginSF.CreateCCTable(sw, SpellFixerEncConverterName, PunctuationAndWhiteSpace);
+            AppendCCTableFromDataTable(sw, WordBoundaryDelimiter, tbl, nTableIndex, nNumRows);
             sw.Flush();
             sw.Close();
         }
@@ -632,7 +593,6 @@ namespace SpellingFixerEC
             (
             StreamWriter sw,
             string strWordBoundaryDelimiter,
-            string strPunctuationAndWhiteSpace,
             DataTable myTable,
             int nTableIndex,
             int nNumRows
@@ -659,10 +619,10 @@ namespace SpellingFixerEC
         internal static StreamReader InitReaderPastHeader(string strConverterSpec, Encoding enc)
         {
             // get a stream writer for these encoding and append
-            StreamReader sr = new StreamReader(strConverterSpec, enc);
+            var sr = new StreamReader(strConverterSpec, enc);
 
             // skip past the header lines
-            string line = null;
+            string line;
             do
             {
                 line = sr.ReadLine();
@@ -670,7 +630,7 @@ namespace SpellingFixerEC
                 if (line == null)
                     throw new ExternalException(String.Format("The substitution mapping file (i.e. '{0}') appears to be from a previous version of SpellFixer. Create a new project and manually copy over the spelling substitutions from the existing mapping file to the new project mapping file using a text editor like Notepad", strConverterSpec));
 
-            } while (line != LoginSF.cstrLastHeaderLine);
+            } while (line != LoginSF.CctableLastHeaderLine);
 
             return sr;
         }
@@ -687,7 +647,7 @@ namespace SpellingFixerEC
             StreamReader sr = InitReaderPastHeader(strConverterSpec, enc);
 
             myTable = GetDataTable;
-            string line = null;
+            string line;
             while ((line = sr.ReadLine()) != null)
             {
                 string strLhs = null;

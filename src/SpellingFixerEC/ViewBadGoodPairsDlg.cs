@@ -22,8 +22,8 @@ namespace SpellingFixerEC
 
         const int cnBadSpelling = 0;
         const int cnGoodSpelling = 1;
-        private string _wordBoundaryDelimiter;
-        private bool _isRightToLeft;
+        private readonly string _wordBoundaryDelimiter;
+        private readonly bool _isRightToLeft;
 
         internal ViewBadGoodPairsDlg(DataTable myTable, Font font, string wordBoundaryDelimiter, bool isRightToLeft)
         {
@@ -99,24 +99,24 @@ namespace SpellingFixerEC
         }
 #endif
 
-		private void buttonOK_Click(object sender, EventArgs e)
+		private void ButtonOK_Click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.OK;
             this.Close();
         }
 
-        private void buttonCancel_Click(object sender, EventArgs e)
+        private void ButtonCancel_Click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.Cancel;
             this.Close();
         }
 
-		private void dataGridView_UserAddedRow(object sender, DataGridViewRowEventArgs e)
+		private void DataGridView_UserAddedRow(object sender, DataGridViewRowEventArgs e)
 		{
 			buttonOK.Enabled = true;
 		}
 
-        private void dataGridView_UserDeletedRow(object sender, DataGridViewRowEventArgs e)
+        private void DataGridView_UserDeletedRow(object sender, DataGridViewRowEventArgs e)
         {
             DeletingRow(e.Row);
         }
@@ -158,7 +158,7 @@ namespace SpellingFixerEC
         protected string m_strBadForm = null;
         protected string m_strGoodForm = null;
         protected string m_strWordBeingEdited = null;
-        private void dataGridView_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
+        private void DataGridView_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
         {
             DataGridViewRow theRow = dataGridView.Rows[e.RowIndex];
             if (theRow.IsNewRow)
@@ -172,7 +172,7 @@ namespace SpellingFixerEC
             m_strWordBeingEdited = (e.ColumnIndex == cnBadSpelling) ? m_strBadForm : m_strGoodForm;
         }
 
-        private void dataGridView_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        private void DataGridView_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
             DataGridViewRow theRow = dataGridView.Rows[e.RowIndex];
             string strWordEdited = (string)theRow.Cells[e.ColumnIndex].Value;
@@ -180,218 +180,12 @@ namespace SpellingFixerEC
                 return;
 
             buttonOK.Enabled = true;
-
-#if !TurnOffSF30
-            // the word was changed... if we're editing the dictionary...
-            if (EditingDictionary)
-            {
-                // if this is a new record...
-                if (String.IsNullOrEmpty(m_strWordBeingEdited))
-                    if (!AddToWhiteList(strWordEdited))  // (i.e. so add)
-                    {
-                        // means we didn't add it (because it was already there)
-                        System.Diagnostics.Debug.Assert(m_mapWhiteList.ContainsKey(strWordEdited));
-
-                        // in that case, don't add this new value, but just select and display the existing value.
-                        theRow.Cells[cnGoodSpelling].Value = null;
-                    }
-
-                // ... then we also have to update any entries in the bad2good list that had
-                //  the original good word in them.
-                DialogResult res = RetaskBad2GoodList(m_strWordBeingEdited, strWordEdited);
-
-                // either if they said 'Yes' or there weren't others...
-                if (res != DialogResult.Cancel)
-                {
-                    // update the current value in the known good list with the new value
-                    RetaskWhiteListSfw(m_strWordBeingEdited, strWordEdited);
-                }
-
-                // if it happened to have been 'No', then we have to have the old value as well
-                if (res == DialogResult.No)
-                {
-                    if (AddToWhiteList(m_strWordBeingEdited))  // (i.e. so add)
-                        dataGridView.Rows.Add(new object[] { null, m_strWordBeingEdited });
-                }
-
-                // the update to the WordsToCheck will happen by the caller after we're totally done
-            }
-            else if (EditingCscBad2GoodList)
-            {
-                DataGridViewCell theBadCell = theRow.Cells[cnBadSpelling];
-                if (e.ColumnIndex == cnGoodSpelling)
-                {
-                    string strBadValue = (string)theBadCell.Value;
-                    if (String.IsNullOrEmpty(strBadValue))
-                        theRow.Cells[cnGoodSpelling].Value = strWordEdited;
-                    else
-                    {
-                        // if this is newly edited (i.e. word being edited is null), then pretend the bad value is
-                        //  new too (or it looks like it's already there)
-                        GoodValueEdited(theRow, strBadValue, strBadValue, m_strWordBeingEdited, strWordEdited);
-                    }
-                }
-                else    // edited the bad spelling cell
-                {
-                    System.Diagnostics.Debug.Assert(e.ColumnIndex == cnBadSpelling);
-                    if (String.IsNullOrEmpty(m_strWordBeingEdited) && (theRow.Cells[cnGoodSpelling].Value == null))
-                        // means that this is the new row, so with only a bad value, we have nothing
-                        theRow.Cells[cnBadSpelling].Value = strWordEdited;
-                    else
-                        BadValueOnlyEdited(theBadCell, m_strWordBeingEdited, strWordEdited, (string)theRow.Cells[cnGoodSpelling].Value);
-                }
-            }
-#endif
         }
 
-        private void UpdateGridGoodValues(string strOldValue, string strNewValue)
-        {
-            foreach (DataGridViewRow aRow in dataGridView.Rows)
-            {
-                DataGridViewCell theGoodCell = aRow.Cells[cnGoodSpelling];
-                if (strOldValue == (string)theGoodCell.Value)
-                    theGoodCell.Value = strNewValue;
-            }
-        }
-
-#if !TurnOffSF30
-        private DialogResult RetaskBad2GoodList(string strOldValue, string strNewValue)
-        {
-            // ... then we also have to update any entries in the bad2good list that had
-            //  the original good word in them.
-            DialogResult res = DialogResult.None;
-            if (m_mapBad2Good.ContainsValue(strOldValue))
-            {
-                bool bDeleting = String.IsNullOrEmpty(strNewValue);
-                string strMsg = String.Format("The word you just {1}, '{2}', is in other records in the bad-to-good list.{0}Would you like to have those record(s) {1} as well?",
-                    Environment.NewLine, (bDeleting) ? "deleted" : "changed", strOldValue);
-
-                if (!bDeleting)
-                    strMsg += String.Format(" (i.e. to '{0}')", strNewValue);
-
-                res = MessageBox.Show(strMsg, CscProject.cstrCaption, MessageBoxButtons.YesNoCancel);
-
-                if (res == DialogResult.Yes)
-                {
-                    while (m_mapBad2Good.ContainsValue(strOldValue))
-                    {
-                        foreach (KeyValuePair<string, string> kvp in m_mapBad2Good)
-                        {
-                            if (strOldValue == kvp.Value)
-                            {
-                                m_mapBad2Good.Remove(kvp.Key);
-                                if (!bDeleting)
-                                    m_mapBad2Good.Add(kvp.Key, strNewValue);
-                                break;  // can't modify the collection without restarting the enumerator
-                            }
-                        }
-                    }
-                }
-            }
-
-            return res;
-        }
-
-        private void RetaskWhiteListSfw(string strKey, string strNewValue)
-        {
-            SpellFixerWord sfw = m_mapWhiteList[strKey];
-            m_mapWhiteList.Remove(strKey);
-            if (!m_mapWhiteList.ContainsKey(strNewValue))
-            {
-                sfw.Value = strNewValue;
-                sfw.InitializeNonStaticData(m_project);
-                m_mapWhiteList.Add(sfw);
-            }
-        }
-
-        private bool AddToWhiteList(string strValue)
-        {
-            if (!m_mapWhiteList.ContainsKey(strValue))
-            {
-                SpellFixerWord sfw = m_project.GetNewSpellFixerWord(strValue, null);
-                m_mapWhiteList.Add(sfw);
-                return true;
-            }
-            return false;
-        }
-
-        protected void GoodValueEdited(DataGridViewRow theRow, string strBadValue, string strNewBadValue, 
-            string strGoodValue, string strNewGoodValue)
-        {
-            // if the new record is already in there, then just select and display the existing value
-            if (strBadValue != strNewBadValue)
-                foreach (DataGridViewRow aRow in dataGridView.Rows)
-                    if (strNewBadValue == (string)aRow.Cells[cnBadSpelling].Value)
-                    {
-                        aRow.Selected = true;
-                        dataGridView.FirstDisplayedScrollingRowIndex = aRow.Index;
-                        System.Diagnostics.Debug.Assert(m_mapBad2Good.ContainsKey(strNewBadValue) && m_mapBad2Good[strNewBadValue] == strNewGoodValue);
-                        return;
-                    }
-
-            // remove the one we're editing (so we don't find it below causing us to query the user 
-            //  about *that* one)
-            if (!String.IsNullOrEmpty(strBadValue))
-                m_mapBad2Good.Remove(strBadValue);
-
-            // then see if any other records have the same 'good form' and ask the user if they'd like us
-            //  to change those also
-            DialogResult res = RetaskBad2GoodList(strGoodValue, strNewGoodValue);
-            if (res == DialogResult.Yes)
-                UpdateGridGoodValues(strGoodValue, strNewGoodValue);
-
-            // now update the row being edited with the new data
-            theRow.Cells[cnGoodSpelling].Value = strNewGoodValue;
-            if (strNewBadValue != strBadValue)
-                theRow.Cells[cnBadSpelling].Value = strNewBadValue;
-
-            // now add the new data to the collection
-            m_mapBad2Good.Add(strNewBadValue, strNewGoodValue);
-
-            // also update the known good list with the new good form (if we're changing them all)
-            System.Diagnostics.Debug.Assert(String.IsNullOrEmpty(strGoodValue) || m_mapWhiteList.ContainsKey(strGoodValue));
-            if (!String.IsNullOrEmpty(strGoodValue)
-                && m_mapWhiteList.ContainsKey(strGoodValue)
-                && (res != DialogResult.No))   // this means the original good form is still there for other records
-            {
-                RetaskWhiteListSfw(strGoodValue, strNewGoodValue);
-            }
-            else if (!m_mapWhiteList.ContainsKey(strNewGoodValue))
-                AddToWhiteList(strNewGoodValue);
-
-            buttonOK.Enabled = true;
-            // the update to the WordsToCheck will happen by the caller after we're totally done
-        }
-
-        protected void BadValueOnlyEdited(DataGridViewCell theBadCell, string strBadValue, string strNewBadValue,
-            string strNewGoodValue)
-        {
-            // update the row value
-            theBadCell.Value = strNewBadValue;
-
-            // and update the collection
-            if (!String.IsNullOrEmpty(strBadValue))
-                m_mapBad2Good.Remove(strBadValue);
-
-            m_mapBad2Good.Add(strNewBadValue, strNewGoodValue);
-
-            // since we know this can't be a good word (or it wouldn't be the 'bad' form), remove it from the white list if present
-            if (m_mapWhiteList.ContainsKey(strNewBadValue))
-                m_mapWhiteList.Remove(strNewBadValue);
-
-            buttonOK.Enabled = true;
-        }
-
-#else   // not in SF30
-#endif
-
-        private void dataGridView_CellMouseUp(object sender, DataGridViewCellMouseEventArgs e)
+        private void DataGridView_CellMouseUp(object sender, DataGridViewCellMouseEventArgs e)
         {
             if ((e.RowIndex < 0) || (e.RowIndex >= dataGridView.Rows.Count)
                 || (e.ColumnIndex < 0) || (e.ColumnIndex >= dataGridView.Columns.Count)
-#if !TurnOffSF30
-                || (EditingDictionary)
-#endif
                 || (e.Button != MouseButtons.Right))
                 return;
 
@@ -516,7 +310,7 @@ namespace SpellingFixerEC
             }
         }
 
-        private void dataGridView_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        private void DataGridView_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
             System.Diagnostics.Trace.WriteLine(String.Format("PreviewKeyDown: sender: {3}, KeyValue: {0}, KeyCode: {1}, KeyData: {2}",
                 e.KeyValue, e.KeyCode, e.KeyData, sender.ToString()));
@@ -538,7 +332,7 @@ namespace SpellingFixerEC
             }
         }
 
-        private void buttonAddCorrection_Click(object sender, EventArgs e)
+        private void ButtonAddCorrection_Click(object sender, EventArgs e)
         {
             DataTable myTable = (DataTable)dataGridView.DataSource;
             myTable.Rows.Add(new object[] { "incorect", "incorrect" });
