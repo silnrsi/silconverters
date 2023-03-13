@@ -316,13 +316,13 @@ namespace SIL.ParatextBackTranslationHelperPlugin
         // marker, it's value for IsPublishableVernacular (false) and IsMetadata (true) are opposite from the other case. 
         // So... if IsPubliableVernacular is false, at least check if this is that case, and return true, so we'll try to 
         // translate it as the others are (bkz we only send IsPub text segments for translation)
-        private bool IsPublishableVernacular(IUSFMTextToken t, List<IUSFMToken> tokens)
+        private static bool IsPublishableVernacular(IUSFMTextToken t, List<IUSFMToken> tokens)
         {
             return t.IsPublishableVernacular || 
                    (PreviousToken(t, tokens, out IUSFMMarkerToken mt) && (mt.Marker == "va") && mt.IsMetadata);
         }
 
-        private bool PreviousToken(IUSFMTextToken t, List<IUSFMToken> tokens, out IUSFMMarkerToken previousToken)
+        private static bool PreviousToken(IUSFMTextToken t, List<IUSFMToken> tokens, out IUSFMMarkerToken previousToken)
         {
             var index = tokens.IndexOf(t) - 1;
             if ((index >= 0) && (index < tokens.Count) && (tokens[index] is IUSFMMarkerToken prevToken))
@@ -630,7 +630,9 @@ namespace SIL.ParatextBackTranslationHelperPlugin
             foreach (var token in tokensTarget)
             {
                 IUSFMToken updatedToken = token;
-                if ((token is IUSFMTextToken textToken) && textToken.IsPublishableVernacular && IsMatchingVerse((IVerseRef)textToken.VerseRef, verseReference))
+                if ((token is IUSFMTextToken textToken) && 
+                    IsPublishableVernacular(textToken, tokensTarget) 
+                    && IsMatchingVerse((IVerseRef)textToken.VerseRef, verseReference))
                 {
                     latestTextToken = new TextToken(textToken)
                     {

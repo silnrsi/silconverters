@@ -289,6 +289,7 @@
     <Content Include="redist\Help\TECkit_Map_Plug-in_About_box.htm" />
     <Content Include="TestFiles\BulkWordDocConverter\TestFile1.xml" />
     <Content Include="TestFiles\BulkWordDocConverter\TestFile2.xml" />
+    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\CombinedInSourceAndTargetWithVaOverride\CombinedInSourceAndTargetWithVaOverride_TranslatedText.txt" />
     <EmbeddedResource Include="TestFiles\PtxBackTrHelper\CombinedInSourceSeparateNoEmptyInTarget\CombinedInSourceSeparateNoEmptyInTarget_TranslatedText.txt" />
     <EmbeddedResource Include="TestFiles\PtxBackTrHelper\SeparateInSourceCombinedButEmptyInTarget\SeparateInSourceCombinedButEmptyInTarget_TranslatedText.txt" />
     <EmbeddedResource Include="TestFiles\PtxBackTrHelper\MultipleVersesWithFootnote\MultipleVersesWithFootnote_TranslatedText.txt" />
@@ -438,6 +439,11 @@
     <EmbeddedResource Include="TestFiles\PtxBackTrHelper\CombinedInSourceSeparateNoEmptyInTarget\CombinedInSourceSeparateNoEmptyInTarget_TokensTargetUpdate.json" />
     <EmbeddedResource Include="TestFiles\PtxBackTrHelper\CombinedInSourceSeparateNoEmptyInTarget\CombinedInSourceSeparateNoEmptyInTarget_VerseReference.json" />
     <EmbeddedResource Include="TestFiles\PtxBackTrHelper\CombinedInSourceSeparateNoEmptyInTarget\CombinedInSourceSeparateNoEmptyInTarget_VersesReference.json" />
+    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\CombinedInSourceAndTargetWithVaOverride\CombinedInSourceAndTargetWithVaOverride_TokensSource.json" />
+    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\CombinedInSourceAndTargetWithVaOverride\CombinedInSourceAndTargetWithVaOverride_TokensTarget.json" />
+    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\CombinedInSourceAndTargetWithVaOverride\CombinedInSourceAndTargetWithVaOverride_TokensTargetUpdate.json" />
+    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\CombinedInSourceAndTargetWithVaOverride\CombinedInSourceAndTargetWithVaOverride_VerseReference.json" />
+    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\CombinedInSourceAndTargetWithVaOverride\CombinedInSourceAndTargetWithVaOverride_VersesReference.json" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

@@ -23,7 +23,8 @@ namespace TestBwdc
         [TestCase("SimpleParagraphVerse", "SimpleParagraphVerseMissingInTarget")]
         [TestCase("SingleVerse", "SingleVerseMissingInTarget")]
         /* these are all now failing and I don't think they matter anymore. We aren't now completely 
-         * overwriting the target text with the translated text.
+         * overwriting the target text with the translated text, rather than merging with what's
+         * in the target presently.
         [TestCase("SingleVerse", "SingleVerseMiTSplitIntoTwoParagraphs")]
         [TestCase("SingleVerse", "SingleVerseSplitIntoTwoParagraphs")]
         [TestCase("MultipleParagraphs", "MultipleParagraphsJoinedIntoOneParagraphs")]
@@ -56,6 +57,7 @@ namespace TestBwdc
         [TestCase("MultipleVersesWithFootnote")]
         [TestCase("SeparateInSourceCombinedButEmptyInTarget")]
         [TestCase("CombinedInSourceSeparateNoEmptyInTarget")]
+        [TestCase("CombinedInSourceAndTargetWithVaOverride")]
         public void It_Can_Determine_Correct_Update_To_Target_Project_For_Other_Cases(string fileNamePrefix)
         {
             var usfmTokensSource = TestModel.LoadKeyedListOfTokens($"{fileNamePrefix}_TokensSource.json");

@@ -1,0 +1,1032 @@
+{
+  "40_018_003": [
+    {
+      "Type": 2,
+      "Marker": "v",
+      "Attributes": [],
+      "Data": "3-4",
+      "EndMarker": null,
+      "Token": {
+        "Type": 2,
+        "Marker": "v",
+        "Text": null,
+        "Attributes": null,
+        "Data": "3-4",
+        "EndMarker": null,
+        "NestlessMarker": "v",
+        "HasData": true,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "MAT",
+        "BookNum": 40,
+        "ChapterNum": 18,
+        "VerseNum": 3,
+        "BBBCCCVVV": 40018003,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": true,
+        "AllVerses": [
+          {
+            "BookCode": "MAT",
+            "BookNum": 40,
+            "ChapterNum": 18,
+            "VerseNum": 3,
+            "BBBCCCVVV": 40018003,
+            "Versification": {
+              "Type": 4,
+              "IsCustomized": false
+            },
+            "RepresentsMultipleVerses": false,
+            "AllVerses": []
+          },
+          {
+            "BookCode": "MAT",
+            "BookNum": 40,
+            "ChapterNum": 18,
+            "VerseNum": 4,
+            "BBBCCCVVV": 40018004,
+            "Versification": {
+              "Type": 4,
+              "IsCustomized": false
+            },
+            "RepresentsMultipleVerses": false,
+            "AllVerses": []
+          }
+        ]
+      },
+      "VerseOffset": 0,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": true,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    },
+    {
+      "Type": 4,
+      "Marker": "va",
+      "Attributes": [],
+      "Data": null,
+      "EndMarker": "va*",
+      "Token": {
+        "Type": 5,
+        "Marker": "va",
+        "Text": null,
+        "Attributes": null,
+        "Data": null,
+        "EndMarker": "va*",
+        "NestlessMarker": "va",
+        "HasData": false,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "MAT",
+        "BookNum": 40,
+        "ChapterNum": 18,
+        "VerseNum": 3,
+        "BBBCCCVVV": 40018003,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": true,
+        "AllVerses": [
+          {
+            "BookCode": "MAT",
+            "BookNum": 40,
+            "ChapterNum": 18,
+            "VerseNum": 3,
+            "BBBCCCVVV": 40018003,
+            "Versification": {
+              "Type": 4,
+              "IsCustomized": false
+            },
+            "RepresentsMultipleVerses": false,
+            "AllVerses": []
+          },
+          {
+            "BookCode": "MAT",
+            "BookNum": 40,
+            "ChapterNum": 18,
+            "VerseNum": 4,
+            "BBBCCCVVV": 40018004,
+            "Versification": {
+              "Type": 4,
+              "IsCustomized": false
+            },
+            "RepresentsMultipleVerses": false,
+            "AllVerses": []
+          }
+        ]
+      },
+      "VerseOffset": 7,
+      "IsSpecial": true,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": true,
+      "IsMetadata": true,
+      "IsPublishableVernacular": false
+    },
+    {
+      "Text": "3क",
+      "Token": {
+        "Type": 3,
+        "Marker": null,
+        "Text": "3क",
+        "Attributes": null,
+        "Data": null,
+        "EndMarker": null,
+        "NestlessMarker": null,
+        "HasData": false,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "MAT",
+        "BookNum": 40,
+        "ChapterNum": 18,
+        "VerseNum": 3,
+        "BBBCCCVVV": 40018003,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": true,
+        "AllVerses": [
+          {
+            "BookCode": "MAT",
+            "BookNum": 40,
+            "ChapterNum": 18,
+            "VerseNum": 3,
+            "BBBCCCVVV": 40018003,
+            "Versification": {
+              "Type": 4,
+              "IsCustomized": false
+            },
+            "RepresentsMultipleVerses": false,
+            "AllVerses": []
+          },
+          {
+            "BookCode": "MAT",
+            "BookNum": 40,
+            "ChapterNum": 18,
+            "VerseNum": 4,
+            "BBBCCCVVV": 40018004,
+            "Versification": {
+              "Type": 4,
+              "IsCustomized": false
+            },
+            "RepresentsMultipleVerses": false,
+            "AllVerses": []
+          }
+        ]
+      },
+      "VerseOffset": 11,
+      "IsSpecial": true,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": true,
+      "IsMetadata": true,
+      "IsPublishableVernacular": false
+    },
+    {
+      "Type": 6,
+      "Marker": "va*",
+      "Attributes": [],
+      "Data": null,
+      "EndMarker": null,
+      "Token": {
+        "Type": 7,
+        "Marker": "va*",
+        "Text": null,
+        "Attributes": null,
+        "Data": null,
+        "EndMarker": null,
+        "NestlessMarker": "va*",
+        "HasData": false,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "MAT",
+        "BookNum": 40,
+        "ChapterNum": 18,
+        "VerseNum": 3,
+        "BBBCCCVVV": 40018003,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": true,
+        "AllVerses": [
+          {
+            "BookCode": "MAT",
+            "BookNum": 40,
+            "ChapterNum": 18,
+            "VerseNum": 3,
+            "BBBCCCVVV": 40018003,
+            "Versification": {
+              "Type": 4,
+              "IsCustomized": false
+            },
+            "RepresentsMultipleVerses": false,
+            "AllVerses": []
+          },
+          {
+            "BookCode": "MAT",
+            "BookNum": 40,
+            "ChapterNum": 18,
+            "VerseNum": 4,
+            "BBBCCCVVV": 40018004,
+            "Versification": {
+              "Type": 4,
+              "IsCustomized": false
+            },
+            "RepresentsMultipleVerses": false,
+            "AllVerses": []
+          }
+        ]
+      },
+      "VerseOffset": 13,
+      "IsSpecial": true,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": true,
+      "IsMetadata": true,
+      "IsPublishableVernacular": false
+    },
+    {
+      "Text": " फिर कहा, ",
+      "Token": {
+        "Type": 3,
+        "Marker": null,
+        "Text": " फिर कहा, ",
+        "Attributes": null,
+        "Data": null,
+        "EndMarker": null,
+        "NestlessMarker": null,
+        "HasData": false,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "MAT",
+        "BookNum": 40,
+        "ChapterNum": 18,
+        "VerseNum": 3,
+        "BBBCCCVVV": 40018003,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": true,
+        "AllVerses": [
+          {
+            "BookCode": "MAT",
+            "BookNum": 40,
+            "ChapterNum": 18,
+            "VerseNum": 3,
+            "BBBCCCVVV": 40018003,
+            "Versification": {
+              "Type": 4,
+              "IsCustomized": false
+            },
+            "RepresentsMultipleVerses": false,
+            "AllVerses": []
+          },
+          {
+            "BookCode": "MAT",
+            "BookNum": 40,
+            "ChapterNum": 18,
+            "VerseNum": 4,
+            "BBBCCCVVV": 40018004,
+            "Versification": {
+              "Type": 4,
+              "IsCustomized": false
+            },
+            "RepresentsMultipleVerses": false,
+            "AllVerses": []
+          }
+        ]
+      },
+      "VerseOffset": 17,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": true,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    },
+    {
+      "Type": 4,
+      "Marker": "va",
+      "Attributes": [],
+      "Data": null,
+      "EndMarker": "va*",
+      "Token": {
+        "Type": 5,
+        "Marker": "va",
+        "Text": null,
+        "Attributes": null,
+        "Data": null,
+        "EndMarker": "va*",
+        "NestlessMarker": "va",
+        "HasData": false,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "MAT",
+        "BookNum": 40,
+        "ChapterNum": 18,
+        "VerseNum": 3,
+        "BBBCCCVVV": 40018003,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": true,
+        "AllVerses": [
+          {
+            "BookCode": "MAT",
+            "BookNum": 40,
+            "ChapterNum": 18,
+            "VerseNum": 3,
+            "BBBCCCVVV": 40018003,
+            "Versification": {
+              "Type": 4,
+              "IsCustomized": false
+            },
+            "RepresentsMultipleVerses": false,
+            "AllVerses": []
+          },
+          {
+            "BookCode": "MAT",
+            "BookNum": 40,
+            "ChapterNum": 18,
+            "VerseNum": 4,
+            "BBBCCCVVV": 40018004,
+            "Versification": {
+              "Type": 4,
+              "IsCustomized": false
+            },
+            "RepresentsMultipleVerses": false,
+            "AllVerses": []
+          }
+        ]
+      },
+      "VerseOffset": 27,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": true,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    },
+    {
+      "Text": "4",
+      "Token": {
+        "Type": 3,
+        "Marker": null,
+        "Text": "4",
+        "Attributes": null,
+        "Data": null,
+        "EndMarker": null,
+        "NestlessMarker": null,
+        "HasData": false,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "MAT",
+        "BookNum": 40,
+        "ChapterNum": 18,
+        "VerseNum": 3,
+        "BBBCCCVVV": 40018003,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": true,
+        "AllVerses": [
+          {
+            "BookCode": "MAT",
+            "BookNum": 40,
+            "ChapterNum": 18,
+            "VerseNum": 3,
+            "BBBCCCVVV": 40018003,
+            "Versification": {
+              "Type": 4,
+              "IsCustomized": false
+            },
+            "RepresentsMultipleVerses": false,
+            "AllVerses": []
+          },
+          {
+            "BookCode": "MAT",
+            "BookNum": 40,
+            "ChapterNum": 18,
+            "VerseNum": 4,
+            "BBBCCCVVV": 40018004,
+            "Versification": {
+              "Type": 4,
+              "IsCustomized": false
+            },
+            "RepresentsMultipleVerses": false,
+            "AllVerses": []
+          }
+        ]
+      },
+      "VerseOffset": 31,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": true,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    },
+    {
+      "Type": 6,
+      "Marker": "va*",
+      "Attributes": [],
+      "Data": null,
+      "EndMarker": null,
+      "Token": {
+        "Type": 7,
+        "Marker": "va*",
+        "Text": null,
+        "Attributes": null,
+        "Data": null,
+        "EndMarker": null,
+        "NestlessMarker": "va*",
+        "HasData": false,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "MAT",
+        "BookNum": 40,
+        "ChapterNum": 18,
+        "VerseNum": 3,
+        "BBBCCCVVV": 40018003,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": true,
+        "AllVerses": [
+          {
+            "BookCode": "MAT",
+            "BookNum": 40,
+            "ChapterNum": 18,
+            "VerseNum": 3,
+            "BBBCCCVVV": 40018003,
+            "Versification": {
+              "Type": 4,
+              "IsCustomized": false
+            },
+            "RepresentsMultipleVerses": false,
+            "AllVerses": []
+          },
+          {
+            "BookCode": "MAT",
+            "BookNum": 40,
+            "ChapterNum": 18,
+            "VerseNum": 4,
+            "BBBCCCVVV": 40018004,
+            "Versification": {
+              "Type": 4,
+              "IsCustomized": false
+            },
+            "RepresentsMultipleVerses": false,
+            "AllVerses": []
+          }
+        ]
+      },
+      "VerseOffset": 32,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": true,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    },
+    {
+      "Text": " “मैं तुम्‍हें सच्‍चाई बताता हूँ कि जो अपने आपको दीन बनाएगा, और इस बच्‍चे के समान साफ दिल बनेगा, वही परमेश्वर के राज्‍य में सबसे बड़ा है। ",
+      "Token": {
+        "Type": 3,
+        "Marker": null,
+        "Text": " “मैं तुम्‍हें सच्‍चाई बताता हूँ कि जो अपने आपको दीन बनाएगा, और इस बच्‍चे के समान साफ दिल बनेगा, वही परमेश्वर के राज्‍य में सबसे बड़ा है। ",
+        "Attributes": null,
+        "Data": null,
+        "EndMarker": null,
+        "NestlessMarker": null,
+        "HasData": false,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "MAT",
+        "BookNum": 40,
+        "ChapterNum": 18,
+        "VerseNum": 3,
+        "BBBCCCVVV": 40018003,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": true,
+        "AllVerses": [
+          {
+            "BookCode": "MAT",
+            "BookNum": 40,
+            "ChapterNum": 18,
+            "VerseNum": 3,
+            "BBBCCCVVV": 40018003,
+            "Versification": {
+              "Type": 4,
+              "IsCustomized": false
+            },
+            "RepresentsMultipleVerses": false,
+            "AllVerses": []
+          },
+          {
+            "BookCode": "MAT",
+            "BookNum": 40,
+            "ChapterNum": 18,
+            "VerseNum": 4,
+            "BBBCCCVVV": 40018004,
+            "Versification": {
+              "Type": 4,
+              "IsCustomized": false
+            },
+            "RepresentsMultipleVerses": false,
+            "AllVerses": []
+          }
+        ]
+      },
+      "VerseOffset": 36,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": true,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    },
+    {
+      "Type": 4,
+      "Marker": "va",
+      "Attributes": [],
+      "Data": null,
+      "EndMarker": "va*",
+      "Token": {
+        "Type": 5,
+        "Marker": "va",
+        "Text": null,
+        "Attributes": null,
+        "Data": null,
+        "EndMarker": "va*",
+        "NestlessMarker": "va",
+        "HasData": false,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "MAT",
+        "BookNum": 40,
+        "ChapterNum": 18,
+        "VerseNum": 3,
+        "BBBCCCVVV": 40018003,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": true,
+        "AllVerses": [
+          {
+            "BookCode": "MAT",
+            "BookNum": 40,
+            "ChapterNum": 18,
+            "VerseNum": 3,
+            "BBBCCCVVV": 40018003,
+            "Versification": {
+              "Type": 4,
+              "IsCustomized": false
+            },
+            "RepresentsMultipleVerses": false,
+            "AllVerses": []
+          },
+          {
+            "BookCode": "MAT",
+            "BookNum": 40,
+            "ChapterNum": 18,
+            "VerseNum": 4,
+            "BBBCCCVVV": 40018004,
+            "Versification": {
+              "Type": 4,
+              "IsCustomized": false
+            },
+            "RepresentsMultipleVerses": false,
+            "AllVerses": []
+          }
+        ]
+      },
+      "VerseOffset": 174,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": true,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    },
+    {
+      "Text": "3ख",
+      "Token": {
+        "Type": 3,
+        "Marker": null,
+        "Text": "3ख",
+        "Attributes": null,
+        "Data": null,
+        "EndMarker": null,
+        "NestlessMarker": null,
+        "HasData": false,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "MAT",
+        "BookNum": 40,
+        "ChapterNum": 18,
+        "VerseNum": 3,
+        "BBBCCCVVV": 40018003,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": true,
+        "AllVerses": [
+          {
+            "BookCode": "MAT",
+            "BookNum": 40,
+            "ChapterNum": 18,
+            "VerseNum": 3,
+            "BBBCCCVVV": 40018003,
+            "Versification": {
+              "Type": 4,
+              "IsCustomized": false
+            },
+            "RepresentsMultipleVerses": false,
+            "AllVerses": []
+          },
+          {
+            "BookCode": "MAT",
+            "BookNum": 40,
+            "ChapterNum": 18,
+            "VerseNum": 4,
+            "BBBCCCVVV": 40018004,
+            "Versification": {
+              "Type": 4,
+              "IsCustomized": false
+            },
+            "RepresentsMultipleVerses": false,
+            "AllVerses": []
+          }
+        ]
+      },
+      "VerseOffset": 178,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": true,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    },
+    {
+      "Type": 6,
+      "Marker": "va*",
+      "Attributes": [],
+      "Data": null,
+      "EndMarker": null,
+      "Token": {
+        "Type": 7,
+        "Marker": "va*",
+        "Text": null,
+        "Attributes": null,
+        "Data": null,
+        "EndMarker": null,
+        "NestlessMarker": "va*",
+        "HasData": false,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "MAT",
+        "BookNum": 40,
+        "ChapterNum": 18,
+        "VerseNum": 3,
+        "BBBCCCVVV": 40018003,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": true,
+        "AllVerses": [
+          {
+            "BookCode": "MAT",
+            "BookNum": 40,
+            "ChapterNum": 18,
+            "VerseNum": 3,
+            "BBBCCCVVV": 40018003,
+            "Versification": {
+              "Type": 4,
+              "IsCustomized": false
+            },
+            "RepresentsMultipleVerses": false,
+            "AllVerses": []
+          },
+          {
+            "BookCode": "MAT",
+            "BookNum": 40,
+            "ChapterNum": 18,
+            "VerseNum": 4,
+            "BBBCCCVVV": 40018004,
+            "Versification": {
+              "Type": 4,
+              "IsCustomized": false
+            },
+            "RepresentsMultipleVerses": false,
+            "AllVerses": []
+          }
+        ]
+      },
+      "VerseOffset": 180,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": true,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    },
+    {
+      "Text": " और जब तक तुम ऐसा नहीं करते हो, तब तक स्‍वर्ग के राज्‍य में प्रवेश नहीं कर सकते हो।” ",
+      "Token": {
+        "Type": 3,
+        "Marker": null,
+        "Text": " और जब तक तुम ऐसा नहीं करते हो, तब तक स्‍वर्ग के राज्‍य में प्रवेश नहीं कर सकते हो।” ",
+        "Attributes": null,
+        "Data": null,
+        "EndMarker": null,
+        "NestlessMarker": null,
+        "HasData": false,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "MAT",
+        "BookNum": 40,
+        "ChapterNum": 18,
+        "VerseNum": 3,
+        "BBBCCCVVV": 40018003,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": true,
+        "AllVerses": [
+          {
+            "BookCode": "MAT",
+            "BookNum": 40,
+            "ChapterNum": 18,
+            "VerseNum": 3,
+            "BBBCCCVVV": 40018003,
+            "Versification": {
+              "Type": 4,
+              "IsCustomized": false
+            },
+            "RepresentsMultipleVerses": false,
+            "AllVerses": []
+          },
+          {
+            "BookCode": "MAT",
+            "BookNum": 40,
+            "ChapterNum": 18,
+            "VerseNum": 4,
+            "BBBCCCVVV": 40018004,
+            "Versification": {
+              "Type": 4,
+              "IsCustomized": false
+            },
+            "RepresentsMultipleVerses": false,
+            "AllVerses": []
+          }
+        ]
+      },
+      "VerseOffset": 184,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": true,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    },
+    {
+      "Type": 3,
+      "Marker": "s",
+      "Attributes": [],
+      "Data": null,
+      "EndMarker": null,
+      "Token": {
+        "Type": 4,
+        "Marker": "s",
+        "Text": null,
+        "Attributes": null,
+        "Data": null,
+        "EndMarker": "s*",
+        "NestlessMarker": "s",
+        "HasData": false,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "MAT",
+        "BookNum": 40,
+        "ChapterNum": 18,
+        "VerseNum": 3,
+        "BBBCCCVVV": 40018003,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": true,
+        "AllVerses": [
+          {
+            "BookCode": "MAT",
+            "BookNum": 40,
+            "ChapterNum": 18,
+            "VerseNum": 3,
+            "BBBCCCVVV": 40018003,
+            "Versification": {
+              "Type": 4,
+              "IsCustomized": false
+            },
+            "RepresentsMultipleVerses": false,
+            "AllVerses": []
+          },
+          {
+            "BookCode": "MAT",
+            "BookNum": 40,
+            "ChapterNum": 18,
+            "VerseNum": 4,
+            "BBBCCCVVV": 40018004,
+            "Versification": {
+              "Type": 4,
+              "IsCustomized": false
+            },
+            "RepresentsMultipleVerses": false,
+            "AllVerses": []
+          }
+        ]
+      },
+      "VerseOffset": 269,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": false,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    },
+    {
+      "Text": "परख के विषय में शिक्षा ",
+      "Token": {
+        "Type": 3,
+        "Marker": null,
+        "Text": "परख के विषय में शिक्षा ",
+        "Attributes": null,
+        "Data": null,
+        "EndMarker": null,
+        "NestlessMarker": null,
+        "HasData": false,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "MAT",
+        "BookNum": 40,
+        "ChapterNum": 18,
+        "VerseNum": 3,
+        "BBBCCCVVV": 40018003,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": true,
+        "AllVerses": [
+          {
+            "BookCode": "MAT",
+            "BookNum": 40,
+            "ChapterNum": 18,
+            "VerseNum": 3,
+            "BBBCCCVVV": 40018003,
+            "Versification": {
+              "Type": 4,
+              "IsCustomized": false
+            },
+            "RepresentsMultipleVerses": false,
+            "AllVerses": []
+          },
+          {
+            "BookCode": "MAT",
+            "BookNum": 40,
+            "ChapterNum": 18,
+            "VerseNum": 4,
+            "BBBCCCVVV": 40018004,
+            "Versification": {
+              "Type": 4,
+              "IsCustomized": false
+            },
+            "RepresentsMultipleVerses": false,
+            "AllVerses": []
+          }
+        ]
+      },
+      "VerseOffset": 272,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": false,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    },
+    {
+      "Type": 3,
+      "Marker": "p",
+      "Attributes": [],
+      "Data": null,
+      "EndMarker": null,
+      "Token": {
+        "Type": 4,
+        "Marker": "p",
+        "Text": null,
+        "Attributes": null,
+        "Data": null,
+        "EndMarker": "p*",
+        "NestlessMarker": "p",
+        "HasData": false,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "MAT",
+        "BookNum": 40,
+        "ChapterNum": 18,
+        "VerseNum": 3,
+        "BBBCCCVVV": 40018003,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": true,
+        "AllVerses": [
+          {
+            "BookCode": "MAT",
+            "BookNum": 40,
+            "ChapterNum": 18,
+            "VerseNum": 3,
+            "BBBCCCVVV": 40018003,
+            "Versification": {
+              "Type": 4,
+              "IsCustomized": false
+            },
+            "RepresentsMultipleVerses": false,
+            "AllVerses": []
+          },
+          {
+            "BookCode": "MAT",
+            "BookNum": 40,
+            "ChapterNum": 18,
+            "VerseNum": 4,
+            "BBBCCCVVV": 40018004,
+            "Versification": {
+              "Type": 4,
+              "IsCustomized": false
+            },
+            "RepresentsMultipleVerses": false,
+            "AllVerses": []
+          }
+        ]
+      },
+      "VerseOffset": 295,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": true,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    }
+  ]
+}
