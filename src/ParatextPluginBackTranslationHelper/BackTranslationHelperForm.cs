@@ -392,7 +392,10 @@ namespace SIL.ParatextBackTranslationHelperPlugin
 
                 var tokens = vrefTokens[bookChapterVerseKey];
                 var data = tokens.OfType<IUSFMTextToken>()
-                                 .Where(t => t.IsPublishableVernacular && IsMatchingVerse(t.VerseRef, _verseReference));
+                                 .Where(t => IsPublishableVernacular(t, tokens) && IsMatchingVerse(t.VerseRef, _verseReference));
+
+                if (!data.Any())
+                    return null;
 
                 var values = data.Select(t => t.Text);
                 var verseData = string.Join(Environment.NewLine, values);
