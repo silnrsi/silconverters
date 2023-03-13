@@ -12,6 +12,8 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using Newtonsoft.Json;
+using System.Windows;
+using System.Security.Policy;
 
 namespace SIL.ParatextBackTranslationHelperPlugin
 {
@@ -270,7 +272,7 @@ namespace SIL.ParatextBackTranslationHelperPlugin
         {
             get
             {
-                var keyBookChapterVerse = GetBookChapterVerseKey(_verseReference);
+                var keyBookChapterVerse = GetBookChapterVerseRangeKey(_verseReference);
                 if (!UsfmTokensSource.TryGetValue(keyBookChapterVerse, out List<IUSFMToken> tokens))
                 {
                     System.Diagnostics.Debug.WriteLine($"PtxBTH: Loading UsfmTokensSource for {keyBookChapterVerse}");
@@ -285,6 +287,9 @@ namespace SIL.ParatextBackTranslationHelperPlugin
                 var data = tokens.OfType<IUSFMTextToken>()
                                  .Where(t => t.IsPublishableVernacular && IsMatchingVerse(t.VerseRef, _verseReference))
                                  .ToDictionary(ta => ta, ta => ta.VerseRef);
+
+                if (!data.Any())
+                    return null;
 
                 TextTokenMarkersSource = GetTextTokenMarkers(tokens, data.Keys.ToList());
 
@@ -338,7 +343,7 @@ namespace SIL.ParatextBackTranslationHelperPlugin
                     System.Diagnostics.Debug.WriteLine($"PtxBTH: Loading UsfmTokensTarget for {bookChapterKey}");
                     var chapterTokens = _projectTarget.GetUSFMTokens(_verseReference.BookNum, _verseReference.ChapterNum).ToList();
                     var dict = chapterTokens.GroupBy(t => t.VerseRef, t => t, (key, g) => new { VerseRef = key, USFMTokens = g.ToList() })
-                                            .ToDictionary(t => GetBookChapterVerseKey(t.VerseRef), t => t.USFMTokens);
+                                            .ToDictionary(t => GetBookChapterVerseRangeKey(t.VerseRef), t => t.USFMTokens);
                     vrefTokens = new SortedDictionary<string, List<IUSFMToken>>(dict);
                     UsfmTokensTarget.Add(bookChapterKey, vrefTokens);
                 }
@@ -347,7 +352,7 @@ namespace SIL.ParatextBackTranslationHelperPlugin
                     System.Diagnostics.Debug.WriteLine($"PtxBTH: Already have UsfmTokensTarget for {bookChapterKey}");
                 }
 
-                var bookChapterVerseKey = GetBookChapterVerseKey(_verseReference);
+                var bookChapterVerseKey = GetBookChapterVerseRangeKey(_verseReference);
 
                 // issue: if Ptx is in "I'm just a single verse" mode (e.g. clicking up/down in the combo box at the top)
                 //  then this will show a single verse even if the text is a multi-verse situation
@@ -355,7 +360,7 @@ namespace SIL.ParatextBackTranslationHelperPlugin
                 //  which one it *should* be so we can find a hit in vrefTokens
                 bookChapterVerseKey = TriangulateBookChapterVerseKey(bookChapterVerseKey, vrefTokens);
 
-                if (!vrefTokens.ContainsKey(bookChapterVerseKey))
+                if (String.IsNullOrEmpty(bookChapterVerseKey) || !vrefTokens.ContainsKey(bookChapterVerseKey))
                     return null;
 
                 var tokens = vrefTokens[bookChapterVerseKey];
@@ -373,7 +378,7 @@ namespace SIL.ParatextBackTranslationHelperPlugin
             if (vrefTokens.ContainsKey(bookChapterVerseKey))
                 return bookChapterVerseKey;
 
-            var vrefTokenKey = vrefTokens.FirstOrDefault(t => t.Value.Any(v => v.VerseRef.AllVerses.Any(sv => GetBookChapterVerseKey(sv) == bookChapterVerseKey))).Key;
+            var vrefTokenKey = vrefTokens.FirstOrDefault(t => t.Value.Any(v => v.VerseRef.AllVerses.Any(sv => GetBookChapterVerseRangeKey(sv) == bookChapterVerseKey))).Key;
             return vrefTokenKey;
         }
 
@@ -383,7 +388,7 @@ namespace SIL.ParatextBackTranslationHelperPlugin
             return $"{verseReference.BookNum:D2}_{verseReference.ChapterNum:D3}";
         }
 
-        private static string GetBookChapterVerseKey(IVerseRef verseReference)
+        private static string GetBookChapterVerseRangeKey(IVerseRef verseReference)
         {
             // get the key to see if we already have this data (TODO: add a 'it was changed in Ptx', so we can remove it from this collection)
             var bookChapterFirstVerse = $"{verseReference.BookNum:D2}_{verseReference.ChapterNum:D3}_{verseReference.VerseNum:D3}";
@@ -394,8 +399,9 @@ namespace SIL.ParatextBackTranslationHelperPlugin
 
         private static bool IsMatchingVerse(IVerseRef verseReferenceFromToken, IVerseRef verseReference)
         {
-            return ((verseReferenceFromToken.ToString() == verseReference.ToString()) || 
-                    (verseReferenceFromToken?.AllVerses?.Any(vr => vr.ToString() == verseReference?.ToString()) ?? false));
+            return ((verseReferenceFromToken?.ToString() == verseReference?.ToString()) || 
+                    (verseReferenceFromToken.AllVerses?.Any(vr => vr.ToString() == verseReference?.ToString()) ?? false) ||
+                    (verseReference?.AllVerses?.Any(vr => vr.ToString() == verseReferenceFromToken.ToString()) ?? false));
         }
 
         private void ReleaseRequested(IWriteLock obj)
@@ -552,9 +558,9 @@ namespace SIL.ParatextBackTranslationHelperPlugin
                 return null;
 
             // get the source project tokens (so we can use those in the target project)
-            // if by chance, there are non, then it must be that we marked them 'dirty', so just return mull 
+            // if by chance, there are none, then it must be that we marked them 'dirty', so just return mull 
             //  to have them be requeried
-            var keyBookChapterVerse = GetBookChapterVerseKey(verseReference);
+            var keyBookChapterVerse = GetBookChapterVerseRangeKey(verseReference);
             if (!usfmTokensSource.TryGetValue(keyBookChapterVerse, out List<IUSFMToken> tokensSource))
                 return null;
 
@@ -575,10 +581,15 @@ namespace SIL.ParatextBackTranslationHelperPlugin
             //  have any, it probably means that the user didn't have any data in the target project yet... But 
             //  it doesn't really matter, bkz we're just going to replace them with a copy of the source tokens
             //  anyway, which will be replaced w/ the translated text below
-            var keyBookChapterVerses = GetBookChapterVerseKey(versesReference);
+            var keyBookChapterVerses = GetBookChapterVerseRangeKey(versesReference);
             var tokensTarget = tokensSource;
-            if (vrefTokensTarget.ContainsKey(keyBookChapterVerse))
-                vrefTokensTarget[keyBookChapterVerse] = tokensSource;
+
+            // before adding it back in, remove any data in the target collection for any and all verses in the source range
+            var matchingTokensInTarget = vrefTokensTarget.Where(kvp => kvp.Value.Any(t => IsMatchingVerse(t.VerseRef, verseReference))).ToList();
+            matchingTokensInTarget.ForEach(kvp => vrefTokensTarget.Remove(kvp.Key));
+
+            if (vrefTokensTarget.ContainsKey(keyBookChapterVerses))
+                vrefTokensTarget[keyBookChapterVerses] = tokensSource;
             else
                 vrefTokensTarget.Add(keyBookChapterVerses, tokensSource);
 
@@ -668,6 +679,12 @@ namespace SIL.ParatextBackTranslationHelperPlugin
         private static bool IsParagraphToken(IUSFMToken token)
         {
             return (token is IUSFMMarkerToken markerToken) && (markerToken.Type == MarkerType.Paragraph) && _paragraphMarkers.Contains(markerToken.Marker);
+        }
+
+        protected override void OnShown(EventArgs e)
+        {
+            base.OnShown(e);
+            GetNewReference(_verseReference);
         }
 
         private void BackTranslationHelperForm_Load(object sender, EventArgs e)

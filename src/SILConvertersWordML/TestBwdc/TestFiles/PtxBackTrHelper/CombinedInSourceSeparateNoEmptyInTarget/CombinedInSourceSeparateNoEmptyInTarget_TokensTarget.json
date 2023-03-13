@@ -1,0 +1,2508 @@
+{
+  "01_001": {
+    "01_001_000": [
+      {
+        "Type": 0,
+        "Marker": "id",
+        "Attributes": [],
+        "Data": "GEN",
+        "EndMarker": null,
+        "Token": {
+          "Type": 0,
+          "Marker": "id",
+          "Text": null,
+          "Attributes": null,
+          "Data": "GEN",
+          "EndMarker": null,
+          "NestlessMarker": "id",
+          "HasData": true,
+          "HasAttributes": false,
+          "HasNonDefaultAttribute": false
+        },
+        "VerseRef": {
+          "BookCode": "GEN",
+          "BookNum": 1,
+          "ChapterNum": 1,
+          "VerseNum": 0,
+          "BBBCCCVVV": 1001000,
+          "Versification": {
+            "Type": 4,
+            "IsCustomized": false
+          },
+          "RepresentsMultipleVerses": false,
+          "AllVerses": []
+        },
+        "VerseOffset": 0,
+        "IsSpecial": false,
+        "IsFigure": false,
+        "IsFootnoteOrCrossReference": false,
+        "IsScripture": false,
+        "IsMetadata": true,
+        "IsPublishableVernacular": false
+      },
+      {
+        "Text": "- English नौंआ जीबन सास्‍तर (from xnr) ",
+        "Token": {
+          "Type": 3,
+          "Marker": null,
+          "Text": "- English नौंआ जीबन सास्‍तर (from xnr) ",
+          "Attributes": null,
+          "Data": null,
+          "EndMarker": null,
+          "NestlessMarker": null,
+          "HasData": false,
+          "HasAttributes": false,
+          "HasNonDefaultAttribute": false
+        },
+        "VerseRef": {
+          "BookCode": "GEN",
+          "BookNum": 1,
+          "ChapterNum": 1,
+          "VerseNum": 0,
+          "BBBCCCVVV": 1001000,
+          "Versification": {
+            "Type": 4,
+            "IsCustomized": false
+          },
+          "RepresentsMultipleVerses": false,
+          "AllVerses": []
+        },
+        "VerseOffset": 8,
+        "IsSpecial": false,
+        "IsFigure": false,
+        "IsFootnoteOrCrossReference": false,
+        "IsScripture": false,
+        "IsMetadata": true,
+        "IsPublishableVernacular": false
+      },
+      {
+        "Type": 3,
+        "Marker": "h",
+        "Attributes": [],
+        "Data": null,
+        "EndMarker": null,
+        "Token": {
+          "Type": 4,
+          "Marker": "h",
+          "Text": null,
+          "Attributes": null,
+          "Data": null,
+          "EndMarker": "h*",
+          "NestlessMarker": "h",
+          "HasData": false,
+          "HasAttributes": false,
+          "HasNonDefaultAttribute": false
+        },
+        "VerseRef": {
+          "BookCode": "GEN",
+          "BookNum": 1,
+          "ChapterNum": 1,
+          "VerseNum": 0,
+          "BBBCCCVVV": 1001000,
+          "Versification": {
+            "Type": 4,
+            "IsCustomized": false
+          },
+          "RepresentsMultipleVerses": false,
+          "AllVerses": []
+        },
+        "VerseOffset": 47,
+        "IsSpecial": false,
+        "IsFigure": false,
+        "IsFootnoteOrCrossReference": false,
+        "IsScripture": false,
+        "IsMetadata": false,
+        "IsPublishableVernacular": true
+      },
+      {
+        "Text": "Creation ",
+        "Token": {
+          "Type": 3,
+          "Marker": null,
+          "Text": "Creation ",
+          "Attributes": null,
+          "Data": null,
+          "EndMarker": null,
+          "NestlessMarker": null,
+          "HasData": false,
+          "HasAttributes": false,
+          "HasNonDefaultAttribute": false
+        },
+        "VerseRef": {
+          "BookCode": "GEN",
+          "BookNum": 1,
+          "ChapterNum": 1,
+          "VerseNum": 0,
+          "BBBCCCVVV": 1001000,
+          "Versification": {
+            "Type": 4,
+            "IsCustomized": false
+          },
+          "RepresentsMultipleVerses": false,
+          "AllVerses": []
+        },
+        "VerseOffset": 50,
+        "IsSpecial": false,
+        "IsFigure": false,
+        "IsFootnoteOrCrossReference": false,
+        "IsScripture": false,
+        "IsMetadata": false,
+        "IsPublishableVernacular": true
+      },
+      {
+        "Type": 3,
+        "Marker": "toc3",
+        "Attributes": [],
+        "Data": null,
+        "EndMarker": null,
+        "Token": {
+          "Type": 4,
+          "Marker": "toc3",
+          "Text": null,
+          "Attributes": null,
+          "Data": null,
+          "EndMarker": "toc3*",
+          "NestlessMarker": "toc3",
+          "HasData": false,
+          "HasAttributes": false,
+          "HasNonDefaultAttribute": false
+        },
+        "VerseRef": {
+          "BookCode": "GEN",
+          "BookNum": 1,
+          "ChapterNum": 1,
+          "VerseNum": 0,
+          "BBBCCCVVV": 1001000,
+          "Versification": {
+            "Type": 4,
+            "IsCustomized": false
+          },
+          "RepresentsMultipleVerses": false,
+          "AllVerses": []
+        },
+        "VerseOffset": 59,
+        "IsSpecial": false,
+        "IsFigure": false,
+        "IsFootnoteOrCrossReference": false,
+        "IsScripture": false,
+        "IsMetadata": false,
+        "IsPublishableVernacular": true
+      },
+      {
+        "Text": "Cre ",
+        "Token": {
+          "Type": 3,
+          "Marker": null,
+          "Text": "Cre ",
+          "Attributes": null,
+          "Data": null,
+          "EndMarker": null,
+          "NestlessMarker": null,
+          "HasData": false,
+          "HasAttributes": false,
+          "HasNonDefaultAttribute": false
+        },
+        "VerseRef": {
+          "BookCode": "GEN",
+          "BookNum": 1,
+          "ChapterNum": 1,
+          "VerseNum": 0,
+          "BBBCCCVVV": 1001000,
+          "Versification": {
+            "Type": 4,
+            "IsCustomized": false
+          },
+          "RepresentsMultipleVerses": false,
+          "AllVerses": []
+        },
+        "VerseOffset": 65,
+        "IsSpecial": false,
+        "IsFigure": false,
+        "IsFootnoteOrCrossReference": false,
+        "IsScripture": false,
+        "IsMetadata": false,
+        "IsPublishableVernacular": true
+      },
+      {
+        "Type": 3,
+        "Marker": "toc2",
+        "Attributes": [],
+        "Data": null,
+        "EndMarker": null,
+        "Token": {
+          "Type": 4,
+          "Marker": "toc2",
+          "Text": null,
+          "Attributes": null,
+          "Data": null,
+          "EndMarker": "toc2*",
+          "NestlessMarker": "toc2",
+          "HasData": false,
+          "HasAttributes": false,
+          "HasNonDefaultAttribute": false
+        },
+        "VerseRef": {
+          "BookCode": "GEN",
+          "BookNum": 1,
+          "ChapterNum": 1,
+          "VerseNum": 0,
+          "BBBCCCVVV": 1001000,
+          "Versification": {
+            "Type": 4,
+            "IsCustomized": false
+          },
+          "RepresentsMultipleVerses": false,
+          "AllVerses": []
+        },
+        "VerseOffset": 69,
+        "IsSpecial": false,
+        "IsFigure": false,
+        "IsFootnoteOrCrossReference": false,
+        "IsScripture": false,
+        "IsMetadata": false,
+        "IsPublishableVernacular": true
+      },
+      {
+        "Text": "Creation ",
+        "Token": {
+          "Type": 3,
+          "Marker": null,
+          "Text": "Creation ",
+          "Attributes": null,
+          "Data": null,
+          "EndMarker": null,
+          "NestlessMarker": null,
+          "HasData": false,
+          "HasAttributes": false,
+          "HasNonDefaultAttribute": false
+        },
+        "VerseRef": {
+          "BookCode": "GEN",
+          "BookNum": 1,
+          "ChapterNum": 1,
+          "VerseNum": 0,
+          "BBBCCCVVV": 1001000,
+          "Versification": {
+            "Type": 4,
+            "IsCustomized": false
+          },
+          "RepresentsMultipleVerses": false,
+          "AllVerses": []
+        },
+        "VerseOffset": 75,
+        "IsSpecial": false,
+        "IsFigure": false,
+        "IsFootnoteOrCrossReference": false,
+        "IsScripture": false,
+        "IsMetadata": false,
+        "IsPublishableVernacular": true
+      },
+      {
+        "Type": 3,
+        "Marker": "toc1",
+        "Attributes": [],
+        "Data": null,
+        "EndMarker": null,
+        "Token": {
+          "Type": 4,
+          "Marker": "toc1",
+          "Text": null,
+          "Attributes": null,
+          "Data": null,
+          "EndMarker": "toc1*",
+          "NestlessMarker": "toc1",
+          "HasData": false,
+          "HasAttributes": false,
+          "HasNonDefaultAttribute": false
+        },
+        "VerseRef": {
+          "BookCode": "GEN",
+          "BookNum": 1,
+          "ChapterNum": 1,
+          "VerseNum": 0,
+          "BBBCCCVVV": 1001000,
+          "Versification": {
+            "Type": 4,
+            "IsCustomized": false
+          },
+          "RepresentsMultipleVerses": false,
+          "AllVerses": []
+        },
+        "VerseOffset": 84,
+        "IsSpecial": false,
+        "IsFigure": false,
+        "IsFootnoteOrCrossReference": false,
+        "IsScripture": false,
+        "IsMetadata": false,
+        "IsPublishableVernacular": true
+      },
+      {
+        "Text": "Creation ",
+        "Token": {
+          "Type": 3,
+          "Marker": null,
+          "Text": "Creation ",
+          "Attributes": null,
+          "Data": null,
+          "EndMarker": null,
+          "NestlessMarker": null,
+          "HasData": false,
+          "HasAttributes": false,
+          "HasNonDefaultAttribute": false
+        },
+        "VerseRef": {
+          "BookCode": "GEN",
+          "BookNum": 1,
+          "ChapterNum": 1,
+          "VerseNum": 0,
+          "BBBCCCVVV": 1001000,
+          "Versification": {
+            "Type": 4,
+            "IsCustomized": false
+          },
+          "RepresentsMultipleVerses": false,
+          "AllVerses": []
+        },
+        "VerseOffset": 90,
+        "IsSpecial": false,
+        "IsFigure": false,
+        "IsFootnoteOrCrossReference": false,
+        "IsScripture": false,
+        "IsMetadata": false,
+        "IsPublishableVernacular": true
+      },
+      {
+        "Type": 3,
+        "Marker": "h",
+        "Attributes": [],
+        "Data": null,
+        "EndMarker": null,
+        "Token": {
+          "Type": 4,
+          "Marker": "h",
+          "Text": null,
+          "Attributes": null,
+          "Data": null,
+          "EndMarker": "h*",
+          "NestlessMarker": "h",
+          "HasData": false,
+          "HasAttributes": false,
+          "HasNonDefaultAttribute": false
+        },
+        "VerseRef": {
+          "BookCode": "GEN",
+          "BookNum": 1,
+          "ChapterNum": 1,
+          "VerseNum": 0,
+          "BBBCCCVVV": 1001000,
+          "Versification": {
+            "Type": 4,
+            "IsCustomized": false
+          },
+          "RepresentsMultipleVerses": false,
+          "AllVerses": []
+        },
+        "VerseOffset": 99,
+        "IsSpecial": false,
+        "IsFigure": false,
+        "IsFootnoteOrCrossReference": false,
+        "IsScripture": false,
+        "IsMetadata": false,
+        "IsPublishableVernacular": true
+      },
+      {
+        "Type": 3,
+        "Marker": "mt",
+        "Attributes": [],
+        "Data": null,
+        "EndMarker": null,
+        "Token": {
+          "Type": 4,
+          "Marker": "mt",
+          "Text": null,
+          "Attributes": null,
+          "Data": null,
+          "EndMarker": "mt*",
+          "NestlessMarker": "mt",
+          "HasData": false,
+          "HasAttributes": false,
+          "HasNonDefaultAttribute": false
+        },
+        "VerseRef": {
+          "BookCode": "GEN",
+          "BookNum": 1,
+          "ChapterNum": 1,
+          "VerseNum": 0,
+          "BBBCCCVVV": 1001000,
+          "Versification": {
+            "Type": 4,
+            "IsCustomized": false
+          },
+          "RepresentsMultipleVerses": false,
+          "AllVerses": []
+        },
+        "VerseOffset": 102,
+        "IsSpecial": false,
+        "IsFigure": false,
+        "IsFootnoteOrCrossReference": false,
+        "IsScripture": false,
+        "IsMetadata": false,
+        "IsPublishableVernacular": true
+      },
+      {
+        "Type": 1,
+        "Marker": "c",
+        "Attributes": [],
+        "Data": "1",
+        "EndMarker": null,
+        "Token": {
+          "Type": 1,
+          "Marker": "c",
+          "Text": null,
+          "Attributes": null,
+          "Data": "1",
+          "EndMarker": null,
+          "NestlessMarker": "c",
+          "HasData": true,
+          "HasAttributes": false,
+          "HasNonDefaultAttribute": false
+        },
+        "VerseRef": {
+          "BookCode": "GEN",
+          "BookNum": 1,
+          "ChapterNum": 1,
+          "VerseNum": 0,
+          "BBBCCCVVV": 1001000,
+          "Versification": {
+            "Type": 4,
+            "IsCustomized": false
+          },
+          "RepresentsMultipleVerses": false,
+          "AllVerses": []
+        },
+        "VerseOffset": 106,
+        "IsSpecial": false,
+        "IsFigure": false,
+        "IsFootnoteOrCrossReference": false,
+        "IsScripture": true,
+        "IsMetadata": false,
+        "IsPublishableVernacular": true
+      },
+      {
+        "Type": 3,
+        "Marker": "p",
+        "Attributes": [],
+        "Data": null,
+        "EndMarker": null,
+        "Token": {
+          "Type": 4,
+          "Marker": "p",
+          "Text": null,
+          "Attributes": null,
+          "Data": null,
+          "EndMarker": "p*",
+          "NestlessMarker": "p",
+          "HasData": false,
+          "HasAttributes": false,
+          "HasNonDefaultAttribute": false
+        },
+        "VerseRef": {
+          "BookCode": "GEN",
+          "BookNum": 1,
+          "ChapterNum": 1,
+          "VerseNum": 0,
+          "BBBCCCVVV": 1001000,
+          "Versification": {
+            "Type": 4,
+            "IsCustomized": false
+          },
+          "RepresentsMultipleVerses": false,
+          "AllVerses": []
+        },
+        "VerseOffset": 111,
+        "IsSpecial": false,
+        "IsFigure": false,
+        "IsFootnoteOrCrossReference": false,
+        "IsScripture": true,
+        "IsMetadata": false,
+        "IsPublishableVernacular": true
+      }
+    ],
+    "01_001_001": [
+      {
+        "Type": 2,
+        "Marker": "v",
+        "Attributes": [],
+        "Data": "1",
+        "EndMarker": null,
+        "Token": {
+          "Type": 2,
+          "Marker": "v",
+          "Text": null,
+          "Attributes": null,
+          "Data": "1",
+          "EndMarker": null,
+          "NestlessMarker": "v",
+          "HasData": true,
+          "HasAttributes": false,
+          "HasNonDefaultAttribute": false
+        },
+        "VerseRef": {
+          "BookCode": "GEN",
+          "BookNum": 1,
+          "ChapterNum": 1,
+          "VerseNum": 1,
+          "BBBCCCVVV": 1001001,
+          "Versification": {
+            "Type": 4,
+            "IsCustomized": false
+          },
+          "RepresentsMultipleVerses": false,
+          "AllVerses": []
+        },
+        "VerseOffset": 0,
+        "IsSpecial": false,
+        "IsFigure": false,
+        "IsFootnoteOrCrossReference": false,
+        "IsScripture": true,
+        "IsMetadata": false,
+        "IsPublishableVernacular": true
+      },
+      {
+        "Text": "This is how God created the universe: In the beginning God created the earth. ",
+        "Token": {
+          "Type": 3,
+          "Marker": null,
+          "Text": "This is how God created the universe: In the beginning God created the earth. ",
+          "Attributes": null,
+          "Data": null,
+          "EndMarker": null,
+          "NestlessMarker": null,
+          "HasData": false,
+          "HasAttributes": false,
+          "HasNonDefaultAttribute": false
+        },
+        "VerseRef": {
+          "BookCode": "GEN",
+          "BookNum": 1,
+          "ChapterNum": 1,
+          "VerseNum": 1,
+          "BBBCCCVVV": 1001001,
+          "Versification": {
+            "Type": 4,
+            "IsCustomized": false
+          },
+          "RepresentsMultipleVerses": false,
+          "AllVerses": []
+        },
+        "VerseOffset": 5,
+        "IsSpecial": false,
+        "IsFigure": false,
+        "IsFootnoteOrCrossReference": false,
+        "IsScripture": true,
+        "IsMetadata": false,
+        "IsPublishableVernacular": true
+      }
+    ],
+    "01_001_002": [
+      {
+        "Type": 2,
+        "Marker": "v",
+        "Attributes": [],
+        "Data": "2",
+        "EndMarker": null,
+        "Token": {
+          "Type": 2,
+          "Marker": "v",
+          "Text": null,
+          "Attributes": null,
+          "Data": "2",
+          "EndMarker": null,
+          "NestlessMarker": "v",
+          "HasData": true,
+          "HasAttributes": false,
+          "HasNonDefaultAttribute": false
+        },
+        "VerseRef": {
+          "BookCode": "GEN",
+          "BookNum": 1,
+          "ChapterNum": 1,
+          "VerseNum": 2,
+          "BBBCCCVVV": 1001002,
+          "Versification": {
+            "Type": 4,
+            "IsCustomized": false
+          },
+          "RepresentsMultipleVerses": false,
+          "AllVerses": []
+        },
+        "VerseOffset": 0,
+        "IsSpecial": false,
+        "IsFigure": false,
+        "IsFootnoteOrCrossReference": false,
+        "IsScripture": true,
+        "IsMetadata": false,
+        "IsPublishableVernacular": true
+      },
+      {
+        "Text": "But at that time she was deserted, and there was only water on it. There was no light all around. God's Spirit hovered over that water. ",
+        "Token": {
+          "Type": 3,
+          "Marker": null,
+          "Text": "But at that time she was deserted, and there was only water on it. There was no light all around. God's Spirit hovered over that water. ",
+          "Attributes": null,
+          "Data": null,
+          "EndMarker": null,
+          "NestlessMarker": null,
+          "HasData": false,
+          "HasAttributes": false,
+          "HasNonDefaultAttribute": false
+        },
+        "VerseRef": {
+          "BookCode": "GEN",
+          "BookNum": 1,
+          "ChapterNum": 1,
+          "VerseNum": 2,
+          "BBBCCCVVV": 1001002,
+          "Versification": {
+            "Type": 4,
+            "IsCustomized": false
+          },
+          "RepresentsMultipleVerses": false,
+          "AllVerses": []
+        },
+        "VerseOffset": 5,
+        "IsSpecial": false,
+        "IsFigure": false,
+        "IsFootnoteOrCrossReference": false,
+        "IsScripture": true,
+        "IsMetadata": false,
+        "IsPublishableVernacular": true
+      },
+      {
+        "Type": 3,
+        "Marker": "s",
+        "Attributes": [],
+        "Data": null,
+        "EndMarker": null,
+        "Token": {
+          "Type": 4,
+          "Marker": "s",
+          "Text": null,
+          "Attributes": null,
+          "Data": null,
+          "EndMarker": "s*",
+          "NestlessMarker": "s",
+          "HasData": false,
+          "HasAttributes": false,
+          "HasNonDefaultAttribute": false
+        },
+        "VerseRef": {
+          "BookCode": "GEN",
+          "BookNum": 1,
+          "ChapterNum": 1,
+          "VerseNum": 2,
+          "BBBCCCVVV": 1001002,
+          "Versification": {
+            "Type": 4,
+            "IsCustomized": false
+          },
+          "RepresentsMultipleVerses": false,
+          "AllVerses": []
+        },
+        "VerseOffset": 141,
+        "IsSpecial": false,
+        "IsFigure": false,
+        "IsFootnoteOrCrossReference": false,
+        "IsScripture": false,
+        "IsMetadata": false,
+        "IsPublishableVernacular": true
+      },
+      {
+        "Type": 3,
+        "Marker": "p",
+        "Attributes": [],
+        "Data": null,
+        "EndMarker": null,
+        "Token": {
+          "Type": 4,
+          "Marker": "p",
+          "Text": null,
+          "Attributes": null,
+          "Data": null,
+          "EndMarker": "p*",
+          "NestlessMarker": "p",
+          "HasData": false,
+          "HasAttributes": false,
+          "HasNonDefaultAttribute": false
+        },
+        "VerseRef": {
+          "BookCode": "GEN",
+          "BookNum": 1,
+          "ChapterNum": 1,
+          "VerseNum": 2,
+          "BBBCCCVVV": 1001002,
+          "Versification": {
+            "Type": 4,
+            "IsCustomized": false
+          },
+          "RepresentsMultipleVerses": false,
+          "AllVerses": []
+        },
+        "VerseOffset": 144,
+        "IsSpecial": false,
+        "IsFigure": false,
+        "IsFootnoteOrCrossReference": false,
+        "IsScripture": true,
+        "IsMetadata": false,
+        "IsPublishableVernacular": true
+      }
+    ],
+    "01_001_003": [
+      {
+        "Type": 2,
+        "Marker": "v",
+        "Attributes": [],
+        "Data": "3",
+        "EndMarker": null,
+        "Token": {
+          "Type": 2,
+          "Marker": "v",
+          "Text": null,
+          "Attributes": null,
+          "Data": "3",
+          "EndMarker": null,
+          "NestlessMarker": "v",
+          "HasData": true,
+          "HasAttributes": false,
+          "HasNonDefaultAttribute": false
+        },
+        "VerseRef": {
+          "BookCode": "GEN",
+          "BookNum": 1,
+          "ChapterNum": 1,
+          "VerseNum": 3,
+          "BBBCCCVVV": 1001003,
+          "Versification": {
+            "Type": 4,
+            "IsCustomized": false
+          },
+          "RepresentsMultipleVerses": false,
+          "AllVerses": []
+        },
+        "VerseOffset": 0,
+        "IsSpecial": false,
+        "IsFigure": false,
+        "IsFootnoteOrCrossReference": false,
+        "IsScripture": true,
+        "IsMetadata": false,
+        "IsPublishableVernacular": true
+      }
+    ],
+    "01_001_004": [
+      {
+        "Type": 2,
+        "Marker": "v",
+        "Attributes": [],
+        "Data": "4",
+        "EndMarker": null,
+        "Token": {
+          "Type": 2,
+          "Marker": "v",
+          "Text": null,
+          "Attributes": null,
+          "Data": "4",
+          "EndMarker": null,
+          "NestlessMarker": "v",
+          "HasData": true,
+          "HasAttributes": false,
+          "HasNonDefaultAttribute": false
+        },
+        "VerseRef": {
+          "BookCode": "GEN",
+          "BookNum": 1,
+          "ChapterNum": 1,
+          "VerseNum": 4,
+          "BBBCCCVVV": 1001004,
+          "Versification": {
+            "Type": 4,
+            "IsCustomized": false
+          },
+          "RepresentsMultipleVerses": false,
+          "AllVerses": []
+        },
+        "VerseOffset": 0,
+        "IsSpecial": false,
+        "IsFigure": false,
+        "IsFootnoteOrCrossReference": false,
+        "IsScripture": true,
+        "IsMetadata": false,
+        "IsPublishableVernacular": true
+      }
+    ],
+    "01_001_005": [
+      {
+        "Type": 2,
+        "Marker": "v",
+        "Attributes": [],
+        "Data": "5",
+        "EndMarker": null,
+        "Token": {
+          "Type": 2,
+          "Marker": "v",
+          "Text": null,
+          "Attributes": null,
+          "Data": "5",
+          "EndMarker": null,
+          "NestlessMarker": "v",
+          "HasData": true,
+          "HasAttributes": false,
+          "HasNonDefaultAttribute": false
+        },
+        "VerseRef": {
+          "BookCode": "GEN",
+          "BookNum": 1,
+          "ChapterNum": 1,
+          "VerseNum": 5,
+          "BBBCCCVVV": 1001005,
+          "Versification": {
+            "Type": 4,
+            "IsCustomized": false
+          },
+          "RepresentsMultipleVerses": false,
+          "AllVerses": []
+        },
+        "VerseOffset": 0,
+        "IsSpecial": false,
+        "IsFigure": false,
+        "IsFootnoteOrCrossReference": false,
+        "IsScripture": true,
+        "IsMetadata": false,
+        "IsPublishableVernacular": true
+      },
+      {
+        "Type": 3,
+        "Marker": "s",
+        "Attributes": [],
+        "Data": null,
+        "EndMarker": null,
+        "Token": {
+          "Type": 4,
+          "Marker": "s",
+          "Text": null,
+          "Attributes": null,
+          "Data": null,
+          "EndMarker": "s*",
+          "NestlessMarker": "s",
+          "HasData": false,
+          "HasAttributes": false,
+          "HasNonDefaultAttribute": false
+        },
+        "VerseRef": {
+          "BookCode": "GEN",
+          "BookNum": 1,
+          "ChapterNum": 1,
+          "VerseNum": 5,
+          "BBBCCCVVV": 1001005,
+          "Versification": {
+            "Type": 4,
+            "IsCustomized": false
+          },
+          "RepresentsMultipleVerses": false,
+          "AllVerses": []
+        },
+        "VerseOffset": 5,
+        "IsSpecial": false,
+        "IsFigure": false,
+        "IsFootnoteOrCrossReference": false,
+        "IsScripture": false,
+        "IsMetadata": false,
+        "IsPublishableVernacular": true
+      },
+      {
+        "Type": 3,
+        "Marker": "p",
+        "Attributes": [],
+        "Data": null,
+        "EndMarker": null,
+        "Token": {
+          "Type": 4,
+          "Marker": "p",
+          "Text": null,
+          "Attributes": null,
+          "Data": null,
+          "EndMarker": "p*",
+          "NestlessMarker": "p",
+          "HasData": false,
+          "HasAttributes": false,
+          "HasNonDefaultAttribute": false
+        },
+        "VerseRef": {
+          "BookCode": "GEN",
+          "BookNum": 1,
+          "ChapterNum": 1,
+          "VerseNum": 5,
+          "BBBCCCVVV": 1001005,
+          "Versification": {
+            "Type": 4,
+            "IsCustomized": false
+          },
+          "RepresentsMultipleVerses": false,
+          "AllVerses": []
+        },
+        "VerseOffset": 8,
+        "IsSpecial": false,
+        "IsFigure": false,
+        "IsFootnoteOrCrossReference": false,
+        "IsScripture": true,
+        "IsMetadata": false,
+        "IsPublishableVernacular": true
+      }
+    ],
+    "01_001_006": [
+      {
+        "Type": 2,
+        "Marker": "v",
+        "Attributes": [],
+        "Data": "6",
+        "EndMarker": null,
+        "Token": {
+          "Type": 2,
+          "Marker": "v",
+          "Text": null,
+          "Attributes": null,
+          "Data": "6",
+          "EndMarker": null,
+          "NestlessMarker": "v",
+          "HasData": true,
+          "HasAttributes": false,
+          "HasNonDefaultAttribute": false
+        },
+        "VerseRef": {
+          "BookCode": "GEN",
+          "BookNum": 1,
+          "ChapterNum": 1,
+          "VerseNum": 6,
+          "BBBCCCVVV": 1001006,
+          "Versification": {
+            "Type": 4,
+            "IsCustomized": false
+          },
+          "RepresentsMultipleVerses": false,
+          "AllVerses": []
+        },
+        "VerseOffset": 0,
+        "IsSpecial": false,
+        "IsFigure": false,
+        "IsFootnoteOrCrossReference": false,
+        "IsScripture": true,
+        "IsMetadata": false,
+        "IsPublishableVernacular": true
+      }
+    ],
+    "01_001_007": [
+      {
+        "Type": 2,
+        "Marker": "v",
+        "Attributes": [],
+        "Data": "7",
+        "EndMarker": null,
+        "Token": {
+          "Type": 2,
+          "Marker": "v",
+          "Text": null,
+          "Attributes": null,
+          "Data": "7",
+          "EndMarker": null,
+          "NestlessMarker": "v",
+          "HasData": true,
+          "HasAttributes": false,
+          "HasNonDefaultAttribute": false
+        },
+        "VerseRef": {
+          "BookCode": "GEN",
+          "BookNum": 1,
+          "ChapterNum": 1,
+          "VerseNum": 7,
+          "BBBCCCVVV": 1001007,
+          "Versification": {
+            "Type": 4,
+            "IsCustomized": false
+          },
+          "RepresentsMultipleVerses": false,
+          "AllVerses": []
+        },
+        "VerseOffset": 0,
+        "IsSpecial": false,
+        "IsFigure": false,
+        "IsFootnoteOrCrossReference": false,
+        "IsScripture": true,
+        "IsMetadata": false,
+        "IsPublishableVernacular": true
+      }
+    ],
+    "01_001_008": [
+      {
+        "Type": 2,
+        "Marker": "v",
+        "Attributes": [],
+        "Data": "8",
+        "EndMarker": null,
+        "Token": {
+          "Type": 2,
+          "Marker": "v",
+          "Text": null,
+          "Attributes": null,
+          "Data": "8",
+          "EndMarker": null,
+          "NestlessMarker": "v",
+          "HasData": true,
+          "HasAttributes": false,
+          "HasNonDefaultAttribute": false
+        },
+        "VerseRef": {
+          "BookCode": "GEN",
+          "BookNum": 1,
+          "ChapterNum": 1,
+          "VerseNum": 8,
+          "BBBCCCVVV": 1001008,
+          "Versification": {
+            "Type": 4,
+            "IsCustomized": false
+          },
+          "RepresentsMultipleVerses": false,
+          "AllVerses": []
+        },
+        "VerseOffset": 0,
+        "IsSpecial": false,
+        "IsFigure": false,
+        "IsFootnoteOrCrossReference": false,
+        "IsScripture": true,
+        "IsMetadata": false,
+        "IsPublishableVernacular": true
+      },
+      {
+        "Type": 3,
+        "Marker": "s",
+        "Attributes": [],
+        "Data": null,
+        "EndMarker": null,
+        "Token": {
+          "Type": 4,
+          "Marker": "s",
+          "Text": null,
+          "Attributes": null,
+          "Data": null,
+          "EndMarker": "s*",
+          "NestlessMarker": "s",
+          "HasData": false,
+          "HasAttributes": false,
+          "HasNonDefaultAttribute": false
+        },
+        "VerseRef": {
+          "BookCode": "GEN",
+          "BookNum": 1,
+          "ChapterNum": 1,
+          "VerseNum": 8,
+          "BBBCCCVVV": 1001008,
+          "Versification": {
+            "Type": 4,
+            "IsCustomized": false
+          },
+          "RepresentsMultipleVerses": false,
+          "AllVerses": []
+        },
+        "VerseOffset": 5,
+        "IsSpecial": false,
+        "IsFigure": false,
+        "IsFootnoteOrCrossReference": false,
+        "IsScripture": false,
+        "IsMetadata": false,
+        "IsPublishableVernacular": true
+      },
+      {
+        "Type": 3,
+        "Marker": "p",
+        "Attributes": [],
+        "Data": null,
+        "EndMarker": null,
+        "Token": {
+          "Type": 4,
+          "Marker": "p",
+          "Text": null,
+          "Attributes": null,
+          "Data": null,
+          "EndMarker": "p*",
+          "NestlessMarker": "p",
+          "HasData": false,
+          "HasAttributes": false,
+          "HasNonDefaultAttribute": false
+        },
+        "VerseRef": {
+          "BookCode": "GEN",
+          "BookNum": 1,
+          "ChapterNum": 1,
+          "VerseNum": 8,
+          "BBBCCCVVV": 1001008,
+          "Versification": {
+            "Type": 4,
+            "IsCustomized": false
+          },
+          "RepresentsMultipleVerses": false,
+          "AllVerses": []
+        },
+        "VerseOffset": 8,
+        "IsSpecial": false,
+        "IsFigure": false,
+        "IsFootnoteOrCrossReference": false,
+        "IsScripture": true,
+        "IsMetadata": false,
+        "IsPublishableVernacular": true
+      }
+    ],
+    "01_001_009": [
+      {
+        "Type": 2,
+        "Marker": "v",
+        "Attributes": [],
+        "Data": "9",
+        "EndMarker": null,
+        "Token": {
+          "Type": 2,
+          "Marker": "v",
+          "Text": null,
+          "Attributes": null,
+          "Data": "9",
+          "EndMarker": null,
+          "NestlessMarker": "v",
+          "HasData": true,
+          "HasAttributes": false,
+          "HasNonDefaultAttribute": false
+        },
+        "VerseRef": {
+          "BookCode": "GEN",
+          "BookNum": 1,
+          "ChapterNum": 1,
+          "VerseNum": 9,
+          "BBBCCCVVV": 1001009,
+          "Versification": {
+            "Type": 4,
+            "IsCustomized": false
+          },
+          "RepresentsMultipleVerses": false,
+          "AllVerses": []
+        },
+        "VerseOffset": 0,
+        "IsSpecial": false,
+        "IsFigure": false,
+        "IsFootnoteOrCrossReference": false,
+        "IsScripture": true,
+        "IsMetadata": false,
+        "IsPublishableVernacular": true
+      }
+    ],
+    "01_001_010": [
+      {
+        "Type": 2,
+        "Marker": "v",
+        "Attributes": [],
+        "Data": "10",
+        "EndMarker": null,
+        "Token": {
+          "Type": 2,
+          "Marker": "v",
+          "Text": null,
+          "Attributes": null,
+          "Data": "10",
+          "EndMarker": null,
+          "NestlessMarker": "v",
+          "HasData": true,
+          "HasAttributes": false,
+          "HasNonDefaultAttribute": false
+        },
+        "VerseRef": {
+          "BookCode": "GEN",
+          "BookNum": 1,
+          "ChapterNum": 1,
+          "VerseNum": 10,
+          "BBBCCCVVV": 1001010,
+          "Versification": {
+            "Type": 4,
+            "IsCustomized": false
+          },
+          "RepresentsMultipleVerses": false,
+          "AllVerses": []
+        },
+        "VerseOffset": 0,
+        "IsSpecial": false,
+        "IsFigure": false,
+        "IsFootnoteOrCrossReference": false,
+        "IsScripture": true,
+        "IsMetadata": false,
+        "IsPublishableVernacular": true
+      },
+      {
+        "Type": 3,
+        "Marker": "p",
+        "Attributes": [],
+        "Data": null,
+        "EndMarker": null,
+        "Token": {
+          "Type": 4,
+          "Marker": "p",
+          "Text": null,
+          "Attributes": null,
+          "Data": null,
+          "EndMarker": "p*",
+          "NestlessMarker": "p",
+          "HasData": false,
+          "HasAttributes": false,
+          "HasNonDefaultAttribute": false
+        },
+        "VerseRef": {
+          "BookCode": "GEN",
+          "BookNum": 1,
+          "ChapterNum": 1,
+          "VerseNum": 10,
+          "BBBCCCVVV": 1001010,
+          "Versification": {
+            "Type": 4,
+            "IsCustomized": false
+          },
+          "RepresentsMultipleVerses": false,
+          "AllVerses": []
+        },
+        "VerseOffset": 6,
+        "IsSpecial": false,
+        "IsFigure": false,
+        "IsFootnoteOrCrossReference": false,
+        "IsScripture": true,
+        "IsMetadata": false,
+        "IsPublishableVernacular": true
+      }
+    ],
+    "01_001_011": [
+      {
+        "Type": 2,
+        "Marker": "v",
+        "Attributes": [],
+        "Data": "11",
+        "EndMarker": null,
+        "Token": {
+          "Type": 2,
+          "Marker": "v",
+          "Text": null,
+          "Attributes": null,
+          "Data": "11",
+          "EndMarker": null,
+          "NestlessMarker": "v",
+          "HasData": true,
+          "HasAttributes": false,
+          "HasNonDefaultAttribute": false
+        },
+        "VerseRef": {
+          "BookCode": "GEN",
+          "BookNum": 1,
+          "ChapterNum": 1,
+          "VerseNum": 11,
+          "BBBCCCVVV": 1001011,
+          "Versification": {
+            "Type": 4,
+            "IsCustomized": false
+          },
+          "RepresentsMultipleVerses": false,
+          "AllVerses": []
+        },
+        "VerseOffset": 0,
+        "IsSpecial": false,
+        "IsFigure": false,
+        "IsFootnoteOrCrossReference": false,
+        "IsScripture": true,
+        "IsMetadata": false,
+        "IsPublishableVernacular": true
+      }
+    ],
+    "01_001_012": [
+      {
+        "Type": 2,
+        "Marker": "v",
+        "Attributes": [],
+        "Data": "12",
+        "EndMarker": null,
+        "Token": {
+          "Type": 2,
+          "Marker": "v",
+          "Text": null,
+          "Attributes": null,
+          "Data": "12",
+          "EndMarker": null,
+          "NestlessMarker": "v",
+          "HasData": true,
+          "HasAttributes": false,
+          "HasNonDefaultAttribute": false
+        },
+        "VerseRef": {
+          "BookCode": "GEN",
+          "BookNum": 1,
+          "ChapterNum": 1,
+          "VerseNum": 12,
+          "BBBCCCVVV": 1001012,
+          "Versification": {
+            "Type": 4,
+            "IsCustomized": false
+          },
+          "RepresentsMultipleVerses": false,
+          "AllVerses": []
+        },
+        "VerseOffset": 0,
+        "IsSpecial": false,
+        "IsFigure": false,
+        "IsFootnoteOrCrossReference": false,
+        "IsScripture": true,
+        "IsMetadata": false,
+        "IsPublishableVernacular": true
+      }
+    ],
+    "01_001_013": [
+      {
+        "Type": 2,
+        "Marker": "v",
+        "Attributes": [],
+        "Data": "13",
+        "EndMarker": null,
+        "Token": {
+          "Type": 2,
+          "Marker": "v",
+          "Text": null,
+          "Attributes": null,
+          "Data": "13",
+          "EndMarker": null,
+          "NestlessMarker": "v",
+          "HasData": true,
+          "HasAttributes": false,
+          "HasNonDefaultAttribute": false
+        },
+        "VerseRef": {
+          "BookCode": "GEN",
+          "BookNum": 1,
+          "ChapterNum": 1,
+          "VerseNum": 13,
+          "BBBCCCVVV": 1001013,
+          "Versification": {
+            "Type": 4,
+            "IsCustomized": false
+          },
+          "RepresentsMultipleVerses": false,
+          "AllVerses": []
+        },
+        "VerseOffset": 0,
+        "IsSpecial": false,
+        "IsFigure": false,
+        "IsFootnoteOrCrossReference": false,
+        "IsScripture": true,
+        "IsMetadata": false,
+        "IsPublishableVernacular": true
+      },
+      {
+        "Type": 3,
+        "Marker": "s",
+        "Attributes": [],
+        "Data": null,
+        "EndMarker": null,
+        "Token": {
+          "Type": 4,
+          "Marker": "s",
+          "Text": null,
+          "Attributes": null,
+          "Data": null,
+          "EndMarker": "s*",
+          "NestlessMarker": "s",
+          "HasData": false,
+          "HasAttributes": false,
+          "HasNonDefaultAttribute": false
+        },
+        "VerseRef": {
+          "BookCode": "GEN",
+          "BookNum": 1,
+          "ChapterNum": 1,
+          "VerseNum": 13,
+          "BBBCCCVVV": 1001013,
+          "Versification": {
+            "Type": 4,
+            "IsCustomized": false
+          },
+          "RepresentsMultipleVerses": false,
+          "AllVerses": []
+        },
+        "VerseOffset": 6,
+        "IsSpecial": false,
+        "IsFigure": false,
+        "IsFootnoteOrCrossReference": false,
+        "IsScripture": false,
+        "IsMetadata": false,
+        "IsPublishableVernacular": true
+      },
+      {
+        "Type": 3,
+        "Marker": "p",
+        "Attributes": [],
+        "Data": null,
+        "EndMarker": null,
+        "Token": {
+          "Type": 4,
+          "Marker": "p",
+          "Text": null,
+          "Attributes": null,
+          "Data": null,
+          "EndMarker": "p*",
+          "NestlessMarker": "p",
+          "HasData": false,
+          "HasAttributes": false,
+          "HasNonDefaultAttribute": false
+        },
+        "VerseRef": {
+          "BookCode": "GEN",
+          "BookNum": 1,
+          "ChapterNum": 1,
+          "VerseNum": 13,
+          "BBBCCCVVV": 1001013,
+          "Versification": {
+            "Type": 4,
+            "IsCustomized": false
+          },
+          "RepresentsMultipleVerses": false,
+          "AllVerses": []
+        },
+        "VerseOffset": 9,
+        "IsSpecial": false,
+        "IsFigure": false,
+        "IsFootnoteOrCrossReference": false,
+        "IsScripture": true,
+        "IsMetadata": false,
+        "IsPublishableVernacular": true
+      }
+    ],
+    "01_001_014-015": [
+      {
+        "Type": 2,
+        "Marker": "v",
+        "Attributes": [],
+        "Data": "14-15",
+        "EndMarker": null,
+        "Token": {
+          "Type": 2,
+          "Marker": "v",
+          "Text": null,
+          "Attributes": null,
+          "Data": "14-15",
+          "EndMarker": null,
+          "NestlessMarker": "v",
+          "HasData": true,
+          "HasAttributes": false,
+          "HasNonDefaultAttribute": false
+        },
+        "VerseRef": {
+          "BookCode": "GEN",
+          "BookNum": 1,
+          "ChapterNum": 1,
+          "VerseNum": 14,
+          "BBBCCCVVV": 1001014,
+          "Versification": {
+            "Type": 4,
+            "IsCustomized": false
+          },
+          "RepresentsMultipleVerses": true,
+          "AllVerses": [
+            {
+              "BookCode": "GEN",
+              "BookNum": 1,
+              "ChapterNum": 1,
+              "VerseNum": 14,
+              "BBBCCCVVV": 1001014,
+              "Versification": {
+                "Type": 4,
+                "IsCustomized": false
+              },
+              "RepresentsMultipleVerses": false,
+              "AllVerses": []
+            },
+            {
+              "BookCode": "GEN",
+              "BookNum": 1,
+              "ChapterNum": 1,
+              "VerseNum": 15,
+              "BBBCCCVVV": 1001015,
+              "Versification": {
+                "Type": 4,
+                "IsCustomized": false
+              },
+              "RepresentsMultipleVerses": false,
+              "AllVerses": []
+            }
+          ]
+        },
+        "VerseOffset": 0,
+        "IsSpecial": false,
+        "IsFigure": false,
+        "IsFootnoteOrCrossReference": false,
+        "IsScripture": true,
+        "IsMetadata": false,
+        "IsPublishableVernacular": true
+      }
+    ],
+    "01_001_016": [
+      {
+        "Type": 2,
+        "Marker": "v",
+        "Attributes": [],
+        "Data": "16",
+        "EndMarker": null,
+        "Token": {
+          "Type": 2,
+          "Marker": "v",
+          "Text": null,
+          "Attributes": null,
+          "Data": "16",
+          "EndMarker": null,
+          "NestlessMarker": "v",
+          "HasData": true,
+          "HasAttributes": false,
+          "HasNonDefaultAttribute": false
+        },
+        "VerseRef": {
+          "BookCode": "GEN",
+          "BookNum": 1,
+          "ChapterNum": 1,
+          "VerseNum": 16,
+          "BBBCCCVVV": 1001016,
+          "Versification": {
+            "Type": 4,
+            "IsCustomized": false
+          },
+          "RepresentsMultipleVerses": false,
+          "AllVerses": []
+        },
+        "VerseOffset": 0,
+        "IsSpecial": false,
+        "IsFigure": false,
+        "IsFootnoteOrCrossReference": false,
+        "IsScripture": true,
+        "IsMetadata": false,
+        "IsPublishableVernacular": true
+      },
+      {
+        "Type": 3,
+        "Marker": "p",
+        "Attributes": [],
+        "Data": null,
+        "EndMarker": null,
+        "Token": {
+          "Type": 4,
+          "Marker": "p",
+          "Text": null,
+          "Attributes": null,
+          "Data": null,
+          "EndMarker": "p*",
+          "NestlessMarker": "p",
+          "HasData": false,
+          "HasAttributes": false,
+          "HasNonDefaultAttribute": false
+        },
+        "VerseRef": {
+          "BookCode": "GEN",
+          "BookNum": 1,
+          "ChapterNum": 1,
+          "VerseNum": 16,
+          "BBBCCCVVV": 1001016,
+          "Versification": {
+            "Type": 4,
+            "IsCustomized": false
+          },
+          "RepresentsMultipleVerses": false,
+          "AllVerses": []
+        },
+        "VerseOffset": 6,
+        "IsSpecial": false,
+        "IsFigure": false,
+        "IsFootnoteOrCrossReference": false,
+        "IsScripture": true,
+        "IsMetadata": false,
+        "IsPublishableVernacular": true
+      }
+    ],
+    "01_001_017-018": [
+      {
+        "Type": 2,
+        "Marker": "v",
+        "Attributes": [],
+        "Data": "17-18",
+        "EndMarker": null,
+        "Token": {
+          "Type": 2,
+          "Marker": "v",
+          "Text": null,
+          "Attributes": null,
+          "Data": "17-18",
+          "EndMarker": null,
+          "NestlessMarker": "v",
+          "HasData": true,
+          "HasAttributes": false,
+          "HasNonDefaultAttribute": false
+        },
+        "VerseRef": {
+          "BookCode": "GEN",
+          "BookNum": 1,
+          "ChapterNum": 1,
+          "VerseNum": 17,
+          "BBBCCCVVV": 1001017,
+          "Versification": {
+            "Type": 4,
+            "IsCustomized": false
+          },
+          "RepresentsMultipleVerses": true,
+          "AllVerses": [
+            {
+              "BookCode": "GEN",
+              "BookNum": 1,
+              "ChapterNum": 1,
+              "VerseNum": 17,
+              "BBBCCCVVV": 1001017,
+              "Versification": {
+                "Type": 4,
+                "IsCustomized": false
+              },
+              "RepresentsMultipleVerses": false,
+              "AllVerses": []
+            },
+            {
+              "BookCode": "GEN",
+              "BookNum": 1,
+              "ChapterNum": 1,
+              "VerseNum": 18,
+              "BBBCCCVVV": 1001018,
+              "Versification": {
+                "Type": 4,
+                "IsCustomized": false
+              },
+              "RepresentsMultipleVerses": false,
+              "AllVerses": []
+            }
+          ]
+        },
+        "VerseOffset": 0,
+        "IsSpecial": false,
+        "IsFigure": false,
+        "IsFootnoteOrCrossReference": false,
+        "IsScripture": true,
+        "IsMetadata": false,
+        "IsPublishableVernacular": true
+      }
+    ],
+    "01_001_019": [
+      {
+        "Type": 2,
+        "Marker": "v",
+        "Attributes": [],
+        "Data": "19",
+        "EndMarker": null,
+        "Token": {
+          "Type": 2,
+          "Marker": "v",
+          "Text": null,
+          "Attributes": null,
+          "Data": "19",
+          "EndMarker": null,
+          "NestlessMarker": "v",
+          "HasData": true,
+          "HasAttributes": false,
+          "HasNonDefaultAttribute": false
+        },
+        "VerseRef": {
+          "BookCode": "GEN",
+          "BookNum": 1,
+          "ChapterNum": 1,
+          "VerseNum": 19,
+          "BBBCCCVVV": 1001019,
+          "Versification": {
+            "Type": 4,
+            "IsCustomized": false
+          },
+          "RepresentsMultipleVerses": false,
+          "AllVerses": []
+        },
+        "VerseOffset": 0,
+        "IsSpecial": false,
+        "IsFigure": false,
+        "IsFootnoteOrCrossReference": false,
+        "IsScripture": true,
+        "IsMetadata": false,
+        "IsPublishableVernacular": true
+      },
+      {
+        "Type": 3,
+        "Marker": "s",
+        "Attributes": [],
+        "Data": null,
+        "EndMarker": null,
+        "Token": {
+          "Type": 4,
+          "Marker": "s",
+          "Text": null,
+          "Attributes": null,
+          "Data": null,
+          "EndMarker": "s*",
+          "NestlessMarker": "s",
+          "HasData": false,
+          "HasAttributes": false,
+          "HasNonDefaultAttribute": false
+        },
+        "VerseRef": {
+          "BookCode": "GEN",
+          "BookNum": 1,
+          "ChapterNum": 1,
+          "VerseNum": 19,
+          "BBBCCCVVV": 1001019,
+          "Versification": {
+            "Type": 4,
+            "IsCustomized": false
+          },
+          "RepresentsMultipleVerses": false,
+          "AllVerses": []
+        },
+        "VerseOffset": 6,
+        "IsSpecial": false,
+        "IsFigure": false,
+        "IsFootnoteOrCrossReference": false,
+        "IsScripture": false,
+        "IsMetadata": false,
+        "IsPublishableVernacular": true
+      },
+      {
+        "Type": 3,
+        "Marker": "p",
+        "Attributes": [],
+        "Data": null,
+        "EndMarker": null,
+        "Token": {
+          "Type": 4,
+          "Marker": "p",
+          "Text": null,
+          "Attributes": null,
+          "Data": null,
+          "EndMarker": "p*",
+          "NestlessMarker": "p",
+          "HasData": false,
+          "HasAttributes": false,
+          "HasNonDefaultAttribute": false
+        },
+        "VerseRef": {
+          "BookCode": "GEN",
+          "BookNum": 1,
+          "ChapterNum": 1,
+          "VerseNum": 19,
+          "BBBCCCVVV": 1001019,
+          "Versification": {
+            "Type": 4,
+            "IsCustomized": false
+          },
+          "RepresentsMultipleVerses": false,
+          "AllVerses": []
+        },
+        "VerseOffset": 9,
+        "IsSpecial": false,
+        "IsFigure": false,
+        "IsFootnoteOrCrossReference": false,
+        "IsScripture": true,
+        "IsMetadata": false,
+        "IsPublishableVernacular": true
+      }
+    ],
+    "01_001_020": [
+      {
+        "Type": 2,
+        "Marker": "v",
+        "Attributes": [],
+        "Data": "20",
+        "EndMarker": null,
+        "Token": {
+          "Type": 2,
+          "Marker": "v",
+          "Text": null,
+          "Attributes": null,
+          "Data": "20",
+          "EndMarker": null,
+          "NestlessMarker": "v",
+          "HasData": true,
+          "HasAttributes": false,
+          "HasNonDefaultAttribute": false
+        },
+        "VerseRef": {
+          "BookCode": "GEN",
+          "BookNum": 1,
+          "ChapterNum": 1,
+          "VerseNum": 20,
+          "BBBCCCVVV": 1001020,
+          "Versification": {
+            "Type": 4,
+            "IsCustomized": false
+          },
+          "RepresentsMultipleVerses": false,
+          "AllVerses": []
+        },
+        "VerseOffset": 0,
+        "IsSpecial": false,
+        "IsFigure": false,
+        "IsFootnoteOrCrossReference": false,
+        "IsScripture": true,
+        "IsMetadata": false,
+        "IsPublishableVernacular": true
+      }
+    ],
+    "01_001_021": [
+      {
+        "Type": 2,
+        "Marker": "v",
+        "Attributes": [],
+        "Data": "21",
+        "EndMarker": null,
+        "Token": {
+          "Type": 2,
+          "Marker": "v",
+          "Text": null,
+          "Attributes": null,
+          "Data": "21",
+          "EndMarker": null,
+          "NestlessMarker": "v",
+          "HasData": true,
+          "HasAttributes": false,
+          "HasNonDefaultAttribute": false
+        },
+        "VerseRef": {
+          "BookCode": "GEN",
+          "BookNum": 1,
+          "ChapterNum": 1,
+          "VerseNum": 21,
+          "BBBCCCVVV": 1001021,
+          "Versification": {
+            "Type": 4,
+            "IsCustomized": false
+          },
+          "RepresentsMultipleVerses": false,
+          "AllVerses": []
+        },
+        "VerseOffset": 0,
+        "IsSpecial": false,
+        "IsFigure": false,
+        "IsFootnoteOrCrossReference": false,
+        "IsScripture": true,
+        "IsMetadata": false,
+        "IsPublishableVernacular": true
+      }
+    ],
+    "01_001_022": [
+      {
+        "Type": 2,
+        "Marker": "v",
+        "Attributes": [],
+        "Data": "22",
+        "EndMarker": null,
+        "Token": {
+          "Type": 2,
+          "Marker": "v",
+          "Text": null,
+          "Attributes": null,
+          "Data": "22",
+          "EndMarker": null,
+          "NestlessMarker": "v",
+          "HasData": true,
+          "HasAttributes": false,
+          "HasNonDefaultAttribute": false
+        },
+        "VerseRef": {
+          "BookCode": "GEN",
+          "BookNum": 1,
+          "ChapterNum": 1,
+          "VerseNum": 22,
+          "BBBCCCVVV": 1001022,
+          "Versification": {
+            "Type": 4,
+            "IsCustomized": false
+          },
+          "RepresentsMultipleVerses": false,
+          "AllVerses": []
+        },
+        "VerseOffset": 0,
+        "IsSpecial": false,
+        "IsFigure": false,
+        "IsFootnoteOrCrossReference": false,
+        "IsScripture": true,
+        "IsMetadata": false,
+        "IsPublishableVernacular": true
+      }
+    ],
+    "01_001_023": [
+      {
+        "Type": 2,
+        "Marker": "v",
+        "Attributes": [],
+        "Data": "23",
+        "EndMarker": null,
+        "Token": {
+          "Type": 2,
+          "Marker": "v",
+          "Text": null,
+          "Attributes": null,
+          "Data": "23",
+          "EndMarker": null,
+          "NestlessMarker": "v",
+          "HasData": true,
+          "HasAttributes": false,
+          "HasNonDefaultAttribute": false
+        },
+        "VerseRef": {
+          "BookCode": "GEN",
+          "BookNum": 1,
+          "ChapterNum": 1,
+          "VerseNum": 23,
+          "BBBCCCVVV": 1001023,
+          "Versification": {
+            "Type": 4,
+            "IsCustomized": false
+          },
+          "RepresentsMultipleVerses": false,
+          "AllVerses": []
+        },
+        "VerseOffset": 0,
+        "IsSpecial": false,
+        "IsFigure": false,
+        "IsFootnoteOrCrossReference": false,
+        "IsScripture": true,
+        "IsMetadata": false,
+        "IsPublishableVernacular": true
+      },
+      {
+        "Type": 3,
+        "Marker": "s",
+        "Attributes": [],
+        "Data": null,
+        "EndMarker": null,
+        "Token": {
+          "Type": 4,
+          "Marker": "s",
+          "Text": null,
+          "Attributes": null,
+          "Data": null,
+          "EndMarker": "s*",
+          "NestlessMarker": "s",
+          "HasData": false,
+          "HasAttributes": false,
+          "HasNonDefaultAttribute": false
+        },
+        "VerseRef": {
+          "BookCode": "GEN",
+          "BookNum": 1,
+          "ChapterNum": 1,
+          "VerseNum": 23,
+          "BBBCCCVVV": 1001023,
+          "Versification": {
+            "Type": 4,
+            "IsCustomized": false
+          },
+          "RepresentsMultipleVerses": false,
+          "AllVerses": []
+        },
+        "VerseOffset": 6,
+        "IsSpecial": false,
+        "IsFigure": false,
+        "IsFootnoteOrCrossReference": false,
+        "IsScripture": false,
+        "IsMetadata": false,
+        "IsPublishableVernacular": true
+      },
+      {
+        "Type": 3,
+        "Marker": "p",
+        "Attributes": [],
+        "Data": null,
+        "EndMarker": null,
+        "Token": {
+          "Type": 4,
+          "Marker": "p",
+          "Text": null,
+          "Attributes": null,
+          "Data": null,
+          "EndMarker": "p*",
+          "NestlessMarker": "p",
+          "HasData": false,
+          "HasAttributes": false,
+          "HasNonDefaultAttribute": false
+        },
+        "VerseRef": {
+          "BookCode": "GEN",
+          "BookNum": 1,
+          "ChapterNum": 1,
+          "VerseNum": 23,
+          "BBBCCCVVV": 1001023,
+          "Versification": {
+            "Type": 4,
+            "IsCustomized": false
+          },
+          "RepresentsMultipleVerses": false,
+          "AllVerses": []
+        },
+        "VerseOffset": 9,
+        "IsSpecial": false,
+        "IsFigure": false,
+        "IsFootnoteOrCrossReference": false,
+        "IsScripture": true,
+        "IsMetadata": false,
+        "IsPublishableVernacular": true
+      }
+    ],
+    "01_001_024": [
+      {
+        "Type": 2,
+        "Marker": "v",
+        "Attributes": [],
+        "Data": "24",
+        "EndMarker": null,
+        "Token": {
+          "Type": 2,
+          "Marker": "v",
+          "Text": null,
+          "Attributes": null,
+          "Data": "24",
+          "EndMarker": null,
+          "NestlessMarker": "v",
+          "HasData": true,
+          "HasAttributes": false,
+          "HasNonDefaultAttribute": false
+        },
+        "VerseRef": {
+          "BookCode": "GEN",
+          "BookNum": 1,
+          "ChapterNum": 1,
+          "VerseNum": 24,
+          "BBBCCCVVV": 1001024,
+          "Versification": {
+            "Type": 4,
+            "IsCustomized": false
+          },
+          "RepresentsMultipleVerses": false,
+          "AllVerses": []
+        },
+        "VerseOffset": 0,
+        "IsSpecial": false,
+        "IsFigure": false,
+        "IsFootnoteOrCrossReference": false,
+        "IsScripture": true,
+        "IsMetadata": false,
+        "IsPublishableVernacular": true
+      }
+    ],
+    "01_001_025": [
+      {
+        "Type": 2,
+        "Marker": "v",
+        "Attributes": [],
+        "Data": "25",
+        "EndMarker": null,
+        "Token": {
+          "Type": 2,
+          "Marker": "v",
+          "Text": null,
+          "Attributes": null,
+          "Data": "25",
+          "EndMarker": null,
+          "NestlessMarker": "v",
+          "HasData": true,
+          "HasAttributes": false,
+          "HasNonDefaultAttribute": false
+        },
+        "VerseRef": {
+          "BookCode": "GEN",
+          "BookNum": 1,
+          "ChapterNum": 1,
+          "VerseNum": 25,
+          "BBBCCCVVV": 1001025,
+          "Versification": {
+            "Type": 4,
+            "IsCustomized": false
+          },
+          "RepresentsMultipleVerses": false,
+          "AllVerses": []
+        },
+        "VerseOffset": 0,
+        "IsSpecial": false,
+        "IsFigure": false,
+        "IsFootnoteOrCrossReference": false,
+        "IsScripture": true,
+        "IsMetadata": false,
+        "IsPublishableVernacular": true
+      },
+      {
+        "Type": 3,
+        "Marker": "p",
+        "Attributes": [],
+        "Data": null,
+        "EndMarker": null,
+        "Token": {
+          "Type": 4,
+          "Marker": "p",
+          "Text": null,
+          "Attributes": null,
+          "Data": null,
+          "EndMarker": "p*",
+          "NestlessMarker": "p",
+          "HasData": false,
+          "HasAttributes": false,
+          "HasNonDefaultAttribute": false
+        },
+        "VerseRef": {
+          "BookCode": "GEN",
+          "BookNum": 1,
+          "ChapterNum": 1,
+          "VerseNum": 25,
+          "BBBCCCVVV": 1001025,
+          "Versification": {
+            "Type": 4,
+            "IsCustomized": false
+          },
+          "RepresentsMultipleVerses": false,
+          "AllVerses": []
+        },
+        "VerseOffset": 6,
+        "IsSpecial": false,
+        "IsFigure": false,
+        "IsFootnoteOrCrossReference": false,
+        "IsScripture": true,
+        "IsMetadata": false,
+        "IsPublishableVernacular": true
+      }
+    ],
+    "01_001_026": [
+      {
+        "Type": 2,
+        "Marker": "v",
+        "Attributes": [],
+        "Data": "26",
+        "EndMarker": null,
+        "Token": {
+          "Type": 2,
+          "Marker": "v",
+          "Text": null,
+          "Attributes": null,
+          "Data": "26",
+          "EndMarker": null,
+          "NestlessMarker": "v",
+          "HasData": true,
+          "HasAttributes": false,
+          "HasNonDefaultAttribute": false
+        },
+        "VerseRef": {
+          "BookCode": "GEN",
+          "BookNum": 1,
+          "ChapterNum": 1,
+          "VerseNum": 26,
+          "BBBCCCVVV": 1001026,
+          "Versification": {
+            "Type": 4,
+            "IsCustomized": false
+          },
+          "RepresentsMultipleVerses": false,
+          "AllVerses": []
+        },
+        "VerseOffset": 0,
+        "IsSpecial": false,
+        "IsFigure": false,
+        "IsFootnoteOrCrossReference": false,
+        "IsScripture": true,
+        "IsMetadata": false,
+        "IsPublishableVernacular": true
+      }
+    ],
+    "01_001_027": [
+      {
+        "Type": 2,
+        "Marker": "v",
+        "Attributes": [],
+        "Data": "27",
+        "EndMarker": null,
+        "Token": {
+          "Type": 2,
+          "Marker": "v",
+          "Text": null,
+          "Attributes": null,
+          "Data": "27",
+          "EndMarker": null,
+          "NestlessMarker": "v",
+          "HasData": true,
+          "HasAttributes": false,
+          "HasNonDefaultAttribute": false
+        },
+        "VerseRef": {
+          "BookCode": "GEN",
+          "BookNum": 1,
+          "ChapterNum": 1,
+          "VerseNum": 27,
+          "BBBCCCVVV": 1001027,
+          "Versification": {
+            "Type": 4,
+            "IsCustomized": false
+          },
+          "RepresentsMultipleVerses": false,
+          "AllVerses": []
+        },
+        "VerseOffset": 0,
+        "IsSpecial": false,
+        "IsFigure": false,
+        "IsFootnoteOrCrossReference": false,
+        "IsScripture": true,
+        "IsMetadata": false,
+        "IsPublishableVernacular": true
+      },
+      {
+        "Type": 3,
+        "Marker": "p",
+        "Attributes": [],
+        "Data": null,
+        "EndMarker": null,
+        "Token": {
+          "Type": 4,
+          "Marker": "p",
+          "Text": null,
+          "Attributes": null,
+          "Data": null,
+          "EndMarker": "p*",
+          "NestlessMarker": "p",
+          "HasData": false,
+          "HasAttributes": false,
+          "HasNonDefaultAttribute": false
+        },
+        "VerseRef": {
+          "BookCode": "GEN",
+          "BookNum": 1,
+          "ChapterNum": 1,
+          "VerseNum": 27,
+          "BBBCCCVVV": 1001027,
+          "Versification": {
+            "Type": 4,
+            "IsCustomized": false
+          },
+          "RepresentsMultipleVerses": false,
+          "AllVerses": []
+        },
+        "VerseOffset": 6,
+        "IsSpecial": false,
+        "IsFigure": false,
+        "IsFootnoteOrCrossReference": false,
+        "IsScripture": true,
+        "IsMetadata": false,
+        "IsPublishableVernacular": true
+      }
+    ],
+    "01_001_028": [
+      {
+        "Type": 2,
+        "Marker": "v",
+        "Attributes": [],
+        "Data": "28",
+        "EndMarker": null,
+        "Token": {
+          "Type": 2,
+          "Marker": "v",
+          "Text": null,
+          "Attributes": null,
+          "Data": "28",
+          "EndMarker": null,
+          "NestlessMarker": "v",
+          "HasData": true,
+          "HasAttributes": false,
+          "HasNonDefaultAttribute": false
+        },
+        "VerseRef": {
+          "BookCode": "GEN",
+          "BookNum": 1,
+          "ChapterNum": 1,
+          "VerseNum": 28,
+          "BBBCCCVVV": 1001028,
+          "Versification": {
+            "Type": 4,
+            "IsCustomized": false
+          },
+          "RepresentsMultipleVerses": false,
+          "AllVerses": []
+        },
+        "VerseOffset": 0,
+        "IsSpecial": false,
+        "IsFigure": false,
+        "IsFootnoteOrCrossReference": false,
+        "IsScripture": true,
+        "IsMetadata": false,
+        "IsPublishableVernacular": true
+      }
+    ],
+    "01_001_029": [
+      {
+        "Type": 2,
+        "Marker": "v",
+        "Attributes": [],
+        "Data": "29",
+        "EndMarker": null,
+        "Token": {
+          "Type": 2,
+          "Marker": "v",
+          "Text": null,
+          "Attributes": null,
+          "Data": "29",
+          "EndMarker": null,
+          "NestlessMarker": "v",
+          "HasData": true,
+          "HasAttributes": false,
+          "HasNonDefaultAttribute": false
+        },
+        "VerseRef": {
+          "BookCode": "GEN",
+          "BookNum": 1,
+          "ChapterNum": 1,
+          "VerseNum": 29,
+          "BBBCCCVVV": 1001029,
+          "Versification": {
+            "Type": 4,
+            "IsCustomized": false
+          },
+          "RepresentsMultipleVerses": false,
+          "AllVerses": []
+        },
+        "VerseOffset": 0,
+        "IsSpecial": false,
+        "IsFigure": false,
+        "IsFootnoteOrCrossReference": false,
+        "IsScripture": true,
+        "IsMetadata": false,
+        "IsPublishableVernacular": true
+      }
+    ],
+    "01_001_030": [
+      {
+        "Type": 2,
+        "Marker": "v",
+        "Attributes": [],
+        "Data": "30",
+        "EndMarker": null,
+        "Token": {
+          "Type": 2,
+          "Marker": "v",
+          "Text": null,
+          "Attributes": null,
+          "Data": "30",
+          "EndMarker": null,
+          "NestlessMarker": "v",
+          "HasData": true,
+          "HasAttributes": false,
+          "HasNonDefaultAttribute": false
+        },
+        "VerseRef": {
+          "BookCode": "GEN",
+          "BookNum": 1,
+          "ChapterNum": 1,
+          "VerseNum": 30,
+          "BBBCCCVVV": 1001030,
+          "Versification": {
+            "Type": 4,
+            "IsCustomized": false
+          },
+          "RepresentsMultipleVerses": false,
+          "AllVerses": []
+        },
+        "VerseOffset": 0,
+        "IsSpecial": false,
+        "IsFigure": false,
+        "IsFootnoteOrCrossReference": false,
+        "IsScripture": true,
+        "IsMetadata": false,
+        "IsPublishableVernacular": true
+      },
+      {
+        "Type": 3,
+        "Marker": "p",
+        "Attributes": [],
+        "Data": null,
+        "EndMarker": null,
+        "Token": {
+          "Type": 4,
+          "Marker": "p",
+          "Text": null,
+          "Attributes": null,
+          "Data": null,
+          "EndMarker": "p*",
+          "NestlessMarker": "p",
+          "HasData": false,
+          "HasAttributes": false,
+          "HasNonDefaultAttribute": false
+        },
+        "VerseRef": {
+          "BookCode": "GEN",
+          "BookNum": 1,
+          "ChapterNum": 1,
+          "VerseNum": 30,
+          "BBBCCCVVV": 1001030,
+          "Versification": {
+            "Type": 4,
+            "IsCustomized": false
+          },
+          "RepresentsMultipleVerses": false,
+          "AllVerses": []
+        },
+        "VerseOffset": 6,
+        "IsSpecial": false,
+        "IsFigure": false,
+        "IsFootnoteOrCrossReference": false,
+        "IsScripture": true,
+        "IsMetadata": false,
+        "IsPublishableVernacular": true
+      }
+    ],
+    "01_001_031": [
+      {
+        "Type": 2,
+        "Marker": "v",
+        "Attributes": [],
+        "Data": "31",
+        "EndMarker": null,
+        "Token": {
+          "Type": 2,
+          "Marker": "v",
+          "Text": null,
+          "Attributes": null,
+          "Data": "31",
+          "EndMarker": null,
+          "NestlessMarker": "v",
+          "HasData": true,
+          "HasAttributes": false,
+          "HasNonDefaultAttribute": false
+        },
+        "VerseRef": {
+          "BookCode": "GEN",
+          "BookNum": 1,
+          "ChapterNum": 1,
+          "VerseNum": 31,
+          "BBBCCCVVV": 1001031,
+          "Versification": {
+            "Type": 4,
+            "IsCustomized": false
+          },
+          "RepresentsMultipleVerses": false,
+          "AllVerses": []
+        },
+        "VerseOffset": 0,
+        "IsSpecial": false,
+        "IsFigure": false,
+        "IsFootnoteOrCrossReference": false,
+        "IsScripture": true,
+        "IsMetadata": false,
+        "IsPublishableVernacular": true
+      }
+    ]
+  }
+}

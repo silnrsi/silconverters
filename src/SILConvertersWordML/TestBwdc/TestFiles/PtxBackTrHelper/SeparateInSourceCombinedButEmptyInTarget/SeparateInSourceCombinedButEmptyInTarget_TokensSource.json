@@ -1,0 +1,308 @@
+{
+  "01_001_001-002": [
+    {
+      "Type": 2,
+      "Marker": "v",
+      "Attributes": [],
+      "Data": "1",
+      "EndMarker": null,
+      "Token": {
+        "Type": 2,
+        "Marker": "v",
+        "Text": null,
+        "Attributes": null,
+        "Data": "1",
+        "EndMarker": null,
+        "NestlessMarker": "v",
+        "HasData": true,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "GEN",
+        "BookNum": 1,
+        "ChapterNum": 1,
+        "VerseNum": 1,
+        "BBBCCCVVV": 1001001,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": false,
+        "AllVerses": []
+      },
+      "VerseOffset": 0,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": true,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    },
+    {
+      "Text": "परमेश्वर ने सृष्टि की रचना यूँ की: आरम्‍भ में परमेश्वर ने पृथ्‍वी की रचना की। ",
+      "Token": {
+        "Type": 3,
+        "Marker": null,
+        "Text": "परमेश्वर ने सृष्टि की रचना यूँ की: आरम्‍भ में परमेश्वर ने पृथ्‍वी की रचना की। ",
+        "Attributes": null,
+        "Data": null,
+        "EndMarker": null,
+        "NestlessMarker": null,
+        "HasData": false,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "GEN",
+        "BookNum": 1,
+        "ChapterNum": 1,
+        "VerseNum": 1,
+        "BBBCCCVVV": 1001001,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": false,
+        "AllVerses": []
+      },
+      "VerseOffset": 5,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": true,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    }
+  ],
+  "01_001_002": [
+    {
+      "Type": 2,
+      "Marker": "v",
+      "Attributes": [],
+      "Data": "2",
+      "EndMarker": null,
+      "Token": {
+        "Type": 2,
+        "Marker": "v",
+        "Text": null,
+        "Attributes": null,
+        "Data": "2",
+        "EndMarker": null,
+        "NestlessMarker": "v",
+        "HasData": true,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "GEN",
+        "BookNum": 1,
+        "ChapterNum": 1,
+        "VerseNum": 2,
+        "BBBCCCVVV": 1001002,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": false,
+        "AllVerses": []
+      },
+      "VerseOffset": 0,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": true,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    },
+    {
+      "Text": "परंतु उस समय वह सुनसान थी, और उस पर केवल पानी ही था। और चारों ओर कोई प्रकाश भी नहीं था। परमेश्वर की आत्‍मा उस पानी के ऊपर मंडराती थी। ",
+      "Token": {
+        "Type": 3,
+        "Marker": null,
+        "Text": "परंतु उस समय वह सुनसान थी, और उस पर केवल पानी ही था। और चारों ओर कोई प्रकाश भी नहीं था। परमेश्वर की आत्‍मा उस पानी के ऊपर मंडराती थी। ",
+        "Attributes": null,
+        "Data": null,
+        "EndMarker": null,
+        "NestlessMarker": null,
+        "HasData": false,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "GEN",
+        "BookNum": 1,
+        "ChapterNum": 1,
+        "VerseNum": 2,
+        "BBBCCCVVV": 1001002,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": false,
+        "AllVerses": []
+      },
+      "VerseOffset": 5,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": true,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    },
+    {
+      "Type": 3,
+      "Marker": "s",
+      "Attributes": [],
+      "Data": null,
+      "EndMarker": null,
+      "Token": {
+        "Type": 4,
+        "Marker": "s",
+        "Text": null,
+        "Attributes": null,
+        "Data": null,
+        "EndMarker": "s*",
+        "NestlessMarker": "s",
+        "HasData": false,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "GEN",
+        "BookNum": 1,
+        "ChapterNum": 1,
+        "VerseNum": 2,
+        "BBBCCCVVV": 1001002,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": false,
+        "AllVerses": []
+      },
+      "VerseOffset": 139,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": false,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    },
+    {
+      "Type": 3,
+      "Marker": "p",
+      "Attributes": [],
+      "Data": null,
+      "EndMarker": null,
+      "Token": {
+        "Type": 4,
+        "Marker": "p",
+        "Text": null,
+        "Attributes": null,
+        "Data": null,
+        "EndMarker": "p*",
+        "NestlessMarker": "p",
+        "HasData": false,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "GEN",
+        "BookNum": 1,
+        "ChapterNum": 1,
+        "VerseNum": 2,
+        "BBBCCCVVV": 1001002,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": false,
+        "AllVerses": []
+      },
+      "VerseOffset": 142,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": true,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    }
+  ],
+  "01_001_001": [
+    {
+      "Type": 2,
+      "Marker": "v",
+      "Attributes": [],
+      "Data": "1",
+      "EndMarker": null,
+      "Token": {
+        "Type": 2,
+        "Marker": "v",
+        "Text": null,
+        "Attributes": null,
+        "Data": "1",
+        "EndMarker": null,
+        "NestlessMarker": "v",
+        "HasData": true,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "GEN",
+        "BookNum": 1,
+        "ChapterNum": 1,
+        "VerseNum": 1,
+        "BBBCCCVVV": 1001001,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": false,
+        "AllVerses": []
+      },
+      "VerseOffset": 0,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": true,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    },
+    {
+      "Text": "परमेश्वर ने सृष्टि की रचना यूँ की: आरम्‍भ में परमेश्वर ने पृथ्‍वी की रचना की। ",
+      "Token": {
+        "Type": 3,
+        "Marker": null,
+        "Text": "परमेश्वर ने सृष्टि की रचना यूँ की: आरम्‍भ में परमेश्वर ने पृथ्‍वी की रचना की। ",
+        "Attributes": null,
+        "Data": null,
+        "EndMarker": null,
+        "NestlessMarker": null,
+        "HasData": false,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "GEN",
+        "BookNum": 1,
+        "ChapterNum": 1,
+        "VerseNum": 1,
+        "BBBCCCVVV": 1001001,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": false,
+        "AllVerses": []
+      },
+      "VerseOffset": 5,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": true,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    }
+  ]
+}

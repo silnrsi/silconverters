@@ -1,0 +1,13 @@
+{
+  "BookCode": "GEN",
+  "BookNum": 1,
+  "ChapterNum": 1,
+  "VerseNum": 1,
+  "BBBCCCVVV": 1001001,
+  "Versification": {
+    "Type": 4,
+    "IsCustomized": false
+  },
+  "RepresentsMultipleVerses": false,
+  "AllVerses": []
+}

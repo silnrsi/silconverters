@@ -289,6 +289,9 @@
     <Content Include="redist\Help\TECkit_Map_Plug-in_About_box.htm" />
     <Content Include="TestFiles\BulkWordDocConverter\TestFile1.xml" />
     <Content Include="TestFiles\BulkWordDocConverter\TestFile2.xml" />
+    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\CombinedInSourceSeparateNoEmptyInTarget\CombinedInSourceSeparateNoEmptyInTarget_TranslatedText.txt" />
+    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\SeparateInSourceCombinedButEmptyInTarget\SeparateInSourceCombinedButEmptyInTarget_TranslatedText.txt" />
+    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\MultipleVersesWithFootnote\MultipleVersesWithFootnote_TranslatedText.txt" />
     <EmbeddedResource Include="TestFiles\PtxBackTrHelper\SingleVerse\MultiplePoeticParagraphs\MultiplePoeticParagraphsMissingInTarget\MultiplePoeticParagraphsMissingInTarget_TranslatedText.txt" />
     <EmbeddedResource Include="TestFiles\PtxBackTrHelper\MultipleVerses\MultipleVersesAndParagraphsMiTJoinedIntoOneParagraphs\MultipleVersesAndParagraphsMiTJoinedIntoOneParagraphs_TranslatedText.txt" />
     <EmbeddedResource Include="TestFiles\PtxBackTrHelper\MultipleVerses\MultipleVersesAndParagraphsJoinedIntoOneParagraphs\MultipleVersesAndParagraphsJoinedIntoOneParagraphs_TranslatedText.txt" />
@@ -420,6 +423,21 @@
     <EmbeddedResource Include="TestFiles\PtxBackTrHelper\SingleVerse\MultiplePoeticParagraphs\MultiplePoeticParagraphs_VersesReference.json" />
     <EmbeddedResource Include="TestFiles\PtxBackTrHelper\SingleVerse\MultiplePoeticParagraphs\MultiplePoeticParagraphsMissingInTarget\MultiplePoeticParagraphsMissingInTarget_TokensTarget.json" />
     <EmbeddedResource Include="TestFiles\PtxBackTrHelper\SingleVerse\MultiplePoeticParagraphs\MultiplePoeticParagraphsMissingInTarget\MultiplePoeticParagraphsMissingInTarget_TokensTargetUpdate.json" />
+    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\MultipleVersesWithFootnote\MultipleVersesWithFootnote_TokensSource.json" />
+    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\MultipleVersesWithFootnote\MultipleVersesWithFootnote_TokensTarget.json" />
+    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\MultipleVersesWithFootnote\MultipleVersesWithFootnote_VerseReference.json" />
+    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\MultipleVersesWithFootnote\MultipleVersesWithFootnote_VersesReference.json" />
+    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\MultipleVersesWithFootnote\MultipleVersesWithFootnote_TokensTargetUpdate.json" />
+    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\SeparateInSourceCombinedButEmptyInTarget\SeparateInSourceCombinedButEmptyInTarget_TokensSource.json" />
+    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\SeparateInSourceCombinedButEmptyInTarget\SeparateInSourceCombinedButEmptyInTarget_TokensTarget.json" />
+    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\SeparateInSourceCombinedButEmptyInTarget\SeparateInSourceCombinedButEmptyInTarget_TokensTargetUpdate.json" />
+    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\SeparateInSourceCombinedButEmptyInTarget\SeparateInSourceCombinedButEmptyInTarget_VerseReference.json" />
+    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\SeparateInSourceCombinedButEmptyInTarget\SeparateInSourceCombinedButEmptyInTarget_VersesReference.json" />
+    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\CombinedInSourceSeparateNoEmptyInTarget\CombinedInSourceSeparateNoEmptyInTarget_TokensSource.json" />
+    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\CombinedInSourceSeparateNoEmptyInTarget\CombinedInSourceSeparateNoEmptyInTarget_TokensTarget.json" />
+    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\CombinedInSourceSeparateNoEmptyInTarget\CombinedInSourceSeparateNoEmptyInTarget_TokensTargetUpdate.json" />
+    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\CombinedInSourceSeparateNoEmptyInTarget\CombinedInSourceSeparateNoEmptyInTarget_VerseReference.json" />
+    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\CombinedInSourceSeparateNoEmptyInTarget\CombinedInSourceSeparateNoEmptyInTarget_VersesReference.json" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

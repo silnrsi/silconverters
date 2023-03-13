@@ -1,0 +1,4589 @@
+{
+  "52_005_000": [
+    {
+      "Type": 1,
+      "Marker": "c",
+      "Attributes": [],
+      "Data": "5",
+      "EndMarker": null,
+      "Token": {
+        "Type": 1,
+        "Marker": "c",
+        "Text": null,
+        "Attributes": null,
+        "Data": "5",
+        "EndMarker": null,
+        "NestlessMarker": "c",
+        "HasData": true,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "1TH",
+        "BookNum": 52,
+        "ChapterNum": 5,
+        "VerseNum": 0,
+        "BBBCCCVVV": 52005000,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": false,
+        "AllVerses": []
+      },
+      "VerseOffset": 0,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": true,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    },
+    {
+      "Type": 3,
+      "Marker": "s",
+      "Attributes": [],
+      "Data": null,
+      "EndMarker": null,
+      "Token": {
+        "Type": 4,
+        "Marker": "s",
+        "Text": null,
+        "Attributes": null,
+        "Data": null,
+        "EndMarker": "s*",
+        "NestlessMarker": "s",
+        "HasData": false,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "1TH",
+        "BookNum": 52,
+        "ChapterNum": 5,
+        "VerseNum": 0,
+        "BBBCCCVVV": 52005000,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": false,
+        "AllVerses": []
+      },
+      "VerseOffset": 5,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": false,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    },
+    {
+      "Text": "Be Prepared For the Return of the Lord Jesus ",
+      "Token": {
+        "Type": 3,
+        "Marker": null,
+        "Text": "Be Prepared For the Return of the Lord Jesus ",
+        "Attributes": null,
+        "Data": null,
+        "EndMarker": null,
+        "NestlessMarker": null,
+        "HasData": false,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "1TH",
+        "BookNum": 52,
+        "ChapterNum": 5,
+        "VerseNum": 0,
+        "BBBCCCVVV": 52005000,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": false,
+        "AllVerses": []
+      },
+      "VerseOffset": 8,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": false,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    },
+    {
+      "Type": 3,
+      "Marker": "p",
+      "Attributes": [],
+      "Data": null,
+      "EndMarker": null,
+      "Token": {
+        "Type": 4,
+        "Marker": "p",
+        "Text": null,
+        "Attributes": null,
+        "Data": null,
+        "EndMarker": "p*",
+        "NestlessMarker": "p",
+        "HasData": false,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "1TH",
+        "BookNum": 52,
+        "ChapterNum": 5,
+        "VerseNum": 0,
+        "BBBCCCVVV": 52005000,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": false,
+        "AllVerses": []
+      },
+      "VerseOffset": 53,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": true,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    }
+  ],
+  "52_005_001": [
+    {
+      "Type": 2,
+      "Marker": "v",
+      "Attributes": [],
+      "Data": "1",
+      "EndMarker": null,
+      "Token": {
+        "Type": 2,
+        "Marker": "v",
+        "Text": null,
+        "Attributes": null,
+        "Data": "1",
+        "EndMarker": null,
+        "NestlessMarker": "v",
+        "HasData": true,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "1TH",
+        "BookNum": 52,
+        "ChapterNum": 5,
+        "VerseNum": 1,
+        "BBBCCCVVV": 52005001,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": false,
+        "AllVerses": []
+      },
+      "VerseOffset": 0,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": true,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    },
+    {
+      "Text": "Brothers and sisters, I don’t think it is necessary to write to you about when the Lord Jesus Christ will return to this world. ",
+      "Token": {
+        "Type": 3,
+        "Marker": null,
+        "Text": "Brothers and sisters, I don’t think it is necessary to write to you about when the Lord Jesus Christ will return to this world. ",
+        "Attributes": null,
+        "Data": null,
+        "EndMarker": null,
+        "NestlessMarker": null,
+        "HasData": false,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "1TH",
+        "BookNum": 52,
+        "ChapterNum": 5,
+        "VerseNum": 1,
+        "BBBCCCVVV": 52005001,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": false,
+        "AllVerses": []
+      },
+      "VerseOffset": 5,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": true,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    }
+  ],
+  "52_005_002": [
+    {
+      "Type": 2,
+      "Marker": "v",
+      "Attributes": [],
+      "Data": "2",
+      "EndMarker": null,
+      "Token": {
+        "Type": 2,
+        "Marker": "v",
+        "Text": null,
+        "Attributes": null,
+        "Data": "2",
+        "EndMarker": null,
+        "NestlessMarker": "v",
+        "HasData": true,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "1TH",
+        "BookNum": 52,
+        "ChapterNum": 5,
+        "VerseNum": 2,
+        "BBBCCCVVV": 52005002,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": false,
+        "AllVerses": []
+      },
+      "VerseOffset": 0,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": true,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    },
+    {
+      "Text": "For you know very well that the Lord will return when you have not even thought about it.",
+      "Token": {
+        "Type": 3,
+        "Marker": null,
+        "Text": "For you know very well that the Lord will return when you have not even thought about it.",
+        "Attributes": null,
+        "Data": null,
+        "EndMarker": null,
+        "NestlessMarker": null,
+        "HasData": false,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "1TH",
+        "BookNum": 52,
+        "ChapterNum": 5,
+        "VerseNum": 2,
+        "BBBCCCVVV": 52005002,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": false,
+        "AllVerses": []
+      },
+      "VerseOffset": 5,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": true,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    },
+    {
+      "Type": 5,
+      "Marker": "f",
+      "Attributes": [],
+      "Data": "+",
+      "EndMarker": "f*",
+      "Token": {
+        "Type": 6,
+        "Marker": "f",
+        "Text": null,
+        "Attributes": null,
+        "Data": "+",
+        "EndMarker": "f*",
+        "NestlessMarker": "f",
+        "HasData": true,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "1TH",
+        "BookNum": 52,
+        "ChapterNum": 5,
+        "VerseNum": 2,
+        "BBBCCCVVV": 52005002,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": false,
+        "AllVerses": []
+      },
+      "VerseOffset": 94,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": true,
+      "IsScripture": false,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    },
+    {
+      "Type": 4,
+      "Marker": "fr",
+      "Attributes": [],
+      "Data": null,
+      "EndMarker": "fr*",
+      "Token": {
+        "Type": 5,
+        "Marker": "fr",
+        "Text": null,
+        "Attributes": null,
+        "Data": null,
+        "EndMarker": "fr*",
+        "NestlessMarker": "fr",
+        "HasData": false,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "1TH",
+        "BookNum": 52,
+        "ChapterNum": 5,
+        "VerseNum": 2,
+        "BBBCCCVVV": 52005002,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": false,
+        "AllVerses": []
+      },
+      "VerseOffset": 99,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": true,
+      "IsScripture": false,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    },
+    {
+      "Text": "5:2 ",
+      "Token": {
+        "Type": 3,
+        "Marker": null,
+        "Text": "5:2 ",
+        "Attributes": null,
+        "Data": null,
+        "EndMarker": null,
+        "NestlessMarker": null,
+        "HasData": false,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "1TH",
+        "BookNum": 52,
+        "ChapterNum": 5,
+        "VerseNum": 2,
+        "BBBCCCVVV": 52005002,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": false,
+        "AllVerses": []
+      },
+      "VerseOffset": 103,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": true,
+      "IsScripture": false,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    },
+    {
+      "Type": 4,
+      "Marker": "fq",
+      "Attributes": [],
+      "Data": null,
+      "EndMarker": "fq*",
+      "Token": {
+        "Type": 5,
+        "Marker": "fq",
+        "Text": null,
+        "Attributes": null,
+        "Data": null,
+        "EndMarker": "fq*",
+        "NestlessMarker": "fq",
+        "HasData": false,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "1TH",
+        "BookNum": 52,
+        "ChapterNum": 5,
+        "VerseNum": 2,
+        "BBBCCCVVV": 52005002,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": false,
+        "AllVerses": []
+      },
+      "VerseOffset": 107,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": true,
+      "IsScripture": false,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    },
+    {
+      "Text": "when you have not even thought about it ",
+      "Token": {
+        "Type": 3,
+        "Marker": null,
+        "Text": "when you have not even thought about it ",
+        "Attributes": null,
+        "Data": null,
+        "EndMarker": null,
+        "NestlessMarker": null,
+        "HasData": false,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "1TH",
+        "BookNum": 52,
+        "ChapterNum": 5,
+        "VerseNum": 2,
+        "BBBCCCVVV": 52005002,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": false,
+        "AllVerses": []
+      },
+      "VerseOffset": 111,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": true,
+      "IsScripture": false,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    },
+    {
+      "Type": 4,
+      "Marker": "ft",
+      "Attributes": [],
+      "Data": null,
+      "EndMarker": "ft*",
+      "Token": {
+        "Type": 5,
+        "Marker": "ft",
+        "Text": null,
+        "Attributes": null,
+        "Data": null,
+        "EndMarker": "ft*",
+        "NestlessMarker": "ft",
+        "HasData": false,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "1TH",
+        "BookNum": 52,
+        "ChapterNum": 5,
+        "VerseNum": 2,
+        "BBBCCCVVV": 52005002,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": false,
+        "AllVerses": []
+      },
+      "VerseOffset": 151,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": true,
+      "IsScripture": false,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    },
+    {
+      "Text": "In Greek, “like a thief at night”. See, Revelation 3:3, 16:15; Matthew 24:42-44; 2 Peter 3:10. This is also in verses 4-5.",
+      "Token": {
+        "Type": 3,
+        "Marker": null,
+        "Text": "In Greek, “like a thief at night”. See, Revelation 3:3, 16:15; Matthew 24:42-44; 2 Peter 3:10. This is also in verses 4-5.",
+        "Attributes": null,
+        "Data": null,
+        "EndMarker": null,
+        "NestlessMarker": null,
+        "HasData": false,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "1TH",
+        "BookNum": 52,
+        "ChapterNum": 5,
+        "VerseNum": 2,
+        "BBBCCCVVV": 52005002,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": false,
+        "AllVerses": []
+      },
+      "VerseOffset": 155,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": true,
+      "IsScripture": false,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    },
+    {
+      "Type": 6,
+      "Marker": "f*",
+      "Attributes": [],
+      "Data": null,
+      "EndMarker": null,
+      "Token": {
+        "Type": 7,
+        "Marker": "f*",
+        "Text": null,
+        "Attributes": null,
+        "Data": null,
+        "EndMarker": null,
+        "NestlessMarker": "f*",
+        "HasData": false,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "1TH",
+        "BookNum": 52,
+        "ChapterNum": 5,
+        "VerseNum": 2,
+        "BBBCCCVVV": 52005002,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": false,
+        "AllVerses": []
+      },
+      "VerseOffset": 277,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": true,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    },
+    {
+      "Text": " ",
+      "Token": {
+        "Type": 3,
+        "Marker": null,
+        "Text": " ",
+        "Attributes": null,
+        "Data": null,
+        "EndMarker": null,
+        "NestlessMarker": null,
+        "HasData": false,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "1TH",
+        "BookNum": 52,
+        "ChapterNum": 5,
+        "VerseNum": 2,
+        "BBBCCCVVV": 52005002,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": false,
+        "AllVerses": []
+      },
+      "VerseOffset": 280,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": true,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    },
+    {
+      "Type": 3,
+      "Marker": "p",
+      "Attributes": [],
+      "Data": null,
+      "EndMarker": null,
+      "Token": {
+        "Type": 4,
+        "Marker": "p",
+        "Text": null,
+        "Attributes": null,
+        "Data": null,
+        "EndMarker": "p*",
+        "NestlessMarker": "p",
+        "HasData": false,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "1TH",
+        "BookNum": 52,
+        "ChapterNum": 5,
+        "VerseNum": 2,
+        "BBBCCCVVV": 52005002,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": false,
+        "AllVerses": []
+      },
+      "VerseOffset": 281,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": true,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    }
+  ],
+  "52_005_003": [
+    {
+      "Type": 2,
+      "Marker": "v",
+      "Attributes": [],
+      "Data": "3",
+      "EndMarker": null,
+      "Token": {
+        "Type": 2,
+        "Marker": "v",
+        "Text": null,
+        "Attributes": null,
+        "Data": "3",
+        "EndMarker": null,
+        "NestlessMarker": "v",
+        "HasData": true,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "1TH",
+        "BookNum": 52,
+        "ChapterNum": 5,
+        "VerseNum": 3,
+        "BBBCCCVVV": 52005003,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": false,
+        "AllVerses": []
+      },
+      "VerseOffset": 0,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": true,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    },
+    {
+      "Text": "Those who are in the dark kingdom of Satan will then say, “Now there is peace all around, and there is nothing to fear...” ",
+      "Token": {
+        "Type": 3,
+        "Marker": null,
+        "Text": "Those who are in the dark kingdom of Satan will then say, “Now there is peace all around, and there is nothing to fear...” ",
+        "Attributes": null,
+        "Data": null,
+        "EndMarker": null,
+        "NestlessMarker": null,
+        "HasData": false,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "1TH",
+        "BookNum": 52,
+        "ChapterNum": 5,
+        "VerseNum": 3,
+        "BBBCCCVVV": 52005003,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": false,
+        "AllVerses": []
+      },
+      "VerseOffset": 5,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": true,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    },
+    {
+      "Type": 3,
+      "Marker": "p",
+      "Attributes": [],
+      "Data": null,
+      "EndMarker": null,
+      "Token": {
+        "Type": 4,
+        "Marker": "p",
+        "Text": null,
+        "Attributes": null,
+        "Data": null,
+        "EndMarker": "p*",
+        "NestlessMarker": "p",
+        "HasData": false,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "1TH",
+        "BookNum": 52,
+        "ChapterNum": 5,
+        "VerseNum": 3,
+        "BBBCCCVVV": 52005003,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": false,
+        "AllVerses": []
+      },
+      "VerseOffset": 128,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": true,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    },
+    {
+      "Text": "But what will really happen is that just as a pregnant woman feels the pain of childbirth in an instant, disaster will come upon them at once, and they will have nowhere to go. ",
+      "Token": {
+        "Type": 3,
+        "Marker": null,
+        "Text": "But what will really happen is that just as a pregnant woman feels the pain of childbirth in an instant, disaster will come upon them at once, and they will have nowhere to go. ",
+        "Attributes": null,
+        "Data": null,
+        "EndMarker": null,
+        "NestlessMarker": null,
+        "HasData": false,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "1TH",
+        "BookNum": 52,
+        "ChapterNum": 5,
+        "VerseNum": 3,
+        "BBBCCCVVV": 52005003,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": false,
+        "AllVerses": []
+      },
+      "VerseOffset": 131,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": true,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    },
+    {
+      "Type": 3,
+      "Marker": "p",
+      "Attributes": [],
+      "Data": null,
+      "EndMarker": null,
+      "Token": {
+        "Type": 4,
+        "Marker": "p",
+        "Text": null,
+        "Attributes": null,
+        "Data": null,
+        "EndMarker": "p*",
+        "NestlessMarker": "p",
+        "HasData": false,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "1TH",
+        "BookNum": 52,
+        "ChapterNum": 5,
+        "VerseNum": 3,
+        "BBBCCCVVV": 52005003,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": false,
+        "AllVerses": []
+      },
+      "VerseOffset": 308,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": true,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    }
+  ],
+  "52_005_004-005": [
+    {
+      "Type": 2,
+      "Marker": "v",
+      "Attributes": [],
+      "Data": "4-5",
+      "EndMarker": null,
+      "Token": {
+        "Type": 2,
+        "Marker": "v",
+        "Text": null,
+        "Attributes": null,
+        "Data": "4-5",
+        "EndMarker": null,
+        "NestlessMarker": "v",
+        "HasData": true,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "1TH",
+        "BookNum": 52,
+        "ChapterNum": 5,
+        "VerseNum": 4,
+        "BBBCCCVVV": 52005004,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": true,
+        "AllVerses": [
+          {
+            "BookCode": "1TH",
+            "BookNum": 52,
+            "ChapterNum": 5,
+            "VerseNum": 4,
+            "BBBCCCVVV": 52005004,
+            "Versification": {
+              "Type": 4,
+              "IsCustomized": false
+            },
+            "RepresentsMultipleVerses": false,
+            "AllVerses": []
+          },
+          {
+            "BookCode": "1TH",
+            "BookNum": 52,
+            "ChapterNum": 5,
+            "VerseNum": 5,
+            "BBBCCCVVV": 52005005,
+            "Versification": {
+              "Type": 4,
+              "IsCustomized": false
+            },
+            "RepresentsMultipleVerses": false,
+            "AllVerses": []
+          }
+        ]
+      },
+      "VerseOffset": 0,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": true,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    },
+    {
+      "Text": "But brothers and sisters, you and I are neither of the ‘darkness’ nor of the ‘night’ like them. You belong to God’s ‘light’ and to the ‘day’. And for you, the return of the Lord will not be alarming or come as a surprise. ",
+      "Token": {
+        "Type": 3,
+        "Marker": null,
+        "Text": "But brothers and sisters, you and I are neither of the ‘darkness’ nor of the ‘night’ like them. You belong to God’s ‘light’ and to the ‘day’. And for you, the return of the Lord will not be alarming or come as a surprise. ",
+        "Attributes": null,
+        "Data": null,
+        "EndMarker": null,
+        "NestlessMarker": null,
+        "HasData": false,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "1TH",
+        "BookNum": 52,
+        "ChapterNum": 5,
+        "VerseNum": 4,
+        "BBBCCCVVV": 52005004,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": true,
+        "AllVerses": [
+          {
+            "BookCode": "1TH",
+            "BookNum": 52,
+            "ChapterNum": 5,
+            "VerseNum": 4,
+            "BBBCCCVVV": 52005004,
+            "Versification": {
+              "Type": 4,
+              "IsCustomized": false
+            },
+            "RepresentsMultipleVerses": false,
+            "AllVerses": []
+          },
+          {
+            "BookCode": "1TH",
+            "BookNum": 52,
+            "ChapterNum": 5,
+            "VerseNum": 5,
+            "BBBCCCVVV": 52005005,
+            "Versification": {
+              "Type": 4,
+              "IsCustomized": false
+            },
+            "RepresentsMultipleVerses": false,
+            "AllVerses": []
+          }
+        ]
+      },
+      "VerseOffset": 7,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": true,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    },
+    {
+      "Type": 3,
+      "Marker": "p",
+      "Attributes": [],
+      "Data": null,
+      "EndMarker": null,
+      "Token": {
+        "Type": 4,
+        "Marker": "p",
+        "Text": null,
+        "Attributes": null,
+        "Data": null,
+        "EndMarker": "p*",
+        "NestlessMarker": "p",
+        "HasData": false,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "1TH",
+        "BookNum": 52,
+        "ChapterNum": 5,
+        "VerseNum": 4,
+        "BBBCCCVVV": 52005004,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": true,
+        "AllVerses": [
+          {
+            "BookCode": "1TH",
+            "BookNum": 52,
+            "ChapterNum": 5,
+            "VerseNum": 4,
+            "BBBCCCVVV": 52005004,
+            "Versification": {
+              "Type": 4,
+              "IsCustomized": false
+            },
+            "RepresentsMultipleVerses": false,
+            "AllVerses": []
+          },
+          {
+            "BookCode": "1TH",
+            "BookNum": 52,
+            "ChapterNum": 5,
+            "VerseNum": 5,
+            "BBBCCCVVV": 52005005,
+            "Versification": {
+              "Type": 4,
+              "IsCustomized": false
+            },
+            "RepresentsMultipleVerses": false,
+            "AllVerses": []
+          }
+        ]
+      },
+      "VerseOffset": 229,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": true,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    }
+  ],
+  "52_005_006-007": [
+    {
+      "Type": 2,
+      "Marker": "v",
+      "Attributes": [],
+      "Data": "6-7",
+      "EndMarker": null,
+      "Token": {
+        "Type": 2,
+        "Marker": "v",
+        "Text": null,
+        "Attributes": null,
+        "Data": "6-7",
+        "EndMarker": null,
+        "NestlessMarker": "v",
+        "HasData": true,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "1TH",
+        "BookNum": 52,
+        "ChapterNum": 5,
+        "VerseNum": 6,
+        "BBBCCCVVV": 52005006,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": true,
+        "AllVerses": [
+          {
+            "BookCode": "1TH",
+            "BookNum": 52,
+            "ChapterNum": 5,
+            "VerseNum": 6,
+            "BBBCCCVVV": 52005006,
+            "Versification": {
+              "Type": 4,
+              "IsCustomized": false
+            },
+            "RepresentsMultipleVerses": false,
+            "AllVerses": []
+          },
+          {
+            "BookCode": "1TH",
+            "BookNum": 52,
+            "ChapterNum": 5,
+            "VerseNum": 7,
+            "BBBCCCVVV": 52005007,
+            "Versification": {
+              "Type": 4,
+              "IsCustomized": false
+            },
+            "RepresentsMultipleVerses": false,
+            "AllVerses": []
+          }
+        ]
+      },
+      "VerseOffset": 0,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": true,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    },
+    {
+      "Text": "For ‘Night’ is when people drink and get drunk and sleep away their lives. So let us not sleep away our lives like them, but rather be vigilant and sober. ",
+      "Token": {
+        "Type": 3,
+        "Marker": null,
+        "Text": "For ‘Night’ is when people drink and get drunk and sleep away their lives. So let us not sleep away our lives like them, but rather be vigilant and sober. ",
+        "Attributes": null,
+        "Data": null,
+        "EndMarker": null,
+        "NestlessMarker": null,
+        "HasData": false,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "1TH",
+        "BookNum": 52,
+        "ChapterNum": 5,
+        "VerseNum": 6,
+        "BBBCCCVVV": 52005006,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": true,
+        "AllVerses": [
+          {
+            "BookCode": "1TH",
+            "BookNum": 52,
+            "ChapterNum": 5,
+            "VerseNum": 6,
+            "BBBCCCVVV": 52005006,
+            "Versification": {
+              "Type": 4,
+              "IsCustomized": false
+            },
+            "RepresentsMultipleVerses": false,
+            "AllVerses": []
+          },
+          {
+            "BookCode": "1TH",
+            "BookNum": 52,
+            "ChapterNum": 5,
+            "VerseNum": 7,
+            "BBBCCCVVV": 52005007,
+            "Versification": {
+              "Type": 4,
+              "IsCustomized": false
+            },
+            "RepresentsMultipleVerses": false,
+            "AllVerses": []
+          }
+        ]
+      },
+      "VerseOffset": 7,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": true,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    }
+  ],
+  "52_005_008": [
+    {
+      "Type": 2,
+      "Marker": "v",
+      "Attributes": [],
+      "Data": "8",
+      "EndMarker": null,
+      "Token": {
+        "Type": 2,
+        "Marker": "v",
+        "Text": null,
+        "Attributes": null,
+        "Data": "8",
+        "EndMarker": null,
+        "NestlessMarker": "v",
+        "HasData": true,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "1TH",
+        "BookNum": 52,
+        "ChapterNum": 5,
+        "VerseNum": 8,
+        "BBBCCCVVV": 52005008,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": false,
+        "AllVerses": []
+      },
+      "VerseOffset": 0,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": true,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    },
+    {
+      "Text": "Since we are of the ‘day’, let us strap on our weapons and armor and be alert: such as the ‘helmet’ ",
+      "Token": {
+        "Type": 3,
+        "Marker": null,
+        "Text": "Since we are of the ‘day’, let us strap on our weapons and armor and be alert: such as the ‘helmet’ ",
+        "Attributes": null,
+        "Data": null,
+        "EndMarker": null,
+        "NestlessMarker": null,
+        "HasData": false,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "1TH",
+        "BookNum": 52,
+        "ChapterNum": 5,
+        "VerseNum": 8,
+        "BBBCCCVVV": 52005008,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": false,
+        "AllVerses": []
+      },
+      "VerseOffset": 5,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": true,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    },
+    {
+      "Type": 5,
+      "Marker": "x",
+      "Attributes": [],
+      "Data": "+",
+      "EndMarker": "x*",
+      "Token": {
+        "Type": 6,
+        "Marker": "x",
+        "Text": null,
+        "Attributes": null,
+        "Data": "+",
+        "EndMarker": "x*",
+        "NestlessMarker": "x",
+        "HasData": true,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "1TH",
+        "BookNum": 52,
+        "ChapterNum": 5,
+        "VerseNum": 8,
+        "BBBCCCVVV": 52005008,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": false,
+        "AllVerses": []
+      },
+      "VerseOffset": 105,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": true,
+      "IsScripture": false,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    },
+    {
+      "Type": 4,
+      "Marker": "xo",
+      "Attributes": [],
+      "Data": null,
+      "EndMarker": "xo*",
+      "Token": {
+        "Type": 5,
+        "Marker": "xo",
+        "Text": null,
+        "Attributes": null,
+        "Data": null,
+        "EndMarker": "xo*",
+        "NestlessMarker": "xo",
+        "HasData": false,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "1TH",
+        "BookNum": 52,
+        "ChapterNum": 5,
+        "VerseNum": 8,
+        "BBBCCCVVV": 52005008,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": false,
+        "AllVerses": []
+      },
+      "VerseOffset": 110,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": true,
+      "IsScripture": false,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    },
+    {
+      "Text": "5.8 ",
+      "Token": {
+        "Type": 3,
+        "Marker": null,
+        "Text": "5.8 ",
+        "Attributes": null,
+        "Data": null,
+        "EndMarker": null,
+        "NestlessMarker": null,
+        "HasData": false,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "1TH",
+        "BookNum": 52,
+        "ChapterNum": 5,
+        "VerseNum": 8,
+        "BBBCCCVVV": 52005008,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": false,
+        "AllVerses": []
+      },
+      "VerseOffset": 114,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": true,
+      "IsScripture": false,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    },
+    {
+      "Type": 4,
+      "Marker": "xq",
+      "Attributes": [],
+      "Data": null,
+      "EndMarker": "xq*",
+      "Token": {
+        "Type": 5,
+        "Marker": "xq",
+        "Text": null,
+        "Attributes": null,
+        "Data": null,
+        "EndMarker": "xq*",
+        "NestlessMarker": "xq",
+        "HasData": false,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "1TH",
+        "BookNum": 52,
+        "ChapterNum": 5,
+        "VerseNum": 8,
+        "BBBCCCVVV": 52005008,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": false,
+        "AllVerses": []
+      },
+      "VerseOffset": 118,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": true,
+      "IsScripture": false,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    },
+    {
+      "Text": "‘helmet’ ",
+      "Token": {
+        "Type": 3,
+        "Marker": null,
+        "Text": "‘helmet’ ",
+        "Attributes": null,
+        "Data": null,
+        "EndMarker": null,
+        "NestlessMarker": null,
+        "HasData": false,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "1TH",
+        "BookNum": 52,
+        "ChapterNum": 5,
+        "VerseNum": 8,
+        "BBBCCCVVV": 52005008,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": false,
+        "AllVerses": []
+      },
+      "VerseOffset": 122,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": true,
+      "IsScripture": false,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    },
+    {
+      "Type": 4,
+      "Marker": "xt",
+      "Attributes": [],
+      "Data": null,
+      "EndMarker": "xt*",
+      "Token": {
+        "Type": 5,
+        "Marker": "xt",
+        "Text": null,
+        "Attributes": null,
+        "Data": null,
+        "EndMarker": "xt*",
+        "NestlessMarker": "xt",
+        "HasData": false,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "1TH",
+        "BookNum": 52,
+        "ChapterNum": 5,
+        "VerseNum": 8,
+        "BBBCCCVVV": 52005008,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": false,
+        "AllVerses": []
+      },
+      "VerseOffset": 131,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": true,
+      "IsScripture": false,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    },
+    {
+      "Text": "Eph 6:17 ",
+      "Token": {
+        "Type": 3,
+        "Marker": null,
+        "Text": "Eph 6:17 ",
+        "Attributes": null,
+        "Data": null,
+        "EndMarker": null,
+        "NestlessMarker": null,
+        "HasData": false,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "1TH",
+        "BookNum": 52,
+        "ChapterNum": 5,
+        "VerseNum": 8,
+        "BBBCCCVVV": 52005008,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": false,
+        "AllVerses": []
+      },
+      "VerseOffset": 135,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": true,
+      "IsScripture": false,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    },
+    {
+      "Type": 6,
+      "Marker": "x*",
+      "Attributes": [],
+      "Data": null,
+      "EndMarker": null,
+      "Token": {
+        "Type": 7,
+        "Marker": "x*",
+        "Text": null,
+        "Attributes": null,
+        "Data": null,
+        "EndMarker": null,
+        "NestlessMarker": "x*",
+        "HasData": false,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "1TH",
+        "BookNum": 52,
+        "ChapterNum": 5,
+        "VerseNum": 8,
+        "BBBCCCVVV": 52005008,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": false,
+        "AllVerses": []
+      },
+      "VerseOffset": 144,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": true,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    },
+    {
+      "Text": " of our full faith in salvation, and let us put on the ‘breastplate’ ",
+      "Token": {
+        "Type": 3,
+        "Marker": null,
+        "Text": " of our full faith in salvation, and let us put on the ‘breastplate’ ",
+        "Attributes": null,
+        "Data": null,
+        "EndMarker": null,
+        "NestlessMarker": null,
+        "HasData": false,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "1TH",
+        "BookNum": 52,
+        "ChapterNum": 5,
+        "VerseNum": 8,
+        "BBBCCCVVV": 52005008,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": false,
+        "AllVerses": []
+      },
+      "VerseOffset": 147,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": true,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    },
+    {
+      "Type": 5,
+      "Marker": "x",
+      "Attributes": [],
+      "Data": "+",
+      "EndMarker": "x*",
+      "Token": {
+        "Type": 6,
+        "Marker": "x",
+        "Text": null,
+        "Attributes": null,
+        "Data": "+",
+        "EndMarker": "x*",
+        "NestlessMarker": "x",
+        "HasData": true,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "1TH",
+        "BookNum": 52,
+        "ChapterNum": 5,
+        "VerseNum": 8,
+        "BBBCCCVVV": 52005008,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": false,
+        "AllVerses": []
+      },
+      "VerseOffset": 216,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": true,
+      "IsScripture": false,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    },
+    {
+      "Type": 4,
+      "Marker": "xo",
+      "Attributes": [],
+      "Data": null,
+      "EndMarker": "xo*",
+      "Token": {
+        "Type": 5,
+        "Marker": "xo",
+        "Text": null,
+        "Attributes": null,
+        "Data": null,
+        "EndMarker": "xo*",
+        "NestlessMarker": "xo",
+        "HasData": false,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "1TH",
+        "BookNum": 52,
+        "ChapterNum": 5,
+        "VerseNum": 8,
+        "BBBCCCVVV": 52005008,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": false,
+        "AllVerses": []
+      },
+      "VerseOffset": 221,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": true,
+      "IsScripture": false,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    },
+    {
+      "Text": "5.8 ",
+      "Token": {
+        "Type": 3,
+        "Marker": null,
+        "Text": "5.8 ",
+        "Attributes": null,
+        "Data": null,
+        "EndMarker": null,
+        "NestlessMarker": null,
+        "HasData": false,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "1TH",
+        "BookNum": 52,
+        "ChapterNum": 5,
+        "VerseNum": 8,
+        "BBBCCCVVV": 52005008,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": false,
+        "AllVerses": []
+      },
+      "VerseOffset": 225,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": true,
+      "IsScripture": false,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    },
+    {
+      "Type": 4,
+      "Marker": "xq",
+      "Attributes": [],
+      "Data": null,
+      "EndMarker": "xq*",
+      "Token": {
+        "Type": 5,
+        "Marker": "xq",
+        "Text": null,
+        "Attributes": null,
+        "Data": null,
+        "EndMarker": "xq*",
+        "NestlessMarker": "xq",
+        "HasData": false,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "1TH",
+        "BookNum": 52,
+        "ChapterNum": 5,
+        "VerseNum": 8,
+        "BBBCCCVVV": 52005008,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": false,
+        "AllVerses": []
+      },
+      "VerseOffset": 229,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": true,
+      "IsScripture": false,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    },
+    {
+      "Text": "‘breastplate’ ",
+      "Token": {
+        "Type": 3,
+        "Marker": null,
+        "Text": "‘breastplate’ ",
+        "Attributes": null,
+        "Data": null,
+        "EndMarker": null,
+        "NestlessMarker": null,
+        "HasData": false,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "1TH",
+        "BookNum": 52,
+        "ChapterNum": 5,
+        "VerseNum": 8,
+        "BBBCCCVVV": 52005008,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": false,
+        "AllVerses": []
+      },
+      "VerseOffset": 233,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": true,
+      "IsScripture": false,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    },
+    {
+      "Type": 4,
+      "Marker": "xt",
+      "Attributes": [],
+      "Data": null,
+      "EndMarker": "xt*",
+      "Token": {
+        "Type": 5,
+        "Marker": "xt",
+        "Text": null,
+        "Attributes": null,
+        "Data": null,
+        "EndMarker": "xt*",
+        "NestlessMarker": "xt",
+        "HasData": false,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "1TH",
+        "BookNum": 52,
+        "ChapterNum": 5,
+        "VerseNum": 8,
+        "BBBCCCVVV": 52005008,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": false,
+        "AllVerses": []
+      },
+      "VerseOffset": 247,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": true,
+      "IsScripture": false,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    },
+    {
+      "Text": "Eph 6:14,16 ",
+      "Token": {
+        "Type": 3,
+        "Marker": null,
+        "Text": "Eph 6:14,16 ",
+        "Attributes": null,
+        "Data": null,
+        "EndMarker": null,
+        "NestlessMarker": null,
+        "HasData": false,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "1TH",
+        "BookNum": 52,
+        "ChapterNum": 5,
+        "VerseNum": 8,
+        "BBBCCCVVV": 52005008,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": false,
+        "AllVerses": []
+      },
+      "VerseOffset": 251,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": true,
+      "IsScripture": false,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    },
+    {
+      "Type": 6,
+      "Marker": "x*",
+      "Attributes": [],
+      "Data": null,
+      "EndMarker": null,
+      "Token": {
+        "Type": 7,
+        "Marker": "x*",
+        "Text": null,
+        "Attributes": null,
+        "Data": null,
+        "EndMarker": null,
+        "NestlessMarker": "x*",
+        "HasData": false,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "1TH",
+        "BookNum": 52,
+        "ChapterNum": 5,
+        "VerseNum": 8,
+        "BBBCCCVVV": 52005008,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": false,
+        "AllVerses": []
+      },
+      "VerseOffset": 263,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": true,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    },
+    {
+      "Text": " of our faith in and love for Christ. ",
+      "Token": {
+        "Type": 3,
+        "Marker": null,
+        "Text": " of our faith in and love for Christ. ",
+        "Attributes": null,
+        "Data": null,
+        "EndMarker": null,
+        "NestlessMarker": null,
+        "HasData": false,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "1TH",
+        "BookNum": 52,
+        "ChapterNum": 5,
+        "VerseNum": 8,
+        "BBBCCCVVV": 52005008,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": false,
+        "AllVerses": []
+      },
+      "VerseOffset": 266,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": true,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    },
+    {
+      "Type": 3,
+      "Marker": "p",
+      "Attributes": [],
+      "Data": null,
+      "EndMarker": null,
+      "Token": {
+        "Type": 4,
+        "Marker": "p",
+        "Text": null,
+        "Attributes": null,
+        "Data": null,
+        "EndMarker": "p*",
+        "NestlessMarker": "p",
+        "HasData": false,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "1TH",
+        "BookNum": 52,
+        "ChapterNum": 5,
+        "VerseNum": 8,
+        "BBBCCCVVV": 52005008,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": false,
+        "AllVerses": []
+      },
+      "VerseOffset": 304,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": true,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    }
+  ],
+  "52_005_009": [
+    {
+      "Type": 2,
+      "Marker": "v",
+      "Attributes": [],
+      "Data": "9",
+      "EndMarker": null,
+      "Token": {
+        "Type": 2,
+        "Marker": "v",
+        "Text": null,
+        "Attributes": null,
+        "Data": "9",
+        "EndMarker": null,
+        "NestlessMarker": "v",
+        "HasData": true,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "1TH",
+        "BookNum": 52,
+        "ChapterNum": 5,
+        "VerseNum": 9,
+        "BBBCCCVVV": 52005009,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": false,
+        "AllVerses": []
+      },
+      "VerseOffset": 0,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": true,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    },
+    {
+      "Text": "You see, God did not choose us to punish us, but rather to save us through the sacrifice of the Lord Jesus Christ. ",
+      "Token": {
+        "Type": 3,
+        "Marker": null,
+        "Text": "You see, God did not choose us to punish us, but rather to save us through the sacrifice of the Lord Jesus Christ. ",
+        "Attributes": null,
+        "Data": null,
+        "EndMarker": null,
+        "NestlessMarker": null,
+        "HasData": false,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "1TH",
+        "BookNum": 52,
+        "ChapterNum": 5,
+        "VerseNum": 9,
+        "BBBCCCVVV": 52005009,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": false,
+        "AllVerses": []
+      },
+      "VerseOffset": 5,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": true,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    }
+  ],
+  "52_005_010": [
+    {
+      "Type": 2,
+      "Marker": "v",
+      "Attributes": [],
+      "Data": "10",
+      "EndMarker": null,
+      "Token": {
+        "Type": 2,
+        "Marker": "v",
+        "Text": null,
+        "Attributes": null,
+        "Data": "10",
+        "EndMarker": null,
+        "NestlessMarker": "v",
+        "HasData": true,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "1TH",
+        "BookNum": 52,
+        "ChapterNum": 5,
+        "VerseNum": 10,
+        "BBBCCCVVV": 52005010,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": false,
+        "AllVerses": []
+      },
+      "VerseOffset": 0,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": true,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    },
+    {
+      "Text": "Jesus Christ gave His life for us, so that when He returns, whether we are alive or dead, He will take us to heaven to live with Him there forever and ever. ",
+      "Token": {
+        "Type": 3,
+        "Marker": null,
+        "Text": "Jesus Christ gave His life for us, so that when He returns, whether we are alive or dead, He will take us to heaven to live with Him there forever and ever. ",
+        "Attributes": null,
+        "Data": null,
+        "EndMarker": null,
+        "NestlessMarker": null,
+        "HasData": false,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "1TH",
+        "BookNum": 52,
+        "ChapterNum": 5,
+        "VerseNum": 10,
+        "BBBCCCVVV": 52005010,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": false,
+        "AllVerses": []
+      },
+      "VerseOffset": 6,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": true,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    }
+  ],
+  "52_005_011": [
+    {
+      "Type": 2,
+      "Marker": "v",
+      "Attributes": [],
+      "Data": "11",
+      "EndMarker": null,
+      "Token": {
+        "Type": 2,
+        "Marker": "v",
+        "Text": null,
+        "Attributes": null,
+        "Data": "11",
+        "EndMarker": null,
+        "NestlessMarker": "v",
+        "HasData": true,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "1TH",
+        "BookNum": 52,
+        "ChapterNum": 5,
+        "VerseNum": 11,
+        "BBBCCCVVV": 52005011,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": false,
+        "AllVerses": []
+      },
+      "VerseOffset": 0,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": true,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    },
+    {
+      "Text": "Therefore, continue to encourage one another, and help each other grow in spiritual maturity, just as you have been doing. ",
+      "Token": {
+        "Type": 3,
+        "Marker": null,
+        "Text": "Therefore, continue to encourage one another, and help each other grow in spiritual maturity, just as you have been doing. ",
+        "Attributes": null,
+        "Data": null,
+        "EndMarker": null,
+        "NestlessMarker": null,
+        "HasData": false,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "1TH",
+        "BookNum": 52,
+        "ChapterNum": 5,
+        "VerseNum": 11,
+        "BBBCCCVVV": 52005011,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": false,
+        "AllVerses": []
+      },
+      "VerseOffset": 6,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": true,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    },
+    {
+      "Type": 3,
+      "Marker": "s",
+      "Attributes": [],
+      "Data": null,
+      "EndMarker": null,
+      "Token": {
+        "Type": 4,
+        "Marker": "s",
+        "Text": null,
+        "Attributes": null,
+        "Data": null,
+        "EndMarker": "s*",
+        "NestlessMarker": "s",
+        "HasData": false,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "1TH",
+        "BookNum": 52,
+        "ChapterNum": 5,
+        "VerseNum": 11,
+        "BBBCCCVVV": 52005011,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": false,
+        "AllVerses": []
+      },
+      "VerseOffset": 129,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": false,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    },
+    {
+      "Text": "Final Warning and Greetings ",
+      "Token": {
+        "Type": 3,
+        "Marker": null,
+        "Text": "Final Warning and Greetings ",
+        "Attributes": null,
+        "Data": null,
+        "EndMarker": null,
+        "NestlessMarker": null,
+        "HasData": false,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "1TH",
+        "BookNum": 52,
+        "ChapterNum": 5,
+        "VerseNum": 11,
+        "BBBCCCVVV": 52005011,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": false,
+        "AllVerses": []
+      },
+      "VerseOffset": 132,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": false,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    },
+    {
+      "Type": 3,
+      "Marker": "p",
+      "Attributes": [],
+      "Data": null,
+      "EndMarker": null,
+      "Token": {
+        "Type": 4,
+        "Marker": "p",
+        "Text": null,
+        "Attributes": null,
+        "Data": null,
+        "EndMarker": "p*",
+        "NestlessMarker": "p",
+        "HasData": false,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "1TH",
+        "BookNum": 52,
+        "ChapterNum": 5,
+        "VerseNum": 11,
+        "BBBCCCVVV": 52005011,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": false,
+        "AllVerses": []
+      },
+      "VerseOffset": 160,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": true,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    }
+  ],
+  "52_005_012": [
+    {
+      "Type": 2,
+      "Marker": "v",
+      "Attributes": [],
+      "Data": "12",
+      "EndMarker": null,
+      "Token": {
+        "Type": 2,
+        "Marker": "v",
+        "Text": null,
+        "Attributes": null,
+        "Data": "12",
+        "EndMarker": null,
+        "NestlessMarker": "v",
+        "HasData": true,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "1TH",
+        "BookNum": 52,
+        "ChapterNum": 5,
+        "VerseNum": 12,
+        "BBBCCCVVV": 52005012,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": false,
+        "AllVerses": []
+      },
+      "VerseOffset": 0,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": true,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    },
+    {
+      "Text": "Brothers and sisters, we ask you to honor the leaders of the Church of the Lord Jesus,",
+      "Token": {
+        "Type": 3,
+        "Marker": null,
+        "Text": "Brothers and sisters, we ask you to honor the leaders of the Church of the Lord Jesus,",
+        "Attributes": null,
+        "Data": null,
+        "EndMarker": null,
+        "NestlessMarker": null,
+        "HasData": false,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "1TH",
+        "BookNum": 52,
+        "ChapterNum": 5,
+        "VerseNum": 12,
+        "BBBCCCVVV": 52005012,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": false,
+        "AllVerses": []
+      },
+      "VerseOffset": 6,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": true,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    },
+    {
+      "Type": 5,
+      "Marker": "x",
+      "Attributes": [],
+      "Data": "+",
+      "EndMarker": "x*",
+      "Token": {
+        "Type": 6,
+        "Marker": "x",
+        "Text": null,
+        "Attributes": null,
+        "Data": "+",
+        "EndMarker": "x*",
+        "NestlessMarker": "x",
+        "HasData": true,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "1TH",
+        "BookNum": 52,
+        "ChapterNum": 5,
+        "VerseNum": 12,
+        "BBBCCCVVV": 52005012,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": false,
+        "AllVerses": []
+      },
+      "VerseOffset": 92,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": true,
+      "IsScripture": false,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    },
+    {
+      "Type": 4,
+      "Marker": "xo",
+      "Attributes": [],
+      "Data": null,
+      "EndMarker": "xo*",
+      "Token": {
+        "Type": 5,
+        "Marker": "xo",
+        "Text": null,
+        "Attributes": null,
+        "Data": null,
+        "EndMarker": "xo*",
+        "NestlessMarker": "xo",
+        "HasData": false,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "1TH",
+        "BookNum": 52,
+        "ChapterNum": 5,
+        "VerseNum": 12,
+        "BBBCCCVVV": 52005012,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": false,
+        "AllVerses": []
+      },
+      "VerseOffset": 97,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": true,
+      "IsScripture": false,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    },
+    {
+      "Text": "5:12 ",
+      "Token": {
+        "Type": 3,
+        "Marker": null,
+        "Text": "5:12 ",
+        "Attributes": null,
+        "Data": null,
+        "EndMarker": null,
+        "NestlessMarker": null,
+        "HasData": false,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "1TH",
+        "BookNum": 52,
+        "ChapterNum": 5,
+        "VerseNum": 12,
+        "BBBCCCVVV": 52005012,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": false,
+        "AllVerses": []
+      },
+      "VerseOffset": 101,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": true,
+      "IsScripture": false,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    },
+    {
+      "Type": 4,
+      "Marker": "xq",
+      "Attributes": [],
+      "Data": null,
+      "EndMarker": "xq*",
+      "Token": {
+        "Type": 5,
+        "Marker": "xq",
+        "Text": null,
+        "Attributes": null,
+        "Data": null,
+        "EndMarker": "xq*",
+        "NestlessMarker": "xq",
+        "HasData": false,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "1TH",
+        "BookNum": 52,
+        "ChapterNum": 5,
+        "VerseNum": 12,
+        "BBBCCCVVV": 52005012,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": false,
+        "AllVerses": []
+      },
+      "VerseOffset": 106,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": true,
+      "IsScripture": false,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    },
+    {
+      "Text": "honor those leaders",
+      "Token": {
+        "Type": 3,
+        "Marker": null,
+        "Text": "honor those leaders",
+        "Attributes": null,
+        "Data": null,
+        "EndMarker": null,
+        "NestlessMarker": null,
+        "HasData": false,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "1TH",
+        "BookNum": 52,
+        "ChapterNum": 5,
+        "VerseNum": 12,
+        "BBBCCCVVV": 52005012,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": false,
+        "AllVerses": []
+      },
+      "VerseOffset": 110,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": true,
+      "IsScripture": false,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    },
+    {
+      "Type": 4,
+      "Marker": "xt",
+      "Attributes": [],
+      "Data": null,
+      "EndMarker": "xt*",
+      "Token": {
+        "Type": 5,
+        "Marker": "xt",
+        "Text": null,
+        "Attributes": null,
+        "Data": null,
+        "EndMarker": "xt*",
+        "NestlessMarker": "xt",
+        "HasData": false,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "1TH",
+        "BookNum": 52,
+        "ChapterNum": 5,
+        "VerseNum": 12,
+        "BBBCCCVVV": 52005012,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": false,
+        "AllVerses": []
+      },
+      "VerseOffset": 129,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": true,
+      "IsScripture": false,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    },
+    {
+      "Text": "Hebrews 13:7-17 ",
+      "Token": {
+        "Type": 3,
+        "Marker": null,
+        "Text": "Hebrews 13:7-17 ",
+        "Attributes": null,
+        "Data": null,
+        "EndMarker": null,
+        "NestlessMarker": null,
+        "HasData": false,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "1TH",
+        "BookNum": 52,
+        "ChapterNum": 5,
+        "VerseNum": 12,
+        "BBBCCCVVV": 52005012,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": false,
+        "AllVerses": []
+      },
+      "VerseOffset": 133,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": true,
+      "IsScripture": false,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    },
+    {
+      "Type": 6,
+      "Marker": "x*",
+      "Attributes": [],
+      "Data": null,
+      "EndMarker": null,
+      "Token": {
+        "Type": 7,
+        "Marker": "x*",
+        "Text": null,
+        "Attributes": null,
+        "Data": null,
+        "EndMarker": null,
+        "NestlessMarker": "x*",
+        "HasData": false,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "1TH",
+        "BookNum": 52,
+        "ChapterNum": 5,
+        "VerseNum": 12,
+        "BBBCCCVVV": 52005012,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": false,
+        "AllVerses": []
+      },
+      "VerseOffset": 149,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": true,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    },
+    {
+      "Text": " who help you grow spiritually. They give their life and limb to guide you. ",
+      "Token": {
+        "Type": 3,
+        "Marker": null,
+        "Text": " who help you grow spiritually. They give their life and limb to guide you. ",
+        "Attributes": null,
+        "Data": null,
+        "EndMarker": null,
+        "NestlessMarker": null,
+        "HasData": false,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "1TH",
+        "BookNum": 52,
+        "ChapterNum": 5,
+        "VerseNum": 12,
+        "BBBCCCVVV": 52005012,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": false,
+        "AllVerses": []
+      },
+      "VerseOffset": 152,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": true,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    }
+  ],
+  "52_005_013-014": [
+    {
+      "Type": 2,
+      "Marker": "v",
+      "Attributes": [],
+      "Data": "13-14",
+      "EndMarker": null,
+      "Token": {
+        "Type": 2,
+        "Marker": "v",
+        "Text": null,
+        "Attributes": null,
+        "Data": "13-14",
+        "EndMarker": null,
+        "NestlessMarker": "v",
+        "HasData": true,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "1TH",
+        "BookNum": 52,
+        "ChapterNum": 5,
+        "VerseNum": 13,
+        "BBBCCCVVV": 52005013,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": true,
+        "AllVerses": [
+          {
+            "BookCode": "1TH",
+            "BookNum": 52,
+            "ChapterNum": 5,
+            "VerseNum": 13,
+            "BBBCCCVVV": 52005013,
+            "Versification": {
+              "Type": 4,
+              "IsCustomized": false
+            },
+            "RepresentsMultipleVerses": false,
+            "AllVerses": []
+          },
+          {
+            "BookCode": "1TH",
+            "BookNum": 52,
+            "ChapterNum": 5,
+            "VerseNum": 14,
+            "BBBCCCVVV": 52005014,
+            "Versification": {
+              "Type": 4,
+              "IsCustomized": false
+            },
+            "RepresentsMultipleVerses": false,
+            "AllVerses": []
+          }
+        ]
+      },
+      "VerseOffset": 0,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": true,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    },
+    {
+      "Text": "Therefore, respect them with love for this ministry of theirs. ",
+      "VerseRef": {
+        "BookCode": "1TH",
+        "BookNum": 52,
+        "ChapterNum": 5,
+        "VerseNum": 13,
+        "BBBCCCVVV": 52005013,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": true,
+        "AllVerses": [
+          {
+            "BookCode": "1TH",
+            "BookNum": 52,
+            "ChapterNum": 5,
+            "VerseNum": 13,
+            "BBBCCCVVV": 52005013,
+            "Versification": {
+              "Type": 4,
+              "IsCustomized": false
+            },
+            "RepresentsMultipleVerses": false,
+            "AllVerses": []
+          },
+          {
+            "BookCode": "1TH",
+            "BookNum": 52,
+            "ChapterNum": 5,
+            "VerseNum": 14,
+            "BBBCCCVVV": 52005014,
+            "Versification": {
+              "Type": 4,
+              "IsCustomized": false
+            },
+            "RepresentsMultipleVerses": false,
+            "AllVerses": []
+          }
+        ]
+      },
+      "VerseOffset": 9,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": true,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    },
+    {
+      "Type": 3,
+      "Marker": "p",
+      "Attributes": [],
+      "Data": null,
+      "EndMarker": null,
+      "Token": {
+        "Type": 4,
+        "Marker": "p",
+        "Text": null,
+        "Attributes": null,
+        "Data": null,
+        "EndMarker": "p*",
+        "NestlessMarker": "p",
+        "HasData": false,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "1TH",
+        "BookNum": 52,
+        "ChapterNum": 5,
+        "VerseNum": 13,
+        "BBBCCCVVV": 52005013,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": true,
+        "AllVerses": [
+          {
+            "BookCode": "1TH",
+            "BookNum": 52,
+            "ChapterNum": 5,
+            "VerseNum": 13,
+            "BBBCCCVVV": 52005013,
+            "Versification": {
+              "Type": 4,
+              "IsCustomized": false
+            },
+            "RepresentsMultipleVerses": false,
+            "AllVerses": []
+          },
+          {
+            "BookCode": "1TH",
+            "BookNum": 52,
+            "ChapterNum": 5,
+            "VerseNum": 14,
+            "BBBCCCVVV": 52005014,
+            "Versification": {
+              "Type": 4,
+              "IsCustomized": false
+            },
+            "RepresentsMultipleVerses": false,
+            "AllVerses": []
+          }
+        ]
+      },
+      "VerseOffset": 68,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": true,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    },
+    {
+      "Text": "Brothers and sisters, we also ask that you reconcile among yourselves in the Church. Warn those who have become lazy to work hard to earn their daily bread. Encourage those who are afraid. Help those who are weak. Continue to patiently care for all. ",
+      "VerseRef": {
+        "BookCode": "1TH",
+        "BookNum": 52,
+        "ChapterNum": 5,
+        "VerseNum": 13,
+        "BBBCCCVVV": 52005013,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": true,
+        "AllVerses": [
+          {
+            "BookCode": "1TH",
+            "BookNum": 52,
+            "ChapterNum": 5,
+            "VerseNum": 13,
+            "BBBCCCVVV": 52005013,
+            "Versification": {
+              "Type": 4,
+              "IsCustomized": false
+            },
+            "RepresentsMultipleVerses": false,
+            "AllVerses": []
+          },
+          {
+            "BookCode": "1TH",
+            "BookNum": 52,
+            "ChapterNum": 5,
+            "VerseNum": 14,
+            "BBBCCCVVV": 52005014,
+            "Versification": {
+              "Type": 4,
+              "IsCustomized": false
+            },
+            "RepresentsMultipleVerses": false,
+            "AllVerses": []
+          }
+        ]
+      },
+      "VerseOffset": 71,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": true,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    },
+    {
+      "Type": 3,
+      "Marker": "p",
+      "Attributes": [],
+      "Data": null,
+      "EndMarker": null,
+      "Token": {
+        "Type": 4,
+        "Marker": "p",
+        "Text": null,
+        "Attributes": null,
+        "Data": null,
+        "EndMarker": "p*",
+        "NestlessMarker": "p",
+        "HasData": false,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "1TH",
+        "BookNum": 52,
+        "ChapterNum": 5,
+        "VerseNum": 13,
+        "BBBCCCVVV": 52005013,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": true,
+        "AllVerses": [
+          {
+            "BookCode": "1TH",
+            "BookNum": 52,
+            "ChapterNum": 5,
+            "VerseNum": 13,
+            "BBBCCCVVV": 52005013,
+            "Versification": {
+              "Type": 4,
+              "IsCustomized": false
+            },
+            "RepresentsMultipleVerses": false,
+            "AllVerses": []
+          },
+          {
+            "BookCode": "1TH",
+            "BookNum": 52,
+            "ChapterNum": 5,
+            "VerseNum": 14,
+            "BBBCCCVVV": 52005014,
+            "Versification": {
+              "Type": 4,
+              "IsCustomized": false
+            },
+            "RepresentsMultipleVerses": false,
+            "AllVerses": []
+          }
+        ]
+      },
+      "VerseOffset": 361,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": true,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    }
+  ],
+  "52_005_015": [
+    {
+      "Type": 2,
+      "Marker": "v",
+      "Attributes": [],
+      "Data": "15",
+      "EndMarker": null,
+      "Token": {
+        "Type": 2,
+        "Marker": "v",
+        "Text": null,
+        "Attributes": null,
+        "Data": "15",
+        "EndMarker": null,
+        "NestlessMarker": "v",
+        "HasData": true,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "1TH",
+        "BookNum": 52,
+        "ChapterNum": 5,
+        "VerseNum": 15,
+        "BBBCCCVVV": 52005015,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": false,
+        "AllVerses": []
+      },
+      "VerseOffset": 0,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": true,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    },
+    {
+      "Text": "Be careful! No one among you should take revenge for evil. But in every situation, always look for ways to do good, not only to those within the Church, but also to outsiders. ",
+      "Token": {
+        "Type": 3,
+        "Marker": null,
+        "Text": "Be careful! No one among you should take revenge for evil. But in every situation, always look for ways to do good, not only to those within the Church, but also to outsiders. ",
+        "Attributes": null,
+        "Data": null,
+        "EndMarker": null,
+        "NestlessMarker": null,
+        "HasData": false,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "1TH",
+        "BookNum": 52,
+        "ChapterNum": 5,
+        "VerseNum": 15,
+        "BBBCCCVVV": 52005015,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": false,
+        "AllVerses": []
+      },
+      "VerseOffset": 6,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": true,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    }
+  ],
+  "52_005_016": [
+    {
+      "Type": 2,
+      "Marker": "v",
+      "Attributes": [],
+      "Data": "16",
+      "EndMarker": null,
+      "Token": {
+        "Type": 2,
+        "Marker": "v",
+        "Text": null,
+        "Attributes": null,
+        "Data": "16",
+        "EndMarker": null,
+        "NestlessMarker": "v",
+        "HasData": true,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "1TH",
+        "BookNum": 52,
+        "ChapterNum": 5,
+        "VerseNum": 16,
+        "BBBCCCVVV": 52005016,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": false,
+        "AllVerses": []
+      },
+      "VerseOffset": 0,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": true,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    },
+    {
+      "Text": "Always be happy. ",
+      "Token": {
+        "Type": 3,
+        "Marker": null,
+        "Text": "Always be happy. ",
+        "Attributes": null,
+        "Data": null,
+        "EndMarker": null,
+        "NestlessMarker": null,
+        "HasData": false,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "1TH",
+        "BookNum": 52,
+        "ChapterNum": 5,
+        "VerseNum": 16,
+        "BBBCCCVVV": 52005016,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": false,
+        "AllVerses": []
+      },
+      "VerseOffset": 6,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": true,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    }
+  ],
+  "52_005_017": [
+    {
+      "Type": 2,
+      "Marker": "v",
+      "Attributes": [],
+      "Data": "17",
+      "EndMarker": null,
+      "Token": {
+        "Type": 2,
+        "Marker": "v",
+        "Text": null,
+        "Attributes": null,
+        "Data": "17",
+        "EndMarker": null,
+        "NestlessMarker": "v",
+        "HasData": true,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "1TH",
+        "BookNum": 52,
+        "ChapterNum": 5,
+        "VerseNum": 17,
+        "BBBCCCVVV": 52005017,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": false,
+        "AllVerses": []
+      },
+      "VerseOffset": 0,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": true,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    },
+    {
+      "Text": "Always keep praying. ",
+      "Token": {
+        "Type": 3,
+        "Marker": null,
+        "Text": "Always keep praying. ",
+        "Attributes": null,
+        "Data": null,
+        "EndMarker": null,
+        "NestlessMarker": null,
+        "HasData": false,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "1TH",
+        "BookNum": 52,
+        "ChapterNum": 5,
+        "VerseNum": 17,
+        "BBBCCCVVV": 52005017,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": false,
+        "AllVerses": []
+      },
+      "VerseOffset": 6,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": true,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    }
+  ],
+  "52_005_018": [
+    {
+      "Type": 2,
+      "Marker": "v",
+      "Attributes": [],
+      "Data": "18",
+      "EndMarker": null,
+      "Token": {
+        "Type": 2,
+        "Marker": "v",
+        "Text": null,
+        "Attributes": null,
+        "Data": "18",
+        "EndMarker": null,
+        "NestlessMarker": "v",
+        "HasData": true,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "1TH",
+        "BookNum": 52,
+        "ChapterNum": 5,
+        "VerseNum": 18,
+        "BBBCCCVVV": 52005018,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": false,
+        "AllVerses": []
+      },
+      "VerseOffset": 0,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": true,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    },
+    {
+      "Text": "No matter what happens, always give thank to God. This is God’s will for you as a believer in Christ Jesus. ",
+      "Token": {
+        "Type": 3,
+        "Marker": null,
+        "Text": "No matter what happens, always give thank to God. This is God’s will for you as a believer in Christ Jesus. ",
+        "Attributes": null,
+        "Data": null,
+        "EndMarker": null,
+        "NestlessMarker": null,
+        "HasData": false,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "1TH",
+        "BookNum": 52,
+        "ChapterNum": 5,
+        "VerseNum": 18,
+        "BBBCCCVVV": 52005018,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": false,
+        "AllVerses": []
+      },
+      "VerseOffset": 6,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": true,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    },
+    {
+      "Type": 3,
+      "Marker": "p",
+      "Attributes": [],
+      "Data": null,
+      "EndMarker": null,
+      "Token": {
+        "Type": 4,
+        "Marker": "p",
+        "Text": null,
+        "Attributes": null,
+        "Data": null,
+        "EndMarker": "p*",
+        "NestlessMarker": "p",
+        "HasData": false,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "1TH",
+        "BookNum": 52,
+        "ChapterNum": 5,
+        "VerseNum": 18,
+        "BBBCCCVVV": 52005018,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": false,
+        "AllVerses": []
+      },
+      "VerseOffset": 114,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": true,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    }
+  ],
+  "52_005_019": [
+    {
+      "Type": 2,
+      "Marker": "v",
+      "Attributes": [],
+      "Data": "19",
+      "EndMarker": null,
+      "Token": {
+        "Type": 2,
+        "Marker": "v",
+        "Text": null,
+        "Attributes": null,
+        "Data": "19",
+        "EndMarker": null,
+        "NestlessMarker": "v",
+        "HasData": true,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "1TH",
+        "BookNum": 52,
+        "ChapterNum": 5,
+        "VerseNum": 19,
+        "BBBCCCVVV": 52005019,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": false,
+        "AllVerses": []
+      },
+      "VerseOffset": 0,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": true,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    },
+    {
+      "Text": "Let God’s Holy Spirit work in you. ",
+      "Token": {
+        "Type": 3,
+        "Marker": null,
+        "Text": "Let God’s Holy Spirit work in you. ",
+        "Attributes": null,
+        "Data": null,
+        "EndMarker": null,
+        "NestlessMarker": null,
+        "HasData": false,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "1TH",
+        "BookNum": 52,
+        "ChapterNum": 5,
+        "VerseNum": 19,
+        "BBBCCCVVV": 52005019,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": false,
+        "AllVerses": []
+      },
+      "VerseOffset": 6,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": true,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    }
+  ],
+  "52_005_020": [
+    {
+      "Type": 2,
+      "Marker": "v",
+      "Attributes": [],
+      "Data": "20",
+      "EndMarker": null,
+      "Token": {
+        "Type": 2,
+        "Marker": "v",
+        "Text": null,
+        "Attributes": null,
+        "Data": "20",
+        "EndMarker": null,
+        "NestlessMarker": "v",
+        "HasData": true,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "1TH",
+        "BookNum": 52,
+        "ChapterNum": 5,
+        "VerseNum": 20,
+        "BBBCCCVVV": 52005020,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": false,
+        "AllVerses": []
+      },
+      "VerseOffset": 0,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": true,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    },
+    {
+      "Text": "Don’t ignore prophecies. ",
+      "Token": {
+        "Type": 3,
+        "Marker": null,
+        "Text": "Don’t ignore prophecies. ",
+        "Attributes": null,
+        "Data": null,
+        "EndMarker": null,
+        "NestlessMarker": null,
+        "HasData": false,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "1TH",
+        "BookNum": 52,
+        "ChapterNum": 5,
+        "VerseNum": 20,
+        "BBBCCCVVV": 52005020,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": false,
+        "AllVerses": []
+      },
+      "VerseOffset": 6,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": true,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    }
+  ],
+  "52_005_021": [
+    {
+      "Type": 2,
+      "Marker": "v",
+      "Attributes": [],
+      "Data": "21",
+      "EndMarker": null,
+      "Token": {
+        "Type": 2,
+        "Marker": "v",
+        "Text": null,
+        "Attributes": null,
+        "Data": "21",
+        "EndMarker": null,
+        "NestlessMarker": "v",
+        "HasData": true,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "1TH",
+        "BookNum": 52,
+        "ChapterNum": 5,
+        "VerseNum": 21,
+        "BBBCCCVVV": 52005021,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": false,
+        "AllVerses": []
+      },
+      "VerseOffset": 0,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": true,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    },
+    {
+      "Text": "But test them and all things first. If they are scripturally correct, accept them. ",
+      "Token": {
+        "Type": 3,
+        "Marker": null,
+        "Text": "But test them and all things first. If they are scripturally correct, accept them. ",
+        "Attributes": null,
+        "Data": null,
+        "EndMarker": null,
+        "NestlessMarker": null,
+        "HasData": false,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "1TH",
+        "BookNum": 52,
+        "ChapterNum": 5,
+        "VerseNum": 21,
+        "BBBCCCVVV": 52005021,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": false,
+        "AllVerses": []
+      },
+      "VerseOffset": 6,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": true,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    }
+  ],
+  "52_005_022": [
+    {
+      "Type": 2,
+      "Marker": "v",
+      "Attributes": [],
+      "Data": "22",
+      "EndMarker": null,
+      "Token": {
+        "Type": 2,
+        "Marker": "v",
+        "Text": null,
+        "Attributes": null,
+        "Data": "22",
+        "EndMarker": null,
+        "NestlessMarker": "v",
+        "HasData": true,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "1TH",
+        "BookNum": 52,
+        "ChapterNum": 5,
+        "VerseNum": 22,
+        "BBBCCCVVV": 52005022,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": false,
+        "AllVerses": []
+      },
+      "VerseOffset": 0,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": true,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    },
+    {
+      "Text": "And stay away from all evil. ",
+      "Token": {
+        "Type": 3,
+        "Marker": null,
+        "Text": "And stay away from all evil. ",
+        "Attributes": null,
+        "Data": null,
+        "EndMarker": null,
+        "NestlessMarker": null,
+        "HasData": false,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "1TH",
+        "BookNum": 52,
+        "ChapterNum": 5,
+        "VerseNum": 22,
+        "BBBCCCVVV": 52005022,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": false,
+        "AllVerses": []
+      },
+      "VerseOffset": 6,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": true,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    },
+    {
+      "Type": 3,
+      "Marker": "p",
+      "Attributes": [],
+      "Data": null,
+      "EndMarker": null,
+      "Token": {
+        "Type": 4,
+        "Marker": "p",
+        "Text": null,
+        "Attributes": null,
+        "Data": null,
+        "EndMarker": "p*",
+        "NestlessMarker": "p",
+        "HasData": false,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "1TH",
+        "BookNum": 52,
+        "ChapterNum": 5,
+        "VerseNum": 22,
+        "BBBCCCVVV": 52005022,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": false,
+        "AllVerses": []
+      },
+      "VerseOffset": 35,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": true,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    }
+  ],
+  "52_005_023": [
+    {
+      "Type": 2,
+      "Marker": "v",
+      "Attributes": [],
+      "Data": "23",
+      "EndMarker": null,
+      "Token": {
+        "Type": 2,
+        "Marker": "v",
+        "Text": null,
+        "Attributes": null,
+        "Data": "23",
+        "EndMarker": null,
+        "NestlessMarker": "v",
+        "HasData": true,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "1TH",
+        "BookNum": 52,
+        "ChapterNum": 5,
+        "VerseNum": 23,
+        "BBBCCCVVV": 52005023,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": false,
+        "AllVerses": []
+      },
+      "VerseOffset": 0,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": true,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    },
+    {
+      "Text": "May the peace-giving God Himself sanctify everything in your life holy, so that you may be completely blameless ",
+      "Token": {
+        "Type": 3,
+        "Marker": null,
+        "Text": "May the peace-giving God Himself sanctify everything in your life holy, so that you may be completely blameless ",
+        "Attributes": null,
+        "Data": null,
+        "EndMarker": null,
+        "NestlessMarker": null,
+        "HasData": false,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "1TH",
+        "BookNum": 52,
+        "ChapterNum": 5,
+        "VerseNum": 23,
+        "BBBCCCVVV": 52005023,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": false,
+        "AllVerses": []
+      },
+      "VerseOffset": 6,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": true,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    },
+    {
+      "Type": 5,
+      "Marker": "f",
+      "Attributes": [],
+      "Data": "+",
+      "EndMarker": "f*",
+      "Token": {
+        "Type": 6,
+        "Marker": "f",
+        "Text": null,
+        "Attributes": null,
+        "Data": "+",
+        "EndMarker": "f*",
+        "NestlessMarker": "f",
+        "HasData": true,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "1TH",
+        "BookNum": 52,
+        "ChapterNum": 5,
+        "VerseNum": 23,
+        "BBBCCCVVV": 52005023,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": false,
+        "AllVerses": []
+      },
+      "VerseOffset": 118,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": true,
+      "IsScripture": false,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    },
+    {
+      "Type": 4,
+      "Marker": "fr",
+      "Attributes": [],
+      "Data": null,
+      "EndMarker": "fr*",
+      "Token": {
+        "Type": 5,
+        "Marker": "fr",
+        "Text": null,
+        "Attributes": null,
+        "Data": null,
+        "EndMarker": "fr*",
+        "NestlessMarker": "fr",
+        "HasData": false,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "1TH",
+        "BookNum": 52,
+        "ChapterNum": 5,
+        "VerseNum": 23,
+        "BBBCCCVVV": 52005023,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": false,
+        "AllVerses": []
+      },
+      "VerseOffset": 123,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": true,
+      "IsScripture": false,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    },
+    {
+      "Text": "5:23 ",
+      "Token": {
+        "Type": 3,
+        "Marker": null,
+        "Text": "5:23 ",
+        "Attributes": null,
+        "Data": null,
+        "EndMarker": null,
+        "NestlessMarker": null,
+        "HasData": false,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "1TH",
+        "BookNum": 52,
+        "ChapterNum": 5,
+        "VerseNum": 23,
+        "BBBCCCVVV": 52005023,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": false,
+        "AllVerses": []
+      },
+      "VerseOffset": 127,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": true,
+      "IsScripture": false,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    },
+    {
+      "Type": 4,
+      "Marker": "fq",
+      "Attributes": [],
+      "Data": null,
+      "EndMarker": "fq*",
+      "Token": {
+        "Type": 5,
+        "Marker": "fq",
+        "Text": null,
+        "Attributes": null,
+        "Data": null,
+        "EndMarker": "fq*",
+        "NestlessMarker": "fq",
+        "HasData": false,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "1TH",
+        "BookNum": 52,
+        "ChapterNum": 5,
+        "VerseNum": 23,
+        "BBBCCCVVV": 52005023,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": false,
+        "AllVerses": []
+      },
+      "VerseOffset": 132,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": true,
+      "IsScripture": false,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    },
+    {
+      "Text": "completely ",
+      "Token": {
+        "Type": 3,
+        "Marker": null,
+        "Text": "completely ",
+        "Attributes": null,
+        "Data": null,
+        "EndMarker": null,
+        "NestlessMarker": null,
+        "HasData": false,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "1TH",
+        "BookNum": 52,
+        "ChapterNum": 5,
+        "VerseNum": 23,
+        "BBBCCCVVV": 52005023,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": false,
+        "AllVerses": []
+      },
+      "VerseOffset": 136,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": true,
+      "IsScripture": false,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    },
+    {
+      "Type": 4,
+      "Marker": "ft",
+      "Attributes": [],
+      "Data": null,
+      "EndMarker": "ft*",
+      "Token": {
+        "Type": 5,
+        "Marker": "ft",
+        "Text": null,
+        "Attributes": null,
+        "Data": null,
+        "EndMarker": "ft*",
+        "NestlessMarker": "ft",
+        "HasData": false,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "1TH",
+        "BookNum": 52,
+        "ChapterNum": 5,
+        "VerseNum": 23,
+        "BBBCCCVVV": 52005023,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": false,
+        "AllVerses": []
+      },
+      "VerseOffset": 147,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": true,
+      "IsScripture": false,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    },
+    {
+      "Text": "In the Greek language, “whole spirit, soul, and body.” ",
+      "Token": {
+        "Type": 3,
+        "Marker": null,
+        "Text": "In the Greek language, “whole spirit, soul, and body.” ",
+        "Attributes": null,
+        "Data": null,
+        "EndMarker": null,
+        "NestlessMarker": null,
+        "HasData": false,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "1TH",
+        "BookNum": 52,
+        "ChapterNum": 5,
+        "VerseNum": 23,
+        "BBBCCCVVV": 52005023,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": false,
+        "AllVerses": []
+      },
+      "VerseOffset": 151,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": true,
+      "IsScripture": false,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    },
+    {
+      "Type": 6,
+      "Marker": "f*",
+      "Attributes": [],
+      "Data": null,
+      "EndMarker": null,
+      "Token": {
+        "Type": 7,
+        "Marker": "f*",
+        "Text": null,
+        "Attributes": null,
+        "Data": null,
+        "EndMarker": null,
+        "NestlessMarker": "f*",
+        "HasData": false,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "1TH",
+        "BookNum": 52,
+        "ChapterNum": 5,
+        "VerseNum": 23,
+        "BBBCCCVVV": 52005023,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": false,
+        "AllVerses": []
+      },
+      "VerseOffset": 206,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": true,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    },
+    {
+      "Text": " at the return of the Lord Jesus Christ. ",
+      "Token": {
+        "Type": 3,
+        "Marker": null,
+        "Text": " at the return of the Lord Jesus Christ. ",
+        "Attributes": null,
+        "Data": null,
+        "EndMarker": null,
+        "NestlessMarker": null,
+        "HasData": false,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "1TH",
+        "BookNum": 52,
+        "ChapterNum": 5,
+        "VerseNum": 23,
+        "BBBCCCVVV": 52005023,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": false,
+        "AllVerses": []
+      },
+      "VerseOffset": 209,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": true,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    }
+  ],
+  "52_005_024": [
+    {
+      "Type": 2,
+      "Marker": "v",
+      "Attributes": [],
+      "Data": "24",
+      "EndMarker": null,
+      "Token": {
+        "Type": 2,
+        "Marker": "v",
+        "Text": null,
+        "Attributes": null,
+        "Data": "24",
+        "EndMarker": null,
+        "NestlessMarker": "v",
+        "HasData": true,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "1TH",
+        "BookNum": 52,
+        "ChapterNum": 5,
+        "VerseNum": 24,
+        "BBBCCCVVV": 52005024,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": false,
+        "AllVerses": []
+      },
+      "VerseOffset": 0,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": true,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    },
+    {
+      "Text": "And look, the God who has chosen you is faithful, and He will surely do this. ",
+      "Token": {
+        "Type": 3,
+        "Marker": null,
+        "Text": "And look, the God who has chosen you is faithful, and He will surely do this. ",
+        "Attributes": null,
+        "Data": null,
+        "EndMarker": null,
+        "NestlessMarker": null,
+        "HasData": false,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "1TH",
+        "BookNum": 52,
+        "ChapterNum": 5,
+        "VerseNum": 24,
+        "BBBCCCVVV": 52005024,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": false,
+        "AllVerses": []
+      },
+      "VerseOffset": 6,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": true,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    },
+    {
+      "Type": 3,
+      "Marker": "p",
+      "Attributes": [],
+      "Data": null,
+      "EndMarker": null,
+      "Token": {
+        "Type": 4,
+        "Marker": "p",
+        "Text": null,
+        "Attributes": null,
+        "Data": null,
+        "EndMarker": "p*",
+        "NestlessMarker": "p",
+        "HasData": false,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "1TH",
+        "BookNum": 52,
+        "ChapterNum": 5,
+        "VerseNum": 24,
+        "BBBCCCVVV": 52005024,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": false,
+        "AllVerses": []
+      },
+      "VerseOffset": 84,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": true,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    }
+  ],
+  "52_005_025": [
+    {
+      "Type": 2,
+      "Marker": "v",
+      "Attributes": [],
+      "Data": "25",
+      "EndMarker": null,
+      "Token": {
+        "Type": 2,
+        "Marker": "v",
+        "Text": null,
+        "Attributes": null,
+        "Data": "25",
+        "EndMarker": null,
+        "NestlessMarker": "v",
+        "HasData": true,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "1TH",
+        "BookNum": 52,
+        "ChapterNum": 5,
+        "VerseNum": 25,
+        "BBBCCCVVV": 52005025,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": false,
+        "AllVerses": []
+      },
+      "VerseOffset": 0,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": true,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    },
+    {
+      "Text": "Brothers and sisters, continue to pray for us also. ",
+      "Token": {
+        "Type": 3,
+        "Marker": null,
+        "Text": "Brothers and sisters, continue to pray for us also. ",
+        "Attributes": null,
+        "Data": null,
+        "EndMarker": null,
+        "NestlessMarker": null,
+        "HasData": false,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "1TH",
+        "BookNum": 52,
+        "ChapterNum": 5,
+        "VerseNum": 25,
+        "BBBCCCVVV": 52005025,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": false,
+        "AllVerses": []
+      },
+      "VerseOffset": 6,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": true,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    }
+  ],
+  "52_005_026": [
+    {
+      "Type": 2,
+      "Marker": "v",
+      "Attributes": [],
+      "Data": "26",
+      "EndMarker": null,
+      "Token": {
+        "Type": 2,
+        "Marker": "v",
+        "Text": null,
+        "Attributes": null,
+        "Data": "26",
+        "EndMarker": null,
+        "NestlessMarker": "v",
+        "HasData": true,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "1TH",
+        "BookNum": 52,
+        "ChapterNum": 5,
+        "VerseNum": 26,
+        "BBBCCCVVV": 52005026,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": false,
+        "AllVerses": []
+      },
+      "VerseOffset": 0,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": true,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    },
+    {
+      "Text": "Embrace and greet each other. ",
+      "Token": {
+        "Type": 3,
+        "Marker": null,
+        "Text": "Embrace and greet each other. ",
+        "Attributes": null,
+        "Data": null,
+        "EndMarker": null,
+        "NestlessMarker": null,
+        "HasData": false,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "1TH",
+        "BookNum": 52,
+        "ChapterNum": 5,
+        "VerseNum": 26,
+        "BBBCCCVVV": 52005026,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": false,
+        "AllVerses": []
+      },
+      "VerseOffset": 6,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": true,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    }
+  ],
+  "52_005_027": [
+    {
+      "Type": 2,
+      "Marker": "v",
+      "Attributes": [],
+      "Data": "27",
+      "EndMarker": null,
+      "Token": {
+        "Type": 2,
+        "Marker": "v",
+        "Text": null,
+        "Attributes": null,
+        "Data": "27",
+        "EndMarker": null,
+        "NestlessMarker": "v",
+        "HasData": true,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "1TH",
+        "BookNum": 52,
+        "ChapterNum": 5,
+        "VerseNum": 27,
+        "BBBCCCVVV": 52005027,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": false,
+        "AllVerses": []
+      },
+      "VerseOffset": 0,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": true,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    },
+    {
+      "Text": "Before the Lord Jesus read this letter aloud to all the believers in the church there. ",
+      "Token": {
+        "Type": 3,
+        "Marker": null,
+        "Text": "Before the Lord Jesus read this letter aloud to all the believers in the church there. ",
+        "Attributes": null,
+        "Data": null,
+        "EndMarker": null,
+        "NestlessMarker": null,
+        "HasData": false,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "1TH",
+        "BookNum": 52,
+        "ChapterNum": 5,
+        "VerseNum": 27,
+        "BBBCCCVVV": 52005027,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": false,
+        "AllVerses": []
+      },
+      "VerseOffset": 6,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": true,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    },
+    {
+      "Type": 3,
+      "Marker": "p",
+      "Attributes": [],
+      "Data": null,
+      "EndMarker": null,
+      "Token": {
+        "Type": 4,
+        "Marker": "p",
+        "Text": null,
+        "Attributes": null,
+        "Data": null,
+        "EndMarker": "p*",
+        "NestlessMarker": "p",
+        "HasData": false,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "1TH",
+        "BookNum": 52,
+        "ChapterNum": 5,
+        "VerseNum": 27,
+        "BBBCCCVVV": 52005027,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": false,
+        "AllVerses": []
+      },
+      "VerseOffset": 93,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": true,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    }
+  ],
+  "52_005_028": [
+    {
+      "Type": 2,
+      "Marker": "v",
+      "Attributes": [],
+      "Data": "28",
+      "EndMarker": null,
+      "Token": {
+        "Type": 2,
+        "Marker": "v",
+        "Text": null,
+        "Attributes": null,
+        "Data": "28",
+        "EndMarker": null,
+        "NestlessMarker": "v",
+        "HasData": true,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "1TH",
+        "BookNum": 52,
+        "ChapterNum": 5,
+        "VerseNum": 28,
+        "BBBCCCVVV": 52005028,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": false,
+        "AllVerses": []
+      },
+      "VerseOffset": 0,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": true,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    },
+    {
+      "Text": "The grace of our Lord Jesus Christ be with you. ",
+      "Token": {
+        "Type": 3,
+        "Marker": null,
+        "Text": "The grace of our Lord Jesus Christ be with you. ",
+        "Attributes": null,
+        "Data": null,
+        "EndMarker": null,
+        "NestlessMarker": null,
+        "HasData": false,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "1TH",
+        "BookNum": 52,
+        "ChapterNum": 5,
+        "VerseNum": 28,
+        "BBBCCCVVV": 52005028,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": false,
+        "AllVerses": []
+      },
+      "VerseOffset": 6,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": true,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    }
+  ]
+}

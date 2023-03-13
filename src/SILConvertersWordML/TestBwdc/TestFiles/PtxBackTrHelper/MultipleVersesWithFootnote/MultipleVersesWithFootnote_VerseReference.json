@@ -1,0 +1,13 @@
+{
+  "BookCode": "1TH",
+  "BookNum": 52,
+  "ChapterNum": 5,
+  "VerseNum": 13,
+  "BBBCCCVVV": 52005013,
+  "Versification": {
+    "Type": 4,
+    "IsCustomized": false
+  },
+  "RepresentsMultipleVerses": false,
+  "AllVerses": []
+}

@@ -1,0 +1,326 @@
+{
+  "52_005_013": [
+    {
+      "Type": 2,
+      "Marker": "v",
+      "Attributes": [],
+      "Data": "13-14",
+      "EndMarker": null,
+      "Token": {
+        "Type": 2,
+        "Marker": "v",
+        "Text": null,
+        "Attributes": null,
+        "Data": "13-14",
+        "EndMarker": null,
+        "NestlessMarker": "v",
+        "HasData": true,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "1TH",
+        "BookNum": 52,
+        "ChapterNum": 5,
+        "VerseNum": 13,
+        "BBBCCCVVV": 52005013,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": true,
+        "AllVerses": [
+          {
+            "BookCode": "1TH",
+            "BookNum": 52,
+            "ChapterNum": 5,
+            "VerseNum": 13,
+            "BBBCCCVVV": 52005013,
+            "Versification": {
+              "Type": 4,
+              "IsCustomized": false
+            },
+            "RepresentsMultipleVerses": false,
+            "AllVerses": []
+          },
+          {
+            "BookCode": "1TH",
+            "BookNum": 52,
+            "ChapterNum": 5,
+            "VerseNum": 14,
+            "BBBCCCVVV": 52005014,
+            "Versification": {
+              "Type": 4,
+              "IsCustomized": false
+            },
+            "RepresentsMultipleVerses": false,
+            "AllVerses": []
+          }
+        ]
+      },
+      "VerseOffset": 0,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": true,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    },
+    {
+      "Text": "इसलिए उनकी इस सेवकाई के कारण उनका प्रेम सहित बहुत आदर करो। ",
+      "Token": {
+        "Type": 3,
+        "Marker": null,
+        "Text": "इसलिए उनकी इस सेवकाई के कारण उनका प्रेम सहित बहुत आदर करो। ",
+        "Attributes": null,
+        "Data": null,
+        "EndMarker": null,
+        "NestlessMarker": null,
+        "HasData": false,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "1TH",
+        "BookNum": 52,
+        "ChapterNum": 5,
+        "VerseNum": 13,
+        "BBBCCCVVV": 52005013,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": true,
+        "AllVerses": [
+          {
+            "BookCode": "1TH",
+            "BookNum": 52,
+            "ChapterNum": 5,
+            "VerseNum": 13,
+            "BBBCCCVVV": 52005013,
+            "Versification": {
+              "Type": 4,
+              "IsCustomized": false
+            },
+            "RepresentsMultipleVerses": false,
+            "AllVerses": []
+          },
+          {
+            "BookCode": "1TH",
+            "BookNum": 52,
+            "ChapterNum": 5,
+            "VerseNum": 14,
+            "BBBCCCVVV": 52005014,
+            "Versification": {
+              "Type": 4,
+              "IsCustomized": false
+            },
+            "RepresentsMultipleVerses": false,
+            "AllVerses": []
+          }
+        ]
+      },
+      "VerseOffset": 9,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": true,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    },
+    {
+      "Type": 3,
+      "Marker": "p",
+      "Attributes": [],
+      "Data": null,
+      "EndMarker": null,
+      "Token": {
+        "Type": 4,
+        "Marker": "p",
+        "Text": null,
+        "Attributes": null,
+        "Data": null,
+        "EndMarker": "p*",
+        "NestlessMarker": "p",
+        "HasData": false,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "1TH",
+        "BookNum": 52,
+        "ChapterNum": 5,
+        "VerseNum": 13,
+        "BBBCCCVVV": 52005013,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": true,
+        "AllVerses": [
+          {
+            "BookCode": "1TH",
+            "BookNum": 52,
+            "ChapterNum": 5,
+            "VerseNum": 13,
+            "BBBCCCVVV": 52005013,
+            "Versification": {
+              "Type": 4,
+              "IsCustomized": false
+            },
+            "RepresentsMultipleVerses": false,
+            "AllVerses": []
+          },
+          {
+            "BookCode": "1TH",
+            "BookNum": 52,
+            "ChapterNum": 5,
+            "VerseNum": 14,
+            "BBBCCCVVV": 52005014,
+            "Versification": {
+              "Type": 4,
+              "IsCustomized": false
+            },
+            "RepresentsMultipleVerses": false,
+            "AllVerses": []
+          }
+        ]
+      },
+      "VerseOffset": 68,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": true,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    },
+    {
+      "Text": "मेरे भाई-बहनों, हमारी तुमसे यह भी विनती है कि मंडली में आपस में एक-दूसरे के साथ मेल-मिलाप से रहो। तुम में जो आलसी हो गये हैं, उनको प्रतिदिन की रोटी कमाने के लिए परिश्रम करने की चेतावनी दो। डरपोकों का साहस बढ़ाओ। जिनमें दुर्बलताएँ हैं, उनकी सहायता करो। सभी की सहनशीलता के साथ सुधि लेते रहो। ",
+      "Token": {
+        "Type": 3,
+        "Marker": null,
+        "Text": "मेरे भाई-बहनों, हमारी तुमसे यह भी विनती है कि मंडली में आपस में एक-दूसरे के साथ मेल-मिलाप से रहो। तुम में जो आलसी हो गये हैं, उनको प्रतिदिन की रोटी कमाने के लिए परिश्रम करने की चेतावनी दो। डरपोकों का साहस बढ़ाओ। जिनमें दुर्बलताएँ हैं, उनकी सहायता करो। सभी की सहनशीलता के साथ सुधि लेते रहो। ",
+        "Attributes": null,
+        "Data": null,
+        "EndMarker": null,
+        "NestlessMarker": null,
+        "HasData": false,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "1TH",
+        "BookNum": 52,
+        "ChapterNum": 5,
+        "VerseNum": 13,
+        "BBBCCCVVV": 52005013,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": true,
+        "AllVerses": [
+          {
+            "BookCode": "1TH",
+            "BookNum": 52,
+            "ChapterNum": 5,
+            "VerseNum": 13,
+            "BBBCCCVVV": 52005013,
+            "Versification": {
+              "Type": 4,
+              "IsCustomized": false
+            },
+            "RepresentsMultipleVerses": false,
+            "AllVerses": []
+          },
+          {
+            "BookCode": "1TH",
+            "BookNum": 52,
+            "ChapterNum": 5,
+            "VerseNum": 14,
+            "BBBCCCVVV": 52005014,
+            "Versification": {
+              "Type": 4,
+              "IsCustomized": false
+            },
+            "RepresentsMultipleVerses": false,
+            "AllVerses": []
+          }
+        ]
+      },
+      "VerseOffset": 71,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": true,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    },
+    {
+      "Type": 3,
+      "Marker": "p",
+      "Attributes": [],
+      "Data": null,
+      "EndMarker": null,
+      "Token": {
+        "Type": 4,
+        "Marker": "p",
+        "Text": null,
+        "Attributes": null,
+        "Data": null,
+        "EndMarker": "p*",
+        "NestlessMarker": "p",
+        "HasData": false,
+        "HasAttributes": false,
+        "HasNonDefaultAttribute": false
+      },
+      "VerseRef": {
+        "BookCode": "1TH",
+        "BookNum": 52,
+        "ChapterNum": 5,
+        "VerseNum": 13,
+        "BBBCCCVVV": 52005013,
+        "Versification": {
+          "Type": 4,
+          "IsCustomized": false
+        },
+        "RepresentsMultipleVerses": true,
+        "AllVerses": [
+          {
+            "BookCode": "1TH",
+            "BookNum": 52,
+            "ChapterNum": 5,
+            "VerseNum": 13,
+            "BBBCCCVVV": 52005013,
+            "Versification": {
+              "Type": 4,
+              "IsCustomized": false
+            },
+            "RepresentsMultipleVerses": false,
+            "AllVerses": []
+          },
+          {
+            "BookCode": "1TH",
+            "BookNum": 52,
+            "ChapterNum": 5,
+            "VerseNum": 14,
+            "BBBCCCVVV": 52005014,
+            "Versification": {
+              "Type": 4,
+              "IsCustomized": false
+            },
+            "RepresentsMultipleVerses": false,
+            "AllVerses": []
+          }
+        ]
+      },
+      "VerseOffset": 361,
+      "IsSpecial": false,
+      "IsFigure": false,
+      "IsFootnoteOrCrossReference": false,
+      "IsScripture": true,
+      "IsMetadata": false,
+      "IsPublishableVernacular": true
+    }
+  ]
+}
