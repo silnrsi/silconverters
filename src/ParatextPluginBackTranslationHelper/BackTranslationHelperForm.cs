@@ -106,13 +106,13 @@ namespace SIL.ParatextBackTranslationHelperPlugin
         private void TargetBackTranslationTextChanged(string value)
         {
             var translatedCount = GetTranslatedLines(value).Count;
+            System.Diagnostics.Debug.WriteLine($"PtxBTH: TargetBackTranslationTextChanged: SourceDataLineCount = '{SourceDataLineCount}', translatedCount = '{translatedCount}'");
             if (SourceDataLineCount != translatedCount)
-            {
-                // TODO: add a tooltip to show how the currently translated lines will be put into the source project markers
                 textBoxStatus.Text = $"There are currently {translatedCount} lines of text in the Target Translation box vs. {SourceDataLineCount} text lines in the source verse (one for each of these markers: {String.Join(",", TextTokenMarkersSource.Select(m => $"\\{m.Marker}"))})";
-            }
             else
-                textBoxStatus.Clear();
+                textBoxStatus.Text = String.Empty;
+
+            Application.DoEvents(); // this says we need to do this for when it won't display the change: https://social.msdn.microsoft.com/Forums/vstudio/en-US/983d2e3b-9bcb-4c9c-9e85-59f8b2051b3e/program-updating-a-textbox-does-not-work?forum=csharpgeneral
         }
 
         private static string GetFrameText(IProject projectSource, IProject projectTarget, IVerseRef versesReference)
@@ -162,17 +162,34 @@ namespace SIL.ParatextBackTranslationHelperPlugin
 
         private void Host_VerseRefChanged(IPluginHost sender, IVerseRef newReference, SyncReferenceGroup group)
         {
-            System.Diagnostics.Debug.WriteLine($"PtxBTH: In Host_VerseRefChanged {newReference} & {group}, _isNotInFocus: {_isNotInFocus}, IsModified: {backTranslationHelperCtrl.IsModified}");
+            var newRef = (newReference.RepresentsMultipleVerses) ? newReference.AllVerses.First() : newReference;
+            System.Diagnostics.Debug.WriteLine($"PtxBTH: In Host_VerseRefChanged {newReference} (newRef: {newRef}) & {group}, _isNotInFocus: {_isNotInFocus}, IsModified: {backTranslationHelperCtrl.IsModified}");
 
             // since this will initialize the _verseReference, which is intended to be the first
             //  of a series of verses...
             // UPDATE: but not if the Form isn't in focus (so we don't thrash around converting stuff while
             //  the user may be editing stuff in Ptx)
             if (_isNotInFocus && backTranslationHelperCtrl.IsModified)
+            {
+                textBoxStatus.Text = $"Staying on {_verseReference} because the Target Translation box was modified. Click here to update to current verse in Paratext";
+                textBoxStatus.Tag = newRef;
+                Application.DoEvents(); // this says we need to do this for when it won't display the change: https://social.msdn.microsoft.com/Forums/vstudio/en-US/983d2e3b-9bcb-4c9c-9e85-59f8b2051b3e/program-updating-a-textbox-does-not-work?forum=csharpgeneral
                 return;
+            }
+            else
+                textBoxStatus.Tag = null;
 
-            var newRef = (newReference.RepresentsMultipleVerses) ? newReference.AllVerses.First() : newReference;
             GetNewReference(newRef);
+        }
+
+        private void TextBoxStatus_Click(object sender, System.EventArgs e)
+        {
+            if (textBoxStatus.Tag != null)
+            {
+                backTranslationHelperCtrl.IsModified = false;
+                var newReference = (IVerseRef)textBoxStatus.Tag;
+                GetNewReference(newReference);
+            }
         }
 
         private void GetNewReference(IVerseRef newReference)
