@@ -30,6 +30,7 @@ namespace SIL.ParatextBackTranslationHelperPlugin
         private void InitializeComponent()
         {
             this.backTranslationHelperCtrl = new BackTranslationHelper.BackTranslationHelperCtrl();
+            this.textBoxStatus = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // backTranslationHelperCtrl
@@ -45,14 +46,26 @@ namespace SIL.ParatextBackTranslationHelperPlugin
             this.backTranslationHelperCtrl.AutoSize = false;
             this.backTranslationHelperCtrl.Location = new System.Drawing.Point(0, 0);
             this.backTranslationHelperCtrl.Name = "backTranslationHelperCtrl";
-            this.backTranslationHelperCtrl.Size = new System.Drawing.Size(790, 449);
+            this.backTranslationHelperCtrl.Size = new System.Drawing.Size(800, 428);
             this.backTranslationHelperCtrl.TabIndex = 1;
+            // 
+            // textBoxStatus
+            // 
+            this.textBoxStatus.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxStatus.Location = new System.Drawing.Point(0, 430);
+            this.textBoxStatus.Name = "textBoxStatus";
+            this.textBoxStatus.ReadOnly = true;
+            this.textBoxStatus.Size = new System.Drawing.Size(800, 20);
+            this.textBoxStatus.TabIndex = 2;
+            this.textBoxStatus.Click += TextBoxStatus_Click;
             // 
             // BackTranslationHelperForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.textBoxStatus);
             this.Controls.Add(this.backTranslationHelperCtrl);
             this.Name = "BackTranslationHelperForm";
             this.Text = "Back Translating from {0} - {1} in verse: {2}";
@@ -67,5 +80,6 @@ namespace SIL.ParatextBackTranslationHelperPlugin
         #endregion
 
         private BackTranslationHelper.BackTranslationHelperCtrl backTranslationHelperCtrl;
+        private System.Windows.Forms.TextBox textBoxStatus;
     }
 }
