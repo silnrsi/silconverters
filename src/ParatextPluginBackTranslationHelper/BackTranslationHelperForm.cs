@@ -109,10 +109,20 @@ namespace SIL.ParatextBackTranslationHelperPlugin
         {
             var translatedCount = GetTranslatedLines(value).Count;
             System.Diagnostics.Debug.WriteLine($"PtxBTH: TargetBackTranslationTextChanged: SourceDataLineCount = '{SourceDataLineCount}', translatedCount = '{translatedCount}'");
+            var statusText = String.Empty;
             if (SourceDataLineCount != translatedCount)
-                textBoxStatus.Text = $"There are currently {translatedCount} lines of text in the Target Translation box vs. {SourceDataLineCount} text lines in the source verse (one for each of these markers: {String.Join(",", TextTokenMarkersSource.Select(m => $"\\{m.Marker}"))})";
-            else
-                textBoxStatus.Text = String.Empty;
+            {
+                statusText = String.Format("There {0} currently {1} line{2} of text in the Target Translation box vs. {3} text line{4} in the source verse ({5}: {6})",
+                                           (translatedCount > 1) ? "are" : "is",
+                                           translatedCount,
+                                           (translatedCount > 1) ? "s" : string.Empty,
+                                           SourceDataLineCount,
+                                           (SourceDataLineCount > 1) ? "s" : string.Empty,
+                                           (TextTokenMarkersSource.Count > 1) ? "one for each of these markers" : "for this marker",
+                                           String.Join(",", TextTokenMarkersSource.Select(m => $"\\{m.Marker}")));
+            }
+
+            textBoxStatus.Text = statusText;
 
             Application.DoEvents(); // this says we need to do this for when it won't display the change: https://social.msdn.microsoft.com/Forums/vstudio/en-US/983d2e3b-9bcb-4c9c-9e85-59f8b2051b3e/program-updating-a-textbox-does-not-work?forum=csharpgeneral
         }
