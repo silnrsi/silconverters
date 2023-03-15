@@ -135,7 +135,7 @@ namespace SpellingFixerEC
             get { return "c Last Header Line: DON'T modify the table beyond this point (or your changes may be overwritten)"; }
         }
 
-        internal const string DummyRule = $"    d31 > d31 c dummy rule so that the table isn't empty (can be removed if you have rules below the Last Header Line below)";
+        internal const string DummyRule = "    d31 > d31 c dummy rule so that the table isn't empty (can be removed if you have rules below the Last Header Line below)";
         internal const string CustomRuleEndComment = "c +----------end custom changes----------+";
 
         internal static void CreateCCTable(StreamWriter sw, string strEncConverterName, string strPunctuation, string strCustomCode = DummyRule, bool bUnicode = true)
