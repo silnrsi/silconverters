@@ -16,12 +16,12 @@
           <File Id="SpellingFixerEC.dll" Name="SpellingFixerEC.dll" KeyPath="yes" Assembly=".net" AssemblyManifest="SpellingFixerEC.dll" AssemblyApplication="SpellingFixerEC.dll"
                 Source="..\..\output\x86\release\SpellingFixerEC.dll" />
           <RegistryValue Root="HKCR" Key="CLSID\{B3256CF8-FA9B-310D-89A6-9268B37A9A72}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
-          <RegistryValue Root="HKCR" Key="CLSID\{B3256CF8-FA9B-310D-89A6-9268B37A9A72}\InprocServer32\4.0.0.0" Name="Class" Value="SpellingFixerEC.SpellingFixerEC" Type="string" Action="write" />
-          <RegistryValue Root="HKCR" Key="CLSID\{B3256CF8-FA9B-310D-89A6-9268B37A9A72}\InprocServer32\4.0.0.0" Name="Assembly" Value="SpellingFixerEC, Version=4.0.0.0, Culture=neutral, PublicKeyToken=f1447bae1e63f485" Type="string" Action="write" />
-          <RegistryValue Root="HKCR" Key="CLSID\{B3256CF8-FA9B-310D-89A6-9268B37A9A72}\InprocServer32\4.0.0.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-          <RegistryValue Root="HKCR" Key="CLSID\{B3256CF8-FA9B-310D-89A6-9268B37A9A72}\InprocServer32\4.0.0.0" Name="CodeBase" Value="file:///[#SpellingFixerEC.dll]" Type="string" Action="write" />
+          <RegistryValue Root="HKCR" Key="CLSID\{B3256CF8-FA9B-310D-89A6-9268B37A9A72}\InprocServer32\5.0.0.0" Name="Class" Value="SpellingFixerEC.SpellingFixerEC" Type="string" Action="write" />
+          <RegistryValue Root="HKCR" Key="CLSID\{B3256CF8-FA9B-310D-89A6-9268B37A9A72}\InprocServer32\5.0.0.0" Name="Assembly" Value="SpellingFixerEC, Version=5.0.0.0, Culture=neutral, PublicKeyToken=f1447bae1e63f485" Type="string" Action="write" />
+          <RegistryValue Root="HKCR" Key="CLSID\{B3256CF8-FA9B-310D-89A6-9268B37A9A72}\InprocServer32\5.0.0.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+          <RegistryValue Root="HKCR" Key="CLSID\{B3256CF8-FA9B-310D-89A6-9268B37A9A72}\InprocServer32\5.0.0.0" Name="CodeBase" Value="file:///[#SpellingFixerEC.dll]" Type="string" Action="write" />
           <RegistryValue Root="HKCR" Key="CLSID\{B3256CF8-FA9B-310D-89A6-9268B37A9A72}\InprocServer32" Name="Class" Value="SpellingFixerEC.SpellingFixerEC" Type="string" Action="write" />
-          <RegistryValue Root="HKCR" Key="CLSID\{B3256CF8-FA9B-310D-89A6-9268B37A9A72}\InprocServer32" Name="Assembly" Value="SpellingFixerEC, Version=4.0.0.0, Culture=neutral, PublicKeyToken=f1447bae1e63f485" Type="string" Action="write" />
+          <RegistryValue Root="HKCR" Key="CLSID\{B3256CF8-FA9B-310D-89A6-9268B37A9A72}\InprocServer32" Name="Assembly" Value="SpellingFixerEC, Version=5.0.0.0, Culture=neutral, PublicKeyToken=f1447bae1e63f485" Type="string" Action="write" />
           <RegistryValue Root="HKCR" Key="CLSID\{B3256CF8-FA9B-310D-89A6-9268B37A9A72}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
           <RegistryValue Root="HKCR" Key="CLSID\{B3256CF8-FA9B-310D-89A6-9268B37A9A72}\InprocServer32" Name="CodeBase" Value="file:///[#SpellingFixerEC.dll]" Type="string" Action="write" />
         </Component>
