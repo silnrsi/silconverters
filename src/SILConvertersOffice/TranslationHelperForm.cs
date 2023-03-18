@@ -235,6 +235,11 @@ namespace SILConvertersOffice
                 (ButtonPressed != FormButtons.Cancel) && 
                 (ButtonPressed != FormButtons.Next))
                 e.Cancel = true;
+        
+            Properties.Settings.Default.DefaultWindowState = WindowState;
+            Properties.Settings.Default.WindowLocation = Location;
+            Properties.Settings.Default.WindowSize = Size;
+            Properties.Settings.Default.Save();
         }
 
         void IBackTranslationHelperDataSource.ButtonPressed(ButtonPressed button)
