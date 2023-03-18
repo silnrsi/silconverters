@@ -47,7 +47,7 @@ namespace SILConvertersOffice
         FormButtons IBaseConverterForm.Show(FontConverter aThisFC, string strInput, string strOutput)
         {
             if (!Forms.TryGetValue(aThisFC, out var form))
-    {
+            {
                 form = new TranslationHelperForm();
             }
 
@@ -246,10 +246,8 @@ namespace SILConvertersOffice
                 switch(button.ToString())
                 {
                     case "MoveToNext":
-                        ButtonPressed = FormButtons.Next;
-                        break;
                     case "WriteToTarget":
-                        ButtonPressed = FormButtons.ReplaceOnce;
+                        ButtonPressed = FormButtons.ReplaceOnce;    // these both mean replace
                         break;
                     case "Cancel":
                         ButtonPressed = FormButtons.Cancel;
