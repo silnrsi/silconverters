@@ -7,6 +7,15 @@ using System.Windows.Forms;
 using ECInterfaces;
 using SilEncConverters40;
 using Word = Microsoft.Office.Interop.Word;
+#if BUILD_FOR_OFF11
+using SILConvertersOffice.Properties;
+#elif BUILD_FOR_OFF12
+using SILConvertersOffice07.Properties;
+#elif BUILD_FOR_OFF14
+using SILConvertersOffice10.Properties;
+#elif BUILD_FOR_OFF15
+using SILConvertersOffice13.Properties;
+#endif
 
 namespace SILConvertersOffice
 {
@@ -37,16 +46,16 @@ namespace SILConvertersOffice
             m_doc = doc;
 
             // make sure these exist so don't throw an error later when we try to add to them
-            if (Properties.Settings.Default.RecentFindWhat == null)
-                Properties.Settings.Default.RecentFindWhat = new System.Collections.Specialized.StringCollection();
+            if (Settings.Default.RecentFindWhat == null)
+                Settings.Default.RecentFindWhat = new System.Collections.Specialized.StringCollection();
             else
-                foreach (string str in Properties.Settings.Default.RecentFindWhat)
+                foreach (string str in Settings.Default.RecentFindWhat)
                     comboBoxFindWhat.Items.Add(str);
 
-            if (Properties.Settings.Default.RecentReplaceWith == null)
-                Properties.Settings.Default.RecentReplaceWith = new System.Collections.Specialized.StringCollection();
+            if (Settings.Default.RecentReplaceWith == null)
+                Settings.Default.RecentReplaceWith = new System.Collections.Specialized.StringCollection();
             else
-                foreach (string str in Properties.Settings.Default.RecentReplaceWith)
+                foreach (string str in Settings.Default.RecentReplaceWith)
                     comboBoxReplaceWith.Items.Add(str);
 
 #if BUILD_FOR_OFF15
@@ -61,7 +70,7 @@ namespace SILConvertersOffice
             helpProvider.SetHelpString(this, SILConvertersOffice07.Properties.Resources.FindReplaceFormHelpString);
             helpProvider.SetHelpString(ecTextBoxFindWhat, SILConvertersOffice07.Properties.Resources.ecTextBoxFindWhatHelpString);
             helpProvider.SetHelpString(ecTextBoxReplaceWith, SILConvertersOffice07.Properties.Resources.ecTextBoxReplaceWithHelpString);
-#else
+#elif BUILD_FOR_OFF11
             helpProvider.SetHelpString(this, Properties.Resources.FindReplaceFormHelpString);
             helpProvider.SetHelpString(ecTextBoxFindWhat, Properties.Resources.ecTextBoxFindWhatHelpString);
             helpProvider.SetHelpString(ecTextBoxReplaceWith, Properties.Resources.ecTextBoxReplaceWithHelpString);

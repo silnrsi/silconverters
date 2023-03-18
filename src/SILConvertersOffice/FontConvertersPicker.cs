@@ -14,6 +14,15 @@ using Word = Microsoft.Office.Interop.Word;
 using System.Collections;
 using System.IO;                                    // FileStream
 using System.Runtime.Serialization;                 // for SerializationException
+#if BUILD_FOR_OFF11
+using SILConvertersOffice.Properties;
+#elif BUILD_FOR_OFF12
+using SILConvertersOffice07.Properties;
+#elif BUILD_FOR_OFF14
+using SILConvertersOffice10.Properties;
+#elif BUILD_FOR_OFF15
+using SILConvertersOffice13.Properties;
+#endif
 
 namespace SILConvertersOffice
 {
@@ -50,10 +59,10 @@ namespace SILConvertersOffice
         protected void InsureSettings()
         {
             // make sure we have the collection around so we don't have to check it later
-            if (Properties.Settings.Default.ConverterMappingRecentFiles == null)
+            if (Settings.Default.ConverterMappingRecentFiles == null)
             {
-                Properties.Settings.Default.ConverterMappingRecentFiles = new System.Collections.Specialized.StringCollection();
-                Properties.Settings.Default.Save();
+                Settings.Default.ConverterMappingRecentFiles = new System.Collections.Specialized.StringCollection();
+                Settings.Default.Save();
             }
         }
 
@@ -515,13 +524,13 @@ namespace SILConvertersOffice
             System.Diagnostics.Debug.Assert(!String.IsNullOrEmpty(strFilename));
 
             // add this filename to the list of recently used files
-            if (Properties.Settings.Default.ConverterMappingRecentFiles.Contains(strFilename))
-                Properties.Settings.Default.ConverterMappingRecentFiles.Remove(strFilename);
-            else if (Properties.Settings.Default.ConverterMappingRecentFiles.Count > nMaxRecentFiles)
-                Properties.Settings.Default.ConverterMappingRecentFiles.RemoveAt(nMaxRecentFiles);
+            if (Settings.Default.ConverterMappingRecentFiles.Contains(strFilename))
+                Settings.Default.ConverterMappingRecentFiles.Remove(strFilename);
+            else if (Settings.Default.ConverterMappingRecentFiles.Count > nMaxRecentFiles)
+                Settings.Default.ConverterMappingRecentFiles.RemoveAt(nMaxRecentFiles);
 
-            Properties.Settings.Default.ConverterMappingRecentFiles.Insert(0, strFilename);
-            Properties.Settings.Default.Save();
+            Settings.Default.ConverterMappingRecentFiles.Insert(0, strFilename);
+            Settings.Default.Save();
         }
 
         private void recentFilesToolStripMenuItem_Click(object sender, EventArgs e)
@@ -536,7 +545,7 @@ namespace SILConvertersOffice
             catch (Exception ex)
             {
                 // probably means the file doesn't exist anymore, so remove it from the recent used list
-                Properties.Settings.Default.ConverterMappingRecentFiles.Remove(aRecentFile.Text);
+                Settings.Default.ConverterMappingRecentFiles.Remove(aRecentFile.Text);
                 MessageBox.Show(ex.Message, OfficeApp.cstrCaption);
             }
         }
@@ -550,8 +559,8 @@ namespace SILConvertersOffice
             this.setDefaultConverterToolStripMenuItem.Enabled = bRowsExist;
 
             recentToolStripMenuItem.DropDownItems.Clear();
-            foreach (string strRecentFile in Properties.Settings.Default.ConverterMappingRecentFiles)
-                recentToolStripMenuItem.DropDownItems.Add(strRecentFile, null, recentFilesToolStripMenuItem_Click);
+            foreach (string strRecentFile in Settings.Default.ConverterMappingRecentFiles)
+                recentToolStripMenuItem.DropDownItems.Add(strRecentFile, null, RecentFilesToolStripMenuItem_Click);
             recentToolStripMenuItem.Enabled = (recentToolStripMenuItem.DropDownItems.Count > 0);
         }
     }

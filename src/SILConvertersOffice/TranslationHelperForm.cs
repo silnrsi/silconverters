@@ -6,6 +6,15 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+#if BUILD_FOR_OFF11
+using SILConvertersOffice.Properties;
+#elif BUILD_FOR_OFF12
+using SILConvertersOffice07.Properties;
+#elif BUILD_FOR_OFF14
+using SILConvertersOffice10.Properties;
+#elif BUILD_FOR_OFF15
+using SILConvertersOffice13.Properties;
+#endif
 
 namespace SILConvertersOffice
 {
@@ -205,6 +214,17 @@ namespace SILConvertersOffice
         {
             ButtonPressed = FormButtons.Cancel;
             Close();
+        }
+
+        private void TranslationHelperForm_Load(object sender, EventArgs e)
+        {
+            Location = Settings.Default.WindowLocation;
+            WindowState = Settings.Default.DefaultWindowState;
+            if (MinimumSize.Height <= Settings.Default.WindowSize.Height &&
+                MinimumSize.Width <= Settings.Default.WindowSize.Width)
+            {
+                Size = Settings.Default.WindowSize;
+            }
         }
 
         private void TranslationHelperForm_FormClosing(object sender, FormClosingEventArgs e)

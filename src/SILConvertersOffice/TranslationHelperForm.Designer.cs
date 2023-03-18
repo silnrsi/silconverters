@@ -1,4 +1,6 @@
 ﻿
+using System;
+
 namespace SILConvertersOffice
 {
     partial class TranslationHelperForm
@@ -38,6 +40,11 @@ namespace SILConvertersOffice
             this.backTranslationHelperCtrl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            // if you edit the form (e.g. to add a control), then the designer auto coding will change this "AutoSize = false"
+            //  to (possibly true) and add an 'AutoSizeMode = GrowAndShrink'... but this will cause the embedded control to
+            //  stop showing properly. It *must* be AutoSize = false. (keep this comment here too, so the next person sees it too)
+            // (I'm not sure if it's specifically necessary, but you might need to restore the PerformLayout at the bottom,
+            //  which the editing of the form will remove too)
             this.backTranslationHelperCtrl.AutoSize = false;
             this.backTranslationHelperCtrl.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.backTranslationHelperCtrl.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -55,6 +62,7 @@ namespace SILConvertersOffice
             this.Controls.Add(this.backTranslationHelperCtrl);
             this.Name = "TranslationHelperForm";
             this.Text = "Back Translating from {0} - {1}";
+            this.Load += new System.EventHandler(this.TranslationHelperForm_Load);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.TranslationHelperForm_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -227,7 +227,6 @@
     </Compile>
     <Compile Include="..\SILConvertersOffice\TranslationHelperForm.cs">
       <Link>TranslationHelperForm.cs</Link>
-      <SubType>Form</SubType>
     </Compile>
     <Compile Include="..\SILConvertersOffice\TranslationHelperForm.designer.cs">
       <Link>TranslationHelperForm.designer.cs</Link>
@@ -260,6 +259,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -294,6 +298,7 @@
     <EmbeddedResource Include="..\SILConvertersOffice07\RibbonPublisher.xml" />
     <EmbeddedResource Include="..\SILConvertersOffice\TranslationHelperForm.resx">
       <DependentUpon>TranslationHelperForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
@@ -305,7 +310,10 @@
     <None Include="app.config" />
     <None Include="FieldWorks.snk" />
     <None Include="packages.config" />
-    <None Include="Properties\Settings.settings" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Content Include="RibbonAccess.xml" />
