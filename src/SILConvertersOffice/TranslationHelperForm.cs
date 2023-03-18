@@ -9,7 +9,46 @@ using System.Windows.Forms;
 
 namespace SILConvertersOffice
 {
-    internal partial class TranslationHelperForm : Form, IBaseConverterForm, IBackTranslationHelperDataSource
+    /// <summary>
+    /// each project (read: font and converter combination) needs its own TranslationHelperForm
+    /// so it can manage things like its own SpellFixer and set of EncConverters to use. So use 
+    /// this class (w/ an 's') to triangulate between the different instances of it based on the 
+    /// requested FontConverter
+    /// </summary>
+    internal class TranslationHelperForms : IBaseConverterForm
+    {
+        private static TranslationHelperForm _current;
+        private Dictionary<FontConverter, TranslationHelperForm> Forms = new Dictionary<FontConverter, TranslationHelperForm>();
+
+        bool IBaseConverterForm.SkipIdenticalValues => false;   // this was a feature for checking round-tripping, which doesn't apply here
+
+        string IBaseConverterForm.ForwardString
+        {
+            get
+            {
+                return _current?.ForwardString;
+            }
+
+            set
+            {
+                _current.ForwardString = value;
+            }
+        }
+
+        FormButtons IBaseConverterForm.Show(FontConverter aThisFC, string strInput, string strOutput)
+        {
+            if (!Forms.TryGetValue(aThisFC, out var form))
+    {
+                form = new TranslationHelperForm();
+            }
+
+            _current = form;
+
+            return _current.Show(aThisFC, strInput, strOutput);
+        }
+    }
+
+    internal partial class TranslationHelperForm : Form, IBackTranslationHelperDataSource
     {
         protected FontConverter _theFontsAndEncConverter;
         protected BackTranslationHelperModel _model;
@@ -21,9 +60,7 @@ namespace SILConvertersOffice
             InitializeComponent();
         }
 
-        bool IBaseConverterForm.SkipIdenticalValues => false;   // this was a feature for checking round-tripping, which doesn't apply here
-
-        string IBaseConverterForm.ForwardString
+        public string ForwardString
         { 
             get
             {
@@ -42,7 +79,7 @@ namespace SILConvertersOffice
             }
         }
 
-        FormButtons IBaseConverterForm.Show(FontConverter fontConverter, string sourceText, string targetText)
+        public FormButtons Show(FontConverter fontConverter, string sourceText, string targetText)
         {
             WordApp.SetCursorToWaiting();
             ButtonPressed = FormButtons.Cancel; // reset and be pessimistic
@@ -64,7 +101,7 @@ namespace SILConvertersOffice
                 },
             };
 
-            // this form is the implementation of the way to get get data
+            // this form is the implementation of the way to get data
             backTranslationHelperCtrl.BackTranslationHelperDataSource = this;
             if (!backTranslationHelperCtrl.TheTranslators.Any(t => t.Name == _theFontsAndEncConverter.DirectableEncConverter.GetEncConverter.Name))
                 backTranslationHelperCtrl.TheTranslators.Add(_theFontsAndEncConverter.DirectableEncConverter.GetEncConverter);
