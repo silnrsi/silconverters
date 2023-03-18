@@ -80,7 +80,7 @@ namespace SilConvertersXML
         public static void PrintUsage()
         {
             Assembly assy = Assembly.GetExecutingAssembly();
-            string strUsage = String.Format("Usage: {1} <xmlfile2open>.xml (/cm <converterMappingFile2Use>.xcm) (<xmlfile2save>.xml){0}{0} where the xml file (i.e. <xmlfile2open>.xml) will be automatically converted if you provide the '/cm' switch and the converter mapping file (i.e. <converterMappingFile2Use>.xcm). If you want to save it with a different name, you can optionally provide the <xmlfile2save>.xml parameter",
+            string strUsage = String.Format("Usage: {1} <xmlfile2open> (/cm <converterMappingFile2Use.xcm>) (<xmlfile2save>){0}{0} where the xml file (i.e. <xmlfile2open>) will be automatically converted if you provide the '/cm' switch and the converter mapping file (i.e. <converterMappingFile2Use.xcm>). If you want to save it with a different name, you can optionally provide the <xmlfile2save> parameter",
                 Environment.NewLine, assy.ManifestModule.Name);
             Console.WriteLine(strUsage);
             MessageBox.Show(strUsage, XMLViewForm.cstrCaption);

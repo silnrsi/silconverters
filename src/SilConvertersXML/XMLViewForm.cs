@@ -457,7 +457,7 @@ namespace SilConvertersXML
                         string strInput = xpIterator.Current.Value;
                         string strOutput = strInput;
                         var isTranslatorResource = (((ProcessTypeFlags)aEC.GetEncConverter.ProcessType & ProcessTypeFlags.Translation) == ProcessTypeFlags.Translation);
-                        if (useTranslationForm || isTranslatorResource)
+                        if (bShowUI && (useTranslationForm || isTranslatorResource))
                         {
                             if (!_mapConverterToTranslationForm.TryGetValue(aEC.Name, out TranslationHelperForm form))
                             {
@@ -499,7 +499,7 @@ namespace SilConvertersXML
                 // reset this so we can do new versions
                 m_mapEncConverters.Clear();
 
-                bool bHaveOutputFilename = false;
+                bool bHaveOutputFilename = !String.IsNullOrEmpty(strOutputFileSpec);
                 do
                 {
                     if (String.IsNullOrEmpty(strOutputFileSpec))
