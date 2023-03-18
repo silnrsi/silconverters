@@ -68,6 +68,8 @@
         <Condition Level="0"><![CDATA[NOT ((COMPONENTEXISTS_WORD_10_PIA) OR (COMPONENTEXISTS_EXCEL_10_PIA) OR (ACCESS_2010_PIA_EXISTS) OR (PUBLISHER_2010_PIA_EXISTS))]]></Condition>
         <MergeRef Id="SEC_EC"/>
         <MergeRef Id="SCOffice10"/>
+        <MergeRef Id="EcTranslators"/>
+        <MergeRef Id="SpellFixerEc"/>
         <MergeRef Id="SEC_ICU"/>
         <MergeRef Id="CRT"/>
       </Feature>
@@ -76,6 +78,8 @@
         <Condition Level="0"><![CDATA[OFFICE_2016_BITNESS OR (NOT ((COMPONENTEXISTS_WORD_13_PIA) OR (COMPONENTEXISTS_EXCEL_13_PIA) OR (ACCESS_2013_PIA_EXISTS) OR (PUBLISHER_2013_PIA_EXISTS)))]]></Condition>
         <MergeRef Id="SEC_EC"/>
         <MergeRef Id="SCOffice13"/>
+        <MergeRef Id="EcTranslators"/>
+        <MergeRef Id="SpellFixerEc"/>
         <MergeRef Id="SEC_ICU"/>
         <MergeRef Id="CRT"/>
       </Feature>
@@ -84,6 +88,8 @@
         <Condition Level="0"><![CDATA[OFFICE_2013_BITNESS OR (NOT ((COMPONENTEXISTS_WORD_13_PIA) OR (COMPONENTEXISTS_EXCEL_13_PIA) OR (ACCESS_2013_PIA_EXISTS) OR (PUBLISHER_2013_PIA_EXISTS)))]]></Condition>
         <MergeRef Id="SEC_EC"/>
         <MergeRef Id="SCOffice13"/>
+        <MergeRef Id="EcTranslators"/>
+        <MergeRef Id="SpellFixerEc"/>
         <MergeRef Id="SEC_ICU"/>
         <MergeRef Id="CRT"/>
       </Feature>
