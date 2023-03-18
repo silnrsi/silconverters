@@ -65,10 +65,6 @@ namespace SILConvertersOffice
                     "Click this item to convert the selected text only",
                     new Microsoft.Office.Core._CommandBarButtonEvents_ClickEventHandler(SelectionConvert_Click));
 
-                AddMenu(ref ResetMenuBtn, NewMenuBar, "&Reset",
-                    "Reset the unfinished conversion processes",
-                    new Microsoft.Office.Core._CommandBarButtonEvents_ClickEventHandler(Reset_Click));
-
                 AddMenu(ref ConvertParagraphsIsoFormatMenu, NewMenuBar, "Convert by &paragraph (iso formatted)",
                     "Click this item to convert the document from the cursor on down, paragraph-by-paragraph, but in chunks that keep the formatting the same (which might ruin the Translation if using Bing or DeepL translators)",
                     new Microsoft.Office.Core._CommandBarButtonEvents_ClickEventHandler(ConvertParagraphs_Click));
@@ -76,6 +72,10 @@ namespace SILConvertersOffice
                 AddMenu(ref ConvertParagraphsMenu, NewMenuBar, "Convert by paragraph",
                     "Click this item to convert the document from the cursor on down, paragraph-by-paragraph, ignoring formatting (so formatting will be lost, but you'll get whole paragraphs translated as a unit)",
                     new Microsoft.Office.Core._CommandBarButtonEvents_ClickEventHandler(ConvertParagraphs_IgnoreStyle_Click));
+
+                AddMenu(ref ResetMenuBtn, NewMenuBar, "&Reset",
+                    "Reset the unfinished conversion processes",
+                    new Microsoft.Office.Core._CommandBarButtonEvents_ClickEventHandler(Reset_Click));
             }
             catch (Exception ex)
             {

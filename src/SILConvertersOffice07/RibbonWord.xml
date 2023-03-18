@@ -12,12 +12,12 @@
             size="large" onAction="Button_Clicked" screentip="Click this item to search the document using Regular Expression syntax" />
           <button id="SILConvertersOffice.WordApp.RoundTripCheck_Click" label="Check round-trip conversion"
             size="large" onAction="Button_Clicked" screentip="Click this item to check a bidirectional converter's round-trip capability" />
-          <button id="SILConvertersOffice.WordApp.Reset_Click" label="Reset"
-            size="large" onAction="Button_Clicked" screentip="Reset the unfinished conversion processes" />
           <button id="SILConvertersOffice.WordApp.ConvertParagraphs_Click" label="Convert by paragraph (iso formatted)"
             size="large" onAction="Button_Clicked" screentip="Click this item to convert the document from the cursor on down, paragraph-by-paragraph, but in chunks that keep the formatting the same" />
           <button id="SILConvertersOffice.WordApp.ConvertParagraphs_IgnoreStyle_Click" label="Convert by paragraph"
             size="large" onAction="Button_Clicked" screentip="Click this item to convert the document from the cursor on down, paragraph-by-paragraph, ignoring formatting (so formatting will be lost, but you'll get whole paragraphs translated as a unit)" />
+          <button id="SILConvertersOffice.WordApp.Reset_Click" label="Reset"
+            size="large" onAction="Button_Clicked" screentip="Reset the unfinished conversion processes" />
         </group>
       </tab>
     </tabs>
