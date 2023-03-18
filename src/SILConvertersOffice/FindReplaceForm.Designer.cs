@@ -82,7 +82,7 @@ namespace SILConvertersOffice
             this.buttonReplaceAll.TabIndex = 7;
             this.buttonReplaceAll.Text = "Replace &All";
             this.buttonReplaceAll.UseVisualStyleBackColor = true;
-            this.buttonReplaceAll.Click += new System.EventHandler(this.buttonReplaceAll_Click);
+            this.buttonReplaceAll.Click += new System.EventHandler(this.ButtonReplaceAll_Click);
             // 
             // buttonReplace
             // 
@@ -92,7 +92,7 @@ namespace SILConvertersOffice
             this.buttonReplace.TabIndex = 6;
             this.buttonReplace.Text = "&Replace";
             this.buttonReplace.UseVisualStyleBackColor = true;
-            this.buttonReplace.Click += new System.EventHandler(this.buttonReplace_Click);
+            this.buttonReplace.Click += new System.EventHandler(this.ButtonReplace_Click);
             // 
             // buttonFindNext
             // 
@@ -102,7 +102,7 @@ namespace SILConvertersOffice
             this.buttonFindNext.TabIndex = 5;
             this.buttonFindNext.Text = "&Find Next";
             this.buttonFindNext.UseVisualStyleBackColor = true;
-            this.buttonFindNext.Click += new System.EventHandler(this.buttonFindNext_Click);
+            this.buttonFindNext.Click += new System.EventHandler(this.ButtonFindNext_Click);
             // 
             // checkBoxMatchCase
             // 
@@ -114,7 +114,7 @@ namespace SILConvertersOffice
             this.checkBoxMatchCase.TabIndex = 8;
             this.checkBoxMatchCase.Text = "Matc&h case";
             this.checkBoxMatchCase.UseVisualStyleBackColor = true;
-            this.checkBoxMatchCase.CheckedChanged += new System.EventHandler(this.checkBoxMatchCase_CheckedChanged);
+            this.checkBoxMatchCase.CheckedChanged += new System.EventHandler(this.CheckBoxMatchCase_CheckedChanged);
             // 
             // comboBoxReplaceWith
             // 
@@ -127,7 +127,7 @@ namespace SILConvertersOffice
             this.comboBoxReplaceWith.Name = "comboBoxReplaceWith";
             this.comboBoxReplaceWith.Size = new System.Drawing.Size(427, 29);
             this.comboBoxReplaceWith.TabIndex = 10;
-            this.comboBoxReplaceWith.SelectedIndexChanged += new System.EventHandler(this.comboBoxReplaceWith_SelectedIndexChanged);
+            this.comboBoxReplaceWith.SelectedIndexChanged += new System.EventHandler(this.ComboBoxReplaceWith_SelectedIndexChanged);
             // 
             // labelReplaceWith
             // 
@@ -149,7 +149,7 @@ namespace SILConvertersOffice
             this.comboBoxFindWhat.Name = "comboBoxFindWhat";
             this.comboBoxFindWhat.Size = new System.Drawing.Size(427, 29);
             this.comboBoxFindWhat.TabIndex = 9;
-            this.comboBoxFindWhat.SelectedIndexChanged += new System.EventHandler(this.comboBoxFindWhat_SelectedIndexChanged);
+            this.comboBoxFindWhat.SelectedIndexChanged += new System.EventHandler(this.ComboBoxFindWhat_SelectedIndexChanged);
             // 
             // labelFindWhat
             // 
@@ -170,7 +170,7 @@ namespace SILConvertersOffice
             this.buttonExpressionBuilder.TabIndex = 4;
             this.buttonExpressionBuilder.Text = ">";
             this.buttonExpressionBuilder.UseVisualStyleBackColor = true;
-            this.buttonExpressionBuilder.Click += new System.EventHandler(this.buttonExpressionBuilder_Click);
+            this.buttonExpressionBuilder.Click += new System.EventHandler(this.ButtonExpressionBuilder_Click);
             // 
             // contextMenuStripExprBuilder
             // 
@@ -201,7 +201,7 @@ namespace SILConvertersOffice
             this.regularExpressionHelpToolStripMenuItem});
             this.contextMenuStripExprBuilder.Name = "contextMenuStripExprBuilder";
             this.contextMenuStripExprBuilder.Size = new System.Drawing.Size(351, 484);
-            this.contextMenuStripExprBuilder.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.contextMenuStripExprBuilder_ItemClicked);
+            this.contextMenuStripExprBuilder.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.ContextMenuStripExprBuilder_ItemClicked);
             // 
             // MatchAnyCharacterToolStripMenuItem
             // 
@@ -343,7 +343,7 @@ namespace SILConvertersOffice
             this.regularExpressionHelpToolStripMenuItem.Name = "regularExpressionHelpToolStripMenuItem";
             this.regularExpressionHelpToolStripMenuItem.Size = new System.Drawing.Size(350, 22);
             this.regularExpressionHelpToolStripMenuItem.Text = "Regular Expression &Help";
-            this.regularExpressionHelpToolStripMenuItem.Click += new System.EventHandler(this.regularExpressionHelpToolStripMenuItem_Click);
+            this.regularExpressionHelpToolStripMenuItem.Click += new System.EventHandler(this.RegularExpressionHelpToolStripMenuItem_Click);
             // 
             // buttonCancel
             // 
@@ -354,7 +354,7 @@ namespace SILConvertersOffice
             this.buttonCancel.TabIndex = 11;
             this.buttonCancel.Text = "&Close";
             this.buttonCancel.UseVisualStyleBackColor = true;
-            this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
+            this.buttonCancel.Click += new System.EventHandler(this.ButtonCancel_Click);
             // 
             // ecTextBoxFindWhat
             // 
@@ -366,7 +366,7 @@ namespace SILConvertersOffice
             this.ecTextBoxFindWhat.Size = new System.Drawing.Size(408, 29);
             this.ecTextBoxFindWhat.TabIndex = 1;
             this.ecTextBoxFindWhat.WordWrap = false;
-            this.ecTextBoxFindWhat.TextChanged += new System.EventHandler(this.ecTextBox_TextChanged);
+            this.ecTextBoxFindWhat.TextChanged += new System.EventHandler(this.EcTextBox_TextChanged);
             // 
             // ecTextBoxReplaceWith
             // 
@@ -378,7 +378,7 @@ namespace SILConvertersOffice
             this.ecTextBoxReplaceWith.Size = new System.Drawing.Size(408, 29);
             this.ecTextBoxReplaceWith.TabIndex = 3;
             this.ecTextBoxReplaceWith.WordWrap = false;
-            this.ecTextBoxReplaceWith.TextChanged += new System.EventHandler(this.ecTextBox_TextChanged);
+            this.ecTextBoxReplaceWith.TextChanged += new System.EventHandler(this.EcTextBox_TextChanged);
             // 
             // progressBar
             // 
@@ -393,9 +393,9 @@ namespace SILConvertersOffice
             // 
             this.backgroundWorker.WorkerReportsProgress = true;
             this.backgroundWorker.WorkerSupportsCancellation = true;
-            this.backgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker_DoWork);
-            this.backgroundWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker_RunWorkerCompleted);
-            this.backgroundWorker.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorker_ProgressChanged);
+            this.backgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.BackgroundWorker_DoWork);
+            this.backgroundWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.BackgroundWorker_RunWorkerCompleted);
+            this.backgroundWorker.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.BackgroundWorker_ProgressChanged);
             // 
             // FindReplaceForm
             // 

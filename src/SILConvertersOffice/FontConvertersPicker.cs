@@ -28,10 +28,10 @@ namespace SILConvertersOffice
 {
     internal partial class FontConvertersPicker : Form
     {
-        private OfficeDocument m_doc = null;
-        protected DirectableEncConverter m_aECForAll = null;
-        protected DirectableEncConverter m_aECLast = null;
-        protected Hashtable m_mapEncConverters = new Hashtable();
+        private OfficeDocument m_doc;
+        protected DirectableEncConverter m_aECForAll;
+        protected DirectableEncConverter m_aECLast;
+        protected Hashtable m_mapEncConverters = new();
         protected const int nMaxRecentFiles = 15;
 
         const int nColumnFontNames = 0;
@@ -42,7 +42,7 @@ namespace SILConvertersOffice
         protected const string cstrClickMsg = "Select a converter";
         protected const string cstrFontClickMsg = "Select a font to apply";
         protected const string cstrApplyECFormat = "Apply '{0}'?";
-        protected string m_strApplyEC = null;
+        protected string m_strApplyEC;
 
         /// <summary>
         /// FontConvertersPicker: to choose the font you want to process in the Word document
@@ -168,7 +168,7 @@ namespace SILConvertersOffice
 
                         if (aIEC != null)
                         {
-                            DirectableEncConverter aEC = new DirectableEncConverter(aIEC);
+                            var aEC = new DirectableEncConverter(aIEC);
                             m_mapEncConverters.Add(strFontName, aEC);
                         }
                     }
@@ -177,7 +177,7 @@ namespace SILConvertersOffice
 
             if (m_mapEncConverters.ContainsKey(strFontName))
             {
-                DirectableEncConverter aEC = (DirectableEncConverter)m_mapEncConverters[strFontName];
+                var aEC = (DirectableEncConverter)m_mapEncConverters[strFontName];
                 strConverterName = aEC.Name;
                 strTooltip = aEC.ToString();
                 if (aEC.TargetFont != null)
@@ -202,8 +202,7 @@ namespace SILConvertersOffice
 
         protected void AddRow(string strFontName)
         {
-            string strConverterName, strTooltip, strFontNameOutput;
-            InitConverterDetails(strFontName, out strConverterName, out strTooltip, out strFontNameOutput);
+            InitConverterDetails(strFontName, out string strConverterName, out string strTooltip, out string strFontNameOutput);
 
             string[] row = { strFontName, strConverterName, strFontNameOutput };
             int nIndex = dataGridViewFontsConverters.Rows.Add(row);
@@ -215,19 +214,21 @@ namespace SILConvertersOffice
         {
             get 
             {
-                FontConverters aFCs = new FontConverters();
+                FontConverters aFCs = new();
                 foreach (string strFontName in m_mapEncConverters.Keys)
                 {
                     DirectableEncConverter aIEC = (DirectableEncConverter)m_mapEncConverters[strFontName];
-                    FontConverter aFC = new FontConverter(strFontName, aIEC);
-                    aFC.RhsFont = aIEC.TargetFont;
+                    var aFC = new FontConverter(strFontName, aIEC)
+                    {
+                        RhsFont = aIEC.TargetFont
+                    };
                     aFCs.Add(strFontName, aFC);
                 }
                 return aFCs;
             }
         }
 
-        private void buttonOK_Click(object sender, EventArgs e)
+        private void ButtonOK_Click(object sender, EventArgs e)
         {
             if (m_mapEncConverters.Count > 0)
             {
@@ -238,7 +239,7 @@ namespace SILConvertersOffice
                 MessageBox.Show("You must choose at least one converter (or click Cancel)", OfficeApp.cstrCaption);
         }
 
-        private void checkBoxFontsInUse_CheckedChanged(object sender, EventArgs e)
+        private void CheckBoxFontsInUse_CheckedChanged(object sender, EventArgs e)
         {
             PopulateGrid();
         }
@@ -254,7 +255,7 @@ namespace SILConvertersOffice
                 this.backgroundWorker.CancelAsync();
         }
 
-        private void backgroundWorker_DoWork(object sender, DoWorkEventArgs e)
+        private void BackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
             DoWork(sender as BackgroundWorker, e.Argument as OfficeDocument);
         }
@@ -270,7 +271,7 @@ namespace SILConvertersOffice
                 nWordCount = 0;
             }
             */
-            FontNamesInUseProcessor aDocumentProcess = new FontNamesInUseProcessor(nWordCount, worker);
+            var aDocumentProcess = new FontNamesInUseProcessor(nWordCount, worker);
             
             try
             {
@@ -282,29 +283,28 @@ namespace SILConvertersOffice
             }
         }
 
-        private void backgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        private void BackgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             // for us the "progress" is a new font found (if not null)
             if (e.UserState != null)
             {
-                string[] aStrs = (string[])e.UserState;
+                var aStrs = (string[])e.UserState;
                 System.Diagnostics.Debug.Assert(aStrs.Length == 2);
-                string strFontName = aStrs[0];
-                string strWord = aStrs[1];  // in case we want to 
+                var strFontName = aStrs[0];
                 AddRow(strFontName);
             }
             else
                 progressBarFontsInUse.PerformStep();
         }
 
-        private void backgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        private void BackgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             if (e.Error != null)
                 MessageBox.Show(e.Error.Message, OfficeApp.cstrCaption);
             progressBarFontsInUse.Visible = false;
         }
 
-        private void setDefaultConverterToolStripMenuItem_Click(object sender, EventArgs e)
+        private void SetDefaultConverterToolStripMenuItem_Click(object sender, EventArgs e)
         {
             EncConverters aECs = OfficeApp.GetEncConverters;
             if (aECs != null)
@@ -312,7 +312,7 @@ namespace SILConvertersOffice
                 IEncConverter aIEC = aECs.AutoSelectWithTitle(ConvType.Unknown, "Select Default Converter");
                 if (aIEC != null)
                 {
-                    DirectableEncConverter aEC = new DirectableEncConverter(aIEC.Name, aIEC.DirectionForward, aIEC.NormalizeOutput);
+                    var aEC = new DirectableEncConverter(aIEC.Name, aIEC.DirectionForward, aIEC.NormalizeOutput);
                     foreach (DataGridViewRow aRow in dataGridViewFontsConverters.Rows)
                     {
                         string strFontName = (string)aRow.Cells[nColumnFontNames].Value;
@@ -336,8 +336,7 @@ namespace SILConvertersOffice
             foreach (DataGridViewRow aRow in dataGridViewFontsConverters.Rows)
             {
                 string strFontname = (string)aRow.Cells[nColumnFontNames].Value;
-                string strConverterName, strTooltip, strFontNameOutput;
-                InitConverterDetails(strFontname, out strConverterName, out strTooltip, out strFontNameOutput);
+                InitConverterDetails(strFontname, out string strConverterName, out string strTooltip, out string strFontNameOutput);
                 DataGridViewCell cell = aRow.Cells[nColumnConverterNames];
                 cell.Value = strConverterName;
                 cell.ToolTipText = strTooltip;
@@ -345,18 +344,20 @@ namespace SILConvertersOffice
             }
         }
 
-        private void newConverterMappingToolStripMenuItem_Click(object sender, EventArgs e)
+        private void NewConverterMappingToolStripMenuItem_Click(object sender, EventArgs e)
         {
             m_mapEncConverters.Clear();
             UpdateConverterNames();
         }
 
-        private void openConverterMappingToolStripMenuItem_Click(object sender, EventArgs e)
+        private void OpenConverterMappingToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            OpenFileDialog dlgSettings = new OpenFileDialog();
-            dlgSettings.DefaultExt = "fcm";
-            dlgSettings.InitialDirectory = OfficeApp.GetAppDataDir;
-            dlgSettings.Filter = "Font Converter mapping files (*.fcm)|*.fcm|All files|*.*";
+            var dlgSettings = new OpenFileDialog
+            {
+                DefaultExt = "fcm",
+                InitialDirectory = OfficeApp.GetAppDataDir,
+                Filter = "Font Converter mapping files (*.fcm)|*.fcm|All files|*.*"
+            };
 
             if (dlgSettings.ShowDialog() == DialogResult.OK)
             {
@@ -367,15 +368,17 @@ namespace SILConvertersOffice
         protected void LoadMappingFile(string strFilename)
         {
             m_mapEncConverters = null;
-            FileStream fs = new FileStream(strFilename, FileMode.Open);
+            var fs = new FileStream(strFilename, FileMode.Open);
 
             // Construct a SoapFormatter and use it 
             // to serialize the data to the stream.
             try
             {
-                SoapFormatter formatter = new SoapFormatter();
-                formatter.Binder = new DirectableEncConverterDeserializationBinder();
-                formatter.AssemblyFormat = System.Runtime.Serialization.Formatters.FormatterAssemblyStyle.Simple;
+                SoapFormatter formatter = new()
+                {
+                    Binder = new DirectableEncConverterDeserializationBinder(),
+                    AssemblyFormat = System.Runtime.Serialization.Formatters.FormatterAssemblyStyle.Simple
+                };
                 m_mapEncConverters = (Hashtable)formatter.Deserialize(fs);
                 AddToConverterMappingRecentlyUsed(strFilename);
             }
@@ -392,11 +395,13 @@ namespace SILConvertersOffice
                 UpdateConverterNames();
         }
 
-        private void saveConverterMappingToolStripMenuItem_Click(object sender, EventArgs e)
+        private void SaveConverterMappingToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SaveFileDialog dlgSettings = new SaveFileDialog();
-            dlgSettings.DefaultExt = "fcm";
-            dlgSettings.FileName = "Font Converter mapping1.fcm";
+            SaveFileDialog dlgSettings = new()
+            {
+                DefaultExt = "fcm",
+                FileName = "Font Converter mapping1.fcm"
+            };
             if (!Directory.Exists(OfficeApp.GetAppDataDir))
                 Directory.CreateDirectory(OfficeApp.GetAppDataDir);
             dlgSettings.InitialDirectory = OfficeApp.GetAppDataDir;
@@ -405,8 +410,8 @@ namespace SILConvertersOffice
             {
                 // Construct a SoapFormatter and use it 
                 // to serialize the data to the stream.
-                FileStream fs = new FileStream(dlgSettings.FileName, FileMode.Create);
-                SoapFormatter formatter = new SoapFormatter();
+                var fs = new FileStream(dlgSettings.FileName, FileMode.Create);
+                var formatter = new SoapFormatter();
                 try
                 {
                     formatter.AssemblyFormat = System.Runtime.Serialization.Formatters.FormatterAssemblyStyle.Simple;
@@ -424,7 +429,7 @@ namespace SILConvertersOffice
             }
         }
 
-        private void dataGridViewFontsConverters_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        private void DataGridViewFontsConverters_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             int nColumnIndex = e.ColumnIndex;
             // if the user clicks on the header... that doesn't work
@@ -533,7 +538,7 @@ namespace SILConvertersOffice
             Settings.Default.Save();
         }
 
-        private void recentFilesToolStripMenuItem_Click(object sender, EventArgs e)
+        private void RecentFilesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ToolStripDropDownItem aRecentFile = (ToolStripDropDownItem)sender;
             try
@@ -550,7 +555,7 @@ namespace SILConvertersOffice
             }
         }
 
-        private void converterMappingToolStripMenuItem_DropDownOpening(object sender, EventArgs e)
+        private void ConverterMappingToolStripMenuItem_DropDownOpening(object sender, EventArgs e)
         {
             bool bMappingsExist = (m_mapEncConverters.Count > 0);
             this.newConverterMappingToolStripMenuItem.Enabled = bMappingsExist;
@@ -570,22 +575,22 @@ namespace SILConvertersOffice
     /// </summary>
     internal class FontNamesInUseProcessor : OfficeDocumentProcessor
     {
-        BackgroundWorker m_worker = null; // who we send updates to
-        List<string> m_astrListFontNames = new List<string>();
+        readonly BackgroundWorker m_worker; // who we send updates to
+        readonly List<string> m_astrListFontNames = new();
         int m_nCount = 0;
-        int m_nModulo = 10;
+        readonly int m_nModulo = 10;
         const int cnNumSteps = 50;
 
         public FontNamesInUseProcessor(int nDocumentWordCount, BackgroundWorker worker)
         {
-            Process = myWordProcessor;
+            Process = MyWordProcessor;
 
             // get a rough estimate of the number of words in the document
             m_nModulo = (nDocumentWordCount == 0) ? 0 : Math.Max(nDocumentWordCount / cnNumSteps, 2);
             m_worker = worker;
         }
 
-        protected bool myWordProcessor(OfficeRange aWordRange, ref int nCharIndex)
+        protected bool MyWordProcessor(OfficeRange aWordRange, ref int nCharIndex)
         {
             if (m_worker.CancellationPending)
                 return false;

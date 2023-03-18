@@ -31,7 +31,7 @@ namespace SILConvertersOffice
         const string cstrClose = "&Close";
         const string cstrStop = "&Stop";
 
-        private WordFindReplaceDocument m_doc;
+        private readonly WordFindReplaceDocument m_doc;
         FindWordProcessor m_aWordByWordProcessor = null;
         protected SearchAreaType m_eSearchAreaType = SearchAreaType.eUnknown;
 
@@ -105,7 +105,7 @@ namespace SILConvertersOffice
 
                 // if the user clicked Find/Next, then don't give the Replace With text even if there is some
                 m_aWordByWordProcessor = new FindWordProcessor(ecTextBoxFindWhat.Text, ecTextBoxReplaceWith.Text,
-                    checkBoxMatchCase.Checked, ecTextBoxFindWhat.Font);
+                    checkBoxMatchCase.Checked);
             }
 
             // update the button pressed information
@@ -167,7 +167,7 @@ namespace SILConvertersOffice
             doc.Search(worker);
         }
 
-        private void backgroundWorker_DoWork(object sender, DoWorkEventArgs e)
+        private void BackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
             BackgroundWorker worker = (BackgroundWorker)sender;
             DoWork(worker, e.Argument as WordFindReplaceDocument);
@@ -175,7 +175,7 @@ namespace SILConvertersOffice
                 e.Cancel = true;
         }
 
-        private void backgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        private void BackgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             // for us the "progress" is a new range of the document we're searching thru
             int nValue = (int)e.ProgressPercentage;
@@ -190,7 +190,7 @@ namespace SILConvertersOffice
                 });
         }
 
-        private void backgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        private void BackgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             bool bReplace = (m_aWordByWordProcessor.FormButton == FormButtons.ReplaceOnce) || (m_aWordByWordProcessor.FormButton == FormButtons.ReplaceAll);
             bool bContinue = false;  // start again pessimistic
@@ -308,7 +308,7 @@ namespace SILConvertersOffice
             base.Show();
         }
 
-        private void contextMenuStripExprBuilder_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        private void ContextMenuStripExprBuilder_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
             string strItem = ((ToolStripItem)e.ClickedItem).Text;
             if (strItem != regularExpressionHelpToolStripMenuItem.Text)
@@ -348,51 +348,51 @@ namespace SILConvertersOffice
             }
         }
 
-        private void buttonFindNext_Click(object sender, EventArgs e)
+        private void ButtonFindNext_Click(object sender, EventArgs e)
         {
             ProcessButton(FormButtons.Next);
         }
 
-        private void buttonReplace_Click(object sender, EventArgs e)
+        private void ButtonReplace_Click(object sender, EventArgs e)
         {
             ProcessButton(FormButtons.ReplaceOnce);
         }
 
-        private void buttonReplaceAll_Click(object sender, EventArgs e)
+        private void ButtonReplaceAll_Click(object sender, EventArgs e)
         {
             ProcessButton(FormButtons.ReplaceAll);
         }
 
-        private void ecTextBox_TextChanged(object sender, EventArgs e)
+        private void EcTextBox_TextChanged(object sender, EventArgs e)
         {
             m_eSearchAreaType = SearchAreaType.eUnknown;
             m_aWordByWordProcessor = null;
         }
 
-        private void buttonExpressionBuilder_Click(object sender, EventArgs e)
+        private void ButtonExpressionBuilder_Click(object sender, EventArgs e)
         {
             ToolStripDropDownDirection dir = ToolStripDropDownDirection.BelowRight;
             this.buttonExpressionBuilder.ContextMenuStrip.Show(PointToScreen(buttonExpressionBuilder.Location), dir);
         }
 
-        private void comboBoxFindWhat_SelectedIndexChanged(object sender, EventArgs e)
+        private void ComboBoxFindWhat_SelectedIndexChanged(object sender, EventArgs e)
         {
             ecTextBoxFindWhat.Text = (string)comboBoxFindWhat.SelectedItem;
         }
 
-        private void comboBoxReplaceWith_SelectedIndexChanged(object sender, EventArgs e)
+        private void ComboBoxReplaceWith_SelectedIndexChanged(object sender, EventArgs e)
         {
             ecTextBoxReplaceWith.Text = (string)comboBoxReplaceWith.SelectedItem;
         }
 
-        private void regularExpressionHelpToolStripMenuItem_Click(object sender, EventArgs e)
+        private void RegularExpressionHelpToolStripMenuItem_Click(object sender, EventArgs e)
         {
             // launch the ICU help
             string strCommandLine = Environment.GetFolderPath(Environment.SpecialFolder.CommonProgramFiles) + @"\SIL\Help\ICU Regular Expression Plug-in About box.htm";
             OfficeApp.LaunchProgram(strCommandLine, null);
         }
 
-        private void checkBoxMatchCase_CheckedChanged(object sender, EventArgs e)
+        private void CheckBoxMatchCase_CheckedChanged(object sender, EventArgs e)
         {
             m_aWordByWordProcessor = null;
         }
@@ -403,7 +403,7 @@ namespace SILConvertersOffice
                 this.backgroundWorker.CancelAsync();
         }
 
-        private void buttonCancel_Click(object sender, EventArgs e)
+        private void ButtonCancel_Click(object sender, EventArgs e)
         {
             if (buttonCancel.Text == cstrStop)
                 ResetBackgroundWorker();
@@ -425,10 +425,9 @@ namespace SILConvertersOffice
         protected string[] astrReplaceDoubleEscapeCodes = new string[] { @"\t", @"\r", @"\n", @"\a", @"\b", @"\f" };
         protected string[] astrReplaceEscapeCodes = new string[] { "\t", "\r", "\n", "\a", "\b", "\f" };
 
-        public FindWordProcessor(string strFindWhat, string strReplaceWith, bool bMatchCase, Font font)
+        public FindWordProcessor(string strFindWhat, string strReplaceWith, bool bMatchCase)
         {
-            if (m_aECs == null)
-                m_aECs = new EncConverters(true);
+            m_aECs ??= new EncConverters(true);
 
             // for some reason, the text that goes to constructing the 'Find what' part of the CRegexMatcher is 
             //  expecting doubly-escaped text (e.g. "\\r" for CR), but the text that goes for the 'Replace with'
@@ -439,7 +438,7 @@ namespace SILConvertersOffice
             for (int i = 0; i < nNumEscapeCodes; i++)
                 strReplaceWith = strReplaceWith.Replace(astrReplaceDoubleEscapeCodes[i], astrReplaceEscapeCodes[i]);
 
-            m_aECRegex = InitSearchFontConverter(strFindWhat, strReplaceWith, font, bMatchCase);
+            m_aECRegex = InitSearchFontConverter(strFindWhat, strReplaceWith, bMatchCase);
             AutoReplaceOnNextFind = false;  // we'll take care of this as well
 
             // Normally, we search the text one paragraph at a time for the FindWhat string, but if the user 
@@ -459,13 +458,13 @@ namespace SILConvertersOffice
 
         // initialize an EncConverter which will tell us when we've hit a match. Uses ICU RegEx (though, there's
         //  no reason this couldn't be .Net regex...)
-        protected IEncConverter InitSearchFontConverter(string strFindWhat, string strReplaceWith, Font font, bool bMatchCase)
+        protected IEncConverter InitSearchFontConverter(string strFindWhat, string strReplaceWith, bool bMatchCase)
         {
             // we're going to use a temporary ICU RegEx EncConverter to do our 'searching' for us. 
             // get a blank ICU Regex converter that we can program with our FindWhat string
             // but, it may be null if ICU isn't installed
             System.Diagnostics.Debug.Assert(m_aECs != null);
-            IEncConverter aIEC = null;
+            IEncConverter aIEC;
             try
             {
                 aIEC = m_aECs.NewEncConverterByImplementationType(EncConverters.strTypeSILicuRegex);
@@ -535,7 +534,7 @@ namespace SILConvertersOffice
                 int nInputLength = strInput.Length;
                 int nDiffLength = nInputLength;
                 int nTempInputLength = nInputLength;
-                string strTempInput = null;
+                string strTempInput;
                 do
                 {
                     // do a binary search until we get only one replacement
@@ -898,10 +897,10 @@ namespace SILConvertersOffice
             WordRange aRunRange = GetStartingRange(theRangeToSearch);
             if (aRunRange == null)
                 return;
+            object nOffsetParagraph = aWordProcessor.NumOfParagraphsToSearch - 1;
 
             // how many paragraphs ahead we have to look for a match
-            int nEndRangeToSearch = -1;   // might change from loop to loop if we do replacements (so update inside loop)
-            object nOffsetParagraph = aWordProcessor.NumOfParagraphsToSearch - 1;
+            int nEndRangeToSearch;
             do
             {
                 SearchAreaStart = aRunRange.Start;
