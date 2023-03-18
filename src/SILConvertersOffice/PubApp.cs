@@ -295,7 +295,7 @@ namespace SILConvertersOffice
                     return;
 
                 PubRangeDocument doc = new PubRangeDocument(Application.ActiveDocument, eIsoFormattedRun);
-                OfficeDocumentProcessor aSelectionProcessor = GetDocumentProcessor((FontConverters)null, new SILConvertersOffice.TranslationHelperForm());
+                OfficeDocumentProcessor aSelectionProcessor = GetDocumentProcessor((FontConverters)null, new SILConvertersOffice.TranslationHelperForms());
 
                 if (aSelectionProcessor != null)
                     doc.ProcessWordByWord(aSelectionProcessor, OfficeTextDocument.ProcessingType.eIsoFormattedRun);
