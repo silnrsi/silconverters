@@ -68,7 +68,7 @@ namespace SilConvertersXML
                         string strOutputFileSpec = strFileSpecToOpen;
                         if (args.Length > 3)
                             strOutputFileSpec = args[3];
-                        m_aForm.ProcessAndSave(false, strOutputFileSpec);
+                        m_aForm.ProcessAndSave(false, false, strOutputFileSpec);
                         return;
                     }
                 }

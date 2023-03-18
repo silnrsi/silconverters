@@ -67,6 +67,7 @@ namespace SilConvertersXML
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.backgroundWorker = new System.ComponentModel.BackgroundWorker();
             this.fontDialog = new System.Windows.Forms.FontDialog();
+            this.menuUseTranslationDialog = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
             this.splitContainer.Panel1.SuspendLayout();
@@ -208,7 +209,8 @@ namespace SilConvertersXML
             // advancedToolStripMenuItem
             // 
             this.advancedToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.enterXPathExpressionToolStripMenuItem});
+            this.enterXPathExpressionToolStripMenuItem,
+            this.menuUseTranslationDialog});
             this.advancedToolStripMenuItem.Name = "advancedToolStripMenuItem";
             this.advancedToolStripMenuItem.Size = new System.Drawing.Size(72, 20);
             this.advancedToolStripMenuItem.Text = "&Advanced";
@@ -217,7 +219,7 @@ namespace SilConvertersXML
             // 
             this.enterXPathExpressionToolStripMenuItem.Enabled = false;
             this.enterXPathExpressionToolStripMenuItem.Name = "enterXPathExpressionToolStripMenuItem";
-            this.enterXPathExpressionToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
+            this.enterXPathExpressionToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
             this.enterXPathExpressionToolStripMenuItem.Text = "Enter &XPath Expression";
             this.enterXPathExpressionToolStripMenuItem.Click += new System.EventHandler(this.enterXPathExpressionToolStripMenuItem_Click);
             // 
@@ -296,7 +298,7 @@ namespace SilConvertersXML
             this.radioButtonDefaultFont.AutoSize = true;
             this.radioButtonDefaultFont.Location = new System.Drawing.Point(3, 231);
             this.radioButtonDefaultFont.Name = "radioButtonDefaultFont";
-            this.radioButtonDefaultFont.Size = new System.Drawing.Size(121, 20);
+            this.radioButtonDefaultFont.Size = new System.Drawing.Size(120, 20);
             this.radioButtonDefaultFont.TabIndex = 3;
             this.radioButtonDefaultFont.TabStop = true;
             this.radioButtonDefaultFont.Text = "Arial Unicode MS";
@@ -341,7 +343,7 @@ namespace SilConvertersXML
             this.buttonProcessAndSave.Location = new System.Drawing.Point(270, 143);
             this.buttonProcessAndSave.Margin = new System.Windows.Forms.Padding(2);
             this.buttonProcessAndSave.Name = "buttonProcessAndSave";
-            this.buttonProcessAndSave.Size = new System.Drawing.Size(204, 26);
+            this.buttonProcessAndSave.Size = new System.Drawing.Size(203, 26);
             this.buttonProcessAndSave.TabIndex = 3;
             this.buttonProcessAndSave.Text = "&Convert and Save XML Document";
             this.buttonProcessAndSave.UseVisualStyleBackColor = true;
@@ -432,6 +434,13 @@ namespace SilConvertersXML
             this.backgroundWorker.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorker_ProgressChanged);
             this.backgroundWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker_RunWorkerCompleted);
             // 
+            // menuUseTranslationDialog
+            // 
+            this.menuUseTranslationDialog.CheckOnClick = true;
+            this.menuUseTranslationDialog.Name = "menuUseTranslationDialog";
+            this.menuUseTranslationDialog.Size = new System.Drawing.Size(194, 22);
+            this.menuUseTranslationDialog.Text = "&UseTranslation Dialog";
+            // 
             // XMLViewForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
@@ -506,6 +515,7 @@ namespace SilConvertersXML
         private System.Windows.Forms.ToolStripMenuItem enterXPathExpressionToolStripMenuItem;
         private System.Windows.Forms.TextBox textBoxInput;
         private System.Windows.Forms.TextBox textBoxOutput;
-	}
+        private System.Windows.Forms.ToolStripMenuItem menuUseTranslationDialog;
+    }
 }
 
