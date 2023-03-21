@@ -101,7 +101,7 @@ namespace SILConvertersOffice
             // if there's no processor (e.g. initially, change of Find What or Replace With text)...
             if (m_aWordByWordProcessor == null)
             {
-                AddToComboBox(ecTextBoxFindWhat, comboBoxFindWhat, Properties.Settings.Default.RecentFindWhat);
+                AddToComboBox(ecTextBoxFindWhat, comboBoxFindWhat, Settings.Default.RecentFindWhat);
 
                 // if the user clicked Find/Next, then don't give the Replace With text even if there is some
                 m_aWordByWordProcessor = new FindWordProcessor(ecTextBoxFindWhat.Text, ecTextBoxReplaceWith.Text,
@@ -114,7 +114,7 @@ namespace SILConvertersOffice
             // if we're doing a replacement, then save the 'Replace with' string in our settings file
             if ((eFormButton == FormButtons.ReplaceOnce) || (eFormButton == FormButtons.ReplaceAll))
             {
-                AddToComboBox(ecTextBoxReplaceWith, comboBoxReplaceWith, Properties.Settings.Default.RecentReplaceWith);
+                AddToComboBox(ecTextBoxReplaceWith, comboBoxReplaceWith, Settings.Default.RecentReplaceWith);
 
                 // the user may have done 'Replace' when it was found, but then later clicked said ReplaceAll, 
                 //  so update the value
@@ -325,7 +325,7 @@ namespace SILConvertersOffice
             //  expression).
             FindWordProcessor.m_aECs = null;
             ResetBackgroundWorker();
-            Properties.Settings.Default.Save(); // in case something was changed
+            Settings.Default.Save(); // in case something was changed
             e.Cancel = true;
             Hide();
         }
