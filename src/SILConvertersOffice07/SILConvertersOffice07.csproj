@@ -141,6 +141,7 @@
       <HintPath>System.XML.dll</HintPath>
       <Name>System.XML</Name>
     </Reference>
+    <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\SILConvertersOffice\AccessApp.cs">

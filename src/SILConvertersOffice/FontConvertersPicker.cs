@@ -14,6 +14,8 @@ using Word = Microsoft.Office.Interop.Word;
 using System.Collections;
 using System.IO;                                    // FileStream
 using System.Runtime.Serialization;                 // for SerializationException
+using System.Xml.Linq;
+using System.Linq;
 #if BUILD_FOR_OFF11
 using SILConvertersOffice.Properties;
 #elif BUILD_FOR_OFF12
@@ -120,7 +122,7 @@ namespace SILConvertersOffice
             ResetBackgroundWorker();    // just in case
 
             dataGridViewFontsConverters.Rows.Clear();
-            
+
             // check the check box state which says whether we do "all fonts" or just those in the document
             if (checkBoxFontsInUse.Checked)
             {
@@ -129,9 +131,11 @@ namespace SILConvertersOffice
 
                 // Office 2007 (what I'm calling build 4518) doesn't allow background workers to run while a 
                 //  modal dialog is visible. So do it inline.
-                if (    ((m_doc.GetType() != typeof(PubDocument)) && (m_doc.GetType() != typeof(PubStoryDocument)))
-                    ||  ((PubDocument)m_doc).Document.Application.Version.Substring(0,2) == "11")
+                if (((m_doc.GetType() != typeof(PubDocument)) && (m_doc.GetType() != typeof(PubStoryDocument)))
+                    || ((PubDocument)m_doc).Document.Application.Version.Substring(0, 2) == "11")
+                {
                     backgroundWorker.RunWorkerAsync(m_doc);
+                }
                 else
                 {
                     DoWork(backgroundWorker, m_doc);
@@ -139,8 +143,20 @@ namespace SILConvertersOffice
                 }
             }
             else
-                foreach (FontFamily aFontFamily in new InstalledFontCollection().Families)
-                    AddRow(aFontFamily.Name);
+            {
+                if (m_doc is WordDocument wordDoc)
+                {
+                    var xdoc = wordDoc.XDocument;
+                    var fonts = xdoc.Descendants().First(n => n.Name.LocalName == "fonts").Elements().Where(n => n.Name.LocalName == "font");
+                    var fontNames = fonts.Select(f => f.Attributes().First(a => a.Name.LocalName == "name").Value);
+                    fontNames.Distinct().ToList().ForEach(fn => AddRow(fn));
+                }
+                else
+                {
+                    foreach (FontFamily aFontFamily in new InstalledFontCollection().Families)
+                        AddRow(aFontFamily.Name);
+                }
+            }
         }
 
         protected bool IsTargetFontDefined(string strFontNameOutput)

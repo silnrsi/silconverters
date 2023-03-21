@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Drawing;
 using Word = Microsoft.Office.Interop.Word;
+using Microsoft.Office.Interop.Word;
 
 namespace SILConvertersOffice
 {
@@ -225,6 +226,20 @@ namespace SILConvertersOffice
                 }
 
                 aRange.End = aBasedOnSelection.End;
+            }
+        }
+
+        public WordParagraphs(Paragraphs paragraphs)
+        {
+            int nParagraphCount = paragraphs.Count;
+            int i = 1;
+            Word.Range aRange = paragraphs[i].Range.Duplicate;
+            Add(aRange);
+
+            while (i < nParagraphCount)
+            {
+                aRange = paragraphs[++i].Range.Duplicate;
+                Add(aRange);
             }
         }
     }
