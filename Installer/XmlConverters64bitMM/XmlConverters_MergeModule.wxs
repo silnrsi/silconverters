@@ -21,6 +21,11 @@
           <Shortcut Id="SilConvertersXML.exe" Directory="SILConverters" Name="XML Document Converter" Description="Convert your XML documents with SIL Converters" IconIndex="0" Show="normal" Target="[#SilConvertersXML.exe]" WorkingDirectory="MergeRedirectFolder" Advertise="no" />
         </Component>
 
+        <Component Id="SilConvertersXML.exe.config" Guid="{6343D12D-43B0-48F2-BE98-E628D244704C}">
+          <File Id="SilConvertersXML.exe.config" Name="SilConvertersXML.exe.config" Vital="yes" KeyPath="yes"
+                Source="..\..\output\x64\release\SilConvertersXML.exe.config" />
+        </Component>
+
       </Directory>
 
       <Directory Id="StartMenuFolder" SourceName="Start Menu">

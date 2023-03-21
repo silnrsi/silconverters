@@ -110,12 +110,23 @@ namespace SilConvertersXML
 
         public void ButtonPressed(ButtonPressed button)
         {
-            // todo
+            switch (button)
+            {
+                case BackTranslationHelper.ButtonPressed.Skip:
+                    DialogResult = DialogResult.No;
+                    break;
+                case BackTranslationHelper.ButtonPressed.MoveToNext:
+                case BackTranslationHelper.ButtonPressed.WriteToTarget:
+                    DialogResult = DialogResult.OK; 
+                    break;
+                case BackTranslationHelper.ButtonPressed.Cancel:
+                    DialogResult = DialogResult.Cancel;
+                    break;
+            }
         }
 
         public void Cancel()
         {
-            DialogResult = DialogResult.Cancel;
             Close();
         }
 
@@ -126,7 +137,6 @@ namespace SilConvertersXML
 
         public void MoveToNext()
         {
-            DialogResult = DialogResult.OK;
             Close();
         }
 
