@@ -183,13 +183,13 @@ namespace SILConvertersOffice
         {
             // for us the "progress" is a new range of the document we're searching thru
             int nValue = (int)e.ProgressPercentage;
-            if (nValue > progressBar.Maximum)
-            {
-                progressBar.Maximum = nValue;
-            }
 
             progressBar.BeginInvoke(
                 (MethodInvoker)delegate () {
+                    if (nValue > progressBar.Maximum)
+                    {
+                        progressBar.Maximum = nValue;
+                    }
                     progressBar.Value = nValue;
                 });
         }
