@@ -179,6 +179,7 @@
     </Compile>
     <EmbeddedResource Include="AddNewProjectForm.resx">
       <DependentUpon>AddNewProjectForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="LoginSF.resx">
       <DependentUpon>LoginSF.cs</DependentUpon>

@@ -50,13 +50,13 @@
             // 
             // tableLayoutPanel
             // 
-            this.tableLayoutPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tableLayoutPanel.ColumnCount = 3;
+            this.tableLayoutPanel.AutoSize = true;
+            this.tableLayoutPanel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.tableLayoutPanel.ColumnCount = 4;
             this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 120F));
             this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel.Controls.Add(this.labelName, 0, 0);
             this.tableLayoutPanel.Controls.Add(this.textBoxName, 1, 0);
             this.tableLayoutPanel.Controls.Add(this.labelFont, 0, 1);
@@ -69,23 +69,24 @@
             this.tableLayoutPanel.Controls.Add(this.textBoxAddlPunctuation, 1, 4);
             this.tableLayoutPanel.Controls.Add(this.buttonCancel, 2, 5);
             this.tableLayoutPanel.Controls.Add(this.buttonOk, 1, 5);
-            this.tableLayoutPanel.Location = new System.Drawing.Point(12, 12);
+            this.tableLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel.Name = "tableLayoutPanel";
             this.tableLayoutPanel.RowCount = 6;
-            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
-            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
-            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
-            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
-            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel.Size = new System.Drawing.Size(439, 291);
+            this.tableLayoutPanel.Size = new System.Drawing.Size(463, 315);
             this.tableLayoutPanel.TabIndex = 15;
             // 
             // labelName
             // 
             this.labelName.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.labelName.AutoSize = true;
-            this.labelName.Location = new System.Drawing.Point(79, 18);
+            this.labelName.Location = new System.Drawing.Point(79, 22);
             this.labelName.Name = "labelName";
             this.labelName.Size = new System.Drawing.Size(38, 13);
             this.labelName.TabIndex = 16;
@@ -95,9 +96,9 @@
             // 
             this.textBoxName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel.SetColumnSpan(this.textBoxName, 2);
-            this.textBoxName.Location = new System.Drawing.Point(123, 15);
+            this.textBoxName.Location = new System.Drawing.Point(123, 18);
             this.textBoxName.Name = "textBoxName";
-            this.textBoxName.Size = new System.Drawing.Size(313, 20);
+            this.textBoxName.Size = new System.Drawing.Size(317, 20);
             this.textBoxName.TabIndex = 17;
             this.toolTips.SetToolTip(this.textBoxName, "Enter the name of a new projects (e.g. \'Hindi to English fixes\')");
             // 
@@ -105,7 +106,7 @@
             // 
             this.labelFont.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.labelFont.AutoSize = true;
-            this.labelFont.Location = new System.Drawing.Point(86, 68);
+            this.labelFont.Location = new System.Drawing.Point(86, 79);
             this.labelFont.Name = "labelFont";
             this.labelFont.Size = new System.Drawing.Size(31, 13);
             this.labelFont.TabIndex = 16;
@@ -114,7 +115,7 @@
             // buttonChooseFont
             // 
             this.buttonChooseFont.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.buttonChooseFont.Location = new System.Drawing.Point(123, 63);
+            this.buttonChooseFont.Location = new System.Drawing.Point(123, 74);
             this.buttonChooseFont.Name = "buttonChooseFont";
             this.buttonChooseFont.Size = new System.Drawing.Size(84, 23);
             this.buttonChooseFont.TabIndex = 18;
@@ -127,9 +128,9 @@
             // labelFontChosen
             // 
             this.labelFontChosen.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelFontChosen.Location = new System.Drawing.Point(227, 66);
+            this.labelFontChosen.Location = new System.Drawing.Point(227, 76);
             this.labelFontChosen.Name = "labelFontChosen";
-            this.labelFontChosen.Size = new System.Drawing.Size(209, 18);
+            this.labelFontChosen.Size = new System.Drawing.Size(213, 18);
             this.labelFontChosen.TabIndex = 19;
             // 
             // checkBoxRtL
@@ -137,7 +138,7 @@
             this.checkBoxRtL.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.checkBoxRtL.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.checkBoxRtL.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.checkBoxRtL.Location = new System.Drawing.Point(123, 113);
+            this.checkBoxRtL.Location = new System.Drawing.Point(123, 130);
             this.checkBoxRtL.Name = "checkBoxRtL";
             this.checkBoxRtL.Size = new System.Drawing.Size(98, 24);
             this.checkBoxRtL.TabIndex = 20;
@@ -147,16 +148,16 @@
             // labelWordBoundaryDelimiter
             // 
             this.labelWordBoundaryDelimiter.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.labelWordBoundaryDelimiter.Location = new System.Drawing.Point(36, 165);
+            this.labelWordBoundaryDelimiter.Location = new System.Drawing.Point(27, 180);
             this.labelWordBoundaryDelimiter.Name = "labelWordBoundaryDelimiter";
-            this.labelWordBoundaryDelimiter.Size = new System.Drawing.Size(81, 19);
+            this.labelWordBoundaryDelimiter.Size = new System.Drawing.Size(90, 38);
             this.labelWordBoundaryDelimiter.TabIndex = 21;
             this.labelWordBoundaryDelimiter.Text = "&Word boundary delimiter:";
             // 
             // textBoxWordBoundaryDelimiter
             // 
             this.textBoxWordBoundaryDelimiter.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.textBoxWordBoundaryDelimiter.Location = new System.Drawing.Point(123, 165);
+            this.textBoxWordBoundaryDelimiter.Location = new System.Drawing.Point(123, 189);
             this.textBoxWordBoundaryDelimiter.Name = "textBoxWordBoundaryDelimiter";
             this.textBoxWordBoundaryDelimiter.Size = new System.Drawing.Size(24, 20);
             this.textBoxWordBoundaryDelimiter.TabIndex = 22;
@@ -167,7 +168,7 @@
             // 
             this.labelAddlPunct.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.labelAddlPunct.AutoSize = true;
-            this.labelAddlPunct.Location = new System.Drawing.Point(5, 212);
+            this.labelAddlPunct.Location = new System.Drawing.Point(5, 243);
             this.labelAddlPunct.Name = "labelAddlPunct";
             this.labelAddlPunct.Size = new System.Drawing.Size(112, 26);
             this.labelAddlPunct.TabIndex = 23;
@@ -178,9 +179,9 @@
             // 
             this.textBoxAddlPunctuation.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel.SetColumnSpan(this.textBoxAddlPunctuation, 2);
-            this.textBoxAddlPunctuation.Location = new System.Drawing.Point(123, 215);
+            this.textBoxAddlPunctuation.Location = new System.Drawing.Point(123, 246);
             this.textBoxAddlPunctuation.Name = "textBoxAddlPunctuation";
-            this.textBoxAddlPunctuation.Size = new System.Drawing.Size(313, 20);
+            this.textBoxAddlPunctuation.Size = new System.Drawing.Size(317, 20);
             this.textBoxAddlPunctuation.TabIndex = 24;
             this.toolTips.SetToolTip(this.textBoxAddlPunctuation, "Enter any additional punctuation or whitespace characters needed for this languag" +
         "e, separated by spaces (these are used for boundary condition checking)");
@@ -188,7 +189,7 @@
             // buttonCancel
             // 
             this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.buttonCancel.Location = new System.Drawing.Point(227, 253);
+            this.buttonCancel.Location = new System.Drawing.Point(227, 288);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 23);
             this.buttonCancel.TabIndex = 25;
@@ -199,7 +200,7 @@
             // 
             this.buttonOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonOk.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.buttonOk.Location = new System.Drawing.Point(146, 253);
+            this.buttonOk.Location = new System.Drawing.Point(146, 288);
             this.buttonOk.Name = "buttonOk";
             this.buttonOk.Size = new System.Drawing.Size(75, 23);
             this.buttonOk.TabIndex = 16;
@@ -226,6 +227,7 @@
             this.tableLayoutPanel.ResumeLayout(false);
             this.tableLayoutPanel.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
