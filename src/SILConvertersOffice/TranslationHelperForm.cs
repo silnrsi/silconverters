@@ -117,6 +117,10 @@ namespace SILConvertersOffice
 
             backTranslationHelperCtrl.Initialize(displayExistingTargetTranslation: false);
 
+            // If Initialize sets the possible target boxes (more than the 1st one) to Visible, 
+            //  for some reason, it's not changing its state... Try this:
+            Application.DoEvents(); 
+
             // TODO: fix this
             backTranslationHelperCtrl.GetNewData(ref _model);
             _updateDataProc(_model);
