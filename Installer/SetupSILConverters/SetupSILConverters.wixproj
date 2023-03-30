@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" InitialTargets="EnsureWixToolsetInstalled" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\..\packages\Encoding-Converters-Core.0.5.8\build\Encoding-Converters-Core.props" Condition="Exists('..\..\packages\Encoding-Converters-Core.0.5.8\build\Encoding-Converters-Core.props')" />
+  <Import Project="..\..\packages\Encoding-Converters-Core.0.6.0\build\Encoding-Converters-Core.props" Condition="Exists('..\..\packages\Encoding-Converters-Core.0.6.0\build\Encoding-Converters-Core.props')" />
   <Import Project="$([MSBuild]::GetPathOfFileAbove(directory.build.props))" Condition="Exists('$([MSBuild]::GetPathOfFileAbove(directory.build.props))')" />
   <Import Project="..\..\packages\WiX.3.11.2\build\wix.props" Condition="Exists('..\..\packages\WiX.3.11.2\build\wix.props')" />
   <PropertyGroup>
@@ -17,10 +17,10 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <OutputPath>bin\$(Platform)\$(Configuration)\</OutputPath>
     <IntermediateOutputPath>obj\$(Platform)\$(Configuration)\</IntermediateOutputPath>
-    <DefineConstants>ApplicationName=SILConverters;SafeApplicationName=SILConverters;TruncatedVersion=5.1;VersionNumber=5.1.2.0;UpgradeCode=8A50226C-84D0-4CAF-AF8F-B0284643C415;Year=2022;Manufacturer=SIL International;EcDistFilesPath=$(EcDistFilesPath)</DefineConstants>
+    <DefineConstants>ApplicationName=SILConverters;SafeApplicationName=SILConverters;TruncatedVersion=5.1;VersionNumber=5.1.3.0;UpgradeCode=8A50226C-84D0-4CAF-AF8F-B0284643C415;Year=2022;Manufacturer=SIL International;EcDistFilesPath=$(EcDistFilesPath)</DefineConstants>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x64' ">
-    <DefineConstants>ApplicationName=SILConverters;SafeApplicationName=SILConverters;TruncatedVersion=5.1;VersionNumber=5.1.2.0;UpgradeCode=0F7D5D72-E9F3-40BB-9748-D388C70096CD;Year=2023;Manufacturer=SIL International;EcDistFilesPath=$(EcDistFilesPath)</DefineConstants>
+    <DefineConstants>ApplicationName=SILConverters;SafeApplicationName=SILConverters;TruncatedVersion=5.1;VersionNumber=5.1.3.0;UpgradeCode=0F7D5D72-E9F3-40BB-9748-D388C70096CD;Year=2023;Manufacturer=SIL International;EcDistFilesPath=$(EcDistFilesPath)</DefineConstants>
     <OutputPath>bin\$(Platform)\$(Configuration)\</OutputPath>
     <IntermediateOutputPath>obj\$(Platform)\$(Configuration)\</IntermediateOutputPath>
   </PropertyGroup>
@@ -66,7 +66,7 @@
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('..\..\packages\WiX.3.11.2\build\wix.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\WiX.3.11.2\build\wix.props'))" />
-    <Error Condition="!Exists('..\..\packages\Encoding-Converters-Core.0.5.8\build\Encoding-Converters-Core.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Encoding-Converters-Core.0.5.8\build\Encoding-Converters-Core.props'))" />
+    <Error Condition="!Exists('..\..\packages\Encoding-Converters-Core.0.6.0\build\Encoding-Converters-Core.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Encoding-Converters-Core.0.6.0\build\Encoding-Converters-Core.props'))" />
   </Target>
   <Target Name="PostBuildCopy" AfterTargets="Build">
     <PropertyGroup>
