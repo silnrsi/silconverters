@@ -22,9 +22,12 @@ namespace TestBwdc
         [TestCase("MultiplePoeticParagraphs", "MultiplePoeticParagraphsMissingInTarget")]
         [TestCase("SimpleParagraphVerse", "SimpleParagraphVerseMissingInTarget")]
         [TestCase("SingleVerse", "SingleVerseMissingInTarget")]
-        /* these are all now failing and I don't think they matter anymore. We aren't now completely 
-         * overwriting the target text with the translated text, rather than merging with what's
-         * in the target presently.
+        /* the test cases below are all now failing, but they don't matter anymore. They were for 
+         * when we were trying to merge the markers from the source with any possible ones existing 
+         * in the target. This was a fool's errand (too many possible differences). 
+         * Now we just completely overwrite the text in the target project with the same markers from
+         * the source project (with the source text replaced by the translated text). So what these 
+         * tests were trying to validate doesn't happen anymore.
         [TestCase("SingleVerse", "SingleVerseMiTSplitIntoTwoParagraphs")]
         [TestCase("SingleVerse", "SingleVerseSplitIntoTwoParagraphs")]
         [TestCase("MultipleParagraphs", "MultipleParagraphsJoinedIntoOneParagraphs")]
