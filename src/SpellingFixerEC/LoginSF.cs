@@ -239,10 +239,11 @@ namespace SpellingFixerEC
 
         private void AddNewProject()
         {
-            var dlg = new AddNewProjectForm(SpellingFixerEC.GetDefaultPunctuation)
+            using var dlg = new AddNewProjectForm(SpellingFixerEC.GetDefaultPunctuation)
             {
                 WordBoundaryDelimiter = SpellingFixerEC.cstrDefaultWordBoundaryDelimiter
             };
+
             var res = dlg.ShowDialog();
             if (res == DialogResult.Cancel)
                 return;
@@ -569,7 +570,7 @@ namespace SpellingFixerEC
         {
             m_font = new Font(strFontName, GetFloatFontSize(sFontSize));
 
-            var dlg = new AddNewProjectForm(m_strNonWordCharacters)
+            using var dlg = new AddNewProjectForm(m_strNonWordCharacters)
             {
                 NewProjectName = strProjectName,
                 WordBoundaryDelimiter = m_strWordBoundaryDelimiter,
@@ -618,8 +619,7 @@ namespace SpellingFixerEC
 
         private void LoginSF_Shown(object sender, EventArgs e)
         {
-            buttonAddNewProject.Visible = !ProjectsExist;
-            if (buttonAddNewProject.Visible)
+            if (!ProjectsExist)
             {
                 AddNewProject();
             }

@@ -72,29 +72,6 @@ namespace SpellingFixerEC
 
         private void ButtonOk_Click(object sender, EventArgs e)
         {
-            if (WordBoundaryDelimiter.Contains('"'))
-            {
-                MessageBox.Show("Can't use the double-quote character for the word boundary delimiter", 
-                                SpellingFixerEC.cstrCaption);
-                return;
-            }
-            
-            if (String.IsNullOrEmpty(NewProjectName))
-            {
-                MessageBox.Show("You must define a name for this converter (e.g. 'Hindi fixes')", 
-                                SpellingFixerEC.cstrCaption);
-                return;
-            }
-            
-            if (String.IsNullOrEmpty(labelFontChosen.Text))
-            {
-                if (MessageBox.Show("Did you want to select a font to use when displaying Find-Replace pairs?",
-                                    SpellingFixerEC.cstrCaption, MessageBoxButtons.YesNo)
-                    == DialogResult.Yes)
-                {
-                    return;
-                }
-            }
         }
 
         private string EncodePunctuationForCC(string strPunctuation)
@@ -198,6 +175,36 @@ namespace SpellingFixerEC
                 strRet = strRet.Substring(0, strRet.Length - 1);
 
             return strRet;
+        }
+
+        private void AddNewProjectForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (WordBoundaryDelimiter.Contains('"'))
+            {
+                MessageBox.Show("Can't use the double-quote character for the word boundary delimiter",
+                                SpellingFixerEC.cstrCaption);
+                e.Cancel = true;
+                return;
+            }
+
+            if (String.IsNullOrEmpty(NewProjectName))
+            {
+                MessageBox.Show("You must define a name for this converter (e.g. 'Hindi fixes')",
+                                SpellingFixerEC.cstrCaption);
+                e.Cancel = true;
+                return;
+            }
+
+            if (String.IsNullOrEmpty(labelFontChosen.Text))
+            {
+                if (MessageBox.Show("Did you want to select a font to use when displaying Find-Replace pairs?",
+                                    SpellingFixerEC.cstrCaption, MessageBoxButtons.YesNo)
+                    == DialogResult.Yes)
+                {
+                    e.Cancel = true;
+                    return;
+                }
+            }
         }
     }
 }

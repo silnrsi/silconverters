@@ -99,7 +99,7 @@
             this.textBoxName.Location = new System.Drawing.Point(123, 18);
             this.textBoxName.Name = "textBoxName";
             this.textBoxName.Size = new System.Drawing.Size(317, 20);
-            this.textBoxName.TabIndex = 17;
+            this.textBoxName.TabIndex = 0;
             this.toolTips.SetToolTip(this.textBoxName, "Enter the name of a new projects (e.g. \'Hindi to English fixes\')");
             // 
             // labelFont
@@ -118,7 +118,7 @@
             this.buttonChooseFont.Location = new System.Drawing.Point(123, 74);
             this.buttonChooseFont.Name = "buttonChooseFont";
             this.buttonChooseFont.Size = new System.Drawing.Size(84, 23);
-            this.buttonChooseFont.TabIndex = 18;
+            this.buttonChooseFont.TabIndex = 2;
             this.buttonChooseFont.Text = "Choose &Font";
             this.toolTips.SetToolTip(this.buttonChooseFont, "Click to choose the font to be used for displaying the Find-Replace pairs (e.g. \'" +
         "Arial Unicode MS, 12 pt\')");
@@ -141,7 +141,7 @@
             this.checkBoxRtL.Location = new System.Drawing.Point(123, 130);
             this.checkBoxRtL.Name = "checkBoxRtL";
             this.checkBoxRtL.Size = new System.Drawing.Size(98, 24);
-            this.checkBoxRtL.TabIndex = 20;
+            this.checkBoxRtL.TabIndex = 3;
             this.checkBoxRtL.Text = "&Right-to-Left";
             this.toolTips.SetToolTip(this.checkBoxRtL, "Check this if the data is right-to-left");
             // 
@@ -160,7 +160,7 @@
             this.textBoxWordBoundaryDelimiter.Location = new System.Drawing.Point(123, 189);
             this.textBoxWordBoundaryDelimiter.Name = "textBoxWordBoundaryDelimiter";
             this.textBoxWordBoundaryDelimiter.Size = new System.Drawing.Size(24, 20);
-            this.textBoxWordBoundaryDelimiter.TabIndex = 22;
+            this.textBoxWordBoundaryDelimiter.TabIndex = 4;
             this.textBoxWordBoundaryDelimiter.Text = "#";
             this.toolTips.SetToolTip(this.textBoxWordBoundaryDelimiter, resources.GetString("textBoxWordBoundaryDelimiter.ToolTip"));
             // 
@@ -182,7 +182,7 @@
             this.textBoxAddlPunctuation.Location = new System.Drawing.Point(123, 246);
             this.textBoxAddlPunctuation.Name = "textBoxAddlPunctuation";
             this.textBoxAddlPunctuation.Size = new System.Drawing.Size(317, 20);
-            this.textBoxAddlPunctuation.TabIndex = 24;
+            this.textBoxAddlPunctuation.TabIndex = 5;
             this.toolTips.SetToolTip(this.textBoxAddlPunctuation, "Enter any additional punctuation or whitespace characters needed for this languag" +
         "e, separated by spaces (these are used for boundary condition checking)");
             // 
@@ -192,7 +192,7 @@
             this.buttonCancel.Location = new System.Drawing.Point(227, 288);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 23);
-            this.buttonCancel.TabIndex = 25;
+            this.buttonCancel.TabIndex = 7;
             this.buttonCancel.Text = "&Cancel";
             this.buttonCancel.UseVisualStyleBackColor = true;
             // 
@@ -203,7 +203,7 @@
             this.buttonOk.Location = new System.Drawing.Point(146, 288);
             this.buttonOk.Name = "buttonOk";
             this.buttonOk.Size = new System.Drawing.Size(75, 23);
-            this.buttonOk.TabIndex = 16;
+            this.buttonOk.TabIndex = 6;
             this.buttonOk.Text = "OK";
             this.buttonOk.UseVisualStyleBackColor = true;
             this.buttonOk.Click += new System.EventHandler(this.ButtonOk_Click);
@@ -224,6 +224,7 @@
             this.Controls.Add(this.tableLayoutPanel);
             this.Name = "AddNewProjectForm";
             this.Text = "Add New Project";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AddNewProjectForm_FormClosing);
             this.tableLayoutPanel.ResumeLayout(false);
             this.tableLayoutPanel.PerformLayout();
             this.ResumeLayout(false);
