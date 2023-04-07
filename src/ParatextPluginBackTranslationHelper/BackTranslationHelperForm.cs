@@ -520,7 +520,7 @@ namespace SIL.ParatextBackTranslationHelperPlugin
                 {
                     // if we don't already have it... it's probably because something was changed in the project
                     //  external to this form (we lose the data if we get activated).
-                    System.Diagnostics.Debug.WriteLine($"PtxBTH: RequeryWarning");
+                    System.Diagnostics.Debug.WriteLine($"PtxBTH: RequeryWarning: _verseReference: {_verseReference}, _versesReference: {_versesReference}");
 
                     // Note: if the Target Translation textbox has modified data, the current implementation shouldn't
                     //  overwrite it (see UpdateData in BackTranslationHelperCtrl.cs, which shows that if it's
