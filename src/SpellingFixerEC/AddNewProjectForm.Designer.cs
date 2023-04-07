@@ -223,6 +223,7 @@
             this.ClientSize = new System.Drawing.Size(463, 315);
             this.Controls.Add(this.tableLayoutPanel);
             this.Name = "AddNewProjectForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Add New Project";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AddNewProjectForm_FormClosing);
             this.tableLayoutPanel.ResumeLayout(false);

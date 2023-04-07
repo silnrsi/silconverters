@@ -55,7 +55,7 @@ namespace SpellingFixerEC
             this.checkedListBoxProjects.Dock = System.Windows.Forms.DockStyle.Fill;
             this.checkedListBoxProjects.Location = new System.Drawing.Point(3, 3);
             this.checkedListBoxProjects.Name = "checkedListBoxProjects";
-            this.checkedListBoxProjects.Size = new System.Drawing.Size(367, 210);
+            this.checkedListBoxProjects.Size = new System.Drawing.Size(485, 252);
             this.checkedListBoxProjects.TabIndex = 0;
             this.checkedListBoxProjects.ThreeDCheckBoxes = true;
             this.toolTips.SetToolTip(this.checkedListBoxProjects, "List of existing projects");
@@ -67,7 +67,7 @@ namespace SpellingFixerEC
             // 
             this.buttonOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonOK.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.buttonOK.Location = new System.Drawing.Point(108, 219);
+            this.buttonOK.Location = new System.Drawing.Point(167, 261);
             this.buttonOK.Name = "buttonOK";
             this.buttonOK.Size = new System.Drawing.Size(75, 23);
             this.buttonOK.TabIndex = 11;
@@ -79,7 +79,7 @@ namespace SpellingFixerEC
             // 
             this.buttonCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.buttonCancel.Location = new System.Drawing.Point(189, 219);
+            this.buttonCancel.Location = new System.Drawing.Point(248, 261);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 23);
             this.buttonCancel.TabIndex = 12;
@@ -140,8 +140,8 @@ namespace SpellingFixerEC
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel.ColumnCount = 3;
             this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
             this.tableLayoutPanel.Controls.Add(this.checkedListBoxProjects, 0, 0);
             this.tableLayoutPanel.Controls.Add(this.buttonCancel, 1, 1);
             this.tableLayoutPanel.Controls.Add(this.buttonOK, 0, 1);
@@ -151,15 +151,15 @@ namespace SpellingFixerEC
             this.tableLayoutPanel.RowCount = 2;
             this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel.Size = new System.Drawing.Size(373, 245);
+            this.tableLayoutPanel.Size = new System.Drawing.Size(491, 287);
             this.tableLayoutPanel.TabIndex = 14;
             // 
             // buttonAddNewProject
             // 
             this.buttonAddNewProject.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonAddNewProject.Location = new System.Drawing.Point(295, 219);
+            this.buttonAddNewProject.Location = new System.Drawing.Point(378, 261);
             this.buttonAddNewProject.Name = "buttonAddNewProject";
-            this.buttonAddNewProject.Size = new System.Drawing.Size(75, 23);
+            this.buttonAddNewProject.Size = new System.Drawing.Size(110, 23);
             this.buttonAddNewProject.TabIndex = 13;
             this.buttonAddNewProject.Text = "&Add New Project";
             this.buttonAddNewProject.UseVisualStyleBackColor = true;
@@ -170,10 +170,11 @@ namespace SpellingFixerEC
             this.AcceptButton = this.buttonOK;
             this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
             this.CancelButton = this.buttonCancel;
-            this.ClientSize = new System.Drawing.Size(397, 269);
+            this.ClientSize = new System.Drawing.Size(515, 311);
             this.Controls.Add(this.tableLayoutPanel);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "LoginSF";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Select Find-Replace Project";
             this.Shown += new System.EventHandler(this.LoginSF_Shown);
             this.tableLayoutPanel.ResumeLayout(false);
