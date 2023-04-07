@@ -221,7 +221,7 @@ If you want to convert the data in this list from a certain value
 (e.g. if the list is large and you didn't finish it last time), 
 you can select the item you want to start with and when you click 
 the 'Convert and Save XML Document' button, you'll be asked if 
-you want to start the conversation from that item or not.</value>
+you want to continue the conversion from that item or not.</value>
   </data>
   <data name="treeViewXmlDocHelp" xml:space="preserve">
     <value>This window shows all the unique XML elements/attributes in the XML file (c.f. an XML schema).
