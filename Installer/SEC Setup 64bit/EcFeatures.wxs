@@ -63,7 +63,7 @@
         <MergeRef Id="SEC_EC"/>
         <MergeRef Id="SILConvertersForWord"/>
       </Feature>
-      <Feature Id="SILConverters_for_Office10" Title="SILConverters for Office 2010" Description="Provides SILConverter support in Publisher, Excel, and Access and Word (including Regex searching and translation helper dialog)." Level="4" AllowAdvertise="no">
+      <Feature Id="SILConverters_for_Office10" Title="SILConverters for Office 2010" Description="Provides SILConverter support in Publisher, Excel, Access, and Word in Office 2007, 10, 13, 16, 19, or 365 (including Regex searching and translation helper dialog)." Level="4" AllowAdvertise="no">
         <Condition Level="3"><![CDATA[(OFFICE_2010_BITNESS = "x64") AND ((COMPONENTEXISTS_WORD_10_PIA) OR (COMPONENTEXISTS_EXCEL_10_PIA) OR (ACCESS_2010_PIA_EXISTS) OR (PUBLISHER_2010_PIA_EXISTS))]]></Condition>
         <Condition Level="0"><![CDATA[NOT ((COMPONENTEXISTS_WORD_10_PIA) OR (COMPONENTEXISTS_EXCEL_10_PIA) OR (ACCESS_2010_PIA_EXISTS) OR (PUBLISHER_2010_PIA_EXISTS))]]></Condition>
         <MergeRef Id="SEC_EC"/>
@@ -73,7 +73,7 @@
         <MergeRef Id="SEC_ICU"/>
         <MergeRef Id="CRT"/>
       </Feature>
-      <Feature Id="SILConverters_for_Office13" Title="SILConverters for Office 2013" Description="Provides SILConverter support in Publisher, Excel, and Access and Word (including Regex searching and translation helper dialog)." Level="4" AllowAdvertise="no">
+      <Feature Id="SILConverters_for_Office13" Title="SILConverters for Office 2013" Description="Provides SILConverter support in Publisher, Excel, Access, and Word in Office 2007, 10, 13, 16, 19, or 365 (including Regex searching and translation helper dialog)." Level="4" AllowAdvertise="no">
         <Condition Level="3"><![CDATA[(OFFICE_2013_BITNESS = "x64") AND ((COMPONENTEXISTS_WORD_13_PIA) OR (COMPONENTEXISTS_EXCEL_13_PIA) OR (ACCESS_2013_PIA_EXISTS) OR (PUBLISHER_2013_PIA_EXISTS))]]></Condition>
         <Condition Level="0"><![CDATA[OFFICE_2016_BITNESS OR (NOT ((COMPONENTEXISTS_WORD_13_PIA) OR (COMPONENTEXISTS_EXCEL_13_PIA) OR (ACCESS_2013_PIA_EXISTS) OR (PUBLISHER_2013_PIA_EXISTS)))]]></Condition>
         <MergeRef Id="SEC_EC"/>
@@ -83,7 +83,7 @@
         <MergeRef Id="SEC_ICU"/>
         <MergeRef Id="CRT"/>
       </Feature>
-      <Feature Id="SILConverters_for_Office16" Title="SILConverters for Office 2016/2019/365" Description="Provides SILConverter support in Publisher, Excel, and Access and Word (including Regex searching and translation helper dialog)." Level="4" AllowAdvertise="no">
+      <Feature Id="SILConverters_for_Office16" Title="SILConverters for Office 2016/2019/365" Description="Provides SILConverter support in Publisher, Excel, Access, and Word in Office 2007, 10, 13, 16, 19, or 365 (including Regex searching and translation helper dialog)." Level="4" AllowAdvertise="no">
         <Condition Level="3"><![CDATA[(OFFICE_2016_BITNESS = "x64") AND ((COMPONENTEXISTS_WORD_13_PIA) OR (COMPONENTEXISTS_EXCEL_13_PIA) OR (ACCESS_2013_PIA_EXISTS) OR (PUBLISHER_2013_PIA_EXISTS))]]></Condition>
         <Condition Level="0"><![CDATA[OFFICE_2013_BITNESS OR (NOT ((COMPONENTEXISTS_WORD_13_PIA) OR (COMPONENTEXISTS_EXCEL_13_PIA) OR (ACCESS_2013_PIA_EXISTS) OR (PUBLISHER_2013_PIA_EXISTS)))]]></Condition>
         <MergeRef Id="SEC_EC"/>
