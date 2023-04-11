@@ -421,7 +421,9 @@ namespace SILConvertersWordML
                 ref oMissing, ref oMissing, ref oMissing, ref oMissing, ref oMissing, ref oMissing, ref oMissing,
                 ref oMissing, ref oMissing, ref oMissing);
 
-            wrdDoc.Close(ref oMissing, ref oMissing, ref oMissing);
+            wrdDoc.Close(false);
+            Marshal.ReleaseComObject(wrdDoc);
+            wrdDoc = null;
 
             SaveIntermediateXmlFile(ref strXmlFilename, cstrLeftXmlFileSuffixBefore,
                                     strDocFilename, 
@@ -445,11 +447,7 @@ namespace SILConvertersWordML
             {
                 if (bSaveXmlOutputInFolder)
                 {
-                    if (doc == null)
-                    {
-                        doc = XDocument.Load(strXmlFilename);
-                        // doc.Load(strXmlFilename);
-                    }
+                    doc ??= XDocument.Load(strXmlFilename);
 
                     int nIndex = strDocFilename.LastIndexOf('.');
                     if (nIndex != -1)
@@ -462,8 +460,8 @@ namespace SILConvertersWordML
                             File.Delete(strXmlFilename);
                     }
                 }
-                if (doc != null)
-                    doc.Save(strXmlFilename);
+                
+                doc?.Save(strXmlFilename);
             }
             catch (Exception ex)
             {
@@ -678,7 +676,9 @@ namespace SILConvertersWordML
                 ref oMissing, ref oMissing, ref oMissing, ref oMissing, ref oMissing, ref oMissing, ref oMissing,
                 ref oMissing, ref oMissing, ref oMissing);
 
-            wrdDoc.Close(ref oMissing, ref oMissing, ref oMissing);
+            wrdDoc.Close(false);
+            Marshal.ReleaseComObject(wrdDoc);
+            wrdDoc = null;
             
             try
             {
@@ -849,8 +849,9 @@ namespace SILConvertersWordML
             }
             finally
             {
-                ((Microsoft.Office.Interop.Word._Application)wrdApp).Quit(ref oMissing, ref oMissing, ref oMissing);
+                wrdApp.Quit(false);
                 Marshal.ReleaseComObject(wrdApp);
+                wrdApp = null;
                 Cursor = Cursors.Default;
             }
         }
@@ -1062,9 +1063,24 @@ namespace SILConvertersWordML
 				{
 					if (myProcess.ProcessName.ToLower() == "winword")
 					{
-						DialogResult res = MessageBox.Show("Close all running instances of Microsoft Word (including Outlook when Word is your email editor) and then click OK to continue.", cstrCaption, MessageBoxButtons.OKCancel);
+						var res = MessageBox.Show("It's best for any existing running instances of Microsoft Word (including Outlook when Word is the email editor) to be closed before doing the conversion. Would you like to close any other instances?", cstrCaption, MessageBoxButtons.YesNoCancel);
                         if (res == DialogResult.Cancel)
+                        {
                             return false;
+                        }                        
+                        else if (res == DialogResult.Yes)
+                        {
+                            try
+                            {
+                                myProcess.Close();
+                            }
+                            catch (Exception ex)
+                            {
+                                MessageBox.Show(ex.Message, cstrCaption);
+                            }
+                            bReady = true; 
+                            break;  // it's not absolutely necessary -- it just does things like wanting to close the normal.dot file... so just skip it if the user has tried this at least once...
+                        }
 						bReady = false;
 					}
 				}
@@ -1102,8 +1118,9 @@ namespace SILConvertersWordML
             }
             finally
             {
-                ((Microsoft.Office.Interop.Word._Application)wrdApp).Quit(ref oMissing, ref oMissing, ref oMissing);
+                wrdApp.Quit(false);
                 Marshal.ReleaseComObject(wrdApp);
+                wrdApp = null;
             }
         }
 
