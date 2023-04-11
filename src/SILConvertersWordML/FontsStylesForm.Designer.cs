@@ -72,11 +72,11 @@ namespace SILConvertersWordML
             this.singlestepConversionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.leaveXMLFileInFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.useLinqToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.combineIntoIsoformattedParagraphToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.fontDialog = new System.Windows.Forms.FontDialog();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.helpProvider = new System.Windows.Forms.HelpProvider();
-            this.combineIntoIsoformattedParagraphToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.toolStrip.SuspendLayout();
@@ -505,6 +505,7 @@ namespace SILConvertersWordML
             this.leaveXMLFileInFolderToolStripMenuItem.Size = new System.Drawing.Size(280, 22);
             this.leaveXMLFileInFolderToolStripMenuItem.Text = "&Leave XML files in folder ";
             this.leaveXMLFileInFolderToolStripMenuItem.ToolTipText = resources.GetString("leaveXMLFileInFolderToolStripMenuItem.ToolTipText");
+            this.leaveXMLFileInFolderToolStripMenuItem.CheckStateChanged += new System.EventHandler(this.SomeCheckStateChangedRequiringReload);
             // 
             // useLinqToolStripMenuItem
             // 
@@ -515,7 +516,18 @@ namespace SILConvertersWordML
             this.useLinqToolStripMenuItem.Size = new System.Drawing.Size(280, 22);
             this.useLinqToolStripMenuItem.Text = "&Use Linq";
             this.useLinqToolStripMenuItem.ToolTipText = "Check this menu to have the \'Linq\' technology attempt to do the conversion (may y" +
-    "ield a different result if the normal approach doesn\'t work). Check this menu before opening the document.";
+    "ield a different result if the normal approach doesn\'t work). Check this menu be" +
+    "fore opening the document.";
+            this.useLinqToolStripMenuItem.CheckStateChanged += new System.EventHandler(this.SomeCheckStateChangedRequiringReload);
+            // 
+            // combineIntoIsoformattedParagraphToolStripMenuItem
+            // 
+            this.combineIntoIsoformattedParagraphToolStripMenuItem.CheckOnClick = true;
+            this.combineIntoIsoformattedParagraphToolStripMenuItem.Name = "combineIntoIsoformattedParagraphToolStripMenuItem";
+            this.combineIntoIsoformattedParagraphToolStripMenuItem.Size = new System.Drawing.Size(280, 22);
+            this.combineIntoIsoformattedParagraphToolStripMenuItem.Text = "&Combine into iso-formatted paragraph";
+            this.combineIntoIsoformattedParagraphToolStripMenuItem.ToolTipText = resources.GetString("combineIntoIsoformattedParagraphToolStripMenuItem.ToolTipText");
+            this.combineIntoIsoformattedParagraphToolStripMenuItem.CheckStateChanged += new System.EventHandler(this.SomeCheckStateChangedRequiringReload);
             // 
             // fontDialog
             // 
@@ -527,14 +539,6 @@ namespace SILConvertersWordML
             this.saveFileDialog.Filter = resources.GetString("saveFileDialog.Filter");
             this.saveFileDialog.RestoreDirectory = true;
             this.saveFileDialog.SupportMultiDottedExtensions = true;
-            // 
-            // combineIntoIsoformattedParagraphToolStripMenuItem
-            // 
-            this.combineIntoIsoformattedParagraphToolStripMenuItem.CheckOnClick = true;
-            this.combineIntoIsoformattedParagraphToolStripMenuItem.Name = "combineIntoIsoformattedParagraphToolStripMenuItem";
-            this.combineIntoIsoformattedParagraphToolStripMenuItem.Size = new System.Drawing.Size(280, 22);
-            this.combineIntoIsoformattedParagraphToolStripMenuItem.Text = "&Combine into iso-formatted paragraph";
-            this.combineIntoIsoformattedParagraphToolStripMenuItem.ToolTipText = resources.GetString("combineIntoIsoformattedParagraphToolStripMenuItem.ToolTipText");
             // 
             // FontsStylesForm
             // 

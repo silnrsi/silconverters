@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <metadata name="toolStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>656, 17</value>
+  </metadata>
   <metadata name="ColumnFont.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -134,6 +137,21 @@
   </metadata>
   <metadata name="helpProvider.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>945, 17</value>
+  </metadata>
+  <metadata name="ColumnFont.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="ColumnSampleData.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="ColumnConverter.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="ColumnResults.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="ColumnTargetFont.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
   </metadata>
   <metadata name="toolStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>656, 17</value>
@@ -159,17 +177,17 @@
   <data name="toolStripButtonAutoSearch.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         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
-        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
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAJTSURBVDhPrZDrS1NhHMfPnxD0L0S96kWYUNCb6EXGuiDZ
+        VHJpBS2CObCm9KYFpfYi2MZicwOHV7Y5PZs7013OLuyS22iyGYiuCyx1m2OZQsFwTr+dc3a8FVkv+sCP
+        c+B5Pp/nOYf4E3G657jWoNX1KhQZee/rzPPuZzqRSHSSX97HHlrE7njinxBKZpBcyGBwjIQ3FEG++BVL
+        q0WMkHa0y54mWqXyY7xahRV/JRAJwx0Ice9bFeB7aRu5bxWoDWNoahP38moVa2Ce26gc8EA1SKPfEoTG
+        MIhsobgnr25sIZ0tgwovQtjS8plXq1joOS5wEIVWj5XCWlVerzDyJmLpEnQTMdwUCg8HjNMJTlIxN9CM
+        ejE+HYOVomB3B5BfZ07OlRH9UMLU7A9IuuRobG7WKrtlL3mdIIbtMS5wkFx2GQr1G/SbHLCFF9BHxiDp
+        ZOVbMClFGHol3dmLGMgwrx3mbTwFrV6LRxIJ7rTdw+3GeqgfX0J+4DK2Z+5CJe/YUfTIrhN6s58TZhLv
+        QQfjcHjCmHQFQU75YZn0YNhsg9HqQru0Aw+vnUVKXouVvotYoxrRKb4BQjPq4QKszEr744PFTsNITsNI
+        hdAqfQGxoKZBfLUGvq5zeFB3Gk2C2npCPeTkAlPeCCYcPoxTNCN6MDbphol0wmx1wmDxQyB6AvaT2ciF
+        M6dQd/5EA/cPdgPvkvOwMqeSDi/MNhcn2pibuPxRaEbcqL1ynwv8xm6AZbNcQb6wgY9fiphL5xFNLSM0
+        uwR2z18D7POoOTLALv7L8Mr/hCB+AskzQbeWD9t7AAAAAElFTkSuQmCC
 </value>
   </data>
   <data name="toolStripButtonConvertAndSave.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
@@ -197,17 +215,17 @@
   <data name="toolStripButtonSingleStep.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        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
+        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
 </value>
   </data>
   <metadata name="toolTip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
@@ -225,6 +243,9 @@
   <data name="combineIntoIsoformattedParagraphToolStripMenuItem.ToolTipText" xml:space="preserve">
     <value>Check this menu to combine all the runs of text in a paragraph into a single run that has the formatting of the initial run of the paragraph. This is primarily to combine all the words in a paragraph together so they get converted together, which is recommended for when using a Translating EncConverter like Bing or DeepL, which work best with full sentences of text. Check this menu before opening the document.</value>
   </data>
+  <metadata name="toolTip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>347, 17</value>
+  </metadata>
   <metadata name="fontDialog.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>432, 17</value>
   </metadata>
@@ -234,6 +255,9 @@
   <data name="saveFileDialog.Filter" xml:space="preserve">
     <value>Word Document (*.doc)|*.doc|XML Document (*.xml)|*.xml|Single File Web Page (*.mht; *.mhtml)|*.mht; *.mhtml|Web Page (*.htm; *.html)|*.htm; *.html|Document Template (*.dot)|*.dot|Rich Text Format (*.rtf)|*.rtf|Encoded Text (*.txt)|*.txt|All files (*.*)|*.*</value>
   </data>
+  <metadata name="helpProvider.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>945, 17</value>
+  </metadata>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         AAABAAIAICAQAAAAAADoAgAAJgAAABAQEAAAAAAAKAEAAA4DAAAoAAAAIAAAAEAAAAABAAQAAAAAAIAC

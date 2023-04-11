@@ -679,7 +679,7 @@ namespace SILConvertersWordML
             wrdDoc.Close(false);
             Marshal.ReleaseComObject(wrdDoc);
             wrdDoc = null;
-            
+
             try
             {
                 // at least *try* to clean up the temp files
@@ -1054,7 +1054,7 @@ namespace SILConvertersWordML
 
 		protected bool CheckForWinWord()
 		{
-			bool bReady;
+            bool bReady;
 			do
 			{
 				bReady = true;
@@ -1081,7 +1081,7 @@ namespace SILConvertersWordML
                             bReady = true; 
                             break;  // it's not absolutely necessary -- it just does things like wanting to close the normal.dot file... so just skip it if the user has tried this at least once...
                         }
-						bReady = false;
+                        bReady = false;
 					}
 				}
 			} while (!bReady);
@@ -1747,6 +1747,11 @@ namespace SILConvertersWordML
                 mapName2Font.Add(strStyleName, font);
                 RowMaxHeight = Math.Max(RowMaxHeight, font.Height);
             }
+        }
+
+        private void SomeCheckStateChangedRequiringReload(object sender, EventArgs e)
+        {
+            Program.myTimer.Start();    // force reload
         }
     }
 }
