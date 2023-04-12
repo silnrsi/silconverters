@@ -1191,7 +1191,17 @@ namespace SILConvertersWordML
                                 strFontName = strFontStyleName;
                             IEncConverter aIEC = aECs.AutoSelectWithData(strExampleData, strFontName, ConvType.Unknown, "Select Converter");
                             if (aIEC != null)
+                            {
                                 aEC = new DirectableEncConverter(aIEC);
+                                if (((aIEC.ProcessType & (int)ProcessTypeFlags.Translation) == (int)ProcessTypeFlags.Translation) &&
+                                    (!combineIntoIsoformattedParagraphToolStripMenuItem.Checked))
+                                {
+                                    if (MessageBox.Show("If you are using a Translator type converter, you probably want to combine all the data in a paragraph into a single font/style or it won't be converted together (which will likely give a less accurate translation). Would you like to combine the text into the style of the first run of text in the paragraph so they are translated as a unit? (you will lose any specially formatting within the paragraph)?", cstrCaption, MessageBoxButtons.YesNo) == DialogResult.Yes)
+                                    {
+                                        combineIntoIsoformattedParagraphToolStripMenuItem.CheckState = CheckState.Checked;
+                                    }
+                                }
+                            }
                         }
                     }
 
