@@ -235,18 +235,61 @@ namespace SILConvertersWordML
                 if (firstRun == null)
                     continue;
 
+                bool firstNonPunctuationFound = false;
                 XElement textOfNextRun, textOfFirstRun = Get_t(firstRun);
                 for (var i = runs.IndexOf(firstRun) + 1; i < runs.Count; i++)
                 {
                     // combine the text of any subsequent "w:r"s that have text into the text field of the 1st one
                     var nextRun = runs[i];
                     if ((nextRun.Name == w + "r") && ((textOfNextRun = Get_t(nextRun)) != null))
+                    {
+                        // Often, punctuation comes across as the wrong font (e.g. if you have a double
+                        //  quote in Nastaliq, it'll be Times New Roman in Word. For punctuation-initial
+                        //  runs, we don't want them to set the font/style of the combined run...
+                        // if we haven't already found the first non-punctuation run of text,
+                        //  check the current accumulated text and if it's all punctuation, then
+                        //  if the next run is non-punctuation, then swap them, so that becomes
+                        //  the first run
+                        if (!firstNonPunctuationFound)
+                        {
+                            // if the current first run is all punctuation...
+                            if (textOfFirstRun.Value.All(ch => !IsIndicitiveForFont(ch)))
+                            {
+                                // if the next run has some non-punctuation...
+                                if (!textOfNextRun.Value.All(ch => !IsIndicitiveForFont(ch)))
+                                {
+                                    // then let's use that next run as a new first run and prepend
+                                    //  its data with the earlier punctuation.
+                                    var previousPunctuation = textOfFirstRun.Value;
+                                    firstRun.Remove();
+                                    firstRun = nextRun;
+                                    textOfFirstRun = Get_t(firstRun);
+                                    textOfFirstRun.Value = previousPunctuation + textOfFirstRun.Value;
+                                    firstNonPunctuationFound = true;
+                                    continue;
+                                }
+                            }
+                            else
+                                firstNonPunctuationFound = true;
+                        }
+
                         textOfFirstRun.Value += textOfNextRun.Value;
+                    }
 
                     // anything else (and any after the 1st one) are removed
                     nextRun.Remove();
                 }
             }
+        }
+        
+        /// <summary>
+        /// Returns whether the given character is a good value to decide whether this run qualifies as the run of the paragraph
+        /// </summary>
+        /// <param name="ch"></param>
+        /// <returns></returns>
+        private static bool IsIndicitiveForFont(char ch)
+        {
+            return !(Char.IsPunctuation(ch) || Char.IsWhiteSpace(ch) || Char.IsDigit(ch));
         }
 
         /// <summary>

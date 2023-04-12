@@ -112,10 +112,10 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="dataGridViewConverterMappingHelp" xml:space="preserve">
     <value>This grid displays the conversion "instructions" that you've created. The 'XPath' column shows the XPath syntax of the requested change(s). 
@@ -216,7 +216,12 @@ to the left. Right-click on an item in the tree to select it.
 If you want to set the font to be used in this list, 
 then right-click on the list and the font dialog will 
 be displayed for you to choose from.
-    </value>
+
+If you want to convert the data in this list from a certain value
+(e.g. if the list is large and you didn't finish it last time), 
+you can select the item you want to start with and when you click 
+the 'Convert and Save XML Document' button, you'll be asked if 
+you want to continue the conversion from that item or not.</value>
   </data>
   <data name="treeViewXmlDocHelp" xml:space="preserve">
     <value>This window shows all the unique XML elements/attributes in the XML file (c.f. an XML schema).

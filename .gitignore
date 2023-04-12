@@ -273,3 +273,6 @@ autom4te.cache
 /redist/MapsTables/PythonExamples
 /redist/MapsTables/TestEncCnvtrs
 /genericinstaller
+/.vs/config/applicationhost.config
+/.vs/SEC VS2010/v14/.suo
+/.vs/SEC VS2015/v14/.suo

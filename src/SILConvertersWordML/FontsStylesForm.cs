@@ -421,7 +421,9 @@ namespace SILConvertersWordML
                 ref oMissing, ref oMissing, ref oMissing, ref oMissing, ref oMissing, ref oMissing, ref oMissing,
                 ref oMissing, ref oMissing, ref oMissing);
 
-            wrdDoc.Close(ref oMissing, ref oMissing, ref oMissing);
+            wrdDoc.Close(false);
+            Marshal.ReleaseComObject(wrdDoc);
+            wrdDoc = null;
 
             SaveIntermediateXmlFile(ref strXmlFilename, cstrLeftXmlFileSuffixBefore,
                                     strDocFilename, 
@@ -445,11 +447,7 @@ namespace SILConvertersWordML
             {
                 if (bSaveXmlOutputInFolder)
                 {
-                    if (doc == null)
-                    {
-                        doc = XDocument.Load(strXmlFilename);
-                        // doc.Load(strXmlFilename);
-                    }
+                    doc ??= XDocument.Load(strXmlFilename);
 
                     int nIndex = strDocFilename.LastIndexOf('.');
                     if (nIndex != -1)
@@ -462,8 +460,8 @@ namespace SILConvertersWordML
                             File.Delete(strXmlFilename);
                     }
                 }
-                if (doc != null)
-                    doc.Save(strXmlFilename);
+                
+                doc?.Save(strXmlFilename);
             }
             catch (Exception ex)
             {
@@ -678,8 +676,10 @@ namespace SILConvertersWordML
                 ref oMissing, ref oMissing, ref oMissing, ref oMissing, ref oMissing, ref oMissing, ref oMissing,
                 ref oMissing, ref oMissing, ref oMissing);
 
-            wrdDoc.Close(ref oMissing, ref oMissing, ref oMissing);
-            
+            wrdDoc.Close(false);
+            Marshal.ReleaseComObject(wrdDoc);
+            wrdDoc = null;
+
             try
             {
                 // at least *try* to clean up the temp files
@@ -849,8 +849,9 @@ namespace SILConvertersWordML
             }
             finally
             {
-                ((Microsoft.Office.Interop.Word._Application)wrdApp).Quit(ref oMissing, ref oMissing, ref oMissing);
+                wrdApp.Quit(false);
                 Marshal.ReleaseComObject(wrdApp);
+                wrdApp = null;
                 Cursor = Cursors.Default;
             }
         }
@@ -1053,7 +1054,7 @@ namespace SILConvertersWordML
 
 		protected bool CheckForWinWord()
 		{
-			bool bReady;
+            bool bReady;
 			do
 			{
 				bReady = true;
@@ -1062,10 +1063,25 @@ namespace SILConvertersWordML
 				{
 					if (myProcess.ProcessName.ToLower() == "winword")
 					{
-						DialogResult res = MessageBox.Show("Close all running instances of Microsoft Word (including Outlook when Word is your email editor) and then click OK to continue.", cstrCaption, MessageBoxButtons.OKCancel);
+						var res = MessageBox.Show("It's best for any existing running instances of Microsoft Word (including Outlook when Word is the email editor) to be closed before doing the conversion. Would you like to close any other instances?", cstrCaption, MessageBoxButtons.YesNoCancel);
                         if (res == DialogResult.Cancel)
+                        {
                             return false;
-						bReady = false;
+                        }                        
+                        else if (res == DialogResult.Yes)
+                        {
+                            try
+                            {
+                                myProcess.Close();
+                            }
+                            catch (Exception ex)
+                            {
+                                MessageBox.Show(ex.Message, cstrCaption);
+                            }
+                            bReady = true; 
+                            break;  // it's not absolutely necessary -- it just does things like wanting to close the normal.dot file... so just skip it if the user has tried this at least once...
+                        }
+                        bReady = false;
 					}
 				}
 			} while (!bReady);
@@ -1102,8 +1118,9 @@ namespace SILConvertersWordML
             }
             finally
             {
-                ((Microsoft.Office.Interop.Word._Application)wrdApp).Quit(ref oMissing, ref oMissing, ref oMissing);
+                wrdApp.Quit(false);
                 Marshal.ReleaseComObject(wrdApp);
+                wrdApp = null;
             }
         }
 
@@ -1174,7 +1191,17 @@ namespace SILConvertersWordML
                                 strFontName = strFontStyleName;
                             IEncConverter aIEC = aECs.AutoSelectWithData(strExampleData, strFontName, ConvType.Unknown, "Select Converter");
                             if (aIEC != null)
+                            {
                                 aEC = new DirectableEncConverter(aIEC);
+                                if (((aIEC.ProcessType & (int)ProcessTypeFlags.Translation) == (int)ProcessTypeFlags.Translation) &&
+                                    (!combineIntoIsoformattedParagraphToolStripMenuItem.Checked))
+                                {
+                                    if (MessageBox.Show("If you are using a Translator type converter, you probably want to combine all the data in a paragraph into a single font/style or it won't be converted together (which will likely give a less accurate translation). Would you like to combine the text into the style of the first run of text in the paragraph so they are translated as a unit? (you will lose any specially formatting within the paragraph)?", cstrCaption, MessageBoxButtons.YesNo) == DialogResult.Yes)
+                                    {
+                                        combineIntoIsoformattedParagraphToolStripMenuItem.CheckState = CheckState.Checked;
+                                    }
+                                }
+                            }
                         }
                     }
 
@@ -1730,6 +1757,11 @@ namespace SILConvertersWordML
                 mapName2Font.Add(strStyleName, font);
                 RowMaxHeight = Math.Max(RowMaxHeight, font.Height);
             }
+        }
+
+        private void SomeCheckStateChangedRequiringReload(object sender, EventArgs e)
+        {
+            Program.myTimer.Start();    // force reload
         }
     }
 }

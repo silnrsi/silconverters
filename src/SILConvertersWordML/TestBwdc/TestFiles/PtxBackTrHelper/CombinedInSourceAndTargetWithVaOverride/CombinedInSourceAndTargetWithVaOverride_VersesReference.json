@@ -1,0 +1,40 @@
+{
+  "BookCode": "MAT",
+  "BookNum": 40,
+  "ChapterNum": 18,
+  "VerseNum": 3,
+  "BBBCCCVVV": 40018003,
+  "Versification": {
+    "Type": 4,
+    "IsCustomized": false
+  },
+  "RepresentsMultipleVerses": true,
+  "AllVerses": [
+    {
+      "BookCode": "MAT",
+      "BookNum": 40,
+      "ChapterNum": 18,
+      "VerseNum": 3,
+      "BBBCCCVVV": 40018003,
+      "Versification": {
+        "Type": 4,
+        "IsCustomized": false
+      },
+      "RepresentsMultipleVerses": false,
+      "AllVerses": []
+    },
+    {
+      "BookCode": "MAT",
+      "BookNum": 40,
+      "ChapterNum": 18,
+      "VerseNum": 4,
+      "BBBCCCVVV": 40018004,
+      "Versification": {
+        "Type": 4,
+        "IsCustomized": false
+      },
+      "RepresentsMultipleVerses": false,
+      "AllVerses": []
+    }
+  ]
+}

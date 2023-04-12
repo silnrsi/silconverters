@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="16.0">
-  <Import Project="..\..\packages\Encoding-Converters-Core.0.5.4\build\Encoding-Converters-Core.props" Condition="Exists('..\..\packages\Encoding-Converters-Core.0.5.4\build\Encoding-Converters-Core.props')" />
+  <Import Project="..\..\packages\Encoding-Converters-Core.0.6.0\build\Encoding-Converters-Core.props" Condition="Exists('..\..\packages\Encoding-Converters-Core.0.6.0\build\Encoding-Converters-Core.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
@@ -45,6 +45,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <DebugType>full</DebugType>
     <PlatformTarget>x86</PlatformTarget>
+    <LangVersion>latest</LangVersion>
     <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
     <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
     <ErrorReport>prompt</ErrorReport>
@@ -57,6 +58,7 @@
     <Optimize>true</Optimize>
     <DebugType>pdbonly</DebugType>
     <PlatformTarget>x86</PlatformTarget>
+    <LangVersion>latest</LangVersion>
     <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
     <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
     <ErrorReport>prompt</ErrorReport>
@@ -87,6 +89,8 @@
     <Reference Include="AIGuesserEC">
       <HintPath>$(EcDistFilesPath)\win-$(Platform)\native\AIGuesserEC.dll</HintPath>
     </Reference>
+    <!--nuget doesn't add the references to the csproj files properly; not sure why. Here is what
+			you might want to manually add to the csproj file instead-->
     <Reference Include="ECInterfaces, Version=4.0.0.0, Culture=neutral, PublicKeyToken=f1447bae1e63f485, processorArchitecture=x86" Condition="('$(Platform)' == 'x86' or '$(Platform)' == 'AnyCPU') and ('$(OS)'=='Windows_NT')">
       <HintPath>$(EcLibFilesPath)\net48\x86\ECInterfaces.dll</HintPath>
     </Reference>
@@ -244,6 +248,6 @@
       <ErrorTextMissingPIA>This project references a Microsoft Office PIA file, which is required to be built against or it won't work for older versions of Word. The missing file needing to be restored is {0}.</ErrorTextMissingPIA>
     </PropertyGroup>
     <Error Condition="!Exists('..\SILConvertersOffice\DistFiles\Microsoft.Office.Interop.Word.dll')" Text="$([System.String]::Format('$(ErrorTextMissingPIA)', 'Microsoft.Office.Interop.Word, Version=11.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c expected to be in ..\SILConvertersOffice\DistFiles\Microsoft.Office.Interop.Word.dll'))" />
-    <Error Condition="!Exists('..\..\packages\Encoding-Converters-Core.0.5.4\build\Encoding-Converters-Core.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Encoding-Converters-Core.0.5.4\build\Encoding-Converters-Core.props'))" />
+    <Error Condition="!Exists('..\..\packages\Encoding-Converters-Core.0.6.0\build\Encoding-Converters-Core.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Encoding-Converters-Core.0.6.0\build\Encoding-Converters-Core.props'))" />
   </Target>
 </Project>

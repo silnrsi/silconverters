@@ -105,7 +105,7 @@ namespace SILConvertersOffice
         {
             try
             {
-                Process myProcess = new Process { StartInfo = { FileName = strProgram, Arguments = strArguments } };
+                Process myProcess = new() { StartInfo = { FileName = strProgram, Arguments = strArguments } };
                 myProcess.Start();
             }
             catch { }    // we tried...
@@ -145,7 +145,6 @@ namespace SILConvertersOffice
             }
             finally
             {
-                obj = null;
             }
         }
 
@@ -231,8 +230,7 @@ namespace SILConvertersOffice
         // not working for publisher
         public virtual void Select()
         {
-            if( m_typeRange != null )
-                m_typeRange.InvokeMember("Select", BindingFlags.InvokeMethod, null, m_aRangeBasedOn, null);
+            m_typeRange?.InvokeMember("Select", BindingFlags.InvokeMethod, null, m_aRangeBasedOn, null);
         }
 
         public abstract string Text
@@ -252,16 +250,14 @@ namespace SILConvertersOffice
             set
             {
                 object font = GetProperty("Font");
-                if( m_typeRange != null )
-                    m_typeRange.InvokeMember("Name", BindingFlags.SetProperty, null, font, new object[] { value });
+                m_typeRange?.InvokeMember("Name", BindingFlags.SetProperty, null, font, new object[] { value });
             }
         }
 
         protected void SetProperty(string strPropertyName, object value)
         {
             System.Diagnostics.Debug.Assert(m_aRangeBasedOn != null);
-            if( m_typeRange != null )
-                m_typeRange.InvokeMember(strPropertyName, BindingFlags.SetProperty, null, m_aRangeBasedOn, new object[] { value });
+            m_typeRange?.InvokeMember(strPropertyName, BindingFlags.SetProperty, null, m_aRangeBasedOn, new object[] { value });
         }
 
         protected object GetProperty(string strPropertyName)
@@ -487,7 +483,7 @@ namespace SILConvertersOffice
         public delegate bool ProcessWord(OfficeRange aWordRange, ref int nCharIndex);
         private ProcessWord m_aWordProcessor = null;
         protected FontConverters m_mapFontsEncountered = null;
-        protected Dictionary<string, string> m_mapCheckedInputStrings = new Dictionary<string, string>();
+        protected Dictionary<string, string> m_mapCheckedInputStrings = new();
         protected FontConverter m_aFC = null;
         protected FontConverters m_aFCs = null;
         protected IBaseConverterForm m_formDisplayValues = null;
@@ -626,7 +622,7 @@ namespace SILConvertersOffice
 
         public bool CompareInputOutputProcess(OfficeRange aWordRange, ref int nCharIndex)
         {
-            FormButtons res = FormButtons.None;
+            FormButtons res;
             do
             {
                 string strInput = aWordRange.Text;
@@ -658,8 +654,7 @@ namespace SILConvertersOffice
                 }
 
                 // see if we've already checked this word
-                string strReplace = null;
-                if (!m_mapCheckedInputStrings.TryGetValue(strInput, out strReplace))
+                if (!m_mapCheckedInputStrings.TryGetValue(strInput, out string strReplace))
                 {
                     res = ConvertProcessing(aWordRange, aThisFC, strInput, ref strReplace);
 
@@ -695,7 +690,7 @@ namespace SILConvertersOffice
         protected virtual FontConverter QueryForFontConvert(string strFontName)
         {
             FontConverter aFC = null;
-            FontConvertersPicker aFontConverterPicker = new FontConvertersPicker(strFontName);
+            FontConvertersPicker aFontConverterPicker = new(strFontName);
             if (aFontConverterPicker.ShowDialog() == DialogResult.OK)
                 aFC = aFontConverterPicker.SelectedFontConverters[strFontName];
             return aFC;
@@ -707,8 +702,7 @@ namespace SILConvertersOffice
                 return null;
 
             // make sure our collection exists
-            if (m_mapFontsEncountered == null)
-                m_mapFontsEncountered = new FontConverters();
+            m_mapFontsEncountered ??= new FontConverters();
 
             if (!m_mapFontsEncountered.ContainsKey(strFontName))
             {

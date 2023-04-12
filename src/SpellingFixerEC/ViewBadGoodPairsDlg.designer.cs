@@ -32,12 +32,12 @@ namespace SpellingFixerEC
         {
             this.tableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             this.dataGridView = new System.Windows.Forms.DataGridView();
-            this.ColumnBadSpelling = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnGoodSpelling = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.buttonOK = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
-            this.helpProvider = new System.Windows.Forms.HelpProvider();
             this.buttonAddCorrection = new System.Windows.Forms.Button();
+            this.helpProvider = new System.Windows.Forms.HelpProvider();
+            this.ColumnBadSpelling = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnGoodSpelling = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tableLayoutPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.SuspendLayout();
@@ -76,55 +76,55 @@ namespace SpellingFixerEC
             this.dataGridView.RowHeadersWidth = 26;
             this.dataGridView.Size = new System.Drawing.Size(375, 293);
             this.dataGridView.TabIndex = 0;
-            this.dataGridView.UserAddedRow += new System.Windows.Forms.DataGridViewRowEventHandler(this.dataGridView_UserAddedRow);
-            this.dataGridView.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.dataGridView_CellBeginEdit);
-            this.dataGridView.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.dataGridView_PreviewKeyDown);
-            this.dataGridView.CellMouseUp += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView_CellMouseUp);
-            this.dataGridView.UserDeletedRow += new System.Windows.Forms.DataGridViewRowEventHandler(this.dataGridView_UserDeletedRow);
-            this.dataGridView.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_CellEndEdit);
-            // 
-            // ColumnBadSpelling
-            // 
-            this.ColumnBadSpelling.HeaderText = "Bad Form";
-            this.ColumnBadSpelling.Name = "ColumnBadSpelling";
-            // 
-            // ColumnGoodSpelling
-            // 
-            this.ColumnGoodSpelling.HeaderText = "Good Form";
-            this.ColumnGoodSpelling.Name = "ColumnGoodSpelling";
+            this.dataGridView.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.DataGridView_CellBeginEdit);
+            this.dataGridView.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridView_CellEndEdit);
+            this.dataGridView.CellMouseUp += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DataGridView_CellMouseUp);
+            this.dataGridView.UserAddedRow += new System.Windows.Forms.DataGridViewRowEventHandler(this.DataGridView_UserAddedRow);
+            this.dataGridView.UserDeletedRow += new System.Windows.Forms.DataGridViewRowEventHandler(this.DataGridView_UserDeletedRow);
+            this.dataGridView.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.DataGridView_PreviewKeyDown);
             // 
             // buttonOK
             // 
             this.buttonOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonOK.Location = new System.Drawing.Point(48, 302);
+            this.buttonOK.Location = new System.Drawing.Point(49, 302);
             this.buttonOK.Name = "buttonOK";
             this.buttonOK.Size = new System.Drawing.Size(75, 23);
             this.buttonOK.TabIndex = 1;
             this.buttonOK.Text = "OK";
             this.buttonOK.UseVisualStyleBackColor = true;
-            this.buttonOK.Click += new System.EventHandler(this.buttonOK_Click);
+            this.buttonOK.Click += new System.EventHandler(this.ButtonOK_Click);
             // 
             // buttonCancel
             // 
             this.buttonCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.buttonCancel.Location = new System.Drawing.Point(129, 302);
+            this.buttonCancel.Location = new System.Drawing.Point(130, 302);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 23);
             this.buttonCancel.TabIndex = 2;
             this.buttonCancel.Text = "Cancel";
             this.buttonCancel.UseVisualStyleBackColor = true;
-            this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
+            this.buttonCancel.Click += new System.EventHandler(this.ButtonCancel_Click);
             // 
             // buttonAddCorrection
             // 
-            this.buttonAddCorrection.Location = new System.Drawing.Point(255, 302);
+            this.buttonAddCorrection.Location = new System.Drawing.Point(257, 302);
             this.buttonAddCorrection.Name = "buttonAddCorrection";
             this.buttonAddCorrection.Size = new System.Drawing.Size(114, 23);
             this.buttonAddCorrection.TabIndex = 3;
-            this.buttonAddCorrection.Text = "&Add Correction";
+            this.buttonAddCorrection.Text = "&Add Substitution";
             this.buttonAddCorrection.UseVisualStyleBackColor = true;
-            this.buttonAddCorrection.Click += new System.EventHandler(this.buttonAddCorrection_Click);
+            this.buttonAddCorrection.Click += new System.EventHandler(this.ButtonAddCorrection_Click);
+            // 
+            // ColumnBadSpelling
+            // 
+            this.ColumnBadSpelling.HeaderText = "Find What";
+            this.ColumnBadSpelling.Name = "ColumnBadSpelling";
+            // 
+            // ColumnGoodSpelling
+            // 
+            this.ColumnGoodSpelling.HeaderText = "Replace With";
+            this.ColumnGoodSpelling.Name = "ColumnGoodSpelling";
             // 
             // ViewBadGoodPairsDlg
             // 
@@ -138,7 +138,7 @@ namespace SpellingFixerEC
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "ViewBadGoodPairsDlg";
-            this.Text = "Edit Bad-Good Pairs";
+            this.Text = "Edit Find-Replace Pairs";
             this.tableLayoutPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.ResumeLayout(false);
@@ -149,11 +149,11 @@ namespace SpellingFixerEC
 
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel;
         private System.Windows.Forms.DataGridView dataGridView;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnBadSpelling;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnGoodSpelling;
         private System.Windows.Forms.Button buttonOK;
         private System.Windows.Forms.Button buttonCancel;
         private System.Windows.Forms.HelpProvider helpProvider;
         private System.Windows.Forms.Button buttonAddCorrection;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnBadSpelling;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnGoodSpelling;
     }
 }

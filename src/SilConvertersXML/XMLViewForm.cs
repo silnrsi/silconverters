@@ -392,16 +392,19 @@ namespace SilConvertersXML
 
         private void processAndSaveDocuments(object sender, EventArgs e)
         {
-            ProcessAndSave(true, null);
+            ProcessAndSave(true, menuUseTranslationDialog.Checked, null);
         }
 
-        public void ProcessAndSave(bool bShowUI, string strOutputFileSpec)
+        private Dictionary<string, TranslationHelperForm> _mapConverterToTranslationForm = new Dictionary<string, TranslationHelperForm>();
+
+        public void ProcessAndSave(bool bShowUI, bool useTranslationForm, string strOutputFileSpec)
         {
             try
             {
                 Cursor = Cursors.WaitCursor;
+                bool queryForStartAfterIndexRecords = true;
                 bool bModified = Program.Modified;
-                int nIndex = 0;
+                int nIndex = 0, numToSkip = 0;
                 while (nIndex < dataGridViewConverterMapping.Rows.Count)
                 {
                     DataGridViewRow aRow = dataGridViewConverterMapping.Rows[nIndex];
@@ -430,8 +433,53 @@ namespace SilConvertersXML
                     while (xpIterator.MoveNext())
                     {
                         System.Diagnostics.Trace.WriteLine(String.Format("Position: {0} Count: {1}", xpIterator.CurrentPosition, xpIterator.Count));
+
+                        DialogResult res;
+                        // if the user has selected an item in the listBoxViewData, then see if they want to skip to there and pick up
+                        //  (if it's a big file, it might have already a portion of it converted)
+                        if (queryForStartAfterIndexRecords)
+                        {
+                            var index = listBoxViewData.SelectedIndex;
+                            if (index != -1)
+                            {
+                                res = MessageBox.Show($"You selected the item at index, {index} (={listBoxViewData.Items[index]}). Do you want to skip past the earlier items and start the conversion from that item?", cstrCaption, MessageBoxButtons.YesNo);
+                                if (res == DialogResult.Yes)
+                                {
+                                    numToSkip = index;
+                                }
+                            }
+                            queryForStartAfterIndexRecords = false;
+                        }
+
+                        if (numToSkip-- > 0)
+                            continue;
+
                         string strInput = xpIterator.Current.Value;
-                        string strOutput = CallSafeConvert(aEC, strInput);
+                        string strOutput = strInput;
+                        var isTranslatorResource = (((ProcessTypeFlags)aEC.GetEncConverter.ProcessType & ProcessTypeFlags.Translation) == ProcessTypeFlags.Translation);
+                        if (bShowUI && (useTranslationForm || isTranslatorResource))
+                        {
+                            if (!_mapConverterToTranslationForm.TryGetValue(aEC.Name, out TranslationHelperForm form))
+                            {
+                                form = new TranslationHelperForm();
+                                _mapConverterToTranslationForm.Add(aEC.Name, form);
+                            }
+
+                            res = form.Show(aEC, listBoxViewData.Font, strInput);
+                            if (res == DialogResult.OK)
+                            {
+                                strOutput = form.TranslatedOutput;
+                            }
+                            else if (res == DialogResult.Cancel)
+                            {
+                                break;
+                            }
+                        }
+                        else
+                        {
+                            strOutput = CallSafeConvert(aEC, strInput);
+                        }
+
                         if (bShowUI)
                         {
                             textBoxInput.Text = strInput;
@@ -451,7 +499,7 @@ namespace SilConvertersXML
                 // reset this so we can do new versions
                 m_mapEncConverters.Clear();
 
-                bool bHaveOutputFilename = false;
+                bool bHaveOutputFilename = !String.IsNullOrEmpty(strOutputFileSpec);
                 do
                 {
                     if (String.IsNullOrEmpty(strOutputFileSpec))
@@ -681,15 +729,10 @@ namespace SilConvertersXML
             {
                 XPathNodeIterator xpIterator = GetIterator((TreeNode)e.Argument, out strXPath);
 
-                List<string> lstUnique = new List<string>();
                 while (xpIterator.MoveNext() && !worker.CancellationPending)
                 {
                     string strValue = xpIterator.Current.Value;
-                    if (!lstUnique.Contains(strValue))
-                    {
-                        lstUnique.Add(strValue);
-                        worker.ReportProgress((lstUnique.Count * 100) / xpIterator.Count, strValue);
-                    }
+                    worker.ReportProgress((xpIterator.Count * 100) / xpIterator.Count, strValue);
                 }
             }
             catch (ApplicationException ex)

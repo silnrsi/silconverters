@@ -2,7 +2,9 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;             // for DialogResult
+using System.Xml.Linq;
 using Word = Microsoft.Office.Interop.Word;
 /*
 #if !Csc30
@@ -23,6 +25,16 @@ namespace SILConvertersOffice
         public Word.Document Document
         {
             get { return (Word.Document)m_baseDocument; }
+        }
+
+        public XDocument XDocument
+        {
+            get
+            {
+                var xml = Document.Content.XML;
+                var doc = XDocument.Parse(xml);
+                return doc;
+            }
         }
 
         public override int WordCount
@@ -372,7 +384,15 @@ namespace SILConvertersOffice
         {
             // if multiple paragraphs...
             int nCharIndex = 0;
-            WordParagraphs aParagraphRanges = new WordParagraphs(Document.Application.Selection);
+            var selection = Document.Application.Selection;
+            WordParagraphs aParagraphRanges = new WordParagraphs(selection);
+            
+            // if nothing was selected, then assume the user means 'whole document'
+            if (!aParagraphRanges.Any())
+            {
+                aParagraphRanges = new WordParagraphs(Document.Paragraphs);
+            }
+
             foreach (Word.Range aRange in aParagraphRanges)
             {
                 WordRange aThisParagraph = new WordRange(aRange);

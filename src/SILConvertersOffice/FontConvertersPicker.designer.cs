@@ -60,7 +60,7 @@ namespace SILConvertersOffice
             this.buttonOK.TabIndex = 1;
             this.buttonOK.Text = "OK";
             this.buttonOK.UseVisualStyleBackColor = true;
-            this.buttonOK.Click += new System.EventHandler(this.buttonOK_Click);
+            this.buttonOK.Click += new System.EventHandler(this.ButtonOK_Click);
             // 
             // buttonCancel
             // 
@@ -85,15 +85,15 @@ namespace SILConvertersOffice
             this.checkBoxFontsInUse.TabIndex = 3;
             this.checkBoxFontsInUse.Text = "&Limit to fonts in use";
             this.checkBoxFontsInUse.UseVisualStyleBackColor = true;
-            this.checkBoxFontsInUse.CheckedChanged += new System.EventHandler(this.checkBoxFontsInUse_CheckedChanged);
+            this.checkBoxFontsInUse.CheckedChanged += new System.EventHandler(this.CheckBoxFontsInUse_CheckedChanged);
             // 
             // backgroundWorker
             // 
             this.backgroundWorker.WorkerReportsProgress = true;
             this.backgroundWorker.WorkerSupportsCancellation = true;
-            this.backgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker_DoWork);
-            this.backgroundWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker_RunWorkerCompleted);
-            this.backgroundWorker.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorker_ProgressChanged);
+            this.backgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.BackgroundWorker_DoWork);
+            this.backgroundWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.BackgroundWorker_RunWorkerCompleted);
+            this.backgroundWorker.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.BackgroundWorker_ProgressChanged);
             // 
             // dataGridViewFontsConverters
             // 
@@ -113,7 +113,7 @@ namespace SILConvertersOffice
             this.dataGridViewFontsConverters.RowHeadersVisible = false;
             this.dataGridViewFontsConverters.Size = new System.Drawing.Size(425, 319);
             this.dataGridViewFontsConverters.TabIndex = 4;
-            this.dataGridViewFontsConverters.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridViewFontsConverters_CellMouseClick);
+            this.dataGridViewFontsConverters.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DataGridViewFontsConverters_CellMouseClick);
             // 
             // ColumnFontNames
             // 
@@ -164,7 +164,7 @@ namespace SILConvertersOffice
             this.converterMappingToolStripMenuItem.Name = "converterMappingToolStripMenuItem";
             this.converterMappingToolStripMenuItem.Size = new System.Drawing.Size(116, 20);
             this.converterMappingToolStripMenuItem.Text = "&Converter Mappings";
-            this.converterMappingToolStripMenuItem.DropDownOpening += new System.EventHandler(this.converterMappingToolStripMenuItem_DropDownOpening);
+            this.converterMappingToolStripMenuItem.DropDownOpening += new System.EventHandler(this.ConverterMappingToolStripMenuItem_DropDownOpening);
             // 
             // setDefaultConverterToolStripMenuItem
             // 
@@ -172,7 +172,7 @@ namespace SILConvertersOffice
             this.setDefaultConverterToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.setDefaultConverterToolStripMenuItem.Text = "Set &Default Converter";
             this.setDefaultConverterToolStripMenuItem.ToolTipText = "Select a converter to be applied to all fonts that aren\'t currently configured";
-            this.setDefaultConverterToolStripMenuItem.Click += new System.EventHandler(this.setDefaultConverterToolStripMenuItem_Click);
+            this.setDefaultConverterToolStripMenuItem.Click += new System.EventHandler(this.SetDefaultConverterToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
@@ -185,7 +185,7 @@ namespace SILConvertersOffice
             this.newConverterMappingToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.newConverterMappingToolStripMenuItem.Text = "&New";
             this.newConverterMappingToolStripMenuItem.ToolTipText = "Click to reset the current mapping of font names to system converters";
-            this.newConverterMappingToolStripMenuItem.Click += new System.EventHandler(this.newConverterMappingToolStripMenuItem_Click);
+            this.newConverterMappingToolStripMenuItem.Click += new System.EventHandler(this.NewConverterMappingToolStripMenuItem_Click);
             // 
             // openConverterMappingToolStripMenuItem
             // 
@@ -193,7 +193,7 @@ namespace SILConvertersOffice
             this.openConverterMappingToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.openConverterMappingToolStripMenuItem.Text = "&Load";
             this.openConverterMappingToolStripMenuItem.ToolTipText = "Click to load a previously saved mapping of font names to system converters";
-            this.openConverterMappingToolStripMenuItem.Click += new System.EventHandler(this.openConverterMappingToolStripMenuItem_Click);
+            this.openConverterMappingToolStripMenuItem.Click += new System.EventHandler(this.OpenConverterMappingToolStripMenuItem_Click);
             // 
             // recentToolStripMenuItem
             // 
@@ -207,7 +207,7 @@ namespace SILConvertersOffice
             this.saveConverterMappingToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.saveConverterMappingToolStripMenuItem.Text = "&Save";
             this.saveConverterMappingToolStripMenuItem.ToolTipText = "Click to save the current mapping of font names to system converters";
-            this.saveConverterMappingToolStripMenuItem.Click += new System.EventHandler(this.saveConverterMappingToolStripMenuItem_Click);
+            this.saveConverterMappingToolStripMenuItem.Click += new System.EventHandler(this.SaveConverterMappingToolStripMenuItem_Click);
             // 
             // progressBarFontsInUse
             // 

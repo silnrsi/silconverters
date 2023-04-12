@@ -7,6 +7,18 @@ using System.Windows.Forms;
 using ECInterfaces;
 using SilEncConverters40;
 using Word = Microsoft.Office.Interop.Word;
+using System.Text.RegularExpressions;
+using System.Text;
+using System.Security.Policy;
+#if BUILD_FOR_OFF11
+using SILConvertersOffice.Properties;
+#elif BUILD_FOR_OFF12
+using SILConvertersOffice07.Properties;
+#elif BUILD_FOR_OFF14
+using SILConvertersOffice10.Properties;
+#elif BUILD_FOR_OFF15
+using SILConvertersOffice13.Properties;
+#endif
 
 namespace SILConvertersOffice
 {
@@ -21,8 +33,9 @@ namespace SILConvertersOffice
     {
         const string cstrClose = "&Close";
         const string cstrStop = "&Stop";
+        const string NetRegexHelpUrl = "https://learn.microsoft.com/en-us/dotnet/standard/base-types/regular-expression-language-quick-reference";
 
-        private WordFindReplaceDocument m_doc;
+        private readonly WordFindReplaceDocument m_doc;
         FindWordProcessor m_aWordByWordProcessor = null;
         protected SearchAreaType m_eSearchAreaType = SearchAreaType.eUnknown;
 
@@ -37,16 +50,16 @@ namespace SILConvertersOffice
             m_doc = doc;
 
             // make sure these exist so don't throw an error later when we try to add to them
-            if (Properties.Settings.Default.RecentFindWhat == null)
-                Properties.Settings.Default.RecentFindWhat = new System.Collections.Specialized.StringCollection();
+            if (Settings.Default.RecentFindWhat == null)
+                Settings.Default.RecentFindWhat = new System.Collections.Specialized.StringCollection();
             else
-                foreach (string str in Properties.Settings.Default.RecentFindWhat)
+                foreach (string str in Settings.Default.RecentFindWhat)
                     comboBoxFindWhat.Items.Add(str);
 
-            if (Properties.Settings.Default.RecentReplaceWith == null)
-                Properties.Settings.Default.RecentReplaceWith = new System.Collections.Specialized.StringCollection();
+            if (Settings.Default.RecentReplaceWith == null)
+                Settings.Default.RecentReplaceWith = new System.Collections.Specialized.StringCollection();
             else
-                foreach (string str in Properties.Settings.Default.RecentReplaceWith)
+                foreach (string str in Settings.Default.RecentReplaceWith)
                     comboBoxReplaceWith.Items.Add(str);
 
 #if BUILD_FOR_OFF15
@@ -61,7 +74,7 @@ namespace SILConvertersOffice
             helpProvider.SetHelpString(this, SILConvertersOffice07.Properties.Resources.FindReplaceFormHelpString);
             helpProvider.SetHelpString(ecTextBoxFindWhat, SILConvertersOffice07.Properties.Resources.ecTextBoxFindWhatHelpString);
             helpProvider.SetHelpString(ecTextBoxReplaceWith, SILConvertersOffice07.Properties.Resources.ecTextBoxReplaceWithHelpString);
-#else
+#elif BUILD_FOR_OFF11
             helpProvider.SetHelpString(this, Properties.Resources.FindReplaceFormHelpString);
             helpProvider.SetHelpString(ecTextBoxFindWhat, Properties.Resources.ecTextBoxFindWhatHelpString);
             helpProvider.SetHelpString(ecTextBoxReplaceWith, Properties.Resources.ecTextBoxReplaceWithHelpString);
@@ -92,11 +105,11 @@ namespace SILConvertersOffice
             // if there's no processor (e.g. initially, change of Find What or Replace With text)...
             if (m_aWordByWordProcessor == null)
             {
-                AddToComboBox(ecTextBoxFindWhat, comboBoxFindWhat, Properties.Settings.Default.RecentFindWhat);
+                AddToComboBox(ecTextBoxFindWhat, comboBoxFindWhat, Settings.Default.RecentFindWhat);
 
                 // if the user clicked Find/Next, then don't give the Replace With text even if there is some
                 m_aWordByWordProcessor = new FindWordProcessor(ecTextBoxFindWhat.Text, ecTextBoxReplaceWith.Text,
-                    checkBoxMatchCase.Checked, ecTextBoxFindWhat.Font);
+                    checkBoxMatchCase.Checked);
             }
 
             // update the button pressed information
@@ -105,7 +118,7 @@ namespace SILConvertersOffice
             // if we're doing a replacement, then save the 'Replace with' string in our settings file
             if ((eFormButton == FormButtons.ReplaceOnce) || (eFormButton == FormButtons.ReplaceAll))
             {
-                AddToComboBox(ecTextBoxReplaceWith, comboBoxReplaceWith, Properties.Settings.Default.RecentReplaceWith);
+                AddToComboBox(ecTextBoxReplaceWith, comboBoxReplaceWith, Settings.Default.RecentReplaceWith);
 
                 // the user may have done 'Replace' when it was found, but then later clicked said ReplaceAll, 
                 //  so update the value
@@ -158,7 +171,7 @@ namespace SILConvertersOffice
             doc.Search(worker);
         }
 
-        private void backgroundWorker_DoWork(object sender, DoWorkEventArgs e)
+        private void BackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
             BackgroundWorker worker = (BackgroundWorker)sender;
             DoWork(worker, e.Argument as WordFindReplaceDocument);
@@ -166,22 +179,22 @@ namespace SILConvertersOffice
                 e.Cancel = true;
         }
 
-        private void backgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        private void BackgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             // for us the "progress" is a new range of the document we're searching thru
             int nValue = (int)e.ProgressPercentage;
-            if (nValue > progressBar.Maximum)
-            {
-                progressBar.Maximum = nValue;
-            }
 
             progressBar.BeginInvoke(
                 (MethodInvoker)delegate () {
+                    if (nValue > progressBar.Maximum)
+                    {
+                        progressBar.Maximum = nValue;
+                    }
                     progressBar.Value = nValue;
                 });
         }
 
-        private void backgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        private void BackgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             bool bReplace = (m_aWordByWordProcessor.FormButton == FormButtons.ReplaceOnce) || (m_aWordByWordProcessor.FormButton == FormButtons.ReplaceAll);
             bool bContinue = false;  // start again pessimistic
@@ -299,7 +312,7 @@ namespace SILConvertersOffice
             base.Show();
         }
 
-        private void contextMenuStripExprBuilder_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        private void ContextMenuStripExprBuilder_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
             string strItem = ((ToolStripItem)e.ClickedItem).Text;
             if (strItem != regularExpressionHelpToolStripMenuItem.Text)
@@ -311,12 +324,8 @@ namespace SILConvertersOffice
 
         private void FindReplaceForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            // clear out the EncConverters object we created since we're probably done for a while (that 
-            //  is static so we don't have to keep buying it over and over again for simple changes in the 
-            //  expression).
-            FindWordProcessor.m_aECs = null;
             ResetBackgroundWorker();
-            Properties.Settings.Default.Save(); // in case something was changed
+            Settings.Default.Save(); // in case something was changed
             e.Cancel = true;
             Hide();
         }
@@ -339,51 +348,50 @@ namespace SILConvertersOffice
             }
         }
 
-        private void buttonFindNext_Click(object sender, EventArgs e)
+        private void ButtonFindNext_Click(object sender, EventArgs e)
         {
             ProcessButton(FormButtons.Next);
         }
 
-        private void buttonReplace_Click(object sender, EventArgs e)
+        private void ButtonReplace_Click(object sender, EventArgs e)
         {
             ProcessButton(FormButtons.ReplaceOnce);
         }
 
-        private void buttonReplaceAll_Click(object sender, EventArgs e)
+        private void ButtonReplaceAll_Click(object sender, EventArgs e)
         {
             ProcessButton(FormButtons.ReplaceAll);
         }
 
-        private void ecTextBox_TextChanged(object sender, EventArgs e)
+        private void EcTextBox_TextChanged(object sender, EventArgs e)
         {
             m_eSearchAreaType = SearchAreaType.eUnknown;
             m_aWordByWordProcessor = null;
         }
 
-        private void buttonExpressionBuilder_Click(object sender, EventArgs e)
+        private void ButtonExpressionBuilder_Click(object sender, EventArgs e)
         {
             ToolStripDropDownDirection dir = ToolStripDropDownDirection.BelowRight;
             this.buttonExpressionBuilder.ContextMenuStrip.Show(PointToScreen(buttonExpressionBuilder.Location), dir);
         }
 
-        private void comboBoxFindWhat_SelectedIndexChanged(object sender, EventArgs e)
+        private void ComboBoxFindWhat_SelectedIndexChanged(object sender, EventArgs e)
         {
             ecTextBoxFindWhat.Text = (string)comboBoxFindWhat.SelectedItem;
         }
 
-        private void comboBoxReplaceWith_SelectedIndexChanged(object sender, EventArgs e)
+        private void ComboBoxReplaceWith_SelectedIndexChanged(object sender, EventArgs e)
         {
             ecTextBoxReplaceWith.Text = (string)comboBoxReplaceWith.SelectedItem;
         }
 
-        private void regularExpressionHelpToolStripMenuItem_Click(object sender, EventArgs e)
+        private void RegularExpressionHelpToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            // launch the ICU help
-            string strCommandLine = Environment.GetFolderPath(Environment.SpecialFolder.CommonProgramFiles) + @"\SIL\Help\ICU Regular Expression Plug-in About box.htm";
-            OfficeApp.LaunchProgram(strCommandLine, null);
+            // launch the .Net Regex help
+            System.Diagnostics.Process.Start(NetRegexHelpUrl);
         }
 
-        private void checkBoxMatchCase_CheckedChanged(object sender, EventArgs e)
+        private void CheckBoxMatchCase_CheckedChanged(object sender, EventArgs e)
         {
             m_aWordByWordProcessor = null;
         }
@@ -394,7 +402,7 @@ namespace SILConvertersOffice
                 this.backgroundWorker.CancelAsync();
         }
 
-        private void buttonCancel_Click(object sender, EventArgs e)
+        private void ButtonCancel_Click(object sender, EventArgs e)
         {
             if (buttonCancel.Text == cstrStop)
                 ResetBackgroundWorker();
@@ -411,26 +419,21 @@ namespace SILConvertersOffice
         protected char[] m_achDelimiter = new char[] { '\u001f' };
         public int NumOfParagraphsToSearch = 1;
         public int NumOfReplacements = 0;
-        static public EncConverters m_aECs = null;
-        protected IEncConverter m_aECRegex = null;
+        protected Regex _netRegex = null;
+        protected string _replaceWith = null;
         protected string[] astrReplaceDoubleEscapeCodes = new string[] { @"\t", @"\r", @"\n", @"\a", @"\b", @"\f" };
         protected string[] astrReplaceEscapeCodes = new string[] { "\t", "\r", "\n", "\a", "\b", "\f" };
 
-        public FindWordProcessor(string strFindWhat, string strReplaceWith, bool bMatchCase, Font font)
+        public FindWordProcessor(string strFindWhat, string strReplaceWith, bool bMatchCase)
         {
-            if (m_aECs == null)
-                m_aECs = new EncConverters(true);
+            strReplaceWith = Regex.Unescape(strReplaceWith);
 
-            // for some reason, the text that goes to constructing the 'Find what' part of the CRegexMatcher is 
-            //  expecting doubly-escaped text (e.g. "\\r" for CR), but the text that goes for the 'Replace with'
-            //  (i.e. the CRegex::ReplaceAll) is expecting singly-escaped text. Our text boxes, however, will always
-            //  return these as doubly-escaped. So for the 'Replace with' stuff, we need to turn certain doubly-
-            //  escaped codes into their single-escaped flavors).
-            int nNumEscapeCodes = astrReplaceDoubleEscapeCodes.Length;
-            for (int i = 0; i < nNumEscapeCodes; i++)
-                strReplaceWith = strReplaceWith.Replace(astrReplaceDoubleEscapeCodes[i], astrReplaceEscapeCodes[i]);
+            // use a dummy delimiter in the replaceWith string, so we can find the changed bit
+            //  (hoping the person isn't looking for this delimiter)
+            _replaceWith = String.Format("{0}{1}{0}", m_achDelimiter[0], strReplaceWith);
 
-            m_aECRegex = InitSearchFontConverter(strFindWhat, strReplaceWith, font, bMatchCase);
+            _netRegex = new(strFindWhat);
+
             AutoReplaceOnNextFind = false;  // we'll take care of this as well
 
             // Normally, we search the text one paragraph at a time for the FindWhat string, but if the user 
@@ -448,48 +451,15 @@ namespace SILConvertersOffice
             }
         }
 
-        // initialize an EncConverter which will tell us when we've hit a match. Uses ICU RegEx (though, there's
-        //  no reason this couldn't be .Net regex...)
-        protected IEncConverter InitSearchFontConverter(string strFindWhat, string strReplaceWith, Font font, bool bMatchCase)
-        {
-            // we're going to use a temporary ICU RegEx EncConverter to do our 'searching' for us. 
-            // get a blank ICU Regex converter that we can program with our FindWhat string
-            // but, it may be null if ICU isn't installed
-            System.Diagnostics.Debug.Assert(m_aECs != null);
-            IEncConverter aIEC = null;
-            try
-            {
-                aIEC = m_aECs.NewEncConverterByImplementationType(EncConverters.strTypeSILicuRegex);
-            }
-            catch (Exception ex)
-            {
-                throw new ApplicationException("ICU doesn't appear to have been installed. This feature won't work without ICU.", ex);
-            }
-
-            // we search for different things depending on whether it's "Find" (only) vs. "Find & Replace"
-            // delimit the replacement string with something we can detect, which we wouldn't otherwise expect
-            //  to find in user text.
-            string strConverterSpec = String.Format("{0}->{2}{1}{2}{3}", strFindWhat, strReplaceWith,
-                m_achDelimiter[0], (bMatchCase) ? " /i" : null);
-
-            // Give it a friendly name that isn't likely to conflict with anything 'real' the user might name it.
-            string strName = String.Format("{0} FindReplaceConverter", OfficeApp.cstrCaption);
-            ConvType eConvType = ConvType.Unicode_to_Unicode;
-            string strDummy = null;
-            int nProcType = (int)ProcessTypeFlags.ICURegularExpression;
-
-            // initialize it so it's ready and put it in the current repository object (as a temporary converter)
-            aIEC.Initialize(strName, strConverterSpec, ref strDummy, ref strDummy, ref eConvType,
-                ref nProcType, 0, 0, true);
-
-            return aIEC;
-        }
-
         public void ReplaceText(WordRange aRunRange, string strNewText)
         {
             try
             {
+                // if you don't explicitly set the font after replacing the text, Word drops it 
+                //  in with some other default font...
+                var font = aRunRange.FontName;
                 aRunRange.Text = strNewText;
+                aRunRange.FontName = font;
             }
             catch (Exception ex)
             {
@@ -526,7 +496,7 @@ namespace SILConvertersOffice
                 int nInputLength = strInput.Length;
                 int nDiffLength = nInputLength;
                 int nTempInputLength = nInputLength;
-                string strTempInput = null;
+                string strTempInput;
                 do
                 {
                     // do a binary search until we get only one replacement
@@ -537,7 +507,7 @@ namespace SILConvertersOffice
                         nTempInputLength = Math.Min(nTempInputLength + nDiffLength, nInputLength);
 
                     strTempInput = strInput.Substring(0, nTempInputLength);
-                    strOutput = m_aECRegex.Convert(strTempInput);
+                    strOutput = _netRegex.Replace(strTempInput, _replaceWith);
                     astrSegments = strOutput.Split(m_achDelimiter);
                     System.Diagnostics.Trace.WriteLine(String.Format("{0}: diff:{1} segments:{2}", nTempInputLength, nDiffLength, astrSegments.Length));
                 } while (astrSegments.Length != 3);
@@ -554,16 +524,16 @@ namespace SILConvertersOffice
         {
             FindResult res = FindResult.eNothingFound;
             string strInput = aRunRange.Text;
-            if (String.IsNullOrEmpty(strInput) || (m_aECRegex == null))
+
+            if (String.IsNullOrEmpty(strInput) || (_netRegex == null))
                 return res;
 
-            // otherwise 'convert' it to see if the 'Find what' string is in it
-            string strOutput = m_aECRegex.Convert(strInput);
+            // otherwise do the replacement to see if the 'Find what' string is in it
+            string strOutput = _netRegex.Replace(strInput, _replaceWith);
 
             // if the input string is different from the output string, then the FindWhat string was found.
             if (strInput != strOutput)
             {
-#if !DefineToNotUseSplitAndConvert
                 // The way the convert works is that it will replace each instance of the input string that matches
                 //  the FindWhat syntax (i.e. there may be more than one replacement we have to deal with).
                 // here's the problem: if there was more than one replacment, then I really can't tell what portion
@@ -600,107 +570,6 @@ namespace SILConvertersOffice
                     nEndOfFindWhatSelection = strInput.Length;
                 else
                     nEndOfFindWhatSelection = strInput.Length - strStuffFollowingMatch.Length;
-#else
-                // this could probably be done more elegantly with Split rather than what I do in the #else case
-                string[] astrSegments = strOutput.Split(m_achDelimiter);
-
-                // must be odd (before, ||: replace, following :||), where any or all can be null
-                int nTotalSegments = astrSegments.Length;
-                System.Diagnostics.Debug.Assert((nTotalSegments % 2) == 1);
-                
-                // get the index to the first character of the replacement (which is the same as the first character
-                //  of the 'Find what' as well).
-                int nIndex = astrSegments[0].Length;
-
-                // remember this so we pick up here later
-                SearchAreaStart += nIndex;
-                if (nIndex > 0)
-                    aRunRange.Start = SearchAreaStart;
-
-                // the replacement string is easy. It's just whatever's in the 1st element of the Split array.
-                //  but we have to figure out what the 'Find what' text is so that we can select it (so we can replace 
-                //  it). This is not so easy, because it could be anything and not just a string of text like in a normal
-                //  find.
-                string strReplacementString = astrSegments[1];
-
-                // Between the end of the first replacement and the beginning of the next (if multiple replacments)
-                //  is a string which should match something in the original, which we can search for
-                string strStuffFollowingMatch = astrSegments[2];   // may be null
-
-                int nEndOfFindWhatSelection;
-                if (String.IsNullOrEmpty(strStuffFollowingMatch))
-                {
-                    // If the 'Find what' is repeated twice in a row, then the stuff in-between the two instances of 
-                    //  replacement text will be null.
-                    // Detect this by looking at the length of the even number string array elements (2, 4, etc),
-                    //  which are the segments following the replacements. This tells us what we have to divide by
-                    //  to get the proportion for only one find.
-                    int nNumReplacmentsInARow = 1;
-                    int nNextReplacementIndex = 2;
-                    nTotalSegments--;
-                    while ((nNextReplacementIndex < nTotalSegments) && String.IsNullOrEmpty(astrSegments[nNextReplacementIndex]))
-                    {
-                        nNumReplacmentsInARow++;
-                        nNextReplacementIndex += 2;
-                    }
-
-                    if (nNextReplacementIndex < astrSegments.Length)
-                        strStuffFollowingMatch = astrSegments[nNextReplacementIndex];
-
-                    int numerator;
-                    if (String.IsNullOrEmpty(strStuffFollowingMatch))
-                        numerator = strInput.Length;
-                    else
-                        numerator = strInput.IndexOf(strStuffFollowingMatch, nIndex + 1);
-                    nEndOfFindWhatSelection = ((numerator - nIndex) / nNumReplacmentsInARow) + nIndex;
-                }
-                else
-                    nEndOfFindWhatSelection = strInput.IndexOf(strStuffFollowingMatch, nIndex + 1);
-
-                /*
-                int nIndex = strOutput.IndexOf(m_achDelimiter[0]);
-                System.Diagnostics.Debug.Assert(nIndex != -1);
-                SearchAreaStart += nIndex;
-                if (nIndex > 0)
-                    aRunRange.Start = SearchAreaStart;
-
-                int nEndOfReplacement = strOutput.IndexOf(m_achDelimiter[0], nIndex + 1);
-                System.Diagnostics.Debug.Assert(nEndOfReplacement != -1);
-
-                // the replacement string is what's between these two
-                string strReplacementString = strOutput.Substring(nIndex + 1, (nEndOfReplacement - nIndex - 1));
-
-                // now the complicated part. Between the end of the first replacement and the next 
-                //  one is a string which should match something in the original. But if the replacement
-                //  were null, then it could be the very next character...
-                // This also handles the situation where there may be several "found whats"
-                int nNumReplacmentsInARow = 1;
-                int nNextIndex = nEndOfReplacement + 1;
-                while ((nNextIndex < strOutput.Length) && (strOutput[nNextIndex] == m_achDelimiter[0]))
-                {
-                    nNumReplacmentsInARow++;
-                    nEndOfReplacement = strOutput.IndexOf(m_achDelimiter[0], nNextIndex + 1);
-                    nNextIndex = nEndOfReplacement + 1;
-                }
-
-                if (nNextIndex < strOutput.Length)
-                {
-                    nEndOfReplacement = strOutput.IndexOf(m_achDelimiter[0], nNextIndex + 1);
-                    if (nEndOfReplacement == -1)
-                        nEndOfReplacement = strOutput.Length;
-                }
-                else if (nNextIndex == strOutput.Length)
-                    nNextIndex--;
-
-                string strStuffFollowingMatch = strOutput.Substring(nNextIndex, nEndOfReplacement - nNextIndex);
-
-                nEndOfFindWhatSelection = ((strInput.Length - nIndex) / nNumReplacmentsInARow) + nIndex;
-                if (!String.IsNullOrEmpty(strStuffFollowingMatch))
-                {
-                    nEndOfFindWhatSelection = strInput.IndexOf(strStuffFollowingMatch, nIndex + 1) / nNumReplacmentsInARow;
-                }
-                */
-#endif // !UseSplitToFindReplacements
 
                 FoundAreaLength = nEndOfFindWhatSelection - nIndex;
                 aRunRange.End = SearchAreaStart + FoundAreaLength;
@@ -889,10 +758,10 @@ namespace SILConvertersOffice
             WordRange aRunRange = GetStartingRange(theRangeToSearch);
             if (aRunRange == null)
                 return;
+            object nOffsetParagraph = aWordProcessor.NumOfParagraphsToSearch - 1;
 
             // how many paragraphs ahead we have to look for a match
-            int nEndRangeToSearch = -1;   // might change from loop to loop if we do replacements (so update inside loop)
-            object nOffsetParagraph = aWordProcessor.NumOfParagraphsToSearch - 1;
+            int nEndRangeToSearch;
             do
             {
                 SearchAreaStart = aRunRange.Start;

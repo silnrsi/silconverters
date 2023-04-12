@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="16.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\..\..\packages\Encoding-Converters-Core.0.6.0\build\Encoding-Converters-Core.props" Condition="Exists('..\..\..\packages\Encoding-Converters-Core.0.6.0\build\Encoding-Converters-Core.props')" />
   <Import Project="..\..\..\packages\NUnit3TestAdapter.4.3.1\build\net35\NUnit3TestAdapter.props" Condition="Exists('..\..\..\packages\NUnit3TestAdapter.4.3.1\build\net35\NUnit3TestAdapter.props')" />
   <Import Project="..\..\..\packages\NUnit.3.13.3\build\NUnit.props" Condition="Exists('..\..\..\packages\NUnit.3.13.3\build\NUnit.props')" />
-  <Import Project="..\..\..\packages\Encoding-Converters-Core.0.5.4\build\Encoding-Converters-Core.props" Condition="Exists('..\..\..\packages\Encoding-Converters-Core.0.5.4\build\Encoding-Converters-Core.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -61,7 +61,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <DebugType>full</DebugType>
     <PlatformTarget>x64</PlatformTarget>
-    <LangVersion>7.3</LangVersion>
+    <LangVersion>latest</LangVersion>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
@@ -71,30 +71,38 @@
     <Optimize>true</Optimize>
     <DebugType>pdbonly</DebugType>
     <PlatformTarget>x64</PlatformTarget>
-    <LangVersion>7.3</LangVersion>
+    <LangVersion>latest</LangVersion>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ECInterfaces, Version=4.0.0.0, Culture=neutral, PublicKeyToken=f1447bae1e63f485, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\Encoding-Converters-Core.0.5.4\lib\net48\x86\ECInterfaces.dll</HintPath>
+    <!--nuget doesn't add the references to the csproj files properly; not sure why. Here is what
+			you might want to manually add to the csproj file instead-->
+    <Reference Include="ECInterfaces, Version=4.0.0.0, Culture=neutral, PublicKeyToken=f1447bae1e63f485, processorArchitecture=x86" Condition="('$(Platform)' == 'x86' or '$(Platform)' == 'AnyCPU') and ('$(OS)'=='Windows_NT')">
+      <HintPath>$(EcLibFilesPath)\net48\x86\ECInterfaces.dll</HintPath>
     </Reference>
-    <Reference Include="EmbeddedUiPluginInterfaces, Version=2.0.21.0, Culture=neutral, PublicKeyToken=583bede96b7c94a3, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\ParatextEmbeddedUiPluginInterfaces.2.0.21\lib\net48\EmbeddedUiPluginInterfaces.dll</HintPath>
+    <Reference Include="ECInterfaces, Version=4.0.0.0, Culture=neutral, PublicKeyToken=f1447bae1e63f485, processorArchitecture=x64" Condition="('$(Platform)' == 'x64') and ('$(OS)'=='Windows_NT')">
+      <HintPath>$(EcLibFilesPath)\net48\x64\ECInterfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="EmbeddedUiPluginInterfaces, Version=2.0.23.0, Culture=neutral, PublicKeyToken=583bede96b7c94a3, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\ParatextEmbeddedUiPluginInterfaces.2.0.23\lib\net48\EmbeddedUiPluginInterfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Newtonsoft.Json.13.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="PluginInterfaces, Version=2.0.23.0, Culture=neutral, PublicKeyToken=583bede96b7c94a3, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\ParatextPluginInterfaces.2.0.23\lib\netstandard2.0\PluginInterfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="SilEncConverters40, Version=4.0.0.0, Culture=neutral, PublicKeyToken=f1447bae1e63f485, processorArchitecture=x86" Condition="('$(Platform)' == 'x86' or '$(Platform)' == 'AnyCPU') and ('$(OS)'=='Windows_NT')">
+      <HintPath>$(EcLibFilesPath)\net48\x86\SilEncConverters40.dll</HintPath>
+    </Reference>
+    <Reference Include="SilEncConverters40, Version=4.0.0.0, Culture=neutral, PublicKeyToken=f1447bae1e63f485, processorArchitecture=x64" Condition="('$(Platform)' == 'x64') and ('$(OS)'=='Windows_NT')">
+      <HintPath>$(EcLibFilesPath)\net48\x64\SilEncConverters40.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
-    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="nunit.framework, Version=3.13.3.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\NUnit.3.13.3\lib\net45\nunit.framework.dll</HintPath>
-    </Reference>
-    <Reference Include="PluginInterfaces, Version=2.0.21.0, Culture=neutral, PublicKeyToken=583bede96b7c94a3, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\ParatextPluginInterfaces.2.0.21\lib\netstandard2.0\PluginInterfaces.dll</HintPath>
-    </Reference>
-    <Reference Include="SilEncConverters40, Version=4.0.0.0, Culture=neutral, PublicKeyToken=f1447bae1e63f485, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\Encoding-Converters-Core.0.5.4\lib\net48\x86\SilEncConverters40.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
@@ -280,7 +288,13 @@
     <Content Include="redist\Help\Technical_Hindi_%28Google_group%29_Html_Converter_Plug-in_About_box.htm" />
     <Content Include="redist\Help\TECkit_Map_Plug-in_About_box.htm" />
     <Content Include="TestFiles\BulkWordDocConverter\TestFile1.xml" />
+    <EmbeddedResource Include="TestFiles\BulkWordDocConverter\TestFile_ConvertMiddleTableCell_Expected.xml" />
+    <EmbeddedResource Include="TestFiles\BulkWordDocConverter\TestFile_ConvertMiddleTableCell_Input.xml" />
     <Content Include="TestFiles\BulkWordDocConverter\TestFile2.xml" />
+    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\CombinedInSourceAndTargetWithVaOverride\CombinedInSourceAndTargetWithVaOverride_TranslatedText.txt" />
+    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\CombinedInSourceSeparateNoEmptyInTarget\CombinedInSourceSeparateNoEmptyInTarget_TranslatedText.txt" />
+    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\SeparateInSourceCombinedButEmptyInTarget\SeparateInSourceCombinedButEmptyInTarget_TranslatedText.txt" />
+    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\MultipleVersesWithFootnote\MultipleVersesWithFootnote_TranslatedText.txt" />
     <EmbeddedResource Include="TestFiles\PtxBackTrHelper\SingleVerse\MultiplePoeticParagraphs\MultiplePoeticParagraphsMissingInTarget\MultiplePoeticParagraphsMissingInTarget_TranslatedText.txt" />
     <EmbeddedResource Include="TestFiles\PtxBackTrHelper\MultipleVerses\MultipleVersesAndParagraphsMiTJoinedIntoOneParagraphs\MultipleVersesAndParagraphsMiTJoinedIntoOneParagraphs_TranslatedText.txt" />
     <EmbeddedResource Include="TestFiles\PtxBackTrHelper\MultipleVerses\MultipleVersesAndParagraphsJoinedIntoOneParagraphs\MultipleVersesAndParagraphsJoinedIntoOneParagraphs_TranslatedText.txt" />
@@ -412,6 +426,26 @@
     <EmbeddedResource Include="TestFiles\PtxBackTrHelper\SingleVerse\MultiplePoeticParagraphs\MultiplePoeticParagraphs_VersesReference.json" />
     <EmbeddedResource Include="TestFiles\PtxBackTrHelper\SingleVerse\MultiplePoeticParagraphs\MultiplePoeticParagraphsMissingInTarget\MultiplePoeticParagraphsMissingInTarget_TokensTarget.json" />
     <EmbeddedResource Include="TestFiles\PtxBackTrHelper\SingleVerse\MultiplePoeticParagraphs\MultiplePoeticParagraphsMissingInTarget\MultiplePoeticParagraphsMissingInTarget_TokensTargetUpdate.json" />
+    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\MultipleVersesWithFootnote\MultipleVersesWithFootnote_TokensSource.json" />
+    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\MultipleVersesWithFootnote\MultipleVersesWithFootnote_TokensTarget.json" />
+    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\MultipleVersesWithFootnote\MultipleVersesWithFootnote_VerseReference.json" />
+    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\MultipleVersesWithFootnote\MultipleVersesWithFootnote_VersesReference.json" />
+    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\MultipleVersesWithFootnote\MultipleVersesWithFootnote_TokensTargetUpdate.json" />
+    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\SeparateInSourceCombinedButEmptyInTarget\SeparateInSourceCombinedButEmptyInTarget_TokensSource.json" />
+    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\SeparateInSourceCombinedButEmptyInTarget\SeparateInSourceCombinedButEmptyInTarget_TokensTarget.json" />
+    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\SeparateInSourceCombinedButEmptyInTarget\SeparateInSourceCombinedButEmptyInTarget_TokensTargetUpdate.json" />
+    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\SeparateInSourceCombinedButEmptyInTarget\SeparateInSourceCombinedButEmptyInTarget_VerseReference.json" />
+    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\SeparateInSourceCombinedButEmptyInTarget\SeparateInSourceCombinedButEmptyInTarget_VersesReference.json" />
+    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\CombinedInSourceSeparateNoEmptyInTarget\CombinedInSourceSeparateNoEmptyInTarget_TokensSource.json" />
+    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\CombinedInSourceSeparateNoEmptyInTarget\CombinedInSourceSeparateNoEmptyInTarget_TokensTarget.json" />
+    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\CombinedInSourceSeparateNoEmptyInTarget\CombinedInSourceSeparateNoEmptyInTarget_TokensTargetUpdate.json" />
+    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\CombinedInSourceSeparateNoEmptyInTarget\CombinedInSourceSeparateNoEmptyInTarget_VerseReference.json" />
+    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\CombinedInSourceSeparateNoEmptyInTarget\CombinedInSourceSeparateNoEmptyInTarget_VersesReference.json" />
+    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\CombinedInSourceAndTargetWithVaOverride\CombinedInSourceAndTargetWithVaOverride_TokensSource.json" />
+    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\CombinedInSourceAndTargetWithVaOverride\CombinedInSourceAndTargetWithVaOverride_TokensTarget.json" />
+    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\CombinedInSourceAndTargetWithVaOverride\CombinedInSourceAndTargetWithVaOverride_TokensTargetUpdate.json" />
+    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\CombinedInSourceAndTargetWithVaOverride\CombinedInSourceAndTargetWithVaOverride_VerseReference.json" />
+    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\CombinedInSourceAndTargetWithVaOverride\CombinedInSourceAndTargetWithVaOverride_VersesReference.json" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
@@ -422,9 +456,9 @@
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\..\..\packages\Encoding-Converters-Core.0.5.4\build\Encoding-Converters-Core.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\packages\Encoding-Converters-Core.0.5.4\build\Encoding-Converters-Core.props'))" />
     <Error Condition="!Exists('..\..\..\packages\NUnit.3.13.3\build\NUnit.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\packages\NUnit.3.13.3\build\NUnit.props'))" />
     <Error Condition="!Exists('..\..\..\packages\NUnit3TestAdapter.4.3.1\build\net35\NUnit3TestAdapter.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\packages\NUnit3TestAdapter.4.3.1\build\net35\NUnit3TestAdapter.props'))" />
+    <Error Condition="!Exists('..\..\..\packages\Encoding-Converters-Core.0.6.0\build\Encoding-Converters-Core.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\packages\Encoding-Converters-Core.0.6.0\build\Encoding-Converters-Core.props'))" />
   </Target>
   <ProjectExtensions>
     <VisualStudio>

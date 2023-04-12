@@ -1,0 +1,40 @@
+{
+  "BookCode": "GEN",
+  "BookNum": 1,
+  "ChapterNum": 1,
+  "VerseNum": 1,
+  "BBBCCCVVV": 1001001,
+  "Versification": {
+    "Type": 4,
+    "IsCustomized": false
+  },
+  "RepresentsMultipleVerses": true,
+  "AllVerses": [
+    {
+      "BookCode": "GEN",
+      "BookNum": 1,
+      "ChapterNum": 1,
+      "VerseNum": 1,
+      "BBBCCCVVV": 1001001,
+      "Versification": {
+        "Type": 4,
+        "IsCustomized": false
+      },
+      "RepresentsMultipleVerses": false,
+      "AllVerses": []
+    },
+    {
+      "BookCode": "GEN",
+      "BookNum": 1,
+      "ChapterNum": 1,
+      "VerseNum": 2,
+      "BBBCCCVVV": 1001002,
+      "Versification": {
+        "Type": 4,
+        "IsCustomized": false
+      },
+      "RepresentsMultipleVerses": false,
+      "AllVerses": []
+    }
+  ]
+}

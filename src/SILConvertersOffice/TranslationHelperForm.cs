@@ -6,10 +6,58 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+#if BUILD_FOR_OFF11
+using SILConvertersOffice.Properties;
+#elif BUILD_FOR_OFF12
+using SILConvertersOffice07.Properties;
+#elif BUILD_FOR_OFF14
+using SILConvertersOffice10.Properties;
+#elif BUILD_FOR_OFF15
+using SILConvertersOffice13.Properties;
+#endif
 
 namespace SILConvertersOffice
 {
-    internal partial class TranslationHelperForm : Form, IBaseConverterForm, IBackTranslationHelperDataSource
+    /// <summary>
+    /// each project (read: font and converter combination) needs its own TranslationHelperForm
+    /// so it can manage things like its own SpellFixer and set of EncConverters to use. So use 
+    /// this class (w/ an 's') to triangulate between the different instances of it based on the 
+    /// requested FontConverter
+    /// </summary>
+    internal class TranslationHelperForms : IBaseConverterForm
+    {
+        private static TranslationHelperForm _current;
+        private Dictionary<FontConverter, TranslationHelperForm> Forms = new Dictionary<FontConverter, TranslationHelperForm>();
+
+        bool IBaseConverterForm.SkipIdenticalValues => false;   // this was a feature for checking round-tripping, which doesn't apply here
+
+        string IBaseConverterForm.ForwardString
+        {
+            get
+            {
+                return _current?.ForwardString;
+            }
+
+            set
+            {
+                _current.ForwardString = value;
+            }
+        }
+
+        FormButtons IBaseConverterForm.Show(FontConverter aThisFC, string strInput, string strOutput)
+        {
+            if (!Forms.TryGetValue(aThisFC, out var form))
+            {
+                form = new TranslationHelperForm();
+            }
+
+            _current = form;
+
+            return _current.Show(aThisFC, strInput, strOutput);
+        }
+    }
+
+    internal partial class TranslationHelperForm : Form, IBackTranslationHelperDataSource
     {
         protected FontConverter _theFontsAndEncConverter;
         protected BackTranslationHelperModel _model;
@@ -21,14 +69,12 @@ namespace SILConvertersOffice
             InitializeComponent();
         }
 
-        bool IBaseConverterForm.SkipIdenticalValues => false;   // this was a feature for checking round-tripping, which doesn't apply here
-
-        string IBaseConverterForm.ForwardString
+        public string ForwardString
         { 
             get
             {
                 // TODO: fix this
-                return backTranslationHelperCtrl.NewTargetTexts.FirstOrDefault()?.TargetData;
+                return backTranslationHelperCtrl.GetNewTargetTexts().FirstOrDefault()?.TargetData;
             }
 
             set
@@ -42,7 +88,7 @@ namespace SILConvertersOffice
             }
         }
 
-        FormButtons IBaseConverterForm.Show(FontConverter fontConverter, string sourceText, string targetText)
+        public FormButtons Show(FontConverter fontConverter, string sourceText, string targetText)
         {
             WordApp.SetCursorToWaiting();
             ButtonPressed = FormButtons.Cancel; // reset and be pessimistic
@@ -64,12 +110,16 @@ namespace SILConvertersOffice
                 },
             };
 
-            // this form is the implementation of the way to get get data
+            // this form is the implementation of the way to get data
             backTranslationHelperCtrl.BackTranslationHelperDataSource = this;
             if (!backTranslationHelperCtrl.TheTranslators.Any(t => t.Name == _theFontsAndEncConverter.DirectableEncConverter.GetEncConverter.Name))
                 backTranslationHelperCtrl.TheTranslators.Add(_theFontsAndEncConverter.DirectableEncConverter.GetEncConverter);
 
             backTranslationHelperCtrl.Initialize(displayExistingTargetTranslation: false);
+
+            // If Initialize sets the possible target boxes (more than the 1st one) to Visible, 
+            //  for some reason, it's not changing its state... Try this:
+            Application.DoEvents(); 
 
             // TODO: fix this
             backTranslationHelperCtrl.GetNewData(ref _model);
@@ -95,10 +145,11 @@ namespace SILConvertersOffice
             // TODO: 
         }
 
-        public void WriteToTarget(string text)
+        public bool WriteToTarget(string text)
         {
             ButtonPressed = FormButtons.ReplaceEvery;
             Close();
+            return true;
         }
 
         public void SetDataUpdateProc(Action<BackTranslationHelperModel> updateDataProc)
@@ -169,6 +220,17 @@ namespace SILConvertersOffice
             Close();
         }
 
+        private void TranslationHelperForm_Load(object sender, EventArgs e)
+        {
+            Location = Settings.Default.WindowLocation;
+            WindowState = Settings.Default.DefaultWindowState;
+            if (MinimumSize.Height <= Settings.Default.WindowSize.Height &&
+                MinimumSize.Width <= Settings.Default.WindowSize.Width)
+            {
+                Size = Settings.Default.WindowSize;
+            }
+        }
+
         private void TranslationHelperForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             // only allow Cancel or ReplaceEvery
@@ -177,6 +239,11 @@ namespace SILConvertersOffice
                 (ButtonPressed != FormButtons.Cancel) && 
                 (ButtonPressed != FormButtons.Next))
                 e.Cancel = true;
+        
+            Settings.Default.DefaultWindowState = WindowState;
+            Settings.Default.WindowLocation = Location;
+            Settings.Default.WindowSize = Size;
+            Settings.Default.Save();
         }
 
         void IBackTranslationHelperDataSource.ButtonPressed(ButtonPressed button)
@@ -188,10 +255,8 @@ namespace SILConvertersOffice
                 switch(button.ToString())
                 {
                     case "MoveToNext":
-                        ButtonPressed = FormButtons.Next;
-                        break;
                     case "WriteToTarget":
-                        ButtonPressed = FormButtons.ReplaceOnce;
+                        ButtonPressed = FormButtons.ReplaceOnce;    // these both mean replace
                         break;
                     case "Cancel":
                         ButtonPressed = FormButtons.Cancel;

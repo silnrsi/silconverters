@@ -290,7 +290,7 @@ namespace SILConvertersOffice
                 // keep reusing the same doc processor (in case we're doing sub-paragraph selections and have already specified which cnvtr to use for a given font)
                 //  user must click the 'Reset' button, if they want to be requiried about which cnvtr to use
                 if (m_officeDocumentProcessor == null)
-                    m_officeDocumentProcessor = new OfficeDocumentProcessor((FontConverters)null, new SILConvertersOffice.TranslationHelperForm());
+                    m_officeDocumentProcessor = new OfficeDocumentProcessor((FontConverters)null, new SILConvertersOffice.TranslationHelperForms());
 
                 // start where the cursor is currently
                 m_officeDocumentProcessor.LeftOvers = doc.SelectionRange;

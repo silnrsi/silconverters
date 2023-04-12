@@ -19,7 +19,7 @@ namespace SilConvertersXML.Properties {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Resources {
@@ -112,7 +112,11 @@ namespace SilConvertersXML.Properties {
         ///If you want to set the font to be used in this list, 
         ///then right-click on the list and the font dialog will 
         ///be displayed for you to choose from.
-        ///    .
+        ///
+        ///If you want to convert the data in this list from a certain value
+        ///(e.g. if the list is large and you didn&apos;t finish it last time), 
+        ///you can select the item you want to start with and when you click 
+        ///the &apos;Convert and Save XML D [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string listBoxViewDataHelp {
             get {
