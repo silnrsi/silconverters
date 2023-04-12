@@ -209,13 +209,13 @@
           </w:rPr>
         </w:pPr>
         <w:r wsp:rsidRPr="0080395C">
-          <w:rPr>
-            <w:rStyle w:val="v-VerseNumber" />
-            <w:rFonts w:ascii="Arial Unicode MS" w:fareast="Arial Unicode MS" w:h-ansi="Arial Unicode MS" w:cs="Arial Unicode MS" />
-            <wx:font wx:val="Arial Unicode MS" />
-            <w:sz w:val="28" />
-            <w:sz-cs w:val="28" />
-          </w:rPr>
+          <rPr>
+            <rFonts cs="Arial Unicode MS" hint="fareast" />
+            <font val="Arial Unicode MS"/>
+            <sz val="28" />
+            <sz-cs val="28" />
+            <cs />
+          </rPr>
           <w:t>1 यह सु-समाचार परमेश्वर के पुत्र यीशु मसीह के विषय में है, जो इस जगत में देह धारण कर आया। यह इस प्रकार है… 2 यीशु के देह धारण करने से लगभग सात सौ वर्ष पहले यशायाह नामक एक संत था। उसने यीशु के विषय में परमेश्वर की ओर से भविष्यवाणी कर यह वादा किया:</w:t>
         </w:r>
       </w:p>
@@ -240,11 +240,12 @@
         </w:pPr>
         <w:r wsp:rsidRPr="0080395C">
           <w:rPr>
-            <w:rStyle w:val="v-VerseNumber" />
-            <w:rFonts w:ascii="Times New Roman" w:h-ansi="Times New Roman" w:cs="Mangal" />
+            <w:rFonts w:ascii="Times New Roman" w:h-ansi="Times New Roman" w:cs="Times New Roman" />
             <wx:font wx:val="Times New Roman" />
             <w:sz w:val="28" />
             <w:sz-cs w:val="28" />
+            <w:rtl />
+            <w:lang w:bidi="AR-SA" />
           </w:rPr>
           <w:t>1 یہ خُوشخبری خُدا کے بیٹے یِسُوعؔ مسِیح کے بارے میں ہے; جو اِس دُنیا میں اِسان کی جِسم میں کر آیا, یہ اِس کے بارے میں ہے۔۔۔ 2 یِسُوعؔ کے اِسان کی جِسم میں کرنے سے تقریباً سات سو سال پہلے یسعیاہ نام کا ایک نبی تھا, اُس نے یِسُوعؔ کے بارے میں خُدا کی ترف سے پیشن گوئی کر یہ وعدہ کیا:</w:t>
         </w:r>
@@ -266,12 +267,13 @@
           </w:rPr>
         </w:pPr>
         <w:r wsp:rsidRPr="0080395C">
-          <w:rPr>
-            <w:rStyle w:val="v-VerseNumber" />
-            <w:rFonts w:cs="Nafees Nastaleeq" />
-            <w:sz w:val="28" />
-            <w:sz-cs w:val="28" />
-          </w:rPr>
+          <rPr>
+            <rFonts cs="Nafees Nastaleeq" />
+            <sz val="28" />
+            <sz-cs val="28" />
+            <rtl />
+            <lang bidi="AR-SA" />
+          </rPr>
           <w:t>1 یہ خُوشخبری خُدا کے بیٹے یِسُوعؔ مسِیح کے بارے میں ہے; جو اِس دُنیا میں اِسان کی جِسم میں کر آیا, یہ اِس کے بارے میں ہے۔۔۔ 2 یِسُوعؔ کے اِسان کی جِسم میں کرنے سے تقریباً سات سو سال پہلے یسعیاہ نام کا ایک نبی تھا, اُس نے یِسُوعؔ کے بارے میں خُدا کی ترف سے پیشن گوئی کر یہ وعدہ کیا:</w:t>
         </w:r>
       </w:p>
@@ -485,13 +487,13 @@
           </w:rPr>
         </w:pPr>
         <w:r wsp:rsidRPr="0080395C">
-          <w:rPr>
-            <w:rStyle w:val="v-VerseNumber" />
-            <w:rFonts w:ascii="Arial Unicode MS" w:fareast="Arial Unicode MS" w:h-ansi="Arial Unicode MS" w:cs="Arial Unicode MS" />
-            <wx:font wx:val="Arial Unicode MS" />
-            <w:sz w:val="28" />
-            <w:sz-cs w:val="28" />
-          </w:rPr>
+          <rPr>
+            <rFonts cs="Arial Unicode MS" hint="fareast" />
+            <font val="Arial Unicode MS"/>
+            <sz val="28" />
+            <sz-cs val="28" />
+            <cs />
+          </rPr>
           <w:t>3 “उजाड़ जंगल में एक दूत की आवाज आते-जाते लोगों को सुनाई देगी —</w:t>
         </w:r>
       </w:p>
@@ -516,11 +518,12 @@
         </w:pPr>
         <w:r wsp:rsidRPr="0080395C">
           <w:rPr>
-            <w:rStyle w:val="v-VerseNumber" />
-            <w:rFonts w:ascii="Times New Roman" w:h-ansi="Times New Roman" w:cs="Mangal" />
+            <w:rFonts w:ascii="Times New Roman" w:h-ansi="Times New Roman" w:cs="Times New Roman" />
             <wx:font wx:val="Times New Roman" />
             <w:sz w:val="28" />
             <w:sz-cs w:val="28" />
+            <w:rtl />
+            <w:lang w:bidi="AR-SA" />
           </w:rPr>
           <w:t>3 “اُجاڑ جنگل میں ایک پیغمبر کی آواز آتے جاتے لوگوں کو سنائی دے گی</w:t>
         </w:r>
@@ -543,10 +546,11 @@
         </w:pPr>
         <w:r wsp:rsidRPr="0080395C">
           <w:rPr>
-            <w:rStyle w:val="v-VerseNumber" />
             <w:rFonts w:cs="Nafees Nastaleeq" />
             <w:sz w:val="28" />
             <w:sz-cs w:val="28" />
+            <w:rtl />
+            <w:lang w:bidi="AR-SA" />
           </w:rPr>
           <w:t>3 “اُجاڑ جنگل میں ایک پیغمبر کی آواز آتے جاتے لوگوں کو سنائی دے گی</w:t>
         </w:r>

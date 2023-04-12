@@ -253,10 +253,10 @@ namespace SILConvertersWordML
                         if (!firstNonPunctuationFound)
                         {
                             // if the current first run is all punctuation...
-                            if (textOfFirstRun.Value.All(ch => Char.IsPunctuation(ch)))
+                            if (textOfFirstRun.Value.All(ch => !IsIndicitiveForFont(ch)))
                             {
                                 // if the next run has some non-punctuation...
-                                if (!textOfNextRun.Value.All(ch => Char.IsPunctuation(ch)))
+                                if (!textOfNextRun.Value.All(ch => !IsIndicitiveForFont(ch)))
                                 {
                                     // then let's use that next run as a new first run and prepend
                                     //  its data with the earlier punctuation.
@@ -280,6 +280,16 @@ namespace SILConvertersWordML
                     nextRun.Remove();
                 }
             }
+        }
+        
+        /// <summary>
+        /// Returns whether the given character is a good value to decide whether this run qualifies as the run of the paragraph
+        /// </summary>
+        /// <param name="ch"></param>
+        /// <returns></returns>
+        private static bool IsIndicitiveForFont(char ch)
+        {
+            return !(Char.IsPunctuation(ch) || Char.IsWhiteSpace(ch) || Char.IsDigit(ch));
         }
 
         /// <summary>
