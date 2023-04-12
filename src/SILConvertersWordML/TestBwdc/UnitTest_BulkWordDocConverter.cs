@@ -6,6 +6,7 @@ using System.Text.RegularExpressions;
 using System.Xml.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SILConvertersWordML;
+using TestBwdc.TestFiles;
 
 namespace TestBwdc
 {
@@ -1322,11 +1323,59 @@ namespace TestBwdc
             AssertEqual(strResult, cstrOutput);
         }
 
-        public void AssertEqual(string str1, string str2)
+        [TestMethod]
+        public void TestingCombiningRunsIntoSingleIsoFormattedParagraph_With_Text_In_A_Table()
         {
-            string ours = RemoveNameSpaces(str1);
-            string theirs = RemoveNameSpaces(str2);
-            Assert.IsTrue(XmlUtilities.AreXmlElementsEqual(ours, theirs));
+            // from C:\My Paratext 9 Projects\xnrUr\Mark 1_1-8 Urdu.rtf
+            var input = TestModel.LoadEmbeddedResourceFileAsStringExecutingAssembly("TestFile_ConvertMiddleTableCell_Input.xml");
+            var expected = TestModel.LoadEmbeddedResourceFileAsStringExecutingAssembly("TestFile_ConvertMiddleTableCell_Expected.xml");
+
+            var strExpectedDoc = String.Format(Properties.Resources.TestFile2,
+                                               expected);
+            var docExpected = XDocument.Parse(strExpectedDoc);
+            var paragraphsExpected = docExpected.Root.Descendants(WordLinqDocument.w + "p").ToList();
+
+            var strInput = String.Format(Properties.Resources.TestFile2,
+                                         input);
+            var doc = XDocument.Parse(strInput);
+            WordLinqDocument.CombineAllRunsIntoSingleRun(doc);
+
+            var paragraphsOutput = doc.Root.Descendants(WordLinqDocument.w + "p").ToList();
+            for (var i= 0; i < paragraphsOutput.Count; i++)
+            {
+                var paragraphExpected = paragraphsExpected[i];
+                var strExpected = paragraphExpected.ToString();
+                var paragraphOutput = paragraphsOutput[i];
+                var strResult = paragraphOutput.ToString();
+                AssertEqual(strExpected, strResult);
+            }
+        }
+
+        public void AssertEqual(string strExpected, string strResult)
+        {
+            var expected = RemoveSomeAttributes(RemoveNameSpaces(strExpected));
+            var result = RemoveSomeAttributes(RemoveNameSpaces(strResult));
+            Assert.IsTrue(XmlUtilities.AreXmlElementsEqual(expected, result));
+        }
+
+        private static List<string> _attributesToRemove = new List<string>
+        {
+            "rsidP",
+            "rsidR",
+            "rsidRDefault",
+            "rsidRPr",
+            "rsidTr"
+        };
+
+        private string RemoveSomeAttributes(string xml)
+        {
+            // some attributes may be different from the source to the expected target and don't mean it's different
+            foreach (var attributeName in  _attributesToRemove)
+            {
+                var regexExpression = $" {attributeName}=['\"].*?['\"]";
+                xml = Regex.Replace(xml, regexExpression, String.Empty);
+            }
+            return xml;
         }
 
         [TestMethod]

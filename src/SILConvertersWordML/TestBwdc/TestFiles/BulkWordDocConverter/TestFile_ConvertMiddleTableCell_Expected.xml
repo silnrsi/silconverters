@@ -1,0 +1,650 @@
+﻿<w:tbl>
+  <w:tblPr>
+    <w:bidiVisual />
+    <w:tblW w:w="0" w:type="auto" />
+    <w:tblBorders>
+      <w:top w:val="single" w:sz="4" wx:bdrwidth="10" w:space="0" w:color="auto" />
+      <w:left w:val="single" w:sz="4" wx:bdrwidth="10" w:space="0" w:color="auto" />
+      <w:bottom w:val="single" w:sz="4" wx:bdrwidth="10" w:space="0" w:color="auto" />
+      <w:right w:val="single" w:sz="4" wx:bdrwidth="10" w:space="0" w:color="auto" />
+      <w:insideH w:val="single" w:sz="4" wx:bdrwidth="10" w:space="0" w:color="auto" />
+      <w:insideV w:val="single" w:sz="4" wx:bdrwidth="10" w:space="0" w:color="auto" />
+    </w:tblBorders>
+    <w:tblLook w:val="04A0" />
+  </w:tblPr>
+  <w:tblGrid>
+    <w:gridCol w:w="4261" />
+    <w:gridCol w:w="4410" />
+    <w:gridCol w:w="4505" />
+  </w:tblGrid>
+  <w:tr wsp:rsidR="00BD201A" wsp:rsidRPr="0080395C" wsp:rsidTr="0080395C">
+    <w:trPr>
+      <w:cantSplit />
+      <w:trHeight w:val="1134" />
+    </w:trPr>
+    <w:tc>
+      <w:tcPr>
+        <w:tcW w:w="4261" w:type="dxa" />
+        <w:shd w:val="clear" w:color="auto" w:fill="auto" />
+      </w:tcPr>
+      <w:p wsp:rsidR="00BD201A" wsp:rsidRPr="0080395C" wsp:rsidRDefault="00BD201A" wsp:rsidP="0080395C">
+        <w:pPr>
+          <w:pStyle w:val="c-ChapterNumber" />
+          <w:jc w:val="right" />
+          <w:rPr>
+            <w:rFonts w:cs="Nafees Nastaleeq" />
+          </w:rPr>
+        </w:pPr>
+        <w:r wsp:rsidRPr="0080395C">
+          <w:rPr>
+            <w:rFonts w:ascii="Arial Unicode MS" w:fareast="Arial Unicode MS" w:h-ansi="Arial Unicode MS" w:cs="Arial Unicode MS" />
+            <wx:font wx:val="Arial Unicode MS" />
+            <w:sz w:val="40" />
+            <w:sz-cs w:val="40" />
+          </w:rPr>
+          <w:t>1</w:t>
+        </w:r>
+      </w:p>
+    </w:tc>
+    <w:tc>
+      <w:tcPr>
+        <w:tcW w:w="4410" w:type="dxa" />
+        <w:shd w:val="clear" w:color="auto" w:fill="auto" />
+      </w:tcPr>
+      <w:p wsp:rsidR="00BD201A" wsp:rsidRPr="0080395C" wsp:rsidRDefault="00BD201A" wsp:rsidP="0080395C">
+        <w:pPr>
+          <w:pStyle w:val="c-ChapterNumber" />
+          <w:jc w:val="right" />
+          <w:rPr>
+            <w:rFonts w:ascii="Times New Roman" w:h-ansi="Times New Roman" w:cs="Mangal" />
+            <wx:font wx:val="Times New Roman" />
+            <w:sz w:val="28" />
+            <w:sz-cs w:val="28" />
+          </w:rPr>
+        </w:pPr>
+        <w:r wsp:rsidRPr="0080395C">
+          <w:rPr>
+            <w:rFonts w:ascii="Times New Roman" w:h-ansi="Times New Roman" w:cs="Mangal" />
+            <wx:font wx:val="Times New Roman" />
+            <w:sz w:val="28" />
+            <w:sz-cs w:val="28" />
+          </w:rPr>
+          <w:t>1</w:t>
+        </w:r>
+      </w:p>
+    </w:tc>
+    <w:tc>
+      <w:tcPr>
+        <w:tcW w:w="4505" w:type="dxa" />
+        <w:shd w:val="clear" w:color="auto" w:fill="auto" />
+      </w:tcPr>
+      <w:p wsp:rsidR="00BD201A" wsp:rsidRPr="0080395C" wsp:rsidRDefault="00BD201A" wsp:rsidP="00BD201A">
+        <w:pPr>
+          <w:pStyle w:val="c-ChapterNumber" />
+          <w:rPr>
+            <w:rFonts w:cs="Nafees Nastaleeq" />
+            <w:sz w:val="28" />
+            <w:sz-cs w:val="28" />
+          </w:rPr>
+        </w:pPr>
+        <w:r wsp:rsidRPr="0080395C">
+          <w:rPr>
+            <w:rFonts w:cs="Nafees Nastaleeq" />
+            <w:sz w:val="28" />
+            <w:sz-cs w:val="28" />
+          </w:rPr>
+          <w:t>1</w:t>
+        </w:r>
+      </w:p>
+    </w:tc>
+  </w:tr>
+  <w:tr wsp:rsidR="00BD201A" wsp:rsidRPr="0080395C" wsp:rsidTr="0080395C">
+    <w:trPr>
+      <w:cantSplit />
+      <w:trHeight w:val="1134" />
+    </w:trPr>
+    <w:tc>
+      <w:tcPr>
+        <w:tcW w:w="4261" w:type="dxa" />
+        <w:shd w:val="clear" w:color="auto" w:fill="auto" />
+      </w:tcPr>
+      <w:p wsp:rsidR="00BD201A" wsp:rsidRPr="0080395C" wsp:rsidRDefault="00BD201A" wsp:rsidP="0080395C">
+        <w:pPr>
+          <w:pStyle w:val="s-Heading-SectionLevel1" />
+          <w:jc w:val="right" />
+          <w:rPr>
+            <w:rFonts w:cs="Nafees Nastaleeq" />
+            <w:rtl />
+            <w:lang w:bidi="AR-SA" />
+          </w:rPr>
+        </w:pPr>
+        <w:r wsp:rsidRPr="0080395C">
+          <w:rPr>
+            <w:rFonts w:cs="Arial Unicode MS" w:hint="fareast" />
+            <wx:font wx:val="Arial Unicode MS" />
+            <w:sz w:val="28" />
+            <w:sz-cs w:val="28" />
+            <w:cs />
+          </w:rPr>
+          <w:t>युहन्‍ना द्वारा परमेश्वर के पुत्र के लिए मार्ग तैयार किया जाना</w:t>
+        </w:r>
+      </w:p>
+    </w:tc>
+    <w:tc>
+      <w:tcPr>
+        <w:tcW w:w="4410" w:type="dxa" />
+        <w:shd w:val="clear" w:color="auto" w:fill="auto" />
+      </w:tcPr>
+      <w:p wsp:rsidR="00BD201A" wsp:rsidRPr="0080395C" wsp:rsidRDefault="00BD201A" wsp:rsidP="0080395C">
+        <w:pPr>
+          <w:pStyle w:val="s-Heading-SectionLevel1" />
+          <w:jc w:val="right" />
+          <w:rPr>
+            <w:rFonts w:ascii="Times New Roman" w:h-ansi="Times New Roman" w:cs="Mangal" />
+            <wx:font wx:val="Mangal" />
+            <w:sz w:val="28" />
+            <w:sz-cs w:val="28" />
+            <w:rtl />
+            <w:lang w:bidi="AR-SA" />
+          </w:rPr>
+        </w:pPr>
+        <w:r wsp:rsidRPr="0080395C">
+          <w:rPr>
+            <w:rFonts w:ascii="Times New Roman" w:h-ansi="Times New Roman" w:cs="Times New Roman" />
+            <wx:font wx:val="Times New Roman" />
+            <w:sz w:val="28" />
+            <w:sz-cs w:val="28" />
+            <w:rtl />
+            <w:lang w:bidi="AR-SA" />
+          </w:rPr>
+          <w:t>یوحنا خدا کے بیٹے کے لیے راستہ تیار کر رہا ہے</w:t>
+        </w:r>
+      </w:p>
+    </w:tc>
+    <w:tc>
+      <w:tcPr>
+        <w:tcW w:w="4505" w:type="dxa" />
+        <w:shd w:val="clear" w:color="auto" w:fill="auto" />
+      </w:tcPr>
+      <w:p wsp:rsidR="00BD201A" wsp:rsidRPr="0080395C" wsp:rsidRDefault="00BD201A" wsp:rsidP="00BD201A">
+        <w:pPr>
+          <w:pStyle w:val="s-Heading-SectionLevel1" />
+          <w:rPr>
+            <w:rFonts w:cs="Nafees Nastaleeq" />
+            <w:sz w:val="28" />
+            <w:sz-cs w:val="28" />
+          </w:rPr>
+        </w:pPr>
+        <w:r wsp:rsidRPr="0080395C">
+          <w:rPr>
+            <w:rFonts w:cs="Nafees Nastaleeq" />
+            <w:sz w:val="28" />
+            <w:sz-cs w:val="28" />
+            <w:rtl />
+            <w:lang w:bidi="AR-SA" />
+          </w:rPr>
+          <w:t>یوحنا خدا کے بیٹے کے لیے راستہ تیار کر رہا ہے</w:t>
+        </w:r>
+      </w:p>
+    </w:tc>
+  </w:tr>
+  <w:tr wsp:rsidR="00BD201A" wsp:rsidRPr="0080395C" wsp:rsidTr="0080395C">
+    <w:trPr>
+      <w:cantSplit />
+      <w:trHeight w:val="1134" />
+    </w:trPr>
+    <w:tc>
+      <w:tcPr>
+        <w:tcW w:w="4261" w:type="dxa" />
+        <w:shd w:val="clear" w:color="auto" w:fill="auto" />
+      </w:tcPr>
+      <w:p wsp:rsidR="00BD201A" wsp:rsidRPr="0080395C" wsp:rsidRDefault="00BD201A" wsp:rsidP="0080395C">
+        <w:pPr>
+          <w:pStyle w:val="p-Paragraph-Normal-FirstLineIndent" />
+          <w:ind w:first-line="0" />
+          <w:jc w:val="right" />
+          <w:rPr>
+            <w:rStyle w:val="v-VerseNumber" />
+            <w:rFonts w:cs="Nafees Nastaleeq" />
+          </w:rPr>
+        </w:pPr>
+        <w:r wsp:rsidRPr="0080395C">
+          <w:rPr>
+            <w:rStyle w:val="v-VerseNumber" />
+            <w:rFonts w:ascii="Arial Unicode MS" w:fareast="Arial Unicode MS" w:h-ansi="Arial Unicode MS" w:cs="Arial Unicode MS" />
+            <wx:font wx:val="Arial Unicode MS" />
+            <w:sz w:val="28" />
+            <w:sz-cs w:val="28" />
+          </w:rPr>
+          <w:t>1 यह सु-समाचार परमेश्वर के पुत्र यीशु मसीह के विषय में है, जो इस जगत में देह धारण कर आया। यह इस प्रकार है… 2 यीशु के देह धारण करने से लगभग सात सौ वर्ष पहले यशायाह नामक एक संत था। उसने यीशु के विषय में परमेश्वर की ओर से भविष्यवाणी कर यह वादा किया:</w:t>
+        </w:r>
+      </w:p>
+    </w:tc>
+    <w:tc>
+      <w:tcPr>
+        <w:tcW w:w="4410" w:type="dxa" />
+        <w:shd w:val="clear" w:color="auto" w:fill="auto" />
+      </w:tcPr>
+      <w:p wsp:rsidR="00BD201A" wsp:rsidRPr="0080395C" wsp:rsidRDefault="00BD201A" wsp:rsidP="0080395C">
+        <w:pPr>
+          <w:pStyle w:val="p-Paragraph-Normal-FirstLineIndent" />
+          <w:ind w:first-line="0" />
+          <w:jc w:val="right" />
+          <w:rPr>
+            <w:rStyle w:val="v-VerseNumber" />
+            <w:rFonts w:ascii="Times New Roman" w:h-ansi="Times New Roman" w:cs="Mangal" />
+            <wx:font wx:val="Times New Roman" />
+            <w:sz w:val="28" />
+            <w:sz-cs w:val="28" />
+          </w:rPr>
+        </w:pPr>
+        <w:r wsp:rsidRPr="0080395C">
+          <w:rPr>
+            <w:rStyle w:val="v-VerseNumber" />
+            <w:rFonts w:ascii="Times New Roman" w:h-ansi="Times New Roman" w:cs="Mangal" />
+            <wx:font wx:val="Times New Roman" />
+            <w:sz w:val="28" />
+            <w:sz-cs w:val="28" />
+          </w:rPr>
+          <w:t>1 یہ خُوشخبری خُدا کے بیٹے یِسُوعؔ مسِیح کے بارے میں ہے; جو اِس دُنیا میں اِسان کی جِسم میں کر آیا, یہ اِس کے بارے میں ہے۔۔۔ 2 یِسُوعؔ کے اِسان کی جِسم میں کرنے سے تقریباً سات سو سال پہلے یسعیاہ نام کا ایک نبی تھا, اُس نے یِسُوعؔ کے بارے میں خُدا کی ترف سے پیشن گوئی کر یہ وعدہ کیا:</w:t>
+        </w:r>
+      </w:p>
+    </w:tc>
+    <w:tc>
+      <w:tcPr>
+        <w:tcW w:w="4505" w:type="dxa" />
+        <w:shd w:val="clear" w:color="auto" w:fill="auto" />
+      </w:tcPr>
+      <w:p wsp:rsidR="00BD201A" wsp:rsidRPr="0080395C" wsp:rsidRDefault="00BD201A" wsp:rsidP="0080395C">
+        <w:pPr>
+          <w:pStyle w:val="p-Paragraph-Normal-FirstLineIndent" />
+          <w:ind w:first-line="0" />
+          <w:rPr>
+            <w:rFonts w:cs="Nafees Nastaleeq" />
+            <w:sz w:val="28" />
+            <w:sz-cs w:val="28" />
+          </w:rPr>
+        </w:pPr>
+        <w:r wsp:rsidRPr="0080395C">
+          <w:rPr>
+            <w:rStyle w:val="v-VerseNumber" />
+            <w:rFonts w:cs="Nafees Nastaleeq" />
+            <w:sz w:val="28" />
+            <w:sz-cs w:val="28" />
+          </w:rPr>
+          <w:t>1 یہ خُوشخبری خُدا کے بیٹے یِسُوعؔ مسِیح کے بارے میں ہے; جو اِس دُنیا میں اِسان کی جِسم میں کر آیا, یہ اِس کے بارے میں ہے۔۔۔ 2 یِسُوعؔ کے اِسان کی جِسم میں کرنے سے تقریباً سات سو سال پہلے یسعیاہ نام کا ایک نبی تھا, اُس نے یِسُوعؔ کے بارے میں خُدا کی ترف سے پیشن گوئی کر یہ وعدہ کیا:</w:t>
+        </w:r>
+      </w:p>
+    </w:tc>
+  </w:tr>
+  <w:tr wsp:rsidR="00BD201A" wsp:rsidRPr="0080395C" wsp:rsidTr="0080395C">
+    <w:trPr>
+      <w:cantSplit />
+      <w:trHeight w:val="1134" />
+    </w:trPr>
+    <w:tc>
+      <w:tcPr>
+        <w:tcW w:w="4261" w:type="dxa" />
+        <w:shd w:val="clear" w:color="auto" w:fill="auto" />
+      </w:tcPr>
+      <w:p wsp:rsidR="00BD201A" wsp:rsidRPr="0080395C" wsp:rsidRDefault="00BD201A" wsp:rsidP="0080395C">
+        <w:pPr>
+          <w:pStyle w:val="q1-Poetry-IndentLevel1" />
+          <w:ind w:left="0" w:first-line="0" />
+          <w:jc w:val="right" />
+          <w:rPr>
+            <w:rFonts w:ascii="Times New Roman" w:h-ansi="Times New Roman" w:cs="Times New Roman" />
+            <wx:font wx:val="Times New Roman" />
+            <w:rtl />
+            <w:lang w:bidi="AR-SA" />
+          </w:rPr>
+        </w:pPr>
+        <w:r wsp:rsidRPr="0080395C">
+          <w:rPr>
+            <w:rFonts w:cs="Arial Unicode MS" w:hint="fareast" />
+            <wx:font wx:val="Arial Unicode MS" />
+            <w:sz w:val="28" />
+            <w:sz-cs w:val="28" />
+            <w:cs />
+          </w:rPr>
+          <w:t>“‘देख! मैं अपने दूत को तुझ से पहले भेज रहा हूँ,</w:t>
+        </w:r>
+      </w:p>
+    </w:tc>
+    <w:tc>
+      <w:tcPr>
+        <w:tcW w:w="4410" w:type="dxa" />
+        <w:shd w:val="clear" w:color="auto" w:fill="auto" />
+      </w:tcPr>
+      <w:p wsp:rsidR="00BD201A" wsp:rsidRPr="0080395C" wsp:rsidRDefault="00BD201A" wsp:rsidP="0080395C">
+        <w:pPr>
+          <w:pStyle w:val="q1-Poetry-IndentLevel1" />
+          <w:ind w:left="0" w:first-line="0" />
+          <w:jc w:val="right" />
+          <w:rPr>
+            <w:rFonts w:ascii="Times New Roman" w:h-ansi="Times New Roman" w:cs="Mangal" />
+            <wx:font wx:val="Mangal" />
+            <w:sz w:val="28" />
+            <w:sz-cs w:val="28" />
+            <w:rtl />
+            <w:lang w:bidi="AR-SA" />
+          </w:rPr>
+        </w:pPr>
+        <w:r wsp:rsidRPr="0080395C">
+          <w:rPr>
+            <w:rFonts w:ascii="Times New Roman" w:h-ansi="Times New Roman" w:cs="Times New Roman" />
+            <wx:font wx:val="Times New Roman" />
+            <w:sz w:val="28" />
+            <w:sz-cs w:val="28" />
+            <w:rtl />
+            <w:lang w:bidi="AR-SA" />
+          </w:rPr>
+          <w:t>“‘دیکھ! مَیں اپنے پیغمبر کو تُجھ سے پہلے بھیج رہا ہُوں;</w:t>
+        </w:r>
+      </w:p>
+    </w:tc>
+    <w:tc>
+      <w:tcPr>
+        <w:tcW w:w="4505" w:type="dxa" />
+        <w:shd w:val="clear" w:color="auto" w:fill="auto" />
+      </w:tcPr>
+      <w:p wsp:rsidR="00BD201A" wsp:rsidRPr="0080395C" wsp:rsidRDefault="00BD201A" wsp:rsidP="0080395C">
+        <w:pPr>
+          <w:pStyle w:val="q1-Poetry-IndentLevel1" />
+          <w:ind w:left="0" w:first-line="0" />
+          <w:rPr>
+            <w:rFonts w:cs="Nafees Nastaleeq" />
+            <w:sz w:val="28" />
+            <w:sz-cs w:val="28" />
+          </w:rPr>
+        </w:pPr>
+        <w:r wsp:rsidRPr="0080395C">
+          <w:rPr>
+            <w:rFonts w:cs="Nafees Nastaleeq" />
+            <w:sz w:val="28" />
+            <w:sz-cs w:val="28" />
+            <w:rtl />
+            <w:lang w:bidi="AR-SA" />
+          </w:rPr>
+          <w:t>“‘دیکھ! مَیں اپنے پیغمبر کو تُجھ سے پہلے بھیج رہا ہُوں;</w:t>
+        </w:r>
+      </w:p>
+    </w:tc>
+  </w:tr>
+  <w:tr wsp:rsidR="00BD201A" wsp:rsidRPr="0080395C" wsp:rsidTr="0080395C">
+    <w:trPr>
+      <w:cantSplit />
+      <w:trHeight w:val="1134" />
+    </w:trPr>
+    <w:tc>
+      <w:tcPr>
+        <w:tcW w:w="4261" w:type="dxa" />
+        <w:shd w:val="clear" w:color="auto" w:fill="auto" />
+      </w:tcPr>
+      <w:p wsp:rsidR="00BD201A" wsp:rsidRPr="0080395C" wsp:rsidRDefault="00BD201A" wsp:rsidP="0080395C">
+        <w:pPr>
+          <w:pStyle w:val="q2-Poetry-IndentLevel2" />
+          <w:ind w:left="0" w:first-line="0" />
+          <w:jc w:val="right" />
+          <w:rPr>
+            <w:rFonts w:cs="Nafees Nastaleeq" />
+            <w:rtl />
+            <w:lang w:bidi="AR-SA" />
+          </w:rPr>
+        </w:pPr>
+        <w:r wsp:rsidRPr="0080395C">
+          <w:rPr>
+            <w:rFonts w:cs="Arial Unicode MS" w:hint="fareast" />
+            <wx:font wx:val="Arial Unicode MS" />
+            <w:sz w:val="28" />
+            <w:sz-cs w:val="28" />
+            <w:cs />
+          </w:rPr>
+          <w:t>जो तेरे आने से पहले लोगों के मनों को तुझे मान लेने के लिए तैयार करेगा।’” मलाकी 3:1</w:t>
+        </w:r>
+      </w:p>
+    </w:tc>
+    <w:tc>
+      <w:tcPr>
+        <w:tcW w:w="4410" w:type="dxa" />
+        <w:shd w:val="clear" w:color="auto" w:fill="auto" />
+      </w:tcPr>
+      <w:p wsp:rsidR="00BD201A" wsp:rsidRPr="0080395C" wsp:rsidRDefault="00BD201A" wsp:rsidP="0080395C">
+        <w:pPr>
+          <w:pStyle w:val="q2-Poetry-IndentLevel2" />
+          <w:ind w:left="0" w:first-line="0" />
+          <w:jc w:val="right" />
+          <w:rPr>
+            <w:rFonts w:ascii="Times New Roman" w:h-ansi="Times New Roman" w:cs="Mangal" />
+            <wx:font wx:val="Mangal" />
+            <w:sz w:val="28" />
+            <w:sz-cs w:val="28" />
+            <w:rtl />
+            <w:lang w:bidi="AR-SA" />
+          </w:rPr>
+        </w:pPr>
+        <w:r wsp:rsidRPr="0080395C">
+          <w:rPr>
+            <w:rFonts w:ascii="Times New Roman" w:h-ansi="Times New Roman" w:cs="Times New Roman" />
+            <wx:font wx:val="Times New Roman" />
+            <w:sz w:val="28" />
+            <w:sz-cs w:val="28" />
+            <w:rtl />
+            <w:lang w:bidi="AR-SA" />
+          </w:rPr>
+          <w:t>جو تیرے آنے سے پہلے لوگوں کے منوں کو تُجھے مان لینے کے لئے تیار کرے گا;’”</w:t>
+        </w:r>
+      </w:p>
+    </w:tc>
+    <w:tc>
+      <w:tcPr>
+        <w:tcW w:w="4505" w:type="dxa" />
+        <w:shd w:val="clear" w:color="auto" w:fill="auto" />
+      </w:tcPr>
+      <w:p wsp:rsidR="00BD201A" wsp:rsidRPr="0080395C" wsp:rsidRDefault="00BD201A" wsp:rsidP="0080395C">
+        <w:pPr>
+          <w:pStyle w:val="q2-Poetry-IndentLevel2" />
+          <w:ind w:left="0" w:first-line="0" />
+          <w:rPr>
+            <w:rFonts w:cs="Nafees Nastaleeq" />
+            <w:sz w:val="28" />
+            <w:sz-cs w:val="28" />
+          </w:rPr>
+        </w:pPr>
+        <w:r wsp:rsidRPr="0080395C">
+          <w:rPr>
+            <w:rFonts w:cs="Nafees Nastaleeq" />
+            <w:sz w:val="28" />
+            <w:sz-cs w:val="28" />
+            <w:rtl />
+            <w:lang w:bidi="AR-SA" />
+          </w:rPr>
+          <w:t>جو تیرے آنے سے پہلے لوگوں کے منوں کو تُجھے مان لینے کے لئے تیار کرے گا;’”</w:t>
+        </w:r>
+      </w:p>
+    </w:tc>
+  </w:tr>
+  <w:tr wsp:rsidR="00BD201A" wsp:rsidRPr="0080395C" wsp:rsidTr="0080395C">
+    <w:trPr>
+      <w:cantSplit />
+      <w:trHeight w:val="1134" />
+    </w:trPr>
+    <w:tc>
+      <w:tcPr>
+        <w:tcW w:w="4261" w:type="dxa" />
+        <w:shd w:val="clear" w:color="auto" w:fill="auto" />
+      </w:tcPr>
+      <w:p wsp:rsidR="00BD201A" wsp:rsidRPr="0080395C" wsp:rsidRDefault="00BD201A" wsp:rsidP="0080395C">
+        <w:pPr>
+          <w:pStyle w:val="q1-Poetry-IndentLevel1" />
+          <w:ind w:left="0" w:first-line="0" />
+          <w:jc w:val="right" />
+          <w:rPr>
+            <w:rStyle w:val="v-VerseNumber" />
+            <w:rFonts w:cs="Nafees Nastaleeq" />
+          </w:rPr>
+        </w:pPr>
+        <w:r wsp:rsidRPr="0080395C">
+          <w:rPr>
+            <w:rStyle w:val="v-VerseNumber" />
+            <w:rFonts w:ascii="Arial Unicode MS" w:fareast="Arial Unicode MS" w:h-ansi="Arial Unicode MS" w:cs="Arial Unicode MS" />
+            <wx:font wx:val="Arial Unicode MS" />
+            <w:sz w:val="28" />
+            <w:sz-cs w:val="28" />
+          </w:rPr>
+          <w:t>3 “उजाड़ जंगल में एक दूत की आवाज आते-जाते लोगों को सुनाई देगी —</w:t>
+        </w:r>
+      </w:p>
+    </w:tc>
+    <w:tc>
+      <w:tcPr>
+        <w:tcW w:w="4410" w:type="dxa" />
+        <w:shd w:val="clear" w:color="auto" w:fill="auto" />
+      </w:tcPr>
+      <w:p wsp:rsidR="00BD201A" wsp:rsidRPr="0080395C" wsp:rsidRDefault="00BD201A" wsp:rsidP="0080395C">
+        <w:pPr>
+          <w:pStyle w:val="q1-Poetry-IndentLevel1" />
+          <w:ind w:left="0" w:first-line="0" />
+          <w:jc w:val="right" />
+          <w:rPr>
+            <w:rStyle w:val="v-VerseNumber" />
+            <w:rFonts w:ascii="Times New Roman" w:h-ansi="Times New Roman" w:cs="Mangal" />
+            <wx:font wx:val="Times New Roman" />
+            <w:sz w:val="28" />
+            <w:sz-cs w:val="28" />
+          </w:rPr>
+        </w:pPr>
+        <w:r wsp:rsidRPr="0080395C">
+          <w:rPr>
+            <w:rStyle w:val="v-VerseNumber" />
+            <w:rFonts w:ascii="Times New Roman" w:h-ansi="Times New Roman" w:cs="Mangal" />
+            <wx:font wx:val="Times New Roman" />
+            <w:sz w:val="28" />
+            <w:sz-cs w:val="28" />
+          </w:rPr>
+          <w:t>3 “اُجاڑ جنگل میں ایک پیغمبر کی آواز آتے جاتے لوگوں کو سنائی دے گی</w:t>
+        </w:r>
+      </w:p>
+    </w:tc>
+    <w:tc>
+      <w:tcPr>
+        <w:tcW w:w="4505" w:type="dxa" />
+        <w:shd w:val="clear" w:color="auto" w:fill="auto" />
+      </w:tcPr>
+      <w:p wsp:rsidR="00BD201A" wsp:rsidRPr="0080395C" wsp:rsidRDefault="00BD201A" wsp:rsidP="0080395C">
+        <w:pPr>
+          <w:pStyle w:val="q1-Poetry-IndentLevel1" />
+          <w:ind w:left="0" w:first-line="0" />
+          <w:rPr>
+            <w:rFonts w:cs="Nafees Nastaleeq" />
+            <w:sz w:val="28" />
+            <w:sz-cs w:val="28" />
+          </w:rPr>
+        </w:pPr>
+        <w:r wsp:rsidRPr="0080395C">
+          <w:rPr>
+            <w:rStyle w:val="v-VerseNumber" />
+            <w:rFonts w:cs="Nafees Nastaleeq" />
+            <w:sz w:val="28" />
+            <w:sz-cs w:val="28" />
+          </w:rPr>
+          <w:t>3 “اُجاڑ جنگل میں ایک پیغمبر کی آواز آتے جاتے لوگوں کو سنائی دے گی</w:t>
+        </w:r>
+      </w:p>
+    </w:tc>
+  </w:tr>
+  <w:tr wsp:rsidR="00BD201A" wsp:rsidRPr="0080395C" wsp:rsidTr="0080395C">
+    <w:trPr>
+      <w:cantSplit />
+      <w:trHeight w:val="1134" />
+    </w:trPr>
+    <w:tc>
+      <w:tcPr>
+        <w:tcW w:w="4261" w:type="dxa" />
+        <w:shd w:val="clear" w:color="auto" w:fill="auto" />
+      </w:tcPr>
+      <w:p wsp:rsidR="00BD201A" wsp:rsidRPr="0080395C" wsp:rsidRDefault="00BD201A" wsp:rsidP="0080395C">
+        <w:pPr>
+          <w:pStyle w:val="q2-Poetry-IndentLevel2" />
+          <w:ind w:left="0" w:first-line="0" />
+          <w:jc w:val="right" />
+          <w:rPr>
+            <w:rFonts w:ascii="Times New Roman" w:h-ansi="Times New Roman" w:cs="Times New Roman" />
+            <wx:font wx:val="Times New Roman" />
+            <w:rtl />
+            <w:lang w:bidi="AR-SA" />
+          </w:rPr>
+        </w:pPr>
+        <w:r wsp:rsidRPr="0080395C">
+          <w:rPr>
+            <w:rFonts w:cs="Arial Unicode MS" w:hint="fareast" />
+            <wx:font wx:val="Arial Unicode MS" />
+            <w:sz w:val="28" />
+            <w:sz-cs w:val="28" />
+            <w:cs />
+          </w:rPr>
+          <w:t>‘प्रभु के आने से पहले अपने हृदयों को साफ करो, और अपना जीवन सुधार लो’।” यशायाह 40:3</w:t>
+        </w:r>
+      </w:p>
+    </w:tc>
+    <w:tc>
+      <w:tcPr>
+        <w:tcW w:w="4410" w:type="dxa" />
+        <w:shd w:val="clear" w:color="auto" w:fill="auto" />
+      </w:tcPr>
+      <w:p wsp:rsidR="00BD201A" wsp:rsidRPr="0080395C" wsp:rsidRDefault="00BD201A" wsp:rsidP="0080395C">
+        <w:pPr>
+          <w:pStyle w:val="q2-Poetry-IndentLevel2" />
+          <w:ind w:left="0" w:first-line="0" />
+          <w:jc w:val="right" />
+          <w:rPr>
+            <w:rFonts w:ascii="Times New Roman" w:h-ansi="Times New Roman" w:cs="Mangal" />
+            <wx:font wx:val="Mangal" />
+            <w:sz w:val="28" />
+            <w:sz-cs w:val="28" />
+            <w:rtl />
+            <w:lang w:bidi="AR-SA" />
+          </w:rPr>
+        </w:pPr>
+        <w:r wsp:rsidRPr="0080395C">
+          <w:rPr>
+            <w:rFonts w:ascii="Times New Roman" w:h-ansi="Times New Roman" w:cs="Times New Roman" />
+            <wx:font wx:val="Times New Roman" />
+            <w:sz w:val="28" />
+            <w:sz-cs w:val="28" />
+            <w:rtl />
+            <w:lang w:bidi="AR-SA" />
+          </w:rPr>
+          <w:t>‘خُداوند کے آنے سے پہلے اپنے اپنے دلوں کو صاف کرو۔ اور اپنی زندگی سُدھار لو’;”</w:t>
+        </w:r>
+      </w:p>
+    </w:tc>
+    <w:tc>
+      <w:tcPr>
+        <w:tcW w:w="4505" w:type="dxa" />
+        <w:shd w:val="clear" w:color="auto" w:fill="auto" />
+      </w:tcPr>
+      <w:p wsp:rsidR="00BD201A" wsp:rsidRPr="0080395C" wsp:rsidRDefault="00BD201A" wsp:rsidP="0080395C">
+        <w:pPr>
+          <w:pStyle w:val="q2-Poetry-IndentLevel2" />
+          <w:ind w:left="0" w:first-line="0" />
+          <w:rPr>
+            <w:rFonts w:cs="Nafees Nastaleeq" />
+            <w:sz w:val="28" />
+            <w:sz-cs w:val="28" />
+          </w:rPr>
+        </w:pPr>
+        <w:r wsp:rsidRPr="0080395C">
+          <w:rPr>
+            <w:rFonts w:cs="Nafees Nastaleeq" />
+            <w:sz w:val="28" />
+            <w:sz-cs w:val="28" />
+            <w:rtl />
+            <w:lang w:bidi="AR-SA" />
+          </w:rPr>
+          <w:t>‘خُداوند کے آنے سے پہلے اپنے اپنے دلوں کو صاف کرو۔ اور اپنی زندگی سُدھار لو’;”</w:t>
+        </w:r>
+      </w:p>
+    </w:tc>
+  </w:tr>
+</w:tbl>

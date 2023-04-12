@@ -288,6 +288,8 @@
     <Content Include="redist\Help\Technical_Hindi_%28Google_group%29_Html_Converter_Plug-in_About_box.htm" />
     <Content Include="redist\Help\TECkit_Map_Plug-in_About_box.htm" />
     <Content Include="TestFiles\BulkWordDocConverter\TestFile1.xml" />
+    <EmbeddedResource Include="TestFiles\BulkWordDocConverter\TestFile_ConvertMiddleTableCell_Expected.xml" />
+    <EmbeddedResource Include="TestFiles\BulkWordDocConverter\TestFile_ConvertMiddleTableCell_Input.xml" />
     <Content Include="TestFiles\BulkWordDocConverter\TestFile2.xml" />
     <EmbeddedResource Include="TestFiles\PtxBackTrHelper\CombinedInSourceAndTargetWithVaOverride\CombinedInSourceAndTargetWithVaOverride_TranslatedText.txt" />
     <EmbeddedResource Include="TestFiles\PtxBackTrHelper\CombinedInSourceSeparateNoEmptyInTarget\CombinedInSourceSeparateNoEmptyInTarget_TranslatedText.txt" />
