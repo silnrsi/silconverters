@@ -367,13 +367,6 @@ namespace SIL.ParatextBackTranslationHelperPlugin
         {
             get
             {
-                _writeLock = _projectTarget.RequestWriteLock(_plugin, ReleaseRequested, _verseReference.BookNum, _verseReference.ChapterNum);
-                if (_writeLock == null)
-                {
-                    // if this fails to return something, it means we can't edit it
-                    MessageBox.Show($"You don't have edit privilege on this chapter: {_verseReference}");
-                }
-
                 var bookChapterKey = GetBookChapterKey(_verseReference);
                 if (!UsfmTokensTarget.TryGetValue(bookChapterKey, out SortedDictionary<string, List<IUSFMToken>> vrefTokens))
                 {
@@ -535,7 +528,16 @@ namespace SIL.ParatextBackTranslationHelperPlugin
                 }
 
                 AreWeChangingTheTarget = true;
-                _writeLock ??= _projectTarget.RequestWriteLock(_plugin, ReleaseRequested, _verseReference.BookNum, _verseReference.ChapterNum);
+                if (_writeLock == null)
+                {
+                    _writeLock = _projectTarget.RequestWriteLock(_plugin, ReleaseRequested, _verseReference.BookNum, _verseReference.ChapterNum);
+
+                    if (_writeLock == null) // if it still is, we should warn the user that it isn't going to work
+                    {
+                        MessageBox.Show($"You don't have edit privilege on this chapter: {_verseReference}");
+                        return false;
+                    }
+                }
 
                 var tokens = vrefTokensTarget.SelectMany(d => d.Value).ToList();
 
