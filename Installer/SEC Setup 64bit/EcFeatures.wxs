@@ -105,7 +105,7 @@
         <MergeRef Id="DChartHelper"/>
         <MergeRef Id="AIGuesser"/>
       </Feature>
-      <Feature Id="Paratext_BackTranslation_Helper_Plugin" Title="Paratext Back Translation Helper Plugin" Description="The Ptx BT Helper can be launched from the Paratext, Tools menu (newer than 9.2.102.17). Allows you to use Bing/DeepL to prepare a back translation of 1 project into another. It requires an internet connection to run." Display="expand" Level="4" AllowAdvertise="no">
+      <Feature Id="Paratext_BackTranslation_Helper_Plugin" Title="Paratext Back Translation Helper Plugin" Description="The Ptx BT Helper can be launched from the Paratext, Tools menu (newer than 9.2.102.17). Allows you to use Bing/DeepL/Google Translate to prepare a back translation of 1 project into another. It requires an internet connection to run." Display="expand" Level="4" AllowAdvertise="no">
         <Condition Level="3"><![CDATA[COMPONENTEXISTS_PARATEXT_9 AND NOT REMOVE]]></Condition>
         <MergeRef Id="SEC_EC"/>
         <MergeRef Id="ParatextBackTranslationHelperPlugin"/>
@@ -115,7 +115,7 @@
       </Feature>
     </Feature>
     <Feature Id="Transduction_Engines" Title="Transduction Engines" Description="Expand this node to select or deselect individual transduction engines" Level="3" AllowAdvertise="no">
-      <Feature Id="BingTranslator" Title="Bing/DeepL Translators" Description="Use the Bing or DeepL Translator for text translation. Requires an internet connection." Display="expand" Level="3" AllowAdvertise="no">
+      <Feature Id="BingTranslator" Title="Bing/DeepL/Google Translate" Description="Use Bing, DeepL, or Google Translate for text translation. Requires an internet connection." Display="expand" Level="3" AllowAdvertise="no">
         <MergeRef Id="EcTranslators" />
       </Feature>
       <Feature Id="TECkit_DLLs" Title="TECkit" Description="Contains the TECkit conversion and compiling engines (DLLs). Select this component if you intend to use TECkit for encoding conversion or other transduction processing." Display="expand" Level="3" AllowAdvertise="no">
