@@ -286,7 +286,7 @@ namespace SIL.ParatextBackTranslationHelperPlugin
                 if (!UsfmTokensSource.TryGetValue(keyBookChapterVerse, out List<IUSFMToken> tokens))
                 {
                     System.Diagnostics.Debug.WriteLine($"PtxBTH: Loading UsfmTokensSource for {keyBookChapterVerse}");
-                    tokens = _projectSource.GetUSFMTokens(_verseReference.BookNum, _verseReference.ChapterNum, _verseReference.VerseNum).ToList();
+                    tokens = _projectSource.GetUSFMTokens(_verseReference.BookNum, _verseReference.ChapterNum, _verseReference.VerseNum)?.ToList();
                     UsfmTokensSource.Add(keyBookChapterVerse, tokens);
                 }
                 else
@@ -294,11 +294,11 @@ namespace SIL.ParatextBackTranslationHelperPlugin
                     System.Diagnostics.Debug.WriteLine($"PtxBTH: Already have UsfmTokensSource for {keyBookChapterVerse}");
                 }
 
-                var data = tokens.OfType<IUSFMTextToken>()
-                                 .Where(t => IsPublishableVernacular(t, tokens) && IsMatchingVerse(t.VerseRef, _verseReference))
-                                 .ToDictionary(ta => ta, ta => ta.VerseRef);
+                var data = tokens?.OfType<IUSFMTextToken>()
+                                  .Where(t => IsPublishableVernacular(t, tokens) && IsMatchingVerse(t.VerseRef, _verseReference))
+                                  .ToDictionary(ta => ta, ta => ta.VerseRef);
 
-                if (!data.Any())
+                if ((data == null) || !data.Any())
                     return null;
 
                 TextTokenMarkersSource = GetTextTokenMarkers(tokens, data.Keys.ToList());
