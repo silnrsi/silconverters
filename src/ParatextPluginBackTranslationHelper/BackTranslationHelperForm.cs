@@ -12,7 +12,7 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using Newtonsoft.Json;
-using System.Windows;
+using System.Collections.Specialized;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using System.Windows.Forms.VisualStyles;
 
@@ -98,8 +98,51 @@ namespace SIL.ParatextBackTranslationHelperPlugin
             backTranslationHelperCtrl.RegisterForNotification(BackTranslationHelperCtrl.SubscribeableEventKeyTargetBackTranslationTextChanged,
                                                               TargetBackTranslationTextChanged);
 
+            AddToSettingsMenu(backTranslationHelperCtrl);
             _host.VerseRefChanged += Host_VerseRefChanged;
-            _projectSource.ScriptureDataChanged += ScriptureDataChangedHandlerSource;
+        }
+
+        private System.Windows.Forms.ToolStripMenuItem translateNothingButPublishableScriptureTextMenuItem;
+
+        private void AddToSettingsMenu(BackTranslationHelperCtrl backTranslationHelperCtrl)
+        {
+            // add a menu to allow the user to choose a new source project
+            var chooseSourceProjectMenuItem = new System.Windows.Forms.ToolStripMenuItem
+            {
+                Name = "chooseSourceProjectMenuItem",
+                Size = new System.Drawing.Size(247, 22),
+                Text = "&Select New Source Project",
+                ToolTipText = "Click to bring up a dialog to select a different Paratext project to be the source text for the Translation(s).",
+            };
+            chooseSourceProjectMenuItem.Click += new System.EventHandler(this.ChangeSourceProject_Click);
+            backTranslationHelperCtrl.AddToSettingsMenu(chooseSourceProjectMenuItem);
+
+            translateNothingButPublishableScriptureTextMenuItem = new System.Windows.Forms.ToolStripMenuItem
+            {
+                CheckOnClick = true,
+                Name = "translateNothingButPublishableScriptureTextMenuItem",
+                Size = new System.Drawing.Size(247, 22),
+                Text = "&Translate only verse text",
+                ToolTipText = "Check this option to have the source text translated without interruption by inline footnotes or \\va or \\vp verse numbering (should generate a better translation)",
+            };
+            translateNothingButPublishableScriptureTextMenuItem.Checked = Properties.Settings.Default.TranslateOnlyText;
+            translateNothingButPublishableScriptureTextMenuItem.CheckStateChanged += new System.EventHandler(this.TranslateNothingButPublishableScriptureTextMenuItem_CheckStateChanged);
+            backTranslationHelperCtrl.AddToSettingsMenu(translateNothingButPublishableScriptureTextMenuItem);
+        }
+
+        private void TranslateNothingButPublishableScriptureTextMenuItem_CheckStateChanged(object sender, EventArgs e)
+        {
+            var newCheckState = translateNothingButPublishableScriptureTextMenuItem.Checked;
+            if (newCheckState != Properties.Settings.Default.TranslateOnlyText)
+            {
+                Properties.Settings.Default.TranslateOnlyText = newCheckState;
+                Properties.Settings.Default.Save();
+            }
+
+            UsfmTokensSource.Clear();   // so we requery from the new source project
+            GetNewReference(_verseReference);
+        }
+
         private void ChangeSourceProject_Click(object sender, EventArgs e)
         {
             var mapProjectNameToSourceProjectOverride = BackTranslationHelperCtrl.SettingToDictionary(Properties.Settings.Default.MapProjectNameToSourceProjectOverride);
@@ -317,7 +360,7 @@ namespace SIL.ParatextBackTranslationHelperPlugin
         {
             Text = GetFrameText(_projectSource, _projectTarget, _versesReference);
             _model = model;
-            backTranslationHelperCtrl.Initialize(true);
+            backTranslationHelperCtrl.Initialize(displayExistingTargetTranslation: true);
             _updateControls(_model);
         }
 
