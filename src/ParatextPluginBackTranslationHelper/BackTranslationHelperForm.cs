@@ -13,7 +13,8 @@ using System.Linq;
 using System.Windows.Forms;
 using Newtonsoft.Json;
 using System.Windows;
-using System.Security.Policy;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using System.Windows.Forms.VisualStyles;
 
 namespace SIL.ParatextBackTranslationHelperPlugin
 {
@@ -22,11 +23,11 @@ namespace SIL.ParatextBackTranslationHelperPlugin
         private const string FrameTextFormat = "Back Translating from {0} in verse: {1}";
         private const string ProjectNameFormat = "{0} - {1}";
 
-        private readonly IProject _projectSource;
-        private readonly IProject _projectTarget;
-        private readonly IProjectLanguage _languageSource;
-        private readonly IProjectLanguage _languageTarget;
-        private readonly IKeyboard _keyboardTarget;
+        private IProject _projectSource;
+        private IProject _projectTarget;
+        private IProjectLanguage _languageSource;
+        private IProjectLanguage _languageTarget;
+        private IKeyboard _keyboardTarget;
         private readonly IPluginHost _host;
         private readonly ParatextBackTranslationHelperPlugin _plugin;
         private Action<BackTranslationHelperModel> _updateControls;
@@ -81,7 +82,7 @@ namespace SIL.ParatextBackTranslationHelperPlugin
         private Dictionary<string, SortedDictionary<string, List<IUSFMToken>>> UsfmTokensTarget { get; set; } = new Dictionary<string, SortedDictionary<string, List<IUSFMToken>>>();
 
         public BackTranslationHelperForm(IPluginHost host, ParatextBackTranslationHelperPlugin plugin, Action<IVerseRef> setSyncReferenceGroup,
-            IVerseRef initialVerseReference, IProject projectSource, IProject projectTarget, IProjectLanguage languageSource, IProjectLanguage languageTarget)
+            IVerseRef initialVerseReference)
         {
             InitializeComponent();
 
@@ -89,11 +90,8 @@ namespace SIL.ParatextBackTranslationHelperPlugin
             _plugin = plugin;
             _versesReference = _verseReferenceLast = _verseReference = initialVerseReference;
             _setSyncReferenceGroup = setSyncReferenceGroup;
-            _projectSource = projectSource;
-            _projectTarget = projectTarget;
-            _languageSource = languageSource;
-            _languageTarget = languageTarget;
-            _keyboardTarget = _projectTarget.VernacularKeyboard;
+
+            InitializeProjects(_host);
 
             // this form is the implementation of the way to get get data
             backTranslationHelperCtrl.BackTranslationHelperDataSource = this;
@@ -102,7 +100,89 @@ namespace SIL.ParatextBackTranslationHelperPlugin
 
             _host.VerseRefChanged += Host_VerseRefChanged;
             _projectSource.ScriptureDataChanged += ScriptureDataChangedHandlerSource;
+        private void ChangeSourceProject_Click(object sender, EventArgs e)
+        {
+            var mapProjectNameToSourceProjectOverride = BackTranslationHelperCtrl.SettingToDictionary(Properties.Settings.Default.MapProjectNameToSourceProjectOverride);
+
+            var projectName = _projectTarget.ShortName;
+            if (mapProjectNameToSourceProjectOverride.ContainsKey(projectName))
+            {
+                // remove any previous ones in case the user just cancels the QueryForProject to remove the override
+                mapProjectNameToSourceProjectOverride.Remove(projectName);
+            }
+
+            var projectSource = QueryForProject("Source");
+            if ((projectSource != null) && (projectSource != _projectSource))
+            {
+                _projectSource = projectSource;
+                var lstSourceProjects = new List<string> { _projectSource.ShortName };
+                mapProjectNameToSourceProjectOverride[projectName] = lstSourceProjects;
+
+                InitializeSourceProjectCorrelates(_projectSource);
+                UsfmTokensSource.Clear();   // so we requery from the new source project
+                GetNewReference(_verseReference);
+            }
+
+            Properties.Settings.Default.MapProjectNameToSourceProjectOverride = BackTranslationHelperCtrl.SettingFromDictionary(mapProjectNameToSourceProjectOverride);
+            Properties.Settings.Default.Save();
+        }
+
+        private void InitializeProjects(IPluginHost host)
+        {
+            var projects = host.GetAllProjects();
+            var selectedProject = host.ActiveWindowState?.Project;
+
+            var projectName = selectedProject.ShortName;
+            
+            if (Properties.Settings.Default.MapProjectNameToSourceProjectOverride == null)
+                Properties.Settings.Default.MapProjectNameToSourceProjectOverride = new StringCollection();
+            var mapProjectNameToSourceProjectOverride = BackTranslationHelperCtrl.SettingToDictionary(Properties.Settings.Default.MapProjectNameToSourceProjectOverride);
+
+            if (mapProjectNameToSourceProjectOverride.TryGetValue(projectName, out List<string> lstSourceProjects))
+            {
+                _projectSource = projects.FirstOrDefault(p => p.ShortName == lstSourceProjects[0]);
+                _projectTarget = projects.FirstOrDefault(p => p.ShortName == selectedProject.ShortName);
+            }
+
+            // if the user selects the daughter/target project, let's assume that's the intended target from it's base project
+            else if ((selectedProject != null) && (selectedProject.BaseProject != null))
+            {
+                _projectSource = projects.FirstOrDefault(p => p.ShortName == selectedProject.BaseProject.ShortName);
+                _projectTarget = projects.FirstOrDefault(p => p.ShortName == selectedProject.ShortName);
+            }
+            else
+            {
+                // otherwise, make them choose
+                _projectSource ??= QueryForProject("Source");
+                _projectTarget ??= QueryForProject("Target");
+            }
+
+            if ((_projectSource == null) || (_projectTarget == null))
+                throw new ApplicationException($"Source ('{_projectSource}') or Target ('{_projectTarget}') project not selected. Can't continue!");
+
+            InitializeSourceProjectCorrelates(_projectSource);
+
+            _languageTarget = _projectTarget.Language;
+            _keyboardTarget = _projectTarget.VernacularKeyboard;
             _projectTarget.ScriptureDataChanged += ScriptureDataChangedHandlerTarget;
+        }
+
+        private void InitializeSourceProjectCorrelates(IProject projectSource)
+        {
+            _languageSource = projectSource.Language;
+            projectSource.ScriptureDataChanged += ScriptureDataChangedHandlerSource;
+        }
+
+        private IProject QueryForProject(string projectType)
+        {
+            var projects = _host.GetAllProjects();
+            var dlg = new ProjectListForm(projects, projectType);
+            if (dlg.ShowDialog() == DialogResult.OK)
+            {
+                return projects.FirstOrDefault(p => p.ShortName == dlg.SelectedDisplayName);
+            }
+
+            return null;
         }
 
         private void TargetBackTranslationTextChanged(string value)
