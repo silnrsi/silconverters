@@ -69,7 +69,7 @@ namespace SIL.ParatextBackTranslationHelperPlugin
         /// <summary>
         /// This contains the list of marker tokens immediately preceding the text tokens in the source data
         /// </summary>
-        private List<IUSFMMarkerToken> TextTokenMarkersSource { get; set; } = new List<IUSFMMarkerToken>();
+        private TextTokenMarkers TextTokenMarkersSource { get; set; }
 
         /// <summary>
         /// this contains the tokens from the target project, for all the verses in the current chapter (we need the 
@@ -230,22 +230,26 @@ namespace SIL.ParatextBackTranslationHelperPlugin
 
         private void TargetBackTranslationTextChanged(string value)
         {
-            var translatedCount = GetTranslatedLines(value).Count;
+            var translatedLines = GetTranslatedLines(value);
+            var translatedCount = translatedLines.Count;
             System.Diagnostics.Debug.WriteLine($"PtxBTH: TargetBackTranslationTextChanged: SourceDataLineCount = '{SourceDataLineCount}', translatedCount = '{translatedCount}'");
             var statusText = String.Empty;
             if (SourceDataLineCount != translatedCount)
             {
-                statusText = String.Format("There {0} currently {1} line{2} of text in the Target Translation box vs. {3} text line{4} in the source verse ({5}: {6})",
+                statusText = String.Format("There {0} currently {1} line{2} of text in the Target Translation box vs. {3} text line{4} in the source verse ({5}: {6}). Click (or hover your cursor here) to see the correspondence.",
                                            (translatedCount > 1) ? "are" : "is",
                                            translatedCount,
                                            (translatedCount > 1) ? "s" : string.Empty,
                                            SourceDataLineCount,
                                            (SourceDataLineCount > 1) ? "s" : string.Empty,
-                                           (TextTokenMarkersSource.Count > 1) ? "one for each of these markers" : "for this marker",
-                                           String.Join(",", TextTokenMarkersSource.Select(m => $"\\{m.Marker}")));
+                                           (TextTokenMarkersSource.CountTextTokenMarkers > 1) ? "one for each of these markers" : "for this marker",
+                                           String.Join(",", TextTokenMarkersSource.Where(m => !m.IsParagraphMarkerWithoutText).Select(m => $"\\{m.USFMMarkerToken.Marker}")));
             }
 
             textBoxStatus.Text = statusText;
+            textBoxStatus.Tag = translatedLines;
+            var preview = GetPreview(translatedLines);
+            toolTip.SetToolTip(textBoxStatus, preview);
 
             Application.DoEvents(); // this says we need to do this for when it won't display the change: https://social.msdn.microsoft.com/Forums/vstudio/en-US/983d2e3b-9bcb-4c9c-9e85-59f8b2051b3e/program-updating-a-textbox-does-not-work?forum=csharpgeneral
         }
@@ -319,11 +323,75 @@ namespace SIL.ParatextBackTranslationHelperPlugin
 
         private void TextBoxStatus_Click(object sender, System.EventArgs e)
         {
-            if (textBoxStatus.Tag != null)
+            if (textBoxStatus.Tag == null)
+                return;
+
+            if (textBoxStatus.Tag is IVerseRef newReference)
             {
-                backTranslationHelperCtrl.IsModified = false;
-                var newReference = (IVerseRef)textBoxStatus.Tag;
                 GetNewReference(newReference);
+                backTranslationHelperCtrl.IsModified = false;
+                textBoxStatus.Clear();
+                textBoxStatus.Tag = null;
+                backTranslationHelperCtrl.Focus();  // so it doesn’t leave the cursor in the status textBox
+            }
+            else if ((textBoxStatus.Tag is List<string> textLines) && (TextTokenMarkersSource != null) && TextTokenMarkersSource.Any())
+            {
+                var preview = GetPreview(textLines);
+                MessageBox.Show(preview, ParatextBackTranslationHelperPlugin.PluginName);
+                backTranslationHelperCtrl.Focus();  // so it doesn’t leave the cursor in the status textBox
+            }
+        }
+
+        private static readonly List<string> _previewInlineMarkersToIgnore = Properties.Settings.Default.GetPreviewInlineMarkersToIgnore.Cast<string>().ToList();
+
+        private string GetPreview(List<string> textLines)
+        {
+            string preview = null;
+            var translatedLineCount = textLines.Count;
+            var markerCount = TextTokenMarkersSource.Count;
+            string lastNonInlineMarker = @"\p";
+            int i = 0, j = 0;
+            for (; i < markerCount; i++)
+            {
+                var line = (translatedLineCount > j) ? textLines[j++] : String.Empty;
+                bool isNoText = !String.IsNullOrEmpty(line.Trim());
+                var token = TextTokenMarkersSource[i];
+                var nextToken = (TextTokenMarkersSource.Count > i + 1) ? TextTokenMarkersSource[i + 1] : null;
+                var tokenText = token.ToString();   // .Replace(Environment.NewLine, null);
+                bool isInLine = IsInline(token.USFMMarkerToken);
+
+                if (token.IsParagraphMarkerWithoutText)
+                {
+                    // write out '\p's and '\m's if they're followed by some inline marker, but don't write the empty text segment
+                    lastNonInlineMarker = tokenText.Replace(Environment.NewLine, null);
+                    preview += $"{tokenText} ";
+                    j--;    // since we're not going past the current text one
+                    continue;
+                }
+                if (tokenText.Contains("*"))
+                {
+                    if (isNoText)
+                        tokenText = $"{Environment.NewLine}({lastNonInlineMarker} cont)";
+                    else
+                        continue;
+                }
+                else if (!isInLine)
+                    lastNonInlineMarker = tokenText.Replace(Environment.NewLine, null);
+
+                var suffix = isInLine ? " " : String.Empty; //  Environment.NewLine;
+                preview += $"{tokenText} {line}{suffix}";
+            }
+
+            while (translatedLineCount > i)
+                preview += $"(adding as new \\p) {textLines[i++]}{Environment.NewLine}";
+            return preview;
+
+            static bool IsInline(IUSFMMarkerToken token)
+            {
+                return (token.IsFootnoteOrCrossReference || 
+                        token.IsMetadata || 
+                        !String.IsNullOrEmpty(token.EndMarker) ||                   // e.g. \rq ... \rq*
+                        _previewInlineMarkersToIgnore.Any(s => token.ToString().Contains(s)));     // e.g. \va that comes immediately after initial post-\p \v
             }
         }
 
@@ -390,9 +458,11 @@ namespace SIL.ParatextBackTranslationHelperPlugin
             get
             {
                 var currentTargetData = CurrentTargetData;
+                var (sourceData, sourceDataAlternate) = CurrentSourceData;
                 var model = new BackTranslationHelperModel
                 {
-                    SourceData = CurrentSourceData ?? "<source data empty>",
+                    SourceData = sourceData ?? "<source data empty>",
+                    SourceDataAlternate = sourceDataAlternate,
                     TargetData = currentTargetData,
                     TargetDataPreExisting = currentTargetData,
                     TargetsPossible = new List<TargetPossible>()
@@ -401,7 +471,18 @@ namespace SIL.ParatextBackTranslationHelperPlugin
             }
         }
 
-        private string CurrentSourceData
+        /// <summary>
+        /// This field returns one or two flavors of the source data. For Paratext, the 'sourceData'
+        /// return value represents the segments of scripture text in a marker, which could be a whole
+        /// paragraph (e.g. after a \v marker and before another paragraph-breaking marker), or just a
+        /// portion of text (e.g. after a \v marker and before an inline, say, footnote marker, which
+        /// interrupts the full paragraph). The user may want to translate the entire paragraph as a 
+        /// unit to get a better translation rather than shorter snippets of text, in which case, they
+        /// can check the translateNothingButPublishableScriptureTextMenuItem menu and we will combine
+        /// all scripture text together, followed separately by all footnote text to be converted, which
+        /// is returned in the sourceDataAlternate return.
+        /// </summary>
+        private (string sourceData, string sourceDataAlternate) CurrentSourceData
         {
             get
             {
@@ -422,14 +503,17 @@ namespace SIL.ParatextBackTranslationHelperPlugin
                                   .ToDictionary(ta => ta, ta => ta.VerseRef);
 
                 if ((data == null) || !data.Any())
-                    return null;
+                    return (null, null);
 
-                TextTokenMarkersSource = GetTextTokenMarkers(tokens, data.Keys.ToList());
+                TextTokenMarkersSource = TextTokenMarkers.GetTextTokenMarkers(tokens, data.Keys.ToList());
 
                 var textValues = data.Select(t => t.Key.Text);
                 SourceDataLineCount = textValues.Count();
-
                 var sourceString = string.Join(Environment.NewLine, textValues);
+
+                // if the user is requesting, grab all the scripture text first and then the footnotes, as separate
+                //  stuff to translate (not interspersed, so as not to break up the translatable chunks)
+                var sourceStringAlternate = GetSourceAlternate(tokens, data.Keys.ToList());
 
                 // set the verse reference to the last of a combined set of verses (which we can only get from the USFM markers)
                 _versesReference = data.Values.First();
@@ -437,8 +521,75 @@ namespace SIL.ParatextBackTranslationHelperPlugin
                                         ? _versesReference.AllVerses.Last()
                                         : _verseReference;
 
-                return sourceString;
+                return (sourceString, sourceStringAlternate);
             }
+        }
+
+        private string GetSourceAlternate(List<IUSFMToken> tokens, List<IUSFMTextToken> textTokens)
+        {
+            string sourceStringAlternate = null;
+            if (translateNothingButPublishableScriptureTextMenuItem.Checked)
+            {
+                string textValuesAlternate = null;
+                List<string> textValuesAlternateFootnotes = new();
+                foreach (var token in tokens)
+                {
+                    // if the token is a paragraph break token, then put a new line in the running text (but only non-initial)
+                    if (IsParagraphToken(token))
+                    {
+                        textValuesAlternate += Environment.NewLine + Environment.NewLine;   // use 2 so it's more visible (since we're removing the 'va' and 'vp' verse numbering)
+                        continue;
+                    }
+
+                    // if it's not something we want to translate (e.g. not a text marker or a va or vp verse numbers (which are text markers))...
+                    if (!textTokens.Contains(token) || 
+                        (AsTextToken(token, out IUSFMTextToken textToken) && !IsTranslatable(textToken, tokens)))
+                        continue;   // skip it
+
+                    // if it's scripture text (i.e. the translatable stuff)...
+                    if (IsScriptureText(textToken))
+                    {
+                        textValuesAlternate += textToken.Text;  // add it to the running accumulation
+                    }
+                    else
+                    {
+                        // must be a footnote
+                        textValuesAlternateFootnotes.Add(textToken.Text);
+                    }
+                }
+
+                sourceStringAlternate = textValuesAlternateFootnotes.Aggregate(textValuesAlternate.Replace("  ", " ") + Environment.NewLine,
+                                                                               (curr, next) => curr + Environment.NewLine + next);
+            }
+
+            return sourceStringAlternate;
+
+            static bool AsTextToken(IUSFMToken token, out IUSFMTextToken textToken)
+            {
+                if (token is IUSFMTextToken)
+                {
+                    textToken = token as IUSFMTextToken;
+                    return true;
+                }
+                textToken = null;
+                return false;
+            }
+        }
+
+        private static readonly List<string> _additionalMarkersToTranslate = Properties.Settings.Default.AdditionalMarkersToTranslate.Cast<string>().ToList();
+
+        // this would return true for both regular scripture text (i.e.  text after any of these markers:
+        // \v, \q[1-3], \m, \pc, etc) and footnote text that is translatable (i.e. \ft)
+        private static bool IsTranslatable(IUSFMTextToken token, List<IUSFMToken> tokens)
+        {
+            PreviousToken(token, tokens, out IUSFMMarkerToken mt);
+            return (IsScriptureText(token) && (mt.Marker != "va")) ||
+                    _additionalMarkersToTranslate.Contains(mt.Marker);
+        }
+
+        private static bool IsScriptureText(IUSFMTextToken token)
+        {
+            return (token.IsPublishableVernacular && token.IsScripture);
         }
 
         // normally, text tokens are publishable, but there are some that aren't (e.g. the text content of an \id marker).
@@ -447,7 +598,7 @@ namespace SIL.ParatextBackTranslationHelperPlugin
         // the \va...\va* inline marker is defined differently depending on whether it comes immediately after a \v [num(s)] 
         // marker than if it comes elsewhere in a verse. The relevant difference is that when it comes immediately after a \v 
         // marker, it's value for IsPublishableVernacular (false) and IsMetadata (true) are opposite from the other case. 
-        // So... if IsPubliableVernacular is false, at least check if this is that case, and return true, so we'll try to 
+        // So... if IsPublishableVernacular is false, at least check if this is that case, and return true, so we'll try to 
         // translate it as the others are (bkz we only send IsPub text segments for translation)
         private static bool IsPublishableVernacular(IUSFMTextToken t, List<IUSFMToken> tokens)
         {
@@ -468,22 +619,54 @@ namespace SIL.ParatextBackTranslationHelperPlugin
             return false;
         }
 
-        private List<IUSFMMarkerToken> GetTextTokenMarkers(List<IUSFMToken> tokens, List<IUSFMTextToken> textTokens)
+        public class TextMarkerToken
         {
-            IUSFMMarkerToken lastMarkerToken = null;
-            var textTokenMarkers = new List<IUSFMMarkerToken>();
-            foreach (var token in tokens)
+            public IUSFMMarkerToken USFMMarkerToken { get; set; }
+
+            public bool IsParagraphMarkerWithoutText { get; set; }
+
+            public TextMarkerToken(IUSFMMarkerToken iUsfmMarkerToken, bool isParagraphMarkerWithoutText)
             {
-                if (token is IUSFMMarkerToken)
-                {
-                    lastMarkerToken = token as IUSFMMarkerToken;
-                }
-                else if (textTokens.Contains(token) && (lastMarkerToken != null))
-                {
-                    textTokenMarkers.Add(lastMarkerToken);
-                }
+                USFMMarkerToken = iUsfmMarkerToken;
+                IsParagraphMarkerWithoutText = isParagraphMarkerWithoutText;
             }
-            return textTokenMarkers;
+
+            public override string ToString()
+            {
+                return USFMMarkerToken.ToString();
+            }
+        }
+
+        public class TextTokenMarkers : List<TextMarkerToken>
+        {
+            public int CountTextTokenMarkers
+            {
+                get { return this.Count(i => !i.IsParagraphMarkerWithoutText); }
+            }
+
+            public static TextTokenMarkers GetTextTokenMarkers(List<IUSFMToken> tokens, List<IUSFMTextToken> textTokens)
+            {
+                IUSFMMarkerToken lastMarkerToken = null;
+                var textTokenMarkers = new TextTokenMarkers();
+                foreach (var token in tokens)
+                {
+                    if (token is IUSFMMarkerToken)
+                    {
+                        if (IsParagraphToken(lastMarkerToken))
+                        {
+                            textTokenMarkers.Add(new TextMarkerToken(lastMarkerToken, true));
+                            lastMarkerToken = null;
+                        }
+                        lastMarkerToken = token as IUSFMMarkerToken;
+                    }
+                    else if (textTokens.Contains(token) && (lastMarkerToken != null))
+                    {
+                        textTokenMarkers.Add(new TextMarkerToken(lastMarkerToken, false));
+                        lastMarkerToken = null;
+                    }
+                }
+                return textTokenMarkers;
+            }
         }
 
         private string CurrentTargetData
@@ -823,29 +1006,11 @@ namespace SIL.ParatextBackTranslationHelperPlugin
         }
 #endif
 
-        public static IUSFMToken ParagraphToken(Dictionary<string, List<IUSFMToken>> usfmTokensSource, 
-            Dictionary<string, SortedDictionary<string, List<IUSFMToken>>> usfmTokensTarget, TextToken previousTextToken)
-        {
-            // see if we can find a list that has one (check the source first, since target is likely to be lacking)
-            var tokens = usfmTokensSource.Values.FirstOrDefault(l => l.Any(t => IsParagraphToken(t))) ??
-                         usfmTokensTarget.Values.SelectMany(d => d.Values)
-                                                 .FirstOrDefault(l => l.Any(t => IsParagraphToken(t)));
-
-            var paragraphToken = (IUSFMMarkerToken)tokens?.FirstOrDefault(t => IsParagraphToken(t)) ??
-                                    new MarkerToken(previousTextToken.VerseRef, true, true, previousTextToken.VerseOffset + previousTextToken.Text.Length)
-                                    {
-                                        Type = MarkerType.Paragraph,
-                                        Marker = "p"
-                                    };
-
-            return new MarkerToken(paragraphToken, previousTextToken.VerseOffset + previousTextToken.Text.Length, previousTextToken.VerseRef);
-        }
-
         private static readonly List<string> _paragraphMarkers = new() { "p", "m" };
 
         private static bool IsParagraphToken(IUSFMToken token)
         {
-            return (token is IUSFMMarkerToken markerToken) && (markerToken.Type == MarkerType.Paragraph) && _paragraphMarkers.Contains(markerToken.Marker);
+            return (token is IUSFMMarkerToken markerToken) && (markerToken.Type == MarkerType.Paragraph); // not needed? if so, initialize list from a setting: && _paragraphMarkers.Contains(markerToken.Marker);
         }
 
         protected override void OnShown(EventArgs e)
