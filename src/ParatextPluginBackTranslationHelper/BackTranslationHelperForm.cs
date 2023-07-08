@@ -14,7 +14,7 @@ using System.Windows.Forms;
 using Newtonsoft.Json;
 using System.Collections.Specialized;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
-using System.Windows.Forms.VisualStyles;
+using ECInterfaces;
 
 namespace SIL.ParatextBackTranslationHelperPlugin
 {
@@ -409,19 +409,26 @@ namespace SIL.ParatextBackTranslationHelperPlugin
             }
             catch (Exception ex)
             {
-                var error = ex.Message;
-                while (ex.InnerException != null)
-                {
-                    error += Environment.NewLine + Environment.NewLine + ex.InnerException.Message;
-                    ex = ex.InnerException;
-                }
-
+                var error = LogExceptionMessage("GetNewReference", ex);
                 MessageBox.Show(error, ParatextBackTranslationHelperPlugin.PluginName);
             }
             finally
             {
                 Cursor = cursor;
             }
+        }
+
+        public static string LogExceptionMessage(string className, Exception ex)
+        {
+            string msg = "Error occurred: " + ex.Message;
+            while (ex.InnerException != null)
+            {
+                ex = ex.InnerException;
+                msg += $"{Environment.NewLine}because: (InnerException): {ex.Message}";
+            }
+
+            Util.DebugWriteLine(className, msg);
+            return msg;
         }
 
         private void UpdateData(BackTranslationHelperModel model)
@@ -853,7 +860,8 @@ namespace SIL.ParatextBackTranslationHelperPlugin
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Exception caught:\n{ex.Message}");
+                var error = LogExceptionMessage("WriteToTarget", ex);
+                MessageBox.Show($"Exception caught:\n{error}");
             }
             finally
             {
