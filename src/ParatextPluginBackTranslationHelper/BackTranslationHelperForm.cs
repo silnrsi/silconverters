@@ -13,8 +13,9 @@ using System.Linq;
 using System.Windows.Forms;
 using Newtonsoft.Json;
 using System.Collections.Specialized;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using System.Threading.Tasks;
 using ECInterfaces;
+using System.Threading;
 
 namespace SIL.ParatextBackTranslationHelperPlugin
 {
@@ -228,11 +229,59 @@ namespace SIL.ParatextBackTranslationHelperPlugin
             return null;
         }
 
-        private void TargetBackTranslationTextChanged(string value)
+        private CancellationTokenSource cancellationTokenSource;
+        private Task<BackgroundWorkerResult> backgroundTask = null;
+
+        /// <summary>
+        /// This method is called by the BackTranslationHelperCtrl, since we registered for any changes
+        /// to the translated text. We use it to verify that the number of paragraphs of text in the target 
+        /// translation text matches how many are needed for the source text markers that will be used for them.
+        /// I've created this processing as an asynchronous task (since it can take some time) in the hopes of
+        /// getting rid of the occasional error whereby the status text box and/or the tooltip stops updating.
+        /// If we get multiple calls w/in a second, then the earlier executions will end up being canceled
+        /// before completion, and the text box and tooltip will only be updated for the final one of a series.
+        /// </summary>
+        /// <param name="value"></param>
+        private async void TargetBackTranslationTextChanged(string value)
         {
+            // cancel any previous execution
+            cancellationTokenSource?.Cancel();
+
+            // Create a CancellationTokenSource to support cancellation
+            cancellationTokenSource = new CancellationTokenSource();
+            var token = cancellationTokenSource.Token;
+
+            backgroundTask = CreateBackgroundTask(value, token);
+
+            try
+            {
+                var backgroundWorkerResult = await backgroundTask;
+
+                if ((backgroundTask.Status == TaskStatus.RanToCompletion) && (backgroundWorkerResult != null))
+                {
+                    textBoxStatus.Text = backgroundWorkerResult?.TextBoxText;
+                    textBoxStatus.Tag = backgroundWorkerResult?.TextBoxTag;
+                    toolTip.SetToolTip(textBoxStatus, backgroundWorkerResult?.TextBoxTooltip);
+                }
+            }
+            catch (Exception ex)
+            {
+                LogExceptionMessage("TargetBackTranslationTextChanged", ex);
+            }
+        }
+
+        private Task<BackgroundWorkerResult> CreateBackgroundTask(string value, CancellationToken cancelToken)
+        {
+            return Task.Factory.StartNew<BackgroundWorkerResult>(() =>
+            {
+                try
+                {
+                    Task.Delay(TimeSpan.FromMilliseconds(1000), cancelToken).Wait();
+                    cancelToken.ThrowIfCancellationRequested();
+
             var translatedLines = GetTranslatedLines(value);
             var translatedCount = translatedLines.Count;
-            System.Diagnostics.Debug.WriteLine($"PtxBTH: TargetBackTranslationTextChanged: SourceDataLineCount = '{SourceDataLineCount}', translatedCount = '{translatedCount}'");
+                    System.Diagnostics.Debug.WriteLine($"PtxBTH: TargetBackTranslationTextChanged: cancelToken: {cancelToken.IsCancellationRequested}, SourceDataLineCount = '{SourceDataLineCount}', translatedCount = '{translatedCount}'");
             var statusText = String.Empty;
             if (SourceDataLineCount != translatedCount)
             {
@@ -246,12 +295,28 @@ namespace SIL.ParatextBackTranslationHelperPlugin
                                            String.Join(",", TextTokenMarkersSource.Where(m => !m.IsParagraphMarkerWithoutText).Select(m => $"\\{m.USFMMarkerToken.Marker}")));
             }
 
-            textBoxStatus.Text = statusText;
-            textBoxStatus.Tag = translatedLines;
-            var preview = GetPreview(translatedLines);
-            toolTip.SetToolTip(textBoxStatus, preview);
-
-            Application.DoEvents(); // this says we need to do this for when it won't display the change: https://social.msdn.microsoft.com/Forums/vstudio/en-US/983d2e3b-9bcb-4c9c-9e85-59f8b2051b3e/program-updating-a-textbox-does-not-work?forum=csharpgeneral
+                    var preview = GetPreview(translatedLines, cancelToken);
+                    var result = new BackgroundWorkerResult
+                    {
+                        TextBoxText = statusText,
+                        TextBoxTag = translatedLines,
+                        TextBoxTooltip = preview
+                    };
+                    return result;
+                }
+                catch (AggregateException ex)
+                {
+                    if ((ex.InnerExceptions.Count == 1) && (ex.InnerException is TaskCanceledException))
+                        System.Diagnostics.Debug.WriteLine("CreateBackgroundTask: canceled task");
+                    else
+                        LogExceptionMessage("CreateBackgroundTask", ex);
+                }
+                catch (Exception ex)
+                {
+                    LogExceptionMessage("CreateBackgroundTask", ex);
+                }
+                return null;
+            }, cancelToken);
         }
 
         private static string GetFrameText(IProject projectSource, IProject projectTarget, IVerseRef versesReference)
@@ -344,7 +409,7 @@ namespace SIL.ParatextBackTranslationHelperPlugin
 
         private static readonly List<string> _previewInlineMarkersToIgnore = Properties.Settings.Default.GetPreviewInlineMarkersToIgnore.Cast<string>().ToList();
 
-        private string GetPreview(List<string> textLines)
+        private string GetPreview(List<string> textLines, CancellationToken? cancelToken = null)
         {
             string preview = null;
             var translatedLineCount = textLines.Count;
@@ -353,6 +418,7 @@ namespace SIL.ParatextBackTranslationHelperPlugin
             int i = 0, j = 0;
             for (; i < markerCount; i++)
             {
+                cancelToken?.ThrowIfCancellationRequested();
                 var line = (translatedLineCount > j) ? textLines[j++] : String.Empty;
                 bool isNoText = !String.IsNullOrEmpty(line.Trim());
                 var token = TextTokenMarkersSource[i];
@@ -1105,6 +1171,17 @@ namespace SIL.ParatextBackTranslationHelperPlugin
                 return;
 
             GetNewReference(_verseReference);
+        }
+
+        public class BackgroundWorkerResult
+        {
+            public string TextBoxText { get; set; } 
+            public List<string> TextBoxTag { get; set; }
+            public string TextBoxTooltip { get; set; }
+            public override string ToString()
+            {
+                return $"Text: {TextBoxText}, Tag: {String.Join(",", TextBoxTag)}, Tooltip: {TextBoxTooltip}";
+            }
         }
     }
 }
