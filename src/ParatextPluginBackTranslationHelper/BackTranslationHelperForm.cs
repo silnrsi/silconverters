@@ -279,21 +279,21 @@ namespace SIL.ParatextBackTranslationHelperPlugin
                     Task.Delay(TimeSpan.FromMilliseconds(1000), cancelToken).Wait();
                     cancelToken.ThrowIfCancellationRequested();
 
-            var translatedLines = GetTranslatedLines(value);
-            var translatedCount = translatedLines.Count;
+                    var translatedLines = GetTranslatedLines(value);
+                    var translatedCount = translatedLines.Count;
                     System.Diagnostics.Debug.WriteLine($"PtxBTH: TargetBackTranslationTextChanged: cancelToken: {cancelToken.IsCancellationRequested}, SourceDataLineCount = '{SourceDataLineCount}', translatedCount = '{translatedCount}'");
-            var statusText = String.Empty;
-            if (SourceDataLineCount != translatedCount)
-            {
-                statusText = String.Format("There {0} currently {1} line{2} of text in the Target Translation box vs. {3} text line{4} in the source verse ({5}: {6}). Click (or hover your cursor here) to see the correspondence.",
-                                           (translatedCount > 1) ? "are" : "is",
-                                           translatedCount,
-                                           (translatedCount > 1) ? "s" : string.Empty,
-                                           SourceDataLineCount,
-                                           (SourceDataLineCount > 1) ? "s" : string.Empty,
-                                           (TextTokenMarkersSource.CountTextTokenMarkers > 1) ? "one for each of these markers" : "for this marker",
-                                           String.Join(",", TextTokenMarkersSource.Where(m => !m.IsParagraphMarkerWithoutText).Select(m => $"\\{m.USFMMarkerToken.Marker}")));
-            }
+                    var statusText = String.Empty;
+                    if (SourceDataLineCount != translatedCount)
+                    {
+                        statusText = String.Format("There {0} currently {1} line{2} of text in the Target Translation box vs. {3} text line{4} in the source verse ({5}: {6}). Click (or hover your cursor here) to see the correspondence.",
+                                                    (translatedCount > 1) ? "are" : "is",
+                                                    translatedCount,
+                                                    (translatedCount > 1) ? "s" : string.Empty,
+                                                    SourceDataLineCount,
+                                                    (SourceDataLineCount > 1) ? "s" : string.Empty,
+                                                    (TextTokenMarkersSource.CountTextTokenMarkers > 1) ? "one for each of these markers" : "for this marker",
+                                                    String.Join(",", TextTokenMarkersSource.Where(m => !m.IsParagraphMarkerWithoutText).Select(m => $"\\{m.USFMMarkerToken.Marker}")));
+                    }
 
                     var preview = GetPreview(translatedLines, cancelToken);
                     var result = new BackgroundWorkerResult
@@ -564,7 +564,7 @@ namespace SIL.ParatextBackTranslationHelperPlugin
                 {
                     System.Diagnostics.Debug.WriteLine($"PtxBTH: Loading UsfmTokensSource for {keyBookChapterVerse}");
                     tokens = _projectSource.GetUSFMTokens(_verseReference.BookNum, _verseReference.ChapterNum, _verseReference.VerseNum)?.ToList();
-                    UsfmTokensSource.Add(keyBookChapterVerse, tokens);
+                    UsfmTokensSource[keyBookChapterVerse] = tokens;
                 }
                 else
                 {
@@ -625,9 +625,9 @@ namespace SIL.ParatextBackTranslationHelperPlugin
                         _processingQs = (token is IUSFMMarkerToken markerToken) && (markerToken.Marker.Contains("q"));
                         if (!_processingQs)
                         {
-                        textValuesAlternate += Environment.NewLine + Environment.NewLine;   // use 2 so it's more visible (since we're removing the 'va' and 'vp' verse numbering)
-                        continue;
-                    }
+                            textValuesAlternate += Environment.NewLine + Environment.NewLine;   // use 2 so it's more visible (since we're removing the 'va' and 'vp' verse numbering)
+                            continue;
+                        }
                     }
 
                     // if it's not something we want to translate (e.g. not a text marker or a va or vp verse numbers (which are text markers))...
@@ -772,7 +772,7 @@ namespace SIL.ParatextBackTranslationHelperPlugin
                     var dict = chapterTokens.GroupBy(t => t.VerseRef, t => t, (key, g) => new { VerseRef = key, USFMTokens = g.ToList() })
                                             .ToDictionary(t => GetBookChapterVerseRangeKey(t.VerseRef), t => t.USFMTokens);
                     vrefTokens = new SortedDictionary<string, List<IUSFMToken>>(dict);
-                    UsfmTokensTarget.Add(bookChapterKey, vrefTokens);
+                    UsfmTokensTarget[bookChapterKey] = vrefTokens;
                 }
                 else
                 {
@@ -1028,10 +1028,7 @@ namespace SIL.ParatextBackTranslationHelperPlugin
             var matchingTokensInTarget = vrefTokensTarget.Where(kvp => kvp.Value.Any(t => IsMatchingVerse(t.VerseRef, verseReference))).ToList();
             matchingTokensInTarget.ForEach(kvp => vrefTokensTarget.Remove(kvp.Key));
 
-            if (vrefTokensTarget.ContainsKey(keyBookChapterVerses))
-                vrefTokensTarget[keyBookChapterVerses] = tokensSource;
-            else
-                vrefTokensTarget.Add(keyBookChapterVerses, tokensSource);
+            vrefTokensTarget[keyBookChapterVerses] = tokensSource;
 
             // go thru all the ones we had and put the translated text into the text ones and transfer the non-text ones in order into the list to Put
             var i = 0;
