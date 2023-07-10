@@ -414,7 +414,7 @@ namespace SIL.ParatextBackTranslationHelperPlugin
             string preview = null;
             var translatedLineCount = textLines.Count;
             var markerCount = TextTokenMarkersSource.Count;
-            string lastNonInlineMarker = @"\p";
+            string lastNonInlineMarker = _processingQs ? @"\q1" : @"\p";  // occasionally correct... see note where _processingQs is defined
             int i = 0, j = 0;
             for (; i < markerCount; i++)
             {
@@ -598,6 +598,17 @@ namespace SIL.ParatextBackTranslationHelperPlugin
             }
         }
 
+        // when generating the 'alternate' source translation (i.e. ignoring, or rather, moving inline markers w/ text to the end),
+        //  treat the \q1-4 markers special, so their text segments get combined even though they're in different paragraphs (leads to better translation).
+        // NB: BUT there is one glitch: if a \q1 paragraph marker is immediately followed by a \v marker, then technically,
+        //  the \q1 is in the preceding verse reference; not this one. So though we'd want to say that we're 'processingQs' in this case,
+        //  we can't, so the text on that line will be translated separately from the \q2, etc., that follows it.
+        // By making this a global member, it will remember going from verse-to-verse. But one place this would not work: 
+        //  if the user processes a verse that ends with a \q1-4 marker, but rather than clicking 'Next', goes to some other, non-sequential verse, 
+        //  we'd be mistaken that we're processingQs... (but since this is just a preview and not something substantive, let's just ignore this
+        //  hopefully unusual case.
+        private bool _processingQs = false;
+
         private string GetSourceAlternate(List<IUSFMToken> tokens, List<IUSFMTextToken> textTokens)
         {
             string sourceStringAlternate = null;
@@ -607,11 +618,16 @@ namespace SIL.ParatextBackTranslationHelperPlugin
                 List<string> textValuesAlternateFootnotes = new();
                 foreach (var token in tokens)
                 {
-                    // if the token is a paragraph break token, then put a new line in the running text (but only non-initial)
+                    // if the token is a paragraph break token (\i.e. \p and \q{digit}), then put a new line in the running text
                     if (IsParagraphToken(token))
                     {
+                        // but not for \q1-\q4, bkz we want those to be combined into a single run of text
+                        _processingQs = (token is IUSFMMarkerToken markerToken) && (markerToken.Marker.Contains("q"));
+                        if (!_processingQs)
+                        {
                         textValuesAlternate += Environment.NewLine + Environment.NewLine;   // use 2 so it's more visible (since we're removing the 'va' and 'vp' verse numbering)
                         continue;
+                    }
                     }
 
                     // if it's not something we want to translate (e.g. not a text marker or a va or vp verse numbers (which are text markers))...
@@ -631,6 +647,8 @@ namespace SIL.ParatextBackTranslationHelperPlugin
                     }
                 }
 
+                // combine the text fragments of inline markers too, but add them after the main, regular text of the verse, 
+                //  so they don't interfere with the translation of the main text
                 sourceStringAlternate = textValuesAlternateFootnotes.Aggregate(textValuesAlternate.Replace("  ", " ") + Environment.NewLine,
                                                                                (curr, next) => curr + Environment.NewLine + next);
             }
