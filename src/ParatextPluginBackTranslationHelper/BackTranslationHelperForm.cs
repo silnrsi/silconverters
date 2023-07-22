@@ -405,7 +405,7 @@ namespace SIL.ParatextBackTranslationHelperPlugin
 
                 // if we didn't do it above, reset it to be not modified here, so it's the new beginning text and more easily overwritable
                 if (!overwriteEdits)
-                backTranslationHelperCtrl.IsModified = false;
+                    backTranslationHelperCtrl.IsModified = false;
 
                 textBoxStatus.Clear();
                 textBoxStatus.Tag = null;
