@@ -936,12 +936,14 @@ namespace ClipboardEC
             this.forwardToolStripMenuItem.Checked = !this.forwardToolStripMenuItem.Checked;
         }
 
+        private IEncConverter _lastEncConverterUsed;
+
         private void ConverterClick(Object sender, EventArgs e)
         {
             ToolStripMenuItem item = (ToolStripMenuItem)sender;
             string strConverterName = item.Text;
 
-            IEncConverter aEC = GetEncConverters[strConverterName];
+            _lastEncConverterUsed = GetEncConverters[strConverterName];
 
             // now convert the contents of the clipboard (using the correct code page, etc.)
             IDataObject iData = Clipboard.GetDataObject();
@@ -950,7 +952,7 @@ namespace ClipboardEC
             if( iData.GetDataPresent(DataFormats.UnicodeText) )
             {
                 string strInput = (string)iData.GetData(DataFormats.UnicodeText);
-                string strOutput = ConvertDataWithProps(aEC, strInput, DebugState);
+                string strOutput = ConvertDataWithProps(_lastEncConverterUsed, strInput, DebugState);
                 if( strOutput != null )
                     Clipboard.SetDataObject(strOutput);
             }
@@ -958,6 +960,9 @@ namespace ClipboardEC
 
         private string ConvertDataWithProps(IEncConverter aEC, string strInput, bool bDebugState)
         {
+            if (aEC == null)
+                return strInput;
+
             aEC.Debug = bDebugState;
             
             if( this.noneToolStripMenuItem.Checked )
@@ -1457,58 +1462,49 @@ namespace ClipboardEC
             // if a spell fixer project is selected, then make that the left-click behavior
             if (IsSpellFixerProject)
             {
-                this.notifyIconClipboardEC.Text = "Left-click: SpellFixer shortcut; Right-click: system converters";
+                this.notifyIconClipboardEC.Text = "Left-click: SpellFixer shortcut; Right-click: preview converters";
                 MessageBox.Show(String.Format("Now you can click on the ClipboardEncConverter icon with the left mouse button to add a spelling correction to the{0}'{1}' SpellFixer project. The right mouse button still provides normal ClipboardEncConverter functionality.",
                     Environment.NewLine, m_aSpellFixer.SpellFixerEncConverterName), cstrCaption);
             }
             else
-                this.notifyIconClipboardEC.Text = "Convert clipboard data with a system converter (right-click)";
+                this.notifyIconClipboardEC.Text = "L-Click: Repeat last conversion; R-click: preview converters";
         }
 
         private void DealWithLeftClick()
         {
-            // if the SpellFixer isn't installed... then just skip this.
-            if (SpellFixerByReflection.IsSpellFixerAvailable)
-            {
-                /* Kent thought we should turn this off... so turn it off unless the user has enabled a project
-                // okay, it's installed, but the user may not realize that the 'Click' event defaults 
-                //  to be for SpellFixer so make sure this is what they intended.
-                if (m_aSpellFixer == null)
-                {
-                    DialogResult res = MessageBox.Show(String.Format("Turn on 'one-click SpellFixer' mode? {0}{0}[otherwise, if you were just trying to convert the text on the clipboard, then right-click the icon instead]", Environment.NewLine), cstrCaption, MessageBoxButtons.YesNoCancel);
-                    if (res == DialogResult.Yes)
-                        TryLoginProject();
-                }
-                */
-                // if it's now available...
-                if (IsSpellFixerProject)
-                {
-                    // ... go ahead and try to convert what's on the clipboard
-                    IDataObject iData = Clipboard.GetDataObject();
+            // new behavior (2023-07-31): if there's a spell-fixer project loaded, then left-click means bring up the
+            //  Add correction dialog and then process what's on the clipboard thru the updated spellfixer project. Otherwise,
+            //  left click means process the data on the clipboard with the last converter used (so my repeated uses of the
+            //  ClearOutSfmMarkers perl expression can just be a single click.
 
-                    // Determines whether the data is in a format you can use.
-                    if (iData.GetDataPresent(DataFormats.UnicodeText))
+            // ... go ahead and try to convert what's on the clipboard
+            IDataObject iData = Clipboard.GetDataObject();
+
+            // Determines whether the data is in a format you can use.
+            if (iData.GetDataPresent(DataFormats.UnicodeText))
+            {
+                string strInput = (string)iData.GetData(DataFormats.UnicodeText);
+                if (strInput.Length > 0)
+                {
+                    // if the SpellFixer isn't installed... then just skip this.
+                    IEncConverter aEC = null;
+                    if (SpellFixerByReflection.IsSpellFixerAvailable && IsSpellFixerProject)
                     {
-                        string strInput = (string)iData.GetData(DataFormats.UnicodeText);
-                        if (strInput.Length > 0)
-                        {
-                            m_aSpellFixer.AssignCorrectSpelling(strInput);
+                        m_aSpellFixer.AssignCorrectSpelling(strInput);
 
-                            // when the ACS method returns, the couplet has been (probably) added
-                            IEncConverter aEC = m_aSpellFixer.SpellFixerEncConverter;
-                            string strOutput = aEC.Convert(strInput);
-                            if (strOutput != null)
-                                Clipboard.SetDataObject(strOutput);
-                        }
+                        // when the ACS method returns, the couplet has been (probably) added
+                        aEC = m_aSpellFixer.SpellFixerEncConverter;
                     }
+                    else if (_lastEncConverterUsed != null)
+                    {
+                        aEC = _lastEncConverterUsed;
+                    }
+                        
+                    var strOutput = aEC?.Convert(strInput);
+                    if (strOutput != null)
+                        Clipboard.SetDataObject(strOutput);
                 }
             }
-            /* do nothing if it isn't installed or if SpellFixer isn't enabled...
-            else
-            {
-                MessageBox.Show("Use the right-mouse button to bring up the list of converters to choose from", cstrCaption);
-            }
-            */
         }
 
         private void displaySpellingFixToolStripMenuItem_Click(object sender, EventArgs e)
