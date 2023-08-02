@@ -395,7 +395,8 @@ namespace SIL.ParatextBackTranslationHelperPlugin
             {
                 // allow the user to decide whether to overwrite the edits (but only if he's back on the same verse we paused on. If not, then
                 // we have to update)
-                var overwriteEdits = (newReference?.ToString() != _verseReference?.ToString()) ||
+                var hasVerseChanged = newReference?.ToString() != _verseReference?.ToString();
+                var overwriteEdits = hasVerseChanged ||
                                      (MessageBox.Show("Would you like to keep the edited text here (click, 'Yes'), or refresh the target text from Paratext (click, 'No')?",
                                                       ParatextBackTranslationHelperPlugin.PluginName, MessageBoxButtons.YesNo) == DialogResult.No);
                 if (overwriteEdits)
@@ -403,8 +404,10 @@ namespace SIL.ParatextBackTranslationHelperPlugin
 
                 GetNewReference(newReference);
 
-                // if we didn't do it above, reset it to be not modified here, so it's the new beginning text and more easily overwritable
-                if (!overwriteEdits)
+                // if we didn't do it above, reset it to be not modified here (unless the verse didn’t change),
+                //  so it's the new beginning text and more easily overwritable. But if the verse didn't change
+                //  then we don't want to mark it as not modified or a subsequent clicking around in Ptx could clobber it.
+                if (hasVerseChanged && !overwriteEdits)
                     backTranslationHelperCtrl.IsModified = false;
 
                 textBoxStatus.Clear();
