@@ -1462,7 +1462,7 @@ namespace ClipboardEC
             // if a spell fixer project is selected, then make that the left-click behavior
             if (IsSpellFixerProject)
             {
-                this.notifyIconClipboardEC.Text = "Left-click: SpellFixer shortcut; Right-click: preview converters";
+                this.notifyIconClipboardEC.Text = "L-click: Add Substitution; R-click: preview converters";
                 MessageBox.Show(String.Format("Now you can click on the ClipboardEncConverter icon with the left mouse button to add a spelling correction to the{0}'{1}' SpellFixer project. The right mouse button still provides normal ClipboardEncConverter functionality.",
                     Environment.NewLine, m_aSpellFixer.SpellFixerEncConverterName), cstrCaption);
             }
