@@ -102,8 +102,10 @@ namespace SIL.ParatextBackTranslationHelperPlugin.Properties {
 <ArrayOfString xmlns:xsd=""http://www.w3.org/2001/XMLSchema"" xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"">
   <string>fq</string>
   <string>ft</string>
+  <string>fp</string>
   <string>rq</string>
   <string>s</string>
+  <string>ms1</string>
 </ArrayOfString>")]
         public global::System.Collections.Specialized.StringCollection AdditionalMarkersToTranslate {
             get {
@@ -111,6 +113,18 @@ namespace SIL.ParatextBackTranslationHelperPlugin.Properties {
             }
             set {
                 this["AdditionalMarkersToTranslate"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool UpgradeSettings {
+            get {
+                return ((bool)(this["UpgradeSettings"]));
+            }
+            set {
+                this["UpgradeSettings"] = value;
             }
         }
     }

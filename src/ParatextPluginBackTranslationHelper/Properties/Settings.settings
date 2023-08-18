@@ -29,9 +29,14 @@
 &lt;ArrayOfString xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"&gt;
   &lt;string&gt;fq&lt;/string&gt;
   &lt;string&gt;ft&lt;/string&gt;
+  &lt;string&gt;fp&lt;/string&gt;
   &lt;string&gt;rq&lt;/string&gt;
   &lt;string&gt;s&lt;/string&gt;
+  &lt;string&gt;ms1&lt;/string&gt;
 &lt;/ArrayOfString&gt;</Value>
+    </Setting>
+    <Setting Name="UpgradeSettings" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
     </Setting>
   </Settings>
 </SettingsFile>
