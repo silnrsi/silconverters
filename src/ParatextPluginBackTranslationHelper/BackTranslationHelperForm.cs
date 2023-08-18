@@ -87,6 +87,8 @@ namespace SIL.ParatextBackTranslationHelperPlugin
         {
             InitializeComponent();
 
+            InitializeSettings(true);
+
             _host = host;
             _plugin = plugin;
             _versesReference = _verseReferenceLast = _verseReference = initialVerseReference;
@@ -101,6 +103,23 @@ namespace SIL.ParatextBackTranslationHelperPlugin
 
             AddToSettingsMenu(backTranslationHelperCtrl);
             _host.VerseRefChanged += Host_VerseRefChanged;
+        }
+
+        /// <summary>
+        /// If Ptx is upgraded, then we lose the settings. This should upgrade them, if we reinstall (bkz
+        /// UpgradeSettings will be true 1st time after install).
+        /// Settings if user wants to adjust something are stored in: \AppData\Local\United_Bible_Societies\Paratext.exe_[guid]\[version #]\user.config file
+        /// e.g. C:\Users\pete_\AppData\Local\United_Bible_Societies\Paratext.exe_Url_10vizzham1xunpacgy3t1em4g1uelorz\9.3.103.14
+        /// </summary>
+        /// <param name="bDoUpgrade"></param>
+        private void InitializeSettings(bool bDoUpgrade)
+        {
+            if (bDoUpgrade && Properties.Settings.Default.UpgradeSettings)
+            {
+                Properties.Settings.Default.Upgrade();
+                Properties.Settings.Default.UpgradeSettings = false;
+                Properties.Settings.Default.Save();
+            }
         }
 
         private System.Windows.Forms.ToolStripMenuItem translateNothingButPublishableScriptureTextMenuItem;
@@ -1148,7 +1167,13 @@ namespace SIL.ParatextBackTranslationHelperPlugin
 
             Properties.Settings.Default.DefaultWindowState = WindowState;
             Properties.Settings.Default.WindowLocation = Location;
-            Properties.Settings.Default.WindowSize = Size;
+            
+            // someone had it disappear except for the frame... probably bkz Size was 0,0 somehow at this point
+            if (Size.Height >= MinimumSize.Height &&
+                Size.Width >= MinimumSize.Width)
+            {
+                Properties.Settings.Default.WindowSize = Size;
+            }
             Properties.Settings.Default.Save();
 
             _host.VerseRefChanged -= Host_VerseRefChanged;
