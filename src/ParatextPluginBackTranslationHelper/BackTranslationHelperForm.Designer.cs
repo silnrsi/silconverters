@@ -29,8 +29,10 @@ namespace SIL.ParatextBackTranslationHelperPlugin
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.backTranslationHelperCtrl = new BackTranslationHelper.BackTranslationHelperCtrl();
             this.textBoxStatus = new System.Windows.Forms.TextBox();
+            this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.SuspendLayout();
             // 
             // backTranslationHelperCtrl
@@ -81,5 +83,6 @@ namespace SIL.ParatextBackTranslationHelperPlugin
 
         private BackTranslationHelper.BackTranslationHelperCtrl backTranslationHelperCtrl;
         private System.Windows.Forms.TextBox textBoxStatus;
+        private System.Windows.Forms.ToolTip toolTip;
     }
 }

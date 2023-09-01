@@ -108,6 +108,8 @@ namespace SILConvertersOffice
                 { 
                     new TargetPossible { TargetData = targetText, PossibleIndex = 0, TranslatorName = _theFontsAndEncConverter.DirectableEncConverter.Name } 
                 },
+                DisplayExistingTargetTranslation = false,   // the 'existing translation' *is* the source, so no need to repeat it in the existing target
+                IsTargetTranslationEditable = true,         // I suppose this could be based on whether editing is enabled...
             };
 
             // this form is the implementation of the way to get data
@@ -115,7 +117,7 @@ namespace SILConvertersOffice
             if (!backTranslationHelperCtrl.TheTranslators.Any(t => t.Name == _theFontsAndEncConverter.DirectableEncConverter.GetEncConverter.Name))
                 backTranslationHelperCtrl.TheTranslators.Add(_theFontsAndEncConverter.DirectableEncConverter.GetEncConverter);
 
-            backTranslationHelperCtrl.Initialize(displayExistingTargetTranslation: false);
+            backTranslationHelperCtrl.Initialize(_model);
 
             // If Initialize sets the possible target boxes (more than the 1st one) to Visible, 
             //  for some reason, it's not changing its state... Try this:

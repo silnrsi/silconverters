@@ -179,6 +179,11 @@ namespace SpellingFixerEC
 
         private void AddNewProjectForm_FormClosing(object sender, FormClosingEventArgs e)
         {
+            // ignore the validation below, if the user is trying to close the dialog (either by the 
+            //  upper right red 'X' or the Cancel button)
+            if ((e.CloseReason == CloseReason.UserClosing) || (DialogResult == DialogResult.Cancel))
+                return;
+
             if (WordBoundaryDelimiter.Contains('"'))
             {
                 MessageBox.Show("Can't use the double-quote character for the word boundary delimiter",

@@ -433,7 +433,7 @@ namespace SpellingFixerEC
                 ECAttributes aECAttrs = aECs.Attributes(aEC.Name, AttributeType.Converter);
                 string strFontName = aECAttrs[SpellingFixerEC.cstrAttributeFontToUse];
                 string sFontSize = aECAttrs[SpellingFixerEC.cstrAttributeFontSizeToUse];
-                m_isRightToleft = aECAttrs.ContainsKey(SpellingFixerEC.cstrAttributeFontRightToLeft) && (aECAttrs[SpellingFixerEC.cstrAttributeFontRightToLeft] == "true");
+                m_isRightToleft = aECAttrs.ContainsKey(SpellingFixerEC.cstrAttributeFontRightToLeft) && (aECAttrs[SpellingFixerEC.cstrAttributeFontRightToLeft].ToLower() == "true");
                 m_strWordBoundaryDelimiter = aECAttrs[SpellingFixerEC.cstrAttributeWordBoundaryDelimiter];
                 m_strNonWordCharacters = aECAttrs[SpellingFixerEC.cstrAttributeNonWordChars];
 
