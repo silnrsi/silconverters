@@ -16,6 +16,7 @@ using System.Collections.Specialized;
 using System.Threading.Tasks;
 using ECInterfaces;
 using System.Threading;
+using System.Runtime.InteropServices;
 
 namespace SIL.ParatextBackTranslationHelperPlugin
 {
@@ -535,7 +536,10 @@ namespace SIL.ParatextBackTranslationHelperPlugin
         {
             Text = GetFrameText(_projectSource, _projectTarget, _versesReference);
             _model = model;
-            backTranslationHelperCtrl.Initialize(displayExistingTargetTranslation: true);
+            var bookNum = _verseReference.BookNum;
+            var chapterNum = _verseReference.ChapterNum;
+            _model.IsTargetTranslationEditable = _projectTarget.CanEdit(_plugin, bookNum, chapterNum);
+            backTranslationHelperCtrl.Initialize(_model);
             _updateControls(_model);
         }
 
@@ -572,7 +576,8 @@ namespace SIL.ParatextBackTranslationHelperPlugin
                     SourceDataAlternate = sourceDataAlternate,
                     TargetData = currentTargetData,
                     TargetDataPreExisting = currentTargetData,
-                    TargetsPossible = new List<TargetPossible>()
+                    TargetsPossible = new List<TargetPossible>(),
+                    DisplayExistingTargetTranslation = true,
                 };
                 return model;
             }

@@ -57,6 +57,8 @@ namespace SilConvertersXML
                     // the control we're sending this to may have other EncConverters associated w/ this font, but we only have the one. So add it
                     //  here and when it gets initialized below, it may add other conversions done at that time
                     TargetsPossible = new List<TargetPossible>(),
+                    DisplayExistingTargetTranslation = false,
+                    IsTargetTranslationEditable = true,
                 };
 
                 // this form is the implementation of the way to get data
@@ -64,7 +66,7 @@ namespace SilConvertersXML
                 if (!backTranslationHelperCtrl.TheTranslators.Any(t => t.Name == theEc.GetEncConverter.Name))
                     backTranslationHelperCtrl.TheTranslators.Add(theEc.GetEncConverter);
 
-                backTranslationHelperCtrl.Initialize(displayExistingTargetTranslation: false);
+                backTranslationHelperCtrl.Initialize(_model);
                 backTranslationHelperCtrl.GetNewData(ref _model);
                 _updateDataProc(_model);
 
