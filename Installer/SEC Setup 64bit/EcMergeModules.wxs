@@ -5,9 +5,9 @@
 
     <DirectoryRef Id="INSTALLDIR">
       <!-- The following merge modules install to the default directory: C:\Program Files\SIL\SILConverters -->
-      <Merge Id="SEC_EC" Language="1033" SourceFile="$(var.EcDistFilesPath)\MergeModules\x64\EC_40_64bit_MM.msm" DiskId="1"/>
-      <Merge Id="CcDLLsMM" Language="1033" SourceFile="$(var.EcDistFilesPath)\MergeModules\x64\CcDLLs64bitMM.msm" DiskId="1" />
-      <Merge Id="AIGuesser" Language="1033" SourceFile="$(var.EcDistFilesPath)\MergeModules\x64\AIGuesser64bitMM.msm" DiskId="1"/>
+      <Merge Id="SEC_EC" Language="1033" SourceFile="$(var.EcDistFilesPath)\MergeModules\x64\Release\EC_40_64bit_MM.msm" DiskId="1"/>
+      <Merge Id="CcDLLsMM" Language="1033" SourceFile="$(var.EcDistFilesPath)\MergeModules\x64\Release\CcDLLs64bitMM.msm" DiskId="1" />
+      <Merge Id="AIGuesser" Language="1033" SourceFile="$(var.EcDistFilesPath)\MergeModules\x64\Release\AIGuesser64bitMM.msm" DiskId="1"/>
       <Merge Id="AdaptIt2Unicode" Language="1033" SourceFile="..\MergeModules\x64\AdaptIt2Unicode64bitMM.msm" DiskId="1"/>
       <Merge Id="ConverterInstaller" Language="1033" SourceFile="..\MergeModules\x64\ConverterInstaller64bitMM.msm" DiskId="1"/>
       <Merge Id="IndicConverters" Language="1033" SourceFile="..\MergeModules\x64\IndicConverters64bit.msm" DiskId="1"/>
@@ -17,17 +17,17 @@
       <Merge Id="SCOffice10" Language="1033" SourceFile="..\MergeModules\x64\SCOffice1064bitMM.msm" DiskId="1"/>
       <Merge Id="SILConvertersForWord" Language="1033" SourceFile="..\MergeModules\x64\SilConvertersForWord64bitMM.msm" DiskId="1"/>
       <Merge Id="SFM_Converter" Language="1033" SourceFile="..\MergeModules\x64\SFM Converter 64bit MM.msm" DiskId="1"/>
-      <Merge Id="PerlEC" Language="1033" SourceFile="$(var.EcDistFilesPath)\MergeModules\x64\PerlEc64bitMM.msm" DiskId="1"/>
-      <Merge Id="SEC_PythonEC" Language="1033" SourceFile="$(var.EcDistFilesPath)\MergeModules\x64\PythonEc64bitMM.msm" DiskId="1"/>
+      <Merge Id="PerlEC" Language="1033" SourceFile="$(var.EcDistFilesPath)\MergeModules\x64\Release\PerlEc64bitMM.msm" DiskId="1"/>
+      <Merge Id="SEC_PythonEC" Language="1033" SourceFile="$(var.EcDistFilesPath)\MergeModules\x64\Release\PythonEc64bitMM.msm" DiskId="1"/>
       <Merge Id="TECkitMapUEditor" Language="1033" SourceFile="..\MergeModules\x64\TECkitMapUEditor64bit.msm" DiskId="1"/>
       <Merge Id="XmlConverters" Language="1033" SourceFile="..\MergeModules\x64\XmlConverters64bitMM.msm" DiskId="1"/>
       <Merge Id="SpellFixerEc" Language="1033" SourceFile="..\MergeModules\x64\SpellFixerEc64bitMM.msm" DiskId="1"/>
       <Merge Id="TECkit_Package" Language="1033" SourceFile="..\MergeModules\x64\TECkitPackage64bitMM.msm" DiskId="1"/>
-      <Merge Id="EcTranslators" Language="1033" SourceFile="$(var.EcDistFilesPath)\MergeModules\x64\EcTranslators64bitMM.msm" DiskId="1"/>
+      <Merge Id="EcTranslators" Language="1033" SourceFile="$(var.EcDistFilesPath)\MergeModules\x64\Release\EcTranslators64bitMM.msm" DiskId="1"/>
     </DirectoryRef>
 
     <DirectoryRef Id="Firefox">
-      <Merge Id="EcFirefox" Language="1033" SourceFile="$(var.EcDistFilesPath)\MergeModules\x64\EcFireFox64.msm" DiskId="1"/>
+      <Merge Id="EcFirefox" Language="1033" SourceFile="$(var.EcDistFilesPath)\MergeModules\x64\Release\EcFireFox64.msm" DiskId="1"/>
     </DirectoryRef>
 
     <DirectoryRef Id="Paratext9">
@@ -58,8 +58,8 @@
     <DirectoryRef Id="CommonFilesFolderSIL">
       <!--The following merge modules install to the directory: C:\Program Files\Common Files\SIL-->
       <Merge Id="SetPath" Language="1033" SourceFile="..\MergeModules\x64\SetPath.msm" DiskId="1"/>
-      <Merge Id="TECkit_DLLs" Language="1033" SourceFile="$(var.EcDistFilesPath)\MergeModules\x64\TECkit64bitDllsMM.msm" DiskId="1"/>
-      <Merge Id="SEC_ICU" Language="1033" SourceFile="$(var.EcDistFilesPath)\MergeModules\x64\ICU_40_64bit.msm" DiskId="1"/>
+      <Merge Id="TECkit_DLLs" Language="1033" SourceFile="$(var.EcDistFilesPath)\MergeModules\x64\Release\TECkit64bitDllsMM.msm" DiskId="1"/>
+      <Merge Id="SEC_ICU" Language="1033" SourceFile="$(var.EcDistFilesPath)\MergeModules\x64\Release\ICU_40_64bit.msm" DiskId="1"/>
     </DirectoryRef>
     <DirectoryRef Id="System64Folder">
       <Merge Id="CRT" Language="1033" SourceFile="..\ExternalMergeModules\Microsoft_VC142_CRT_x64.msm" DiskId="1"/>
