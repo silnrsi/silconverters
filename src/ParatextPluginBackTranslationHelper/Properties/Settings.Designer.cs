@@ -82,7 +82,7 @@ namespace SIL.ParatextBackTranslationHelperPlugin.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n<ArrayOfString xmlns:xsd=\"http://www.w3." +
             "org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">\r\n  <s" +
@@ -91,12 +91,9 @@ namespace SIL.ParatextBackTranslationHelperPlugin.Properties {
             get {
                 return ((global::System.Collections.Specialized.StringCollection)(this["GetPreviewInlineMarkersToIgnore"]));
             }
-            set {
-                this["GetPreviewInlineMarkersToIgnore"] = value;
-            }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute(@"<?xml version=""1.0"" encoding=""utf-16""?>
 <ArrayOfString xmlns:xsd=""http://www.w3.org/2001/XMLSchema"" xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"">
@@ -110,9 +107,6 @@ namespace SIL.ParatextBackTranslationHelperPlugin.Properties {
         public global::System.Collections.Specialized.StringCollection AdditionalMarkersToTranslate {
             get {
                 return ((global::System.Collections.Specialized.StringCollection)(this["AdditionalMarkersToTranslate"]));
-            }
-            set {
-                this["AdditionalMarkersToTranslate"] = value;
             }
         }
         

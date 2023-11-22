@@ -269,5 +269,15 @@ namespace SILConvertersOffice
                 }
             }
         }
+
+        public void TranslatorSetChanged(List<IEncConverter> theTranslators)
+        {
+            if (!theTranslators.Any(t => t.Name == _theFontsAndEncConverter.DirectableEncConverter.Name))
+            {
+                // We no longer have the original encConverter that the Add-in knows about... 
+                DialogResult = DialogResult.Cancel;
+                Close();
+            }
+        }
     }
 }
