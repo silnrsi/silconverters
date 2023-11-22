@@ -143,7 +143,7 @@
         <Condition Level="3"><![CDATA[SIL_PERL_FOUND AND NOT REMOVE]]></Condition>
         <MergeRef Id="PerlEC"/>
       </Feature>
-      <Feature Id="Python_2.7" Title="Python Script Functions 2.7" Description="Python plug-in to use Python functions for text transduction. Requires a separately-installed distribution of Python v2.7.x." Level="4" AllowAdvertise="no">
+      <Feature Id="Python" Title="Python Scripts" Description="Python plug-in to use Python functions for text transduction. Requires a separately-installed distribution of Python v2.7.x or v3.x" Level="4" AllowAdvertise="no">
         <Condition Level="3"><![CDATA[SIL_PYTHON_FOUND AND NOT REMOVE]]></Condition>
         <MergeRef Id="SEC_PythonEC"/>
         <MergeRef Id="SetPath"/>
