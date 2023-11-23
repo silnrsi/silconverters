@@ -21,7 +21,7 @@ jobs:
        fail-fast: false
        matrix:
          build_configuration: ["Debug", "Release"]
-         platform: ['x64', 'x86']
+         build_platform: ['x64', 'x86']
 
     steps:
     - name: Checkout
@@ -43,11 +43,11 @@ jobs:
     # run VsDevCmd.bat so we can get the path to tlbexp.exe for the SpellFixerEc proj
     - uses: ilammy/msvc-dev-cmd@v1
       with:
-        arch: ${{ matrix.platform }}
+        arch: ${{ matrix.build_platform }}
         
     - name: Build
       working-directory: ${{env.GITHUB_WORKSPACE}}
-      # Add additional options to the MSBuild command line here (like platform or verbosity level).
+      # Add additional options to the MSBuild command line here (like build_platform or verbosity level).
       # See https://docs.microsoft.com/visualstudio/msbuild/msbuild-command-line-reference
       run: msbuild /m /p:Configuration=${{matrix.build_configuration}} /p:Platform=${{ matrix.build_platform }} "${{env.SOLUTION_FILE_PATH}}"
 
@@ -58,11 +58,11 @@ jobs:
     # now that we're building on TeamCity (to sign it), this isn't needed
     #- name: rename installer
     #  if: ${{ success() && matrix.build_configuration == 'Release' }}
-    #  run: cp "output/${{matrix.platform}}/SetupSILConverters_${{matrix.platform}}.exe" "output/${{matrix.platform}}/SetupSILConverters_${{matrix.platform}}.${{github.run_number}}.exe"
+    #  run: cp "output/${{matrix.build_platform}}/SetupSILConverters_${{matrix.build_platform}}.exe" "output/${{matrix.build_platform}}/SetupSILConverters_${{matrix.build_platform}}.${{github.run_number}}.exe"
 
     #- name: Upload a Build Artifact
     #  if: ${{ success() && matrix.build_configuration == 'Release' }}
     #  uses: actions/upload-artifact@v3.1.1
     #  with:
-    #    name: silconverters-installers.${{matrix.platform}}.latest
-    #    path: output/${{matrix.platform}}/SetupSILConverters_${{matrix.platform}}.${{github.run_number}}.exe
+    #    name: silconverters-installers.${{matrix.build_platform}}.latest
+    #    path: output/${{matrix.build_platform}}/SetupSILConverters_${{matrix.build_platform}}.${{github.run_number}}.exe
