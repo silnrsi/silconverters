@@ -25,29 +25,17 @@ jobs:
 
     steps:
     - name: Checkout
-      uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b # v3.0.2
+      uses: actions/checkout@v3
       with:
         fetch-depth: 0 # fetch full history for GitVersion
 
     - name: Setup .NET
-      uses: actions/setup-dotnet@c0d4ad69d8bd405d234f1c9166d383b7a4f69ed8 # v2.1.0
+      uses: actions/setup-dotnet@v3
       with:
         dotnet-version: 6.0.x
 
-    #- name: Restore
-    #  run: dotnet restore
-      
     - name: setup-msbuild
-      uses: microsoft/setup-msbuild@v1.1.3
-      with:
-        # Folder location of where vswhere.exe is located if a self-hosted agent
-        vswhere-path: # optional
-        # Version of Visual Studio to search; defaults to latest if not specified
-        vs-version: # optional
-        # Enable searching for pre-release versions of Visual Studio/MSBuild
-        vs-prerelease: # optional
-        # The preferred processor architecture of MSBuild. Can be either "x86" or "x64". "x64" is only available from Visual Studio version 17.0 and later.
-        msbuild-architecture: x64 # optional, default is x86
+      uses: microsoft/setup-msbuild@v1.3.1
 
     - name: Fetch nuget dependecies
       run: nuget restore "${{env.SOLUTION_FILE_PATH}}"
@@ -61,7 +49,7 @@ jobs:
       working-directory: ${{env.GITHUB_WORKSPACE}}
       # Add additional options to the MSBuild command line here (like platform or verbosity level).
       # See https://docs.microsoft.com/visualstudio/msbuild/msbuild-command-line-reference
-      run: msbuild /m /p:Configuration=${{matrix.build_configuration}} "${{env.SOLUTION_FILE_PATH}}"
+      run: msbuild /m /p:Configuration=${{matrix.build_configuration}} /p:Platform=${{ matrix.build_platform }} "${{env.SOLUTION_FILE_PATH}}"
 
     # TODO Run tests
     #- name: Test
