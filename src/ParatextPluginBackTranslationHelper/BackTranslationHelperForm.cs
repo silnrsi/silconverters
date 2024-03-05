@@ -18,6 +18,7 @@ using ECInterfaces;
 using System.Threading;
 using System.Runtime.InteropServices;
 using SilEncConverters40.EcTranslators.NllbTranslator;
+using System.Diagnostics;
 
 namespace SIL.ParatextBackTranslationHelperPlugin
 {
@@ -100,6 +101,7 @@ namespace SIL.ParatextBackTranslationHelperPlugin
 
             // this form is the implementation of the way to get get data
             backTranslationHelperCtrl.BackTranslationHelperDataSource = this;
+            backTranslationHelperCtrl.buttonPauseUpdating.Visible = true;
             backTranslationHelperCtrl.RegisterForNotification(BackTranslationHelperCtrl.SubscribeableEventKeyTargetBackTranslationTextChanged,
                                                               TargetBackTranslationTextChanged);
 
@@ -389,15 +391,21 @@ namespace SIL.ParatextBackTranslationHelperPlugin
         private void Host_VerseRefChanged(IPluginHost sender, IVerseRef newReference, SyncReferenceGroup group)
         {
             var newRef = (newReference.RepresentsMultipleVerses) ? newReference.AllVerses.First() : newReference;
-            System.Diagnostics.Debug.WriteLine($"PtxBTH: In Host_VerseRefChanged {newReference} (newRef: {newRef}) & {group}, _isNotInFocus: {_isNotInFocus}, IsModified: {backTranslationHelperCtrl.IsModified}");
+            System.Diagnostics.Debug.WriteLine($"PtxBTH: In Host_VerseRefChanged {newReference} (newRef: {newRef}) & {group}, _isNotInFocus: {_isNotInFocus}, IsModified: {backTranslationHelperCtrl.IsModified}, IsPaused {backTranslationHelperCtrl.IsPaused}");
 
             // since this will initialize the _verseReference, which is intended to be the first
             //  of a series of verses...
             // UPDATE: but not if the Form isn't in focus (so we don't thrash around converting stuff while
-            //  the user may be editing stuff in Ptx)
-            if (_isNotInFocus && backTranslationHelperCtrl.IsModified)
+            //  the user may be editing stuff in Ptx
+            // UPDATE (2024-02-17): added an explicit pause button to the control, so I don't have to modify it if I don't want it to requery
+            if ((_isNotInFocus && backTranslationHelperCtrl.IsModified) || backTranslationHelperCtrl.IsPaused)
             {
-                textBoxStatus.Text = $"Staying on {_verseReference} because the Target Translation box was modified. Click here to update to current verse in Paratext";
+                var reason = backTranslationHelperCtrl.IsPaused
+                                ? "translation is paused"
+                                : "Target Translation box was modified";
+
+                textBoxStatus.Text = $"Staying on {_verseReference} because the {reason}. Click here to update to current verse in Paratext";
+                Debug.WriteLine($"Set textBoxStatus.Text = {textBoxStatus.Text}");
                 textBoxStatus.Tag = newRef;
                 Application.DoEvents(); // this says we need to do this for when it won't display the change: https://social.msdn.microsoft.com/Forums/vstudio/en-US/983d2e3b-9bcb-4c9c-9e85-59f8b2051b3e/program-updating-a-textbox-does-not-work?forum=csharpgeneral
                 return;
@@ -423,8 +431,10 @@ namespace SIL.ParatextBackTranslationHelperPlugin
                                      (MessageBox.Show("Would you like to keep the edited text here (click, 'Yes'), or refresh the target text from Paratext (click, 'No')?",
                                                       ParatextBackTranslationHelperPlugin.PluginName, MessageBoxButtons.YesNo) == DialogResult.No);
                 if (overwriteEdits)
-                    backTranslationHelperCtrl.IsModified = false; // putting this before GetNewReference causes us to refresh the editable box also
-
+                {
+                    backTranslationHelperCtrl.IsPaused =                // just in case it was... the user doesn't want that anymore
+                        backTranslationHelperCtrl.IsModified = false;   // putting this before GetNewReference causes us to refresh the editable box also
+                }
                 GetNewReference(newReference);
 
                 // if we didn't do it above, reset it to be not modified here (unless the verse didn’t change),
@@ -974,7 +984,14 @@ namespace SIL.ParatextBackTranslationHelperPlugin
 
         void IBackTranslationHelperDataSource.Log(string message)
         {
-            _host.Log(_plugin, $"PtxBTH: {message}");
+            try
+            {
+                _host.Log(_plugin, $"PtxBTH: {message}");
+            }
+            catch
+            {
+                // this throws, I think, if the msg is too long... if it does, just ignore it
+            }
         }
 
         void IBackTranslationHelperDataSource.MoveToNext()
