@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\..\packages\Encoding-Converters-Core.0.8.1\build\Encoding-Converters-Core.props" Condition="Exists('..\..\packages\Encoding-Converters-Core.0.8.1\build\Encoding-Converters-Core.props')" />
+  <Import Project="..\..\packages\Encoding-Converters-Core.0.8.2\build\Encoding-Converters-Core.props" Condition="Exists('..\..\packages\Encoding-Converters-Core.0.8.2\build\Encoding-Converters-Core.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -211,10 +211,9 @@ IF NOT EXIST "%25ParatextInstallDir%25\plugins\$(ProjectName)\$(ProjectName).ptx
 del "%25ParatextInstallDir%25\plugins\$(ProjectName)\$(ProjectName).ptxplg"
 :nodelete
 
-@echo Copying files to '%25ParatextInstallDir%25\plugins\$(ProjectName)' folder
-xcopy "$(TargetDir)" "%25ParatextInstallDir%25\plugins\$(ProjectName)" /y /i
-copy "$(SolutionDir)output\x64\Debug\AzureOpenAiExe.*" "%25ParatextInstallDir%25\plugins\$(ProjectName)"
-ren "%25ParatextInstallDir%25\plugins\$(ProjectName)\$(TargetFileName)" "$(ProjectName).ptxplg"
+@echo Copying files to '%25ParatextInstallDir%25\Encoding Core' folder
+xcopy "$(SolutionDir)output\x64\Debug\*.*" "%25ParatextInstallDir%25\Encoding Core" /y /i
+copy "$(SolutionDir)output\x64\Debug\$(TargetFileName)" "%25ParatextInstallDir%25\plugins\$(ProjectName)\$(ProjectName).ptxplg"
 
 :nocopy</PostBuildEvent>
   </PropertyGroup>
@@ -222,6 +221,6 @@ ren "%25ParatextInstallDir%25\plugins\$(ProjectName)\$(TargetFileName)" "$(Proje
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\..\packages\Encoding-Converters-Core.0.8.1\build\Encoding-Converters-Core.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Encoding-Converters-Core.0.8.1\build\Encoding-Converters-Core.props'))" />
+    <Error Condition="!Exists('..\..\packages\Encoding-Converters-Core.0.8.2\build\Encoding-Converters-Core.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Encoding-Converters-Core.0.8.2\build\Encoding-Converters-Core.props'))" />
   </Target>
 </Project>
