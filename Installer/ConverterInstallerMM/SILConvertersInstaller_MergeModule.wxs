@@ -42,5 +42,9 @@
                  <Custom Action="LaunchSecOptionsInstaller" Before="InstallFinalize"><![CDATA[NOT Installed]]></Custom>
              </InstallExecuteSequence>
         -->
+
+      <InstallExecuteSequence>
+        <RemoveShortcuts>Installed AND NOT UPGRADINGPRODUCTCODE AND REMOVE="ALL"</RemoveShortcuts>
+      </InstallExecuteSequence>
     </Module>
 </Wix>

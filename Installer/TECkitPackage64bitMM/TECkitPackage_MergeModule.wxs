@@ -37,5 +37,9 @@
       </Directory>
 
     </Directory>
+
+    <InstallExecuteSequence>
+      <RemoveShortcuts>Installed AND NOT UPGRADINGPRODUCTCODE AND REMOVE="ALL"</RemoveShortcuts>
+    </InstallExecuteSequence>
   </Module>
 </Wix>
