@@ -424,6 +424,10 @@ namespace SIL.ParatextBackTranslationHelperPlugin
 
             if (textBoxStatus.Tag is IVerseRef newReference)
             {
+                // whether we're reloading or not, if it's paused, then reset it
+                if (backTranslationHelperCtrl.IsPaused)
+                    backTranslationHelperCtrl.SetPausedAndImage(false);
+
                 // allow the user to decide whether to overwrite the edits (but only if he's back on the same verse we paused on. If not, then
                 // we have to update)
                 var hasVerseChanged = newReference?.ToString() != _verseReference?.ToString();
@@ -432,8 +436,7 @@ namespace SIL.ParatextBackTranslationHelperPlugin
                                                       ParatextBackTranslationHelperPlugin.PluginName, MessageBoxButtons.YesNo) == DialogResult.No);
                 if (overwriteEdits)
                 {
-                    backTranslationHelperCtrl.IsPaused =                // just in case it was... the user doesn't want that anymore
-                        backTranslationHelperCtrl.IsModified = false;   // putting this before GetNewReference causes us to refresh the editable box also
+                    backTranslationHelperCtrl.IsModified = false;   // putting this before GetNewReference causes us to refresh the editable box also
                 }
                 GetNewReference(newReference);
 
