@@ -155,6 +155,16 @@ namespace SilConvertersXML
             return true;
         }
 
+        public void TranslatorSetChanged(List<IEncConverter> theTranslators)
+        {
+            if (!theTranslators.Any(t => t.Name == _theEc.Name))
+            {
+                // We no longer have the original encConverter that the Add-in knows about... 
+                DialogResult = DialogResult.Cancel;
+                Close();
+            }
+        }
+
         private void TranslationHelperForm_Load(object sender, EventArgs e)
         {
             Location = Settings.Default.WindowLocation;

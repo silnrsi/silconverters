@@ -17,6 +17,8 @@ using System.Threading.Tasks;
 using ECInterfaces;
 using System.Threading;
 using System.Runtime.InteropServices;
+using SilEncConverters40.EcTranslators.NllbTranslator;
+using System.Diagnostics;
 
 namespace SIL.ParatextBackTranslationHelperPlugin
 {
@@ -99,6 +101,7 @@ namespace SIL.ParatextBackTranslationHelperPlugin
 
             // this form is the implementation of the way to get get data
             backTranslationHelperCtrl.BackTranslationHelperDataSource = this;
+            backTranslationHelperCtrl.buttonPauseUpdating.Visible = true;
             backTranslationHelperCtrl.RegisterForNotification(BackTranslationHelperCtrl.SubscribeableEventKeyTargetBackTranslationTextChanged,
                                                               TargetBackTranslationTextChanged);
 
@@ -305,14 +308,15 @@ namespace SIL.ParatextBackTranslationHelperPlugin
                     var statusText = String.Empty;
                     if (SourceDataLineCount != translatedCount)
                     {
-                        statusText = String.Format("There {0} currently {1} line{2} of text in the Target Translation box vs. {3} text line{4} in the source verse ({5}: {6}). Click (or hover your cursor here) to see the correspondence.",
+                        statusText = String.Format("There {0} currently {1} line{2} in the edit box vs {3} line{4} in the source. Click (or hover your cursor here) to see the correspondence",
                                                     (translatedCount > 1) ? "are" : "is",
                                                     translatedCount,
                                                     (translatedCount > 1) ? "s" : string.Empty,
                                                     SourceDataLineCount,
-                                                    (SourceDataLineCount > 1) ? "s" : string.Empty,
-                                                    (TextTokenMarkersSource.CountTextTokenMarkers > 1) ? "one for each of these markers" : "for this marker",
-                                                    String.Join(",", TextTokenMarkersSource.Where(m => !m.IsParagraphMarkerWithoutText).Select(m => $"\\{m.USFMMarkerToken.Marker}")));
+                                                    (SourceDataLineCount > 1) ? "s" : string.Empty
+                                                    //,(TextTokenMarkersSource.CountTextTokenMarkers > 1) ? "one for each of these markers" : "for this marker",
+                                                    //String.Join(",", TextTokenMarkersSource.Where(m => !m.IsParagraphMarkerWithoutText).Select(m => $"\\{m.USFMMarkerToken.Marker}"))
+                                                    );
                     }
 
                     var preview = GetPreview(translatedLines, cancelToken);
@@ -387,15 +391,21 @@ namespace SIL.ParatextBackTranslationHelperPlugin
         private void Host_VerseRefChanged(IPluginHost sender, IVerseRef newReference, SyncReferenceGroup group)
         {
             var newRef = (newReference.RepresentsMultipleVerses) ? newReference.AllVerses.First() : newReference;
-            System.Diagnostics.Debug.WriteLine($"PtxBTH: In Host_VerseRefChanged {newReference} (newRef: {newRef}) & {group}, _isNotInFocus: {_isNotInFocus}, IsModified: {backTranslationHelperCtrl.IsModified}");
+            System.Diagnostics.Debug.WriteLine($"PtxBTH: In Host_VerseRefChanged {newReference} (newRef: {newRef}) & {group}, _isNotInFocus: {_isNotInFocus}, IsModified: {backTranslationHelperCtrl.IsModified}, IsPaused {backTranslationHelperCtrl.IsPaused}");
 
             // since this will initialize the _verseReference, which is intended to be the first
             //  of a series of verses...
             // UPDATE: but not if the Form isn't in focus (so we don't thrash around converting stuff while
-            //  the user may be editing stuff in Ptx)
-            if (_isNotInFocus && backTranslationHelperCtrl.IsModified)
+            //  the user may be editing stuff in Ptx
+            // UPDATE (2024-02-17): added an explicit pause button to the control, so I don't have to modify it if I don't want it to requery
+            if ((_isNotInFocus && backTranslationHelperCtrl.IsModified) || backTranslationHelperCtrl.IsPaused)
             {
-                textBoxStatus.Text = $"Staying on {_verseReference} because the Target Translation box was modified. Click here to update to current verse in Paratext";
+                var reason = backTranslationHelperCtrl.IsPaused
+                                ? "translation is paused"
+                                : "Target Translation box was modified";
+
+                textBoxStatus.Text = $"Staying on {_verseReference} because the {reason}. Click here to update to current verse in Paratext";
+                Debug.WriteLine($"Set textBoxStatus.Text = {textBoxStatus.Text}");
                 textBoxStatus.Tag = newRef;
                 Application.DoEvents(); // this says we need to do this for when it won't display the change: https://social.msdn.microsoft.com/Forums/vstudio/en-US/983d2e3b-9bcb-4c9c-9e85-59f8b2051b3e/program-updating-a-textbox-does-not-work?forum=csharpgeneral
                 return;
@@ -404,6 +414,7 @@ namespace SIL.ParatextBackTranslationHelperPlugin
                 textBoxStatus.Tag = null;
 
             GetNewReference(newRef);
+            disableActivateRefreshUntilNextVerse = false;   // reenable the activate refresh
         }
 
         private void TextBoxStatus_Click(object sender, System.EventArgs e)
@@ -413,6 +424,10 @@ namespace SIL.ParatextBackTranslationHelperPlugin
 
             if (textBoxStatus.Tag is IVerseRef newReference)
             {
+                // whether we're reloading or not, if it's paused, then reset it
+                if (backTranslationHelperCtrl.IsPaused)
+                    backTranslationHelperCtrl.SetPausedAndImage(false);
+
                 // allow the user to decide whether to overwrite the edits (but only if he's back on the same verse we paused on. If not, then
                 // we have to update)
                 var hasVerseChanged = newReference?.ToString() != _verseReference?.ToString();
@@ -420,8 +435,9 @@ namespace SIL.ParatextBackTranslationHelperPlugin
                                      (MessageBox.Show("Would you like to keep the edited text here (click, 'Yes'), or refresh the target text from Paratext (click, 'No')?",
                                                       ParatextBackTranslationHelperPlugin.PluginName, MessageBoxButtons.YesNo) == DialogResult.No);
                 if (overwriteEdits)
-                    backTranslationHelperCtrl.IsModified = false; // putting this before GetNewReference causes us to refresh the editable box also
-
+                {
+                    backTranslationHelperCtrl.IsModified = false;   // putting this before GetNewReference causes us to refresh the editable box also
+                }
                 GetNewReference(newReference);
 
                 // if we didn't do it above, reset it to be not modified here (unless the verse didn’t change),
@@ -534,13 +550,56 @@ namespace SIL.ParatextBackTranslationHelperPlugin
 
         private void UpdateData(BackTranslationHelperModel model)
         {
-            Text = GetFrameText(_projectSource, _projectTarget, _versesReference);
-            _model = model;
-            var bookNum = _verseReference.BookNum;
-            var chapterNum = _verseReference.ChapterNum;
-            _model.IsTargetTranslationEditable = _projectTarget.CanEdit(_plugin, bookNum, chapterNum);
-            backTranslationHelperCtrl.Initialize(_model);
-            _updateControls(_model);
+            try
+            {
+                Text = GetFrameText(_projectSource, _projectTarget, _versesReference);
+                _model = model;
+                var bookNum = _verseReference.BookNum;
+                var chapterNum = _verseReference.ChapterNum;
+                _model.IsTargetTranslationEditable = _projectTarget.CanEdit(_plugin, bookNum, chapterNum);
+                backTranslationHelperCtrl.Initialize(_model);
+                _updateControls(_model);
+            }
+            catch
+            {
+                // this can happen if the user is closing the form while we're still processing the translation calls.
+            }
+        }
+
+        private void CheckAndAddNextToAllMenu(List<IEncConverter> theTranslators)
+        {
+            if (theTranslators.Exists(t => t.Configurator?.ConfiguratorDisplayName == NllbTranslatorEncConverter.CstrDisplayName))
+            {
+                // allow users to convert entire chapters if the NLLB converter is present
+                var translateEntireChapterMenuItem = new System.Windows.Forms.ToolStripMenuItem
+                {
+                    Name = "translateEntireChapterMenuItem",
+                    Size = new System.Drawing.Size(247, 22),
+                    Text = "&Translate the entire chapter",
+                    ToolTipText = "Click this option to translate the source text into the target project beginning at the current verse until the end of the chapter. Note the text data won't align properly with all markers (esp. inline markers), bkz we're trying to translate everything without inline data interfering with the translation.",
+                };
+                translateEntireChapterMenuItem.Click += new System.EventHandler(this.TranslateEntireChapterMenuItem_Click);
+                backTranslationHelperCtrl.AddToSettingsMenu(translateEntireChapterMenuItem);
+            }
+        }
+
+        private void TranslateEntireChapterMenuItem_Click(object sender, EventArgs e)
+        {
+            var nllbTranslatorName = backTranslationHelperCtrl.TheTranslators.FirstOrDefault(t => t.Configurator?.ConfiguratorDisplayName == NllbTranslatorEncConverter.CstrDisplayName)?.Name;
+            if (String.IsNullOrEmpty(nllbTranslatorName))
+                return; // they must have removed it
+
+            string keyBookChapter = null, startingKeyBookChapter = GetBookChapterKey(_verseReference);
+            do
+            {
+                BackTranslationHelperModel model = null;    // means query the interface to get the data
+                backTranslationHelperCtrl.GetNewData(ref model);
+                var translation = model.TargetsPossible.FirstOrDefault(t => t.TranslatorName == nllbTranslatorName)?.TargetData;
+                WriteToTarget(translation);
+                Application.DoEvents();
+                _verseReference = _verseReferenceLast.GetNextVerse(_projectSource);
+                keyBookChapter = GetBookChapterKey(_verseReference);
+            } while (keyBookChapter == startingKeyBookChapter);
         }
 
         Font IBackTranslationHelperDataSource.SourceLanguageFont
@@ -664,7 +723,10 @@ namespace SIL.ParatextBackTranslationHelperPlugin
                         _processingQs = (token is IUSFMMarkerToken markerToken) && (markerToken.Marker.Contains("q"));
                         if (!_processingQs)
                         {
-                            textValuesAlternate += Environment.NewLine + Environment.NewLine;   // use 2 so it's more visible (since we're removing the 'va' and 'vp' verse numbering)
+                            // if we have already started collecting text, then add a newline to distinguish
+                            //  this from any possible previous paragraphs
+                            if (!String.IsNullOrEmpty(textValuesAlternate))
+                                textValuesAlternate += Environment.NewLine;
                             continue;
                         }
                     }
@@ -688,7 +750,7 @@ namespace SIL.ParatextBackTranslationHelperPlugin
 
                 // combine the text fragments of inline markers too, but add them after the main, regular text of the verse, 
                 //  so they don't interfere with the translation of the main text
-                sourceStringAlternate = textValuesAlternateFootnotes.Aggregate(textValuesAlternate.Replace("  ", " ") + Environment.NewLine,
+                sourceStringAlternate = textValuesAlternateFootnotes.Aggregate(textValuesAlternate?.Replace("  ", " "),
                                                                                (curr, next) => curr + Environment.NewLine + next);
             }
 
@@ -807,7 +869,10 @@ namespace SIL.ParatextBackTranslationHelperPlugin
                 if (!UsfmTokensTarget.TryGetValue(bookChapterKey, out SortedDictionary<string, List<IUSFMToken>> vrefTokens))
                 {
                     System.Diagnostics.Debug.WriteLine($"PtxBTH: Loading UsfmTokensTarget for {bookChapterKey}");
-                    var chapterTokens = _projectTarget.GetUSFMTokens(_verseReference.BookNum, _verseReference.ChapterNum).ToList();
+                    var chapterTokens = _projectTarget.GetUSFMTokens(_verseReference.BookNum, _verseReference.ChapterNum)?.ToList();
+                    if (chapterTokens == null)
+                        return null;    // some books don't return proper things... (e.g. for me it was GLO)
+
                     var dict = chapterTokens.GroupBy(t => t.VerseRef, t => t, (key, g) => new { VerseRef = key, USFMTokens = g.ToList() })
                                             .ToDictionary(t => GetBookChapterVerseRangeKey(t.VerseRef), t => t.USFMTokens);
                     vrefTokens = new SortedDictionary<string, List<IUSFMToken>>(dict);
@@ -906,6 +971,7 @@ namespace SIL.ParatextBackTranslationHelperPlugin
 
         void IBackTranslationHelperDataSource.ButtonPressed(ButtonPressed button)
         {
+            disableActivateRefreshUntilNextVerse = true;
             _buttonPressed = button;
         }
 
@@ -921,10 +987,22 @@ namespace SIL.ParatextBackTranslationHelperPlugin
 
         void IBackTranslationHelperDataSource.Log(string message)
         {
-            _host.Log(_plugin, $"PtxBTH: {message}");
+            try
+            {
+                _host.Log(_plugin, $"PtxBTH: {message}");
+            }
+            catch
+            {
+                // this throws, I think, if the msg is too long... if it does, just ignore it
+            }
         }
 
         void IBackTranslationHelperDataSource.MoveToNext()
+        {
+            MoveToNext();
+        }
+
+        private void MoveToNext()
         {
             _buttonPressed = ButtonPressed.MoveToNext;
 
@@ -937,6 +1015,11 @@ namespace SIL.ParatextBackTranslationHelperPlugin
         private bool AreWeChangingTheTarget { get; set; }
 
         bool IBackTranslationHelperDataSource.WriteToTarget(string text)
+        {
+            return WriteToTarget(text);
+        }
+
+        private bool WriteToTarget(string text)
         {
             try
             {
@@ -1161,6 +1244,8 @@ namespace SIL.ParatextBackTranslationHelperPlugin
 
         private void BackTranslationHelperForm_FormClosing(object sender, FormClosingEventArgs e)
         {
+            disableActivateRefreshUntilNextVerse = true;    // don't let it refresh if we're closing
+
             // only allow Cancel or ReplaceEvery
             if ((e.CloseReason != CloseReason.UserClosing) &&
                 ((_buttonPressed == ButtonPressed.WriteToTarget)
@@ -1209,6 +1294,8 @@ namespace SIL.ParatextBackTranslationHelperPlugin
             //    return;
         }
 
+        private bool disableActivateRefreshUntilNextVerse = true;   // require us to wait to do activate refresh until we get the converters situated
+
         private void BackTranslationHelperForm_Activated(object sender, EventArgs e)
         {
             _isNotInFocus = false;
@@ -1230,7 +1317,23 @@ namespace SIL.ParatextBackTranslationHelperPlugin
             if (backTranslationHelperCtrl.IsModified)
                 return;
 
-            GetNewReference(_verseReference);
+            // we have this issue that if we launch a dialog (and thus become inactive), when that 
+            //  dialog goes away, it looks like we need to refresh... But this can get us into near
+            //  infinite loops, so have a way to disable this until we get to another verse
+            if (!disableActivateRefreshUntilNextVerse)
+                GetNewReference(_verseReference);
+        }
+
+        public void TranslatorSetChanged(List<IEncConverter> theTranslators)
+        {
+            // now that Initialize has been called, the collection of EncConverters is initialized
+            // See if we need to add the 'translate to end of chapter' menu item to the Settings
+            // menu (if we have an NLLB type converter)
+            // if there are none (it means the user canceled the select converter dialog). In that case,
+            //  disable activate refresh, so we don't get stuck in a loop
+            disableActivateRefreshUntilNextVerse = !theTranslators.Any();
+            if (!disableActivateRefreshUntilNextVerse)
+                CheckAndAddNextToAllMenu(theTranslators);
         }
 
         public class BackgroundWorkerResult

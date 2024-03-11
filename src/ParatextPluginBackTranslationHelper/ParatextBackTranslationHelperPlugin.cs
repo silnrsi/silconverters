@@ -29,8 +29,6 @@ namespace SIL.ParatextBackTranslationHelperPlugin
 		private static BackTranslationHelperForm _mainWindow;
 #endif
 		private static ParatextBackTranslationHelperPlugin _this;
-		private static IProject _projectNameParent;
-		private static IProject _projectNameDaughter;
 
 		public ParatextBackTranslationHelperPlugin()
         {

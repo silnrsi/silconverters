@@ -568,7 +568,7 @@ namespace SpellingFixerEC
 
         private void DoEdit(string strProjectName, string strFontName, string sFontSize)
         {
-            m_font = new Font(strFontName, GetFloatFontSize(sFontSize));
+            m_font = new Font(strFontName, GetFloatFontSize(sFontSize ?? "12.0"));
 
             using var dlg = new AddNewProjectForm(m_strNonWordCharacters)
             {

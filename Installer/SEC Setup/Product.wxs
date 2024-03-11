@@ -148,6 +148,9 @@
     <Property Id="SIL_PYTHON_FOUND">
       <RegistrySearch Id="AppReg1" Root="HKLM" Key="SOFTWARE\Python\PythonCore\2.7\InstallPath" Type="raw" />
     </Property>
+    <Property Id="SIL_PYTHON3_FOUND">
+      <RegistrySearch Id="AppReg13" Root="HKCU" Key="SOFTWARE\Python\PythonCore" Name="DisplayName" Type="raw" />
+    </Property>
     <Property Id="SIL_PERL_FOUND">
       <DirectorySearch Id="AppFile" Path="C:\Perl" Depth="0" />
     </Property>
