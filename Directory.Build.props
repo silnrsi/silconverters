@@ -3,9 +3,9 @@
     <ApplicationName>SILConverters</ApplicationName>
     <SafeApplicationName>SILConverters</SafeApplicationName>
     <TruncatedVersion>5.2</TruncatedVersion>
-    <VersionNumber>5.2.5.0</VersionNumber>
+    <VersionNumber>5.2.6.0</VersionNumber>
     <UpgradeCode>8A50226C-84D0-4CAF-AF8F-B0284643C415</UpgradeCode>
-    <Year>2023</Year>
+    <Year>2024</Year>
     <Manufacturer>SIL International</Manufacturer>
   </PropertyGroup>
 </Project>

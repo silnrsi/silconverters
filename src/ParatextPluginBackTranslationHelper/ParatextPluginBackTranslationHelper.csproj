@@ -35,8 +35,8 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
     <DebugSymbols>true</DebugSymbols>
-    <OutputPath>bin\x64\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <OutputPath>..\..\output\x64\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
     <DebugType>full</DebugType>
     <PlatformTarget>x64</PlatformTarget>
     <LangVersion>latest</LangVersion>
@@ -74,6 +74,9 @@
 			you might want to manually add to the csproj file instead-->
     <Reference Include="AIGuesserEC" Condition="('$(Platform)' == 'x64') and ('$(OS)'=='Windows_NT')">
       <HintPath>$(EcDistFilesPath)\win-$(Platform)\native\AIGuesserEC.dll</HintPath>
+    </Reference>
+    <Reference Include="PtxConverters" Condition="('$(Platform)' == 'x64') and ('$(OS)'=='Windows_NT')">
+      <HintPath>$(EcDistFilesPath)\win-$(Platform)\native\PtxConverters.dll</HintPath>
     </Reference>
     <Reference Include="ECInterfaces, Version=4.0.0.0, Culture=neutral, PublicKeyToken=f1447bae1e63f485, processorArchitecture=x86" Condition="('$(Platform)' == 'x86' or '$(Platform)' == 'AnyCPU') and ('$(OS)'=='Windows_NT')">
       <HintPath>$(EcLibFilesPath)\net48\x86\ECInterfaces.dll</HintPath>
@@ -136,6 +139,7 @@
     <Compile Include="BackTranslationHelperForm.Designer.cs">
       <DependentUpon>BackTranslationHelperForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="PtxPluginHelpers.cs" />
     <Compile Include="VerseRef.cs" />
     <Compile Include="MarkerToken.cs" />
     <Compile Include="ParatextBackTranslationHelperPlugin.cs" />
@@ -208,11 +212,13 @@ IF "%25ParatextInstallDir%25" == "" goto nocopy
 IF NOT EXIST "%25ParatextInstallDir%25" goto nocopy
 
 IF NOT EXIST "%25ParatextInstallDir%25\plugins\$(ProjectName)\$(ProjectName).ptxplg" goto nodelete
+@echo Deleting '%25ParatextInstallDir%25\plugins\$(ProjectName)\$(ProjectName).ptxplg'
 del "%25ParatextInstallDir%25\plugins\$(ProjectName)\$(ProjectName).ptxplg"
 :nodelete
 
 @echo Copying files to '%25ParatextInstallDir%25\Encoding Core' folder
 xcopy "$(SolutionDir)output\x64\Debug\*.*" "%25ParatextInstallDir%25\Encoding Core" /y /i
+@echo Copying '$(SolutionDir)output\x64\Debug\$(TargetFileName)' to: '%25ParatextInstallDir%25\plugins\$(ProjectName)\$(ProjectName).ptxplg'
 copy "$(SolutionDir)output\x64\Debug\$(TargetFileName)" "%25ParatextInstallDir%25\plugins\$(ProjectName)\$(ProjectName).ptxplg"
 
 :nocopy</PostBuildEvent>

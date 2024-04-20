@@ -38,7 +38,7 @@ namespace SIL.ParatextBackTranslationHelperPlugin
             // disable the add button (until an implementation type is selected)
             this.buttonAdd.Enabled = false;
 
-            labelStatic.Text = $"Choose the project that is the {projectTypeName} language";
+            labelStatic.Text = $"Choose the project that is the {projectTypeName}";
         }
 
         private string GetProjectDetails(IProject project)
@@ -113,7 +113,7 @@ namespace SIL.ParatextBackTranslationHelperPlugin
             this.listBoxProjectNames.Location = new System.Drawing.Point(3, 26);
             this.listBoxProjectNames.Name = "listBoxProjectNames";
             this.helpProvider.SetShowHelp(this.listBoxProjectNames, true);
-            this.listBoxProjectNames.Size = new System.Drawing.Size(262, 225);
+            this.listBoxProjectNames.Size = new System.Drawing.Size(408, 277);
             this.listBoxProjectNames.Sorted = true;
             this.listBoxProjectNames.TabIndex = 0;
             this.listBoxProjectNames.SelectedIndexChanged += new System.EventHandler(this.listBoxProjectNames_SelectedIndexChanged);
@@ -123,9 +123,10 @@ namespace SIL.ParatextBackTranslationHelperPlugin
             // labelStatic
             // 
             this.tableLayoutPanel.SetColumnSpan(this.labelStatic, 2);
+            this.labelStatic.Dock = System.Windows.Forms.DockStyle.Fill;
             this.labelStatic.Location = new System.Drawing.Point(3, 0);
             this.labelStatic.Name = "labelStatic";
-            this.labelStatic.Size = new System.Drawing.Size(256, 23);
+            this.labelStatic.Size = new System.Drawing.Size(408, 23);
             this.labelStatic.TabIndex = 1;
             this.labelStatic.Text = "Choose the project that is the {projectTypeName} language";
             // 
@@ -134,7 +135,7 @@ namespace SIL.ParatextBackTranslationHelperPlugin
             this.buttonAdd.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.helpProvider.SetHelpString(this.buttonAdd, "Click this button to add an existing map or create a new converter based on the s" +
         "elected transduction type");
-            this.buttonAdd.Location = new System.Drawing.Point(56, 257);
+            this.buttonAdd.Location = new System.Drawing.Point(129, 321);
             this.buttonAdd.Name = "buttonAdd";
             this.helpProvider.SetShowHelp(this.buttonAdd, true);
             this.buttonAdd.Size = new System.Drawing.Size(75, 23);
@@ -147,7 +148,7 @@ namespace SIL.ParatextBackTranslationHelperPlugin
             this.buttonCancel.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.helpProvider.SetHelpString(this.buttonCancel, "Click this button to cancel this dialog");
-            this.buttonCancel.Location = new System.Drawing.Point(137, 257);
+            this.buttonCancel.Location = new System.Drawing.Point(210, 321);
             this.buttonCancel.Name = "buttonCancel";
             this.helpProvider.SetShowHelp(this.buttonCancel, true);
             this.buttonCancel.Size = new System.Drawing.Size(75, 23);
@@ -173,7 +174,7 @@ namespace SIL.ParatextBackTranslationHelperPlugin
             this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel.Size = new System.Drawing.Size(268, 283);
+            this.tableLayoutPanel.Size = new System.Drawing.Size(414, 347);
             this.tableLayoutPanel.TabIndex = 4;
             // 
             // timerTooltip
@@ -186,7 +187,7 @@ namespace SIL.ParatextBackTranslationHelperPlugin
             this.AcceptButton = this.buttonAdd;
             this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
             this.CancelButton = this.buttonCancel;
-            this.ClientSize = new System.Drawing.Size(292, 307);
+            this.ClientSize = new System.Drawing.Size(438, 371);
             this.Controls.Add(this.tableLayoutPanel);
             this.HelpButton = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));

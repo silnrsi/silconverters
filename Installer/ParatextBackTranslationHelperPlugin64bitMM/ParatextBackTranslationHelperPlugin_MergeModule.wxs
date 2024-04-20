@@ -24,6 +24,10 @@
               <File Id="PtxTranslators4.0.0.0PluginDetails.xml" Name="Translators 4.0.0.0 Plugin Details.xml" KeyPath="yes" Source="..\..\output\x64\release\EC\Plugins\Translators 4.0.0.0 Plugin Details.xml"/>
             </Component>
 
+            <Component Id="PtxProject4.0.0.0PluginDetails.xml" Guid="{66578C6D-BE08-4908-BACE-6E395921BA69}">
+              <File Id="PtxProject4.0.0.0PluginDetails.xml" Name="PtxProject 4.0.0.0 Plugin Details.xml" KeyPath="yes" Source="..\..\output\x64\release\EC\Plugins\PtxProject 4.0.0.0 Plugin Details.xml"/>
+            </Component>
+
           </Directory>
         </Directory>
       </Directory>

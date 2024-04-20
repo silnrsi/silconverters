@@ -1,8 +1,6 @@
 ﻿// Uncomment this define to enable code that helps in test creation for a new scenario
 //  See UnitTest_PtxBackTrHelper::It_Can_Determine_Correct_Update_To_Target_Project in the TestBwdc project for details
-#if DEBUG
-#define SerializeToCreateTestFiles
-#endif
+// #define SerializeToCreateTestFiles
 
 using BackTranslationHelper;
 using Paratext.PluginInterfaces;
@@ -19,6 +17,9 @@ using System.Threading;
 using System.Runtime.InteropServices;
 using SilEncConverters40.EcTranslators.NllbTranslator;
 using System.Diagnostics;
+using SilEncConverters40;
+using SilEncConverters40.EcTranslators;
+using SilEncConverters40.PtxConverters;
 
 namespace SIL.ParatextBackTranslationHelperPlugin
 {
@@ -141,6 +142,8 @@ namespace SIL.ParatextBackTranslationHelperPlugin
             chooseSourceProjectMenuItem.Click += new System.EventHandler(this.ChangeSourceProject_Click);
             backTranslationHelperCtrl.AddToSettingsMenu(chooseSourceProjectMenuItem);
 
+            // add a check-able menu to get it to show/translate all the scripture text first and then the inline markers afterwards
+            //  so that translation is don't w/o interuption by inline markers
             translateNothingButPublishableScriptureTextMenuItem = new System.Windows.Forms.ToolStripMenuItem
             {
                 CheckOnClick = true,
@@ -152,6 +155,15 @@ namespace SIL.ParatextBackTranslationHelperPlugin
             translateNothingButPublishableScriptureTextMenuItem.Checked = Properties.Settings.Default.TranslateOnlyText;
             translateNothingButPublishableScriptureTextMenuItem.CheckStateChanged += new System.EventHandler(this.TranslateNothingButPublishableScriptureTextMenuItem_CheckStateChanged);
             backTranslationHelperCtrl.AddToSettingsMenu(translateNothingButPublishableScriptureTextMenuItem);
+        }
+
+        private string CreateParatextProjectConverterInput(bool? overrideTranslateNothingButPublishableScripture = null)
+        {
+            var shouldTranslateNothingButPublishableScripture = (overrideTranslateNothingButPublishableScripture == null)
+                    ? translateNothingButPublishableScriptureTextMenuItem.Checked
+                    : (bool)overrideTranslateNothingButPublishableScripture;
+
+            return $"{GetBookChapterVerseRangeKey(_verseReference)};{shouldTranslateNothingButPublishableScripture}";
         }
 
         private void TranslateNothingButPublishableScriptureTextMenuItem_CheckStateChanged(object sender, EventArgs e)
@@ -178,7 +190,7 @@ namespace SIL.ParatextBackTranslationHelperPlugin
                 mapProjectNameToSourceProjectOverride.Remove(projectName);
             }
 
-            var projectSource = QueryForProject("Source");
+            var projectSource = QueryForProject("Source language");
             if ((projectSource != null) && (projectSource != _projectSource))
             {
                 _projectSource = projectSource;
@@ -220,8 +232,8 @@ namespace SIL.ParatextBackTranslationHelperPlugin
             else
             {
                 // otherwise, make them choose
-                _projectSource ??= QueryForProject("Source");
-                _projectTarget ??= QueryForProject("Target");
+                _projectSource ??= QueryForProject("Source language");
+                _projectTarget ??= QueryForProject("Target language");
             }
 
             if ((_projectSource == null) || (_projectTarget == null))
@@ -459,6 +471,7 @@ namespace SIL.ParatextBackTranslationHelperPlugin
         }
 
         private static readonly List<string> _previewInlineMarkersToIgnore = Properties.Settings.Default.GetPreviewInlineMarkersToIgnore.Cast<string>().ToList();
+        private bool _processingQs = false;
 
         private string GetPreview(List<string> textLines, CancellationToken? cancelToken = null)
         {
@@ -568,38 +581,117 @@ namespace SIL.ParatextBackTranslationHelperPlugin
 
         private void CheckAndAddNextToAllMenu(List<IEncConverter> theTranslators)
         {
-            if (theTranslators.Exists(t => t.Configurator?.ConfiguratorDisplayName == NllbTranslatorEncConverter.CstrDisplayName))
+            var firstWithOwnCreds = GetFirstFullChapterConverter();
+            if (firstWithOwnCreds == null)
+                return;
+
+            var translatorName = firstWithOwnCreds.Name;
+            var translateEntireChapterMenuItem = new System.Windows.Forms.ToolStripMenuItem
             {
-                // allow users to convert entire chapters if the NLLB converter is present
-                var translateEntireChapterMenuItem = new System.Windows.Forms.ToolStripMenuItem
-                {
-                    Name = "translateEntireChapterMenuItem",
-                    Size = new System.Drawing.Size(247, 22),
-                    Text = "&Translate the entire chapter",
-                    ToolTipText = "Click this option to translate the source text into the target project beginning at the current verse until the end of the chapter. Note the text data won't align properly with all markers (esp. inline markers), bkz we're trying to translate everything without inline data interfering with the translation.",
-                };
-                translateEntireChapterMenuItem.Click += new System.EventHandler(this.TranslateEntireChapterMenuItem_Click);
-                backTranslationHelperCtrl.AddToSettingsMenu(translateEntireChapterMenuItem);
-            }
+                Name = "translateEntireChapterMenuItem",
+                Size = new System.Drawing.Size(247, 22),
+                Text = "&Translate the rest of the chapter",
+                ToolTipText = $"Click this option to translate the source text into the target project with the '{translatorName}' translator beginning at the current verse until the end of the chapter.",
+            };
+            translateEntireChapterMenuItem.Click += new System.EventHandler(this.TranslateEntireChapterMenuItem_Click);
+            backTranslationHelperCtrl.AddToSettingsMenu(translateEntireChapterMenuItem);
+        }
+
+        private IEncConverter GetFirstFullChapterConverter()
+        {
+            // allow users to convert entire chapters if the NLLB converter is present (OR if they have at least 1 w/ their own creds)
+            return  backTranslationHelperCtrl.TheTranslators.FirstOrDefault(t => (t is PromptExeTranslator) || // has their own creds by definition
+                                                                                 ((t is TranslatorConverter translatorConverter) && 
+                                                                                    translatorConverter.HasUserOverriddenCredentials)) ??
+
+                    // if there aren't any 'Prompt' or 'Translators' converters w/ their own creds...
+                    //  then check if there's some non-translator EncConverter to use
+                    backTranslationHelperCtrl.TheTranslators.FirstOrDefault(t => !(t is TranslatorConverter));
         }
 
         private void TranslateEntireChapterMenuItem_Click(object sender, EventArgs e)
         {
-            var nllbTranslatorName = backTranslationHelperCtrl.TheTranslators.FirstOrDefault(t => t.Configurator?.ConfiguratorDisplayName == NllbTranslatorEncConverter.CstrDisplayName)?.Name;
-            if (String.IsNullOrEmpty(nllbTranslatorName))
-                return; // they must have removed it
+            var firstWithOwnCreds = GetFirstFullChapterConverter();
+            if (firstWithOwnCreds == null)
+                return;
 
+            // remove the TargetPossible for the one we're using (so it'll get called) and set the 'TargetPossible'
+            //  for all the other translators (so they don't get called during GetNewData below
+            //  (if the TargetPossible already exists, it thinks they were already converted (cf. Word and PtxProjectData)
+            var translatorName = firstWithOwnCreds.Name;
+            _model.TargetsPossible.Clear();
+            backTranslationHelperCtrl.TheTranslators.Where(t => t.Name != translatorName).ToList()
+                                                    .ForEach(t =>
+                                                    {
+                                                        _model.TargetsPossible.Add(new TargetPossible
+                                                        {
+                                                            PossibleIndex = backTranslationHelperCtrl.TheTranslators.IndexOf(t),
+                                                            TranslatorName = t.Name,
+                                                            TargetData = "Ignore"
+                                                        });
+                                                    });
+
+            var translatorIndex = backTranslationHelperCtrl.TheTranslators.IndexOf(firstWithOwnCreds);
             string keyBookChapter = null, startingKeyBookChapter = GetBookChapterKey(_verseReference);
-            do
+            backTranslationHelperCtrl.IsPaused = disableActivateRefreshUntilNextVerse = true;    // something in the below causes the window to lose focus, which causes us to reprocess all the converters
+            try
             {
-                BackTranslationHelperModel model = null;    // means query the interface to get the data
-                backTranslationHelperCtrl.GetNewData(ref model);
-                var translation = model.TargetsPossible.FirstOrDefault(t => t.TranslatorName == nllbTranslatorName)?.TargetData;
-                WriteToTarget(translation);
-                Application.DoEvents();
-                _verseReference = _verseReferenceLast.GetNextVerse(_projectSource);
-                keyBookChapter = GetBookChapterKey(_verseReference);
-            } while (keyBookChapter == startingKeyBookChapter);
+                var verseReferenceNext = _verseReference;
+                SortedDictionary<string, List<IUSFMToken>> vrefTokensTarget = null;
+                do
+                {
+                    _verseReference = verseReferenceNext;
+
+                    // we probably already have it, but the next time thru the loop, we'll need the next verse pulled in
+                    //  this sets UsfmTokensSource for the current verse, which we'll need 
+                    var currentSourceData = CurrentSourceData;
+
+                    // for the PtxProjectEncConverter, we have to do this one specially (and then we don't need to call GetNewData)
+                    if (firstWithOwnCreds is PtxProjectEncConverter ptxProjectEncConverter)
+                    {
+                        // note that since the data is coming from a paratext project, we don't need to consider 'translating' the verse text
+                        //  as a unit and doing the inline markers later (since there's no 'translation' going on here)
+                        var ptxProjectConverterInput = CreateParatextProjectConverterInput(overrideTranslateNothingButPublishableScripture: false);
+                        InitializeModelForPtxProjectConverters(_model, ptxProjectConverterInput, ptxProjectEncConverter, translatorIndex);
+                    }
+                    else
+                    {
+                        // otherwise, clear the one we want to be called (leaving the others filled so they don't get called)
+                        _model.TargetsPossible.RemoveAll(tp => tp.TranslatorName == translatorName);
+
+                        // set the new source text
+                        _model.SourceData = currentSourceData.sourceData;
+
+                        // call the function that calls the 'converters to update the data for the new verse
+                        backTranslationHelperCtrl.GetNewData(ref _model);
+                    }
+
+                    var translation = _model.TargetsPossible.FirstOrDefault(t => t.TranslatorName == translatorName)?.TargetData;
+
+                    vrefTokensTarget = CalculateTargetTokens(_verseReference, _versesReference, translation, UsfmTokensSource, UsfmTokensTarget);
+
+                    UsfmTokensTarget[startingKeyBookChapter] = vrefTokensTarget;
+
+                    textBoxStatus.Text = $"{translatorName} translated {_verseReference} as {translation}";
+
+                    Application.DoEvents();
+
+                    // move on to the next verse
+                    verseReferenceNext = _verseReferenceLast.GetNextVerse(_projectSource);
+                    keyBookChapter = GetBookChapterKey(verseReferenceNext);
+                } while (keyBookChapter == startingKeyBookChapter);
+
+                // now write all the collected text to the target project
+                WriteToTarget(translatorName, vrefTokensTarget);
+            }
+            catch (Exception ex)
+            {
+                var error = LogExceptionMessage("TranslateEntireChapter", ex);
+                MessageBox.Show($"Exception:\n{error}");
+            }
+
+            backTranslationHelperCtrl.IsPaused = disableActivateRefreshUntilNextVerse = false;   // reenable the activate refresh
+            _model.TargetsPossible.Clear();                 // so we don't keep ignoring the others...
         }
 
         Font IBackTranslationHelperDataSource.SourceLanguageFont
@@ -638,8 +730,34 @@ namespace SIL.ParatextBackTranslationHelperPlugin
                     TargetsPossible = new List<TargetPossible>(),
                     DisplayExistingTargetTranslation = true,
                 };
+
+                // special processing for the PtxProjectEncConverter (since we have to pass it the verse ref rather than text to 'translate')
+                var ptxProjectConverterInput = CreateParatextProjectConverterInput();
+
+                foreach (PtxProjectEncConverter ptxProjectEncConverter in backTranslationHelperCtrl.TheTranslators.Where(t => t is PtxProjectEncConverter))
+                {
+                    InitializeModelForPtxProjectConverters(model, ptxProjectConverterInput, ptxProjectEncConverter, 
+                                                           backTranslationHelperCtrl.TheTranslators.IndexOf(ptxProjectEncConverter));
+                }
                 return model;
             }
+        }
+
+        private static void InitializeModelForPtxProjectConverters(BackTranslationHelperModel model, string ptxProjectConverterInput, 
+                                                                   PtxProjectEncConverter ptxProjectEncConverter, int indexPossibleTarget)
+        {
+            var targetPossible = model.TargetsPossible.FirstOrDefault(tp => tp.TranslatorName == ptxProjectEncConverter.Name);
+            if (targetPossible == null)
+            {
+                targetPossible = new TargetPossible
+                {
+                    PossibleIndex = indexPossibleTarget,
+                    TranslatorName = ptxProjectEncConverter.Name
+                };
+                model.TargetsPossible.Add(targetPossible);
+            }
+
+            targetPossible.TargetData = ptxProjectEncConverter.Convert(ptxProjectConverterInput);
         }
 
         /// <summary>
@@ -670,7 +788,7 @@ namespace SIL.ParatextBackTranslationHelperPlugin
                 }
 
                 var data = tokens?.OfType<IUSFMTextToken>()
-                                  .Where(t => IsPublishableVernacular(t, tokens) && IsMatchingVerse(t.VerseRef, _verseReference))
+                                  .Where(t => PtxPluginHelpers.IsPublishableVernacular(t, tokens) && PtxPluginHelpers.IsMatchingVerse(t.VerseRef, _verseReference))
                                   .ToDictionary(ta => ta, ta => ta.VerseRef);
 
                 if ((data == null) || !data.Any())
@@ -684,7 +802,8 @@ namespace SIL.ParatextBackTranslationHelperPlugin
 
                 // if the user is requesting, grab all the scripture text first and then the footnotes, as separate
                 //  stuff to translate (not interspersed, so as not to break up the translatable chunks)
-                var sourceStringAlternate = GetSourceAlternate(tokens, data.Keys.ToList());
+                var sourceStringAlternate = PtxPluginHelpers.GetSourceAlternate(translateNothingButPublishableScriptureTextMenuItem.Checked, tokens, data.Keys.ToList(),
+                                                                                ref _processingQs);
 
                 // set the verse reference to the last of a combined set of verses (which we can only get from the USFM markers)
                 _versesReference = data.Values.First();
@@ -694,121 +813,6 @@ namespace SIL.ParatextBackTranslationHelperPlugin
 
                 return (sourceString, sourceStringAlternate);
             }
-        }
-
-        // when generating the 'alternate' source translation (i.e. ignoring, or rather, moving inline markers w/ text to the end),
-        //  treat the \q1-4 markers special, so their text segments get combined even though they're in different paragraphs (leads to better translation).
-        // NB: BUT there is one glitch: if a \q1 paragraph marker is immediately followed by a \v marker, then technically,
-        //  the \q1 is in the preceding verse reference; not this one. So though we'd want to say that we're 'processingQs' in this case,
-        //  we can't, so the text on that line will be translated separately from the \q2, etc., that follows it.
-        // By making this a global member, it will remember going from verse-to-verse. But one place this would not work: 
-        //  if the user processes a verse that ends with a \q1-4 marker, but rather than clicking 'Next', goes to some other, non-sequential verse, 
-        //  we'd be mistaken that we're processingQs... (but since this is just a preview and not something substantive, let's just ignore this
-        //  hopefully unusual case.
-        private bool _processingQs = false;
-
-        private string GetSourceAlternate(List<IUSFMToken> tokens, List<IUSFMTextToken> textTokens)
-        {
-            string sourceStringAlternate = null;
-            if (translateNothingButPublishableScriptureTextMenuItem.Checked)
-            {
-                string textValuesAlternate = null;
-                List<string> textValuesAlternateFootnotes = new();
-                foreach (var token in tokens)
-                {
-                    // if the token is a paragraph break token (\i.e. \p and \q{digit}), then put a new line in the running text
-                    if (IsParagraphToken(token))
-                    {
-                        // but not for \q1-\q4, bkz we want those to be combined into a single run of text
-                        _processingQs = (token is IUSFMMarkerToken markerToken) && (markerToken.Marker.Contains("q"));
-                        if (!_processingQs)
-                        {
-                            // if we have already started collecting text, then add a newline to distinguish
-                            //  this from any possible previous paragraphs
-                            if (!String.IsNullOrEmpty(textValuesAlternate))
-                                textValuesAlternate += Environment.NewLine;
-                            continue;
-                        }
-                    }
-
-                    // if it's not something we want to translate (e.g. not a text marker or a va or vp verse numbers (which are text markers))...
-                    if (!textTokens.Contains(token) || 
-                        (AsTextToken(token, out IUSFMTextToken textToken) && !IsTranslatable(textToken, tokens)))
-                        continue;   // skip it
-
-                    // if it's scripture text (i.e. the translatable stuff)...
-                    if (IsScriptureText(textToken))
-                    {
-                        textValuesAlternate += textToken.Text;  // add it to the running accumulation
-                    }
-                    else
-                    {
-                        // must be a footnote
-                        textValuesAlternateFootnotes.Add(textToken.Text);
-                    }
-                }
-
-                // combine the text fragments of inline markers too, but add them after the main, regular text of the verse, 
-                //  so they don't interfere with the translation of the main text
-                sourceStringAlternate = textValuesAlternateFootnotes.Aggregate(textValuesAlternate?.Replace("  ", " "),
-                                                                               (curr, next) => curr + Environment.NewLine + next);
-            }
-
-            return sourceStringAlternate;
-
-            static bool AsTextToken(IUSFMToken token, out IUSFMTextToken textToken)
-            {
-                if (token is IUSFMTextToken)
-                {
-                    textToken = token as IUSFMTextToken;
-                    return true;
-                }
-                textToken = null;
-                return false;
-            }
-        }
-
-        private static readonly List<string> _additionalMarkersToTranslate = Properties.Settings.Default.AdditionalMarkersToTranslate.Cast<string>().ToList();
-
-        // this would return true for both regular scripture text (i.e.  text after any of these markers:
-        // \v, \q[1-3], \m, \pc, etc) and footnote text that is translatable (i.e. \ft)
-        private static bool IsTranslatable(IUSFMTextToken token, List<IUSFMToken> tokens)
-        {
-            PreviousToken(token, tokens, out IUSFMMarkerToken mt);
-            return (IsScriptureText(token) && (mt.Marker != "va")) ||
-                    _additionalMarkersToTranslate.Contains(mt.Marker);
-        }
-
-        private static bool IsScriptureText(IUSFMTextToken token)
-        {
-            return (token.IsPublishableVernacular && token.IsScripture);
-        }
-
-        // normally, text tokens are publishable, but there are some that aren't (e.g. the text content of an \id marker).
-        // And there's one case that seems like a bug to me, but which I've been told has worked that way forever and so
-        // there's no changing it now... vis-a-vis:
-        // the \va...\va* inline marker is defined differently depending on whether it comes immediately after a \v [num(s)] 
-        // marker than if it comes elsewhere in a verse. The relevant difference is that when it comes immediately after a \v 
-        // marker, it's value for IsPublishableVernacular (false) and IsMetadata (true) are opposite from the other case. 
-        // So... if IsPublishableVernacular is false, at least check if this is that case, and return true, so we'll try to 
-        // translate it as the others are (bkz we only send IsPub text segments for translation)
-        private static bool IsPublishableVernacular(IUSFMTextToken t, List<IUSFMToken> tokens)
-        {
-            return t.IsPublishableVernacular || 
-                   (PreviousToken(t, tokens, out IUSFMMarkerToken mt) && (mt.Marker == "va") && mt.IsMetadata);
-        }
-
-        private static bool PreviousToken(IUSFMTextToken t, List<IUSFMToken> tokens, out IUSFMMarkerToken previousToken)
-        {
-            var index = tokens.IndexOf(t) - 1;
-            if ((index >= 0) && (index < tokens.Count) && (tokens[index] is IUSFMMarkerToken prevToken))
-            {
-                previousToken = prevToken;
-                return true;
-            }
-
-            previousToken = null;
-            return false;
         }
 
         public class TextMarkerToken
@@ -844,7 +848,7 @@ namespace SIL.ParatextBackTranslationHelperPlugin
                 {
                     if (token is IUSFMMarkerToken)
                     {
-                        if (IsParagraphToken(lastMarkerToken))
+                        if (PtxPluginHelpers.IsParagraphToken(lastMarkerToken))
                         {
                             textTokenMarkers.Add(new TextMarkerToken(lastMarkerToken, true));
                             lastMarkerToken = null;
@@ -896,7 +900,7 @@ namespace SIL.ParatextBackTranslationHelperPlugin
 
                 var tokens = vrefTokens[bookChapterVerseKey];
                 var data = tokens.OfType<IUSFMTextToken>()
-                                 .Where(t => IsPublishableVernacular(t, tokens) && IsMatchingVerse(t.VerseRef, _verseReference));
+                                 .Where(t => PtxPluginHelpers.IsPublishableVernacular(t, tokens) && PtxPluginHelpers.IsMatchingVerse(t.VerseRef, _verseReference));
 
                 if (!data.Any())
                     return null;
@@ -929,13 +933,6 @@ namespace SIL.ParatextBackTranslationHelperPlugin
             if (verseReference.RepresentsMultipleVerses)
                 bookChapterFirstVerse += $"-{verseReference.AllVerses.Last().VerseNum:D3}";
             return bookChapterFirstVerse;
-        }
-
-        private static bool IsMatchingVerse(IVerseRef verseReferenceFromToken, IVerseRef verseReference)
-        {
-            return ((verseReferenceFromToken?.ToString() == verseReference?.ToString()) || 
-                    (verseReferenceFromToken.AllVerses?.Any(vr => vr.ToString() == verseReference?.ToString()) ?? false) ||
-                    (verseReference?.AllVerses?.Any(vr => vr.ToString() == verseReferenceFromToken.ToString()) ?? false));
         }
 
         private void ReleaseRequested(IWriteLock obj)
@@ -1016,14 +1013,9 @@ namespace SIL.ParatextBackTranslationHelperPlugin
 
         bool IBackTranslationHelperDataSource.WriteToTarget(string text)
         {
-            return WriteToTarget(text);
-        }
-
-        private bool WriteToTarget(string text)
-        {
             try
             {
-                System.Diagnostics.Debug.WriteLine("PtxBTH: In WriteToTarget");
+                System.Diagnostics.Debug.WriteLine("PtxBTH: In IBackTranslationHelperDataSource.WriteToTarget");
 
                 _buttonPressed = ButtonPressed.WriteToTarget;
 
@@ -1046,6 +1038,24 @@ namespace SIL.ParatextBackTranslationHelperPlugin
                     return false;
                 }
 
+                return WriteToTarget(text, vrefTokensTarget);
+            }
+            catch (Exception ex)
+            {
+                var error = LogExceptionMessage("WriteToTarget", ex);
+                MessageBox.Show($"Exception:\n{error}");
+            }
+
+            return false;
+        }
+
+        private bool WriteToTarget(string text, SortedDictionary<string, List<IUSFMToken>> vrefTokensTarget)
+        {
+            try
+            {
+                if (vrefTokensTarget == null)
+                    return false;
+
                 AreWeChangingTheTarget = true;
                 if (_writeLock == null)
                 {
@@ -1067,7 +1077,7 @@ namespace SIL.ParatextBackTranslationHelperPlugin
             catch (Exception ex)
             {
                 var error = LogExceptionMessage("WriteToTarget", ex);
-                MessageBox.Show($"Exception caught:\n{error}");
+                MessageBox.Show($"Exception:\n{error}");
             }
             finally
             {
@@ -1147,7 +1157,7 @@ namespace SIL.ParatextBackTranslationHelperPlugin
             var tokensTarget = tokensSource;
 
             // before adding it back in, remove any data in the target collection for any and all verses in the source range
-            var matchingTokensInTarget = vrefTokensTarget.Where(kvp => kvp.Value.Any(t => IsMatchingVerse(t.VerseRef, verseReference))).ToList();
+            var matchingTokensInTarget = vrefTokensTarget.Where(kvp => kvp.Value.Any(t => PtxPluginHelpers.IsMatchingVerse(t.VerseRef, verseReference))).ToList();
             matchingTokensInTarget.ForEach(kvp => vrefTokensTarget.Remove(kvp.Key));
 
             vrefTokensTarget[keyBookChapterVerses] = tokensSource;
@@ -1160,8 +1170,8 @@ namespace SIL.ParatextBackTranslationHelperPlugin
             {
                 IUSFMToken updatedToken = token;
                 if ((token is IUSFMTextToken textToken) && 
-                    IsPublishableVernacular(textToken, tokensTarget) 
-                    && IsMatchingVerse((IVerseRef)textToken.VerseRef, verseReference))
+                    PtxPluginHelpers.IsPublishableVernacular(textToken, tokensTarget) 
+                    && PtxPluginHelpers.IsMatchingVerse((IVerseRef)textToken.VerseRef, verseReference))
                 {
                     latestTextToken = new TextToken(textToken)
                     {
@@ -1218,11 +1228,6 @@ namespace SIL.ParatextBackTranslationHelperPlugin
 #endif
 
         private static readonly List<string> _paragraphMarkers = new() { "p", "m" };
-
-        private static bool IsParagraphToken(IUSFMToken token)
-        {
-            return (token is IUSFMMarkerToken markerToken) && (markerToken.Type == MarkerType.Paragraph); // not needed? if so, initialize list from a setting: && _paragraphMarkers.Contains(markerToken.Marker);
-        }
 
         protected override void OnShown(EventArgs e)
         {
@@ -1334,6 +1339,25 @@ namespace SIL.ParatextBackTranslationHelperPlugin
             disableActivateRefreshUntilNextVerse = !theTranslators.Any();
             if (!disableActivateRefreshUntilNextVerse)
                 CheckAndAddNextToAllMenu(theTranslators);
+
+            // also, if any of them are PtxProjectEncConverters, then set their project interfaces
+            var ptxProjectConverterInput = CreateParatextProjectConverterInput();
+            var projects = _host.GetAllProjects();
+            foreach (PtxProjectEncConverter ptxProjectEncConverter in theTranslators.Where(t => t is PtxProjectEncConverter))
+            {
+                var projectShortName = ptxProjectEncConverter.ConverterIdentifier;
+                var project = projects.FirstOrDefault(p => p.ShortName == projectShortName);
+                if (project == null)
+                    continue;
+
+                ptxProjectEncConverter.ParatextProject = project;
+
+                if (_model == null)
+                    continue;
+
+                InitializeModelForPtxProjectConverters(_model, ptxProjectConverterInput, ptxProjectEncConverter,
+                                                       theTranslators.IndexOf(ptxProjectEncConverter));
+            }
         }
 
         public class BackgroundWorkerResult
