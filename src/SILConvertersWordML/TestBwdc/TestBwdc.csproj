@@ -58,7 +58,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
     <DebugSymbols>true</DebugSymbols>
     <OutputPath>bin\x64\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;X64</DefineConstants>
     <DebugType>full</DebugType>
     <PlatformTarget>x64</PlatformTarget>
     <LangVersion>latest</LangVersion>
@@ -67,7 +67,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
     <OutputPath>bin\x64\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
+    <DefineConstants>TRACE;X64</DefineConstants>
     <Optimize>true</Optimize>
     <DebugType>pdbonly</DebugType>
     <PlatformTarget>x64</PlatformTarget>
@@ -127,7 +127,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="TestFiles\TestModel.cs" />
-    <Compile Include="UnitTest_PtxBackTrHelper.cs" />
+    <Compile Include="UnitTest_PtxBackTrHelper.cs" Condition="'$(Platform)' == 'x64'" />
     <Compile Include="UnitTest_BulkWordDocConverter.cs" />
     <Compile Include="XmlDiff.cs" />
     <Compile Include="XmlInput.cs" />
@@ -288,25 +288,25 @@
     <EmbeddedResource Include="TestFiles\BulkWordDocConverter\TestFile_ConvertMiddleTableCell_Expected.xml" />
     <EmbeddedResource Include="TestFiles\BulkWordDocConverter\TestFile_ConvertMiddleTableCell_Input.xml" />
     <Content Include="TestFiles\BulkWordDocConverter\TestFile2.xml" />
-    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\CombinedInSourceAndTargetWithVaOverride\CombinedInSourceAndTargetWithVaOverride_TranslatedText.txt" />
-    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\CombinedInSourceSeparateNoEmptyInTarget\CombinedInSourceSeparateNoEmptyInTarget_TranslatedText.txt" />
-    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\SeparateInSourceCombinedButEmptyInTarget\SeparateInSourceCombinedButEmptyInTarget_TranslatedText.txt" />
-    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\MultipleVersesWithFootnote\MultipleVersesWithFootnote_TranslatedText.txt" />
-    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\SingleVerse\MultiplePoeticParagraphs\MultiplePoeticParagraphsMissingInTarget\MultiplePoeticParagraphsMissingInTarget_TranslatedText.txt" />
-    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\MultipleVerses\MultipleVersesAndParagraphsMiTJoinedIntoOneParagraphs\MultipleVersesAndParagraphsMiTJoinedIntoOneParagraphs_TranslatedText.txt" />
-    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\MultipleVerses\MultipleVersesAndParagraphsJoinedIntoOneParagraphs\MultipleVersesAndParagraphsJoinedIntoOneParagraphs_TranslatedText.txt" />
-    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\SingleVerse\MultipleParagraphs\MultipleParagraphsJoinedIntoOneParagraphs\MultipleParagraphsJoinedIntoOneParagraphs_TranslatedText.txt" />
-    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\SingleVerse\MultipleParagraphs\MultipleParagraphsMiTJoinedIntoOneParagraphs\MultipleParagraphsMiTJoinedIntoOneParagraphs_TranslatedText.txt" />
-    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\SingleVerse\MultipleParagraphs\MultipleParagraphsMissingInTarget\MultipleParagraphsMissingInTarget_TranslatedText.txt" />
-    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\SingleVerse\Simple\SingleVerseSplitIntoTwoParagraphs\SingleVerseSplitIntoTwoParagraphs_TranslatedText.txt" />
-    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\SingleVerse\SimpleParagraph\SimpleParagraphVerseMiTSplitIntoTwoParagraphs\SimpleParagraphVerseMiTSplitIntoTwoParagraphs_TranslatedText.txt" />
-    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\SingleVerse\SimpleParagraph\SimpleParagraphVerseSplitIntoTwoParagraphs\SimpleParagraphVerseSplitIntoTwoParagraphs_TranslatedText.txt" />
-    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\SingleVerse\SimpleParagraph\SimpleParagraphVerseMissingInTarget\SimpleParagraphVerseMissingInTarget_TranslatedText.txt" />
-    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\SingleVerse\Simple\SingleVerseMiTSplitIntoTwoParagraphs\SingleVerseMiTSplitIntoTwoParagraphs_TranslatedText.txt" />
-    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\SingleVerse\Complex\PartialOverwriteText\Complex_PartialOverwriteText_TranslatedText.txt" />
-    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\SingleVerse\Complex\PartialOverwriteMarker\Complex_PartialOverwriteMarker_TranslatedText.txt" />
-    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\SingleVerse\Complex\MissingInTarget\Complex_MissingInTarget_TranslatedText.txt" />
-    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\MultipleVerses\MultipleVersesMissingInTarget\MultipleVersesMissingInTarget_TranslatedText.txt" />
+    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\CombinedInSourceAndTargetWithVaOverride\CombinedInSourceAndTargetWithVaOverride_TranslatedText.txt" Condition="'$(Platform)' == 'x64'" />
+    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\CombinedInSourceSeparateNoEmptyInTarget\CombinedInSourceSeparateNoEmptyInTarget_TranslatedText.txt" Condition="'$(Platform)' == 'x64'" />
+    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\SeparateInSourceCombinedButEmptyInTarget\SeparateInSourceCombinedButEmptyInTarget_TranslatedText.txt" Condition="'$(Platform)' == 'x64'" />
+    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\MultipleVersesWithFootnote\MultipleVersesWithFootnote_TranslatedText.txt" Condition="'$(Platform)' == 'x64'" />
+    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\SingleVerse\MultiplePoeticParagraphs\MultiplePoeticParagraphsMissingInTarget\MultiplePoeticParagraphsMissingInTarget_TranslatedText.txt" Condition="'$(Platform)' == 'x64'" />
+    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\MultipleVerses\MultipleVersesAndParagraphsMiTJoinedIntoOneParagraphs\MultipleVersesAndParagraphsMiTJoinedIntoOneParagraphs_TranslatedText.txt" Condition="'$(Platform)' == 'x64'" />
+    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\MultipleVerses\MultipleVersesAndParagraphsJoinedIntoOneParagraphs\MultipleVersesAndParagraphsJoinedIntoOneParagraphs_TranslatedText.txt" Condition="'$(Platform)' == 'x64'" />
+    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\SingleVerse\MultipleParagraphs\MultipleParagraphsJoinedIntoOneParagraphs\MultipleParagraphsJoinedIntoOneParagraphs_TranslatedText.txt" Condition="'$(Platform)' == 'x64'" />
+    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\SingleVerse\MultipleParagraphs\MultipleParagraphsMiTJoinedIntoOneParagraphs\MultipleParagraphsMiTJoinedIntoOneParagraphs_TranslatedText.txt" Condition="'$(Platform)' == 'x64'" />
+    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\SingleVerse\MultipleParagraphs\MultipleParagraphsMissingInTarget\MultipleParagraphsMissingInTarget_TranslatedText.txt" Condition="'$(Platform)' == 'x64'" />
+    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\SingleVerse\Simple\SingleVerseSplitIntoTwoParagraphs\SingleVerseSplitIntoTwoParagraphs_TranslatedText.txt" Condition="'$(Platform)' == 'x64'" />
+    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\SingleVerse\SimpleParagraph\SimpleParagraphVerseMiTSplitIntoTwoParagraphs\SimpleParagraphVerseMiTSplitIntoTwoParagraphs_TranslatedText.txt" Condition="'$(Platform)' == 'x64'" />
+    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\SingleVerse\SimpleParagraph\SimpleParagraphVerseSplitIntoTwoParagraphs\SimpleParagraphVerseSplitIntoTwoParagraphs_TranslatedText.txt" Condition="'$(Platform)' == 'x64'" />
+    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\SingleVerse\SimpleParagraph\SimpleParagraphVerseMissingInTarget\SimpleParagraphVerseMissingInTarget_TranslatedText.txt" Condition="'$(Platform)' == 'x64'" />
+    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\SingleVerse\Simple\SingleVerseMiTSplitIntoTwoParagraphs\SingleVerseMiTSplitIntoTwoParagraphs_TranslatedText.txt" Condition="'$(Platform)' == 'x64'" />
+    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\SingleVerse\Complex\PartialOverwriteText\Complex_PartialOverwriteText_TranslatedText.txt" Condition="'$(Platform)' == 'x64'" />
+    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\SingleVerse\Complex\PartialOverwriteMarker\Complex_PartialOverwriteMarker_TranslatedText.txt" Condition="'$(Platform)' == 'x64'" />
+    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\SingleVerse\Complex\MissingInTarget\Complex_MissingInTarget_TranslatedText.txt" Condition="'$(Platform)' == 'x64'" />
+    <EmbeddedResource Include="TestFiles\PtxBackTrHelper\MultipleVerses\MultipleVersesMissingInTarget\MultipleVersesMissingInTarget_TranslatedText.txt" Condition="'$(Platform)' == 'x64'" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">

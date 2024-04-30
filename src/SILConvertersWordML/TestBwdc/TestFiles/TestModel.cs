@@ -1,7 +1,5 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using Paratext.PluginInterfaces;
-using SIL.ParatextBackTranslationHelperPlugin;
 using System;
 using System.Collections.Generic;
 using System.Dynamic;
@@ -10,6 +8,10 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+#if X64
+using Paratext.PluginInterfaces;
+using SIL.ParatextBackTranslationHelperPlugin;
+#endif
 
 namespace TestBwdc.TestFiles
 {
@@ -21,6 +23,7 @@ namespace TestBwdc.TestFiles
             return json;
         }
 
+#if X64
         public static Dictionary<string, List<IUSFMToken>> LoadKeyedListOfTokens(string embeddedResourceName)
         {
             var contents = LoadEmbeddedResourceFileAsStringExecutingAssembly(embeddedResourceName);
@@ -80,6 +83,7 @@ namespace TestBwdc.TestFiles
             }
             return tokens;
         }
+#endif
 
         public static T LoadFromFileJson<T>(string embeddedResourceName)
         {
