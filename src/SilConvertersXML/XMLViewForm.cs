@@ -456,8 +456,8 @@ namespace SilConvertersXML
 
                         string strInput = xpIterator.Current.Value;
                         string strOutput = strInput;
-                        var isTranslatorResource = (((ProcessTypeFlags)aEC.GetEncConverter.ProcessType & ProcessTypeFlags.Translation) == ProcessTypeFlags.Translation);
-                        if (bShowUI && (useTranslationForm || isTranslatorResource))
+                        // var isTranslatorResource = (((ProcessTypeFlags)aEC.GetEncConverter.ProcessType & ProcessTypeFlags.Translation) == ProcessTypeFlags.Translation);
+                        if (bShowUI && (useTranslationForm /* || isTranslatorResource */))
                         {
                             if (!_mapConverterToTranslationForm.TryGetValue(aEC.Name, out TranslationHelperForm form))
                             {
