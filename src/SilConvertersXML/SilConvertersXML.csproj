@@ -230,7 +230,12 @@
   </Target>
   -->
   <PropertyGroup>
-    <PostBuildEvent>xcopy /y "$(TargetDir)*.*" $(SolutionDir)output\$(PlatformName)\$(ConfigurationName)</PostBuildEvent>
+    <PostBuildEvent>IF "$(ConfigurationName)" == "Debug" goto nocopy
+
+xcopy /y "$(TargetDir)*.*" $(SolutionDir)output\$(PlatformName)\$(ConfigurationName)
+
+:nocopy
+</PostBuildEvent>
   </PropertyGroup>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
