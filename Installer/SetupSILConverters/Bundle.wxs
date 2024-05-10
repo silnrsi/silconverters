@@ -64,30 +64,6 @@
           Value="(Netfx4FullRelease &gt;= $(var.NetFx48MinRelease)) AND (NOT VersionNT64 OR (Netfx4x64FullRelease &gt;= $(var.NetFx48MinRelease)))" />
     <WixVariable Id="NetFx48WebInstallCondition" Value="" Overridable="yes" />
     <WixVariable Id="NetFx48WebPackageDirectory" Value="redist\" Overridable="yes" />
-
-    <PackageGroup Id="NetFx48Web">
-      <ExePackage Id="NetFx48Web"
-              InstallCommand="/q /norestart /ChainingPackage &quot;[WixBundleName]&quot; /log &quot;[NetFx48FullLog].html&quot;"
-              RepairCommand="/q /norestart /repair /ChainingPackage &quot;[WixBundleName]&quot; /log &quot;[NetFx48FullLog].html&quot;"
-              UninstallCommand="/uninstall /q /norestart /ChainingPackage &quot;[WixBundleName]&quot; /log &quot;[NetFx48FullLog].html&quot;"
-              PerMachine="yes"
-              DetectCondition="!(wix.NetFx48OrLaterDetectCondition)"
-              InstallCondition="!(wix.NetFx48WebInstallCondition)"
-              Vital="yes"
-              Permanent="yes"
-              Protocol="netfx4"
-              DownloadUrl="$(var.NetFx48WebLink)"
-              LogPathVariable="NetFx48FullLog"
-              Compressed="no"
-              Name="!(wix.NetFx48WebPackageDirectory)ndp48-web.exe">
-        <RemotePayload
-          Description="Microsoft .NET Framework 4.8 Setup"
-          Hash="4181398AA1FD5190155AC3A388434E5F7EA0B667"
-          ProductName="Microsoft .NET Framework 4.8"
-          Size="1439328"
-          Version="4.8.3928.0" />
-      </ExePackage>
-    </PackageGroup>
   </Fragment>
 
 </Wix>
