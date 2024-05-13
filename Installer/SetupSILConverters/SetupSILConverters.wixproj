@@ -94,7 +94,6 @@
       <BaseBuildArgs>"$(OutputDir)$(ExeFile)" UseInsignia</BaseBuildArgs>
     </PropertyGroup>
     <Message Text="TruncatedVersion: $(TruncatedVersion), ExeFile: $(ExeFile), SolutionDir: $(SolutionDir), BaseBuildDir: $(BaseBuildDir), OutputDir: $(OutputDir), BaseBuildArgs: $(BaseBuildArgs), BuildingInsideVisualStudio: $(BuildingInsideVisualStudio), MSBuildStartupDirectory: $(MSBuildStartupDirectory)" />
-    <Exec Command='sign "$(OutputDir)$(ExeFile)"'></Exec>
-    <!--<Exec WorkingDirectory="$(BaseBuildDir)" Command="$(BaseBuildDir)buildBaseInstaller.bat $(BaseBuildArgs)" />-->
+    <Exec WorkingDirectory="$(BaseBuildDir)" Command="$(BaseBuildDir)buildBaseInstaller.bat $(BaseBuildArgs)" />
   </Target>
 </Project>
