@@ -60,6 +60,12 @@ namespace SIL.ParatextBackTranslationHelperPlugin
         private IVerseRef _verseReferenceLast;
 
         /// <summary>
+        /// this is set to the last verse that was clicked on in Paratext (so we can update to that 
+        /// if the user turns off the pause button)
+        /// </summary>
+        private IVerseRef _verseReferenceDuringPause;
+
+        /// <summary>
         /// this contains the tokens from the source project, but just the verse(s) that we're processing (e.g. v1 
         /// or could be v2-5)
         /// Key is the [BookNum]_[ChapterNum]_[VerseNum] (e.g. ACT_001_001)
@@ -418,7 +424,7 @@ namespace SIL.ParatextBackTranslationHelperPlugin
 
                 textBoxStatus.Text = $"Staying on {_verseReference} because the {reason}. Click here to update to current verse in Paratext";
                 Debug.WriteLine($"Set textBoxStatus.Text = {textBoxStatus.Text}");
-                textBoxStatus.Tag = newRef;
+                textBoxStatus.Tag = _verseReferenceDuringPause = newRef;
                 Application.DoEvents(); // this says we need to do this for when it won't display the change: https://social.msdn.microsoft.com/Forums/vstudio/en-US/983d2e3b-9bcb-4c9c-9e85-59f8b2051b3e/program-updating-a-textbox-does-not-work?forum=csharpgeneral
                 return;
             }
@@ -968,7 +974,16 @@ namespace SIL.ParatextBackTranslationHelperPlugin
 
         void IBackTranslationHelperDataSource.ButtonPressed(ButtonPressed button)
         {
+            if (button != ButtonPressed.UpdateToCurrent)
+            {
             disableActivateRefreshUntilNextVerse = true;
+            }
+            else
+            {
+                disableActivateRefreshUntilNextVerse = false;
+                _verseReference = _verseReferenceDuringPause ?? _verseReference;
+            }
+
             _buttonPressed = button;
         }
 
