@@ -540,7 +540,7 @@ namespace SIL.ParatextBackTranslationHelperPlugin
             try
             {
                 Cursor = Cursors.WaitCursor;
-                backTranslationHelperCtrl.GetNewData(ref model);
+                backTranslationHelperCtrl.GetNewData(false, ref model);
                 UpdateData(model);
             }
             catch (Exception ex)
@@ -669,7 +669,7 @@ namespace SIL.ParatextBackTranslationHelperPlugin
                         _model.SourceData = currentSourceData.sourceData;
 
                         // call the function that calls the 'converters to update the data for the new verse
-                        backTranslationHelperCtrl.GetNewData(ref _model);
+                        backTranslationHelperCtrl.GetNewData(true, ref _model);
                     }
 
                     var translation = _model.TargetsPossible.FirstOrDefault(t => t.TranslatorName == translatorName)?.TargetData;

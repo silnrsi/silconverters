@@ -67,7 +67,7 @@ namespace SilConvertersXML
                     backTranslationHelperCtrl.TheTranslators.Add(theEc.GetEncConverter);
 
                 backTranslationHelperCtrl.Initialize(_model);
-                backTranslationHelperCtrl.GetNewData(ref _model);
+                backTranslationHelperCtrl.GetNewData(false, ref _model);
                 _updateDataProc(_model);
 
                 // get some info to show in the title bar

@@ -124,7 +124,7 @@ namespace SILConvertersOffice
             Application.DoEvents(); 
 
             // TODO: fix this
-            backTranslationHelperCtrl.GetNewData(ref _model);
+            backTranslationHelperCtrl.GetNewData(false, ref _model);
             _updateDataProc(_model);
 
             // get some info to show in the title bar
