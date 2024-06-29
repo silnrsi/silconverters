@@ -1262,6 +1262,11 @@ namespace SIL.ParatextBackTranslationHelperPlugin
             }
         }
 
+        private void BackTranslationHelperForm_Resize(object sender, EventArgs e)
+        {
+            disableActivateRefreshUntilNextVerse = (this.WindowState == FormWindowState.Minimized);
+        }
+
         private void BackTranslationHelperForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             disableActivateRefreshUntilNextVerse = true;    // don't let it refresh if we're closing
@@ -1273,7 +1278,10 @@ namespace SIL.ParatextBackTranslationHelperPlugin
                 || (_buttonPressed == ButtonPressed.Copy)))
                 e.Cancel = true;
 
-            Unlock();
+            _host.VerseRefChanged -= Host_VerseRefChanged;
+
+            if (this.WindowState == FormWindowState.Minimized)
+                return; // don't save location info if the dialog is minimized
 
             Properties.Settings.Default.DefaultWindowState = WindowState;
             Properties.Settings.Default.WindowLocation = Location;
@@ -1286,7 +1294,6 @@ namespace SIL.ParatextBackTranslationHelperPlugin
             }
             Properties.Settings.Default.Save();
 
-            _host.VerseRefChanged -= Host_VerseRefChanged;
             Dispose();
         }
 

@@ -75,6 +75,7 @@ namespace SIL.ParatextBackTranslationHelperPlugin
             this.Deactivate += new System.EventHandler(this.BackTranslationHelperForm_Deactivate);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.BackTranslationHelperForm_FormClosing);
             this.Load += new System.EventHandler(this.BackTranslationHelperForm_Load);
+            this.Resize += new System.EventHandler(this.BackTranslationHelperForm_Resize);
             this.ResumeLayout(false);
             this.PerformLayout();
         }
