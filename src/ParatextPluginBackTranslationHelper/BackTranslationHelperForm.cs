@@ -390,19 +390,9 @@ namespace SIL.ParatextBackTranslationHelperPlugin
             if (AreWeChangingTheTarget)  // if we're the ones who changed it, then ignore
                 return;
 
-            // if the change was in the chapter we're processing, then clear what we think the data is, so we'll repull it later
+            // if the change was in the chapter we're processing, then clear what we think the data is, so we'll repull it again
             if (IsDirty(_verseReference, bookNum, chapterNum))
                 UsfmTokensTarget.Clear();
-
-#if TriedAndFailed
-            // UPDATE: Ptx by definition has the write lock right now, so we can't call GetNewReference here
-            //  Go back to calling it in Activate
-            // unless we were editing it, and then force it to stay the same
-            if (backTranslationHelperCtrl.IsModified)
-                return;
-
-            GetNewReference(_verseReference);
-#endif
         }
 
         private void Host_VerseRefChanged(IPluginHost sender, IVerseRef newReference, SyncReferenceGroup group)
@@ -699,12 +689,16 @@ namespace SIL.ParatextBackTranslationHelperPlugin
                 } while (keyBookChapter == startingKeyBookChapter);
 
                 // now write all the collected text to the target project
-                WriteToTarget(translatorName, vrefTokensTarget);
+                WriteToTarget(writeLock, vrefTokensTarget);
             }
             catch (Exception ex)
             {
                 var error = LogExceptionMessage("TranslateEntireChapter", ex);
                 MessageBox.Show($"Exception:\n{error}");
+            }
+            finally
+            {
+                Unlock(writeLock);
             }
 
             backTranslationHelperCtrl.IsPaused = disableActivateRefreshUntilNextVerse = false;   // reenable the activate refresh
@@ -912,7 +906,10 @@ namespace SIL.ParatextBackTranslationHelperPlugin
                 //  which one it *should* be so we can find a hit in vrefTokens
                 bookChapterVerseKey = TriangulateBookChapterVerseKey(bookChapterVerseKey, vrefTokens);
 
-                if (String.IsNullOrEmpty(bookChapterVerseKey) || !vrefTokens.ContainsKey(bookChapterVerseKey))
+                // we may have called this (during activate) to update the surrounding verses (if the user made
+                //  a change in Ptx and re-activated the plugin form and Ptx said do you want to save changes
+                //  and they said 'yes')... but if the target text has been modified, then don't change it
+                if (backTranslationHelperCtrl.IsModified || String.IsNullOrEmpty(bookChapterVerseKey) || !vrefTokens.ContainsKey(bookChapterVerseKey))
                     return null;
 
                 var tokens = vrefTokens[bookChapterVerseKey];
@@ -987,7 +984,7 @@ namespace SIL.ParatextBackTranslationHelperPlugin
         {
             if (button != ButtonPressed.UpdateToCurrent)
             {
-            disableActivateRefreshUntilNextVerse = true;
+                disableActivateRefreshUntilNextVerse = true;
             }
             else
             {
@@ -1000,6 +997,7 @@ namespace SIL.ParatextBackTranslationHelperPlugin
 
         void IBackTranslationHelperDataSource.Cancel()
         {
+            disableActivateRefreshUntilNextVerse = true;
             Close();
         }
 
@@ -1057,26 +1055,29 @@ namespace SIL.ParatextBackTranslationHelperPlugin
                     return false;
                 }
 
-                    // Note: if the Target Translation textbox has modified data, the current implementation shouldn't
-                    //  overwrite it (see UpdateData in BackTranslationHelperCtrl.cs, which shows that if it's
-                    //  modified, it will get it from the edit box instead of the model... i.e. won't change it)
-                    // So if we don't have it, just requery the data and return false (so we don't move on)
+                // next, if the user did choose 'Yes' to save during the call to RequestWriteLock, that results in 
+                //  UsfmTokensTarget being empty (bkz we got a call to ScriptureDataChangedHandlerTarget to inform us
+                //  that the scripture text has changed)
+                SortedDictionary<string, List<IUSFMToken>> vrefTokensTarget;
+                if (!UsfmTokensTarget.Any() || 
+                    (vrefTokensTarget = CalculateTargetTokens(_verseReference, _versesReference, text, UsfmTokensSource, UsfmTokensTarget)) == null)
+                {
+                    // To get it to work properly, requery the data and return false (so we try again rather than move on)
                     GetNewReference(_verseReference);
-
-                    // by returning false, we prevent it from doing 'next' if that's the button the user clicked,
-                    //  while resetting the IsModified status, so they can click 'Next' next time and have the edited
-                    //  text written to Ptx
-                    return false;
+                    return false;   // this will cause us to try it again automatically.
                 }
 
-                return WriteToTarget(text, vrefTokensTarget);
+                return WriteToTarget(writeLock, vrefTokensTarget);
             }
             catch (Exception ex)
             {
                 var error = LogExceptionMessage("WriteToTarget", ex);
                 MessageBox.Show($"Exception:\n{error}");
             }
-
+            finally
+            {
+                Unlock(writeLock);
+            }
             return false;
         }
 
@@ -1086,22 +1087,14 @@ namespace SIL.ParatextBackTranslationHelperPlugin
             return writeLock != null;
         }
 
-                AreWeChangingTheTarget = true;
-                if (_writeLock == null)
-                {
-                    _writeLock = _projectTarget.RequestWriteLock(_plugin, ReleaseRequested, _verseReference.BookNum, _verseReference.ChapterNum);
-
-                    if (_writeLock == null) // if it still is, we should warn the user that it isn't going to work
-                    {
-                        MessageBox.Show($"You don't have edit privilege on this chapter: {_verseReference}");
-                        return false;
-                    }
-                }
-
+        private bool WriteToTarget(IWriteLock writeLock, SortedDictionary<string, List<IUSFMToken>> vrefTokensTarget)
+        {
+            try
+            {
                 var tokens = vrefTokensTarget.SelectMany(d => d.Value).ToList();
 
-                _projectTarget.PutUSFMTokens(_writeLock, tokens, _verseReference.BookNum);
-                Unlock();
+                AreWeChangingTheTarget = true;
+                _projectTarget.PutUSFMTokens(writeLock, tokens, _verseReference.BookNum);
                 return true;
             }
             catch (Exception ex)
@@ -1368,7 +1361,7 @@ namespace SIL.ParatextBackTranslationHelperPlugin
             if (!disableActivateRefreshUntilNextVerse)
             {
                 GetNewReference(_verseReference);
-        }
+            }
         }
 
         public void TranslatorSetChanged(List<IEncConverter> theTranslators)
