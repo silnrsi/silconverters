@@ -1338,32 +1338,37 @@ namespace SIL.ParatextBackTranslationHelperPlugin
 
         private bool disableActivateRefreshUntilNextVerse = true;   // require us to wait to do activate refresh until we get the converters situated
 
-        private void BackTranslationHelperForm_Activated(object sender, EventArgs e)
+        private async void BackTranslationHelperForm_Activated(object sender, EventArgs e)
         {
             _isNotInFocus = false;
+
+            // Allow any pending UI events to process before starting the lengthy operation
+            //  (possibly including allowing backTranslationHelperCtrl.IsModified and the
+            //  disableActivateRefreshUntilNextVerse flag getting set), either of which 
+            //  would block calling GetNewReference--e.g. if the user clicks the 'Close' button)
+            //  Otherwise, we can get some bogus MouseDown/Up events that cause the editable 
+            //  textbox to annoyingly be in 'select text/drag' mode.
+            await Task.Delay(100);
+
             System.Diagnostics.Debug.WriteLine($"PtxBTH: BackTranslationHelperForm_Activated: _isNotInFocus = '{_isNotInFocus}', IsModified: {backTranslationHelperCtrl.IsModified}, _verseReference: {_verseReference}");
 
-#if false
-            // THIS is now done in ScriptureDataChangedHandlerSource & ScriptureDataChangedHandlerTarget
-            // make the source and target data stale, and trigger a requery...
-            PurgeSourceData(_verseReference);
-
-            var bookChapterKey = GetBookChapterKey(_verseReference);
-            if (UsfmTokensTarget.ContainsKey(bookChapterKey))
-            {
-                UsfmTokensTarget.Remove(bookChapterKey);
-            }
-#endif
-
             // unless we were editing it, and then force it to stay the same
-            if (backTranslationHelperCtrl.IsModified)
-                return;
+            // UPDATE: if the user made changes in Paratext, activated the form by clicking
+            //  save changes, then if we don't update to the changes they made, we'll end
+            //  up writing the old version before their changes... so we really do want to 
+            //  call GetNewReference below even if it's modified, and we solve this by 
+            //  returning nothing from CurrentTargetData if it's modified, causing the ctrl's
+            //  UpdateData to just use what's in the edit box instead.
+            //if (backTranslationHelperCtrl.IsModified)
+            //    return;
 
             // we have this issue that if we launch a dialog (and thus become inactive), when that 
             //  dialog goes away, it looks like we need to refresh... But this can get us into near
             //  infinite loops, so have a way to disable this until we get to another verse
             if (!disableActivateRefreshUntilNextVerse)
+            {
                 GetNewReference(_verseReference);
+        }
         }
 
         public void TranslatorSetChanged(List<IEncConverter> theTranslators)
