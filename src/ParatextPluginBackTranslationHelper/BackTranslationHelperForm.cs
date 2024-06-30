@@ -37,7 +37,6 @@ namespace SIL.ParatextBackTranslationHelperPlugin
         private readonly ParatextBackTranslationHelperPlugin _plugin;
         private Action<BackTranslationHelperModel> _updateControls;
         private BackTranslationHelperModel _model;
-        private IWriteLock _writeLock = null;
         private readonly Action<IVerseRef> _setSyncReferenceGroup;
         private bool _isNotInFocus;
 
@@ -533,7 +532,6 @@ namespace SIL.ParatextBackTranslationHelperPlugin
 
         private void GetNewReference(IVerseRef newReference)
         {
-            Unlock();
             _verseReference = newReference;
             BackTranslationHelperModel model = null;    // means query the interface to get the data
             var cursor = Cursor;
@@ -640,8 +638,21 @@ namespace SIL.ParatextBackTranslationHelperPlugin
             var translatorIndex = backTranslationHelperCtrl.TheTranslators.IndexOf(firstWithOwnCreds);
             string keyBookChapter = null, startingKeyBookChapter = GetBookChapterKey(_verseReference);
             backTranslationHelperCtrl.IsPaused = disableActivateRefreshUntilNextVerse = true;    // something in the below causes the window to lose focus, which causes us to reprocess all the converters
+
+            IWriteLock writeLock = null;
             try
             {
+                // first have to get the lock (bkz if something was changed via Ptx and not saved, then the user
+                //  will need to either save it or throw it away, which would force us to need to do a requery)
+                if (!AcquireWriteLock(ref writeLock))
+                {
+                    // it won't still be null if the user chose 'Yes' or 'No' to Paratext dialog that asks,
+                    //  "Do you want to save the changes?", but it might if the user doesn't have edit permissions.
+                    // if we still don't have it, it means the user doesn't have the privilege to change the target project
+                    MessageBox.Show($"You don't have edit privilege on this chapter: {_verseReference} of the {_projectTarget.ShortName} project");
+                    return;
+                }
+
                 var verseReferenceNext = _verseReference;
                 SortedDictionary<string, List<IUSFMToken>> vrefTokensTarget = null;
                 do
@@ -943,7 +954,7 @@ namespace SIL.ParatextBackTranslationHelperPlugin
 
         private void ReleaseRequested(IWriteLock obj)
         {
-            Unlock();
+            Unlock(obj);
         }
 
         string IBackTranslationHelperDataSource.ProjectName
@@ -1028,18 +1039,23 @@ namespace SIL.ParatextBackTranslationHelperPlugin
 
         bool IBackTranslationHelperDataSource.WriteToTarget(string text)
         {
+            IWriteLock writeLock = null;
             try
             {
                 System.Diagnostics.Debug.WriteLine("PtxBTH: In IBackTranslationHelperDataSource.WriteToTarget");
 
                 _buttonPressed = ButtonPressed.WriteToTarget;
 
-                var vrefTokensTarget = CalculateTargetTokens(_verseReference, _versesReference, text, UsfmTokensSource, UsfmTokensTarget);
-                if (vrefTokensTarget == null)
+                // first have to get the lock (bkz if something was changed via Ptx and not saved, then the user will
+                // need to either save it or throw it away, the former of which would force us to need to do a requery)
+                if (!AcquireWriteLock(ref writeLock))
                 {
-                    // if we don't already have it... it's probably because something was changed in the project
-                    //  external to this form (we lose the data if we get activated).
-                    System.Diagnostics.Debug.WriteLine($"PtxBTH: RequeryWarning: _verseReference: {_verseReference}, _versesReference: {_versesReference}");
+                    // it won't still be null if the user chose 'Yes' or 'No' to Paratext dialog that asks,
+                    //  "Do you want to save the changes?", but it might if the user doesn't have edit permissions.
+                    // if we still don't have it, it means the user doesn't have edit permissions on the target project
+                    MessageBox.Show($"You don't have edit privilege on this chapter: {_verseReference} of the {_projectTarget.ShortName} project");
+                    return false;
+                }
 
                     // Note: if the Target Translation textbox has modified data, the current implementation shouldn't
                     //  overwrite it (see UpdateData in BackTranslationHelperCtrl.cs, which shows that if it's
@@ -1064,12 +1080,11 @@ namespace SIL.ParatextBackTranslationHelperPlugin
             return false;
         }
 
-        private bool WriteToTarget(string text, SortedDictionary<string, List<IUSFMToken>> vrefTokensTarget)
+        private bool AcquireWriteLock(ref IWriteLock writeLock)
         {
-            try
-            {
-                if (vrefTokensTarget == null)
-                    return false;
+            writeLock = _projectTarget.RequestWriteLock(_plugin, ReleaseRequested, _verseReference.BookNum, _verseReference.ChapterNum);
+            return writeLock != null;
+        }
 
                 AreWeChangingTheTarget = true;
                 if (_writeLock == null)
@@ -1297,12 +1312,12 @@ namespace SIL.ParatextBackTranslationHelperPlugin
             Dispose();
         }
 
-        private void Unlock()
+        private void Unlock(IWriteLock writeLock)
         {
-            if (_writeLock != null)
+            if (writeLock != null)
             {
-                IWriteLock temp = _writeLock;
-                _writeLock = null;  // to prevent it being called twice while freeing the lock
+                IWriteLock temp = writeLock;
+                writeLock = null;  // to prevent it being called twice while freeing the lock
                 temp.Dispose();
             }
         }
