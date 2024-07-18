@@ -316,7 +316,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\ParatextPluginBackTranslationHelper\ParatextPluginBackTranslationHelper.csproj">
+    <ProjectReference Include="..\..\ParatextPluginBackTranslationHelper\ParatextPluginBackTranslationHelper.csproj" Condition="('$(Platform)' == 'x64') and ('$(OS)'=='Windows_NT')">
       <Project>{0BFFA5D9-FF49-4F16-BBC6-27F9394341A5}</Project>
       <Name>ParatextPluginBackTranslationHelper</Name>
     </ProjectReference>
