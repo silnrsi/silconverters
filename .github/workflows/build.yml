@@ -15,7 +15,7 @@ env:
 
 jobs:
   build-windows:
-    runs-on: [windows-latest]
+    runs-on: windows-2019   # [windows-latest]   # VS 2022 no longer automatically works w/ the non-‘latest’ version of the C++ bits
     strategy:
        # Keep building other jobs even if another fails, to show what _is_ still working.
        fail-fast: false
@@ -28,6 +28,11 @@ jobs:
       uses: actions/checkout@v4.1.1
       with:
         fetch-depth: 0 # fetch full history for GitVersion
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: 6.0.x
 
     - name: setup-msbuild
       uses: microsoft/setup-msbuild@v2
