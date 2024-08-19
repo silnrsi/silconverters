@@ -1,11 +1,9 @@
 #define Csc30   // turn off CSC30 features
 
 using System;
-using System.Drawing;
 using System.Collections;
 using System.ComponentModel;
 using System.Windows.Forms;
-using System.Data;
 using System.Diagnostics;       // for Debug
 using Microsoft.Win32;          // for RegistryKey
 using ECInterfaces;
@@ -13,6 +11,7 @@ using SilEncConverters40;
 using System.IO;                // for FileInfo
 using System.Text;              // for Encoding
 using System.Runtime.InteropServices;   // DllImport
+using System.Collections.Generic;
 
 #if !Csc30
 using SpellingFixer30;
@@ -27,7 +26,6 @@ using SpellingFixer30;
 #if IncludeSpellFixer
 using SpellingFixerEC;          // to access SpellFixer (if adding a reference to it)
 #else
-using System.Reflection;        // to access SpellFixer via reflection (so it doesn't have to be present)
 #endif
 #endif
 
@@ -35,10 +33,10 @@ using System.Reflection;        // to access SpellFixer via reflection (so it do
 //  in the system tray at startup
 namespace ClipboardEC
 {
-	/// <summary>
-	/// ClipboardEncConverter: convert the text on the clipboard using one of the system converters.
-	/// </summary>
-	public class FormClipboardEncConverter : System.Windows.Forms.Form
+    /// <summary>
+    /// ClipboardEncConverter: convert the text on the clipboard using one of the system converters.
+    /// </summary>
+    public class FormClipboardEncConverter : System.Windows.Forms.Form
 	{
         public const string cstrCaption = "Clipboard EncConverter";
         public const string  cstrProjectMemoryKey = @"SOFTWARE\SIL\SilEncConverters40\ClipboardEC";
@@ -86,6 +84,10 @@ namespace ClipboardEC
         private ToolStripSeparator toolStripSeparator4;
         private ToolStripMenuItem exitToolStripMenuItem;
         private ToolStripMenuItem spellFixerToolStripMenuItem;
+        private ToolStripMenuItem translationHelperFormToolStripMenuItem;
+        private ToolStripSeparator toolStripSeparator9;
+        private ToolStripMenuItem addTranslatorSetToolStripMenuItem;
+        private ToolStripMenuItem deleteTranslatorSetToolStripMenuItem;
         private ToolStripMenuItem resetToolStripMenuItem;
         private ToolStripSeparator toolStripSeparator5;
         private ToolStripMenuItem displaySpellingFixToolStripMenuItem;
@@ -194,6 +196,9 @@ namespace ClipboardEC
 #else
             UpdateIconText();
 #endif
+
+            if (Properties.Settings.Default.TranslatorSetsProjectNames == null)
+                Properties.Settings.Default.TranslatorSetsProjectNames = new System.Collections.Specialized.StringCollection();
         }
 
         public void UpdateFilteringIndication()
@@ -278,6 +283,10 @@ namespace ClipboardEC
             this.addConverterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editOrDeleteConverterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
+            this.translationHelperFormToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.addTranslatorSetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.deleteTranslatorSetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
             this.spellFixerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.selectProjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
@@ -317,17 +326,18 @@ namespace ClipboardEC
             this.addConverterToolStripMenuItem,
             this.editOrDeleteConverterToolStripMenuItem,
             this.toolStripSeparator5,
+            this.translationHelperFormToolStripMenuItem,
             this.spellFixerToolStripMenuItem,
             this.toolStripSeparator4,
             this.exitToolStripMenuItem});
             this.contextMenuStripEC.Name = "contextMenuStripEC";
-            this.contextMenuStripEC.Size = new System.Drawing.Size(203, 276);
+            this.contextMenuStripEC.Size = new System.Drawing.Size(213, 298);
             this.contextMenuStripEC.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStripEC_Opening);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(199, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(209, 6);
             // 
             // normalizationToolStripMenuItem
             // 
@@ -336,7 +346,7 @@ namespace ClipboardEC
             this.decomposedToolStripMenuItem,
             this.composedToolStripMenuItem});
             this.normalizationToolStripMenuItem.Name = "normalizationToolStripMenuItem";
-            this.normalizationToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
+            this.normalizationToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
             this.normalizationToolStripMenuItem.Text = "&Normalization";
             this.normalizationToolStripMenuItem.ToolTipText = "Unicode Normalization Forms for the output of the conversion";
             // 
@@ -345,21 +355,21 @@ namespace ClipboardEC
             this.noneToolStripMenuItem.Checked = true;
             this.noneToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.noneToolStripMenuItem.Name = "noneToolStripMenuItem";
-            this.noneToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
+            this.noneToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
             this.noneToolStripMenuItem.Text = "N&one";
             this.noneToolStripMenuItem.ToolTipText = "Output of the conversion is returned as is (no change)";
             // 
             // decomposedToolStripMenuItem
             // 
             this.decomposedToolStripMenuItem.Name = "decomposedToolStripMenuItem";
-            this.decomposedToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
+            this.decomposedToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
             this.decomposedToolStripMenuItem.Text = "&Decomposed";
             this.decomposedToolStripMenuItem.ToolTipText = "Output of the conversion is returned in Unicode Normalization Form Decomposed";
             // 
             // composedToolStripMenuItem
             // 
             this.composedToolStripMenuItem.Name = "composedToolStripMenuItem";
-            this.composedToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
+            this.composedToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
             this.composedToolStripMenuItem.Text = "&Composed";
             this.composedToolStripMenuItem.ToolTipText = "Output of the conversion is returned in Unicode Normalization Form Composed";
             // 
@@ -368,19 +378,19 @@ namespace ClipboardEC
             this.forwardToolStripMenuItem.Checked = true;
             this.forwardToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.forwardToolStripMenuItem.Name = "forwardToolStripMenuItem";
-            this.forwardToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
+            this.forwardToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
             this.forwardToolStripMenuItem.Text = "&Forward";
             this.forwardToolStripMenuItem.ToolTipText = "Specifies the direction of the conversion (checked=Forward)";
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(199, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(209, 6);
             // 
             // previewToolStripMenuItem
             // 
             this.previewToolStripMenuItem.Name = "previewToolStripMenuItem";
-            this.previewToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
+            this.previewToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
             this.previewToolStripMenuItem.Text = "&Preview";
             this.previewToolStripMenuItem.ToolTipText = "Specifies whether or not to show a preview of the conversion (checked=Yes)";
             this.previewToolStripMenuItem.Click += new System.EventHandler(this.previewToolStripMenuItem_Click);
@@ -388,10 +398,10 @@ namespace ClipboardEC
             // debugToolStripMenuItem
             // 
             this.debugToolStripMenuItem.Name = "debugToolStripMenuItem";
-            this.debugToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
+            this.debugToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
             this.debugToolStripMenuItem.Text = "&Debug";
             this.debugToolStripMenuItem.ToolTipText = "Specifies whether to display debug information sent to/received from the underlyi" +
-                "ng conversion engine";
+    "ng conversion engine";
             this.debugToolStripMenuItem.Click += new System.EventHandler(this.debugToolStripMenuItem_Click);
             // 
             // filteringToolStripMenuItem
@@ -401,7 +411,7 @@ namespace ClipboardEC
             this.byImplementationTypeToolStripMenuItem,
             this.byEncodingToolStripMenuItem});
             this.filteringToolStripMenuItem.Name = "filteringToolStripMenuItem";
-            this.filteringToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
+            this.filteringToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
             this.filteringToolStripMenuItem.Text = "&Filtering";
             this.filteringToolStripMenuItem.ToolTipText = "Allows you to filter the list of converters (to reduce processing time)";
             // 
@@ -422,109 +432,109 @@ namespace ClipboardEC
             this.spare1userdefinableToolStripMenuItem,
             this.spare2userdefinableToolStripMenuItem});
             this.byTransductionTypeToolStripMenuItem.Name = "byTransductionTypeToolStripMenuItem";
-            this.byTransductionTypeToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
+            this.byTransductionTypeToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
             this.byTransductionTypeToolStripMenuItem.Text = "By &Transduction Type";
             // 
             // showAllTransductionTypesToolStripMenuItem
             // 
             this.showAllTransductionTypesToolStripMenuItem.Name = "showAllTransductionTypesToolStripMenuItem";
-            this.showAllTransductionTypesToolStripMenuItem.Size = new System.Drawing.Size(238, 22);
+            this.showAllTransductionTypesToolStripMenuItem.Size = new System.Drawing.Size(262, 22);
             this.showAllTransductionTypesToolStripMenuItem.Text = "Show All Transduction Types";
             this.showAllTransductionTypesToolStripMenuItem.Click += new System.EventHandler(this.showAllTransductionTypesToolStripMenuItem_Click);
             // 
             // unicodeEncodingConversionToolStripMenuItem
             // 
             this.unicodeEncodingConversionToolStripMenuItem.Name = "unicodeEncodingConversionToolStripMenuItem";
-            this.unicodeEncodingConversionToolStripMenuItem.Size = new System.Drawing.Size(238, 22);
+            this.unicodeEncodingConversionToolStripMenuItem.Size = new System.Drawing.Size(262, 22);
             this.unicodeEncodingConversionToolStripMenuItem.Text = "Unicode Encoding Conversion";
             // 
             // transliterationToolStripMenuItem
             // 
             this.transliterationToolStripMenuItem.Name = "transliterationToolStripMenuItem";
-            this.transliterationToolStripMenuItem.Size = new System.Drawing.Size(238, 22);
+            this.transliterationToolStripMenuItem.Size = new System.Drawing.Size(262, 22);
             this.transliterationToolStripMenuItem.Text = "Transliteration";
             // 
             // icuTransliterationToolStripMenuItem
             // 
             this.icuTransliterationToolStripMenuItem.Name = "icuTransliterationToolStripMenuItem";
-            this.icuTransliterationToolStripMenuItem.Size = new System.Drawing.Size(238, 22);
+            this.icuTransliterationToolStripMenuItem.Size = new System.Drawing.Size(262, 22);
             this.icuTransliterationToolStripMenuItem.Text = "ICU Transliteration";
             // 
             // icuRegularExpressionToolStripMenuItem
             // 
             this.icuRegularExpressionToolStripMenuItem.Name = "icuRegularExpressionToolStripMenuItem";
-            this.icuRegularExpressionToolStripMenuItem.Size = new System.Drawing.Size(238, 22);
+            this.icuRegularExpressionToolStripMenuItem.Size = new System.Drawing.Size(262, 22);
             this.icuRegularExpressionToolStripMenuItem.Text = "ICU Regular Expression";
             // 
             // icuConverterToolStripMenuItem
             // 
             this.icuConverterToolStripMenuItem.Name = "icuConverterToolStripMenuItem";
-            this.icuConverterToolStripMenuItem.Size = new System.Drawing.Size(238, 22);
+            this.icuConverterToolStripMenuItem.Size = new System.Drawing.Size(262, 22);
             this.icuConverterToolStripMenuItem.Text = "ICU Converter";
             // 
             // codePageToolStripMenuItem
             // 
             this.codePageToolStripMenuItem.Name = "codePageToolStripMenuItem";
-            this.codePageToolStripMenuItem.Size = new System.Drawing.Size(238, 22);
+            this.codePageToolStripMenuItem.Size = new System.Drawing.Size(262, 22);
             this.codePageToolStripMenuItem.Text = "Code Page";
             // 
             // nonUnicodeEncodingConversionToolStripMenuItem
             // 
             this.nonUnicodeEncodingConversionToolStripMenuItem.Name = "nonUnicodeEncodingConversionToolStripMenuItem";
-            this.nonUnicodeEncodingConversionToolStripMenuItem.Size = new System.Drawing.Size(238, 22);
+            this.nonUnicodeEncodingConversionToolStripMenuItem.Size = new System.Drawing.Size(262, 22);
             this.nonUnicodeEncodingConversionToolStripMenuItem.Text = "Non-Unicode Encoding Conversion";
             // 
             // pythonScriptToolStripMenuItem
             // 
             this.pythonScriptToolStripMenuItem.Name = "pythonScriptToolStripMenuItem";
-            this.pythonScriptToolStripMenuItem.Size = new System.Drawing.Size(238, 22);
+            this.pythonScriptToolStripMenuItem.Size = new System.Drawing.Size(262, 22);
             this.pythonScriptToolStripMenuItem.Text = "Python script";
             // 
             // spellingFixerProjectToolStripMenuItem
             // 
             this.spellingFixerProjectToolStripMenuItem.Name = "spellingFixerProjectToolStripMenuItem";
-            this.spellingFixerProjectToolStripMenuItem.Size = new System.Drawing.Size(238, 22);
+            this.spellingFixerProjectToolStripMenuItem.Size = new System.Drawing.Size(262, 22);
             this.spellingFixerProjectToolStripMenuItem.Text = "Spelling Fixer Project";
             // 
             // perlExpressionToolStripMenuItem
             // 
             this.perlExpressionToolStripMenuItem.Name = "perlExpressionToolStripMenuItem";
-            this.perlExpressionToolStripMenuItem.Size = new System.Drawing.Size(238, 22);
+            this.perlExpressionToolStripMenuItem.Size = new System.Drawing.Size(262, 22);
             this.perlExpressionToolStripMenuItem.Text = "Perl Expression";
             // 
             // spare1userdefinableToolStripMenuItem
             // 
             this.spare1userdefinableToolStripMenuItem.Name = "spare1userdefinableToolStripMenuItem";
-            this.spare1userdefinableToolStripMenuItem.Size = new System.Drawing.Size(238, 22);
+            this.spare1userdefinableToolStripMenuItem.Size = new System.Drawing.Size(262, 22);
             this.spare1userdefinableToolStripMenuItem.Text = "Spare 1 (user-definable)";
             // 
             // spare2userdefinableToolStripMenuItem
             // 
             this.spare2userdefinableToolStripMenuItem.Name = "spare2userdefinableToolStripMenuItem";
-            this.spare2userdefinableToolStripMenuItem.Size = new System.Drawing.Size(238, 22);
+            this.spare2userdefinableToolStripMenuItem.Size = new System.Drawing.Size(262, 22);
             this.spare2userdefinableToolStripMenuItem.Text = "Spare 2 (user-definable)";
             // 
             // byImplementationTypeToolStripMenuItem
             // 
             this.byImplementationTypeToolStripMenuItem.Name = "byImplementationTypeToolStripMenuItem";
-            this.byImplementationTypeToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
+            this.byImplementationTypeToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
             this.byImplementationTypeToolStripMenuItem.Text = "By &Implementation Type";
             // 
             // byEncodingToolStripMenuItem
             // 
             this.byEncodingToolStripMenuItem.Name = "byEncodingToolStripMenuItem";
-            this.byEncodingToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
+            this.byEncodingToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
             this.byEncodingToolStripMenuItem.Text = "By &Encoding";
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(199, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(209, 6);
             // 
             // launchSILConvertersSetupToolStripMenuItem
             // 
             this.launchSILConvertersSetupToolStripMenuItem.Name = "launchSILConvertersSetupToolStripMenuItem";
-            this.launchSILConvertersSetupToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
+            this.launchSILConvertersSetupToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
             this.launchSILConvertersSetupToolStripMenuItem.Text = "&Launch Converter Installer";
             this.launchSILConvertersSetupToolStripMenuItem.ToolTipText = "Click here to launch the Converter Installer";
             this.launchSILConvertersSetupToolStripMenuItem.Click += new System.EventHandler(this.launchSILConvertersSetupToolStripMenuItem_Click);
@@ -532,7 +542,7 @@ namespace ClipboardEC
             // addConverterToolStripMenuItem
             // 
             this.addConverterToolStripMenuItem.Name = "addConverterToolStripMenuItem";
-            this.addConverterToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
+            this.addConverterToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
             this.addConverterToolStripMenuItem.Text = "&Add Converter";
             this.addConverterToolStripMenuItem.ToolTipText = "Click here to add a new converter to the list";
             this.addConverterToolStripMenuItem.Click += new System.EventHandler(this.addConverterToolStripMenuItem_Click);
@@ -540,16 +550,29 @@ namespace ClipboardEC
             // editOrDeleteConverterToolStripMenuItem
             // 
             this.editOrDeleteConverterToolStripMenuItem.Name = "editOrDeleteConverterToolStripMenuItem";
-            this.editOrDeleteConverterToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
+            this.editOrDeleteConverterToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
             this.editOrDeleteConverterToolStripMenuItem.Text = "Ed&it or Delete Converter";
             this.editOrDeleteConverterToolStripMenuItem.ToolTipText = "Click here to bring up the Choose Converter dialog from which you can right-click" +
-                " on a converter to edit or delete it";
+    " on a converter to edit or delete it";
             this.editOrDeleteConverterToolStripMenuItem.Click += new System.EventHandler(this.editOrDeleteConverterToolStripMenuItem_Click);
             // 
             // toolStripSeparator5
             // 
             this.toolStripSeparator5.Name = "toolStripSeparator5";
-            this.toolStripSeparator5.Size = new System.Drawing.Size(199, 6);
+            this.toolStripSeparator5.Size = new System.Drawing.Size(209, 6);
+            // 
+            // translationHelperFormToolStripMenuItem
+            // 
+            this.translationHelperFormToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripSeparator9,
+            this.addTranslatorSetToolStripMenuItem,
+            this.deleteTranslatorSetToolStripMenuItem});
+            this.translationHelperFormToolStripMenuItem.Name = "translationHelperFormToolStripMenuItem";
+            this.translationHelperFormToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
+            this.translationHelperFormToolStripMenuItem.Text = "&Translation Helper";
+            this.translationHelperFormToolStripMenuItem.ToolTipText = "Click to process the clipboard data through the last Translation Helper Dialog used (or choose 'Add' in the sub-menu to add one)";
+            this.translationHelperFormToolStripMenuItem.DropDownOpening += new System.EventHandler(this.translationHelperFormToolStripMenuItem_DropDownOpening);
+            this.translationHelperFormToolStripMenuItem.Click += TranslationHelperFormToolStripMenuItem_Click;
             // 
             // spellFixerToolStripMenuItem
             // 
@@ -561,7 +584,7 @@ namespace ClipboardEC
             this.toolStripSeparator7,
             this.resetToolStripMenuItem});
             this.spellFixerToolStripMenuItem.Name = "spellFixerToolStripMenuItem";
-            this.spellFixerToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
+            this.spellFixerToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
             this.spellFixerToolStripMenuItem.Text = "&Spell Fixer";
             this.spellFixerToolStripMenuItem.ToolTipText = "SpellFixer options";
             this.spellFixerToolStripMenuItem.DropDownOpening += new System.EventHandler(this.spellFixerToolStripMenuItem_DropDownOpening);
@@ -569,7 +592,7 @@ namespace ClipboardEC
             // selectProjectToolStripMenuItem
             // 
             this.selectProjectToolStripMenuItem.Name = "selectProjectToolStripMenuItem";
-            this.selectProjectToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
+            this.selectProjectToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.selectProjectToolStripMenuItem.Text = "&Select Project";
             this.selectProjectToolStripMenuItem.ToolTipText = "Load a SpellFixer project to work with";
             this.selectProjectToolStripMenuItem.Click += new System.EventHandler(this.selectProjectToolStripMenuItem_Click);
@@ -577,12 +600,12 @@ namespace ClipboardEC
             // toolStripSeparator8
             // 
             this.toolStripSeparator8.Name = "toolStripSeparator8";
-            this.toolStripSeparator8.Size = new System.Drawing.Size(161, 6);
+            this.toolStripSeparator8.Size = new System.Drawing.Size(177, 6);
             // 
             // displaySpellingFixToolStripMenuItem
             // 
             this.displaySpellingFixToolStripMenuItem.Name = "displaySpellingFixToolStripMenuItem";
-            this.displaySpellingFixToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
+            this.displaySpellingFixToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.displaySpellingFixToolStripMenuItem.Text = "&Display Spelling Fix";
             this.displaySpellingFixToolStripMenuItem.ToolTipText = "Click to search the database for a spelling fix for the word on the clipboard";
             this.displaySpellingFixToolStripMenuItem.Click += new System.EventHandler(this.displaySpellingFixToolStripMenuItem_Click);
@@ -590,7 +613,7 @@ namespace ClipboardEC
             // editSpellingFixesToolStripMenuItem
             // 
             this.editSpellingFixesToolStripMenuItem.Name = "editSpellingFixesToolStripMenuItem";
-            this.editSpellingFixesToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
+            this.editSpellingFixesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.editSpellingFixesToolStripMenuItem.Text = "&Edit Spelling Fixes";
             this.editSpellingFixesToolStripMenuItem.ToolTipText = "Click to edit the spelling fix database in a grid editor";
             this.editSpellingFixesToolStripMenuItem.Click += new System.EventHandler(this.editSpellingFixesToolStripMenuItem_Click);
@@ -598,12 +621,12 @@ namespace ClipboardEC
             // toolStripSeparator7
             // 
             this.toolStripSeparator7.Name = "toolStripSeparator7";
-            this.toolStripSeparator7.Size = new System.Drawing.Size(161, 6);
+            this.toolStripSeparator7.Size = new System.Drawing.Size(177, 6);
             // 
             // resetToolStripMenuItem
             // 
             this.resetToolStripMenuItem.Name = "resetToolStripMenuItem";
-            this.resetToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
+            this.resetToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.resetToolStripMenuItem.Text = "&Reset";
             this.resetToolStripMenuItem.ToolTipText = "Click to turn off SpellFixer mode";
             this.resetToolStripMenuItem.Click += new System.EventHandler(this.resetToolStripMenuItem_Click);
@@ -611,12 +634,12 @@ namespace ClipboardEC
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(199, 6);
+            this.toolStripSeparator4.Size = new System.Drawing.Size(209, 6);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
             this.exitToolStripMenuItem.Text = "&Exit";
             this.exitToolStripMenuItem.ToolTipText = "Click to exit the Clipboard EncConverter";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.menuItemExit_Click);
@@ -627,7 +650,7 @@ namespace ClipboardEC
             this.consistentSpellingFixerToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
             this.consistentSpellingFixerToolStripMenuItem.Text = "&Consistent Spelling Fixer";
             this.consistentSpellingFixerToolStripMenuItem.ToolTipText = "Click to load a Consistent Spelling Fixer project (for whole word spelling fixes)" +
-                "";
+    "";
             // 
             // legacySpellFixerToolStripMenuItem
             // 
@@ -635,7 +658,7 @@ namespace ClipboardEC
             this.legacySpellFixerToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
             this.legacySpellFixerToolStripMenuItem.Text = "&Legacy SpellFixer";
             this.legacySpellFixerToolStripMenuItem.ToolTipText = "Click to load a Legacy Spell Fixer project (supports partial word spelling change" +
-                "s)";
+    "s)";
             // 
             // toolStripSeparator6
             // 
@@ -653,6 +676,25 @@ namespace ClipboardEC
             // 
             this.toolTip.ShowAlways = true;
             // 
+            // addTranslatorSetToolStripMenuItem
+            // 
+            this.addTranslatorSetToolStripMenuItem.Name = "addTranslatorSetToolStripMenuItem";
+            this.addTranslatorSetToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.addTranslatorSetToolStripMenuItem.Text = "&Add Translator Set";
+            this.addTranslatorSetToolStripMenuItem.Click += new System.EventHandler(this.addTranslatorSetToolStripMenuItem_Click);
+            // 
+            // deleteTranslatorSetToolStripMenuItem
+            // 
+            this.deleteTranslatorSetToolStripMenuItem.Name = "deleteTranslatorSetToolStripMenuItem";
+            this.deleteTranslatorSetToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.deleteTranslatorSetToolStripMenuItem.Text = "&Delete Translator Set";
+            this.deleteTranslatorSetToolStripMenuItem.Click += new System.EventHandler(this.deleteTranslatorSetToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator9
+            // 
+            this.toolStripSeparator9.Name = "toolStripSeparator9";
+            this.toolStripSeparator9.Size = new System.Drawing.Size(177, 6);
+            // 
             // FormClipboardEncConverter
             // 
             this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
@@ -664,7 +706,7 @@ namespace ClipboardEC
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FormClipboardEncConverter";
-            this.Opacity = 0;
+            this.Opacity = 0D;
             this.ShowInTaskbar = false;
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.WindowState = System.Windows.Forms.FormWindowState.Minimized;
@@ -672,12 +714,12 @@ namespace ClipboardEC
             this.ResumeLayout(false);
 
         }
-		#endregion
+        #endregion
 
-		/// <summary>
-		/// The main entry point for the application.
-		/// </summary>
-		[STAThread]
+        /// <summary>
+        /// The main entry point for the application.
+        /// </summary>
+        [STAThread]
 		static void Main() 
 		{
 			Application.Run(new FormClipboardEncConverter());
@@ -1425,6 +1467,89 @@ namespace ClipboardEC
             displaySpellingFixToolStripMenuItem.Enabled = 
             editSpellingFixesToolStripMenuItem.Enabled = 
             resetToolStripMenuItem.Enabled = IsSpellFixerProject;
+        }
+
+        private string _lastTranslationHelperUsed = null;
+        private Dictionary<string, TranslationHelperForm> _mapConverterToTranslationForm = new Dictionary<string, TranslationHelperForm>();
+
+        private void translationHelperFormToolStripMenuItem_DropDownOpening(object sender, EventArgs e)
+        {
+            // remove all added ones (except for the 'add', 'delete', and the separator for them)
+            while (translationHelperFormToolStripMenuItem.DropDownItems.Count > 3)
+                translationHelperFormToolStripMenuItem.DropDownItems.RemoveAt(0);
+
+            var insertIndex = 0;
+            foreach (var projectName in Properties.Settings.Default.TranslatorSetsProjectNames)
+            {
+                var projectToolStripItem = new ToolStripMenuItem(projectName, null, translatorSetsProjectNamesToolStripMenuItem_Click);
+                translationHelperFormToolStripMenuItem.DropDownItems.Insert(insertIndex++, projectToolStripItem);
+            }
+        }
+
+        private void TranslationHelperFormToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (_lastTranslationHelperUsed != null)
+                ExecuteTranslationHelperDialog(_lastTranslationHelperUsed);
+        }
+
+        private void translatorSetsProjectNamesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var projectName = ((ToolStripDropDownItem)sender).Text;
+            ExecuteTranslationHelperDialog(projectName);
+        }
+
+        private void RemoveTranslatorSetFromMap(string projectName)
+        {
+            _mapConverterToTranslationForm?.Remove(projectName);
+            _lastTranslationHelperUsed = null;
+        }
+
+        private void ExecuteTranslationHelperDialog(string projectName)
+        {
+            _lastTranslationHelperUsed = projectName;
+
+            if (!_mapConverterToTranslationForm.TryGetValue(projectName, out TranslationHelperForm form))
+            {
+                form = new TranslationHelperForm(projectName, RemoveTranslatorSetFromMap);
+                _mapConverterToTranslationForm.Add(projectName, form);
+            }
+
+            if (!form.Visible)  // in case the user closed it
+            {
+                // make it show and give it time
+                form.Show();
+                return;     // the GetNewClipboardData will be triggered by OnShown 
+            }
+
+            form.Focus();
+            form.GetNewClipboardData();
+        }
+
+        private void addTranslatorSetToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string projectName = null;
+            const string Prompt = "Enter a name for the Translation Set (e.g. \"Hindi to English\")";
+            do
+            {
+                var prompt = (projectName == null) ? Prompt : Prompt + $" ({projectName} already exists)";
+                projectName = Microsoft.VisualBasic.Interaction.InputBox(prompt, "Translation Set Project Id", "Any to English");
+                if (projectName == String.Empty)    // user clicked 'Cancel'
+                    return;
+            }
+            while (Properties.Settings.Default.TranslatorSetsProjectNames.Contains(projectName));
+
+            var form = new TranslationHelperForm(projectName, RemoveTranslatorSetFromMap);
+            _mapConverterToTranslationForm.Add(projectName, form);
+
+            Properties.Settings.Default.TranslatorSetsProjectNames.Add(projectName);
+            Properties.Settings.Default.Save();
+
+            ExecuteTranslationHelperDialog(projectName);
+        }
+
+        private void deleteTranslatorSetToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
 
         private void selectProjectToolStripMenuItem_Click(object sender, EventArgs e)

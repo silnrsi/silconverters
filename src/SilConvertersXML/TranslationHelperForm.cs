@@ -178,6 +178,9 @@ namespace SilConvertersXML
 
         private void TranslationHelperForm_FormClosing(object sender, FormClosingEventArgs e)
         {
+            if (this.WindowState == FormWindowState.Minimized)
+                return; // don't save location info if the dialog is minimized
+
             Properties.Settings.Default.DefaultWindowState = WindowState;
             Properties.Settings.Default.WindowLocation = Location;
             Properties.Settings.Default.WindowSize = Size;

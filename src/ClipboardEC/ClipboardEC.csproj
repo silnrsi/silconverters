@@ -111,12 +111,16 @@
   <ItemGroup>
     <!--nuget doesn't add the references to the csproj files properly; not sure why. Here is what
 			you might want to manually add to the csproj file instead-->
+    <Reference Include="BackTranslationHelper">
+      <HintPath>$(EcDistFilesPath)\win-$(Platform)\native\BackTranslationHelper.dll</HintPath>
+    </Reference>
     <Reference Include="ECInterfaces, Version=4.0.0.0, Culture=neutral, PublicKeyToken=f1447bae1e63f485, processorArchitecture=x86" Condition="('$(Platform)' == 'x86' or '$(Platform)' == 'AnyCPU') and ('$(OS)'=='Windows_NT')">
       <HintPath>$(EcLibFilesPath)\net48\x86\ECInterfaces.dll</HintPath>
     </Reference>
     <Reference Include="ECInterfaces, Version=4.0.0.0, Culture=neutral, PublicKeyToken=f1447bae1e63f485, processorArchitecture=x64" Condition="('$(Platform)' == 'x64') and ('$(OS)'=='Windows_NT')">
       <HintPath>$(EcLibFilesPath)\net48\x64\ECInterfaces.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="SilEncConverters40, Version=4.0.0.0, Culture=neutral, PublicKeyToken=f1447bae1e63f485, processorArchitecture=x86" Condition="('$(Platform)' == 'x86' or '$(Platform)' == 'AnyCPU') and ('$(OS)'=='Windows_NT')">
       <HintPath>$(EcLibFilesPath)\net48\x86\SilEncConverters40.dll</HintPath>
     </Reference>
@@ -138,8 +142,20 @@
     <Reference Include="System.Windows.Forms">
       <Name>System.Windows.Forms</Name>
     </Reference>
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="TranslationHelperForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TranslationHelperForm.Designer.cs">
+      <DependentUpon>TranslationHelperForm.cs</DependentUpon>
+    </Compile>
     <Content Include="App.ico" />
     <Content Include="TRFFC17.ICO" />
     <Compile Include="AssemblyInfo.cs">
@@ -160,6 +176,10 @@
     <None Include="app.config" />
     <None Include="app.manifest" />
     <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
