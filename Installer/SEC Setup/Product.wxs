@@ -4,8 +4,8 @@
      xmlns:util="http://schemas.microsoft.com/wix/UtilExtension"
      xmlns:netfx="http://schemas.microsoft.com/wix/NetFxExtension">
 
-  <Product Id="*" UpgradeCode="8A50226C-84D0-4CAF-AF8F-B0284643C415" Name="SIL Converters 5.2" Manufacturer="SIL International" 
-           Language="1033" Version="5.2">
+  <Product Id="*" UpgradeCode="8A50226C-84D0-4CAF-AF8F-B0284643C415" Name="SIL Converters 5.3" Manufacturer="SIL International" 
+           Language="1033" Version="5.3">
     <Package InstallerVersion="500" Compressed="yes" InstallScope="perMachine" />
     
     <Condition Message="You need to be an administrator to install this product.">Privileged</Condition>
