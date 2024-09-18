@@ -239,6 +239,15 @@ namespace SIL.ParatextBackTranslationHelperPlugin
                 // otherwise, make them choose
                 _projectSource ??= QueryForProject("Source language");
                 _projectTarget ??= QueryForProject("Target language");
+
+                if (_projectSource != null)
+                {
+                    lstSourceProjects = [_projectSource.ShortName];
+                    mapProjectNameToSourceProjectOverride[projectName] = lstSourceProjects;
+
+                    Properties.Settings.Default.MapProjectNameToSourceProjectOverride = BackTranslationHelperCtrl.SettingFromDictionary(mapProjectNameToSourceProjectOverride);
+                    Properties.Settings.Default.Save();
+                }
             }
 
             if ((_projectSource == null) || (_projectTarget == null))
