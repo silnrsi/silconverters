@@ -242,7 +242,7 @@ namespace SIL.ParatextBackTranslationHelperPlugin
 
                 if (_projectSource != null)
                 {
-                    lstSourceProjects = [_projectSource.ShortName];
+                    lstSourceProjects =  new List<string> { _projectSource.ShortName };
                     mapProjectNameToSourceProjectOverride[projectName] = lstSourceProjects;
 
                     Properties.Settings.Default.MapProjectNameToSourceProjectOverride = BackTranslationHelperCtrl.SettingFromDictionary(mapProjectNameToSourceProjectOverride);
