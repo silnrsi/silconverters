@@ -671,22 +671,27 @@ namespace TECkit_Mapping_Editor
 
         private void textBoxSampleForward_TextChanged(object sender, EventArgs e)
         {
-            UpdateTextChanged(this.textBoxSampleForward, this.textBoxSampleReverse, m_aEC, false);
-            if (!m_bSampleChangedByTyping)
-                UpdateUnicodeDetails(this.textBoxSampleForward);
-            m_bSampleChangedByTyping = false;
-
             string strTooltip = null;
-            if (textBoxSample.Text == textBoxSampleReverse.Text)
+            if (!EncConverters.IsUnidirectional(m_aEC.ConversionType))
             {
-                this.labelRoundtrip.Text = cstrRoundTripDefaultLabel;
-                strTooltip = "Round-trip value matches!";
+                UpdateTextChanged(this.textBoxSampleForward, this.textBoxSampleReverse, m_aEC, false);
+                if (!m_bSampleChangedByTyping)
+                    UpdateUnicodeDetails(this.textBoxSampleForward);
+                m_bSampleChangedByTyping = false;
+
+                if (textBoxSample.Text == textBoxSampleReverse.Text)
+                {
+                    this.labelRoundtrip.Text = cstrRoundTripDefaultLabel;
+                    strTooltip = "Round-trip value matches!";
+                }
+                else
+                {
+                    labelRoundtrip.Text = "*** " + cstrRoundTripDefaultLabel;
+                    strTooltip = "Round-trip value doesn't match!";
+                }
             }
             else
-            {
-                labelRoundtrip.Text = "*** " + cstrRoundTripDefaultLabel;
-                strTooltip = "Round-trip value doesn't match!";
-            }
+                strTooltip = "Map doesn't round-trip.";
 
             strTooltip += String.Format("{0}{0}Left-side:\t{1}{0}Right-side:\t{2}{0}Roundtrip:\t{3}",
                     Environment.NewLine,
