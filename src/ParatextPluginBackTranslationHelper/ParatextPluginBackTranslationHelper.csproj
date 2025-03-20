@@ -217,7 +217,7 @@ del "%25ParatextInstallDir%25\plugins\$(ProjectName)\$(ProjectName).ptxplg"
 :nodelete
 
 @echo Copying files to '%25ParatextInstallDir%25\Encoding Core' folder
-xcopy "$(SolutionDir)output\x64\Debug\*.*" "%25ParatextInstallDir%25\Encoding Core" /y /i
+xcopy "$(SolutionDir)output\x64\Debug\*.*" "%25ParatextInstallDir%25\Encoding Core" /y /i /c
 @echo Copying '$(SolutionDir)output\x64\Debug\$(TargetFileName)' to: '%25ParatextInstallDir%25\plugins\$(ProjectName)\$(ProjectName).ptxplg'
 copy "$(SolutionDir)output\x64\Debug\$(TargetFileName)" "%25ParatextInstallDir%25\plugins\$(ProjectName)\$(ProjectName).ptxplg"
 
