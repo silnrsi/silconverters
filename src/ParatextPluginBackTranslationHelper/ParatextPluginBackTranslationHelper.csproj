@@ -211,6 +211,14 @@
 IF "%25ParatextInstallDir%25" == "" goto nocopy
 IF NOT EXIST "%25ParatextInstallDir%25" goto nocopy
 
+IF EXIST "%25ParatextInstallDir%25\plugins" goto checkMakeBTHPluginDir
+md "%25ParatextInstallDir%25\plugins"
+
+:checkMakeBTHPluginDir
+IF EXIST "%25ParatextInstallDir%25\plugins\$(ProjectName)" goto checkdelete
+md "%25ParatextInstallDir%25\plugins\$(ProjectName)"
+
+:checkdelete
 IF NOT EXIST "%25ParatextInstallDir%25\plugins\$(ProjectName)\$(ProjectName).ptxplg" goto nodelete
 @echo Deleting '%25ParatextInstallDir%25\plugins\$(ProjectName)\$(ProjectName).ptxplg'
 del "%25ParatextInstallDir%25\plugins\$(ProjectName)\$(ProjectName).ptxplg"
