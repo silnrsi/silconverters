@@ -4,11 +4,11 @@
 
 
  /* File created by MIDL compiler version 8.01.0628 */
-/* at Mon Jan 18 21:14:07 2038
+/* at Mon Jan 18 22:14:07 2038
  */
 /* Compiler settings for COMAddInShim07.idl:
-    Oicf, W1, Zp8, env=Win32 (32b run), target_arch=X86 8.01.0628 
-    protocol : dce , ms_ext, c_ext, robust
+    Oicf, W1, Zp8, env=Win64 (32b run), target_arch=AMD64 8.01.0628 
+    protocol : all , ms_ext, c_ext, robust
     error checks: allocation ref bounds_check enum stub_data 
     VC __declspec() decoration level: 
          __declspec(uuid()), __declspec(selectany), __declspec(novtable)
