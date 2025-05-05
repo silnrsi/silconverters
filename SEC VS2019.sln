@@ -250,11 +250,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestBwdc", "src\SILConverte
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{AB86AE67-C7D0-4FAD-AAFC-F6B450669929}"
 	ProjectSection(SolutionItems) = preProject
-		build\buildBaseInstaller.bat = build\buildBaseInstaller.bat
 		Directory.Build.props = Directory.Build.props
 		Local.testsettings = Local.testsettings
 		SEC VS2010.vsmdi = SEC VS2010.vsmdi
-		build\signingProxy.bat = build\signingProxy.bat
 		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
 	EndProjectSection
 EndProject
@@ -495,6 +493,13 @@ Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "ParatextBackTranslationHelp
 	ProjectSection(ProjectDependencies) = postProject
 		{0BFFA5D9-FF49-4F16-BBC6-27F9394341A5} = {0BFFA5D9-FF49-4F16-BBC6-27F9394341A5}
 		{3998257F-C3E2-4508-9579-70305BDD26F7} = {3998257F-C3E2-4508-9579-70305BDD26F7}
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+	ProjectSection(SolutionItems) = preProject
+		build\buildBaseInstaller.bat = build\buildBaseInstaller.bat
+		build\dll_versions.json = build\dll_versions.json
+		build\signingProxy.bat = build\signingProxy.bat
 	EndProjectSection
 EndProject
 Global
@@ -1044,6 +1049,7 @@ Global
 		{496C70F6-D12A-42C9-A892-ACE1C6981F52} = {BD599637-791D-41A6-9B5F-233032353630}
 		{C22EEAE5-C719-4664-85FA-B933344EB109} = {98EE519A-E7DE-42C2-8856-727E5CE8766C}
 		{D1176BF0-59EF-400B-B712-B6B7D5D7FEB7} = {84121E67-E37B-4C69-810B-E3DC1C06F54A}
+		{02EA681E-C7D8-13C7-8484-4AC65E1B71E8} = {AB86AE67-C7D0-4FAD-AAFC-F6B450669929}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0BE575CA-E157-41CC-B2F3-97DC5D97E61C}

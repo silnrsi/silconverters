@@ -1,0 +1,17 @@
+{
+	"Microsoft.Bcl.AsyncInterfaces.dll": "Encoding-Converters-Core.0.9.6/runtimes/EcDistFiles/win-x64/native/Microsoft.Bcl.AsyncInterfaces.dll",
+	"Microsoft.Extensions.DependencyInjection.Abstractions.dll": "Encoding-Converters-Core.0.9.6/runtimes/EcDistFiles/win-x64/native/Microsoft.Extensions.DependencyInjection.Abstractions.dll",
+	"Microsoft.Extensions.Logging.Abstractions.dll": "Encoding-Converters-Core.0.9.6/runtimes/EcDistFiles/win-x64/native/Microsoft.Extensions.Logging.Abstractions.dll",
+	"System.Buffers.dll": "Encoding-Converters-Core.0.9.6/runtimes/EcDistFiles/win-x64/native/System.Buffers.dll",
+	"System.ClientModel.dll": "Encoding-Converters-Core.0.9.6/runtimes/EcDistFiles/win-x64/native/System.ClientModel.dll",
+	"System.Diagnostics.DiagnosticSource.dll": "Encoding-Converters-Core.0.9.6/runtimes/EcDistFiles/win-x64/native/System.Diagnostics.DiagnosticSource.dll",
+	"System.Memory.dll": "Encoding-Converters-Core.0.9.6/runtimes/EcDistFiles/win-x64/native/System.Memory.dll",
+	"System.Memory.Data.dll": "Encoding-Converters-Core.0.9.6/runtimes/EcDistFiles/win-x64/native/System.Memory.Data.dll",
+	"System.Net.Http.WinHttpHandler.dll": "Encoding-Converters-Core.0.9.6/runtimes/EcDistFiles/win-x64/native/System.Net.Http.WinHttpHandler.dll",
+	"System.Numerics.Vectors.dll": "Encoding-Converters-Core.0.9.6/runtimes/EcDistFiles/win-x64/native/System.Numerics.Vectors.dll",
+	"System.Runtime.CompilerServices.Unsafe.dll": "Encoding-Converters-Core.0.9.6/runtimes/EcDistFiles/win-x64/native/System.Runtime.CompilerServices.Unsafe.dll",
+	"System.Text.Encodings.Web.dll": "Encoding-Converters-Core.0.9.6/runtimes/EcDistFiles/win-x64/native/System.Text.Encodings.Web.dll",
+	"System.Text.Json.dll": "Encoding-Converters-Core.0.9.6/runtimes/EcDistFiles/win-x64/native/System.Text.Json.dll",
+	"System.Threading.Tasks.Extensions.dll": "Encoding-Converters-Core.0.9.6/runtimes/EcDistFiles/win-x64/native/System.Threading.Tasks.Extensions.dll",
+	"System.ValueTuple.dll": "Encoding-Converters-Core.0.9.6/runtimes/EcDistFiles/win-x64/native/System.ValueTuple.dll"
+}
