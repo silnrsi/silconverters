@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"
      xmlns:netfx="http://schemas.microsoft.com/wix/NetFxExtension">
-  <Product Id="*" UpgradeCode="{0F7D5D72-E9F3-40BB-9748-D388C70096CD}" Name="SIL Converters 5.3 (x64)" Manufacturer="SIL International"
-           Language="1033" Version="5.3" >
+  <Product Id="*" UpgradeCode="{0F7D5D72-E9F3-40BB-9748-D388C70096CD}" Name="SIL Converters 5.4 (x64)" Manufacturer="SIL International"
+           Language="1033" Version="5.4" >
     <Package InstallerVersion="500" Compressed='yes' InstallScope="perMachine"
              Platform="x64" />
 
