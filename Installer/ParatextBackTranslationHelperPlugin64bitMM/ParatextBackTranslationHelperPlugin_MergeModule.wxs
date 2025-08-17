@@ -28,7 +28,11 @@
               <File Id="PtxProject4.0.0.0PluginDetails.xml" Name="PtxProject 4.0.0.0 Plugin Details.xml" KeyPath="yes" Source="..\..\output\x64\release\EC\Plugins\PtxProject 4.0.0.0 Plugin Details.xml"/>
             </Component>
 
-          </Directory>
+			  <Component Id="AI4.0.0.0PluginDetails.xml" Guid="{A442ECF2-DAE1-411B-B82B-F15B190DBA7E}">
+				  <File Id="AI4.0.0.0PluginDetails.xml" Name="AI 4.0.0.0 Plugin Details.xml" KeyPath="yes" Source="..\..\output\x64\release\EC\Plugins\AI 4.0.0.0 Plugin Details.xml"/>
+			  </Component>
+
+		  </Directory>
         </Directory>
       </Directory>
 
