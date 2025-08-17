@@ -4,12 +4,7 @@ using ECInterfaces;
 using SilEncConverters40;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace ClipboardEC
@@ -19,6 +14,7 @@ namespace ClipboardEC
         protected BackTranslationHelperModel _model;
         protected Action<BackTranslationHelperModel> _updateDataProc;
         protected Action<string> _removeTranslatorSetFromClipboardEncConverter;
+        protected static string _lastOrNextString;
 
         public TranslationHelperForm(string projectName, Action<string> removeTranslatorSetFromMap)
         {
@@ -82,10 +78,9 @@ namespace ClipboardEC
 
         public BackTranslationHelperModel Model
         {
-            get 
+            get
             {
-                var iData = Clipboard.GetDataObject();
-                var sourceString = (iData.GetDataPresent(DataFormats.UnicodeText)) ? (string)iData.GetData(DataFormats.UnicodeText) : "No Unicode data on the clipboard";
+                var sourceString = ReadFromClipboard(useLastOrNextIfNonNull: true);
 
                 var model = new BackTranslationHelperModel
                 {
@@ -96,6 +91,21 @@ namespace ClipboardEC
 
                 return model;
             }
+        }
+
+        private static string ReadFromClipboard(bool useLastOrNextIfNonNull)
+        {
+            string sourceString;
+            if (useLastOrNextIfNonNull && !String.IsNullOrEmpty(_lastOrNextString))
+            {
+                sourceString = _lastOrNextString;
+            }
+            else
+            {
+                var iData = Clipboard.GetDataObject();
+                sourceString = (iData.GetDataPresent(DataFormats.UnicodeText)) ? (string)iData.GetData(DataFormats.UnicodeText) : "No Unicode data on the clipboard";
+            }
+            return sourceString;
         }
 
         public string ProjectName { get; set; }
@@ -134,7 +144,7 @@ namespace ClipboardEC
 
         public void MoveToNext()
         {
-            Close();
+            GetNewClipboardData();
         }
 
         public void SetDataUpdateProc(Action<BackTranslationHelperModel> updateControls)
@@ -145,7 +155,10 @@ namespace ClipboardEC
         public bool WriteToTarget(string text)
         {
             if (text != null)
+            {
+                _lastOrNextString = ReadFromClipboard(useLastOrNextIfNonNull: false);
                 Clipboard.SetDataObject(text);
+            }
             return true;
         }
 
