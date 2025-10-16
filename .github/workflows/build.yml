@@ -15,9 +15,7 @@ env:
 
 jobs:
   build-windows:
-    # Updated from 'windows-2019' to 'windows-2022' since 2019 runner is retired.
-    # VS 2022 components are available by default on this runner.
-    runs-on: windows-2022
+    runs-on: [windows-latest]
 
     strategy:
       # Keep building other jobs even if another fails, to show what is still working.
@@ -31,6 +29,19 @@ jobs:
         uses: actions/checkout@v4.1.1
         with:
           fetch-depth: 0 # fetch full history for GitVersion
+
+      # ✅ Install ATL/MFC support
+      - name: Install missing Visual Studio ATL components
+        run: |
+          Set-Location "C:\Program Files (x86)\Microsoft Visual Studio\Installer\"
+          $vsInstallPath = & .\vswhere.exe -latest -products * -requires Microsoft.Component.MSBuild -property installationPath
+          $atlComponent = @(
+          '--add Microsoft.VisualStudio.Component.VC.14.29.16.11.x86.x64',
+          '--add Microsoft.VisualStudio.Component.VC.14.29.16.11.ATL',
+          '--add Microsoft.VisualStudio.Component.VC.14.29.16.11.MFC'
+          ) -join ' '
+          $args = @('modify', "--installPath", "`"$vsInstallPath`"", $atlComponent, '--quiet', '--norestart', '--nocache')
+          Start-Process -FilePath .\vs_installer.exe -ArgumentList $args -Wait -PassThru -WindowStyle Hidden
 
       - name: Setup .NET
         uses: actions/setup-dotnet@v3
