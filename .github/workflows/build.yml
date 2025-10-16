@@ -15,54 +15,39 @@ env:
 
 jobs:
   build-windows:
-    runs-on: windows-2019   # [windows-latest]   # VS 2022 no longer automatically works w/ the non-‘latest’ version of the C++ bits
+    # Updated from 'windows-2019' to 'windows-2022' since 2019 runner is retired.
+    # VS 2022 components are available by default on this runner.
+    runs-on: windows-2022
+
     strategy:
-       # Keep building other jobs even if another fails, to show what _is_ still working.
-       fail-fast: false
-       matrix:
-         build_configuration: ["Debug", "Release"]
-         build_platform: ['x64', 'x86']
+      # Keep building other jobs even if another fails, to show what is still working.
+      fail-fast: false
+      matrix:
+        build_configuration: ["Debug", "Release"]
+        build_platform: ['x64', 'x86']
 
     steps:
-    - name: Checkout
-      uses: actions/checkout@v4.1.1
-      with:
-        fetch-depth: 0 # fetch full history for GitVersion
+      - name: Checkout
+        uses: actions/checkout@v4.1.1
+        with:
+          fetch-depth: 0 # fetch full history for GitVersion
 
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v3
-      with:
-        dotnet-version: 6.0.x
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: 6.0.x
 
-    - name: setup-msbuild
-      uses: microsoft/setup-msbuild@v2
+      - name: Setup MSBuild
+        uses: microsoft/setup-msbuild@v2
 
-    - name: Fetch nuget dependecies
-      run: nuget restore "${{env.SOLUTION_FILE_PATH}}"
+      - name: Fetch NuGet dependencies
+        run: nuget restore "${{ env.SOLUTION_FILE_PATH }}"
 
-    # run VsDevCmd.bat so we can get the path to tlbexp.exe for the SpellFixerEc proj
-    - uses: ilammy/msvc-dev-cmd@v1
-      with:
-        arch: ${{ matrix.build_platform }}
-        
-    - name: Build
-      working-directory: ${{env.GITHUB_WORKSPACE}}
-      # Add additional options to the MSBuild command line here (like build_platform or verbosity level).
-      # See https://docs.microsoft.com/visualstudio/msbuild/msbuild-command-line-reference
-      run: msbuild /m /p:Configuration=${{matrix.build_configuration}} /p:Platform=${{ matrix.build_platform }} "${{env.SOLUTION_FILE_PATH}}"
+      - name: Setup MSVC Developer Command Prompt
+        uses: ilammy/msvc-dev-cmd@v1
+        with:
+          arch: ${{ matrix.build_platform }}
 
-    # TODO Run tests
-    #- name: Test
-    #  run: output/Win32/${{matrix.build_configuration}}/RunTests.exe
-
-    # now that we're building on TeamCity (to sign it), this isn't needed
-    #- name: rename installer
-    #  if: ${{ success() && matrix.build_configuration == 'Release' }}
-    #  run: cp "output/${{matrix.build_platform}}/SetupSILConverters_${{matrix.build_platform}}.exe" "output/${{matrix.build_platform}}/SetupSILConverters_${{matrix.build_platform}}.${{github.run_number}}.exe"
-
-    #- name: Upload a Build Artifact
-    #  if: ${{ success() && matrix.build_configuration == 'Release' }}
-    #  uses: actions/upload-artifact@v3.1.1
-    #  with:
-    #    name: silconverters-installers.${{matrix.build_platform}}.latest
-    #    path: output/${{matrix.build_platform}}/SetupSILConverters_${{matrix.build_platform}}.${{github.run_number}}.exe
+      - name: Build
+        working-directory: ${{ env.GITHUB_WORKSPACE }}
+        run: msbuild /m /p:Configuration=${{ matrix.build_configuration }} /p:Platform=${{ matrix.build_platform }} "${{ env.SOLUTION_FILE_PATH }}"
