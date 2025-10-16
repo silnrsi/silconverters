@@ -1,4 +1,4 @@
-#define TurnOffSpellFixer30
+// #define TurnOffSpellFixer30
 
 namespace SFMConv
 {
@@ -60,15 +60,19 @@ namespace SFMConv
             this.loadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.recentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.advancedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.singlestepConversionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.doErrorCheckingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.consistentSpellingCheckToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.selectProjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.initializeCheckListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.correctSpellingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.advancedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.singlestepConversionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.doErrorCheckingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openSFMFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.dataGridView = new System.Windows.Forms.DataGridView();
+            this.SFMs = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ExampleData = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Converter = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.ExampleResults = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.asdgToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.helpProvider = new System.Windows.Forms.HelpProvider();
@@ -85,10 +89,7 @@ namespace SFMConv
             this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButtonSingleStep = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
-            this.SFMs = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ExampleData = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Converter = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.ExampleResults = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.importSpellingDataFromParatextProjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
@@ -101,6 +102,7 @@ namespace SFMConv
             this.ToolStripMenuItemFile,
             this.viewToolStripMenuItem,
             this.converterMappingsToolStripMenuItem,
+            this.consistentSpellingCheckToolStripMenuItem,
             this.advancedToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
@@ -307,6 +309,47 @@ namespace SFMConv
             this.saveToolStripMenuItem.ToolTipText = "Click to save the current mapping of SFM field names to system converters";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
+            // consistentSpellingCheckToolStripMenuItem
+            // 
+            this.consistentSpellingCheckToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.selectProjectToolStripMenuItem,
+            this.importSpellingDataFromParatextProjectToolStripMenuItem,
+            this.initializeCheckListToolStripMenuItem,
+            this.correctSpellingToolStripMenuItem});
+            this.consistentSpellingCheckToolStripMenuItem.Name = "consistentSpellingCheckToolStripMenuItem";
+            this.consistentSpellingCheckToolStripMenuItem.Size = new System.Drawing.Size(165, 20);
+            this.consistentSpellingCheckToolStripMenuItem.Text = "Consistent &Spelling Options";
+            this.consistentSpellingCheckToolStripMenuItem.ToolTipText = "Options for performing a consistent spelling check on the data";
+            this.consistentSpellingCheckToolStripMenuItem.DropDownOpening += new System.EventHandler(this.consistentSpellingCheckToolStripMenuItem_DropDownOpening);
+            // 
+            // selectProjectToolStripMenuItem
+            // 
+            this.selectProjectToolStripMenuItem.CheckOnClick = true;
+            this.selectProjectToolStripMenuItem.Name = "selectProjectToolStripMenuItem";
+            this.selectProjectToolStripMenuItem.Size = new System.Drawing.Size(295, 22);
+            this.selectProjectToolStripMenuItem.Text = "&Select Consistent Changes Project...";
+            this.selectProjectToolStripMenuItem.ToolTipText = "Select a project that contains the list of consistent spelling changes to check f" +
+    "or.";
+            this.selectProjectToolStripMenuItem.Click += new System.EventHandler(this.selectProjectToolStripMenuItem_Click);
+            // 
+            // initializeCheckListToolStripMenuItem
+            // 
+            this.initializeCheckListToolStripMenuItem.Name = "initializeCheckListToolStripMenuItem";
+            this.initializeCheckListToolStripMenuItem.Size = new System.Drawing.Size(295, 22);
+            this.initializeCheckListToolStripMenuItem.Text = "&Analyze SFM data for Consistent Spelling";
+            this.initializeCheckListToolStripMenuItem.ToolTipText = "Send all the SFM data to the Consistent Spelling Analyzer to check for possibly m" +
+    "isspelled words.";
+            this.initializeCheckListToolStripMenuItem.Click += new System.EventHandler(this.initializeCheckListToolStripMenuItem_Click);
+            // 
+            // correctSpellingToolStripMenuItem
+            // 
+            this.correctSpellingToolStripMenuItem.Name = "correctSpellingToolStripMenuItem";
+            this.correctSpellingToolStripMenuItem.Size = new System.Drawing.Size(295, 22);
+            this.correctSpellingToolStripMenuItem.Text = "&Correct Spelling in SFM Data";
+            this.correctSpellingToolStripMenuItem.ToolTipText = "Click to correct the spelling of words in the SFM data based on the selected proj" +
+    "ect.";
+            this.correctSpellingToolStripMenuItem.Click += new System.EventHandler(this.correctSpellingToolStripMenuItem_Click);
+            // 
             // advancedToolStripMenuItem
             // 
             this.advancedToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -334,28 +377,8 @@ namespace SFMConv
             this.doErrorCheckingToolStripMenuItem.Name = "doErrorCheckingToolStripMenuItem";
             this.doErrorCheckingToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
             this.doErrorCheckingToolStripMenuItem.Text = "Do &Error Checking";
-            // 
-            // consistentSpellingCheckToolStripMenuItem
-            // 
-            this.consistentSpellingCheckToolStripMenuItem.Name = "consistentSpellingCheckToolStripMenuItem";
-            this.consistentSpellingCheckToolStripMenuItem.Size = new System.Drawing.Size(149, 20);
-            this.consistentSpellingCheckToolStripMenuItem.Text = "Consistent &Spelling Options";
-            this.consistentSpellingCheckToolStripMenuItem.Visible = false;
-            // 
-            // selectProjectToolStripMenuItem
-            // 
-            this.selectProjectToolStripMenuItem.Name = "selectProjectToolStripMenuItem";
-            this.selectProjectToolStripMenuItem.Size = new System.Drawing.Size(32, 19);
-            // 
-            // initializeCheckListToolStripMenuItem
-            // 
-            this.initializeCheckListToolStripMenuItem.Name = "initializeCheckListToolStripMenuItem";
-            this.initializeCheckListToolStripMenuItem.Size = new System.Drawing.Size(32, 19);
-            // 
-            // correctSpellingToolStripMenuItem
-            // 
-            this.correctSpellingToolStripMenuItem.Name = "correctSpellingToolStripMenuItem";
-            this.correctSpellingToolStripMenuItem.Size = new System.Drawing.Size(32, 19);
+            this.doErrorCheckingToolStripMenuItem.ToolTipText = "Check this menu item to have the program check for common errors in converting th" +
+    "e SFM data (e.g. too many \'?\' after conversion)";
             // 
             // openSFMFileDialog
             // 
@@ -397,6 +420,46 @@ namespace SFMConv
             this.dataGridView.TabIndex = 3;
             this.dataGridView.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView_CellMouseClick);
             this.dataGridView.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.dataGridView_KeyPress);
+            // 
+            // SFMs
+            // 
+            this.SFMs.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.SFMs.HeaderText = "SFMs";
+            this.SFMs.Name = "SFMs";
+            this.SFMs.ReadOnly = true;
+            this.SFMs.ToolTipText = "List of the unique SFM fields found in the selected file(s)";
+            this.SFMs.Width = 59;
+            // 
+            // ExampleData
+            // 
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Arial Unicode MS", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ExampleData.DefaultCellStyle = dataGridViewCellStyle1;
+            this.ExampleData.HeaderText = "Example Data";
+            this.ExampleData.Name = "ExampleData";
+            this.ExampleData.ReadOnly = true;
+            this.ExampleData.ToolTipText = "This column shows sample data for the given SFM fields (click a cell in this colu" +
+    "mn to see the next occurrence)";
+            // 
+            // Converter
+            // 
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Converter.DefaultCellStyle = dataGridViewCellStyle2;
+            this.Converter.HeaderText = "Converter";
+            this.Converter.Name = "Converter";
+            this.Converter.ReadOnly = true;
+            this.Converter.ToolTipText = "Click a cell in this column to associate a system converter with the correspondin" +
+    "g SFM field (use right-click to repeat the last converter selected)";
+            // 
+            // ExampleResults
+            // 
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Arial Unicode MS", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ExampleResults.DefaultCellStyle = dataGridViewCellStyle3;
+            this.ExampleResults.HeaderText = "Example Results";
+            this.ExampleResults.Name = "ExampleResults";
+            this.ExampleResults.ReadOnly = true;
+            this.ExampleResults.ToolTipText = "This column shows a preview of what the output would look like after the conversi" +
+    "on";
             // 
             // asdgToolStripMenuItem
             // 
@@ -539,45 +602,14 @@ namespace SFMConv
             this.toolStripButton1.Name = "toolStripButton1";
             this.toolStripButton1.Size = new System.Drawing.Size(23, 23);
             // 
-            // SFMs
+            // importSpellingDataFromParatextProjectToolStripMenuItem
             // 
-            this.SFMs.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.SFMs.HeaderText = "SFMs";
-            this.SFMs.Name = "SFMs";
-            this.SFMs.ReadOnly = true;
-            this.SFMs.ToolTipText = "List of the unique SFM fields found in the selected file(s)";
-            this.SFMs.Width = 59;
-            // 
-            // ExampleData
-            // 
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Arial Unicode MS", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ExampleData.DefaultCellStyle = dataGridViewCellStyle1;
-            this.ExampleData.HeaderText = "Example Data";
-            this.ExampleData.Name = "ExampleData";
-            this.ExampleData.ReadOnly = true;
-            this.ExampleData.ToolTipText = "This column shows sample data for the given SFM fields (click a cell in this colu" +
-    "mn to see the next occurrence)";
-            // 
-            // Converter
-            // 
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Converter.DefaultCellStyle = dataGridViewCellStyle2;
-            this.Converter.HeaderText = "Converter";
-            this.Converter.Name = "Converter";
-            this.Converter.ReadOnly = true;
-            this.Converter.ToolTipText = "Click a cell in this column to associate a system converter with the correspondin" +
-    "g SFM field (use right-click to repeat the last converter selected)";
-            // 
-            // ExampleResults
-            // 
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Arial Unicode MS", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ExampleResults.DefaultCellStyle = dataGridViewCellStyle3;
-            this.ExampleResults.HeaderText = "Example Results";
-            this.ExampleResults.Name = "ExampleResults";
-            this.ExampleResults.ReadOnly = true;
-            this.ExampleResults.ToolTipText = "This column shows a preview of what the output would look like after the conversi" +
-    "on";
+            this.importSpellingDataFromParatextProjectToolStripMenuItem.Name = "importSpellingDataFromParatextProjectToolStripMenuItem";
+            this.importSpellingDataFromParatextProjectToolStripMenuItem.Size = new System.Drawing.Size(295, 22);
+            this.importSpellingDataFromParatextProjectToolStripMenuItem.Text = "&Import Spelling data from Paratext project";
+            this.importSpellingDataFromParatextProjectToolStripMenuItem.ToolTipText = "Click this to browse for a corresponding Paratext project to import Spelling Stat" +
+    "us information from.";
+            this.importSpellingDataFromParatextProjectToolStripMenuItem.Click += new System.EventHandler(this.importSpellingDataFromParatextProjectToolStripMenuItem_Click);
             // 
             // SCConvForm
             // 
@@ -659,6 +691,7 @@ namespace SFMConv
         private System.Windows.Forms.DataGridViewTextBoxColumn ExampleData;
         private System.Windows.Forms.DataGridViewButtonColumn Converter;
         private System.Windows.Forms.DataGridViewTextBoxColumn ExampleResults;
+        private System.Windows.Forms.ToolStripMenuItem importSpellingDataFromParatextProjectToolStripMenuItem;
     }
 }
 

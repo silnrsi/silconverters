@@ -51,6 +51,8 @@ namespace SpellingFixerEC
             foreach(IEncConverter aEC in myECs.Values)
                 if( (strPartialName = PartialName(aEC.Name)) != null )
                     checkedListBoxProjects.Items.Add(strPartialName);
+                else
+                    checkedListBoxProjects.Items.Add(aEC.Name);
 
             // decide which one to select
             int nIndex = checkedListBoxProjects.Items.Count - 1;
@@ -422,7 +424,7 @@ namespace SpellingFixerEC
             }
             else
             {
-                converterName = FullName(strProjectName);
+                converterName = strProjectName;
             }
 
             IEncConverter aEC = aECs[converterName];

@@ -45,6 +45,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SILConvertersOffice07", "sr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SFMConv", "src\BulkSFMConverter\SFMConv.csproj", "{7580E2C0-F919-4FA5-AC2C-ADCAE4F8C14E}"
 	ProjectSection(ProjectDependencies) = postProject
+		{1514880B-9F3C-4BDA-BAFF-0B09DF049EB7} = {1514880B-9F3C-4BDA-BAFF-0B09DF049EB7}
 		{3998257F-C3E2-4508-9579-70305BDD26F7} = {3998257F-C3E2-4508-9579-70305BDD26F7}
 	EndProjectSection
 EndProject
@@ -250,10 +251,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestBwdc", "src\SILConverte
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{AB86AE67-C7D0-4FAD-AAFC-F6B450669929}"
 	ProjectSection(SolutionItems) = preProject
+		build\buildBaseInstaller.bat = build\buildBaseInstaller.bat
 		Directory.Build.props = Directory.Build.props
-		Local.testsettings = Local.testsettings
 		SEC VS2010.vsmdi = SEC VS2010.vsmdi
-		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
+		build\signingProxy.bat = build\signingProxy.bat
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Installer", "Installer", "{BD599637-791D-41A6-9B5F-233032353630}"
@@ -321,6 +322,7 @@ EndProject
 Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "SpellFixerEcMM", "Installer\SpellFixerEcMM\SpellFixerEcMM.wixproj", "{906F2914-563F-4B12-8AC9-54117D29D2B5}"
 	ProjectSection(ProjectDependencies) = postProject
 		{1514880B-9F3C-4BDA-BAFF-0B09DF049EB7} = {1514880B-9F3C-4BDA-BAFF-0B09DF049EB7}
+		{1F6E3722-B445-4638-90D6-22DDE860DCC6} = {1F6E3722-B445-4638-90D6-22DDE860DCC6}
 	EndProjectSection
 EndProject
 Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "ScHelpMM", "Installer\ScHelpMM\ScHelpMM.wixproj", "{E87D3A3C-DB9D-417F-87E5-E43D693AE31F}"
@@ -405,6 +407,7 @@ EndProject
 Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "SpellFixerEc64bitMM", "Installer\SpellFixerEc64bitMM\SpellFixerEc64bitMM.wixproj", "{CE9026BE-14CC-40C0-8BA9-8C5383A37570}"
 	ProjectSection(ProjectDependencies) = postProject
 		{1514880B-9F3C-4BDA-BAFF-0B09DF049EB7} = {1514880B-9F3C-4BDA-BAFF-0B09DF049EB7}
+		{1F6E3722-B445-4638-90D6-22DDE860DCC6} = {1F6E3722-B445-4638-90D6-22DDE860DCC6}
 	EndProjectSection
 EndProject
 Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "TECkitMapUEditor64bit", "Installer\TECkitMapUEditor64bit\TECkitMapUEditor64bit.wixproj", "{B7DC7F74-DDB1-450C-9A70-6C852CEA8A2C}"
@@ -496,11 +499,8 @@ Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "ParatextBackTranslationHelp
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
-	ProjectSection(SolutionItems) = preProject
-		build\buildBaseInstaller.bat = build\buildBaseInstaller.bat
-		build\dll_versions.json = build\dll_versions.json
-		build\signingProxy.bat = build\signingProxy.bat
-	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpellingFixer30", "src\SpellingFixer30\SpellingFixer30.csproj", "{1F6E3722-B445-4638-90D6-22DDE860DCC6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -976,6 +976,14 @@ Global
 		{D1176BF0-59EF-400B-B712-B6B7D5D7FEB7}.Release|x64.ActiveCfg = Release|x64
 		{D1176BF0-59EF-400B-B712-B6B7D5D7FEB7}.Release|x64.Build.0 = Release|x64
 		{D1176BF0-59EF-400B-B712-B6B7D5D7FEB7}.Release|x86.ActiveCfg = Release|x64
+		{1F6E3722-B445-4638-90D6-22DDE860DCC6}.Debug|x64.ActiveCfg = Debug|x64
+		{1F6E3722-B445-4638-90D6-22DDE860DCC6}.Debug|x64.Build.0 = Debug|x64
+		{1F6E3722-B445-4638-90D6-22DDE860DCC6}.Debug|x86.ActiveCfg = Debug|x86
+		{1F6E3722-B445-4638-90D6-22DDE860DCC6}.Debug|x86.Build.0 = Debug|x86
+		{1F6E3722-B445-4638-90D6-22DDE860DCC6}.Release|x64.ActiveCfg = Release|x64
+		{1F6E3722-B445-4638-90D6-22DDE860DCC6}.Release|x64.Build.0 = Release|x64
+		{1F6E3722-B445-4638-90D6-22DDE860DCC6}.Release|x86.ActiveCfg = Release|x86
+		{1F6E3722-B445-4638-90D6-22DDE860DCC6}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,4 +1,4 @@
-using System;
+Ôªøusing System;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using System.ComponentModel;            // for Description
@@ -28,7 +28,7 @@ namespace SpellingFixerEC
         public const string cstrAttributeFontRightToLeft = "SpellingFixer Display Right to Left";
         public const string cstrAttributeWordBoundaryDelimiter = "SpellingFixer Word Boundary Delimiter";
         public const string cstrAttributeNonWordChars = "SpellingFixer punctuation and whitespace characters";
-        public const string cstrDefaultPunctuationAndWhitespace = "' ' tab nl '.' ',' '!' ':' ';' '-' \"'\" '\"' 'ë' 'í' 'ì' 'î' '(' ')' '[' ']' '{' '}'";
+        public const string cstrDefaultPunctuationAndWhitespace = "' ' tab nl '.' ',' '!' ':' ';' '-' \"'\" '\"' '‚Äò' '‚Äô' '‚Äú' '‚Äù' '(' ')' '[' ']' '{' '}' '?' '|'";
         public const string cstrV3DefaultPunctuationAndWhitespaceAdds = " '?'";
         public const string cstrDefaultWordBoundaryDelimiter = "#";
 

@@ -1,4 +1,4 @@
-#define TurnOffSpellFixer30
+﻿// #define TurnOffSpellFixer30
 
 using System;
 using System.Collections;
@@ -16,6 +16,8 @@ using System.Xml;                                   // for XmlException
 
 using ECInterfaces;
 using SilEncConverters40;
+using System.Linq;
+
 
 #if !TurnOffSpellFixer30
 using SpellingFixer30;
@@ -33,6 +35,7 @@ namespace SFMConv
         protected const string cstrCscFieldClickMsg = "Field to check";
         protected int cnMaxConverterName = 30;
         protected const int nMaxRecentFiles = 15;
+        private const string ParatextSpellingStatusFilename = "SpellingStatus.xml";
 
         protected Dictionary<string, string> m_mapSfmData = new Dictionary<string, string>();
         protected Hashtable m_mapEncConverters = new Hashtable();
@@ -56,8 +59,12 @@ namespace SFMConv
         const int cnExampleDataColumn = 1;
         const int cnEncConverterColumn = 2;
         const int cnExampleOutputColumn = 3;
-
+        
         bool m_bLastFontSetWasDataColumn = false;
+
+#if !TurnOffSpellFixer30
+        protected CscProject m_cscProject = null;
+#endif
 
         protected void CheckForFontHelps(string strSfm, DirectableEncConverter aEC, DataGridViewRow theRow)
         {
@@ -425,8 +432,8 @@ namespace SFMConv
                             const double cfMinErrorDetectPercentage = 0.8;
                             // ... e.g. no reason to think that the "?" character in the input string is a "?"...
                             // e.g. if that was a legacy encoding, the character at the "?" code point could be anything...
-                            int nQMsInInput = strData.Length - strData.Replace("?", "").Length;
-                            string strWithoutErrors = strOutput.Replace("?", "");
+                            int nQMsInInput = strData.Length - strData.Replace("?", "").Replace("�","").Length;
+                            string strWithoutErrors = strOutput.Replace("?", "").Replace("�","");
                             if (strWithoutErrors.Length < ((strOutput.Length - nQMsInInput) * cfMinErrorDetectPercentage))
                             {
                                 bShowPotentialError = true;
@@ -1339,7 +1346,7 @@ namespace SFMConv
             }
             catch (ApplicationException ex)
             {
-                if (ex.Message == CscProject.cstrChooseProjectException)
+                if (ex.Message == CscProject.ChooseProjectException)
                     selectProjectToolStripMenuItem.Checked = false;
                 else
                     MessageBox.Show(ex.Message, cstrCaption);
@@ -1353,7 +1360,6 @@ namespace SFMConv
             return true;
         }
 
-        protected CscProject m_cscProject = null;
         private void initializeCheckListToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (m_cscProject == null)
@@ -1386,7 +1392,12 @@ namespace SFMConv
                         string strSfm = strLine.Substring(0, nIndex);
                         if (IsConverterDefined(strSfm))
                         {
-                            string strData = strLine.Substring(nIndex + 1);
+                            var strData = strLine.Substring(nIndex + 1);
+
+                            // see if the project has any regex to use to preprocess the data
+                            if (cscProject.HasPreprocessRegex)
+                                strData = cscProject.PreprocessData(strData);
+
                             string[] astrWords = strData.Split(caSplitChars, StringSplitOptions.RemoveEmptyEntries);
                             int nNumWords = astrWords.Length;
                             int nStartIndex = -1;
@@ -1398,49 +1409,72 @@ namespace SFMConv
                                 anStartIndices[j] = nStartIndex;
                             }
 
-                            const int cnNumContextWords = 3;
+                            var nNumContextWords = cscProject.WordsInContext;
                             for (int j = 0; j < nNumWords; j++)
                             {
-                                if (j < cnNumContextWords)
+                                if (j < nNumContextWords)
                                     nStartIndex = 0;
                                 else
-                                    nStartIndex = anStartIndices[j - cnNumContextWords];
+                                    nStartIndex = anStartIndices[j - nNumContextWords];
 
                                 int nContextLength;
-                                if ((nNumWords - j) < cnNumContextWords)
+                                if ((nNumWords - j) < nNumContextWords)
                                     nContextLength = strData.Length - nStartIndex;
                                 else
                                 {
-                                    int nArrIndex = j + cnNumContextWords - 1;
+                                    int nArrIndex = j + nNumContextWords - 1;
                                     nContextLength = anStartIndices[nArrIndex] + astrWords[nArrIndex].Length - nStartIndex;
                                 }
 
-                                string strContext = strData.Substring(nStartIndex, nContextLength);
-                                cscProject.AddWordToCheckList(astrWords[j], true, strContext);
+                                var strContext = strData.Substring(nStartIndex, nContextLength);
+                                cscProject.AddWordToCheckList(astrWords[j], true, new List<string> { strContext });
                             }
                         }
                     }
                 }
+
+                Application.DoEvents(); // so we don't behave as hung
             }
             progressBarSpellingCheck.Value = 0;
         }
 
-        protected bool m_bBotherUser = true;
-
+        protected bool m_bBotherUser =
+#if !DEBUG
+            true;
+#else
+            false;
+#endif
         private void selectProjectToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            progressBarSpellingCheck.Maximum = dataGridView.Rows.Count + 1;
             if (selectProjectToolStripMenuItem.Checked)
             {
                 if (m_cscProject != null)   // might want to select a different project
                     m_cscProject = null;
 
-                if (!TrySelectProject())
+                progressBarSpellingCheck.PerformStep();
+                Cursor = Cursors.WaitCursor;
+                var projectFound = TrySelectProject();
+                Cursor = Cursors.Default;
+                if (!projectFound)
                     return;
 
                 foreach (DataGridViewRow aRow in dataGridView.Rows)
                 {
-                    string strSFM = (string)aRow.Cells[cnSfmMarkerColumn].Value;
+                    progressBarSpellingCheck.PerformStep();
+                    var strSFM = (string)aRow.Cells[cnSfmMarkerColumn].Value;
                     DirectableEncConverter aEC = GetConverter(strSFM);
+
+                    if ((aEC == null) && !m_cscProject.MarkersToAvoidForSpellingCheck.Contains(strSFM))
+                    {
+                        IEncConverter aIEC = m_cscProject.SpellFixerEncConverter;
+                        if (aIEC != null)
+                        {
+                            aEC = new DirectableEncConverter(aIEC);
+                            DefineConverter(strSFM, aEC);
+                        }
+                    }
+
                     UpdateConverterCellValue(aRow.Cells[cnEncConverterColumn], aEC);
                 }
 
@@ -1451,6 +1485,7 @@ namespace SFMConv
 
                 selectProjectToolStripMenuItem.Text = "&Turn off Consistent Spell Check mode";
                 selectProjectToolStripMenuItem.ToolTipText = String.Format("Click to unload the '{0}' Consistent Spell Fixer project or right-click to choose another", m_cscProject.Name);
+                progressBarSpellingCheck.Value = 0;
             }
             else
             {
@@ -1474,6 +1509,7 @@ namespace SFMConv
             bool bEnableTheRest = (m_cscProject != null);
             initializeCheckListToolStripMenuItem.Enabled = bEnableTheRest;
             correctSpellingToolStripMenuItem.Enabled = bEnableTheRest;
+            importSpellingDataFromParatextProjectToolStripMenuItem.Enabled = bEnableTheRest;
             /*
             editSpellingFixesToolStripMenuItem.Enabled = bEnableTheRest;
             editDictionaryToolStripMenuItem.Enabled = bEnableTheRest;
@@ -1499,26 +1535,58 @@ namespace SFMConv
             TryProcessAndSaveDocumentsEx(m_encOpen, eSaveOption);
             Cursor = Cursors.Default;
         }
-/*
-        private void editSpellingFixesToolStripMenuItem_Click(object sender, EventArgs e)
+
+        private void importSpellingDataFromParatextProjectToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (m_cscProject == null)
                 if (!TrySelectProject())
                     return;
 
-            m_cscProject.EditSpellingFixes();
-        }
+            // see if there is a 'SpellingSettings.xml' file in the same directory as one of the open SFM files
+            System.Diagnostics.Debug.Assert(m_lstFilesOpen.Any());
+            var strDir = Path.GetDirectoryName(m_lstFilesOpen[0]);
+            var strFileSpec = Path.Combine(strDir, ParatextSpellingStatusFilename);
+            if (!File.Exists(strFileSpec))
+            {
+                var dlgSettings = new OpenFileDialog
+                {
+                    FileName = ParatextSpellingStatusFilename,
+                    RestoreDirectory = true,
+                    InitialDirectory = strDir,
+                    Filter = $"Paratext SpellingStatus files ({ParatextSpellingStatusFilename})|{ParatextSpellingStatusFilename}|All files|*.*"
+                };
 
-        private void editDictionaryToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (m_cscProject == null)
-                if (!TrySelectProject())
+                if (dlgSettings.ShowDialog() != DialogResult.OK)
+                {
+                    MessageBox.Show($"No '{ParatextSpellingStatusFilename}' file found!", cstrCaption);
                     return;
+                }
+            }
 
-            Cursor = Cursors.WaitCursor;
-            m_cscProject.EditDictionary();
-            Cursor = Cursors.Default;
+            System.Diagnostics.Debug.Assert(File.Exists(strFileSpec));
+            m_cscProject.AddParatextSpellingStatusToCheckLists(strFileSpec);
         }
+
+        /*
+       private void editSpellingFixesToolStripMenuItem_Click(object sender, EventArgs e)
+       {
+           if (m_cscProject == null)
+               if (!TrySelectProject())
+                   return;
+
+           m_cscProject.EditSpellingFixes();
+       }
+
+       private void editDictionaryToolStripMenuItem_Click(object sender, EventArgs e)
+       {
+           if (m_cscProject == null)
+               if (!TrySelectProject())
+                   return;
+
+           Cursor = Cursors.WaitCursor;
+           m_cscProject.EditDictionary();
+           Cursor = Cursors.Default;
+       }
 */
 #endif
     }

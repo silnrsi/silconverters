@@ -12,20 +12,15 @@
         <!--<MergeRef Id="Managed_Install_Fix"/>-->
         <MergeRef Id="Clipboard_EncConverter"/>
         <MergeRef Id="SEC_EC"/>
-        <!--<MergeRef Id="MFC"/>
-                <MergeRef Id="CRT"/>-->
       </Feature>
       <Feature Id="Bulk_SFM_Converter" Title="Bulk SFM Converter" Description="The Bulk SFM Converter allows you to convert one or more SFM documents (e.g. Toolbox lexicon or text files) using a converter in the system repository (TECkit, CC, etc)." Level="3" AllowAdvertise="no">
         <MergeRef Id="SFM_Converter"/>
         <MergeRef Id="SEC_EC"/>
-        <!--<MergeRef Id="MFC"/>
-                <MergeRef Id="CRT"/>-->
+        <MergeRef Id="SpellFixerEc"/>
       </Feature>
       <Feature Id="XML_Data_Converter" Title="XML Data Converter" Description="An XML document editor which allows you to convert XML data attributes and elements using a converter from the system repository." Level="3" AllowAdvertise="no">
         <MergeRef Id="SEC_EC"/>
         <MergeRef Id="XmlConverters"/>
-        <!--<MergeRef Id="MFC"/>
-                <MergeRef Id="CRT"/>-->
       </Feature>
       <Feature Id="Word_DOTs" Title="Word DOTs" Description="Expand this node to select or deselect individual document templates for Microsoft Word" Level="4" AllowAdvertise="no">
         <Feature Id="DataConversion" Title="Data Conversion Macro" Description="Install this component to use SIL Converters in Microsoft Word." Display="expand" Level="3" AllowAdvertise="no">
@@ -33,24 +28,18 @@
           <MergeRef Id="DcmDot"/>
           <MergeRef Id="SEC_EC"/>
           <MergeRef Id="SetPath"/>
-          <!--<MergeRef Id="MFC"/>
-                    <MergeRef Id="CRT"/>-->
         </Feature>
         <Feature Id="SpellFixer" Title="Spelling Fixer" Description="An SIL Converters client application for fixing spelling errors in Microsoft Word." Level="4" AllowAdvertise="no">
           <Condition Level="3"><![CDATA[COMPONENTEXISTS_WORD_03_PIA OR COMPONENTEXISTS_WORD_07_PIA OR COMPONENTEXISTS_WORD_10_PIA OR COMPONENTEXISTS_WORD_13_PIA]]></Condition>
           <MergeRef Id="SpellFixerEc"/>
           <MergeRef Id="SEC_EC"/>
           <MergeRef Id="SetPath"/>
-          <!--<MergeRef Id="MFC"/>
-                    <MergeRef Id="CRT"/>-->
         </Feature>
         <!--this one takes over the arrow keys, so don't install it by default-->
         <Feature Id="ConsistencySpellingChecker" Title="Consistency Spelling Checker" Description="A Microsoft Word document template that provides utilities for checking the consistency of spelling for any language." Display="expand" Level="4" AllowAdvertise="no">
           <MergeRef Id="CscDot"/>
           <MergeRef Id="SEC_EC"/>
           <MergeRef Id="SetPath"/>
-          <!--<MergeRef Id="MFC"/>
-                    <MergeRef Id="CRT"/>-->
         </Feature>
       </Feature>
       <Feature Id="OO_Ling_Tools" Title="Open/LibreOffice Extension" Description="Install this component to use SIL Converters from within OpenOffice or LibreOffice." Level="3" AllowAdvertise="no">
@@ -155,11 +144,6 @@
     <Feature Id="Maps_and_Tables" Title="Maps and Tables" Description="Select sub-items to place individual converter sets on your machine. Note: a utility will run after installation, with which you can install the converters in the system repository." Level="3" AllowAdvertise="no">
       <MergeRef Id="ConverterInstaller"/>
       <MergeRef Id="SEC_EC"/>
-      <!--
-            <MergeRef Id="Managed_Install_Fix"/>
-            <MergeRef Id="MFC"/>
-            <MergeRef Id="CRT"/>
-            -->
       <Feature Id="BasicConverters" Title="Basic Converters" Description="Converters used in SIL (e.g. SIL IPA 93&lt;&gt;UNICODE, UTF8&lt;&gt;UTF16, null, Windows-SymbolEncodedFont, etc)" Level="3" AllowAdvertise="no">
         <MergeRef Id="BasicConverters"/>
         <MergeRef Id="TECkit_DLLs"/>
@@ -208,10 +192,6 @@
         <MergeRef Id="SetPath"/>
         <MergeRef Id="SEC_ICU"/>
         <MergeRef Id="CRT"/>
-        <!--
-                <MergeRef Id="ICU"/>
-                <MergeRef Id="ICUECHelp"/>
-                -->
       </Feature>
       <Feature Id="Indic_converters" Title="Indic converters" Description="The Indic converters package provides several additional Indic-specific TECkit maps for KrutiDev (10/11/290), Shusha, Kantipur and Preeti fonts." Display="expand" Level="4" AllowAdvertise="no">
         <MergeRef Id="IndicConverters"/>
@@ -241,18 +221,11 @@
         <MergeRef Id="TECkit_DLLs"/>
         <MergeRef Id="SetPath"/>
         <MergeRef Id="TECkitMapUEditor"/>
-        <!--<MergeRef Id="MFC"/>
-                <MergeRef Id="CRT"/>-->
       </Feature>
       <Feature Id="TECkit_Package" Title="TECkit Utilities" Description="Contains the executables from the TECkit package (i.e. DropTEC.exe, SFConv.exe, TECkit Mapping Editor.exe, TECkit_Compile.exe, and TxtConv.exe) and associated documentation." Display="expand" Level="4" AllowAdvertise="no">
         <MergeRef Id="TECkit_Package"/>
         <MergeRef Id="SetPath"/>
       </Feature>
-      <!-- now part of the TECkitMapUEditor feature
-            <Feature Id="TECkit_Documents" Title="TECkit Documents" Description="Contains the documentation for the TECkit mapping table syntax and instructions on using the executables from the TECkit Exes package." Level="4" AllowAdvertise="no">
-                <MergeRef Id="TECkit_DOCs"/>
-            </Feature>
--->
     </Feature>
     <Feature Id="UseMozillaFirefox" Title="Use Mozilla Firefox" Description="Select this item if you want the SILConverters to use Firefox (instead of Internet Explorer) e.g. for the TechHindiSite Indic converters (which works better in newer versions of MS Office)" Level="3" AllowAdvertise="no">
       <MergeRef Id="EcFirefox"/>
