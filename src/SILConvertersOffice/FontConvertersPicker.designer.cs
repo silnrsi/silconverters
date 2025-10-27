@@ -77,8 +77,7 @@ namespace SILConvertersOffice
             // 
             this.checkBoxFontsInUse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.checkBoxFontsInUse.AutoSize = true;
-            this.checkBoxFontsInUse.Checked = true;
-            this.checkBoxFontsInUse.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBoxFontsInUse.Checked = false;
             this.checkBoxFontsInUse.Location = new System.Drawing.Point(13, 356);
             this.checkBoxFontsInUse.Name = "checkBoxFontsInUse";
             this.checkBoxFontsInUse.Size = new System.Drawing.Size(116, 17);

@@ -287,7 +287,8 @@ namespace SILConvertersOffice
         protected object m_baseDocument = null;
 
         protected const char chTab = '\t';
-        protected const char chNL = '\r';
+        protected const char chCR = '\r';
+        protected const char chNL = '\n';
         protected const char chFootnote = '\u0002';
         protected const char chSpace = ' ';
         protected const char chNonBreakingSpace = '\u00A0';
@@ -302,16 +303,18 @@ namespace SILConvertersOffice
         // Thought: it's probably the case that this is a difference in Publisher's PIA -- probably in earlier versions of Office 
         //  (prior to off14), it treats form feeds the same as carriage returns, but not as of Off14... so only do this for off14
         // protected static char[] m_achParagraphTerminators = new char[] { chNL, chFormFeed };
-        protected static char[] m_achParagraphTerminators = new char[] { chNL };
+        // rde: 2025-10-25: if you open an SFM document (e.g. to convert word-by-word w/ a SpellFixer converter), then the line
+        //  endings in Word will be both \r and \n, so add both
+        protected static char[] m_achParagraphTerminators = new char[] { chCR, chNL };
 
         // ... however, we do need the processor to skip past it so it doesn't get clobbered... so treat it like whitespace...
         // protected static char[] m_achWhiteSpace = new char[] { chSpace, chTab, chFootnote, chNonBreakingSpace };
         protected static char[] m_achWhiteSpace = new char[] { chSpace, chTab, chFootnote, chFormFeed, chNonBreakingSpace };
-        protected static char[] m_achWordTerminators = new char[] { chSpace, chTab, chNL, chFootnote, chFormFeed, chNonBreakingSpace };
+        protected static char[] m_achWordTerminators = new char[] { chSpace, chTab, chCR, chNL, chFootnote, chFormFeed, chNonBreakingSpace };
 #else
-        protected static char[] m_achParagraphTerminators = new char[] { chNL, chFormFeed };
+        protected static char[] m_achParagraphTerminators = new char[] { chCR, chNL, chFormFeed };
         protected static char[] m_achWhiteSpace = new char[] { chSpace, chTab, chFootnote, chNonBreakingSpace };
-        protected static char[] m_achWordTerminators = new char[] { chSpace, chTab, chNL, chFootnote, chNonBreakingSpace };
+        protected static char[] m_achWordTerminators = new char[] { chSpace, chTab, chCR, chNL, chFootnote, chNonBreakingSpace };
 #endif
 
         public OfficeDocument(object doc)
@@ -369,7 +372,7 @@ namespace SILConvertersOffice
         protected bool ProcessRangeAsWords(OfficeDocumentProcessor aWordProcessor, OfficeRange aParagraphRange, int nCharIndex)
         {
             string strText = aParagraphRange.Text;
-            int nLength = (strText != null) ? strText.Length : 0;
+            int nLength = CalculateLength(strText);
 
             while ((nCharIndex < nLength) && (strText.IndexOfAny(m_achParagraphTerminators, nCharIndex, 1) == -1))
             {
@@ -412,13 +415,26 @@ namespace SILConvertersOffice
                     }
 
                     strText = aParagraphRange.Text; // incase of replace, we've changed it.
-                    nLength = (strText != null) ? strText.Length : 0;
+                    nLength = CalculateLength(strText);
                 }
                 else
                     break;
             }
 
             return true;
+
+            static int CalculateLength(string strText)
+            {
+                int nLength = (strText != null) ? strText.Length : 0;
+                if ((nLength > 2) && (strText.Substring(nLength - 2) == "\r\n"))
+                {
+                    // if we've opened a text file with encoding (e.g. SFM in utf-8), then chances are 
+                    //  the line ends in both a cr + lf, and if so, we need to reduce the length by 1
+                    nLength--;
+                }
+
+                return nLength;
+            }
         }
 
 		protected bool ProcessWholeRange(OfficeDocumentProcessor aWordProcessor, OfficeRange aParagraphRange, int nCharIndex)
