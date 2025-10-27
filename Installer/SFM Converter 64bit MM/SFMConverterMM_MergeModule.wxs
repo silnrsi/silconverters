@@ -16,9 +16,18 @@
 
       </Directory>
 
+      <Directory Id="CscHelp" Name="Help">
+        <Component Id="HelpforConsistentSpellFixer.pdf" Guid="{AB9C4C65-9AC9-4712-9B42-BF534DD5A7B1}">
+          <File Id="HelpforConsistentSpellFixer.pdf" Name="Help for ConsistentSpellFixer.pdf" KeyPath="yes" Source="..\SFM Converter MM\redist\Help for ConsistentSpellFixer.pdf" />
+          <Shortcut Id="HelpforConsistentSpellFixer.pdf" Directory="ScHelp" Name="Help for ConsistentSpellFixer" Description="Help files for using the ConsistentSpellFixer for correcting or unifying spelling of words that have multiple, valid ways of being spelled" Show="normal" Target="[#HelpforConsistentSpellFixer.pdf]" WorkingDirectory="SCHelp" Advertise="no" />
+        </Component>
+      </Directory>
+
       <Directory Id="StartMenuFolder" SourceName="Start Menu">
         <Directory Id="ProgramMenuFolder" SourceName="Programs">
-          <Directory Id="SILConverters" Name="SIL Converters" />
+          <Directory Id="SILConverters" Name="SIL Converters">
+            <Directory Id="ScHelp" Name="Help" />
+          </Directory>
         </Directory>
       </Directory>
 

@@ -55,6 +55,9 @@ public class VernScriptSystemProperties
     [XmlAttribute("name")]
     public string Name { get; set; }
 
+    [XmlAttribute("isRightToLeft")]
+    public bool IsRightToLeftLanguage { get; set; } = false;
+
     [XmlElement]
     public string ProgId { get; set; }
 

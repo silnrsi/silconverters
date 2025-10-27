@@ -34,6 +34,7 @@ namespace SpellingFixer30
 	{
         public const string cstrAttributeFontToUse = "SpellingFixer Display Font";
         public const string cstrAttributeFontSizeToUse = "SpellingFixer Display Font Size";
+        public const string cstrAttributeFontRightToLeft = "SpellingFixer Display Right to Left";
         public const string cstrAttributeWordBoundaryDelimiter = "SpellingFixer Word Boundary Delimiter";
         public const string cstrAttributeNonWordChars = "SpellingFixer punctuation and whitespace characters";
         public const string cstrDefaultPunctuationAndWhitespace = "' ' tab nl '.' ',' '!' ':' ';' '-' \"'\" '\"' '‘' '’' '“' '”' '(' ')' '[' ']' '{' '}'";

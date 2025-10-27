@@ -873,8 +873,9 @@ namespace SpellingFixer30
             }
 
             // add this 'displaying font' information to the converter as properties/attributes
-            ECAttributes aECAttrs = aECs.Attributes(strEncConverterName,AttributeType.Converter);
-            aECAttrs.Add(SpellingFixer.cstrAttributeFontToUse,font.Name);
+            ECAttributes aECAttrs = aECs.Attributes(strEncConverterName, AttributeType.Converter);
+            aECAttrs.Add(SpellingFixer.cstrAttributeFontToUse, font.Name);
+            aECAttrs.Add(SpellingFixer.cstrAttributeFontRightToLeft, false);    // so the other SpellFixerEc doesn't think it isn't configured (since we transliterate it to latin, it isn't L2R anymore)
             aECAttrs.Add(SpellingFixer.cstrAttributeFontSizeToUse, font.Size);
             aECAttrs.Add(SpellingFixer.cstrAttributeWordBoundaryDelimiter, m_strWordBoundaryDelimiter);
             aECAttrs.Add(SpellingFixer.cstrAttributeNonWordChars, m_strNonWordCharacters);
