@@ -110,7 +110,7 @@ namespace SILConvertersWordML
             this.tableLayoutPanel1.SetColumnSpan(this.textBoxSearchStart, 2);
             this.textBoxSearchStart.Dock = System.Windows.Forms.DockStyle.Fill;
             this.helpProvider.SetHelpString(this.textBoxSearchStart, "Choose the parent folder from which to start the search (e.g. \"C:\\Documents and S" +
-                    "ettings\\<username>\\My Documents\").");
+        "ettings\\<username>\\My Documents\").");
             this.textBoxSearchStart.Location = new System.Drawing.Point(103, 3);
             this.textBoxSearchStart.Name = "textBoxSearchStart";
             this.helpProvider.SetShowHelp(this.textBoxSearchStart, true);
@@ -176,7 +176,7 @@ namespace SILConvertersWordML
             this.tableLayoutPanel1.SetColumnSpan(this.textBoxSearchFilter, 2);
             this.textBoxSearchFilter.Dock = System.Windows.Forms.DockStyle.Fill;
             this.helpProvider.SetHelpString(this.textBoxSearchFilter, "Enter the filter to use for Word documents to search for (separated by a semicolo" +
-                    "n or a space; e.g. *.doc;*.rtf).");
+        "n or a space; e.g. *.doc;*.rtf).");
             this.textBoxSearchFilter.Location = new System.Drawing.Point(103, 32);
             this.textBoxSearchFilter.Name = "textBoxSearchFilter";
             this.helpProvider.SetShowHelp(this.textBoxSearchFilter, true);
@@ -209,7 +209,7 @@ namespace SILConvertersWordML
             this.tableLayoutPanel1.SetColumnSpan(this.textBoxStoreResults, 2);
             this.textBoxStoreResults.Dock = System.Windows.Forms.DockStyle.Fill;
             this.helpProvider.SetHelpString(this.textBoxStoreResults, "Choose the parent folder where a backup copy of the original documents are to be " +
-                    "stored (e.g. \"C:\\Backup\")");
+        "stored (e.g. \"C:\\Backup\")");
             this.textBoxStoreResults.Location = new System.Drawing.Point(103, 58);
             this.textBoxStoreResults.Name = "textBoxStoreResults";
             this.helpProvider.SetShowHelp(this.textBoxStoreResults, true);
