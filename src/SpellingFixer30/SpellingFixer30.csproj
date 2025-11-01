@@ -209,6 +209,9 @@
     <Compile Include="QueryGoodSpelling.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="QueryGoodSpelling.Designer.cs">
+      <DependentUpon>QueryGoodSpelling.cs</DependentUpon>
+    </Compile>
     <Compile Include="SelectProject.cs">
       <SubType>Form</SubType>
     </Compile>

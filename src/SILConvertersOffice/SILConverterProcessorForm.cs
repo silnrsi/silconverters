@@ -44,8 +44,8 @@ namespace SILConvertersOffice
 
         private void buttonViewRule_Click(object sender, EventArgs e)
         {
-            // see if this is a spellfixer-based converter
             m_cscProject ??= TrySelectProject();
+            m_cscProject?.ReplacementRulesCheckForOutsideChange();  // in case the rules file changed outside
             m_cscProject?.FindReplacementRule(textBoxInput.Text);
             RefreshTextBoxes(m_aFontPlusEC.DirectableEncConverter);
         }
@@ -60,6 +60,23 @@ namespace SILConvertersOffice
             {
             }
             return null;
+        }
+
+        private void buttonAddRule_Click(object sender, EventArgs e)
+        {
+            // ... get the word on the clipboard and call the 'FindReplacementRule' method
+            IDataObject iData = Clipboard.GetDataObject();
+
+            string possibleBadWord = String.Empty;
+
+            // Determines whether the data is in a format you can use.
+            if (iData.GetDataPresent(DataFormats.UnicodeText))
+            {
+                possibleBadWord = (string)iData.GetData(DataFormats.UnicodeText);
+            }
+
+            m_cscProject ??= TrySelectProject();
+            m_cscProject?.AssignCorrectSpelling(possibleBadWord);
         }
     }
 

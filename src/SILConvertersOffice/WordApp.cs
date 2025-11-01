@@ -389,15 +389,7 @@ namespace SILConvertersOffice
                 WordDocument doc = new WordDocument(Application.ActiveDocument, OfficeTextDocument.ProcessingType.eWordByWord);
 
                 if (m_theSpellingFixerWordProcessor == null)
-                {
-                    var aFCsPicker = new FontConvertersPicker(doc);
-                    FontConverters aFCs = null;
-                    if ((aFCsPicker.ShowDialog() == DialogResult.OK) && (aFCsPicker.SelectedFontConverters.Count > 0))
-                    {
-                        aFCs = aFCsPicker.SelectedFontConverters;
-                    }
-                    m_theSpellingFixerWordProcessor = new SpellingFixerWordProcessor(aFCs);
-                }
+                    m_theSpellingFixerWordProcessor = new SpellingFixerWordProcessor(null);
 
                 if (doc.ProcessWordByWord(m_theSpellingFixerWordProcessor))
                     m_theSpellingFixerWordProcessor = null;

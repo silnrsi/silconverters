@@ -69,7 +69,7 @@ namespace SILConvertersOffice
             // RoundTripProcessorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.ClientSize = new System.Drawing.Size(648, 222);
+            this.ClientSize = new System.Drawing.Size(679, 223);
             this.Controls.Add(this.labelRoundTripCodePoints);
             this.Controls.Add(this.labelRoundTrip);
             this.Controls.Add(this.textBoxRoundTrip);

@@ -80,13 +80,13 @@ namespace SILConvertersOffice
             this.tableLayoutPanel.Controls.Add(this.textBoxConverted, 1, 1);
             this.tableLayoutPanel.Controls.Add(this.labelForwardCodePoints, 2, 1);
             this.tableLayoutPanel.Controls.Add(this.labelInputCodePoints, 2, 0);
-            this.tableLayoutPanel.Location = new System.Drawing.Point(15, 12);
+            this.tableLayoutPanel.Location = new System.Drawing.Point(12, 12);
             this.tableLayoutPanel.Name = "tableLayoutPanel";
             this.tableLayoutPanel.Padding = new System.Windows.Forms.Padding(3);
             this.tableLayoutPanel.RowCount = 2;
             this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel.Size = new System.Drawing.Size(619, 84);
+            this.tableLayoutPanel.Size = new System.Drawing.Size(649, 84);
             this.tableLayoutPanel.TabIndex = 0;
             // 
             // labelInputString
@@ -107,7 +107,7 @@ namespace SILConvertersOffice
             this.textBoxInput.Location = new System.Drawing.Point(84, 6);
             this.textBoxInput.Multiline = true;
             this.textBoxInput.Name = "textBoxInput";
-            this.textBoxInput.Size = new System.Drawing.Size(208, 33);
+            this.textBoxInput.Size = new System.Drawing.Size(220, 33);
             this.textBoxInput.TabIndex = 1;
             this.toolTip.SetToolTip(this.textBoxInput, "This is the word from the document being checked");
             this.textBoxInput.TextChanged += new System.EventHandler(this.textBoxInput_TextChanged);
@@ -227,7 +227,7 @@ namespace SILConvertersOffice
             this.textBoxConverted.Location = new System.Drawing.Point(84, 45);
             this.textBoxConverted.Multiline = true;
             this.textBoxConverted.Name = "textBoxConverted";
-            this.textBoxConverted.Size = new System.Drawing.Size(208, 33);
+            this.textBoxConverted.Size = new System.Drawing.Size(220, 33);
             this.textBoxConverted.TabIndex = 5;
             this.toolTip.SetToolTip(this.textBoxConverted, "This box shows the result of the conversion");
             this.textBoxConverted.TextChanged += new System.EventHandler(this.textBoxConverted_TextChanged);
@@ -237,11 +237,11 @@ namespace SILConvertersOffice
             this.labelForwardCodePoints.AutoSize = true;
             this.labelForwardCodePoints.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.labelForwardCodePoints.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.labelForwardCodePoints.Location = new System.Drawing.Point(298, 45);
+            this.labelForwardCodePoints.Location = new System.Drawing.Point(310, 45);
             this.labelForwardCodePoints.Margin = new System.Windows.Forms.Padding(3);
             this.labelForwardCodePoints.Name = "labelForwardCodePoints";
             this.labelForwardCodePoints.Padding = new System.Windows.Forms.Padding(3);
-            this.labelForwardCodePoints.Size = new System.Drawing.Size(315, 33);
+            this.labelForwardCodePoints.Size = new System.Drawing.Size(333, 33);
             this.labelForwardCodePoints.TabIndex = 8;
             // 
             // labelInputCodePoints
@@ -249,19 +249,19 @@ namespace SILConvertersOffice
             this.labelInputCodePoints.AutoSize = true;
             this.labelInputCodePoints.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.labelInputCodePoints.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.labelInputCodePoints.Location = new System.Drawing.Point(298, 6);
+            this.labelInputCodePoints.Location = new System.Drawing.Point(310, 6);
             this.labelInputCodePoints.Margin = new System.Windows.Forms.Padding(3);
             this.labelInputCodePoints.Name = "labelInputCodePoints";
             this.labelInputCodePoints.Padding = new System.Windows.Forms.Padding(3);
-            this.labelInputCodePoints.Size = new System.Drawing.Size(315, 33);
+            this.labelInputCodePoints.Size = new System.Drawing.Size(333, 33);
             this.labelInputCodePoints.TabIndex = 6;
             // 
             // buttonNextWord
             // 
-            this.buttonNextWord.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.buttonNextWord.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.buttonNextWord.AutoSize = true;
-            this.buttonNextWord.Location = new System.Drawing.Point(5, 5);
-            this.buttonNextWord.Margin = new System.Windows.Forms.Padding(5);
+            this.buttonNextWord.Location = new System.Drawing.Point(0, 5);
+            this.buttonNextWord.Margin = new System.Windows.Forms.Padding(0, 5, 5, 5);
             this.buttonNextWord.Name = "buttonNextWord";
             this.buttonNextWord.Size = new System.Drawing.Size(75, 23);
             this.buttonNextWord.TabIndex = 3;
@@ -272,11 +272,11 @@ namespace SILConvertersOffice
             // 
             // buttonCancel
             // 
-            this.buttonCancel.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.buttonCancel.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.buttonCancel.AutoSize = true;
             this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.buttonCancel.Location = new System.Drawing.Point(368, 5);
-            this.buttonCancel.Margin = new System.Windows.Forms.Padding(5);
+            this.buttonCancel.Location = new System.Drawing.Point(343, 5);
+            this.buttonCancel.Margin = new System.Windows.Forms.Padding(0, 5, 5, 5);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 23);
             this.buttonCancel.TabIndex = 0;
@@ -287,10 +287,10 @@ namespace SILConvertersOffice
             // 
             // buttonReplaceAll
             // 
-            this.buttonReplaceAll.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.buttonReplaceAll.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.buttonReplaceAll.AutoSize = true;
-            this.buttonReplaceAll.Location = new System.Drawing.Point(283, 5);
-            this.buttonReplaceAll.Margin = new System.Windows.Forms.Padding(5);
+            this.buttonReplaceAll.Location = new System.Drawing.Point(263, 5);
+            this.buttonReplaceAll.Margin = new System.Windows.Forms.Padding(0, 5, 5, 5);
             this.buttonReplaceAll.Name = "buttonReplaceAll";
             this.buttonReplaceAll.Size = new System.Drawing.Size(75, 23);
             this.buttonReplaceAll.TabIndex = 1;
@@ -301,10 +301,10 @@ namespace SILConvertersOffice
             // 
             // buttonReplaceOnce
             // 
-            this.buttonReplaceOnce.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.buttonReplaceOnce.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.buttonReplaceOnce.AutoSize = true;
-            this.buttonReplaceOnce.Location = new System.Drawing.Point(90, 5);
-            this.buttonReplaceOnce.Margin = new System.Windows.Forms.Padding(5);
+            this.buttonReplaceOnce.Location = new System.Drawing.Point(80, 5);
+            this.buttonReplaceOnce.Margin = new System.Windows.Forms.Padding(0, 5, 5, 5);
             this.buttonReplaceOnce.Name = "buttonReplaceOnce";
             this.buttonReplaceOnce.Size = new System.Drawing.Size(86, 23);
             this.buttonReplaceOnce.TabIndex = 9;
@@ -317,7 +317,7 @@ namespace SILConvertersOffice
             // 
             this.checkBoxSkipIdenticalForms.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.checkBoxSkipIdenticalForms.AutoSize = true;
-            this.checkBoxSkipIdenticalForms.Location = new System.Drawing.Point(18, 153);
+            this.checkBoxSkipIdenticalForms.Location = new System.Drawing.Point(24, 151);
             this.checkBoxSkipIdenticalForms.Name = "checkBoxSkipIdenticalForms";
             this.checkBoxSkipIdenticalForms.Size = new System.Drawing.Size(121, 17);
             this.checkBoxSkipIdenticalForms.TabIndex = 10;
@@ -328,10 +328,10 @@ namespace SILConvertersOffice
             // 
             // buttonReplaceEvery
             // 
-            this.buttonReplaceEvery.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.buttonReplaceEvery.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.buttonReplaceEvery.AutoSize = true;
-            this.buttonReplaceEvery.Location = new System.Drawing.Point(186, 5);
-            this.buttonReplaceEvery.Margin = new System.Windows.Forms.Padding(5);
+            this.buttonReplaceEvery.Location = new System.Drawing.Point(171, 5);
+            this.buttonReplaceEvery.Margin = new System.Windows.Forms.Padding(0, 5, 5, 5);
             this.buttonReplaceEvery.Name = "buttonReplaceEvery";
             this.buttonReplaceEvery.Size = new System.Drawing.Size(87, 23);
             this.buttonReplaceEvery.TabIndex = 11;
@@ -354,11 +354,11 @@ namespace SILConvertersOffice
             this.tableLayoutPanelButtons.Controls.Add(this.buttonReplaceOnce, 1, 0);
             this.tableLayoutPanelButtons.Controls.Add(this.buttonReplaceAll, 3, 0);
             this.tableLayoutPanelButtons.Controls.Add(this.buttonCancel, 4, 0);
-            this.tableLayoutPanelButtons.Location = new System.Drawing.Point(13, 176);
+            this.tableLayoutPanelButtons.Location = new System.Drawing.Point(19, 174);
             this.tableLayoutPanelButtons.Name = "tableLayoutPanelButtons";
             this.tableLayoutPanelButtons.RowCount = 1;
             this.tableLayoutPanelButtons.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanelButtons.Size = new System.Drawing.Size(448, 34);
+            this.tableLayoutPanelButtons.Size = new System.Drawing.Size(423, 34);
             this.tableLayoutPanelButtons.TabIndex = 1;
             // 
             // fontDialog
@@ -370,7 +370,7 @@ namespace SILConvertersOffice
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(648, 222);
+            this.ClientSize = new System.Drawing.Size(679, 223);
             this.Controls.Add(this.checkBoxSkipIdenticalForms);
             this.Controls.Add(this.tableLayoutPanelButtons);
             this.Controls.Add(this.tableLayoutPanel);

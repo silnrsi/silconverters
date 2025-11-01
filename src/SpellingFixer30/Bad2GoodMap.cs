@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 
 namespace SpellingFixer30
@@ -74,7 +75,9 @@ namespace SpellingFixer30
                 return;
             }
 
-            if (fileExists && (dtLastModified > m_dtLastRead))
+            // if the file has changed since we last read it, reload it (note the "!=" comparison,
+            //  not ">", in case the file got replaced with an older copy, since we back them up)
+            if (fileExists && (dtLastModified != m_dtLastRead))
             {
                 base.Clear();
                 LoadTable();
@@ -148,8 +151,11 @@ namespace SpellingFixer30
                 StreamWriter sw = new StreamWriter(strFileSpec, false, Encoding.UTF8);
                 LoginSF.CreateCCTable(sw, strEncConverterName, strPunctuationAndWhiteSpace, strCustomCode, true);
 
-                // the 'this' here might want to be 'base'
-                foreach (KeyValuePair<string, string> kvp in this)
+                // order them in the file first by those with a hyphen in alphabetical order,
+                //  followed by those without hyphens in alphabetical order. (so that a non-hypthenated
+                //  word that is a substring of a hyphenated word doesn't get matched first).
+                foreach (KeyValuePair<string, string> kvp in this.OrderBy(kvp => !kvp.Key.Contains("-"))
+                                                                 .ThenBy(kvp => kvp.Key))
                 {
                     // always surround the word with delimiters, because in this application
                     //  it's always full word form searching
