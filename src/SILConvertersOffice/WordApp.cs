@@ -96,6 +96,7 @@ namespace SILConvertersOffice
             return SILConvertersOffice07.Properties.Resources.RibbonWord;
         }
 #else
+        private Office.CommandBarButton SpellFixerMenu;
         private Office.CommandBarButton SelectionConvertMenu;
         private Office.CommandBarButton FindReplaceMenu;
         private Office.CommandBarButton RoundTripCheckMenu;
@@ -109,6 +110,10 @@ namespace SILConvertersOffice
 
             try
             {
+                AddMenu(ref SpellFixerMenu, NewMenuBar, "Check Spelling",
+                    "Click here to check the spelling using a ConsistentSpellingFixer CC table",
+                    new Microsoft.Office.Core._CommandBarButtonEvents_ClickEventHandler(CheckSpelling_Click));
+
                 AddMenu(ref SelectionConvertMenu, NewMenuBar, "Convert &selection",
                     "Click this item to convert the selected text",
                     new Microsoft.Office.Core._CommandBarButtonEvents_ClickEventHandler(SelectionConvert_Click));
@@ -366,7 +371,44 @@ namespace SILConvertersOffice
             }
 
             Application.System.Cursor = Word.WdCursorType.wdCursorNormal;
-}
+        }
+
+        SpellingFixerWordProcessor m_theSpellingFixerWordProcessor = null;
+#if BUILD_FOR_OFF12 || BUILD_FOR_OFF14 || BUILD_FOR_OFF15
+        public void CheckSpelling_Click(Office.IRibbonControl control)
+#else
+        void CheckSpelling_Click(Microsoft.Office.Core.CommandBarButton Ctrl, ref bool CancelDefault)
+#endif
+        {
+            if (!HookDocumentClose(Application.ActiveDocument))
+                return;
+
+            Application.System.Cursor = Word.WdCursorType.wdCursorWait;
+            try
+            {
+                WordDocument doc = new WordDocument(Application.ActiveDocument, OfficeTextDocument.ProcessingType.eWordByWord);
+
+                if (m_theSpellingFixerWordProcessor == null)
+                {
+                    var aFCsPicker = new FontConvertersPicker(doc);
+                    FontConverters aFCs = null;
+                    if ((aFCsPicker.ShowDialog() == DialogResult.OK) && (aFCsPicker.SelectedFontConverters.Count > 0))
+                    {
+                        aFCs = aFCsPicker.SelectedFontConverters;
+                    }
+                    m_theSpellingFixerWordProcessor = new SpellingFixerWordProcessor(aFCs);
+                }
+
+                if (doc.ProcessWordByWord(m_theSpellingFixerWordProcessor))
+                    m_theSpellingFixerWordProcessor = null;
+            }
+            catch (Exception ex)
+            {
+                DisplayException(ex);
+            }
+
+            Application.System.Cursor = Word.WdCursorType.wdCursorNormal;
+        }
 
         public void DocumentClosed()
         {
@@ -375,6 +417,7 @@ namespace SILConvertersOffice
             m_formFindReplace = null;
             m_aRoundTripCheckWordProcessor = null;
             m_officeDocumentProcessor = null;
+            m_theSpellingFixerWordProcessor = null;
         }
 
 #if BUILD_FOR_OFF12 || BUILD_FOR_OFF14 || BUILD_FOR_OFF15

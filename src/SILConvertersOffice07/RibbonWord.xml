@@ -4,6 +4,8 @@
     <tabs>
       <tab id="SILConvertersAddInWord" label="SIL Converters">
         <group id="SILConvertersAddInWordGroup" label="SIL Converters">
+          <button id="SILConvertersOffice.WordApp.CheckSpelling_Click" label="Check Spelling (word-by-word)"
+            size="large" onAction="Button_Clicked" screentip="Click this item to check (word-by-word) for spelling corrections from a 'Consistent Spelling Fixer' CC table" />
           <button id="SILConvertersOffice.WordApp.SelectionConvert_Click" label="Convert selection (word-by-word)"
             size="large" onAction="Button_Clicked" screentip="Click this item to convert the selected text word-by-word" />
           <button id="SILConvertersOffice.WordApp.SelectionConvertParagraph_Click" label="Convert selection"

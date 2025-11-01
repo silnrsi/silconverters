@@ -218,6 +218,7 @@
     </Compile>
     <Compile Include="..\SILConvertersOffice\RoundTripProcessorForm.designer.cs">
       <Link>RoundTripProcessorForm.designer.cs</Link>
+      <DependentUpon>RoundTripProcessorForm.cs</DependentUpon>
     </Compile>
     <Compile Include="..\SILConvertersOffice\SILConverterProcessorForm.cs">
       <Link>SILConverterProcessorForm.cs</Link>
@@ -225,6 +226,7 @@
     </Compile>
     <Compile Include="..\SILConvertersOffice\SILConverterProcessorForm.designer.cs">
       <Link>SILConverterProcessorForm.designer.cs</Link>
+      <DependentUpon>SILConverterProcessorForm.cs</DependentUpon>
     </Compile>
     <Compile Include="..\SILConvertersOffice\TranslationHelperForm.cs">
       <Link>TranslationHelperForm.cs</Link>
@@ -288,9 +290,11 @@
     </EmbeddedResource>
     <EmbeddedResource Include="..\SILConvertersOffice\RoundTripProcessorForm.resx">
       <Link>RoundTripProcessorForm.resx</Link>
+      <DependentUpon>RoundTripProcessorForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="..\SILConvertersOffice\SILConverterProcessorForm.resx">
       <Link>SILConverterProcessorForm.resx</Link>
+      <DependentUpon>SILConverterProcessorForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="..\SILConvertersOffice10\DbFieldSelect.resx">
       <Link>DbFieldSelect.resx</Link>
@@ -342,6 +346,12 @@
       <ProductName>Windows Installer 3.1</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SpellingFixer30\SpellingFixer30.csproj">
+      <Project>{1f6e3722-b445-4638-90d6-22dde860dcc6}</Project>
+      <Name>SpellingFixer30</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSHARP.Targets" />
   <PropertyGroup>

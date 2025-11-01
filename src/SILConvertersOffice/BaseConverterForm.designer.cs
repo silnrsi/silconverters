@@ -66,9 +66,8 @@ namespace SILConvertersOffice
             // 
             // tableLayoutPanel
             // 
-            this.tableLayoutPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableLayoutPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel.AutoSize = true;
             this.tableLayoutPanel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.tableLayoutPanel.ColumnCount = 3;
@@ -129,13 +128,13 @@ namespace SILConvertersOffice
             this.toolStripSeparator3,
             this.right2LeftToolStripMenuItem});
             this.contextMenuStrip.Name = "contextMenuStrip";
-            this.contextMenuStrip.Size = new System.Drawing.Size(200, 204);
+            this.contextMenuStrip.Size = new System.Drawing.Size(211, 204);
             this.contextMenuStrip.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip_Opening);
             // 
             // changeFontToolStripMenuItem
             // 
             this.changeFontToolStripMenuItem.Name = "changeFontToolStripMenuItem";
-            this.changeFontToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
+            this.changeFontToolStripMenuItem.Size = new System.Drawing.Size(210, 22);
             this.changeFontToolStripMenuItem.Text = "Change &Font";
             this.changeFontToolStripMenuItem.ToolTipText = "Click here to change the display font for this text box";
             this.changeFontToolStripMenuItem.Click += new System.EventHandler(this.changeFontToolStripMenuItem_Click);
@@ -143,70 +142,70 @@ namespace SILConvertersOffice
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(196, 6);
+            this.toolStripSeparator4.Size = new System.Drawing.Size(207, 6);
             // 
             // undoToolStripMenuItem
             // 
             this.undoToolStripMenuItem.Name = "undoToolStripMenuItem";
-            this.undoToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
+            this.undoToolStripMenuItem.Size = new System.Drawing.Size(210, 22);
             this.undoToolStripMenuItem.Text = "&Undo";
             this.undoToolStripMenuItem.Click += new System.EventHandler(this.undoToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(196, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(207, 6);
             // 
             // cutToolStripMenuItem
             // 
             this.cutToolStripMenuItem.Name = "cutToolStripMenuItem";
-            this.cutToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
+            this.cutToolStripMenuItem.Size = new System.Drawing.Size(210, 22);
             this.cutToolStripMenuItem.Text = "Cut";
             this.cutToolStripMenuItem.Click += new System.EventHandler(this.cutToolStripMenuItem_Click);
             // 
             // copyToolStripMenuItem
             // 
             this.copyToolStripMenuItem.Name = "copyToolStripMenuItem";
-            this.copyToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
+            this.copyToolStripMenuItem.Size = new System.Drawing.Size(210, 22);
             this.copyToolStripMenuItem.Text = "Copy";
             this.copyToolStripMenuItem.Click += new System.EventHandler(this.copyToolStripMenuItem_Click);
             // 
             // pasteToolStripMenuItem
             // 
             this.pasteToolStripMenuItem.Name = "pasteToolStripMenuItem";
-            this.pasteToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
+            this.pasteToolStripMenuItem.Size = new System.Drawing.Size(210, 22);
             this.pasteToolStripMenuItem.Text = "Paste";
             this.pasteToolStripMenuItem.Click += new System.EventHandler(this.pasteToolStripMenuItem_Click);
             // 
             // deleteToolStripMenuItem
             // 
             this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(210, 22);
             this.deleteToolStripMenuItem.Text = "Delete";
             this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(196, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(207, 6);
             // 
             // selectAllToolStripMenuItem
             // 
             this.selectAllToolStripMenuItem.Name = "selectAllToolStripMenuItem";
-            this.selectAllToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
+            this.selectAllToolStripMenuItem.Size = new System.Drawing.Size(210, 22);
             this.selectAllToolStripMenuItem.Text = "Select All";
             this.selectAllToolStripMenuItem.Click += new System.EventHandler(this.selectAllToolStripMenuItem_Click);
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(196, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(207, 6);
             // 
             // right2LeftToolStripMenuItem
             // 
             this.right2LeftToolStripMenuItem.CheckOnClick = true;
             this.right2LeftToolStripMenuItem.Name = "right2LeftToolStripMenuItem";
-            this.right2LeftToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
+            this.right2LeftToolStripMenuItem.Size = new System.Drawing.Size(210, 22);
             this.right2LeftToolStripMenuItem.Text = "&Right to left reading order";
             this.right2LeftToolStripMenuItem.Click += new System.EventHandler(this.right2LeftToolStripMenuItem_Click);
             // 
@@ -318,13 +317,13 @@ namespace SILConvertersOffice
             // 
             this.checkBoxSkipIdenticalForms.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.checkBoxSkipIdenticalForms.AutoSize = true;
-            this.checkBoxSkipIdenticalForms.Location = new System.Drawing.Point(18, 113);
+            this.checkBoxSkipIdenticalForms.Location = new System.Drawing.Point(18, 153);
             this.checkBoxSkipIdenticalForms.Name = "checkBoxSkipIdenticalForms";
             this.checkBoxSkipIdenticalForms.Size = new System.Drawing.Size(121, 17);
             this.checkBoxSkipIdenticalForms.TabIndex = 10;
             this.checkBoxSkipIdenticalForms.Text = "&Skip Identical Forms";
             this.toolTip.SetToolTip(this.checkBoxSkipIdenticalForms, "Check this box to avoid showing the dialog box when the result of the conversion " +
-                    "is the same as the input string (i.e. no change)");
+        "is the same as the input string (i.e. no change)");
             this.checkBoxSkipIdenticalForms.UseVisualStyleBackColor = true;
             // 
             // buttonReplaceEvery
@@ -355,7 +354,7 @@ namespace SILConvertersOffice
             this.tableLayoutPanelButtons.Controls.Add(this.buttonReplaceOnce, 1, 0);
             this.tableLayoutPanelButtons.Controls.Add(this.buttonReplaceAll, 3, 0);
             this.tableLayoutPanelButtons.Controls.Add(this.buttonCancel, 4, 0);
-            this.tableLayoutPanelButtons.Location = new System.Drawing.Point(13, 136);
+            this.tableLayoutPanelButtons.Location = new System.Drawing.Point(13, 176);
             this.tableLayoutPanelButtons.Name = "tableLayoutPanelButtons";
             this.tableLayoutPanelButtons.RowCount = 1;
             this.tableLayoutPanelButtons.RowStyles.Add(new System.Windows.Forms.RowStyle());
@@ -371,7 +370,7 @@ namespace SILConvertersOffice
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(648, 182);
+            this.ClientSize = new System.Drawing.Size(648, 222);
             this.Controls.Add(this.checkBoxSkipIdenticalForms);
             this.Controls.Add(this.tableLayoutPanelButtons);
             this.Controls.Add(this.tableLayoutPanel);

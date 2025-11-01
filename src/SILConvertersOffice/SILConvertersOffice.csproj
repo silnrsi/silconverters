@@ -301,6 +301,12 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SpellingFixer30\SpellingFixer30.csproj">
+      <Project>{1f6e3722-b445-4638-90d6-22dde860dcc6}</Project>
+      <Name>SpellingFixer30</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSHARP.Targets" />
   <PropertyGroup>
     <PreBuildEvent>
