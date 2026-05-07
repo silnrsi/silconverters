@@ -21,7 +21,7 @@
       <Merge Id="SEC_PythonEC" Language="1033" SourceFile="$(var.EcDistFilesPath)\MergeModules\x64\Release\PythonEc64bitMM.msm" DiskId="1"/>
       <Merge Id="TECkitMapUEditor" Language="1033" SourceFile="..\MergeModules\x64\TECkitMapUEditor64bit.msm" DiskId="1"/>
       <Merge Id="XmlConverters" Language="1033" SourceFile="..\MergeModules\x64\XmlConverters64bitMM.msm" DiskId="1"/>
-      <Merge Id="SpellFixerEc" Language="1033" SourceFile="..\MergeModules\x64\SpellFixerEc64bitMM.msm" DiskId="1"/>
+      <Merge Id="SpellFixerEc" Language="1033" SourceFile="$(var.EcDistFilesPath)\MergeModules\x64\Release\SpellFixerEc64bitMM.msm" DiskId="1"/>
       <Merge Id="TECkit_Package" Language="1033" SourceFile="..\MergeModules\x64\TECkitPackage64bitMM.msm" DiskId="1"/>
       <Merge Id="EcTranslators" Language="1033" SourceFile="$(var.EcDistFilesPath)\MergeModules\x64\Release\EcTranslators64bitMM.msm" DiskId="1"/>
     </DirectoryRef>
