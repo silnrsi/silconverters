@@ -1,33 +1,34 @@
-using System.Diagnostics;
-using System.Reflection;
-using System.Windows.Forms;
 using ECInterfaces;
 using Microsoft.Win32;
 using SILConvertersOffice;
 using SilEncConverters40;
+using System.Diagnostics;
+using System.Reflection;
+using System.Windows.Forms;
 
 namespace SILConvertersOffice07
 {
-	using System;
 	using Extensibility;
-	using System.Runtime.InteropServices;
     using Microsoft.Office.Core;
+	using System;
+    using System.IO;
+	using System.Runtime.InteropServices;
     using Access = Microsoft.Office.Interop.Access;
 
-	#region Read me for Add-in installation and setup information.
-	// When run, the Add-in wizard prepared the registry for the Add-in.
-	// At a later time, if the Add-in becomes unavailable for reasons such as:
-	//   1) You moved this project to a computer other than which is was originally created on.
-	//   2) You chose 'Yes' when presented with a message asking if you wish to remove the Add-in.
-	//   3) Registry corruption.
-	// you will need to re-register the Add-in by building the SILConvertersOffice07Setup project, 
-	// right click the project in the Solution Explorer, then choose install.
-	#endregion
-	
-	/// <summary>
-	///   The object for implementing an Add-in.
-	/// </summary>
-	/// <seealso class='IDTExtensibility2' />
+
+    #region Read me for Add-in installation and setup information.
+    // When run, the Add-in wizard prepared the registry for the Add-in.
+    // At a later time, if the Add-in becomes unavailable for reasons such as:
+    //   1) You moved this project to a computer other than which is was originally created on.
+    //   2) You chose 'Yes' when presented with a message asking if you wish to remove the Add-in.
+    //   3) Registry corruption.
+    // you will need to re-register the Add-in by building the SILConvertersOffice07Setup project, 
+    // right click the project in the Solution Explorer, then choose install.
+    #endregion
+    /// <summary>
+    ///   The object for implementing an Add-in.
+    /// </summary>
+    /// <seealso class='IDTExtensibility2' />
 	[GuidAttribute("3ADDF7E6-29F1-43F5-BF95-06C0579A286B"), ProgId("SILConvertersOffice07.Connect")]
 	public class Connect : Object, Extensibility.IDTExtensibility2, IRibbonExtensibility
 	{
@@ -71,24 +72,47 @@ namespace SILConvertersOffice07
                 throw new Exception(strError);
             }
 
+            AppDomain.CurrentDomain.AssemblyResolve += CurrentDomain_AssemblyResolve;
+
             if (connectMode != ext_ConnectMode.ext_cm_Startup)
             {
                 OnStartupComplete(ref custom);
             }
         }
 
-		/// <summary>
-		///     Implements the OnDisconnection method of the IDTExtensibility2 interface.
-		///     Receives notification that the Add-in is being unloaded.
-		/// </summary>
-		/// <param term='disconnectMode'>
-		///      Describes how the Add-in is being unloaded.
-		/// </param>
-		/// <param term='custom'>
-		///      Array of parameters that are host application specific.
-		/// </param>
-		/// <seealso class='IDTExtensibility2' />
-		public void OnDisconnection(Extensibility.ext_DisconnectMode disconnectMode, ref System.Array custom)
+        private Assembly CurrentDomain_AssemblyResolve(object sender, ResolveEventArgs args)
+        {
+            // Extract the name of the assembly being requested
+            string assemblyName = new AssemblyName(args.Name).Name;
+
+            // Check if it's the one causing the headache
+            if (assemblyName.Contains("Google."))
+            {
+                // Redirect to the version you have deployed in your folder
+                // You can load it specifically by path from your installation directory
+                string installPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+                string assemblyPath = Path.Combine(installPath, $"{assemblyName}.dll");
+
+                if (File.Exists(assemblyPath))
+                {
+                    return Assembly.LoadFrom(assemblyPath);
+                }
+            }
+            return null; // Let the default loader try if it's not our target
+        }
+
+        /// <summary>
+        ///     Implements the OnDisconnection method of the IDTExtensibility2 interface.
+        ///     Receives notification that the Add-in is being unloaded.
+        /// </summary>
+        /// <param term='disconnectMode'>
+        ///      Describes how the Add-in is being unloaded.
+        /// </param>
+        /// <param term='custom'>
+        ///      Array of parameters that are host application specific.
+        /// </param>
+        /// <seealso class='IDTExtensibility2' />
+        public void OnDisconnection(Extensibility.ext_DisconnectMode disconnectMode, ref System.Array custom)
 		{
             if (disconnectMode != ext_DisconnectMode.ext_dm_HostShutdown)
             {

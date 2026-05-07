@@ -74,6 +74,8 @@ namespace SILConvertersOffice10
                     throw new Exception(strError);
                 }
 
+                AppDomain.CurrentDomain.AssemblyResolve += CurrentDomain_AssemblyResolve;
+
                 if (connectMode != ext_ConnectMode.ext_cm_Startup)
                 {
                     OnStartupComplete(ref custom);
@@ -85,6 +87,27 @@ namespace SILConvertersOffice10
 		        ProcessException(ex);
 		        throw;
 		    }
+        }
+
+        private Assembly CurrentDomain_AssemblyResolve(object sender, ResolveEventArgs args)
+        {
+            // Extract the name of the assembly being requested
+            string assemblyName = new AssemblyName(args.Name).Name;
+
+            // Check if it's the one causing the headache
+            if (assemblyName.Contains("Google."))
+            {
+                // Redirect to the version you have deployed in your folder
+                // You can load it specifically by path from your installation directory
+                string installPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+                string assemblyPath = Path.Combine(installPath, $"{assemblyName}.dll");
+
+                if (File.Exists(assemblyPath))
+                {
+                    return Assembly.LoadFrom(assemblyPath);
+                }
+            }
+            return null; // Let the default loader try if it's not our target
         }
 
         private static void ProcessException(Exception ex)
