@@ -15,7 +15,7 @@ env:
 
 jobs:
   build-windows:
-    runs-on: [windows-latest]
+    runs-on: [windows-2022]
 
     strategy:
       # Keep building other jobs even if another fails, to show what is still working.
@@ -25,40 +25,76 @@ jobs:
         build_platform: ['x64', 'x86']
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4.1.1
-        with:
-          fetch-depth: 0 # fetch full history for GitVersion
+    - name: Checkout
+      uses: actions/checkout@v5
 
-      # ✅ Install ATL/MFC support
-      - name: Install missing Visual Studio ATL components
-        run: |
-          Set-Location "C:\Program Files (x86)\Microsoft Visual Studio\Installer\"
-          $vsInstallPath = & .\vswhere.exe -latest -products * -requires Microsoft.Component.MSBuild -property installationPath
-          $atlComponent = @(
-          '--add Microsoft.VisualStudio.Component.VC.14.29.16.11.x86.x64',
-          '--add Microsoft.VisualStudio.Component.VC.14.29.16.11.ATL',
-          '--add Microsoft.VisualStudio.Component.VC.14.29.16.11.MFC'
-          ) -join ' '
-          $args = @('modify', "--installPath", "`"$vsInstallPath`"", $atlComponent, '--quiet', '--norestart', '--nocache')
-          Start-Process -FilePath .\vs_installer.exe -ArgumentList $args -Wait -PassThru -WindowStyle Hidden
+    # Install ATL/MFC (for windows-2022, this is v143)
+    - name: Install Visual Studio ATL/MFC components
+      shell: powershell
+      run: |
+        Set-Location "C:\Program Files (x86)\Microsoft Visual Studio\Installer\"
+        $vsInstallPath = & .\vswhere.exe -latest -products * -property installationPath
 
-      - name: Setup .NET
-        uses: actions/setup-dotnet@v3
-        with:
-          dotnet-version: 6.0.x
+        $components = @(
+          "--add Microsoft.VisualStudio.Component.VC.ATL",
+          "--add Microsoft.VisualStudio.Component.VC.MFC"
+        ) -join ' '
 
-      - name: Setup MSBuild
-        uses: microsoft/setup-msbuild@v2
+        $args = @(
+          "modify",
+          "--installPath `"$vsInstallPath`"",
+          $components,
+          "--quiet",
+          "--norestart",
+          "--nocache"
+        )
 
-      - name: Fetch NuGet dependencies
-        run: nuget restore "${{ env.SOLUTION_FILE_PATH }}"
+        Start-Process -FilePath .\vs_installer.exe -ArgumentList $args -Wait -NoNewWindow
 
-      - name: Setup MSVC Developer Command Prompt
-        uses: ilammy/msvc-dev-cmd@v1
-        with:
-          arch: ${{ matrix.build_platform }}
+    # Locate MSBuild (no Node dependency)
+    - name: Locate MSBuild
+      id: msbuild
+      shell: powershell
+      run: |
+        $path = & "${env:ProgramFiles(x86)}\Microsoft Visual Studio\Installer\vswhere.exe" `
+          -latest -products * -requires Microsoft.Component.MSBuild `
+          -find MSBuild\**\Bin\MSBuild.exe
 
-      - name: Build
-        working-directory: ${{ env.GITHUB_WORKSPACE }}
-        run: msbuild /m /p:Configuration=${{ matrix.build_configuration }} /p:Platform=${{ matrix.build_platform }} "${{ env.SOLUTION_FILE_PATH }}"
+        echo "MSBUILD_PATH=$path" >> $env:GITHUB_ENV
+
+    # Setup NuGet
+    - name: Setup NuGet
+      uses: NuGet/setup-nuget@v2
+
+    # Cache NuGet packages
+    - name: Cache NuGet packages
+      uses: actions/cache@v4
+      with:
+        path: ~/.nuget/packages
+        key: ${{ runner.os }}-nuget-${{ hashFiles('**/*.sln') }}
+        restore-keys: |
+          ${{ runner.os }}-nuget-
+
+    - name: Restore NuGet dependencies
+      run: nuget restore "${{ env.SOLUTION_FILE_PATH }}"
+
+    - name: Setup MSVC Developer Command Prompt
+      uses: ilammy/msvc-dev-cmd@v1
+      with:
+        arch: ${{ matrix.build_platform }}
+
+    - name: Build
+      shell: cmd
+      run: >
+        "%MSBUILD_PATH%"
+        /m
+        /bl:build-${{matrix.build_platform}}-${{matrix.build_configuration}}.binlog
+        /p:Configuration=${{matrix.build_configuration}}
+        /p:Platform=${{matrix.build_platform}}
+        "${{env.SOLUTION_FILE_PATH}}"
+
+    - name: Upload build logs
+      uses: actions/upload-artifact@v6
+      with:
+        name: logs-${{ matrix.build_platform }}-${{ matrix.build_configuration }}
+        path: build-*.binlog
