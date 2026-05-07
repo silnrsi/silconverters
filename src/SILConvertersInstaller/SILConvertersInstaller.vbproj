@@ -1,6 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="16.0">
-  <Import Project="..\..\packages\Encoding-Converters-Core.0.9.7\build\Encoding-Converters-Core.props" Condition="Exists('..\..\packages\Encoding-Converters-Core.0.9.7\build\Encoding-Converters-Core.props')" />
   <PropertyGroup>
     <ProjectType>Local</ProjectType>
     <ProductVersion>9.0.30729</ProductVersion>
@@ -193,7 +192,6 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="My Project\app.manifest" />
-    <None Include="packages.config" />
     <None Include="SILConvertersInstallerDetails.xsc">
       <DependentUpon>SILConvertersInstallerDetails.xsd</DependentUpon>
     </None>
@@ -234,16 +232,15 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Encoding-Converters-Core">
+      <Version>0.9.8</Version>
+    </PackageReference>
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.VisualBasic.targets" />
   <PropertyGroup>
     <PreBuildEvent>xcopy /y "$(EcDistFilesPath)\win-$(PlatformName)\native\*.*" "$(SolutionDir)output\$(PlatformName)\$(ConfigurationName)\"
 xcopy /s /y "$(EcDistFilesPath)\redist\*.*" "$(SolutionDir)output\$(PlatformName)\$(ConfigurationName)\"</PreBuildEvent>
     <PostBuildEvent>xcopy /y "$(TargetDir)*.*" $(SolutionDir)output\$(PlatformName)\$(ConfigurationName)</PostBuildEvent>
   </PropertyGroup>
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('..\..\packages\Encoding-Converters-Core.0.9.7\build\Encoding-Converters-Core.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Encoding-Converters-Core.0.9.7\build\Encoding-Converters-Core.props'))" />
-  </Target>
 </Project>

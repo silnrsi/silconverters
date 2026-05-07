@@ -5,7 +5,12 @@
     <TruncatedVersion>5.4</TruncatedVersion>
     <VersionNumber>5.4.0.0</VersionNumber>
     <UpgradeCode>8A50226C-84D0-4CAF-AF8F-B0284643C415</UpgradeCode>
-    <Year>2025</Year>
+    <Year>2026</Year>
     <Manufacturer>SIL International</Manufacturer>
+	<NuGetPackageRoot Condition="'$(NuGetPackageRoot)' == ''">$(UserProfile)\.nuget\packages\</NuGetPackageRoot>
+    <EcCoreVersion>0.9.8</EcCoreVersion>
+    <EcLibFilesPath>$(NuGetPackageRoot)encoding-converters-core\$(EcCoreVersion)\lib</EcLibFilesPath>
+    <EcDistFilesPath>$(NuGetPackageRoot)encoding-converters-core\$(EcCoreVersion)\runtimes\EcDistFiles</EcDistFilesPath>
+	<IsDirectoryPropsLoaded>TRUE</IsDirectoryPropsLoaded>
   </PropertyGroup>
 </Project>

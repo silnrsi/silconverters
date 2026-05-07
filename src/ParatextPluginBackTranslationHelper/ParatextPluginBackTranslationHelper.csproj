@@ -1,10 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\..\packages\Encoding-Converters-Core.0.9.7\build\Encoding-Converters-Core.props" Condition="Exists('..\..\packages\Encoding-Converters-Core.0.9.7\build\Encoding-Converters-Core.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <Platform Condition=" '$(Platform)' == '' ">x64</Platform>
     <ProjectGuid>{0BFFA5D9-FF49-4F16-BBC6-27F9394341A5}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -13,6 +12,7 @@
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
   </PropertyGroup>
@@ -77,27 +77,6 @@
     </Reference>
     <Reference Include="PtxConverters" Condition="('$(Platform)' == 'x64') and ('$(OS)'=='Windows_NT')">
       <HintPath>$(EcDistFilesPath)\win-$(Platform)\native\PtxConverters.dll</HintPath>
-    </Reference>
-    <Reference Include="ECInterfaces, Version=4.0.0.0, Culture=neutral, PublicKeyToken=f1447bae1e63f485, processorArchitecture=x86" Condition="('$(Platform)' == 'x86' or '$(Platform)' == 'AnyCPU') and ('$(OS)'=='Windows_NT')">
-      <HintPath>$(EcLibFilesPath)\net48\x86\ECInterfaces.dll</HintPath>
-    </Reference>
-    <Reference Include="ECInterfaces, Version=4.0.0.0, Culture=neutral, PublicKeyToken=f1447bae1e63f485, processorArchitecture=x64" Condition="('$(Platform)' == 'x64') and ('$(OS)'=='Windows_NT')">
-      <HintPath>$(EcLibFilesPath)\net48\x64\ECInterfaces.dll</HintPath>
-    </Reference>
-    <Reference Include="EmbeddedUiPluginInterfaces, Version=2.0.23.0, Culture=neutral, PublicKeyToken=583bede96b7c94a3, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\ParatextEmbeddedUiPluginInterfaces.2.0.23\lib\net48\EmbeddedUiPluginInterfaces.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="PluginInterfaces, Version=2.0.23.0, Culture=neutral, PublicKeyToken=583bede96b7c94a3, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\ParatextPluginInterfaces.2.0.23\lib\netstandard2.0\PluginInterfaces.dll</HintPath>
-    </Reference>
-    <Reference Include="SilEncConverters40, Version=4.0.0.0, Culture=neutral, PublicKeyToken=f1447bae1e63f485, processorArchitecture=x86" Condition="('$(Platform)' == 'x86' or '$(Platform)' == 'AnyCPU') and ('$(OS)'=='Windows_NT')">
-      <HintPath>$(EcLibFilesPath)\net48\x86\SilEncConverters40.dll</HintPath>
-    </Reference>
-    <Reference Include="SilEncConverters40, Version=4.0.0.0, Culture=neutral, PublicKeyToken=f1447bae1e63f485, processorArchitecture=x64" Condition="('$(Platform)' == 'x64') and ('$(OS)'=='Windows_NT')">
-      <HintPath>$(EcLibFilesPath)\net48\x64\SilEncConverters40.dll</HintPath>
     </Reference>
     <Reference Include="EcTranslators">
       <HintPath>$(EcDistFilesPath)\win-$(Platform)\native\EcTranslators.dll</HintPath>
@@ -168,7 +147,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -192,7 +170,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="C:\Users\pete_\source\repos\SilConverters\packages\Encoding-Converters-Core.0.5.4\build\..\runtimes\EcDistFiles\redist\EC\Plugins\AI 4.0.0.0 Plugin Details.xml">
+    <Content Include="$(EcDistFilesPath)\redist\EC\Plugins\AI 4.0.0.0 Plugin Details.xml">
       <Link>EcPlugins\AI 4.0.0.0 Plugin Details.xml</Link>
     </Content>
     <Content Include="$(EcDistFilesPath)\redist\EC\Plugins\EC 4.0.0.0 Plugin Details.xml">
@@ -205,6 +183,18 @@
   <ItemGroup>
     <Folder Include="Resources\" />
   </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Encoding-Converters-Core">
+      <Version>0.9.8</Version>
+    </PackageReference>
+    <PackageReference Include="ParatextEmbeddedUiPluginInterfaces">
+      <Version>2.0.23</Version>
+    </PackageReference>
+    <PackageReference Include="ParatextPluginInterfaces">
+      <Version>2.0.23</Version>
+    </PackageReference>
+  </ItemGroup>
+  <Import Project="$(SolutionDir)SharedItems.props" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>IF NOT "$(ConfigurationName)" == "Debug" goto nocopy
@@ -231,10 +221,4 @@ copy "$(SolutionDir)output\x64\Debug\$(TargetFileName)" "%25ParatextInstallDir%2
 
 :nocopy</PostBuildEvent>
   </PropertyGroup>
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('..\..\packages\Encoding-Converters-Core.0.9.7\build\Encoding-Converters-Core.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Encoding-Converters-Core.0.9.7\build\Encoding-Converters-Core.props'))" />
-  </Target>
 </Project>
