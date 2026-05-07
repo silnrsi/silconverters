@@ -1,7 +1,8 @@
 namespace SILConvertersOffice
 {
 	using Extensibility;
-	using System;
+    using Microsoft.Win32;
+    using System;
     using System.IO;
     using System.Reflection;                // for InvokeMember
 	using System.Runtime.InteropServices;
