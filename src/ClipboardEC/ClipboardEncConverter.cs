@@ -1,4 +1,4 @@
-#define Csc30   // turn off CSC30 features
+// #define TurnOffCsc30   // turn off CSC30 features
 
 using System;
 using System.Collections;
@@ -13,7 +13,7 @@ using System.Text;              // for Encoding
 using System.Runtime.InteropServices;   // DllImport
 using System.Collections.Generic;
 
-#if !Csc30
+#if !TurnOffCsc30
 using SpellingFixer30;
 #else
 // if we add a reference to SpellFixerEC assembly (in order to call it), then the SpellFixerEC 
@@ -191,7 +191,7 @@ namespace ClipboardEC
 
             UpdateFilteringIndication();
 
-#if !Csc30
+#if !TurnOffCsc30
             this.notifyIconClipboardEC.Text = "Right-click: system converter; Left-click: Consistent Spelling";
 #else
             UpdateIconText();
@@ -1262,24 +1262,28 @@ namespace ClipboardEC
             keyLastDebugState.SetValue(cstrProjectTransTypeFilterLastState, (Int32)this.ProcessTypeFilter);
         }
 
-#if !Csc30
-        protected SpellingFixer30.CscProject m_aCscProject = null;
+#if !TurnOffCsc30
+        protected SpellingFixer30.CscProject m_cscProject = null;
         protected SpellingFixer30.SpellingFixer m_aSpellFixerLegacy = null;
 
         protected bool TrySelectProject()
         {
             try
             {
-                m_aCscProject = CscProject.SelectProject();
+                m_cscProject = CscProject.SelectProject();
+            }
+            catch (ApplicationException ex)
+            {
+                if (ex.Message == CscProject.ChooseProjectException)
+                    selectProjectToolStripMenuItem.Checked = false;
+                else
+                    MessageBox.Show(ex.Message, cstrCaption);
+                return false;
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, cstrCaption);
                 return false;
-            }
-            finally
-            {
-                m_aSpellFixerLegacy = null; // just in case
             }
             return true;
         }
@@ -1299,12 +1303,12 @@ namespace ClipboardEC
             }
             finally
             {
-                m_aCscProject = null;   // just in case
+                m_cscProject = null;   // just in case
             }
             return true;
         }
 
-        protected void QuerySpellFixProject()
+        public void QuerySpellFixProjectType()
         {
             bool bCscProject = false;
             try
@@ -1317,7 +1321,7 @@ namespace ClipboardEC
                     bCscProject = TrySelectProject();
                 }
                 else
-                    legacySpellFixerToolStripMenuItem_Click(null, null);
+                    TryLoginProject();
             }
             catch (Exception ex)
             {
@@ -1333,7 +1337,7 @@ namespace ClipboardEC
         private void DealWithLeftClick()
         {
             if (!IsCscProject && !IsSpellFixerLegacyProject)
-                QuerySpellFixProject();
+                QuerySpellFixProjectType();
 
             // if it's now available...
             if (IsSpellFixerLegacyProject || IsCscProject)
@@ -1344,8 +1348,8 @@ namespace ClipboardEC
                 // Determines whether the data is in a format you can use.
                 if( iData.GetDataPresent(DataFormats.UnicodeText) )
                 {
-                    string strInput = (string)iData.GetData(DataFormats.UnicodeText);
-                    if (strInput.Length > 0)
+                    var strInput = (string)iData.GetData(DataFormats.UnicodeText);
+                    if (!String.IsNullOrEmpty(strInput))
                     {
                         try
                         {
@@ -1357,8 +1361,8 @@ namespace ClipboardEC
                             }
                             else if (IsCscProject)
                             {
-                                m_aCscProject.AssignCorrectSpelling(strInput);
-                                aEC = m_aCscProject.SpellFixerEncConverter;
+                                m_cscProject.AssignCorrectSpelling(strInput);
+                                aEC = m_cscProject.SpellFixerEncConverter;
                             }
 
                             string strOutput = aEC.Convert(strInput);
@@ -1374,19 +1378,9 @@ namespace ClipboardEC
             }
         }
 
-        protected bool IsCscProject
-        {
-            get { return (m_aCscProject != null); }
-        }
-
-        protected bool IsSpellFixerLegacyProject
-        {
-            get { return (m_aSpellFixerLegacy != null); }
-        }
-
         private void resetToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            m_aCscProject = null;
+            m_cscProject = null;
             m_aSpellFixerLegacy = null;
         }
 
@@ -1405,7 +1399,7 @@ namespace ClipboardEC
                     if (strInput.Length > 0)
                     {
                         if (IsCscProject)
-                            m_aCscProject.FindReplacementRule(strInput);
+                            m_cscProject.FindReplacementRule(strInput);
                         else if (IsSpellFixerLegacyProject)
                             m_aSpellFixerLegacy.FindReplacementRule(strInput);
                     }
@@ -1417,7 +1411,7 @@ namespace ClipboardEC
         {
             // if it's now available...
             if (IsCscProject)
-                m_aCscProject.EditSpellingFixes();
+                m_cscProject.EditSpellingFixes();
             else if (IsSpellFixerLegacyProject)
                 m_aSpellFixerLegacy.EditSpellingFixes();
         }
@@ -1426,7 +1420,7 @@ namespace ClipboardEC
         {
             // if it's now available...
             if (IsCscProject)
-                m_aCscProject.EditDictionary();
+                m_cscProject.EditDictionary();
         }
 
         private void spellFixerToolStripMenuItem_DropDownOpening(object sender, EventArgs e)
@@ -1444,15 +1438,128 @@ namespace ClipboardEC
             TrySelectProject();
         }
 
-        private void legacySpellFixerToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            TryLoginProject();
-        }
-
         private void selectProjectToolStripMenuItem_DropDownOpening(object sender, EventArgs e)
         {
             consistentSpellingFixerToolStripMenuItem.Checked = IsCscProject;
             legacySpellFixerToolStripMenuItem.Checked = IsSpellFixerLegacyProject;
+        }
+
+        private string _lastTranslationHelperUsed = null;
+        private Dictionary<string, TranslationHelperForm> _mapConverterToTranslationForm = new Dictionary<string, TranslationHelperForm>();
+
+        private void translationHelperFormToolStripMenuItem_DropDownOpening(object sender, EventArgs e)
+        {
+            // remove all added ones (except for the 'add', 'delete', and the separator for them)
+            while (translationHelperFormToolStripMenuItem.DropDownItems.Count > 3)
+                translationHelperFormToolStripMenuItem.DropDownItems.RemoveAt(0);
+
+            var insertIndex = 0;
+            foreach (var projectName in Properties.Settings.Default.TranslatorSetsProjectNames)
+            {
+                var projectToolStripItem = new ToolStripMenuItem(projectName, null, translatorSetsProjectNamesToolStripMenuItem_Click);
+                translationHelperFormToolStripMenuItem.DropDownItems.Insert(insertIndex++, projectToolStripItem);
+            }
+        }
+
+        private void TranslationHelperFormToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (_lastTranslationHelperUsed != null)
+                ExecuteTranslationHelperDialog(_lastTranslationHelperUsed);
+        }
+
+        private void translatorSetsProjectNamesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var projectName = ((ToolStripDropDownItem)sender).Text;
+            ExecuteTranslationHelperDialog(projectName);
+        }
+
+        private void ExecuteTranslationHelperDialog(string projectName)
+        {
+            _lastTranslationHelperUsed = projectName;
+
+            if (!_mapConverterToTranslationForm.TryGetValue(projectName, out TranslationHelperForm form))
+            {
+                form = new TranslationHelperForm(projectName, RemoveTranslatorSetFromMap);
+                _mapConverterToTranslationForm.Add(projectName, form);
+            }
+
+            if (!form.Visible)  // in case the user closed it
+            {
+                // make it show and give it time
+                form.Show();
+                return;     // the GetNewClipboardData will be triggered by OnShown 
+            }
+
+            form.Focus();
+            form.GetNewClipboardData();
+        }
+
+        private void RemoveTranslatorSetFromMap(string projectName)
+        {
+            _mapConverterToTranslationForm?.Remove(projectName);
+            _lastTranslationHelperUsed = null;
+        }
+
+        private void selectProjectToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            QuerySpellFixProjectType();
+            UpdateIconText();
+        }
+
+        protected void UpdateIconText()
+        {
+            // if a spell fixer project is selected, then make that the left-click behavior
+            if (IsSpellFixerProject)
+            {
+                this.notifyIconClipboardEC.Text = "L-click: Add Substitution; R-click: preview converters";
+                var spellFixerEncConverterName = m_aSpellFixerLegacy?.SpellFixerEncConverterName ?? m_cscProject?.SpellFixerEncConverterName;
+                MessageBox.Show(String.Format("Now you can click on the ClipboardEncConverter icon with the left mouse button to add a spelling correction to the{0}'{1}' SpellFixer project. The right mouse button still provides normal ClipboardEncConverter functionality.",
+                    Environment.NewLine, spellFixerEncConverterName), cstrCaption);
+            }
+            else
+                this.notifyIconClipboardEC.Text = "L-Click: Repeat last conversion; R-click: preview converters";
+        }
+
+        protected bool IsCscProject
+        {
+            get { return (m_cscProject?.SpellFixerEncConverterName != null); }
+        }
+
+        protected bool IsSpellFixerLegacyProject
+        {
+            get { return (m_aSpellFixerLegacy?.SpellFixerEncConverterName != null); }
+        }
+
+        protected bool IsSpellFixerProject
+        {
+            get { return IsSpellFixerLegacyProject || IsCscProject; }
+        }
+
+        private void addTranslatorSetToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string projectName = null;
+            const string Prompt = "Enter a name for the Translation Set (e.g. \"Hindi to English\")";
+            do
+            {
+                var prompt = (projectName == null) ? Prompt : Prompt + $" ({projectName} already exists)";
+                projectName = Microsoft.VisualBasic.Interaction.InputBox(prompt, "Translation Set Project Id", "Any to English");
+                if (projectName == String.Empty)    // user clicked 'Cancel'
+                    return;
+            }
+            while (Properties.Settings.Default.TranslatorSetsProjectNames.Contains(projectName));
+
+            var form = new TranslationHelperForm(projectName, RemoveTranslatorSetFromMap);
+            _mapConverterToTranslationForm.Add(projectName, form);
+
+            Properties.Settings.Default.TranslatorSetsProjectNames.Add(projectName);
+            Properties.Settings.Default.Save();
+
+            ExecuteTranslationHelperDialog(projectName);
+        }
+
+        private void deleteTranslatorSetToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
 #else
         private SpellFixerByReflection m_aSpellFixer = null;

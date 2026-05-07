@@ -56,7 +56,7 @@ namespace SILConvertersOffice
             {
                 return CscProject.SelectProject();
             }
-            catch (Exception ex)
+            catch
             {
             }
             return null;

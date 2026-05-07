@@ -99,6 +99,7 @@ namespace SILConvertersOffice
             _model = new BackTranslationHelperModel
             {
                 SourceData = sourceText,
+                // don't need this as I though: SourceSentences = [],
                 TargetData = targetText,
                 TargetDataPreExisting = null,  // we don't have an original version of the target (unless someday we allow side-by-side processing of 2 word docs)
 
@@ -124,7 +125,7 @@ namespace SILConvertersOffice
             Application.DoEvents(); 
 
             // TODO: fix this
-            backTranslationHelperCtrl.GetNewData(false, ref _model);
+            backTranslationHelperCtrl.GetNewData(true, ref _model);
             _updateDataProc(_model);
 
             // get some info to show in the title bar

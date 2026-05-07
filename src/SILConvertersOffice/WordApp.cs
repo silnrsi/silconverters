@@ -138,6 +138,10 @@ namespace SILConvertersOffice
                     "Click this item to convert the document from the cursor on down, paragraph-by-paragraph, ignoring formatting (so formatting will be lost, but you'll get whole paragraphs translated as a unit)",
                     new Microsoft.Office.Core._CommandBarButtonEvents_ClickEventHandler(ConvertParagraphs_IgnoreStyle_Click));
 
+                AddMenu(ref ConvertByParagraphMenuIgnoreFormatting, NewMenuBar, "Convert &sentence-by-sentence",
+                    "Click this item to convert the document from the cursor on down, sentence-by-sentence, ignoring formatting (so formatting will be lost)",
+                    new Microsoft.Office.Core._CommandBarButtonEvents_ClickEventHandler(ConvertParagraphs_IgnoreStyle_SentenceBySentence_Click));
+
 #if !TurnOffBitheadFeatures
                 ProcessDocumentPopup = (Office.CommandBarPopup)NewMenuBar.Controls.Add(Office.MsoControlType.msoControlPopup, missing, missing, missing, true);
                 ProcessDocumentPopup.Caption = "&Process Document";
@@ -311,6 +315,15 @@ namespace SILConvertersOffice
         public void ConvertParagraphs_IgnoreStyle_Click(Office.IRibbonControl control)
 #else
         void ConvertParagraphs_IgnoreStyle_Click(Microsoft.Office.Core.CommandBarButton Ctrl, ref bool CancelDefault)
+#endif
+        {
+            ParagraphByParagraph(OfficeTextDocument.ProcessingType.eParagraphByParagraph);
+        }
+
+#if BUILD_FOR_OFF12 || BUILD_FOR_OFF14 || BUILD_FOR_OFF15
+        public void ConvertParagraphs_IgnoreStyle_SentenceBySentence_Click(Office.IRibbonControl control)
+#else
+        void ConvertParagraphs_IgnoreStyle_SentenceBySentence_Click(Microsoft.Office.Core.CommandBarButton Ctrl, ref bool CancelDefault)
 #endif
         {
             ParagraphByParagraph(OfficeTextDocument.ProcessingType.eParagraphByParagraph);
