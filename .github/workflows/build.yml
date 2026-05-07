@@ -75,6 +75,13 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-nuget-
 
+    - name: Restore NuGet
+      shell: cmd
+      run: >
+        "%MSBUILD_PATH%"
+        "${{env.SOLUTION_FILE_PATH}}"
+        /t:Restore
+
     - name: Restore NuGet dependencies
       run: nuget restore "${{ env.SOLUTION_FILE_PATH }}"
 
