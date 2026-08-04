@@ -422,7 +422,7 @@
   <Import Project="$(SolutionDir)SharedItems.props" />
   <ItemGroup>
     <PackageReference Include="Encoding-Converters-Core">
-      <Version>0.9.8</Version>
+      <Version>0.9.9</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.CSharp">
       <Version>4.7.0</Version>

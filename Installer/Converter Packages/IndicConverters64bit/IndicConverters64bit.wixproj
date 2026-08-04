@@ -30,7 +30,7 @@
     <Content Include="EnableIndicConvertersInWord.reg" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Encoding-Converters-Core" Version="0.9.8" GeneratePathProperty="true" />
+    <PackageReference Include="Encoding-Converters-Core" Version="0.9.9" GeneratePathProperty="true" />
     <PackageReference Include="WiX" Version="3.14.1" />
   </ItemGroup>
   <Import Project="$(WixTargetsPath)" Condition=" '$(WixTargetsPath)' != '' " />

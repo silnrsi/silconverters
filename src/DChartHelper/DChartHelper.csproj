@@ -240,7 +240,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Encoding-Converters-Core">
-      <Version>0.9.8</Version>
+      <Version>0.9.9</Version>
     </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
