@@ -29,10 +29,12 @@
       <Merge Id="EcTranslators" Language="1033" SourceFile="$(var.EcDistFilesPath)\MergeModules\x86\Release\EcTranslatorsMM.msm" DiskId="1"/>
     </DirectoryRef>
 
+    <!--
     <DirectoryRef Id="Firefox">
       <Merge Id="EcFirefox" Language="1033" SourceFile="$(var.EcDistFilesPath)\MergeModules\x86\Release\EcFireFox.msm" DiskId="1"/>
     </DirectoryRef>
-
+    -->
+    
     <DirectoryRef Id="AllUserAppDataSIL">
       <Merge Id="ScHelp" Language="1033" SourceFile="..\MergeModules\ScHelpMM.msm" DiskId="1"/>
       <Merge Id="OO_Ling_Tools" Language="1033" SourceFile="..\MergeModules\OpenOfficeLinguisticToolsMM.msm" DiskId="1"/>

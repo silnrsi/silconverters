@@ -26,10 +26,12 @@
       <Merge Id="EcTranslators" Language="1033" SourceFile="$(var.EcDistFilesPath)\MergeModules\x64\Release\EcTranslators64bitMM.msm" DiskId="1"/>
     </DirectoryRef>
 
+    <!--
     <DirectoryRef Id="Firefox">
       <Merge Id="EcFirefox" Language="1033" SourceFile="$(var.EcDistFilesPath)\MergeModules\x64\Release\EcFireFox64.msm" DiskId="1"/>
     </DirectoryRef>
-
+    -->
+    
     <DirectoryRef Id="Paratext9">
       <Merge Id="ParatextBackTranslationHelperPlugin" Language="1033" SourceFile="..\MergeModules\x64\ParatextBackTranslationHelperPlugin64bitMM.msm" DiskId="1"/>
     </DirectoryRef>
