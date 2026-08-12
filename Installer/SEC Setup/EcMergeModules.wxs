@@ -62,11 +62,12 @@
       <Merge Id="TECkit_DLLs" Language="1033" SourceFile="$(var.EcDistFilesPath)\MergeModules\x86\Release\TECkitDLLsMM.msm" DiskId="1"/>
       <Merge Id="SEC_ICU" Language="1033" SourceFile="$(var.EcDistFilesPath)\MergeModules\x86\Release\ICU_40.msm" DiskId="1"/>
     </DirectoryRef>
-    <DirectoryRef Id="SystemFolder">
-      <Merge Id="CRT" Language="1033" SourceFile="..\ExternalMergeModules\Microsoft_VC142_CRT_x86.msm" DiskId="1"/>
-      <Merge Id="MFC" Language="1033" SourceFile="..\ExternalMergeModules\Microsoft_VC142_MFC_x86.msm" DiskId="1"/>
+    <StandardDirectory Id="SystemFolder">
+      <!-- CRT/MFC (was Microsoft_VC142_CRT/MFC_x86.msm - stale v142 modules, wrong for the v143-built C++
+           projects) moved to a chained vc_redist.x86.exe ExePackage in SetupSILConverters\Bundle.wxs; see the
+           comment there for why. -->
       <!-- The CRT90 merge module is needed only for the PythonEC (using Python 2.7) merge module:-->
       <Merge Id="CRT90" Language="1033" SourceFile="..\ExternalMergeModules\Microsoft_VC90_CRT_x86.msm" DiskId="1"/>
-    </DirectoryRef>
+    </StandardDirectory>
   </Fragment>
 </Wix>
