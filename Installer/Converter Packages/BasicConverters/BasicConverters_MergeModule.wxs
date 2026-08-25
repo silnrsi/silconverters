@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-    <Module Id="BasicConverters40MergeModule" Language="1033" Version="4.0.0.0">
-        <Package Id="986d0cb0-8d39-4120-a049-eaffdf42c6f9" Comments="Set of basic converters usable to most users" Description="Basic Converters for use in SILConverters' client applications" Keywords="SILConverters; Encoding Conversion; Transliteration; EncConverters" Manufacturer="SIL International" InstallerVersion="500" />
+﻿<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
+    <Module Id="BasicConverters40MergeModule" Language="1033" Version="4.0.0.0" Guid="986d0cb0-8d39-4120-a049-eaffdf42c6f9" InstallerVersion="500"><SummaryInformation Description="Basic Converters for use in SILConverters' client applications" Keywords="SILConverters; Encoding Conversion; Transliteration; EncConverters" Manufacturer="SIL International" />
 
-        <Directory Id="TARGETDIR" Name="SourceDir">
-            <Directory Id="CommonAppDataFolder" SourceName="AppData">
+        
+
+    
+            <StandardDirectory Id="CommonAppDataFolder">
                 <Directory Id="SIL" Name="SIL">
                     <Directory Id="SILConverters40" Name="SILConverters40">
                         <Directory Id="MapsTables" Name="MapsTables">
@@ -77,8 +77,6 @@
                         </Directory>
                     </Directory>
                 </Directory>
-            </Directory>
-        </Directory>
-
-    </Module>
+            </StandardDirectory>
+        </Module>
 </Wix>

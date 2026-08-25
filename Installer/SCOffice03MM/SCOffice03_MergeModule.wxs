@@ -1,11 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-  <Module Id="SCOffice03MM" Language="1033" Version="1.0.0.0">
-    <Package Id="fa5cdda1-8831-46ff-bd50-1613e67d69f9" Comments="Merge Module for the SILConverters for Office 2003 application"
-         Description="Setup for the SILConverters for Office 2003 application" Keywords="SIL Encoding Converters; Microsoft Office" Manufacturer="SIL International"
-         InstallerVersion="500" />
+﻿<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
+  <Module Id="SCOffice03MM" Language="1033" Version="1.0.0.0" Guid="fa5cdda1-8831-46ff-bd50-1613e67d69f9" InstallerVersion="500"><SummaryInformation Description="Setup for the SILConverters for Office 2003 application" Keywords="SIL Encoding Converters; Microsoft Office" Manufacturer="SIL International" />
 
-    <Directory Id="TARGETDIR" Name="SourceDir">
+    
+  
       <Directory Id="MergeRedirectFolder">
 
         <Component Id="SILConvertersOffice.dll" Guid="{2240FD33-1C13-4788-80D7-9E8B3B403F19}">
@@ -49,8 +46,7 @@
         </Component>
 
         <Component Id="SILConvertersOffice.dll.config" Guid="{1911B9FA-5DA9-4AC8-AAE6-021295F4FCEA}">
-          <File Id="SILConvertersOffice.dll.config" Name="SILConvertersOffice.dll.config" Vital="yes" KeyPath="yes"
-                Source="..\..\output\x86\release\SILConvertersOffice.dll.config" />
+          <File Id="SILConvertersOffice.dll.config" Name="SILConvertersOffice.dll.config" Vital="yes" KeyPath="yes" Source="..\..\output\x86\release\SILConvertersOffice.dll.config" />
         </Component>
 
         <Component Id="SecOffice_COMAddInShim03.dll" Guid="{A6D3E54E-798B-4B8D-A71C-C80B50E36DE0}">
@@ -77,15 +73,13 @@
         </Component>
 
         <Component Id="SecOffice_ManagedAggregator03.dll" Guid="{B8FDE108-ACEB-424F-B28D-C88AA4190061}">
-          <File Id="SecOffice_ManagedAggregator03.dll" Name="SecOffice_ManagedAggregator03.dll" Vital="yes" KeyPath="yes" AssemblyManifest="SecOffice_ManagedAggregator03.dll"
-                AssemblyApplication="SecOffice_ManagedAggregator03.dll" Assembly=".net" Source="..\..\output\x86\release\SecOffice_ManagedAggregator03.dll"/>
+          <File Id="SecOffice_ManagedAggregator03.dll" Name="SecOffice_ManagedAggregator03.dll" Vital="yes" KeyPath="yes" AssemblyManifest="SecOffice_ManagedAggregator03.dll" AssemblyApplication="SecOffice_ManagedAggregator03.dll" Assembly=".net" Source="..\..\output\x86\release\SecOffice_ManagedAggregator03.dll" />
         </Component>
 
         <Component Id="extensibility.dll" Guid="04F00FED-576D-4B33-B697-0264976885E6">
-          <File Id="extensibility.dll" Name="extensibility.dll" Vital="yes" KeyPath="yes" Source="..\..\src\SILConvertersOffice\DistFiles\extensibility.dll"/>
+          <File Id="extensibility.dll" Name="extensibility.dll" Vital="yes" KeyPath="yes" Source="..\..\src\SILConvertersOffice\DistFiles\extensibility.dll" />
         </Component>
 
       </Directory>
-    </Directory>
-  </Module>
+    </Module>
 </Wix>

@@ -1,23 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"
-     xmlns:bal="http://schemas.microsoft.com/wix/BalExtension"
-     xmlns:util="http://schemas.microsoft.com/wix/UtilExtension"
-     xmlns:netfx="http://schemas.microsoft.com/wix/NetFxExtension">
+﻿<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs" xmlns:bal="http://wixtoolset.org/schemas/v4/wxs/bal" xmlns:util="http://wixtoolset.org/schemas/v4/wxs/util">
 
-  <Bundle     Name='$(var.ApplicationName) $(var.TruncatedVersion)'
-                  Version='$(var.VersionNumber)'
-                  UpgradeCode='$(var.UpgradeCode)'
-                  Tag='$(var.ApplicationName)'
-                  IconSourceFile='..\SEC Setup\Installer.ico'
-                  Copyright='Copyright © $(var.Year), $(var.Manufacturer)'
-                  Manufacturer='$(var.Manufacturer)'>
+  <Bundle Name="$(var.ApplicationName) $(var.TruncatedVersion)" Version="$(var.VersionNumber)" UpgradeCode="$(var.UpgradeCode)" Tag="$(var.ApplicationName)" IconSourceFile="..\SEC Setup\Installer.ico" Copyright="Copyright © $(var.Year), $(var.Manufacturer)" Manufacturer="$(var.Manufacturer)">
 
-    <bal:Condition Message="XP is no longer supported."> (VersionNT &gt;= v6.0) </bal:Condition>
-    <BootstrapperApplicationRef Id="WixStandardBootstrapperApplication.RtfLicense">
-      <bal:WixStandardBootstrapperApplication
-            LicenseFile="..\SEC Setup\License.rtf"
-            />
-    </BootstrapperApplicationRef>
+    <bal:Condition Message="XP is no longer supported." Condition="(VersionNT &gt;= v6.0)" />
+    <BootstrapperApplication>
+      <bal:WixStandardBootstrapperApplication LicenseFile="..\SEC Setup\License.rtf" Theme="rtfLicense" />
+    </BootstrapperApplication>
 
     <WixVariable Id="WixStdbaLicenseUrl" Value="..\SEC Setup\License.rtf" />
     <WixVariable Id="WixStdbaLogo" Value="bundle_background.bmp" />
@@ -25,28 +13,36 @@
     <WixVariable Id="WixStdbaThemeWxl" Value="BundleTheme.wxl" />
     <Chain>
       <PackageGroupRef Id="NetFx48Web" />
+      <PackageGroupRef Id="VCRedist" />
       <RollbackBoundary />
-      <PackageGroupRef Id='AppPackageGroup'/>
+      <PackageGroupRef Id="AppPackageGroup" />
     </Chain>
 
   </Bundle>
 
   <?if $(var.Platform) = x64 ?>
   <?define msiFilename = "SetupSILConverters_x64.msi" ?>
-  <?else ?>
+  <?define vcRedistFilename = "vc_redist.x64.exe" ?>
+  <?define VCRuntimesRegKey = "SOFTWARE\Microsoft\VisualStudio\14.0\VC\Runtimes\X64" ?>
+  <?else?>
   <?define msiFilename = "SetupSILConverters_x86.msi" ?>
-  <?endif ?>
+  <?define vcRedistFilename = "vc_redist.x86.exe" ?>
+  <?define VCRuntimesRegKey = "SOFTWARE\Microsoft\VisualStudio\14.0\VC\Runtimes\X86" ?>
+  <?endif?>
 
-  <Fragment Id='AppFragment'>
-    <PackageGroup Id='AppPackageGroup'>
-      <MsiPackage Id='AppMsiPackage'
-                    DisplayName='$(var.ApplicationName) $(var.VersionNumber)'
-                    DisplayInternalUI='yes'
-                    ForcePerMachine='yes'
-                    InstallCondition='1'
-                    SourceFile='$(var.SolutionDir)output\$(var.Platform)\$(var.msiFilename)'
-                    Visible='yes'
-                    Vital='yes'>
+  <Fragment Id="AppFragment">
+    <PackageGroup Id="AppPackageGroup">
+      <!-- DisplayInternalUI="yes" (v3) was dropped from core in WiX v4 and replaced by the bal extension's
+           bal:DisplayInternalUICondition, which is confirmed to work with WixStandardBootstrapperApplication
+           (used here). WixBundleAction = 6 is BOOTSTRAPPER_ACTION_INSTALL, so the MSI's own WixUI_FeatureTree
+           wizard (authored in the "SEC Setup"/"SEC Setup 64bit" Product.wxs) surfaces on top of the bundle
+           during a fresh install, letting the user pick non-default features again; repair/modify/uninstall
+           still go through Burn's own (simpler) UI. The condition is evaluated at plan time, so it must
+           reference the bundle-level WixBundleAction variable, not a package-level action.
+           Known wrinkle: WixStdBA's rtfLicense theme already shows its own license/Install page before the
+           chain runs, so the MSI's WixUI_FeatureTree license dialog will appear a second time right after -
+           acceptable for now, but worth revisiting if it proves confusing in practice. -->
+      <MsiPackage Id="AppMsiPackage" DisplayName="$(var.ApplicationName) $(var.VersionNumber)" ForcePerMachine="yes" InstallCondition="1" SourceFile="$(var.SolutionDir)output\$(var.Platform)\$(var.msiFilename)" Visible="yes" Vital="yes" bal:DisplayInternalUICondition="WixBundleAction = 6">
 
       </MsiPackage>
     </PackageGroup>
@@ -56,14 +52,85 @@
   <!-- .NET 4.8 -->
   <?define NetFx48MinRelease = 528049 ?>
   <?define NetFx48WebLink = https://download.visualstudio.microsoft.com/download/pr/2d6bb6b2-226a-4baa-bdec-798822606ff1/9b7b8746971ed51a1770ae4293618187/ndp48-web.exe ?>
+  <!-- Size/Hash below are for the exact file currently served at NetFx48WebLink (re-verified 2026-08-05: HTTP
+       Content-Length + a real SHA512 computed over the downloaded bytes). WiX v6's Burn engine hashes
+       ExePackagePayload with SHA512 (v3's Payload/@Hash was SHA256) - confirmed the hard way via a VM-install
+       hash-mismatch error (0x80091007) whose "actual" value was a 128-hex-char SHA512 of this same,
+       byte-for-byte-unchanged file. Per wixtoolset/issues#6440, Microsoft has changed this file's hash/size
+       before without notice; re-verify both values if the download URL ever needs to change, or if Burn starts
+       rejecting the download with a hash-mismatch error again. -->
+  <?define NetFx48WebSize = 1439328 ?>
+  <?define NetFx48WebHash = 642721C60D52051C7F3434D8710FE3406A7CFE10B2B39E90EA847719ED1697D7C614F2DF44AD50412B1DF8C98DD78FDC57CA1D047D28C81AC158092E5FB18040 ?>
 
   <Fragment>
     <util:RegistrySearch Root="HKLM" Key="SOFTWARE\Microsoft\Net Framework Setup\NDP\v4\Full" Value="Release" Variable="Netfx4FullRelease" />
-    <util:RegistrySearch Root="HKLM" Key="SOFTWARE\Microsoft\Net Framework Setup\NDP\v4\Full" Value="Release" Variable="Netfx4x64FullRelease" Win64="yes" />
-    <WixVariable Id="NetFx48OrLaterDetectCondition" Overridable="yes"
-          Value="(Netfx4FullRelease &gt;= $(var.NetFx48MinRelease)) AND (NOT VersionNT64 OR (Netfx4x64FullRelease &gt;= $(var.NetFx48MinRelease)))" />
+    <util:RegistrySearch Root="HKLM" Key="SOFTWARE\Microsoft\Net Framework Setup\NDP\v4\Full" Value="Release" Variable="Netfx4x64FullRelease" Bitness="always64" />
+    <WixVariable Id="NetFx48OrLaterDetectCondition" Overridable="yes" Value="(Netfx4FullRelease &gt;= $(var.NetFx48MinRelease)) AND (NOT VersionNT64 OR (Netfx4x64FullRelease &gt;= $(var.NetFx48MinRelease)))" />
     <WixVariable Id="NetFx48WebInstallCondition" Value="" Overridable="yes" />
     <WixVariable Id="NetFx48WebPackageDirectory" Value="redist\" Overridable="yes" />
+
+    <!-- WixToolset.Netfx.wixext no longer ships a prebuilt "NetFx48Web" PackageGroup (confirmed: v6.0.2's
+         wixext DLL contains no PackageGroup/DotNetFramework authoring at all, only NGen-scheduling custom
+         actions); the old v3 NetFxExtension.wixlib's NetFx48Web fragment is hand-authored here instead,
+         following the same shape. NOT verified end-to-end (needs a machine without .NET 4.8 to actually
+         exercise the detect+download+install path; flagged for the interactive Phase 4 verification pass). -->
+    <PackageGroup Id="NetFx48Web">
+      <ExePackage Id="NetFx48WebExe"
+                  Cache="keep"
+                  PerMachine="yes"
+                  Permanent="yes"
+                  Vital="yes"
+                  Protocol="netfx4"
+                  InstallArguments="/q /norestart /ChainingPackage &quot;[WixBundleName]&quot;"
+                  RepairArguments="/q /norestart /repair /ChainingPackage &quot;[WixBundleName]&quot;"
+                  UninstallArguments="/uninstall /q /norestart /ChainingPackage &quot;[WixBundleName]&quot;"
+                  DetectCondition="NetFx48OrLaterDetectCondition"
+                  InstallCondition="NetFx48WebInstallCondition OR NOT NetFx48OrLaterDetectCondition">
+        <ExePackagePayload Name="!(wix.NetFx48WebPackageDirectory)ndp48-web.exe"
+                            DownloadUrl="$(var.NetFx48WebLink)"
+                            Size="$(var.NetFx48WebSize)"
+                            Hash="$(var.NetFx48WebHash)" />
+      </ExePackage>
+    </PackageGroup>
+  </Fragment>
+
+  <!-- VC++ runtime: EcMergeModules.wxs used to bring this in via the Microsoft_VC142_CRT/MFC merge modules
+       (vendored in ..\ExternalMergeModules), but those were left over from a VS2019 (v142) toolset and never
+       updated when the C++ projects moved to VS2022's v143 toolset - the wrong CRT/MFC version was being
+       installed. Microsoft has also deprecated the merge-module distribution model for the VC++ runtime since
+       VS2019: a merge module freezes the runtime DLLs into the MSI's own file table at build time, so they can
+       never receive servicing via Windows Update. vc_redist.x64.exe/x86.exe install into the serviced,
+       versioned side-by-side store instead, so chain it here as an ExePackage (mirroring NetFx48Web above)
+       rather than as a per-feature MergeRef. The CRT/MFC MergeRefs were removed from both SEC Setup/EcFeatures.wxs
+       and SEC Setup 64bit/EcFeatures.wxs accordingly (CRT90 - the unrelated VC++2008 runtime needed only by the
+       legacy Python 2.7 PythonEC merge module - was left alone).
+
+       Unlike NetFx48Web, the exe is vendored locally (Redist\vc_redist.$(var.Platform).exe, copied from a VS2022
+       install's VC\Redist\MSVC\v143\ folder) and embedded in the bundle rather than downloaded, specifically to
+       avoid the hash-drift problem documented above for NetFx48WebHash - Microsoft is known to change these
+       hosted redist files without notice, and a stale pinned hash breaks the bundle for every user until
+       someone re-verifies it. Detection follows the sillsdev/genericinstaller Bundle.wxs convention: a bare
+       "Installed" registry value under the runtime's Runtimes\X64|X86 key is treated as good enough (the VC++
+       runtime is serviced in place by Windows Update once installed, so this isn't pinned to the exact
+       14.44.35211 build vendored here). NOT verified end-to-end (needs a machine without the VC++ 2015-2022
+       runtime to actually exercise the detect+install path; flagged for the interactive Phase 4 verification
+       pass, same as NetFx48Web). -->
+  <Fragment>
+    <util:RegistrySearch Root="HKLM" Key="$(var.VCRuntimesRegKey)" Value="Installed" Variable="VCRuntimeInstalled" Result="value" />
+
+    <PackageGroup Id="VCRedist">
+      <ExePackage Id="VCRedistExe"
+                  Cache="keep"
+                  PerMachine="yes"
+                  Permanent="yes"
+                  Vital="yes"
+                  InstallArguments="/install /quiet /norestart"
+                  RepairArguments="/repair /quiet /norestart"
+                  UninstallArguments="/uninstall /quiet /norestart"
+                  DetectCondition="VCRuntimeInstalled">
+        <ExePackagePayload Name="$(var.vcRedistFilename)" SourceFile="Redist\$(var.vcRedistFilename)" />
+      </ExePackage>
+    </PackageGroup>
   </Fragment>
 
 </Wix>

@@ -1,86 +1,56 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="16.0">
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">x64</Platform>
-    <ProductVersion>9.0.30729</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
+    <TargetFramework>net48</TargetFramework>
+    <Platforms>x86;x64</Platforms>
     <ProjectGuid>{9B2EC5A8-CA2E-45CF-8B0D-35AAF1BB9E51}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <StartupObject>
-    </StartupObject>
-    <NoStandardLibraries>false</NoStandardLibraries>
     <AssemblyName>SILConvertersOffice</AssemblyName>
     <RootNamespace>SILConvertersOffice</RootNamespace>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>FieldWorks.snk</AssemblyOriginatorKeyFile>
     <ApplicationIcon>TRFFC17.ICO</ApplicationIcon>
-    <FileUpgradeFlags>
-    </FileUpgradeFlags>
-    <OldToolsVersion>3.5</OldToolsVersion>
-    <UpgradeBackupLocation>
-    </UpgradeBackupLocation>
     <ApplicationManifest>app.manifest</ApplicationManifest>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
-    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
-    <PublishUrl>publish\</PublishUrl>
-    <Install>true</Install>
-    <InstallFrom>Disk</InstallFrom>
-    <UpdateEnabled>false</UpdateEnabled>
-    <UpdateMode>Foreground</UpdateMode>
-    <UpdateInterval>7</UpdateInterval>
-    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
-    <UpdatePeriodically>false</UpdatePeriodically>
-    <UpdateRequired>false</UpdateRequired>
-    <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>0</ApplicationRevision>
-    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <UseApplicationTrust>false</UseApplicationTrust>
-    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <LangVersion>latest</LangVersion>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-    <TargetFrameworkProfile />
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+  <ItemGroup>
+    <!-- COMAddInShim03 (native vcxproj) and ManagedAggregator (SecOffice_ManagedAggregator03.csproj) are
+         separate projects living in subfolders of this one; DistFiles holds prebuilt reference DLLs, not
+         source. Exclude all three from default globbing so their files aren't swept into this project too. -->
+    <Compile Remove="COMAddInShim03\**;ManagedAggregator\**;DistFiles\**" />
+    <EmbeddedResource Remove="COMAddInShim03\**;ManagedAggregator\**;DistFiles\**" />
+    <None Remove="COMAddInShim03\**;ManagedAggregator\**;DistFiles\**" />
+    <Content Remove="COMAddInShim03\**;ManagedAggregator\**;DistFiles\**" />
+  </ItemGroup>
+  <PropertyGroup Condition="'$(Platform)'=='x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <Prefer32Bit>false</Prefer32Bit>
+    <RegisterForComInterop>false</RegisterForComInterop>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Platform)'=='x64'">
+    <PlatformTarget>x64</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
     <OutputPath>..\..\output\x86\Release\</OutputPath>
-    <DefineConstants>TRACE;BUILD_FOR_OFF11</DefineConstants>
     <Optimize>true</Optimize>
-    <RegisterForComInterop>false</RegisterForComInterop>
-    <PlatformTarget>x86</PlatformTarget>
-    <LangVersion>latest</LangVersion>
-    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
-    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
-    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
-    <Prefer32Bit>false</Prefer32Bit>
+    <DefineConstants>TRACE;BUILD_FOR_OFF11</DefineConstants>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
-    <DebugSymbols>true</DebugSymbols>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <OutputPath>..\..\output\x86\Debug\</OutputPath>
+    <DebugSymbols>true</DebugSymbols>
     <DefineConstants>TRACE;DEBUG;BUILD_FOR_OFF11</DefineConstants>
-    <RegisterForComInterop>false</RegisterForComInterop>
-    <PlatformTarget>x86</PlatformTarget>
-    <LangVersion>latest</LangVersion>
-    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
-    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
-    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
-    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
     <OutputPath>..\..\output\x64\Release\</OutputPath>
-    <DefineConstants>TRACE;BUILD_FOR_OFF11</DefineConstants>
     <Optimize>true</Optimize>
-    <PlatformTarget>x64</PlatformTarget>
-    <LangVersion>latest</LangVersion>
-    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <DefineConstants>TRACE;BUILD_FOR_OFF11</DefineConstants>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
-    <DebugSymbols>true</DebugSymbols>
     <OutputPath>..\..\output\x64\Debug\</OutputPath>
+    <DebugSymbols>true</DebugSymbols>
     <DefineConstants>TRACE;DEBUG;BUILD_FOR_OFF11</DefineConstants>
-    <PlatformTarget>x64</PlatformTarget>
-    <LangVersion>latest</LangVersion>
-    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="adodb, Version=7.0.3300.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
@@ -90,8 +60,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>DistFiles\DAO.DLL</HintPath>
     </Reference>
-    <!--nuget doesn't add the references to the csproj files properly; not sure why. Here is what
-			you might want to manually add to the csproj file instead-->
+    <!-- nuget doesn't add the references to the csproj files properly for these; manually HintPath'd instead. -->
     <Reference Include="BackTranslationHelper">
       <HintPath>$(EcDistFilesPath)\win-$(Platform)\native\BackTranslationHelper.dll</HintPath>
     </Reference>
@@ -122,14 +91,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>DistFiles\OFFICE.DLL</HintPath>
     </Reference>
-    <Reference Include="System" />
     <Reference Include="System.Configuration.Install" />
-    <Reference Include="System.Core">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
     <Reference Include="System.Data">
       <HintPath>System.Data.dll</HintPath>
-      <Name>System.Data</Name>
     </Reference>
     <Reference Include="System.Drawing" />
     <Reference Include="System.Management" />
@@ -137,175 +101,17 @@
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.XML">
       <HintPath>System.XML.dll</HintPath>
-      <Name>System.XML</Name>
     </Reference>
     <Reference Include="System.Xml.Linq" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="AccessApp.cs" />
-    <Compile Include="AccessDoc.cs" />
-    <Compile Include="AssemblyInfo.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Connect.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="DbFieldSelect.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="DbFieldSelect.Designer.cs">
-      <DependentUpon>DbFieldSelect.cs</DependentUpon>
-    </Compile>
-    <Compile Include="ExcelDoc.cs" />
-    <Compile Include="ExcelFunctions.cs" />
-    <Compile Include="FindReplaceForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FindReplaceForm.Designer.cs">
-      <DependentUpon>FindReplaceForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="InstallerRegistrationActions.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="InstallerRegistrationActions.Designer.cs">
-      <DependentUpon>InstallerRegistrationActions.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Properties\Settings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-      <DependentUpon>Settings.settings</DependentUpon>
-    </Compile>
-    <Compile Include="PubDocumentProcessor.cs" />
-    <Compile Include="PubRange.cs" />
-    <Compile Include="TranslationHelperForm.cs" />
-    <Compile Include="TranslationHelperForm.Designer.cs">
-      <DependentUpon>TranslationHelperForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="WordDocumentProcessor.cs" />
-    <Compile Include="ExcelApp.cs" />
-    <Compile Include="FontConverter.cs" />
-    <Compile Include="FontConvertersPicker.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FontConvertersPicker.designer.cs">
-      <DependentUpon>FontConvertersPicker.cs</DependentUpon>
-    </Compile>
-    <Compile Include="WordRange.cs" />
-    <Compile Include="OfficeApp.cs" />
-    <Compile Include="PubApp.cs" />
-    <Compile Include="RoundTripProcessorForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="RoundTripProcessorForm.designer.cs">
-      <DependentUpon>RoundTripProcessorForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="SILConverterProcessorForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="SILConverterProcessorForm.designer.cs">
-      <DependentUpon>SILConverterProcessorForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="WordApp.cs" />
-    <Compile Include="BaseConverterForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="BaseConverterForm.designer.cs">
-      <DependentUpon>BaseConverterForm.cs</DependentUpon>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="DbFieldSelect.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>DbFieldSelect.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FindReplaceForm.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>FindReplaceForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FontConvertersPicker.resx">
-      <DependentUpon>FontConvertersPicker.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Properties\Resources.resx">
-      <SubType>Designer</SubType>
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="RoundTripProcessorForm.resx">
-      <DependentUpon>RoundTripProcessorForm.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="SILConverterProcessorForm.resx">
-      <DependentUpon>SILConverterProcessorForm.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="BaseConverterForm.resx">
-      <DependentUpon>BaseConverterForm.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="TranslationHelperForm.resx">
-      <DependentUpon>TranslationHelperForm.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
     <None Include="app.manifest" />
     <None Include="FieldWorks.snk" />
-    <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="TRFFC17.ICO" />
   </ItemGroup>
   <ItemGroup>
-    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
-      <Visible>False</Visible>
-      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
-      <Install>false</Install>
-    </BootstrapperPackage>
-    <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
-      <Visible>False</Visible>
-      <ProductName>.NET Framework 2.0 %28x86%29</ProductName>
-      <Install>true</Install>
-    </BootstrapperPackage>
-    <BootstrapperPackage Include="Microsoft.Net.Framework.3.0">
-      <Visible>False</Visible>
-      <ProductName>.NET Framework 3.0 %28x86%29</ProductName>
-      <Install>false</Install>
-    </BootstrapperPackage>
-    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5">
-      <Visible>False</Visible>
-      <ProductName>.NET Framework 3.5</ProductName>
-      <Install>false</Install>
-    </BootstrapperPackage>
-    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
-      <Visible>False</Visible>
-      <ProductName>.NET Framework 3.5 SP1</ProductName>
-      <Install>false</Install>
-    </BootstrapperPackage>
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="Encoding-Converters-Core">
-      <Version>0.9.9</Version>
-    </PackageReference>
+    <PackageReference Include="Encoding-Converters-Core" Version="0.9.9" />
   </ItemGroup>
   <Import Project="$(SolutionDir)SharedItems.props" />
-  <Import Project="$(MSBuildBinPath)\Microsoft.CSHARP.Targets" />
-  <PropertyGroup>
-    <PreBuildEvent>
-    </PreBuildEvent>
-    <PostBuildEvent>
-    </PostBuildEvent>
-  </PropertyGroup>
-  <ProjectExtensions>
-    <VisualStudio>
-    </VisualStudio>
-  </ProjectExtensions>
 </Project>

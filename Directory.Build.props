@@ -2,8 +2,8 @@
   <PropertyGroup>
     <ApplicationName>SILConverters</ApplicationName>
     <SafeApplicationName>SILConverters</SafeApplicationName>
-    <TruncatedVersion>5.4</TruncatedVersion>
-    <VersionNumber>5.4.2.0</VersionNumber>
+    <TruncatedVersion>6.0</TruncatedVersion>
+    <VersionNumber>6.0.0.0</VersionNumber>
     <UpgradeCode>8A50226C-84D0-4CAF-AF8F-B0284643C415</UpgradeCode>
     <Year>2026</Year>
     <Manufacturer>SIL International</Manufacturer>

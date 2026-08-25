@@ -1,10 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-  <Module Id="Hebrew40MergeModule" Language="1033" Version="4.0.0.0">
-    <Package Id="f4579731-bed3-49f7-954b-5a2c31aa1f2a" Comments="Converters used in Papua New Guinea" Description="Converters related to Hebrew" Keywords="SILConverters; Encoding Conversion; Transliteration; EncConverters" Languages="1033" Manufacturer="SIL International" InstallerVersion="500" />
+﻿<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
+  <Module Id="Hebrew40MergeModule" Language="1033" Version="4.0.0.0" Guid="f4579731-bed3-49f7-954b-5a2c31aa1f2a" InstallerVersion="500"><SummaryInformation Description="Converters related to Hebrew" Keywords="SILConverters; Encoding Conversion; Transliteration; EncConverters" Manufacturer="SIL International" />
 
-    <Directory Id="TARGETDIR" Name="SourceDir">
-      <Directory Id="CommonAppDataFolder" SourceName="AppData">
+    
+  
+      <StandardDirectory Id="CommonAppDataFolder">
         <Directory Id="SIL" Name="SIL">
           <Directory Id="SILConverters40" Name="SILConverters40">
             <Directory Id="MapsTables" Name="MapsTables">
@@ -47,7 +46,6 @@
             </Directory>
           </Directory>
         </Directory>
-      </Directory>
-    </Directory>
-  </Module>
+      </StandardDirectory>
+    </Module>
 </Wix>

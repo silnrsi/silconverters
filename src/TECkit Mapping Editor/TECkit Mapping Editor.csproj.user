@@ -16,4 +16,21 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
     <StartArguments>"C:\Temp\SEC\Shree550\Manipuri Draft Method A v.03 %28L2U%29.map"</StartArguments>
   </PropertyGroup>
+  <ItemGroup>
+    <Compile Update="DisplayUnicodeNamesForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="FindReplaceForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="MyDataGridView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="QueryConvTypeDlg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="TECkit Mapping Editor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+  </ItemGroup>
 </Project>

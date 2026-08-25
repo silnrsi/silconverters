@@ -1,11 +1,12 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi" xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
-  <Module Id="SpellFixerEcMM" Language="1033" Version="1.0.0.0">
-    <Package Id="{4D120452-EC32-41D3-B8C4-92C142E4DCC1}" Comments="SpellFixer Macro Word document template"
-         Description="Document Template for doing spelling corrections using EncConverters in MS Word" InstallerVersion="500" Keywords="SILConverters; Spell Fixing in MS Word"
-         Manufacturer="SIL" />
+<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs" xmlns:util="http://wixtoolset.org/schemas/v4/wxs/util">
+  <Module Id="SpellFixerEcMM" Language="1033" Version="1.0.0.0" Guid="{4D120452-EC32-41D3-B8C4-92C142E4DCC1}" InstallerVersion="500"><SummaryInformation Description="Document Template for doing spelling corrections using EncConverters in MS Word" Keywords="SILConverters; Spell Fixing in MS Word" Manufacturer="SIL" />
 
-    <Directory Id="TARGETDIR" Name="SourceDir">
+    
+
+    <InstallExecuteSequence>
+      <RemoveShortcuts Condition="Installed AND NOT UPGRADINGPRODUCTCODE AND REMOVE=&quot;ALL&quot;" />
+    </InstallExecuteSequence>
+  
 
       <Directory Id="MergeRedirectFolder">
 
@@ -13,8 +14,7 @@
           <Class Id="{B3256CF8-FA9B-310D-89A6-9268B37A9A72}" Context="InprocServer32" Description="SpellingFixerEC.SpellingFixerEC" ThreadingModel="both" ForeignServer="mscoree.dll">
             <ProgId Id="SpellingFixerEC.SpellingFixerEC" Description="SpellingFixerEC.SpellingFixerEC" />
           </Class>
-          <File Id="SpellingFixerEC.dll" Name="SpellingFixerEC.dll" KeyPath="yes" Assembly=".net" AssemblyManifest="SpellingFixerEC.dll" AssemblyApplication="SpellingFixerEC.dll"
-                Source="..\..\output\x86\release\SpellingFixerEC.dll" />
+          <File Id="SpellingFixerEC.dll" Name="SpellingFixerEC.dll" KeyPath="yes" Assembly=".net" AssemblyManifest="SpellingFixerEC.dll" AssemblyApplication="SpellingFixerEC.dll" Source="..\..\output\x86\release\SpellingFixerEC.dll" />
           <RegistryValue Root="HKCR" Key="CLSID\{B3256CF8-FA9B-310D-89A6-9268B37A9A72}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
           <RegistryValue Root="HKCR" Key="CLSID\{B3256CF8-FA9B-310D-89A6-9268B37A9A72}\InprocServer32\5.0.0.0" Name="Class" Value="SpellingFixerEC.SpellingFixerEC" Type="string" Action="write" />
           <RegistryValue Root="HKCR" Key="CLSID\{B3256CF8-FA9B-310D-89A6-9268B37A9A72}\InprocServer32\5.0.0.0" Name="Assembly" Value="SpellingFixerEC, Version=5.0.0.0, Culture=neutral, PublicKeyToken=f1447bae1e63f485" Type="string" Action="write" />
@@ -38,8 +38,7 @@
           <Class Id="{CFDB9B1A-DAE6-40BE-8A34-5A3CA1A71463}" Context="InprocServer32" Description="SpellingFixer30.SpellingFixer30" ThreadingModel="both" ForeignServer="mscoree.dll">
             <ProgId Id="SpellingFixer30.SpellingFixer30" Description="SpellingFixer30.SpellingFixer30" />
           </Class>
-          <File Id="SpellingFixer30.dll" Name="SpellingFixer30.dll" KeyPath="yes" Assembly=".net" AssemblyManifest="SpellingFixer30.dll" AssemblyApplication="SpellingFixer30.dll"
-                Source="..\..\output\x86\release\SpellingFixer30.dll" />
+          <File Id="SpellingFixer30.dll" Name="SpellingFixer30.dll" KeyPath="yes" Assembly=".net" AssemblyManifest="SpellingFixer30.dll" AssemblyApplication="SpellingFixer30.dll" Source="..\..\output\x86\release\SpellingFixer30.dll" />
           <RegistryValue Root="HKCR" Key="CLSID\{CFDB9B1A-DAE6-40BE-8A34-5A3CA1A71463}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
           <RegistryValue Root="HKCR" Key="CLSID\{CFDB9B1A-DAE6-40BE-8A34-5A3CA1A71463}\InprocServer32\5.0.0.0" Name="Class" Value="SpellingFixer30.SpellingFixer30" Type="string" Action="write" />
           <RegistryValue Root="HKCR" Key="CLSID\{CFDB9B1A-DAE6-40BE-8A34-5A3CA1A71463}\InprocServer32\5.0.0.0" Name="Assembly" Value="SpellingFixer30, Version=5.0.0.0, Culture=neutral, PublicKeyToken=f1447bae1e63f485" Type="string" Action="write" />
@@ -53,7 +52,7 @@
 
       </Directory>
 
-      <Directory Id="CommonAppDataFolder" SourceName="AppData">
+      <StandardDirectory Id="CommonAppDataFolder">
         <Directory Id="AppDataSIL" Name="SIL">
           <Directory Id="AllUserAppDataSILConsistentSpellingFixer" Name="ConsistentSpellingFixer">
             <Directory Id="AppDataSILCscScriptSystems" Name="ScriptSystems">
@@ -79,7 +78,7 @@
             </Directory>
           </Directory>
         </Directory>
-      </Directory>
+      </StandardDirectory>
 
       <Directory Id="WORD_DOT_FOLDER" Name="Word DOT Folder">
         <Component Id="SpellFixer.dot" Guid="{56498D8E-5A6A-46A8-9AA5-13D022E4E914}">
@@ -88,18 +87,11 @@
         </Component>
       </Directory>
 
-      <Directory Id="StartMenuFolder" SourceName="Start Menu">
-        <Directory Id="ProgramMenuFolder" SourceName="Programs">
+      <StandardDirectory Id="ProgramMenuFolder">
           <Directory Id="SIL_Converters" Name="SIL Converters">
             <Directory Id="SILConvHelp" Name="Help" />
           </Directory>
-        </Directory>
-      </Directory>
+        </StandardDirectory>
 
-    </Directory>
-
-    <InstallExecuteSequence>
-      <RemoveShortcuts>Installed AND NOT UPGRADINGPRODUCTCODE AND REMOVE="ALL"</RemoveShortcuts>
-    </InstallExecuteSequence>
-  </Module>
+    </Module>
 </Wix>

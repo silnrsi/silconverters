@@ -1,11 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-  <Module Id="SCOffice13MM" Language="1033" Version="4.0.0.0">
-    <Package Id="5a37ca0b-2f3d-4a04-a031-72b143eabba9" Comments="Merge Module for the SILConverters for Office 2013 application"
-         Description="Setup for the SILConverters for Office 2013 application" Keywords="SIL Encoding Converters; Microsoft Office" Manufacturer="SIL International"
-         InstallerVersion="500" />
+﻿<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
+  <Module Id="SCOffice13MM" Language="1033" Version="4.0.0.0" Guid="5a37ca0b-2f3d-4a04-a031-72b143eabba9" InstallerVersion="500"><SummaryInformation Description="Setup for the SILConverters for Office 2013 application" Keywords="SIL Encoding Converters; Microsoft Office" Manufacturer="SIL International" />
 
-    <Directory Id="TARGETDIR" Name="SourceDir">
+    
+  
       <Directory Id="MergeRedirectFolder">
 
         <Component Id="SILConvertersOffice13.dll" Guid="{74FE9840-3B06-4CA8-9A48-76754E9D0FE6}">
@@ -89,8 +86,7 @@
         </Component>
 
         <Component Id="SILConvertersOffice13.dll.config" Guid="{4A86C3F9-86F2-4F3F-A479-1D68E8E0FE0B}">
-          <File Id="SILConvertersOffice13.dll.config" Name="SILConvertersOffice13.dll.config" Vital="yes" KeyPath="yes"
-                Source="..\..\output\x86\release\SILConvertersOffice13.dll.config" />
+          <File Id="SILConvertersOffice13.dll.config" Name="SILConvertersOffice13.dll.config" Vital="yes" KeyPath="yes" Source="..\..\output\x86\release\SILConvertersOffice13.dll.config" />
         </Component>
 
         <Component Id="SecOffice_COMAddInShim13.dll" Guid="{FB6B704D-7D1B-4B9C-8F98-CE8F6BDBA0EC}">
@@ -114,11 +110,9 @@
         </Component>
 
         <Component Id="SecOffice_ManagedAggregator13.dll" Guid="{A3A1BC2E-1364-4AC7-AF6A-15D78DDBA82A}">
-          <File Id="SecOffice_ManagedAggregator13.dll" Name="SecOffice_ManagedAggregator13.dll" Vital="yes" KeyPath="yes" AssemblyManifest="SecOffice_ManagedAggregator13.dll"
-                AssemblyApplication="SecOffice_ManagedAggregator13.dll" Assembly=".net" Source="..\..\output\x86\release\SecOffice_ManagedAggregator13.dll"/>
+          <File Id="SecOffice_ManagedAggregator13.dll" Name="SecOffice_ManagedAggregator13.dll" Vital="yes" KeyPath="yes" AssemblyManifest="SecOffice_ManagedAggregator13.dll" AssemblyApplication="SecOffice_ManagedAggregator13.dll" Assembly=".net" Source="..\..\output\x86\release\SecOffice_ManagedAggregator13.dll" />
         </Component>
 
       </Directory>
-    </Directory>
-  </Module>
+    </Module>
 </Wix>

@@ -1,14 +1,15 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-  <Module Id="DChartHelper4064bitMergeModule" Language="1033" Version="4.0.0.0">
-    <Package Id="{FEE2161F-5A5E-4B0A-894F-75E5DA50ACFE}" Comments="Discourse Chart Helper" Keywords="Discourse Analysis; Discourse Charting; SILConverters; SIL" Manufacturer="SIL International"
-         InstallerVersion="500"
-         Platform="x64" />
+<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
+  <Module Id="DChartHelper4064bitMergeModule" Language="1033" Version="4.0.0.0" Guid="{FEE2161F-5A5E-4B0A-894F-75E5DA50ACFE}" InstallerVersion="500"><SummaryInformation Keywords="Discourse Analysis; Discourse Charting; SILConverters; SIL" Manufacturer="SIL International" />
 
 
-    <Directory Id="TARGETDIR" Name="SourceDir">
+    
 
-      <Component Id="xmlOpenWithRegKeys" Guid="{32A6238C-5632-4B43-AD11-826F51253E3A}">
+    <InstallExecuteSequence>
+      <RemoveShortcuts Condition="Installed AND NOT UPGRADINGPRODUCTCODE AND REMOVE=&quot;ALL&quot;" />
+    </InstallExecuteSequence>
+  
+
+      <Component Id="xmlOpenWithRegKeys" Guid="{32A6238C-5632-4B43-AD11-826F51253E3A}" Directory="TARGETDIR">
         <RegistryValue Id="xmlOpenWithRegKeys1" Root="HKCR" Key=".xml\OpenWithList\DChartHelper.exe" Value="" Type="string" KeyPath="yes" />
         <RegistryValue Id="xmlOpenWithRegKeys2" Root="HKCR" Key=".xml" Value="xmlfile" Type="string" />
         <RegistryValue Id="xmlOpenWithRegKeys3" Root="HKCR" Key=".xml" Name="PerceivedType" Value="text" Type="string" />
@@ -26,8 +27,7 @@
       <Directory Id="MergeRedirectFolder">
 
         <Component Id="DChartHelper.exe" Guid="{DC0C23E6-79E9-4E42-9FE9-D47FCB91751E}">
-          <File Id="DChartHelper.exe" Name="DChartHelper.exe" KeyPath="yes" Assembly=".net" AssemblyManifest="DChartHelper.exe" AssemblyApplication="DChartHelper.exe"
-                Source="..\..\output\x64\release\DChartHelper.exe" />
+          <File Id="DChartHelper.exe" Name="DChartHelper.exe" KeyPath="yes" Assembly=".net" AssemblyManifest="DChartHelper.exe" AssemblyApplication="DChartHelper.exe" Source="..\..\output\x64\release\DChartHelper.exe" />
           <Shortcut Id="DChartHelper.exe" Directory="SILConverters" Name="Discourse Chart Helper" Description="Prepare discourse analysis charts" IconIndex="0" Show="normal" Target="[#DChartHelper.exe]" WorkingDirectory="MergeRedirectFolder" Advertise="no" />
         </Component>
 
@@ -39,18 +39,11 @@
         </Directory>
       </Directory>
 
-      <Directory Id="StartMenuFolder" SourceName="Start Menu">
-        <Directory Id="ProgramMenuFolder" SourceName="Programs">
+      <StandardDirectory Id="ProgramMenuFolder">
           <Directory Id="SILConverters" Name="SIL Converters">
             <Directory Id="DcHelp" Name="Help" />
           </Directory>
-        </Directory>
-      </Directory>
+        </StandardDirectory>
 
-    </Directory>
-
-    <InstallExecuteSequence>
-      <RemoveShortcuts>Installed AND NOT UPGRADINGPRODUCTCODE AND REMOVE="ALL"</RemoveShortcuts>
-    </InstallExecuteSequence>
-  </Module>
+    </Module>
 </Wix>

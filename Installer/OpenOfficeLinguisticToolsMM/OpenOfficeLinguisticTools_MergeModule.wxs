@@ -1,9 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-  <Module Id="OpenOfficeLinguisticToolsMM" Language="1033" Version="4.0.0.0">
-    <Package Id="c214f0e4-3e22-4a50-8f5e-5024301f3ba6" Comments="Linguistic Tools/Data Conversion Extension for Open/LibreOffice" Description="Linguistic Tools/Data Conversion Extension for Open/LibreOffice" InstallerVersion="500" Keywords="SILConverters; OpenOffice; LibreOffice; Extension; Linguistic Tools; Data Conversion" Manufacturer="SIL" />
+﻿<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
+  <Module Id="OpenOfficeLinguisticToolsMM" Language="1033" Version="4.0.0.0" Guid="c214f0e4-3e22-4a50-8f5e-5024301f3ba6" InstallerVersion="500"><SummaryInformation Description="Linguistic Tools/Data Conversion Extension for Open/LibreOffice" Keywords="SILConverters; OpenOffice; LibreOffice; Extension; Linguistic Tools; Data Conversion" Manufacturer="SIL" />
 
-    <Directory Id="TARGETDIR" Name="SourceDir">
+    
+  
       <Directory Id="MergeRedirectFolder">
 
         <Component Id="LinguisticTools4.0.2.oxt" Guid="770D3851-231F-405C-A8CC-12CC662F8AF3">
@@ -11,6 +10,5 @@
         </Component>
 
       </Directory>
-    </Directory>
-  </Module>
+    </Module>
 </Wix>

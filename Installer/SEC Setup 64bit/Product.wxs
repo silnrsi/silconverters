@@ -1,32 +1,23 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"
-     xmlns:netfx="http://schemas.microsoft.com/wix/NetFxExtension">
-  <Product Id="*" UpgradeCode="{0F7D5D72-E9F3-40BB-9748-D388C70096CD}" Name="SIL Converters 5.4 (x64)" Manufacturer="SIL International"
-           Language="1033" Version="5.4" >
-    <Package InstallerVersion="500" Compressed='yes' InstallScope="perMachine"
-             Platform="x64" />
+﻿<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs" xmlns:ui="http://wixtoolset.org/schemas/v4/wxs/ui">
+  <Package UpgradeCode="{0F7D5D72-E9F3-40BB-9748-D388C70096CD}" Name="SIL Converters 6.0 (x64)" Manufacturer="SIL International" Language="1033" Version="6.0">
+    
 
-    <Condition Message="You need to be an administrator to install this product.">Privileged</Condition>
-    <Condition Message="[ProductName] will only run on Windows 2000 or better. You cannot intall it on this machine.">
-      <![CDATA[(NOT Version9X) OR (NOT VersionNT OR (VersionNT >= 500))]]>
-    </Condition>
+    <Launch Condition="Privileged" Message="You need to be an administrator to install this product." />
+    <Launch Condition="(NOT Version9X) OR (NOT VersionNT OR (VersionNT &gt;= 500))" Message="[ProductName] will only run on Windows 2000 or better. You cannot intall it on this machine." />
 
-    <Icon Id="Installer.ico" SourceFile="Installer.ico"/>
+    <Icon Id="Installer.ico" SourceFile="Installer.ico" />
     <Property Id="ARPPRODUCTICON" Value="Installer.ico" />
 
     <Property Id="REINSTALLMODE" Value="amus" />
 
-    <MajorUpgrade Schedule='afterInstallInitialize'
-                  DowngradeErrorMessage="A newer version of [ProductName] is already installed."
-                  AllowSameVersionUpgrades="yes" />
+    <MajorUpgrade Schedule="afterInstallInitialize" DowngradeErrorMessage="A newer version of [ProductName] is already installed." AllowSameVersionUpgrades="yes" />
 
     <MediaTemplate EmbedCab="yes" CompressionLevel="high" />
 
-    <!-- Require .NET 4.6.1+ -->
-    <PropertyRef Id="WIX_IS_NETFRAMEWORK_461_OR_LATER_INSTALLED"/>
-    <Condition Message="This application requires .NET Framework 4.6.1 or later. Please install the .NET Framework then run this installer again.">
-      <![CDATA[Installed OR WIX_IS_NETFRAMEWORK_461_OR_LATER_INSTALLED]]>
-    </Condition>
+    <!-- No MSI-level .NET Framework check: the bundle (SetupSILConverters\Bundle.wxs) is the only supported
+         install path and already chains NetFx48Web (the real requirement is 4.8, not the 4.6.1 this used to
+         check) before this MSI ever runs. This used WIX_IS_NETFRAMEWORK_461_OR_LATER_INSTALLED, a property
+         shipped by WixToolset.Netfx.wixext; removed along with that now-unused PackageReference. -->
 
     <Property Id="OFFICE_2016_BITNESS">
       <RegistrySearch Id="Office2016Bitness" Root="HKLM" Key="Software\Microsoft\Office\16.0\Outlook" Name="Bitness" Type="raw" />
@@ -166,20 +157,20 @@
       </DirectorySearch>
     </Property>
 
-    <Property Id="OfficePIAWarningWord"><![CDATA[The "Bulk Word Document Converter" add-in requires the Microsoft Office Primary Interop Assemblies (PIAs).]]></Property>
-    <Property Id="OfficePIAWarningOffice"><![CDATA[The "SILConverters for Office" add-in requires the Microsoft Office Primary Interop Assemblies (PIAs).]]></Property>
-    <Property Id="OfficePIAWarning"><![CDATA[The web page that shows how they can be installed either from your Office 2003/2007/2010 CD/DVD or via a (4MB) download is: http://msdn2.microsoft.com/en-us/library/aa159923(office.11).aspx]]></Property>
+    <Property Id="OfficePIAWarningWord" Value="The &quot;Bulk Word Document Converter&quot; add-in requires the Microsoft Office Primary Interop Assemblies (PIAs)." />
+    <Property Id="OfficePIAWarningOffice" Value="The &quot;SILConverters for Office&quot; add-in requires the Microsoft Office Primary Interop Assemblies (PIAs)." />
+    <Property Id="OfficePIAWarning" Value="The web page that shows how they can be installed either from your Office 2003/2007/2010 CD/DVD or via a (4MB) download is: http://msdn2.microsoft.com/en-us/library/aa159923(office.11).aspx" />
 
-    <PropertyRef Id='EcFilesFragment'/>
-    <PropertyRef Id='EcFeaturesFragment'/>
-    <PropertyRef Id='EcMergeModulesFragment'/>
-    <PropertyRef Id='EcActionsFragment'/>
+    <PropertyRef Id="EcFilesFragment" />
+    <PropertyRef Id="EcFeaturesFragment" />
+    <PropertyRef Id="EcMergeModulesFragment" />
+    <PropertyRef Id="EcActionsFragment" />
 
-    <Property Id="INSTALLLEVEL"><![CDATA[3]]></Property>
+    <Property Id="INSTALLLEVEL" Value="3" />
     <WixVariable Id="WixUILicenseRtf" Value="License.rtf" />
     <WixVariable Id="WixUIDialogBmp" Value="MSIBackground.bmp" />
     <Property Id="WIXUI_INSTALLDIR" Value="INSTALLDIR" />
-    <UIRef Id="WixUI_FeatureTree"/>
+    <ui:WixUI Id="WixUI_FeatureTree" />
 
-  </Product>
+  </Package>
 </Wix>

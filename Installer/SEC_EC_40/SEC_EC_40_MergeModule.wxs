@@ -1,12 +1,23 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi" xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
-    <Module Id="SECEC40" Language="1033" Version="4.0.0.0">
-        <Package Id="13edfc7c-c15d-4db2-bf8b-4da34fc38a88" Keywords="SIL; Encoding Conversion; Transliteration; EncConverters" Description="EncConverter core 4.0 Merge Module -- Include in any client application deployment project which uses the EncConverters objects" Comments="Common installer module for SIL's version 4.0 of the EncConverter's core" Manufacturer="SIL International" InstallerVersion="200" Languages="1033" SummaryCodepage="1252" />
+<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs" xmlns:util="http://wixtoolset.org/schemas/v4/wxs/util">
+    <Module Id="SECEC40" Language="1033" Version="4.0.0.0" Guid="13edfc7c-c15d-4db2-bf8b-4da34fc38a88" InstallerVersion="200"><SummaryInformation Keywords="SIL; Encoding Conversion; Transliteration; EncConverters" Description="EncConverter core 4.0 Merge Module -- Include in any client application deployment project which uses the EncConverters objects" Manufacturer="SIL International" />
 
-        <Directory Id="TARGETDIR" Name="SourceDir">
-            <Component Id="RegisterECFolders" Guid="ba2789b1-93c9-4258-872e-85d91e975db1">
-                <RegistryValue Root="HKLM" Key="Software\SIL\SilEncConverters40" Name="RootDir" Type="string" Value="[EcSIL]"/>
-                <RegistryValue Root="HKLM" Key="Software\SIL\SilEncConverters40" Name="UseMozilla" Type="string" Value="False"/>
+        
+
+        <!-- The following section launches the installed file EncConvertersAppDataMover40.exe but hides its console window.
+             Uses the WixToolset.Util.wixext WixQuietExec custom action (CreateProcess-based) instead of a VBScript deferred
+             CustomAction, because WiX v6+ cannot modularize a Script="vbscript" CustomAction into a merge module (.msm). -->
+        <CustomAction Id="SetAppDataMoverData" Return="check" Property="LaunchAppDataMover" Value="&quot;[#EncConvertersAppDataMover40.exe]&quot;" />
+        <CustomAction Id="LaunchAppDataMover" BinaryRef="Wix4UtilCA_$(sys.BUILDARCHSHORT)" DllEntry="WixQuietExec" Return="ignore" Impersonate="no" Execute="deferred" />
+
+        <InstallExecuteSequence>
+            <Custom Action="SetAppDataMoverData" Before="InstallInitialize" Condition="VersionNT &gt;= 501" />
+            <Custom Action="LaunchAppDataMover" After="PublishComponents" Condition="NOT Installed" />
+        </InstallExecuteSequence>
+
+    
+            <Component Id="RegisterECFolders" Guid="ba2789b1-93c9-4258-872e-85d91e975db1" Directory="TARGETDIR">
+                <RegistryValue Root="HKLM" Key="Software\SIL\SilEncConverters40" Name="RootDir" Type="string" Value="[EcSIL]" />
+                <RegistryValue Root="HKLM" Key="Software\SIL\SilEncConverters40" Name="UseMozilla" Type="string" Value="False" />
             </Component>
             
             <Directory Id="MergeRedirectFolder">
@@ -15,7 +26,7 @@
                     <Class Id="{E8DE7761-7091-38B8-82CD-C67A76F62DC9}" Context="InprocServer32" Description="ECInterfaces.mappingRegistry" ThreadingModel="both" ForeignServer="mscoree.dll">
                         <ProgId Id="ECInterfaces.mappingRegistry" Description="ECInterfaces.mappingRegistry" />
                     </Class>
-                    <File Id="ECInterfaces.dll" Name="ECInterfaces.dll" Vital="yes" KeyPath="yes" AssemblyManifest="ECInterfaces.dll" AssemblyApplication="ECInterfaces.dll" Assembly=".net" Source="..\..\DistFiles\release\ECInterfaces.dll"/>
+                    <File Id="ECInterfaces.dll" Name="ECInterfaces.dll" Vital="yes" KeyPath="yes" AssemblyManifest="ECInterfaces.dll" AssemblyApplication="ECInterfaces.dll" Assembly=".net" Source="..\..\DistFiles\release\ECInterfaces.dll" />
                     <ProgId Id="Record" />
                     <RegistryValue Root="HKCR" Key="CLSID\{E8DE7761-7091-38B8-82CD-C67A76F62DC9}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
                     <RegistryValue Root="HKCR" Key="CLSID\{E8DE7761-7091-38B8-82CD-C67A76F62DC9}\InprocServer32\4.0.0.0" Name="Class" Value="ECInterfaces.mappingRegistry" Type="string" Action="write" />
@@ -257,7 +268,7 @@
                     <Class Id="{FBC7B81D-39A4-3DC6-A085-567D325146A2}" Context="InprocServer32" Description="SilEncConverters40.MetaCmpdAutoConfigDialog" ThreadingModel="both" ForeignServer="mscoree.dll">
                         <ProgId Id="SilEncConverters40.MetaCmpdAutoConfigDialog" Description="SilEncConverters40.MetaCmpdAutoConfigDialog" />
                     </Class>
-                    <File Id="SilEncConverters40.dll" Name="SilEncConverters40.dll" Vital="yes" KeyPath="yes" AssemblyManifest="SilEncConverters40.dll" AssemblyApplication="SilEncConverters40.dll" Assembly=".net" Source="..\..\DistFiles\release\SilEncConverters40.dll"/>
+                    <File Id="SilEncConverters40.dll" Name="SilEncConverters40.dll" Vital="yes" KeyPath="yes" AssemblyManifest="SilEncConverters40.dll" AssemblyApplication="SilEncConverters40.dll" Assembly=".net" Source="..\..\DistFiles\release\SilEncConverters40.dll" />
                     <ProgId Id="Record" />
                     <RegistryValue Root="HKCR" Key="CLSID\{0162B174-E479-44CD-BEE8-CFA9BC06BF92}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
                     <RegistryValue Root="HKCR" Key="CLSID\{0162B174-E479-44CD-BEE8-CFA9BC06BF92}\InprocServer32\4.0.0.0" Name="Class" Value="SilEncConverters40.EncConverters" Type="string" Action="write" />
@@ -474,50 +485,50 @@
                     </File>
                 </Component>
                 <Component Id="EncConvertersAppDataMover40.exe" Guid="4F57740F-5033-42f2-A41A-ED8022731CE0">
-                    <File Id="EncConvertersAppDataMover40.exe" Name="EncConvertersAppDataMover40.exe" ReadOnly="yes" KeyPath="yes" Source="..\..\DistFiles\release\EncConvertersAppDataMover40.exe" Assembly=".net" AssemblyApplication="EncConvertersAppDataMover40.exe" AssemblyManifest="EncConvertersAppDataMover40.exe"/>
+                    <File Id="EncConvertersAppDataMover40.exe" Name="EncConvertersAppDataMover40.exe" ReadOnly="yes" KeyPath="yes" Source="..\..\DistFiles\release\EncConvertersAppDataMover40.exe" Assembly=".net" AssemblyApplication="EncConvertersAppDataMover40.exe" AssemblyManifest="EncConvertersAppDataMover40.exe" />
                 </Component>
                 <Component Id="geckofx_core_18.dll" Guid="{39593B07-CD1F-40D0-A5D0-BDDB70F78152}">
-                    <File Id="geckofx_core_18.dll" Name="geckofx-core-18.dll" Vital="yes" KeyPath="yes" AssemblyManifest="geckofx_core_18.dll" AssemblyApplication="geckofx_core_18.dll" Assembly=".net" Source="..\..\DistFiles\release\geckofx-core-18.dll"/>
+                    <File Id="geckofx_core_18.dll" Name="geckofx-core-18.dll" Vital="yes" KeyPath="yes" AssemblyManifest="geckofx_core_18.dll" AssemblyApplication="geckofx_core_18.dll" Assembly=".net" Source="..\..\DistFiles\release\geckofx-core-18.dll" />
                 </Component>
                 <Component Id="Geckofx_Winforms_18.dll" Guid="{DE143B00-87A2-4DD2-8A73-970B457D7AE4}">
-                    <File Id="Geckofx_Winforms_18.dll" Name="Geckofx-Winforms-18.dll" Vital="yes" KeyPath="yes" AssemblyManifest="Geckofx_Winforms_18.dll" AssemblyApplication="Geckofx_Winforms_18.dll" Assembly=".net" Source="..\..\DistFiles\release\Geckofx-Winforms-18.dll"/>
+                    <File Id="Geckofx_Winforms_18.dll" Name="Geckofx-Winforms-18.dll" Vital="yes" KeyPath="yes" AssemblyManifest="Geckofx_Winforms_18.dll" AssemblyApplication="Geckofx_Winforms_18.dll" Assembly=".net" Source="..\..\DistFiles\release\Geckofx-Winforms-18.dll" />
                 </Component>
                 <Directory Id="ECFolder" Name="EC">
                     <Directory Id="PluginsFolder" Name="Plugins">
                         <Component Id="EC4.0.0.0PluginDetails.xml" Guid="579194FE-37AA-47a3-A089-B0F1F17415FB">
-                            <File Id="EC4.0.0.0PluginDetails.xml" Name="EC 4.0.0.0 Plugin Details.xml" KeyPath="yes" Source="..\..\DistFiles\release\EC\Plugins\EC 4.0.0.0 Plugin Details.xml"/>
+                            <File Id="EC4.0.0.0PluginDetails.xml" Name="EC 4.0.0.0 Plugin Details.xml" KeyPath="yes" Source="..\..\DistFiles\release\EC\Plugins\EC 4.0.0.0 Plugin Details.xml" />
                         </Component>
                     </Directory>
                 </Directory>
             </Directory>
 
-            <Directory Id="CommonFilesFolder" SourceName="Common Files Folder">
+            <StandardDirectory Id="CommonFilesFolder">
                 <Directory Id="EcSIL" Name="SIL">
                     <Component Id="ECDriver.dll" Guid="4c632e67-b66b-4a7b-a6bb-f99d93abdcca">
-                        <File Id="ECDriver.dll" Name="ECDriver.dll" KeyPath="yes" Source="..\..\DistFiles\release\ECDriver.dll"/>
+                        <File Id="ECDriver.dll" Name="ECDriver.dll" KeyPath="yes" Source="..\..\DistFiles\release\ECDriver.dll" />
                     </Component>
                     <Directory Id="Help" Name="Help">
                         <Component Id="CPHelp" Guid="58fac2f3-e469-4e62-a5a1-970647ebe5fc">
-                            <File Id="CPHelp" Name="Code Page Converter Plug-in About box.mht" ReadOnly="yes" KeyPath="yes" Source="..\..\DistFiles\release\Help\Code Page Converter Plug-in About box.mht"/>
+                            <File Id="CPHelp" Name="Code Page Converter Plug-in About box.mht" ReadOnly="yes" KeyPath="yes" Source="..\..\DistFiles\release\Help\Code Page Converter Plug-in About box.mht" />
                         </Component>
                         <Component Id="CmpdHelp" Guid="a2557ea3-3ec1-41aa-8a06-af9fccfd07da">
-                            <File Id="CmpdHelp" Name="Compound Converter Plug-in About box.mht" ReadOnly="yes" KeyPath="yes" Source="..\..\DistFiles\release\Help\Compound Converter Plug-in About box.mht"/>
+                            <File Id="CmpdHelp" Name="Compound Converter Plug-in About box.mht" ReadOnly="yes" KeyPath="yes" Source="..\..\DistFiles\release\Help\Compound Converter Plug-in About box.mht" />
                         </Component>
                         <Component Id="FallBackHelp" Guid="cd14321a-d6c0-44aa-b59d-773e9b060d34">
-                            <File Id="FallBackHelp" Name="Fallback Converter Plug-in About box.mht" ReadOnly="yes" KeyPath="yes" Source="..\..\DistFiles\release\Help\Fallback Converter Plug-in About box.mht"/>
+                            <File Id="FallBackHelp" Name="Fallback Converter Plug-in About box.mht" ReadOnly="yes" KeyPath="yes" Source="..\..\DistFiles\release\Help\Fallback Converter Plug-in About box.mht" />
                         </Component>
                         <Component Id="TECkitHelp" Guid="292dcfa4-3602-4861-ae01-6b4875707dec">
-                            <File Id="TECkitHelp" Name="TECkit Map Plug-in About box.mht" ReadOnly="yes" KeyPath="yes" Source="..\..\DistFiles\release\Help\TECkit Map Plug-in About box.mht"/>
+                            <File Id="TECkitHelp" Name="TECkit Map Plug-in About box.mht" ReadOnly="yes" KeyPath="yes" Source="..\..\DistFiles\release\Help\TECkit Map Plug-in About box.mht" />
                         </Component>
                         <Component Id="CantReadMhtFiles.htm" Guid="{F3B39444-A2B0-40D8-8863-8FE1E8194FF4}">
-                            <File Id="CantReadMhtFiles.htm" Name="CantReadMhtFiles.htm" ReadOnly="yes" KeyPath="yes" Source="..\..\DistFiles\release\Help\CantReadMhtFiles.htm"/>
+                            <File Id="CantReadMhtFiles.htm" Name="CantReadMhtFiles.htm" ReadOnly="yes" KeyPath="yes" Source="..\..\DistFiles\release\Help\CantReadMhtFiles.htm" />
                         </Component>
                     </Directory>
                 </Directory>
-            </Directory>
+            </StandardDirectory>
 
             <!--This is still needed to open authentication for the repository file folder-->
-            <Directory Id="CommonAppDataFolder" SourceName="AppData">
+            <StandardDirectory Id="CommonAppDataFolder">
                 <Directory Id="AppDataSIL" Name="SIL">
                     <Directory Id="AppDataECFolder" Name="EC">
                         <Component Id="CreateEcFolder" Guid="78456078-a9db-40d9-bc9a-f79b24abd7df">
@@ -527,43 +538,22 @@
                         </Component>
                     </Directory>
                 </Directory>
-            </Directory>
+            </StandardDirectory>
 
-            <Directory Id="StartMenuFolder" SourceName="Start Menu">
-                <Directory Id="ProgramMenuFolder" SourceName="Programs">
+            <StandardDirectory Id="ProgramMenuFolder">
                     <Directory Id="SIL_Converters" Name="SIL Converters">
                         <Directory Id="SILConvHelp" Name="Help">
                             <Component Id="HelpShortcuts" Guid="5f95a3bb-d7be-4a03-a6e6-07f5b6e38c6d" KeyPath="yes">
-                                <Shortcut Id="CPPluginHelp" Directory="SILConvHelp" Name="Code Page Plug-in Help" Target="[#CPHelp]" Hotkey="0" IconIndex="0" Show="normal" WorkingDirectory="Help"/>
-                                <Shortcut Id="CmpdPluginHelp" Directory="SILConvHelp" Name="Compound Converter Plug-in Help" Target="[#CmpdHelp]" Hotkey="0" IconIndex="0" Show="normal" WorkingDirectory="Help"/>
-                                <Shortcut Id="FallbackPluginHelp" Directory="SILConvHelp" Name="Primary-Fallback Converter Plug-in Help" Target="[#FallBackHelp]" Hotkey="0" IconIndex="0" Show="normal" WorkingDirectory="Help"/>
-                                <Shortcut Id="TECkitPluginHelp" Directory="SILConvHelp" Name="TECkit Converter Plug-in Help" Target="[#TECkitHelp]" Hotkey="0" IconIndex="0" Show="normal" WorkingDirectory="Help"/>
+                                <Shortcut Id="CPPluginHelp" Directory="SILConvHelp" Name="Code Page Plug-in Help" Target="[#CPHelp]" Hotkey="0" IconIndex="0" Show="normal" WorkingDirectory="Help" />
+                                <Shortcut Id="CmpdPluginHelp" Directory="SILConvHelp" Name="Compound Converter Plug-in Help" Target="[#CmpdHelp]" Hotkey="0" IconIndex="0" Show="normal" WorkingDirectory="Help" />
+                                <Shortcut Id="FallbackPluginHelp" Directory="SILConvHelp" Name="Primary-Fallback Converter Plug-in Help" Target="[#FallBackHelp]" Hotkey="0" IconIndex="0" Show="normal" WorkingDirectory="Help" />
+                                <Shortcut Id="TECkitPluginHelp" Directory="SILConvHelp" Name="TECkit Converter Plug-in Help" Target="[#TECkitHelp]" Hotkey="0" IconIndex="0" Show="normal" WorkingDirectory="Help" />
                                 <!-- The next item is junk to make validation pass on ICE18 -->
-                                <CreateFolder/>
+                                <CreateFolder />
                             </Component>
                         </Directory>
                     </Directory>
-                </Directory>
-            </Directory>
+                </StandardDirectory>
 
-        </Directory>
-
-        <!-- The following section launches the installed file EncConvertersAppDataMover40.exe but hides its DOS window -->
-        <CustomAction Id="SetAppDataMoverData" Return="check" Property="LaunchAppDataMover" Value="[#EncConvertersAppDataMover40.exe]" />
-        <CustomAction Id="LaunchAppDataMover" Return="ignore" Impersonate="no" Execute="deferred" Script="vbscript">
-            <![CDATA[
-dim EncConvertersAppDataMoverPath
-EncConvertersAppDataMoverPath = Session.Property("CustomActionData")
-const WindowStyleStealth  = &H20000000
-set WSO = createobject("WScript.Shell")
-WSO.run "%comspec% /c """ + EncConvertersAppDataMoverPath + """", WindowStyleStealth, false
-]]>
-        </CustomAction>
-
-        <InstallExecuteSequence>
-            <Custom Action="SetAppDataMoverData" Before="InstallInitialize"><![CDATA[VersionNT >= 501]]></Custom>
-            <Custom Action="LaunchAppDataMover" After="PublishComponents"><![CDATA[NOT Installed]]></Custom>
-        </InstallExecuteSequence>
-
-    </Module>
+        </Module>
 </Wix>

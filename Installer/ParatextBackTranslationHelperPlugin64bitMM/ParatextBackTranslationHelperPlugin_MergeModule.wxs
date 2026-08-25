@@ -1,18 +1,14 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-  <Module Id="ParatextBackTranslationHelperPlugin64bitMergeModule" Language="1033" Version="5.0.0.0">
-    <Package Id="{00DE4FC7-217E-4836-9676-3A393A4DCE94}" Comments="Merge module containing the BackTranslationHelperPlugin for Paratext" Description="Installer for the ParatextBackTranslationHelper Plug-in"
-          Keywords="Paratext Plugin; Encoding Converters; EcTranslators; SIL; Unicode" Manufacturer="SIL International" InstallerVersion="500"
-          Platform="x64" />
+﻿<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
+  <Module Id="ParatextBackTranslationHelperPlugin64bitMergeModule" Language="1033" Version="5.0.0.0" Guid="{00DE4FC7-217E-4836-9676-3A393A4DCE94}" InstallerVersion="500"><SummaryInformation Description="Installer for the ParatextBackTranslationHelper Plug-in" Keywords="Paratext Plugin; Encoding Converters; EcTranslators; SIL; Unicode" Manufacturer="SIL International" />
 
-    <Directory Id="TARGETDIR" Name="SourceDir">
+    
+  
       <Directory Id="MergeRedirectFolder">
 
         <Directory Id="Paratext9Plugins" Name="plugins">
           <Directory Id="ParatextPluginBackTranslationHelper" Name="ParatextPluginBackTranslationHelper">
             <Component Id="ParatextPluginBackTranslationHelper.ptxplg" Guid="{D44AD674-E478-499C-BA98-B03B5A6E2E2D}">
-              <File Id="ParatextPluginBackTranslationHelper.ptxplg" Name="ParatextPluginBackTranslationHelper.ptxplg" KeyPath="yes" Assembly=".net" AssemblyManifest="ParatextPluginBackTranslationHelper.ptxplg" AssemblyApplication="ParatextPluginBackTranslationHelper.ptxplg"
-                    Source="..\..\output\x64\release\ParatextPluginBackTranslationHelper.dll" />
+              <File Id="ParatextPluginBackTranslationHelper.ptxplg" Name="ParatextPluginBackTranslationHelper.ptxplg" KeyPath="yes" Assembly=".net" AssemblyManifest="ParatextPluginBackTranslationHelper.ptxplg" AssemblyApplication="ParatextPluginBackTranslationHelper.ptxplg" Source="..\..\output\x64\release\ParatextPluginBackTranslationHelper.dll" />
             </Component>
           </Directory>
         </Directory>
@@ -21,22 +17,21 @@
           <Directory Id="ParatextEcPlugins" Name="Plugins">
             
             <Component Id="PtxTranslators4.0.0.0PluginDetails.xml" Guid="{61A5D089-E9CA-4AF0-B230-2759BC775FC8}">
-              <File Id="PtxTranslators4.0.0.0PluginDetails.xml" Name="Translators 4.0.0.0 Plugin Details.xml" KeyPath="yes" Source="..\..\output\x64\release\EC\Plugins\Translators 4.0.0.0 Plugin Details.xml"/>
+              <File Id="PtxTranslators4.0.0.0PluginDetails.xml" Name="Translators 4.0.0.0 Plugin Details.xml" KeyPath="yes" Source="..\..\output\x64\release\EC\Plugins\Translators 4.0.0.0 Plugin Details.xml" />
             </Component>
 
             <Component Id="PtxProject4.0.0.0PluginDetails.xml" Guid="{66578C6D-BE08-4908-BACE-6E395921BA69}">
-              <File Id="PtxProject4.0.0.0PluginDetails.xml" Name="PtxProject 4.0.0.0 Plugin Details.xml" KeyPath="yes" Source="..\..\output\x64\release\EC\Plugins\PtxProject 4.0.0.0 Plugin Details.xml"/>
+              <File Id="PtxProject4.0.0.0PluginDetails.xml" Name="PtxProject 4.0.0.0 Plugin Details.xml" KeyPath="yes" Source="..\..\output\x64\release\EC\Plugins\PtxProject 4.0.0.0 Plugin Details.xml" />
             </Component>
 
 			  <Component Id="AI4.0.0.0PluginDetails.xml" Guid="{A442ECF2-DAE1-411B-B82B-F15B190DBA7E}">
-				  <File Id="AI4.0.0.0PluginDetails.xml" Name="AI 4.0.0.0 Plugin Details.xml" KeyPath="yes" Source="..\..\output\x64\release\EC\Plugins\AI 4.0.0.0 Plugin Details.xml"/>
+				  <File Id="AI4.0.0.0PluginDetails.xml" Name="AI 4.0.0.0 Plugin Details.xml" KeyPath="yes" Source="..\..\output\x64\release\EC\Plugins\AI 4.0.0.0 Plugin Details.xml" />
 			  </Component>
 
 		  </Directory>
         </Directory>
       </Directory>
 
-    </Directory>
-  </Module>
+    </Module>
 </Wix>
         

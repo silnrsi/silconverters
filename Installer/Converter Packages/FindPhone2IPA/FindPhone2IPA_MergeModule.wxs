@@ -1,10 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-  <Module Id="FindPhone2IPA40MergeModule" Language="1033" Version="4.0.0.0">
-    <Package Id="cde3c042-3e92-44f0-a862-6ca48b07c2a0" Comments="Set of converters related to the FindPhone encoding" Description="Encoding Converters related to FindPhone encoding" Keywords="FindPhone; SILConverters; Encoding Conversion; EncConverters" Manufacturer="SIL International" InstallerVersion="500" />
+﻿<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
+  <Module Id="FindPhone2IPA40MergeModule" Language="1033" Version="4.0.0.0" Guid="cde3c042-3e92-44f0-a862-6ca48b07c2a0" InstallerVersion="500"><SummaryInformation Description="Encoding Converters related to FindPhone encoding" Keywords="FindPhone; SILConverters; Encoding Conversion; EncConverters" Manufacturer="SIL International" />
 
-    <Directory Id="TARGETDIR" Name="SourceDir">
-      <Directory Id="CommonAppDataFolder" SourceName="AppData">
+    
+  
+      <StandardDirectory Id="CommonAppDataFolder">
         <Directory Id="SIL" Name="SIL">
           <Directory Id="SILConverters40" Name="SILConverters40">
             <Directory Id="MapsTables" Name="MapsTables">
@@ -23,7 +22,6 @@
             </Directory>
           </Directory>
         </Directory>
-      </Directory>
-    </Directory>
-  </Module>
+      </StandardDirectory>
+    </Module>
 </Wix>

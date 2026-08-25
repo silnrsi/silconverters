@@ -1,9 +1,12 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-  <Module Id="AdaptIt2Unicode40" Language="1033" Version="4.0.0.0">
-    <Package Id="c6628a1b-f759-4068-b112-eb2d401aefa9" Manufacturer="SIL International" Comments="Merge module containing the AdaptIt2Unicode program" Description="Installer for the AdaptIt2Unicode utility" InstallerVersion="500" Keywords="Encoding Converters; Adapt It; SIL; Unicode" />
+<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
+  <Module Id="AdaptIt2Unicode40" Language="1033" Version="4.0.0.0" Guid="c6628a1b-f759-4068-b112-eb2d401aefa9" InstallerVersion="500"><SummaryInformation Manufacturer="SIL International" Description="Installer for the AdaptIt2Unicode utility" Keywords="Encoding Converters; Adapt It; SIL; Unicode" />
 
-    <Directory Id="TARGETDIR" Name="SourceDir">
+    
+
+    <InstallExecuteSequence>
+      <RemoveShortcuts Condition="Installed AND NOT UPGRADINGPRODUCTCODE AND REMOVE=&quot;ALL&quot;" />
+    </InstallExecuteSequence>
+  
       <Directory Id="MergeRedirectFolder">
 
         <Component Id="AdaptIt2Unicode.exe" Guid="FC11A9E6-7044-48B4-BC13-C93B85BCB092">
@@ -13,15 +16,8 @@
 
       </Directory>
 
-      <Directory Id="StartMenuFolder" SourceName="Start Menu">
-        <Directory Id="ProgramMenuFolder" SourceName="Programs">
+      <StandardDirectory Id="ProgramMenuFolder">
           <Directory Id="SILConverters" Name="SIL Converters" />
-        </Directory>
-      </Directory>
-    </Directory>
-
-    <InstallExecuteSequence>
-      <RemoveShortcuts>Installed AND NOT UPGRADINGPRODUCTCODE AND REMOVE="ALL"</RemoveShortcuts>
-    </InstallExecuteSequence>
-  </Module>
+        </StandardDirectory>
+    </Module>
 </Wix>

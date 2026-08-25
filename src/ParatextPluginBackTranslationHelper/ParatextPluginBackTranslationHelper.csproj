@@ -1,77 +1,61 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">x64</Platform>
+    <TargetFramework>net48</TargetFramework>
+    <Platforms>AnyCPU;x86;x64</Platforms>
     <ProjectGuid>{0BFFA5D9-FF49-4F16-BBC6-27F9394341A5}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>SIL.ParatextBackTranslationHelperPlugin</RootNamespace>
     <AssemblyName>ParatextPluginBackTranslationHelper</AssemblyName>
-    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <Deterministic>true</Deterministic>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
+    <LangVersion>latest</LangVersion>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+  <PropertyGroup Condition="'$(Platform)'=='x64'">
+    <PlatformTarget>x64</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Platform)'=='x86'">
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
+    <OutputPath>..\..\output\x86\Debug\</OutputPath>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\..\output\x86\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
+    <OutputPath>..\..\output\x86\Release\</OutputPath>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>..\..\output\x86\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
-    <DebugSymbols>true</DebugSymbols>
     <OutputPath>..\..\output\x64\Debug\</OutputPath>
-    <DefineConstants>TRACE;DEBUG</DefineConstants>
+    <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
-    <PlatformTarget>x64</PlatformTarget>
-    <LangVersion>latest</LangVersion>
-    <ErrorReport>prompt</ErrorReport>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
     <OutputPath>..\..\output\x64\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
     <Optimize>true</Optimize>
     <DebugType>pdbonly</DebugType>
-    <PlatformTarget>x64</PlatformTarget>
-    <LangVersion>latest</LangVersion>
-    <ErrorReport>prompt</ErrorReport>
+    <DefineConstants>TRACE</DefineConstants>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
-    <DebugSymbols>true</DebugSymbols>
     <OutputPath>bin\x86\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
-    <PlatformTarget>x86</PlatformTarget>
-    <LangVersion>latest</LangVersion>
-    <ErrorReport>prompt</ErrorReport>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
     <OutputPath>bin\x86\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
     <Optimize>true</Optimize>
     <DebugType>pdbonly</DebugType>
-    <PlatformTarget>x86</PlatformTarget>
-    <LangVersion>latest</LangVersion>
-    <ErrorReport>prompt</ErrorReport>
+    <DefineConstants>TRACE</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
-    <!--nuget doesn't add the references to the csproj files properly; not sure why. Here is what
-			you might want to manually add to the csproj file instead-->
+    <!-- nuget doesn't add the references to the csproj files properly for these; manually HintPath'd instead. -->
     <Reference Include="AIGuesserEC" Condition="('$(Platform)' == 'x64') and ('$(OS)'=='Windows_NT')">
       <HintPath>$(EcDistFilesPath)\win-$(Platform)\native\AIGuesserEC.dll</HintPath>
     </Reference>
@@ -85,16 +69,10 @@
       <HintPath>$(EcDistFilesPath)\win-$(Platform)\native\BackTranslationHelper.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.VisualBasic" />
-    <Reference Include="System">
-      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.8\System.dll</HintPath>
-    </Reference>
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Configuration" />
-    <Reference Include="System.Core" />
     <Reference Include="System.Data.OracleClient" />
-    <Reference Include="System.Drawing">
-      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.8\System.Drawing.dll</HintPath>
-    </Reference>
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Management" />
     <Reference Include="System.Net" />
     <Reference Include="System.Numerics" />
@@ -112,64 +90,18 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BackTranslationHelperForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="BackTranslationHelperForm.Designer.cs">
-      <DependentUpon>BackTranslationHelperForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="PtxPluginHelpers.cs" />
-    <Compile Include="VerseRef.cs" />
-    <Compile Include="MarkerToken.cs" />
-    <Compile Include="ParatextBackTranslationHelperPlugin.cs" />
-    <Compile Include="ProjectListForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Properties\Settings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-      <DependentUpon>Settings.settings</DependentUpon>
-    </Compile>
-    <Compile Include="SplashScreenForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="SplashScreenForm.designer.cs">
-      <DependentUpon>SplashScreenForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="TokenBase.cs" />
-    <Compile Include="TextToken.cs" />
+    <!-- BackTranslationHelperWebForm.* is the "#if UseWebForm" branch referenced in
+         ParatextBackTranslationHelperPlugin.cs; genuinely dormant/incomplete ("not fully functional though...",
+         per that file's own comment) since UseWebForm is never defined in this project's DefineConstants.
+         BackTranslationHelperForm.* (the "#else" branch, the one actually used) was NOT in the pre-conversion
+         project's explicit item list at all; a latent bug (the file's newer than the rest of this project and
+         was apparently never wired in) that default SDK globbing fixes as a side effect of this conversion. -->
+    <Compile Remove="BackTranslationHelperWebForm.cs" />
+    <Compile Remove="BackTranslationHelperWebForm.Designer.cs" />
+    <EmbeddedResource Remove="BackTranslationHelperWebForm.resx" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="BackTranslationHelperForm.resx">
-      <DependentUpon>BackTranslationHelperForm.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ProjectListForm.resx">
-      <DependentUpon>ProjectListForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="SplashScreenForm.resx">
-      <DependentUpon>SplashScreenForm.cs</DependentUpon>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="$(EcDistFilesPath)\redist\EC\Plugins\AI 4.0.0.0 Plugin Details.xml">
       <Link>EcPlugins\AI 4.0.0.0 Plugin Details.xml</Link>
     </Content>
@@ -181,43 +113,33 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Resources\" />
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="Encoding-Converters-Core">
-      <Version>0.9.9</Version>
-    </PackageReference>
-    <PackageReference Include="ParatextEmbeddedUiPluginInterfaces">
-      <Version>2.0.23</Version>
-    </PackageReference>
-    <PackageReference Include="ParatextPluginInterfaces">
-      <Version>2.0.23</Version>
-    </PackageReference>
+    <PackageReference Include="Encoding-Converters-Core" Version="0.9.9" />
+    <PackageReference Include="ParatextEmbeddedUiPluginInterfaces" Version="2.0.23" />
+    <PackageReference Include="ParatextPluginInterfaces" Version="2.0.23" />
   </ItemGroup>
   <Import Project="$(SolutionDir)SharedItems.props" />
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>IF NOT "$(ConfigurationName)" == "Debug" goto nocopy
-IF "%25ParatextInstallDir%25" == "" goto nocopy
-IF NOT EXIST "%25ParatextInstallDir%25" goto nocopy
+    <PostBuildEvent>IF NOT "$(Configuration)" == "Debug" goto nocopy
+IF "%ParatextInstallDir%" == "" goto nocopy
+IF NOT EXIST "%ParatextInstallDir%" goto nocopy
 
-IF EXIST "%25ParatextInstallDir%25\plugins" goto checkMakeBTHPluginDir
-md "%25ParatextInstallDir%25\plugins"
+IF EXIST "%ParatextInstallDir%\plugins" goto checkMakeBTHPluginDir
+md "%ParatextInstallDir%\plugins"
 
 :checkMakeBTHPluginDir
-IF EXIST "%25ParatextInstallDir%25\plugins\$(ProjectName)" goto checkdelete
-md "%25ParatextInstallDir%25\plugins\$(ProjectName)"
+IF EXIST "%ParatextInstallDir%\plugins\$(MSBuildProjectName)" goto checkdelete
+md "%ParatextInstallDir%\plugins\$(MSBuildProjectName)"
 
 :checkdelete
-IF NOT EXIST "%25ParatextInstallDir%25\plugins\$(ProjectName)\$(ProjectName).ptxplg" goto nodelete
-@echo Deleting '%25ParatextInstallDir%25\plugins\$(ProjectName)\$(ProjectName).ptxplg'
-del "%25ParatextInstallDir%25\plugins\$(ProjectName)\$(ProjectName).ptxplg"
+IF NOT EXIST "%ParatextInstallDir%\plugins\$(MSBuildProjectName)\$(MSBuildProjectName).ptxplg" goto nodelete
+@echo Deleting '%ParatextInstallDir%\plugins\$(MSBuildProjectName)\$(MSBuildProjectName).ptxplg'
+del "%ParatextInstallDir%\plugins\$(MSBuildProjectName)\$(MSBuildProjectName).ptxplg"
 :nodelete
 
-@echo Copying files to '%25ParatextInstallDir%25\Encoding Core' folder
-xcopy "$(SolutionDir)output\x64\Debug\*.*" "%25ParatextInstallDir%25\Encoding Core" /y /i /c
-@echo Copying '$(SolutionDir)output\x64\Debug\$(TargetFileName)' to: '%25ParatextInstallDir%25\plugins\$(ProjectName)\$(ProjectName).ptxplg'
-copy "$(SolutionDir)output\x64\Debug\$(TargetFileName)" "%25ParatextInstallDir%25\plugins\$(ProjectName)\$(ProjectName).ptxplg"
+@echo Copying files to '%ParatextInstallDir%\Encoding Core' folder
+xcopy "$(SolutionDir)output\x64\Debug\*.*" "%ParatextInstallDir%\Encoding Core" /y /i /c
+@echo Copying '$(SolutionDir)output\x64\Debug\$(AssemblyName).dll' to: '%ParatextInstallDir%\plugins\$(MSBuildProjectName)\$(MSBuildProjectName).ptxplg'
+copy "$(SolutionDir)output\x64\Debug\$(AssemblyName).dll" "%ParatextInstallDir%\plugins\$(MSBuildProjectName)\$(MSBuildProjectName).ptxplg"
 
 :nocopy</PostBuildEvent>
   </PropertyGroup>

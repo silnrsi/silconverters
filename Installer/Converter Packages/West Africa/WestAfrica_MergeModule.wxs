@@ -1,10 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-  <Module Id="West_Africa40MergeModule" Language="1033" Version="4.0.0.0">
-    <Package Id="9c7e2ab4-6c25-4652-bfe1-2bdc83aac310" Comments="Encoding converters used in West Africa" Description="Encoding converters for West Africa encoding" Keywords="SILConverters; Encoding Conversion; West Africa; EncConverters" Manufacturer="SIL International" InstallerVersion="500" />
+﻿<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
+  <Module Id="West_Africa40MergeModule" Language="1033" Version="4.0.0.0" Guid="9c7e2ab4-6c25-4652-bfe1-2bdc83aac310" InstallerVersion="500"><SummaryInformation Description="Encoding converters for West Africa encoding" Keywords="SILConverters; Encoding Conversion; West Africa; EncConverters" Manufacturer="SIL International" />
 
-    <Directory Id="TARGETDIR" Name="SourceDir">
-      <Directory Id="CommonAppDataFolder" SourceName="AppData">
+    
+  
+      <StandardDirectory Id="CommonAppDataFolder">
         <Directory Id="SIL" Name="SIL">
           <Directory Id="SILConverters40" Name="SILConverters40">
             <Directory Id="MapsTables" Name="MapsTables">
@@ -110,7 +109,6 @@
             </Directory>
           </Directory>
         </Directory>
-      </Directory>
-    </Directory>
-  </Module>
+      </StandardDirectory>
+    </Module>
 </Wix>

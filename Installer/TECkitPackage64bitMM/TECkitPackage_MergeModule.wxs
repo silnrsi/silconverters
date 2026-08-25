@@ -1,11 +1,12 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-  <Module Id="TECkitPackage64MM" Language="1033" Version="1.0.0.0">
-    <Package Id="{B039CC72-613F-4B87-BF54-7573C48B759B}" Comments="Merge module containing the TECkit documentation and executables" Description="TECkit DOCs/EXEs" 
-             InstallerVersion="500" Keywords="TECkit, Encoding Conversion" Manufacturer="SIL" 
-             Platform="x64" />
+<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
+  <Module Id="TECkitPackage64MM" Language="1033" Version="1.0.0.0" Guid="{B039CC72-613F-4B87-BF54-7573C48B759B}" InstallerVersion="500"><SummaryInformation Description="TECkit DOCs/EXEs" Keywords="TECkit, Encoding Conversion" Manufacturer="SIL" />
 
-    <Directory Id="TARGETDIR" Name="SourceDir">
+    
+
+    <InstallExecuteSequence>
+      <RemoveShortcuts Condition="Installed AND NOT UPGRADINGPRODUCTCODE AND REMOVE=&quot;ALL&quot;" />
+    </InstallExecuteSequence>
+  
       <Directory Id="MergeRedirectFolder">
 
         <Component Id="TECkitTools_exe" Guid="{D19136AE-CAEC-4440-9CB4-94630D510EBA}">
@@ -28,18 +29,11 @@
 
       </Directory>
 
-      <Directory Id="StartMenuFolder" SourceName="Start Menu">
-        <Directory Id="ProgramMenuFolder" SourceName="Programs">
+      <StandardDirectory Id="ProgramMenuFolder">
           <Directory Id="TECkitMenu" Name="TECkit">
             <Directory Id="TkMenuHelp" Name="Help" />
           </Directory>
-        </Directory>
-      </Directory>
+        </StandardDirectory>
 
-    </Directory>
-
-    <InstallExecuteSequence>
-      <RemoveShortcuts>Installed AND NOT UPGRADINGPRODUCTCODE AND REMOVE="ALL"</RemoveShortcuts>
-    </InstallExecuteSequence>
-  </Module>
+    </Module>
 </Wix>

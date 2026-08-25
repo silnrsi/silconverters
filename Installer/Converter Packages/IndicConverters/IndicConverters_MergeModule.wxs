@@ -1,10 +1,12 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-  <Module Id="IndicConverters40MergeModule" Language="1033" Version="4.0.0.0">
-    <Package Id="d0d94060-4d2a-4607-bdaf-94c64c485b41" Comments="Merge module for SILConverters Indic Add-in" Description="Merge Module for SILConverters (Indic Add-in)"
-             Manufacturer="SIL International" Keywords="Technical Hindi Google Group Html converter, TECkit maps, Indic encodings, SILConverters" InstallerVersion="500" />
+﻿<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
+  <Module Id="IndicConverters40MergeModule" Language="1033" Version="4.0.0.0" Guid="d0d94060-4d2a-4607-bdaf-94c64c485b41" InstallerVersion="500"><SummaryInformation Description="Merge Module for SILConverters (Indic Add-in)" Manufacturer="SIL International" Keywords="Technical Hindi Google Group Html converter, TECkit maps, Indic encodings, SILConverters" />
 
-    <Directory Id="TARGETDIR" Name="SourceDir">
+    
+
+    <InstallExecuteSequence>
+      <RemoveShortcuts Condition="Installed AND NOT UPGRADINGPRODUCTCODE AND REMOVE=&quot;ALL&quot;" />
+    </InstallExecuteSequence>
+  
       <Directory Id="MergeRedirectFolder">
 
         <Component Id="SilIndicEncConverters40.dll" Guid="3d6abc4d-1239-4525-881f-b51bda96b39c">
@@ -33,22 +35,28 @@
           <RegistryValue Root="HKLM" Key="SOFTWARE\Microsoft\Internet Explorer\Main\FeatureControl\FEATURE_BROWSER_EMULATION" Name="SFMConv.exe" Value="12001" Type="integer" Action="write" />
           <RegistryValue Root="HKLM" Key="SOFTWARE\Microsoft\Internet Explorer\Main\FeatureControl\FEATURE_BROWSER_EMULATION" Name="SILConvertersWordML.exe" Value="12001" Type="integer" Action="write" />
           <RegistryValue Root="HKLM" Key="SOFTWARE\Microsoft\Internet Explorer\Main\FeatureControl\FEATURE_BROWSER_EMULATION" Name="SilConvertersXML.exe" Value="12001" Type="integer" Action="write" />
+          <!-- This is the key EnableIndicConvertersInWord.reg (above) describes - that .reg file is only ever
+               copied to disk as a merge module payload, never executed/merged, so the key it documents never
+               actually got set. Written directly here instead, alongside its sibling FEATURE_BROWSER_EMULATION
+               entries above; MSI's per-component bitness redirection lands this under Wow6432Node on 64-bit
+               Windows for this x86 package, same as the .reg file did explicitly. -->
+          <RegistryValue Root="HKLM" Key="SOFTWARE\Microsoft\Internet Explorer\Main\FeatureControl\FEATURE_BROWSER_EMULATION" Name="winword.exe" Value="12001" Type="integer" Action="write" />
         </Component>
 
         <Directory Id="ECFolder" Name="EC">
           <Directory Id="PluginsFolder" Name="Plugins">
             <Component Id="SIEC_4.0.0.0_Plugin_Details.xml" Guid="304b6f60-e5f2-43c6-a655-f33367e3fe4d">
-              <File Id="SIEC_4.0.0.0_Plugin_Details.xml" Name="SIEC 4.0.0.0 Plugin Details.xml" KeyPath="yes" Source="$(var.EcDistFilesPath)\redist\EC\Plugins\SIEC 4.0.0.0 Plugin Details.xml"/>
+              <File Id="SIEC_4.0.0.0_Plugin_Details.xml" Name="SIEC 4.0.0.0 Plugin Details.xml" KeyPath="yes" Source="$(var.EcDistFilesPath)\redist\EC\Plugins\SIEC 4.0.0.0 Plugin Details.xml" />
             </Component>
           </Directory>
         </Directory>
       </Directory>
-      <Directory Id="ProgramMenuFolder" SourceName="User's Programs Menu">
+      <StandardDirectory Id="ProgramMenuFolder">
         <Directory Id="SILConverters" Name="SIL Converters">
           <Directory Id="UsersSilConvertersHelpMenu" Name="Help" />
         </Directory>
-      </Directory>
-      <Directory Id="CommonAppDataFolder" SourceName="AppData">
+      </StandardDirectory>
+      <StandardDirectory Id="CommonAppDataFolder">
         <Directory Id="IndicConvertersSIL" Name="SIL">
           <Directory Id="SILConverters40" Name="SILConverters40">
             <Directory Id="MapsTables" Name="MapsTables">
@@ -162,39 +170,34 @@
 
               <!--Technical Hindi (Google group) Html Converter Help-->
               <Component Id="TechHindiHelp.htm" Guid="{FD05F25A-E3C5-43F4-8A68-9D50EA1ECC7B}">
-                <File Id="TechHindiHelp.htm" Name="Technical_Hindi_(Google_group)_Html_Converter_Plug-in_About_box.htm" KeyPath="yes" Source="$(var.EcDistFilesPath)\redist\Help\Technical_Hindi_(Google_group)_Html_Converter_Plug-in_About_box.htm"/>
+                <File Id="TechHindiHelp.htm" Name="Technical_Hindi_(Google_group)_Html_Converter_Plug-in_About_box.htm" KeyPath="yes" Source="$(var.EcDistFilesPath)\redist\Help\Technical_Hindi_(Google_group)_Html_Converter_Plug-in_About_box.htm" />
                 <Shortcut Id="TechHindiHelpHtm" Directory="UsersSilConvertersHelpMenu" Name="Technical Hindi Google Group Converters Help" Description="View help document for the Technical Hindi Google Group Converters Plug-in" IconIndex="0" Show="normal" Target="[#TechHindiHelp.htm]" WorkingDirectory="Help" Advertise="no" />
               </Component>
               <Directory Id="Technical_Hindi_Html_Converter_Plugin_About_box" Name="Technical_Hindi_(Google_group)_Html_Converter_Plug-in_About_box_files">
                 <Component Id="Technical_Hindi_Html_Converter_Plugin_About_boxComp" Guid="{974458DB-B7AE-4F32-8437-4E71C37F45F7}">
-                  <File Id="thc_filelist.xml" Name="filelist.xml" KeyPath="yes" Source="$(var.EcDistFilesPath)\redist\Help\Technical_Hindi_(Google_group)_Html_Converter_Plug-in_About_box_files\filelist.xml"/>
-                  <File Id="thc_colorschememapping.xml" Name="colorschememapping.xml" Source="$(var.EcDistFilesPath)\redist\Help\Technical_Hindi_(Google_group)_Html_Converter_Plug-in_About_box_files\colorschememapping.xml"/>
-                  <File Id="thc_themedata.thmx" Name="themedata.thmx" Source="$(var.EcDistFilesPath)\redist\Help\Technical_Hindi_(Google_group)_Html_Converter_Plug-in_About_box_files\themedata.thmx"/>
-                  <File Id="thc_image001.png" Name="image001.png" Source="$(var.EcDistFilesPath)\redist\Help\Technical_Hindi_(Google_group)_Html_Converter_Plug-in_About_box_files\image001.png"/>
-                  <File Id="thc_image003.png" Name="image003.png" Source="$(var.EcDistFilesPath)\redist\Help\Technical_Hindi_(Google_group)_Html_Converter_Plug-in_About_box_files\image003.png"/>
-                  <File Id="thc_image005.png" Name="image005.png" Source="$(var.EcDistFilesPath)\redist\Help\Technical_Hindi_(Google_group)_Html_Converter_Plug-in_About_box_files\image005.png"/>
-                  <File Id="thc_image007.png" Name="image007.png" Source="$(var.EcDistFilesPath)\redist\Help\Technical_Hindi_(Google_group)_Html_Converter_Plug-in_About_box_files\image007.png"/>
-                  <File Id="thc_image009.png" Name="image009.png" Source="$(var.EcDistFilesPath)\redist\Help\Technical_Hindi_(Google_group)_Html_Converter_Plug-in_About_box_files\image009.png"/>
-                  <File Id="thc_image011.png" Name="image011.png" Source="$(var.EcDistFilesPath)\redist\Help\Technical_Hindi_(Google_group)_Html_Converter_Plug-in_About_box_files\image011.png"/>
-                  <File Id="thc_image013.png" Name="image013.png" Source="$(var.EcDistFilesPath)\redist\Help\Technical_Hindi_(Google_group)_Html_Converter_Plug-in_About_box_files\image013.png"/>
-                  <File Id="thc_image015.jpg" Name="image015.jpg" Source="$(var.EcDistFilesPath)\redist\Help\Technical_Hindi_(Google_group)_Html_Converter_Plug-in_About_box_files\image015.jpg"/>
-                  <File Id="thc_image016.jpg" Name="image016.jpg" Source="$(var.EcDistFilesPath)\redist\Help\Technical_Hindi_(Google_group)_Html_Converter_Plug-in_About_box_files\image016.jpg"/>
-                  <File Id="thc_image017.jpg" Name="image017.jpg" Source="$(var.EcDistFilesPath)\redist\Help\Technical_Hindi_(Google_group)_Html_Converter_Plug-in_About_box_files\image017.jpg"/>
-                  <File Id="thc_image018.jpg" Name="image018.jpg" Source="$(var.EcDistFilesPath)\redist\Help\Technical_Hindi_(Google_group)_Html_Converter_Plug-in_About_box_files\image018.jpg"/>
-                  <File Id="thc_image019.jpg" Name="image019.jpg" Source="$(var.EcDistFilesPath)\redist\Help\Technical_Hindi_(Google_group)_Html_Converter_Plug-in_About_box_files\image019.jpg"/>
-                  <File Id="thc_image020.jpg" Name="image020.jpg" Source="$(var.EcDistFilesPath)\redist\Help\Technical_Hindi_(Google_group)_Html_Converter_Plug-in_About_box_files\image020.jpg"/>
-                  <File Id="thc_image021.jpg" Name="image021.jpg" Source="$(var.EcDistFilesPath)\redist\Help\Technical_Hindi_(Google_group)_Html_Converter_Plug-in_About_box_files\image021.jpg"/>
+                  <File Id="thc_filelist.xml" Name="filelist.xml" KeyPath="yes" Source="$(var.EcDistFilesPath)\redist\Help\Technical_Hindi_(Google_group)_Html_Converter_Plug-in_About_box_files\filelist.xml" />
+                  <File Id="thc_colorschememapping.xml" Name="colorschememapping.xml" Source="$(var.EcDistFilesPath)\redist\Help\Technical_Hindi_(Google_group)_Html_Converter_Plug-in_About_box_files\colorschememapping.xml" />
+                  <File Id="thc_themedata.thmx" Name="themedata.thmx" Source="$(var.EcDistFilesPath)\redist\Help\Technical_Hindi_(Google_group)_Html_Converter_Plug-in_About_box_files\themedata.thmx" />
+                  <File Id="thc_image001.png" Name="image001.png" Source="$(var.EcDistFilesPath)\redist\Help\Technical_Hindi_(Google_group)_Html_Converter_Plug-in_About_box_files\image001.png" />
+                  <File Id="thc_image003.png" Name="image003.png" Source="$(var.EcDistFilesPath)\redist\Help\Technical_Hindi_(Google_group)_Html_Converter_Plug-in_About_box_files\image003.png" />
+                  <File Id="thc_image005.png" Name="image005.png" Source="$(var.EcDistFilesPath)\redist\Help\Technical_Hindi_(Google_group)_Html_Converter_Plug-in_About_box_files\image005.png" />
+                  <File Id="thc_image007.png" Name="image007.png" Source="$(var.EcDistFilesPath)\redist\Help\Technical_Hindi_(Google_group)_Html_Converter_Plug-in_About_box_files\image007.png" />
+                  <File Id="thc_image009.png" Name="image009.png" Source="$(var.EcDistFilesPath)\redist\Help\Technical_Hindi_(Google_group)_Html_Converter_Plug-in_About_box_files\image009.png" />
+                  <File Id="thc_image011.png" Name="image011.png" Source="$(var.EcDistFilesPath)\redist\Help\Technical_Hindi_(Google_group)_Html_Converter_Plug-in_About_box_files\image011.png" />
+                  <File Id="thc_image013.png" Name="image013.png" Source="$(var.EcDistFilesPath)\redist\Help\Technical_Hindi_(Google_group)_Html_Converter_Plug-in_About_box_files\image013.png" />
+                  <File Id="thc_image015.jpg" Name="image015.jpg" Source="$(var.EcDistFilesPath)\redist\Help\Technical_Hindi_(Google_group)_Html_Converter_Plug-in_About_box_files\image015.jpg" />
+                  <File Id="thc_image016.jpg" Name="image016.jpg" Source="$(var.EcDistFilesPath)\redist\Help\Technical_Hindi_(Google_group)_Html_Converter_Plug-in_About_box_files\image016.jpg" />
+                  <File Id="thc_image017.jpg" Name="image017.jpg" Source="$(var.EcDistFilesPath)\redist\Help\Technical_Hindi_(Google_group)_Html_Converter_Plug-in_About_box_files\image017.jpg" />
+                  <File Id="thc_image018.jpg" Name="image018.jpg" Source="$(var.EcDistFilesPath)\redist\Help\Technical_Hindi_(Google_group)_Html_Converter_Plug-in_About_box_files\image018.jpg" />
+                  <File Id="thc_image019.jpg" Name="image019.jpg" Source="$(var.EcDistFilesPath)\redist\Help\Technical_Hindi_(Google_group)_Html_Converter_Plug-in_About_box_files\image019.jpg" />
+                  <File Id="thc_image020.jpg" Name="image020.jpg" Source="$(var.EcDistFilesPath)\redist\Help\Technical_Hindi_(Google_group)_Html_Converter_Plug-in_About_box_files\image020.jpg" />
+                  <File Id="thc_image021.jpg" Name="image021.jpg" Source="$(var.EcDistFilesPath)\redist\Help\Technical_Hindi_(Google_group)_Html_Converter_Plug-in_About_box_files\image021.jpg" />
                 </Component>
               </Directory>
 
             </Directory>
           </Directory>
         </Directory>
-      </Directory>
-    </Directory>
-
-    <InstallExecuteSequence>
-      <RemoveShortcuts>Installed AND NOT UPGRADINGPRODUCTCODE AND REMOVE="ALL"</RemoveShortcuts>
-    </InstallExecuteSequence>
-  </Module>
+      </StandardDirectory>
+    </Module>
 </Wix>

@@ -1,10 +1,12 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-  <Module Id="DcmDotMM" Language="1033" Version="4.0.0.0">
-    <Package Id="d59085a5-5cb5-44e4-aef8-15910ce63bc0" Comments="Data Conversion Macro Word document template" Description="Document Template for using EncConverters in MS Word"
-         InstallerVersion="500" Keywords="SILConverters; Encoding Conversion in MS Word" Manufacturer="SIL" />
+<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
+  <Module Id="DcmDotMM" Language="1033" Version="4.0.0.0" Guid="d59085a5-5cb5-44e4-aef8-15910ce63bc0" InstallerVersion="500"><SummaryInformation Description="Document Template for using EncConverters in MS Word" Keywords="SILConverters; Encoding Conversion in MS Word" Manufacturer="SIL" />
 
-    <Directory Id="TARGETDIR" Name="SourceDir">
+    
+
+    <InstallExecuteSequence>
+      <RemoveShortcuts Condition="Installed AND NOT UPGRADINGPRODUCTCODE AND REMOVE=&quot;ALL&quot;" />
+    </InstallExecuteSequence>
+  
 
       <Directory Id="WORD_DOT_FOLDER" Name="Word DOT Folder">
         <Component Id="DataConversionMacro0500.dot" Guid="D0BDA592-89AD-4E2D-AF72-92BF5CA5F51E">
@@ -13,18 +15,11 @@
         </Component>
       </Directory>
 
-      <Directory Id="StartMenuFolder" SourceName="Start Menu">
-        <Directory Id="ProgramMenuFolder" SourceName="Programs">
+      <StandardDirectory Id="ProgramMenuFolder">
           <Directory Id="SIL_Converters" Name="SIL Converters">
             <Directory Id="SILConvHelp" Name="Help" />
           </Directory>
-        </Directory>
-      </Directory>
+        </StandardDirectory>
 
-    </Directory>
-
-    <InstallExecuteSequence>
-      <RemoveShortcuts>Installed AND NOT UPGRADINGPRODUCTCODE AND REMOVE="ALL"</RemoveShortcuts>
-    </InstallExecuteSequence>
-  </Module>
+    </Module>
 </Wix>

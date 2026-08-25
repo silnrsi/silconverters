@@ -1,9 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-  <Module Id="SCOffice07MM" Language="1033" Version="1.0.0.0">
-    <Package Id="b7553e44-dc9b-41c3-bfd1-ef985cd97045" Comments="Merge Module for the SILConverters for Office 2007 application" Description="Setup for the SILConverters for Office 2007 application" Keywords="SIL Encoding Converters; Microsoft Office" Manufacturer="SIL International" InstallerVersion="500" />
+﻿<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
+  <Module Id="SCOffice07MM" Language="1033" Version="1.0.0.0" Guid="b7553e44-dc9b-41c3-bfd1-ef985cd97045" InstallerVersion="500"><SummaryInformation Description="Setup for the SILConverters for Office 2007 application" Keywords="SIL Encoding Converters; Microsoft Office" Manufacturer="SIL International" />
 
-    <Directory Id="TARGETDIR" Name="SourceDir">
+    
+  
       <Directory Id="MergeRedirectFolder">
 
         <Component Id="SILConvertersOffice07.dll" Guid="{0340781F-FA84-4D98-A7D2-C9D12D5679C6}">
@@ -47,8 +46,7 @@
         </Component>
 
         <Component Id="SILConvertersOffice07.dll.config" Guid="{E263C23E-2C26-43BC-B816-D6692744CBD8}">
-          <File Id="SILConvertersOffice07.dll.config" Name="SILConvertersOffice07.dll.config" Vital="yes" KeyPath="yes"
-                Source="..\..\output\x86\release\SILConvertersOffice07.dll.config" />
+          <File Id="SILConvertersOffice07.dll.config" Name="SILConvertersOffice07.dll.config" Vital="yes" KeyPath="yes" Source="..\..\output\x86\release\SILConvertersOffice07.dll.config" />
         </Component>
 
         <Component Id="SecOffice_COMAddInShim07" Guid="{BFAEF454-F874-4668-B545-4354A2C50FD7}">
@@ -72,10 +70,9 @@
         </Component>
 
         <Component Id="SecOffice_ManagedAggregator07.dll" Guid="{51950AE3-0F0C-44DF-8226-63D71116DA54}">
-          <File Id="SecOffice_ManagedAggregator07.dll" Name="SecOffice_ManagedAggregator07.dll" Vital="yes" KeyPath="yes" AssemblyManifest="SecOffice_ManagedAggregator07.dll" AssemblyApplication="SecOffice_ManagedAggregator07.dll" Assembly=".net" Source="..\..\output\x86\release\SecOffice_ManagedAggregator07.dll"/>
+          <File Id="SecOffice_ManagedAggregator07.dll" Name="SecOffice_ManagedAggregator07.dll" Vital="yes" KeyPath="yes" AssemblyManifest="SecOffice_ManagedAggregator07.dll" AssemblyApplication="SecOffice_ManagedAggregator07.dll" Assembly=".net" Source="..\..\output\x86\release\SecOffice_ManagedAggregator07.dll" />
         </Component>
 
       </Directory>
-    </Directory>
-  </Module>
+    </Module>
 </Wix>
