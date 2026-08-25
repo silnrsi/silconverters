@@ -9,6 +9,10 @@ on:
     branches: [ master ]
   workflow_dispatch:
 
+permissions:
+  contents: read
+  id-token: write   # required by sillsdev/codesign/trusted-signing-action (OIDC to Azure)
+
 env:
   # Path to the solution file relative to the root of the project.
   SOLUTION_FILE_PATH: "./SEC VS2019.sln"
@@ -99,3 +103,19 @@ jobs:
       with:
         name: logs-${{ matrix.build_platform }}-${{ matrix.build_configuration }}
         path: build-*.binlog
+
+    - name: Sign installer
+      if: ${{ matrix.build_configuration == 'Release' && github.event_name != 'pull_request' }}
+      uses: sillsdev/codesign/trusted-signing-action@v3
+      with:
+        credentials: ${{ secrets.TRUSTED_SIGNING_CREDENTIALS }}
+        files-folder: output/${{ matrix.build_platform }}
+        files-folder-filter: SetupSILConverters*.exe
+
+    - name: Upload installer artifact
+      if: ${{ matrix.build_configuration == 'Release' }}
+      uses: actions/upload-artifact@v6
+      with:
+        name: silconverters-installer-${{ matrix.build_platform }}
+        if-no-files-found: error
+        path: output/${{ matrix.build_platform }}/SetupSILConverters*.exe
