@@ -84,11 +84,6 @@ jobs:
         /p:Configuration=${{matrix.build_configuration}}
         /p:Platform=${{matrix.build_platform}}
 
-    - name: Setup MSVC Developer Command Prompt
-      uses: ilammy/msvc-dev-cmd@v1
-      with:
-        arch: ${{ matrix.build_platform }}
-
     - name: Build
       shell: cmd
       run: >
