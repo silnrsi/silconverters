@@ -81,9 +81,8 @@ jobs:
         "%MSBUILD_PATH%"
         "${{env.SOLUTION_FILE_PATH}}"
         /t:Restore
-
-    - name: Restore NuGet dependencies
-      run: nuget restore "${{ env.SOLUTION_FILE_PATH }}"
+        /p:Configuration=${{matrix.build_configuration}}
+        /p:Platform=${{matrix.build_platform}}
 
     - name: Setup MSVC Developer Command Prompt
       uses: ilammy/msvc-dev-cmd@v1
