@@ -104,6 +104,44 @@ jobs:
         name: logs-${{ matrix.build_platform }}-${{ matrix.build_configuration }}
         path: build-*.binlog
 
+    # Burn bundles (SetupSILConverters*.exe) carry an attached container - the vc_redist/MSI
+    # payloads - appended after the engine stub at build time, with byte offsets recorded in the
+    # engine's own manifest. Authenticode-signing the finished bundle exe directly changes the
+    # engine's size without updating those offsets, so Burn can no longer find/extract the
+    # container at install time ("Failed to acquire container: WixAttachedContainer", surfacing as
+    # a "locate missing file" dialog and an 0x800704c7 abort). The fix is the same detach/sign/
+    # reattach/sign dance the (legacy) TeamCity build already does for this exact reason - see
+    # build/buildBaseInstaller.bat's "UseInsignia" branch, which calls insignia -ib/-ab around the
+    # sign - just using the modern `wix burn detach`/`reattach` subcommands instead of insignia.exe.
+    - name: Install WiX signing tool
+      if: ${{ matrix.build_configuration == 'Release' && github.event_name != 'pull_request' }}
+      shell: cmd
+      run: |
+        dotnet tool install --global wix --version 6.0.2
+        echo %USERPROFILE%\.dotnet\tools>> %GITHUB_PATH%
+
+    - name: Detach bundle engine for signing
+      if: ${{ matrix.build_configuration == 'Release' && github.event_name != 'pull_request' }}
+      shell: cmd
+      run: >
+        for %%f in ("output\${{matrix.build_platform}}\SetupSILConverters*.exe")
+        do wix burn detach "%%f" -engine "output\${{matrix.build_platform}}\engine.exe"
+
+    - name: Sign bundle engine
+      if: ${{ matrix.build_configuration == 'Release' && github.event_name != 'pull_request' }}
+      uses: sillsdev/codesign/trusted-signing-action@v3
+      with:
+        credentials: ${{ secrets.TRUSTED_SIGNING_CREDENTIALS }}
+        files-folder: output/${{ matrix.build_platform }}
+        files-folder-filter: engine.exe
+
+    - name: Reattach signed engine to bundle
+      if: ${{ matrix.build_configuration == 'Release' && github.event_name != 'pull_request' }}
+      shell: cmd
+      run: |
+        for %%f in ("output\${{matrix.build_platform}}\SetupSILConverters*.exe") do wix burn reattach "%%f" -engine "output\${{matrix.build_platform}}\engine.exe" -o "%%f"
+        del "output\${{matrix.build_platform}}\engine.exe"
+
     - name: Sign installer
       if: ${{ matrix.build_configuration == 'Release' && github.event_name != 'pull_request' }}
       uses: sillsdev/codesign/trusted-signing-action@v3
