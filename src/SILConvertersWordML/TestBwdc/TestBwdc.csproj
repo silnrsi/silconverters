@@ -382,7 +382,7 @@
   </ItemGroup>
   <Import Project="$(SolutionDir)SharedItems.props" />
   <ItemGroup>
-    <PackageReference Include="Encoding-Converters-Core" Version="0.9.9" />
+    <PackageReference Include="Encoding-Converters-Core" Version="1.0.0" />
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
     <PackageReference Include="NUnit" Version="3.13.3" />
     <PackageReference Include="NUnit3TestAdapter" Version="4.5.0" />

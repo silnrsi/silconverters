@@ -113,7 +113,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Encoding-Converters-Core" Version="0.9.9" />
+    <PackageReference Include="Encoding-Converters-Core" Version="1.0.0" />
     <PackageReference Include="ParatextEmbeddedUiPluginInterfaces" Version="2.0.23" />
     <PackageReference Include="ParatextPluginInterfaces" Version="2.0.23" />
   </ItemGroup>

@@ -20,6 +20,6 @@
     <Content Include="EnableIndicConvertersInWord.reg" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Encoding-Converters-Core" Version="0.9.9" GeneratePathProperty="true" />
+    <PackageReference Include="Encoding-Converters-Core" Version="1.0.0" GeneratePathProperty="true" />
   </ItemGroup>
 </Project>

@@ -64,8 +64,7 @@
       <_RegAsmToolPath>$(SystemRoot)\Microsoft.NET\Framework64\v4.0.30319\RegAsm.exe</_RegAsmToolPath>
     </PropertyGroup>
     <Exec Command="&quot;$(_TlbExpToolPath)&quot; &quot;$(TargetPath)&quot; /out:&quot;$(TargetDir)$(TargetName).tlb&quot;" />
-    <Exec Command="&quot;$(_RegAsmToolPath)&quot; &quot;$(TargetPath)&quot; /codebase /tlb:&quot;$(TargetDir)$(TargetName).tlb&quot;"
-          ContinueOnError="WarnAndContinue" />
+    <Exec Command="&quot;$(_RegAsmToolPath)&quot; &quot;$(TargetPath)&quot; /codebase /tlb:&quot;$(TargetDir)$(TargetName).tlb&quot;" ContinueOnError="WarnAndContinue" />
   </Target>
   <ItemGroup>
     <Reference Include="AIGuesserEC">
@@ -277,7 +276,7 @@
     <Content Include="TRFFC17.ICO" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Encoding-Converters-Core" Version="0.9.9" />
+    <PackageReference Include="Encoding-Converters-Core" Version="1.0.0" />
   </ItemGroup>
   <Import Project="$(SolutionDir)SharedItems.props" />
 </Project>

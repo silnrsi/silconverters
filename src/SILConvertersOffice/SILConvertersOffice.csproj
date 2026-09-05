@@ -111,7 +111,7 @@
     <Content Include="TRFFC17.ICO" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Encoding-Converters-Core" Version="0.9.9" />
+    <PackageReference Include="Encoding-Converters-Core" Version="1.0.0" />
   </ItemGroup>
   <Import Project="$(SolutionDir)SharedItems.props" />
 </Project>
