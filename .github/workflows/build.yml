@@ -104,6 +104,49 @@ jobs:
         name: logs-${{ matrix.build_platform }}-${{ matrix.build_configuration }}
         path: build-*.binlog
 
+    # The Installer\*.wixproj merge modules harvest this repo's own exes/dlls straight out of
+    # output\<platform>\<configuration>\ (see e.g. DChartHelperMM's Source="..\..\output\x64\
+    # release\DChartHelper.exe") and were already built - unsigned - by the single solution Build
+    # above. Sign that output now, then force the merge modules (and the MSI/bundle that harvest
+    # them in turn) to rebuild so they pick up the now-signed bytes.
+    - name: Sign build outputs
+      if: ${{ matrix.build_configuration == 'Release' && github.event_name != 'pull_request' }}
+      uses: sillsdev/codesign/trusted-signing-action@v3
+      with:
+        credentials: ${{ secrets.TRUSTED_SIGNING_CREDENTIALS }}
+        files-folder: output\${{ matrix.build_platform }}\${{ matrix.build_configuration }}
+        files-folder-filter: "dll,exe"
+
+    # Clear the wix projects' own bind cache/output so the rebuild below can't decide they're
+    # already up to date - the safest guarantee is to force it, rather than trust that WiX's own
+    # bind-input tracking picks up the now-newer Source= binaries. Only descend into obj\<platform>\
+    # <configuration>\ (the wix bind intermediate/tracking output) and bin\ - never obj\ itself,
+    # which is also where these SDK-style wixprojs' NuGet restore assets (project.assets.json etc.)
+    # live; deleting those would reintroduce the NETSDK1047 restore failures fixed earlier. The
+    # app/library projects are left alone: their compiled output is untouched by signing except
+    # for its timestamp, which the normal incremental build already treats as up to date against
+    # their (unchanged) sources.
+    - name: Clear installer project outputs
+      if: ${{ matrix.build_configuration == 'Release' && github.event_name != 'pull_request' }}
+      shell: powershell
+      run: |
+        $objDirs = Get-ChildItem -Path Installer -Directory -Recurse -Filter obj
+        foreach ($dir in $objDirs) {
+          Get-ChildItem $dir.FullName -Directory | Remove-Item -Recurse -Force
+        }
+        Get-ChildItem -Path Installer -Directory -Recurse -Filter bin |
+          Remove-Item -Recurse -Force
+
+    - name: Rebuild installer projects with signed binaries
+      if: ${{ matrix.build_configuration == 'Release' && github.event_name != 'pull_request' }}
+      shell: cmd
+      run: >
+        "%MSBUILD_PATH%"
+        /m
+        /p:Configuration=${{matrix.build_configuration}}
+        /p:Platform=${{matrix.build_platform}}
+        "${{env.SOLUTION_FILE_PATH}}"
+
     # Burn bundles (SetupSILConverters*.exe) carry an attached container - the vc_redist/MSI
     # payloads - appended after the engine stub at build time, with byte offsets recorded in the
     # engine's own manifest. Authenticode-signing the finished bundle exe directly changes the
