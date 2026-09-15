@@ -1,18 +1,20 @@
+using BackTranslationHelper;
+using ECInterfaces;
+using SilEncConverters40;
+using SpellingFixer30;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
-using ECInterfaces;
-using SilEncConverters40;
-using SpellingFixer30;
 
 namespace SILConvertersOffice
 {
     internal partial class SILConverterProcessorForm : BaseConverterForm, IBaseConverterForm
     {
         protected CscProject m_cscProject = null;
+        protected FindReplaceHelper m_aFindReplaceHelper = null;
 
         public SILConverterProcessorForm()
         {
@@ -44,10 +46,40 @@ namespace SILConvertersOffice
 
         private void buttonViewRule_Click(object sender, EventArgs e)
         {
-            m_cscProject ??= TrySelectProject();
-            m_cscProject?.ReplacementRulesCheckForOutsideChange();  // in case the rules file changed outside
-            m_cscProject?.FindReplacementRule(textBoxInput.Text);
+            ViewRule(m_aFontPlusEC.DirectableEncConverter);
             RefreshTextBoxes(m_aFontPlusEC.DirectableEncConverter);
+
+            void ViewRule(DirectableEncConverter directableEncConverter)
+            {
+                if (directableEncConverter.Name.StartsWith(SpellingFixer30.SpellingFixer.SFConverterPrefix))
+                {
+                    m_aFindReplaceHelper ??= TrySpellFixerProjectLogin();
+                    m_aFindReplaceHelper.FindReplacementRule(textBoxInput.Text);
+                }
+                else if (directableEncConverter.Name.StartsWith(SpellingFixer30.SpellingFixer.SFConverterPrefixCsc))
+                {
+                    m_cscProject ??= TrySelectProject();
+                    m_cscProject?.ReplacementRulesCheckForOutsideChange();  // in case the rules file changed outside
+                    m_cscProject?.FindReplacementRule(textBoxInput.Text);
+                    RefreshTextBoxes(m_aFontPlusEC.DirectableEncConverter);
+                }
+            }
+        }
+
+        private FindReplaceHelper TrySpellFixerProjectLogin()
+        {
+            try
+            {
+                var aSF = FindReplaceHelper.GetFindReplaceHelper();
+                DirectableEncConverter.EncConverters.Reinitialize();
+                return aSF;
+            }
+            catch (Exception ex)
+            {
+                if (!ex.InnerException?.Message.Contains("No project selected") ?? true)
+                    MessageBox.Show(ex.Message, EncConverters.cstrCaption);
+            }
+            return null;
         }
 
         protected CscProject TrySelectProject()
@@ -75,8 +107,21 @@ namespace SILConvertersOffice
                 possibleBadWord = (string)iData.GetData(DataFormats.UnicodeText);
             }
 
-            m_cscProject ??= TrySelectProject();
-            m_cscProject?.AssignCorrectSpelling(possibleBadWord);
+            AddRule(m_aFontPlusEC.DirectableEncConverter, possibleBadWord);
+
+            void AddRule(DirectableEncConverter directableEncConverter, string possibleBadWord)
+            {
+                if (directableEncConverter.Name.StartsWith(SpellingFixer30.SpellingFixer.SFConverterPrefix))
+                {
+                    m_aFindReplaceHelper ??= TrySpellFixerProjectLogin();
+                    m_aFindReplaceHelper.AssignCorrectSpelling(textBoxInput.Text);
+                }
+                else if (directableEncConverter.Name.StartsWith(SpellingFixer30.SpellingFixer.SFConverterPrefixCsc))
+                {
+                    m_cscProject ??= TrySelectProject();
+                    m_cscProject?.AssignCorrectSpelling(possibleBadWord);
+                }
+            }
         }
     }
 
