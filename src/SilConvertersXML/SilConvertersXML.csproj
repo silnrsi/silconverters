@@ -80,7 +80,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Encoding-Converters-Core" Version="1.0.0" />
+    <PackageReference Include="Encoding-Converters-Core" Version="1.0.1" />
   </ItemGroup>
   <Import Project="$(SolutionDir)SharedItems.props" />
   <PropertyGroup>
