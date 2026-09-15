@@ -863,7 +863,7 @@ namespace ClipboardEC
         {
             // if it's now available...
             if (IsCscProject)
-                m_cscProject.EditSpellingFixes();
+                m_cscProject.EditSpellingFixes(validate: false);
             else if (IsSpellFixerLegacyProject)
                 m_aSpellFixerLegacy.EditSpellingFixes();
         }
