@@ -277,3 +277,4 @@ autom4te.cache
 /.vs/SEC VS2010/v14/.suo
 /.vs/SEC VS2015/v14/.suo
 /src/SpellingFixer30/CscFixerMM/.svn
+/build/engine.exe

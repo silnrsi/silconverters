@@ -45,8 +45,13 @@
       <ExeFile>$(TargetName)_$(TruncatedVersion)_$(PlatformName)$(TargetExt)</ExeFile>
       <BaseBuildDir>$(SolutionDir)build\</BaseBuildDir>
       <OutputDir>$(SolutionDir)output\$(PlatformName)\</OutputDir>
-      <BaseBuildArgs>"$(OutputDir)$(ExeFile)" UseInsignia</BaseBuildArgs>
+      <!-- wix.exe from the WixToolset.Sdk package (net472 layout, i.e. when run under full-framework MSBuild.exe)
+           is used to detach/reattach the bundle engine for signing, so the build agent doesn't need WiX v3's
+           insignia.exe on its PATH. -->
+      <WixExe>$(WixBinDir)x86\wix.exe</WixExe>
+      <BaseBuildArgs>"$(OutputDir)$(ExeFile)" UseInsignia "$(WixExe)"</BaseBuildArgs>
     </PropertyGroup>
+    <Error Condition="!Exists('$(WixExe)')" Text="wix.exe not found at '$(WixExe)'; can't detach/reattach the bundle engine for signing." />
     <Message Text="TruncatedVersion: $(TruncatedVersion), ExeFile: $(ExeFile), SolutionDir: $(SolutionDir), BaseBuildDir: $(BaseBuildDir), OutputDir: $(OutputDir), BaseBuildArgs: $(BaseBuildArgs), BuildingInsideVisualStudio: $(BuildingInsideVisualStudio), MSBuildStartupDirectory: $(MSBuildStartupDirectory)" />
     <Exec WorkingDirectory="$(BaseBuildDir)" Command="$(BaseBuildDir)buildBaseInstaller.bat $(BaseBuildArgs)" />
   </Target>

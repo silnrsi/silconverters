@@ -66,14 +66,19 @@
     <util:RegistrySearch Root="HKLM" Key="SOFTWARE\Microsoft\Net Framework Setup\NDP\v4\Full" Value="Release" Variable="Netfx4FullRelease" />
     <util:RegistrySearch Root="HKLM" Key="SOFTWARE\Microsoft\Net Framework Setup\NDP\v4\Full" Value="Release" Variable="Netfx4x64FullRelease" Bitness="always64" />
     <WixVariable Id="NetFx48OrLaterDetectCondition" Overridable="yes" Value="(Netfx4FullRelease &gt;= $(var.NetFx48MinRelease)) AND (NOT VersionNT64 OR (Netfx4x64FullRelease &gt;= $(var.NetFx48MinRelease)))" />
-    <WixVariable Id="NetFx48WebInstallCondition" Value="" Overridable="yes" />
     <WixVariable Id="NetFx48WebPackageDirectory" Value="redist\" Overridable="yes" />
 
     <!-- WixToolset.Netfx.wixext no longer ships a prebuilt "NetFx48Web" PackageGroup (confirmed: v6.0.2's
          wixext DLL contains no PackageGroup/DotNetFramework authoring at all, only NGen-scheduling custom
          actions); the old v3 NetFxExtension.wixlib's NetFx48Web fragment is hand-authored here instead,
          following the same shape. NOT verified end-to-end (needs a machine without .NET 4.8 to actually
-         exercise the detect+download+install path; flagged for the interactive Phase 4 verification pass). -->
+         exercise the detect+download+install path; flagged for the interactive Phase 4 verification pass).
+         DetectCondition must dereference the WixVariable with !(wix.X): a bare "NetFx48OrLaterDetectCondition" is
+         evaluated by Burn as the name of an (undefined) Burn variable, which is always false, so .NET 4.8 was
+         re-downloaded and re-run on every install even with 4.8+ already present (seen in a 2026-09-26
+         OneStory Editor VM log with Release=528372; same authoring). The old InstallCondition had the same
+         problem and is redundant with the DetectCondition anyway (an undetected package is installed by
+         default), so it was dropped. -->
     <PackageGroup Id="NetFx48Web">
       <ExePackage Id="NetFx48WebExe"
                   Cache="keep"
@@ -84,8 +89,7 @@
                   InstallArguments="/q /norestart /ChainingPackage &quot;[WixBundleName]&quot;"
                   RepairArguments="/q /norestart /repair /ChainingPackage &quot;[WixBundleName]&quot;"
                   UninstallArguments="/uninstall /q /norestart /ChainingPackage &quot;[WixBundleName]&quot;"
-                  DetectCondition="NetFx48OrLaterDetectCondition"
-                  InstallCondition="NetFx48WebInstallCondition OR NOT NetFx48OrLaterDetectCondition">
+                  DetectCondition="!(wix.NetFx48OrLaterDetectCondition)">
         <ExePackagePayload Name="!(wix.NetFx48WebPackageDirectory)ndp48-web.exe"
                             DownloadUrl="$(var.NetFx48WebLink)"
                             Size="$(var.NetFx48WebSize)"
