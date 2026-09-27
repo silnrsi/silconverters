@@ -22,6 +22,11 @@
     <None Remove="TestBwdc\**" />
     <Content Remove="TestBwdc\**" />
   </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\BulkSFMConverter\OutputFilenamePattern.cs">
+      <Link>OutputFilenamePattern.cs</Link>
+    </Compile>
+  </ItemGroup>
   <PropertyGroup Condition="'$(Platform)'=='x86'">
     <PlatformTarget>x86</PlatformTarget>
     <Prefer32Bit>false</Prefer32Bit>

@@ -22,6 +22,7 @@ using System.Linq;
 #if !TurnOffSpellFixer30
 using SpellingFixer30;
 #endif
+using SilConvertersShared;
 
 namespace SFMConv
 {
@@ -491,17 +492,6 @@ namespace SFMConv
             NoQuerySameName
         }
 
-        private void UpdateFilenameAffixes(string strFileSpec, ref string strExtn, ref string strFilenamePath, ref string strFileTitle)
-        {
-            if (strExtn == null)
-                strExtn = Path.GetExtension(strFileSpec);
-
-            if (strFilenamePath == null)
-                strFilenamePath = GetDirEnsureFinalSlash(strFileSpec);
-
-            strFileTitle = Path.GetFileNameWithoutExtension(strFileSpec);
-        }
-
         private void TryProcessAndSaveDocumentsEx(Encoding enc, SaveOptions eSaveOption)
         {
             try
@@ -529,25 +519,29 @@ namespace SFMConv
 
         private void processAndSaveDocumentsEx(Encoding enc, SaveOptions eSaveOption)
         {
-            string strFilenamePath = null, strFileTitle = null, strFilenamePrefix = "", strFilenameSuffix = cstrOutputFileAddn, strExtn = null;  // for starters
+            var namePattern = new OutputFilenamePattern();
             foreach (string strFileSpec in m_lstFilesOpen)
             {
                 string[] aStrFileContents = m_mapFile2Contents[strFileSpec];
                 if (!ConvertDoc(aStrFileContents, strFileSpec))
                     continue;
 
+                bool bSkipQuery = (eSaveOption == SaveOptions.NoQuerySameName);
                 if ((eSaveOption == SaveOptions.QuerySameName) || (eSaveOption == SaveOptions.NoQuerySameName))
                     saveFileDialog.FileName = strFileSpec;
                 else if (eSaveOption == SaveOptions.QueryAddAffixes)
                 {
-                    UpdateFilenameAffixes(strFileSpec, ref strExtn, ref strFilenamePath, ref strFileTitle);
-
 #if !DontAllowSameNameSaves
-                    this.saveFileDialog.FileName = strFilenamePath + strFilenamePrefix + strFileTitle + strFilenameSuffix + strExtn;
+                    // once the user has saved a file with a new name and we could figure out how they changed
+                    //  it, save the rest the same way w/o asking -- but only if that can't overwrite an existing
+                    //  file (which includes the original file itself)
+                    string strOutputFilename = namePattern.GetOutputFileSpec(strFileSpec);
+                    bSkipQuery = (strOutputFilename != null) && !File.Exists(strOutputFilename);
+                    this.saveFileDialog.FileName = strOutputFilename ?? namePattern.GetDefaultFileSpec(strFileSpec, cstrOutputFileAddn);
                 }
 
                 DialogResult res = DialogResult.OK;
-                if (eSaveOption != SaveOptions.NoQuerySameName)
+                if (!bSkipQuery)
                     res = this.saveFileDialog.ShowDialog();
 
                 string strFilename = strFileSpec.ToLower();
@@ -566,16 +560,13 @@ namespace SFMConv
                 {
                     // if the user is expected to use the same name (e.g. SpellFixer), but *doesn't*, then go back
                     //  to the affix mode
-                    UpdateFilenameAffixes(strFileSpec, ref strExtn, ref strFilenamePath, ref strFileTitle);
                     eSaveOption = SaveOptions.QueryAddAffixes;
                 }
 #else                
                 string strSaveName = null;
                 do
                 {
-                    string strOutputFilenameOrig = strFilenamePath + strFilenamePrefix + strFileTitle + strFilenameSuffix + strExtOrig;
-
-                    this.saveFileDialog.FileName = strOutputFilenameOrig;
+                    this.saveFileDialog.FileName = namePattern.GetDefaultFileSpec(strFileSpec, cstrOutputFileAddn);
                     
                     DialogResult res = this.saveFileDialog.ShowDialog();
                     strSaveName = saveFileDialog.FileName.ToLower();
@@ -590,34 +581,10 @@ namespace SFMConv
                 string strOutputFilenameNew = saveFileDialog.FileName;
                 File.WriteAllLines(strOutputFilenameNew, aStrFileContents, enc);
 
-                if (eSaveOption == SaveOptions.QueryAddAffixes)
-                {
-                    // calculate (if possible) the suffix the user used so we can use that next time.
-                    strExtn = Path.GetExtension(strOutputFilenameNew);
-                    strFilenamePath = GetDirEnsureFinalSlash(strOutputFilenameNew);
-                    string strNewTitle = Path.GetFileNameWithoutExtension(strOutputFilenameNew);
-
-                    // see if the original name is some portion of the new name
-                    int nIndexOfOrigName = strNewTitle.IndexOf(strFileTitle, StringComparison.InvariantCultureIgnoreCase);
-
-                    // if we found the original name in the new name...
-                    if (nIndexOfOrigName != -1)
-                    {
-                        // first check for a prefix (which must be beyond the path)
-                        if (nIndexOfOrigName > 0)
-                            strFilenamePrefix = strNewTitle.Substring(0, nIndexOfOrigName);
-
-                        // also check for a suffix
-                        int nSuffixStart = (nIndexOfOrigName + strFileTitle.Length);
-                        if (strNewTitle.Length > nSuffixStart)
-                        {
-                            Debug.Assert(nSuffixStart >= 0);
-                            strFilenameSuffix = strNewTitle.Substring(nSuffixStart);
-                        }
-                        else
-                            strFilenameSuffix = null;
-                    }
-                }
+                // if the user just told us the name to use, figure out (if possible) how they changed it, so we
+                //  can name the rest the same way
+                if ((eSaveOption == SaveOptions.QueryAddAffixes) && !bSkipQuery)
+                    namePattern.Learn(strFileSpec, strOutputFilenameNew);
             }
         }
 

@@ -14,6 +14,7 @@ using System.Runtime.Serialization.Formatters.Soap; // for soap formatter
 using System.Runtime.InteropServices;               // for Marshal
 using System.Diagnostics;                           // for Process
 using System.Xml.Linq;
+using SilConvertersShared;
 
 namespace SILConvertersWordML
 {
@@ -537,6 +538,42 @@ namespace SILConvertersWordML
         }
         */
 
+        // if the filename has periods in it (e.g. "Genesis 24.31- 24.67 draft"), the save dialog thinks it already has
+        //  an extension (".67 draft") and doesn't add one. So if it doesn't end with an extension from the dialog's
+        //  filter (or one of the newer Word ones), add the extension of the file type the user selected.
+        protected string EnsureKnownExtension(string strFilename)
+        {
+            var astrFilterParts = saveFileDialog.Filter.Split('|');
+            var setKnownExtns = new HashSet<string>(StringComparer.OrdinalIgnoreCase) { ".docx", ".docm" };
+            for (int i = 1; i < astrFilterParts.Length; i += 2)
+            {
+                foreach (var strPattern in astrFilterParts[i].Split(';'))
+                {
+                    var strExtn = GetFilterPatternExtension(strPattern);
+                    if (strExtn != null)
+                        setKnownExtns.Add(strExtn);
+                }
+            }
+
+            if (setKnownExtns.Contains(Path.GetExtension(strFilename)))
+                return strFilename;
+
+            // FilterIndex is 1-based
+            int nPatternIndex = (2 * (saveFileDialog.FilterIndex - 1)) + 1;
+            string strSelectedExtn = null;
+            if ((nPatternIndex > 0) && (nPatternIndex < astrFilterParts.Length))
+                strSelectedExtn = GetFilterPatternExtension(astrFilterParts[nPatternIndex].Split(';')[0]);
+
+            return strFilename + (strSelectedExtn ?? ("." + saveFileDialog.DefaultExt));
+        }
+
+        // e.g. "*.doc" -> ".doc" (but "*.*" -> null)
+        private static string GetFilterPatternExtension(string strPattern)
+        {
+            strPattern = strPattern.Trim();
+            return (strPattern.StartsWith("*.") && (strPattern != "*.*")) ? strPattern.Substring(1) : null;
+        }
+
         protected Word.WdSaveFormat SaveFormatFromIndexFromFilename(string strFilename)
         {
             // from the FileSave dialog: Word Document (*.doc)|*.doc|XML Document (*.xml)|*.xml|Single File Web Page (*.mht; *.mhtml)|*.mht; *.mhtml|Web Page (*.htm; *.html)|*.htm; *.html|Web Page, Filtered (*.htm; *.html)|*.htm; *.html|Document Template (*.dot)|*.dot|Rich Text Format (*.rtf)|*.rtf|Plain Text (*.txt)|*.txt|Encoded Text (*.txt)|*.txt|Unicode Text (*.txt)|*.txt|Text with line breaks (*.txt)|*.txt|All files (*.*)|*.*
@@ -724,7 +761,7 @@ namespace SILConvertersWordML
             Word.Application wrdApp = new Word.Application();
             try
             {
-                string strFilenamePath = null, strFilenamePrefix = null, strFilenameSuffix = cstrOutputFileAddn, strExtn = null;  // for starters
+                var namePattern = new OutputFilenamePattern();
 
                 foreach (string strOrigFileSpec in m_mapDocName2XmlDocument.Keys)
                 {
@@ -734,17 +771,10 @@ namespace SILConvertersWordML
 
                     // now convert it back to a Word .doc file
                     // First calculate the new filename
-                    if (strExtn == null)
-                        strExtn = Path.GetExtension(strOrigFileSpec);
-
-                    if (strFilenamePath == null)
-                        strFilenamePath = GetDirEnsureFinalSlash(strOrigFileSpec);
-
-                    string strFileTitle = Path.GetFileNameWithoutExtension(strOrigFileSpec);
-
                     string strOrigFileSpecLowerCase = strOrigFileSpec.ToLower();
                     string strNewSaveFileSpec = null;
                     string strBackup = null;
+                    bool bUserChoseName = false;
                     if ((m_mapBackupNameToDocName.Count > 0) && (m_mapBackupNameToDocName.ContainsKey(strOrigFileSpec)))
                     {
                         strNewSaveFileSpec = m_mapBackupNameToDocName[strOrigFileSpec];
@@ -761,24 +791,24 @@ namespace SILConvertersWordML
                     }
                     else
                     {
-                        string strNewSaveFileSpecLowerCase;
-                        do
+                        // once the user has saved a file with a new name (e.g. in a different folder, with a
+                        //  prefix/suffix, or replacing part of the name) and we could figure out how they changed
+                        //  it, save the rest the same way w/o asking -- but only if that can't overwrite an
+                        //  existing file (which includes the original file itself)
+                        var strOutputFilenameAuto = namePattern.GetOutputFileSpec(strOrigFileSpec);
+                        if ((strOutputFilenameAuto != null) && !File.Exists(strOutputFilenameAuto))
                         {
-                            // if the user is saving the file somewhere besides the original folder...
-                            if (GetDirEnsureFinalSlash(strOrigFileSpec) != strFilenamePath)
+                            strNewSaveFileSpec = strOutputFilenameAuto;
+                        }
+                        else
+                        {
+                            // otherwise, query for the name to make sure it isn't the same as the original file
+                            string strNewSaveFileSpecLowerCase;
+                            do
                             {
-                                // then no need to query for the name -- just use the bits we figured out from before
-                                var strOutputFilenameOrig = strFilenamePath + strFilenamePrefix + strFileTitle + strFilenameSuffix + strExtn;
-                                saveFileDialog.FileName = strOutputFilenameOrig;
-                                strNewSaveFileSpecLowerCase = strOutputFilenameOrig.ToLower();
-                            }
-                            else
-                            {
-                                // otherwise, query for the name to make sure it isn't the same as the original file
-                                var strOutputFilenameOrig = strFilenamePath + strFilenamePrefix + strFileTitle +
-                                                               strFilenameSuffix; //  +strExtn;
-
-                                saveFileDialog.FileName = strOutputFilenameOrig;
+                                saveFileDialog.FileName = (strOutputFilenameAuto != null)
+                                                              ? Path.Combine(Path.GetDirectoryName(strOutputFilenameAuto), Path.GetFileNameWithoutExtension(strOutputFilenameAuto))
+                                                              : namePattern.GetDefaultFileSpec(strOrigFileSpec, cstrOutputFileAddn, includeExtension: false);
 
                                 DialogResult res = this.saveFileDialog.ShowDialog();
                                 strNewSaveFileSpecLowerCase = saveFileDialog.FileName.ToLower();
@@ -790,9 +820,10 @@ namespace SILConvertersWordML
                                 }
                                 else if ((res == DialogResult.OK) && (strNewSaveFileSpecLowerCase == strOrigFileSpecLowerCase))
                                     MessageBox.Show("Sorry, you cannot save this file with the same name", cstrCaption);
-                            }
-                        } while (strNewSaveFileSpecLowerCase == strOrigFileSpecLowerCase);
-                        strNewSaveFileSpec = saveFileDialog.FileName;
+                            } while (strNewSaveFileSpecLowerCase == strOrigFileSpecLowerCase);
+                            strNewSaveFileSpec = EnsureKnownExtension(saveFileDialog.FileName);
+                            bUserChoseName = true;
+                        }
                     }
 
                     string strOutputFilenameNew = strNewSaveFileSpec;
@@ -808,31 +839,10 @@ namespace SILConvertersWordML
                         catch { }
                     }
 
-                    // calculate (if possible) the suffix the user used so we can use that next time.
-                    strExtn = Path.GetExtension(strOutputFilenameNew);
-                    strFilenamePath = GetDirEnsureFinalSlash(strOutputFilenameNew);
-                    string strNewTitle = Path.GetFileNameWithoutExtension(strOutputFilenameNew);
-
-                    // see if the original name is some portion of the new name
-                    int nIndexOfOrigName = strNewTitle.IndexOf(strFileTitle, StringComparison.InvariantCultureIgnoreCase);
-
-                    // if we found the original name in the new name...
-                    if (nIndexOfOrigName != -1)
-                    {
-                        // first check for a prefix (which must be beyond the path)
-                        if (nIndexOfOrigName > 0)
-                            strFilenamePrefix = strNewTitle.Substring(0, nIndexOfOrigName);
-
-                        // also check for a suffix
-                        int nSuffixStart = (nIndexOfOrigName + strFileTitle.Length);
-                        if (strNewTitle.Length > nSuffixStart)
-                        {
-                            Debug.Assert(nSuffixStart >= 0);
-                            strFilenameSuffix = strNewTitle.Substring(nSuffixStart);
-                        }
-                        else
-                            strFilenameSuffix = null;
-                    }
+                    // if the user just told us the name to use, figure out (if possible) how they changed it, so
+                    //  we can name the rest the same way (w/o asking)
+                    if (bUserChoseName)
+                        namePattern.Learn(strOrigFileSpec, strOutputFilenameNew);
                 }
 
                 UpdateStatusBar("Convert and Save complete!");
