@@ -34,7 +34,10 @@
   <Target Name="SignBuild">
     <PropertyGroup>
       <MsiFile>$(TargetFileName)</MsiFile>
-      <SolutionDir>$(MSBuildStartupDirectory)\</SolutionDir>
+      <!-- Conditional so a SolutionDir passed in by SetupSILConverters.wixproj's EnsureSignedMsiPayload (which
+           builds this project as a nested child, where MSBuildStartupDirectory isn't necessarily the repo root)
+           isn't clobbered; a target-scoped assignment would otherwise override even a global property. -->
+      <SolutionDir Condition="'$(SolutionDir)' == ''">$(MSBuildStartupDirectory)\</SolutionDir>
       <BaseBuildDir>$(SolutionDir)build\</BaseBuildDir>
       <OutputDir>$(SolutionDir)output\$(PlatformName)\</OutputDir>
       <BaseBuildArgs>"$(OutputDir)$(MsiFile)"</BaseBuildArgs>

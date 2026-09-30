@@ -24,10 +24,12 @@
   <?define msiFilename = "SetupSILConverters_x64.msi" ?>
   <?define vcRedistFilename = "vc_redist.x64.exe" ?>
   <?define VCRuntimesRegKey = "SOFTWARE\Microsoft\VisualStudio\14.0\VC\Runtimes\X64" ?>
+  <?define VCRuntimesRegBitness = "always64" ?>
   <?else?>
   <?define msiFilename = "SetupSILConverters_x86.msi" ?>
   <?define vcRedistFilename = "vc_redist.x86.exe" ?>
   <?define VCRuntimesRegKey = "SOFTWARE\Microsoft\VisualStudio\14.0\VC\Runtimes\X86" ?>
+  <?define VCRuntimesRegBitness = "always32" ?>
   <?endif?>
 
   <Fragment Id="AppFragment">
@@ -119,14 +121,21 @@
        install's VC\Redist\MSVC\v143\ folder) and embedded in the bundle rather than downloaded, specifically to
        avoid the hash-drift problem documented above for NetFx48WebHash - Microsoft is known to change these
        hosted redist files without notice, and a stale pinned hash breaks the bundle for every user until
-       someone re-verifies it. Detection follows the sillsdev/genericinstaller Bundle.wxs convention: a bare
-       "Installed" registry value under the runtime's Runtimes\X64|X86 key is treated as good enough (the VC++
-       runtime is serviced in place by Windows Update once installed, so this isn't pinned to the exact
-       14.44.35211 build vendored here). NOT verified end-to-end (needs a machine without the VC++ 2015-2022
-       runtime to actually exercise the detect+install path; flagged for the interactive Phase 4 verification
-       pass, same as NetFx48Web). -->
+       someone re-verifies it.
+
+       Detection is a real minimum-version gate on the Runtimes\X64|X86 key's "Version" value, not the bare
+       "Installed" flag the sillsdev/genericinstaller convention uses. Microsoft reuses that same 14.0 key for every
+       VC++ 2015-2022 release, so "Installed" is true for any old 14.x runtime a machine happens to have - and
+       Windows Update doesn't bring an app-installed redist up to date on its own. Hit for real in the sibling
+       OneStoryEditor bundle (identical authoring) on 2026-09-30: a VM with a pre-existing v14.29.30040.00
+       runtime had vc17 planned "execute: None", the vendored v143 redist never ran, and the app failed to start
+       until a Repair forced it. The stored value is a "v"-prefixed version string (confirmed on that VM:
+       "v14.29.30040.00"), which Burn types as a Version, so >= compares properly. The floor is below the
+       vendored 14.44.35211 so routine in-place servicing of an already-current runtime doesn't force a reinstall.
+       Bitness is explicit so the x86 bundle reads the 32-bit view (WOW6432Node) and the x64 bundle the 64-bit
+       view, where each runtime's key actually lives. -->
   <Fragment>
-    <util:RegistrySearch Root="HKLM" Key="$(var.VCRuntimesRegKey)" Value="Installed" Variable="VCRuntimeInstalled" Result="value" />
+    <util:RegistrySearch Root="HKLM" Key="$(var.VCRuntimesRegKey)" Value="Version" Variable="VCRuntimeVersion" Result="value" Bitness="$(var.VCRuntimesRegBitness)" />
 
     <PackageGroup Id="VCRedist">
       <ExePackage Id="VCRedistExe"
@@ -137,7 +146,7 @@
                   InstallArguments="/install /quiet /norestart"
                   RepairArguments="/repair /quiet /norestart"
                   UninstallArguments="/uninstall /quiet /norestart"
-                  DetectCondition="VCRuntimeInstalled">
+                  DetectCondition="VCRuntimeVersion &gt;= v14.40.0.0">
         <ExePackagePayload Name="$(var.vcRedistFilename)" SourceFile="Redist\$(var.vcRedistFilename)" />
       </ExePackage>
     </PackageGroup>

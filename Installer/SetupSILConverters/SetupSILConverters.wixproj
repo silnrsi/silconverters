@@ -33,6 +33,23 @@
     <PackageReference Include="WixToolset.Util.wixext" Version="6.0.2" />
     <PackageReference Include="WixToolset.Bal.wixext" Version="6.0.2" />
   </ItemGroup>
+  <!-- The MSI must be signed BEFORE this bundle compiles, because CoreCompile embeds whatever MSI is sitting in
+       output\<platform>\ at that moment into the bundle's attached container; signing the loose MSI afterward
+       never reaches the embedded copy. Found in the sibling OneStoryEditor build (same structure) on 2026-09-30:
+       the bundle exe and engine were signed but the MSI extracted from inside it had no signature. So for
+       SignBuild-driven builds (TeamCity), build and sign the matching MSI project first.
+       Skipped under GitHub Actions: that workflow signs with sillsdev/codesign/trusted-signing-action instead of
+       SignBuild, and orders MSI signing before the bundle rebuild itself (see .github/workflows/build.yml). Running
+       this there would also re-trigger the MSI project's CopyMsiToOutput (SkipUnchangedFiles="false"), overwriting
+       an already-signed output\ MSI with the unsigned bin\ copy. Release-only so local Debug builds don't need
+       signing tooling. -->
+  <Target Name="EnsureSignedMsiPayload" BeforeTargets="CoreCompile" Condition="'$(Configuration)' == 'Release' and '$(GITHUB_ACTIONS)' != 'true'">
+    <PropertyGroup>
+      <MsiProject Condition="'$(Platform)' == 'x64'">..\SEC Setup 64bit\SEC Setup 64bit.wixproj</MsiProject>
+      <MsiProject Condition="'$(Platform)' != 'x64'">..\SEC Setup\SEC Setup.wixproj</MsiProject>
+    </PropertyGroup>
+    <MSBuild Projects="$(MsiProject)" Targets="Build;SignBuild" Properties="Configuration=$(Configuration);Platform=$(Platform);SolutionDir=$(SolutionDir)" />
+  </Target>
   <Target Name="PostBuildCopy" AfterTargets="Build">
     <PropertyGroup>
       <CmdLineArgs>"$(TargetPath)" "$(SolutionDir)output\$(PlatformName)\$(TargetName)_$(TruncatedVersion)_$(PlatformName)$(TargetExt)"</CmdLineArgs>

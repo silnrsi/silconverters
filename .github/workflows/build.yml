@@ -159,6 +159,31 @@ jobs:
         /p:Platform=${{matrix.build_platform}}
         "${{env.SOLUTION_FILE_PATH}}"
 
+    # The rebuild above produced the MSI (output\<platform>\SetupSILConverters_<platform>.msi) and, in the
+    # same pass, the bundle that embeds it - so the embedded MSI is unsigned. Signing the loose MSI only
+    # helps if the bundle is then rebuilt from it, since the bundle's attached container is fixed at
+    # compile time. Sign the MSI, then rebuild just the bundle project so it embeds the signed file.
+    # (SetupSILConverters.wixproj's EnsureSignedMsiPayload target is skipped under GitHub Actions, so this
+    # bundle-only build won't rebuild/recopy the MSI over the signed one.)
+    - name: Sign MSI
+      if: ${{ matrix.build_configuration == 'Release' && github.event_name != 'pull_request' }}
+      uses: sillsdev/codesign/trusted-signing-action@v3
+      with:
+        credentials: ${{ secrets.TRUSTED_SIGNING_CREDENTIALS }}
+        files-folder: output/${{ matrix.build_platform }}
+        files-folder-filter: msi
+
+    - name: Rebuild bundle with signed MSI
+      if: ${{ matrix.build_configuration == 'Release' && github.event_name != 'pull_request' }}
+      shell: cmd
+      run: >
+        "%MSBUILD_PATH%"
+        -t:Rebuild
+        /p:Configuration=${{matrix.build_configuration}}
+        /p:Platform=${{matrix.build_platform}}
+        /p:SolutionDir=%GITHUB_WORKSPACE%\
+        "Installer\SetupSILConverters\SetupSILConverters.wixproj"
+
     # Burn bundles (SetupSILConverters*.exe) carry an attached container - the vc_redist/MSI
     # payloads - appended after the engine stub at build time, with byte offsets recorded in the
     # engine's own manifest. Authenticode-signing the finished bundle exe directly changes the
