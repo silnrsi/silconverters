@@ -88,6 +88,18 @@ jobs:
         /p:Configuration=${{matrix.build_configuration}}
         /p:Platform=${{matrix.build_platform}}
 
+    # Encoding-Converters-Core's dependencies come from the SharedItems.props inside the ec-core package
+    # itself (see Directory.Build.targets), which only exists once the first restore has pulled ec-core
+    # into the NuGet cache - so restore again to pick up those PackageReferences.
+    - name: Restore NuGet (EC-core SharedItems.props dependencies)
+      shell: cmd
+      run: >
+        "%MSBUILD_PATH%"
+        "${{env.SOLUTION_FILE_PATH}}"
+        /t:Restore
+        /p:Configuration=${{matrix.build_configuration}}
+        /p:Platform=${{matrix.build_platform}}
+
     - name: Build
       shell: cmd
       run: >

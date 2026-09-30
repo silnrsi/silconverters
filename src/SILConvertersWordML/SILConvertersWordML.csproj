@@ -78,9 +78,11 @@
     <Content Include="TRFFC17.ICO" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Encoding-Converters-Core" Version="1.0.1" />
+    <PackageReference Include="Encoding-Converters-Core" Version="1.0.2" />
   </ItemGroup>
-  <Import Project="$(SolutionDir)SharedItems.props" />
+  <PropertyGroup>
+    <UseEcSharedItems>true</UseEcSharedItems>
+  </PropertyGroup>
   <PropertyGroup>
     <PostBuildEvent>xcopy /y "$(TargetDir)*.*" "$(SolutionDir)output\$(Platform)\$(Configuration)\"</PostBuildEvent>
   </PropertyGroup>

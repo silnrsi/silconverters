@@ -1,0 +1,27 @@
+<Project>
+  <!-- Projects that set UseEcSharedItems=true get encoding-converters-core's own SharedItems.props, i.e. the
+       PackageReferences (Google, Grpc, OpenAI, System.*, etc.) that EC-core's converters need at runtime.
+       The ec-core nuspec declares no dependencies, so this is the only thing that brings them in.
+       That file lives in the ec-core package itself, so it can't be imported until ec-core has been restored:
+       on a fresh clone/NuGet cache the first restore skips it and a second restore is needed to pick up
+       these PackageReferences (VS does this on its own; command-line/CI builds must restore twice). -->
+  <Import Project="$(EcSharedItemsProps)" Condition="'$(UseEcSharedItems)' == 'true' and Exists('$(EcSharedItemsProps)')" />
+
+  <!-- A single restore on a fresh cache otherwise builds "successfully" but without those dependencies (and so
+       fails only at runtime), so make sure every PackageReference that came from SharedItems.props (i.e. whose
+       DefiningProjectFullPath is that file) actually made it into the assets file. (A restore that failed outright
+       is already reported by NuGet itself - NU1101 etc. - before this runs.) -->
+  <Target Name="VerifyEcSharedItemsRestored" AfterTargets="ResolvePackageAssets" Condition="'$(UseEcSharedItems)' == 'true'">
+    <Error Condition="!Exists('$(EcSharedItemsProps)')" Text="Couldn't find '$(EcSharedItemsProps)'. Restore NuGet packages (twice, on a fresh NuGet cache) before building." />
+    <PropertyGroup>
+      <_EcAssetsText>$([System.IO.File]::ReadAllText('$(ProjectAssetsFile)').ToLowerInvariant())</_EcAssetsText>
+    </PropertyGroup>
+    <ItemGroup>
+      <_EcUnrestoredPackage Include="@(PackageReference)" Condition="'%(PackageReference.DefiningProjectFullPath)' == '$(EcSharedItemsProps)' and !$(_EcAssetsText.Contains('&quot;$([System.String]::Copy('%(Identity)').ToLowerInvariant())/'))" />
+    </ItemGroup>
+    <Error Condition="'@(_EcUnrestoredPackage)' != ''" Text="These PackageReferences (from '$(EcSharedItemsProps)') aren't in '$(ProjectAssetsFile)' (last written $([System.IO.File]::GetLastWriteTime('$(ProjectAssetsFile)'))), i.e. haven't been restored yet: @(_EcUnrestoredPackage). Restore NuGet packages again before building." />
+    <PropertyGroup>
+      <_EcAssetsText />
+    </PropertyGroup>
+  </Target>
+</Project>

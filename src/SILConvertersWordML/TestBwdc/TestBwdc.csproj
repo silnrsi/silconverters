@@ -380,9 +380,11 @@
     <EmbeddedResource Include="TestFiles\PtxBackTrHelper\CombinedInSourceAndTargetWithVaOverride\CombinedInSourceAndTargetWithVaOverride_VerseReference.json" />
     <EmbeddedResource Include="TestFiles\PtxBackTrHelper\CombinedInSourceAndTargetWithVaOverride\CombinedInSourceAndTargetWithVaOverride_VersesReference.json" />
   </ItemGroup>
-  <Import Project="$(SolutionDir)SharedItems.props" />
+  <PropertyGroup>
+    <UseEcSharedItems>true</UseEcSharedItems>
+  </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Encoding-Converters-Core" Version="1.0.1" />
+    <PackageReference Include="Encoding-Converters-Core" Version="1.0.2" />
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
     <PackageReference Include="NUnit" Version="3.13.3" />
     <PackageReference Include="NUnit3TestAdapter" Version="4.5.0" />

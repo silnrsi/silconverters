@@ -78,10 +78,16 @@
          re-downloaded and re-run on every install even with 4.8+ already present (seen in a 2026-09-26
          OneStory Editor VM log with Release=528372; same authoring). The old InstallCondition had the same
          problem and is redundant with the DetectCondition anyway (an undetected package is installed by
-         default), so it was dropped. -->
+         default), so it was dropped.
+         Cache must be "remove", not "keep": Burn acquires (i.e. downloads) a Cache="keep" package into the package
+         cache whenever it's planned Present - even when it was detected as already installed and so won't be
+         run - so every install hit the network for ndp48-web.exe, and on a machine that couldn't reach
+         download.visualstudio.microsoft.com the (Vital) download failure aborted the whole install before the MSI
+         ever ran (0x80072ee7, seen in a 2026-09-29 log with Release=533325). "remove" only acquires it when it
+         actually needs to be installed. -->
     <PackageGroup Id="NetFx48Web">
       <ExePackage Id="NetFx48WebExe"
-                  Cache="keep"
+                  Cache="remove"
                   PerMachine="yes"
                   Permanent="yes"
                   Vital="yes"
@@ -124,7 +130,7 @@
 
     <PackageGroup Id="VCRedist">
       <ExePackage Id="VCRedistExe"
-                  Cache="keep"
+                  Cache="remove"
                   PerMachine="yes"
                   Permanent="yes"
                   Vital="yes"

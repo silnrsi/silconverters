@@ -1,4 +1,4 @@
-﻿<Project Sdk="WixToolset.Sdk/6.0.2" ToolsVersion="4.0">
+<Project Sdk="WixToolset.Sdk/6.0.2" ToolsVersion="4.0">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Release</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x64</Platform>
@@ -28,7 +28,7 @@
     <Compile Include="Product.wxs" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Encoding-Converters-Core" Version="1.0.1" GeneratePathProperty="true" />
+    <PackageReference Include="Encoding-Converters-Core" Version="1.0.2" GeneratePathProperty="true" />
     <PackageReference Include="WixToolset.UI.wixext" Version="6.0.2" />
   </ItemGroup>
   <Target Name="SignBuild">

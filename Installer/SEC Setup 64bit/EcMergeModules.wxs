@@ -23,11 +23,6 @@
       <Merge Id="SpellFixerEc" Language="1033" SourceFile="$(var.EcDistFilesPath)\MergeModules\x64\Release\SpellFixerEc64bitMM.msm" DiskId="1" />
       <Merge Id="TECkit_Package" Language="1033" SourceFile="..\MergeModules\x64\TECkitPackage64bitMM.msm" DiskId="1" />
       <Merge Id="EcTranslators" Language="1033" SourceFile="$(var.EcDistFilesPath)\MergeModules\x64\Release\EcTranslators64bitMM.msm" DiskId="1" />
-      <!-- SILConverters-specific: the generic out-of-process fallback host for IEncConverter (see
-           encoding-converters-core's Handover.md, "Generic subprocess fallback for host-process
-           conflicts"). Deliberately not part of EC_40_64bit_MM/EcTranslators64bitMM: other consumers
-           of those (Paratext, FieldWorks, etc.) don't reference this module and so never get it. -->
-      <Merge Id="EncConverterHostExe" Language="1033" SourceFile="$(var.EcDistFilesPath)\MergeModules\x64\Release\EncConverterHostExe64bitMM.msm" DiskId="1" />
     </DirectoryRef>
 
     <!--
