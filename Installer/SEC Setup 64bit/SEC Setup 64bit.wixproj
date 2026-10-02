@@ -36,8 +36,10 @@
       <MsiFile>$(TargetFileName)</MsiFile>
       <!-- Conditional so a SolutionDir passed in by SetupSILConverters.wixproj's EnsureSignedMsiPayload (which
            builds this project as a nested child, where MSBuildStartupDirectory isn't necessarily the repo root)
-           isn't clobbered; a target-scoped assignment would otherwise override even a global property. -->
-      <SolutionDir Condition="'$(SolutionDir)' == ''">$(MSBuildStartupDirectory)\</SolutionDir>
+           isn't clobbered; a target-scoped assignment would otherwise override even a global property.
+           "*Undefined*" is what Microsoft.Common targets set it to when this project is built directly rather
+           than via the .sln (e.g. a CI "-t:SignBuild" step), so it counts as unset too. -->
+      <SolutionDir Condition="'$(SolutionDir)' == '' or '$(SolutionDir)' == '*Undefined*'">$(MSBuildStartupDirectory)\</SolutionDir>
       <BaseBuildDir>$(SolutionDir)build\</BaseBuildDir>
       <OutputDir>$(SolutionDir)output\$(PlatformName)\</OutputDir>
       <BaseBuildArgs>"$(OutputDir)$(MsiFile)"</BaseBuildArgs>
