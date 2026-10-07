@@ -90,7 +90,7 @@
         <MergeRef Id="DChartHelper" />
         <MergeRef Id="AIGuesser" />
       </Feature>
-      <Feature Id="Paratext_BackTranslation_Helper_Plugin" Title="Paratext Back Translation Helper Plugin" Description="The Ptx BT Helper can be launched from the Paratext, Tools menu (newer than 9.2.102.17). Allows you to use Bing/DeepL/Google Translate to prepare a back translation of 1 project into another. It requires an internet connection to run." Display="expand" Level="4" AllowAdvertise="no">
+      <Feature Id="Paratext_BackTranslation_Helper_Plugin" Title="SIL Converters Plugins for Paratext" Description="Plugins launched from the Paratext, Tools menu (newer than 9.2.102.17): the Back Translation Helper (uses Bing/DeepL/Google Translate, etc. to prepare a back translation of 1 project into another; requires an internet connection) and the Spell Fixer (checks and fixes the spelling of a project using a SpellFixer/Consistent Spelling Checker project)." Display="expand" Level="4" AllowAdvertise="no">
         <Level Value="3" Condition="COMPONENTEXISTS_PARATEXT_9 AND NOT REMOVE" />
         <MergeRef Id="SEC_EC" />
         <MergeRef Id="ParatextBackTranslationHelperPlugin" />

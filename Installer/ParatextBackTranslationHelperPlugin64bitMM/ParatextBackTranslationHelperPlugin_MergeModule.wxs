@@ -1,5 +1,5 @@
 ﻿<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
-  <Module Id="ParatextBackTranslationHelperPlugin64bitMergeModule" Language="1033" Version="5.0.0.0" Guid="{00DE4FC7-217E-4836-9676-3A393A4DCE94}" InstallerVersion="500"><SummaryInformation Description="Installer for the ParatextBackTranslationHelper Plug-in" Keywords="Paratext Plugin; Encoding Converters; EcTranslators; SIL; Unicode" Manufacturer="SIL International" />
+  <Module Id="ParatextBackTranslationHelperPlugin64bitMergeModule" Language="1033" Version="5.0.0.0" Guid="{00DE4FC7-217E-4836-9676-3A393A4DCE94}" InstallerVersion="500"><SummaryInformation Description="Installer for the SIL Converters Plug-ins for Paratext (Back Translation Helper and Spell Fixer)" Keywords="Paratext Plugin; Encoding Converters; EcTranslators; SIL; Unicode" Manufacturer="SIL International" />
 
     
   
@@ -9,6 +9,11 @@
           <Directory Id="ParatextPluginBackTranslationHelper" Name="ParatextPluginBackTranslationHelper">
             <Component Id="ParatextPluginBackTranslationHelper.ptxplg" Guid="{D44AD674-E478-499C-BA98-B03B5A6E2E2D}">
               <File Id="ParatextPluginBackTranslationHelper.ptxplg" Name="ParatextPluginBackTranslationHelper.ptxplg" KeyPath="yes" Assembly=".net" AssemblyManifest="ParatextPluginBackTranslationHelper.ptxplg" AssemblyApplication="ParatextPluginBackTranslationHelper.ptxplg" Source="..\..\output\x64\release\ParatextPluginBackTranslationHelper.dll" />
+            </Component>
+          </Directory>
+          <Directory Id="SpellFixerPluginForParatext" Name="SpellFixerPluginForParatext">
+            <Component Id="SpellFixerPluginForParatext.ptxplg" Guid="{9B7E2C41-3D6A-4F18-A5C2-7E0B9D3F1A64}">
+              <File Id="SpellFixerPluginForParatext.ptxplg" Name="SpellFixerPluginForParatext.ptxplg" KeyPath="yes" Assembly=".net" AssemblyManifest="SpellFixerPluginForParatext.ptxplg" AssemblyApplication="SpellFixerPluginForParatext.ptxplg" Source="..\..\output\x64\release\SpellFixerPluginForParatext.dll" />
             </Component>
           </Directory>
         </Directory>
