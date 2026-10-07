@@ -1,4 +1,5 @@
 using Paratext.PluginInterfaces;
+using SIL.ParatextBackTranslationHelperPlugin;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
@@ -261,9 +262,216 @@ namespace SIL.SpellFixerPluginForParatext
 
         private SpellFixerQueryForm _queryForm;
 
-        // implemented in Task 6
+        private Font _projectFont;
+        private bool _hasShownConvertError;
+
         private void CheckFromCurrentVerse()
         {
+            if ((_spellFixerProject == null) || (_verseReference == null))
+                return;
+
+            var session = new SpellFixerSession(ConvertWord, AskUser);
+            var totalWordsFixed = 0;
+            var chapterReference = _verseReference;
+            var startAtBeginningOfChapter = false;
+            _hasShownConvertError = false;
+
+            SetChecking(true);
+            try
+            {
+                while (chapterReference != null)
+                {
+                    if (!CheckChapter(chapterReference, startAtBeginningOfChapter, session, ref totalWordsFixed))
+                        break;  // cancelled or couldn't write
+
+                    chapterReference = QueryNextChapter(chapterReference);
+                    startAtBeginningOfChapter = true;
+                }
+            }
+            finally
+            {
+                SetChecking(false);
+            }
+
+            SetStatus($"Done: {totalWordsFixed} word(s) fixed.");
+        }
+
+        private void SetChecking(bool isChecking)
+        {
+            _isChecking = isChecking;
+            UpdateButtonStates();
+        }
+
+        private void SetStatus(string status)
+        {
+            textBoxStatus.Text = status;
+            textBoxStatus.Refresh();
+        }
+
+        /// <summary>
+        /// Checks one chapter, writing each verse that has accepted fixes. Returns false if the run should stop
+        /// (the user cancelled or a verse couldn't be written)
+        /// </summary>
+        private bool CheckChapter(IVerseRef chapterReference, bool startAtBeginningOfChapter, SpellFixerSession session, ref int totalWordsFixed)
+        {
+            var vrefTokens = LoadChapter(chapterReference);
+            if (vrefTokens == null)
+                return true;    // some books don't return proper things (e.g. GLO), so just go on
+
+            var verseKey = startAtBeginningOfChapter
+                            ? vrefTokens.Keys.FirstOrDefault()
+                            : UsfmChapterTokens.StartVerseKey(vrefTokens, chapterReference);
+
+            while (verseKey != null)
+            {
+                var verseTokens = vrefTokens[verseKey];
+                var verseReference = verseTokens.First().VerseRef;
+                _setSyncReference(verseReference);
+                SetStatus($"Checking {verseReference}...");
+
+                var cancelled = false;
+                var fixedTokens = SpellFixerTokenProcessor.FixVerseTokens(verseTokens, session.FixWord, ref cancelled, out int wordsFixed);
+                if (wordsFixed > 0)
+                {
+                    if (!WriteVerse(chapterReference, verseKey, verseTokens, fixedTokens))
+                        return false;
+
+                    totalWordsFixed += wordsFixed;
+                    SetStatus($"Wrote {wordsFixed} fix(es) to {verseReference}");
+
+                    vrefTokens = LoadChapter(chapterReference);     // Paratext has the new data now
+                    if (vrefTokens == null)
+                        return false;
+                }
+
+                if (cancelled)
+                    return false;
+
+                verseKey = UsfmChapterTokens.NextVerseKey(vrefTokens, verseKey);
+            }
+
+            return true;
+        }
+
+        private SortedDictionary<string, List<IUSFMToken>> LoadChapter(IVerseRef chapterReference)
+        {
+            var chapterTokens = _project.GetUSFMTokens(chapterReference.BookNum, chapterReference.ChapterNum)?.ToList();
+            return ((chapterTokens == null) || !chapterTokens.Any())
+                    ? null
+                    : UsfmChapterTokens.GroupByVerse(chapterTokens);
+        }
+
+        /// <summary>
+        /// Writes the chapter back to Paratext with the verse's tokens replaced by the fixed ones (but only if the
+        /// verse wasn't changed in Paratext since we read it)
+        /// </summary>
+        private bool WriteVerse(IVerseRef chapterReference, string verseKey, List<IUSFMToken> originalVerseTokens, List<IUSFMToken> fixedVerseTokens)
+        {
+            IWriteLock writeLock = null;
+            try
+            {
+                writeLock = _project.RequestWriteLock(_plugin, ReleaseRequested, chapterReference.BookNum, chapterReference.ChapterNum);
+                if (writeLock == null)
+                {
+                    // e.g. the user doesn't have edit permissions on this chapter
+                    MessageBox.Show($"You don't have edit privilege on this chapter: {chapterReference.BookCode} {chapterReference.ChapterNum} of the {_project.ShortName} project", SpellFixerPlugin.PluginName);
+                    return false;
+                }
+
+                // getting the lock may have saved changes the user had made in Paratext, so make sure we aren't
+                //  about to overwrite them with stale data
+                var currentTokens = LoadChapter(chapterReference);
+                if ((currentTokens == null) || !currentTokens.TryGetValue(verseKey, out List<IUSFMToken> currentVerseTokens)
+                    || (SpellFixerTokenProcessor.VerseText(currentVerseTokens) != SpellFixerTokenProcessor.VerseText(originalVerseTokens)))
+                {
+                    MessageBox.Show($"{fixedVerseTokens.First().VerseRef} was changed in Paratext while it was being checked, so the fixes to it weren't saved. Check it again.", SpellFixerPlugin.PluginName);
+                    return false;
+                }
+
+                var chapterTokens = SpellFixerTokenProcessor.SpliceVerse(currentTokens, verseKey, fixedVerseTokens);
+                _project.PutUSFMTokens(writeLock, chapterTokens, chapterReference.BookNum);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                _host.Log(_plugin, $"SpellFixer: WriteVerse: {ex}");
+                MessageBox.Show($"Unable to write the fixes to Paratext:{Environment.NewLine}{ex.Message}", SpellFixerPlugin.PluginName);
+                return false;
+            }
+            finally
+            {
+                writeLock?.Dispose();
+            }
+        }
+
+        private void ReleaseRequested(IWriteLock writeLock)
+        {
+            writeLock?.Dispose();
+        }
+
+        /// <summary>
+        /// Asks whether to go on to the next chapter (or the next book at the end of a book). Returns null if not
+        /// (or if there isn't one)
+        /// </summary>
+        private IVerseRef QueryNextChapter(IVerseRef chapterReference)
+        {
+            var next = chapterReference.GetNextChapter(_project);
+            if (next == null)
+            {
+                MessageBox.Show("That was the last chapter in the project.", SpellFixerPlugin.PluginName);
+                return null;
+            }
+
+            var question = (next.BookNum == chapterReference.BookNum)
+                            ? $"Finished {chapterReference.BookCode} {chapterReference.ChapterNum}. Continue checking with the next chapter ({next.BookCode} {next.ChapterNum})?"
+                            : $"Finished {chapterReference.BookCode}. Continue checking with the next book ({next.BookCode})?";
+
+            return (MessageBox.Show(this, question, SpellFixerPlugin.PluginName, MessageBoxButtons.YesNo) == DialogResult.Yes)
+                    ? next
+                    : null;
+        }
+
+        private string ConvertWord(string word)
+        {
+            try
+            {
+                return _spellFixerProject.Convert(word);
+            }
+            catch (Exception ex)
+            {
+                _host.Log(_plugin, $"SpellFixer: unable to convert '{word}': {ex.Message}");
+                if (!_hasShownConvertError)
+                {
+                    _hasShownConvertError = true;
+                    MessageBox.Show($"The Spell Fixer couldn't process '{word}' (it will be skipped):{Environment.NewLine}{ex.Message}", SpellFixerPlugin.PluginName);
+                }
+                return word;    // i.e. skip it
+            }
+        }
+
+        private FormButtons AskUser(string word, string suggestion, out string correctedSpelling)
+        {
+            _queryForm ??= new SpellFixerQueryForm(_spellFixerProject);
+            _projectFont ??= GetProjectFont();
+
+            var button = _queryForm.Show(this, _projectFont, _project.Language?.IsRtoL ?? false, word, suggestion);
+            correctedSpelling = _queryForm.CorrectedSpelling;
+            return button;
+        }
+
+        private Font GetProjectFont()
+        {
+            try
+            {
+                var font = _project.Language?.Font;
+                if (font != null)
+                    return new Font(font.FontFamily, Math.Max(12F, (float)font.Size));
+            }
+            catch (Exception ex)
+            {
+                _host.Log(_plugin, $"SpellFixer: unable to use the project font: {ex.Message}");
+            }
+            return null;    // i.e. use the dialog's default
         }
     }
 }
