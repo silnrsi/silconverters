@@ -17,12 +17,12 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <OutputPath>bin\$(Platform)\$(Configuration)\</OutputPath>
     <IntermediateOutputPath>obj\$(Platform)\$(Configuration)\</IntermediateOutputPath>
-    <DefineConstants>ApplicationName=SILConverters;SafeApplicationName=SILConverters;TruncatedVersion=6.0;VersionNumber=6.0.0.0;UpgradeCode=8A50226C-84D0-4CAF-AF8F-B0284643C415;Year=2026;Manufacturer=SIL International;EcDistFilesPath=$(EcDistFilesPath)</DefineConstants>
+    <DefineConstants>$(DefineConstants);ApplicationName=SILConverters;SafeApplicationName=SILConverters;TruncatedVersion=6.1;VersionNumber=6.1.0.0;UpgradeCode=8A50226C-84D0-4CAF-AF8F-B0284643C415;Year=2026;Manufacturer=SIL International;EcDistFilesPath=$(EcDistFilesPath)</DefineConstants>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x64' ">
     <OutputPath>bin\$(Platform)\$(Configuration)\</OutputPath>
     <IntermediateOutputPath>obj\$(Platform)\$(Configuration)\</IntermediateOutputPath>
-    <DefineConstants>ApplicationName=SILConverters;SafeApplicationName=SILConverters;TruncatedVersion=6.0;VersionNumber=6.0.0.0;UpgradeCode=0F7D5D72-E9F3-40BB-9748-D388C70096CD;Year=2026;Manufacturer=SIL International;EcDistFilesPath=$(EcDistFilesPath)</DefineConstants>
+    <DefineConstants>$(DefineConstants);ApplicationName=SILConverters;SafeApplicationName=SILConverters;TruncatedVersion=6.1;VersionNumber=6.1.0.0;UpgradeCode=0F7D5D72-E9F3-40BB-9748-D388C70096CD;Year=2026;Manufacturer=SIL International;EcDistFilesPath=$(EcDistFilesPath)</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
     <Content Include="BundleTheme.xml" />
