@@ -1,0 +1,116 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net48</TargetFramework>
+    <Platforms>AnyCPU;x86;x64</Platforms>
+    <ProjectGuid>{6C1E5B2A-8F3D-4A7B-9C2E-1D4F7A9B3E58}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>SIL.SpellFixerPluginForParatext</RootNamespace>
+    <AssemblyName>SpellFixerPluginForParatext</AssemblyName>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <LangVersion>latest</LangVersion>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <UseWindowsForms>true</UseWindowsForms>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Platform)'=='x64'">
+    <PlatformTarget>x64</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Platform)'=='x86'">
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
+    <OutputPath>..\..\output\x86\Debug\</OutputPath>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
+    <OutputPath>..\..\output\x86\Release\</OutputPath>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineConstants>TRACE</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <OutputPath>..\..\output\x64\Debug\</OutputPath>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>..\..\output\x64\Release\</OutputPath>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <DefineConstants>TRACE</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <DefineConstants>TRACE</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup>
+    <!-- nuget doesn't add the references to the csproj files properly for these; manually HintPath'd instead. -->
+    <Reference Include="BackTranslationHelper">
+      <HintPath>$(EcDistFilesPath)\win-$(Platform)\native\BackTranslationHelper.dll</HintPath>
+    </Reference>
+    <Reference Include="SpellingFixer30">
+      <HintPath>$(EcDistFilesPath)\win-$(Platform)\native\SpellingFixer30.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="Microsoft.CSharp" />
+  </ItemGroup>
+  <ItemGroup>
+    <!-- shared with (linked from) the sister ParatextPluginBackTranslationHelper project -->
+    <Compile Include="..\ParatextPluginBackTranslationHelper\TextToken.cs" Link="Shared\TextToken.cs" />
+    <Compile Include="..\ParatextPluginBackTranslationHelper\TokenBase.cs" Link="Shared\TokenBase.cs" />
+    <Compile Include="..\ParatextPluginBackTranslationHelper\MarkerToken.cs" Link="Shared\MarkerToken.cs" />
+    <Compile Include="..\ParatextPluginBackTranslationHelper\VerseRef.cs" Link="Shared\VerseRef.cs" />
+    <Compile Include="..\ParatextPluginBackTranslationHelper\PtxPluginHelpers.cs" Link="Shared\PtxPluginHelpers.cs" />
+    <Compile Include="..\ParatextPluginBackTranslationHelper\UsfmChapterTokens.cs" Link="Shared\UsfmChapterTokens.cs" />
+    <Compile Include="..\ParatextPluginBackTranslationHelper\PluginAssemblyResolver.cs" Link="Shared\PluginAssemblyResolver.cs" />
+    <EmbeddedResource Include="..\ParatextPluginBackTranslationHelper\Resources\pinup.bmp" Link="Resources\pinup.bmp" LogicalName="SIL.SpellFixerPluginForParatext.pinup.bmp" />
+    <EmbeddedResource Include="..\ParatextPluginBackTranslationHelper\Resources\pindown.bmp" Link="Resources\pindown.bmp" LogicalName="SIL.SpellFixerPluginForParatext.pindown.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Encoding-Converters-Core" Version="1.0.2" />
+    <PackageReference Include="ParatextEmbeddedUiPluginInterfaces" Version="2.0.23" />
+    <PackageReference Include="ParatextPluginInterfaces" Version="2.0.23" />
+  </ItemGroup>
+  <PropertyGroup>
+    <UseEcSharedItems>true</UseEcSharedItems>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PostBuildEvent>IF NOT "$(Configuration)" == "Debug" goto nocopy
+IF "%ParatextInstallDir%" == "" goto nocopy
+IF NOT EXIST "%ParatextInstallDir%" goto nocopy
+
+IF EXIST "%ParatextInstallDir%\plugins" goto checkMakePluginDir
+md "%ParatextInstallDir%\plugins"
+
+:checkMakePluginDir
+IF EXIST "%ParatextInstallDir%\plugins\$(MSBuildProjectName)" goto checkdelete
+md "%ParatextInstallDir%\plugins\$(MSBuildProjectName)"
+
+:checkdelete
+IF NOT EXIST "%ParatextInstallDir%\plugins\$(MSBuildProjectName)\$(MSBuildProjectName).ptxplg" goto nodelete
+@echo Deleting '%ParatextInstallDir%\plugins\$(MSBuildProjectName)\$(MSBuildProjectName).ptxplg'
+del "%ParatextInstallDir%\plugins\$(MSBuildProjectName)\$(MSBuildProjectName).ptxplg"
+:nodelete
+
+@echo Copying files to '%ParatextInstallDir%\Encoding Core' folder
+xcopy "$(SolutionDir)output\x64\Debug\*.*" "%ParatextInstallDir%\Encoding Core" /y /i /c
+@echo Copying '$(SolutionDir)output\x64\Debug\$(AssemblyName).dll' to: '%ParatextInstallDir%\plugins\$(MSBuildProjectName)\$(MSBuildProjectName).ptxplg'
+copy "$(SolutionDir)output\x64\Debug\$(AssemblyName).dll" "%ParatextInstallDir%\plugins\$(MSBuildProjectName)\$(MSBuildProjectName).ptxplg"
+
+:nocopy</PostBuildEvent>
+  </PropertyGroup>
+</Project>

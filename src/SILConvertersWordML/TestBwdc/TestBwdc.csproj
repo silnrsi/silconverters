@@ -73,6 +73,7 @@
     <Compile Include="UnitTest_PtxBackTrHelper.cs" Condition="'$(Platform)' == 'x64'" />
     <Compile Include="PtxTestTokens.cs" Condition="'$(Platform)' == 'x64'" />
     <Compile Include="UnitTest_UsfmChapterTokens.cs" Condition="'$(Platform)' == 'x64'" />
+    <Compile Include="UnitTest_PtxSpellFixer.cs" Condition="'$(Platform)' == 'x64'" />
     <Compile Include="UnitTest_BulkWordDocConverter.cs" />
     <Compile Include="XmlDiff.cs" />
     <Compile Include="XmlInput.cs" />
@@ -262,6 +263,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\ParatextPluginBackTranslationHelper\ParatextPluginBackTranslationHelper.csproj" Condition="('$(Platform)' == 'x64') and ('$(OS)'=='Windows_NT')" />
+    <ProjectReference Include="..\..\SpellFixerPluginForParatext\SpellFixerPluginForParatext.csproj" Condition="('$(Platform)' == 'x64') and ('$(OS)'=='Windows_NT')" Aliases="SpellFixer" />
     <ProjectReference Include="..\SILConvertersWordML.csproj" />
   </ItemGroup>
   <ItemGroup>
