@@ -20,6 +20,7 @@ using System.Diagnostics;
 using SilEncConverters40;
 using SilEncConverters40.EcTranslators;
 using SilEncConverters40.PtxConverters;
+using static SIL.ParatextBackTranslationHelperPlugin.UsfmChapterTokens;
 
 namespace SIL.ParatextBackTranslationHelperPlugin
 {
@@ -897,9 +898,7 @@ namespace SIL.ParatextBackTranslationHelperPlugin
                     if (chapterTokens == null)
                         return null;    // some books don't return proper things... (e.g. for me it was GLO)
 
-                    var dict = chapterTokens.GroupBy(t => t.VerseRef, t => t, (key, g) => new { VerseRef = key, USFMTokens = g.ToList() })
-                                            .ToDictionary(t => GetBookChapterVerseRangeKey(t.VerseRef), t => t.USFMTokens);
-                    vrefTokens = new SortedDictionary<string, List<IUSFMToken>>(dict);
+                    vrefTokens = GroupByVerse(chapterTokens);
                     UsfmTokensTarget[bookChapterKey] = vrefTokens;
                 }
                 else
@@ -932,30 +931,6 @@ namespace SIL.ParatextBackTranslationHelperPlugin
                 var verseData = string.Join(Environment.NewLine, values);
                 return verseData;
             }
-        }
-
-        private static string TriangulateBookChapterVerseKey(string bookChapterVerseKey, SortedDictionary<string, List<IUSFMToken>> vrefTokens)
-        {
-            if (vrefTokens.ContainsKey(bookChapterVerseKey))
-                return bookChapterVerseKey;
-
-            var vrefTokenKey = vrefTokens.FirstOrDefault(t => t.Value.Any(v => v.VerseRef.AllVerses.Any(sv => GetBookChapterVerseRangeKey(sv) == bookChapterVerseKey))).Key;
-            return vrefTokenKey;
-        }
-
-        private static string GetBookChapterKey(IVerseRef verseReference)
-        {
-            // get the key, which for the target data is the entire chapter (we have to Put as a whole chapter)
-            return $"{verseReference.BookNum:D2}_{verseReference.ChapterNum:D3}";
-        }
-
-        private static string GetBookChapterVerseRangeKey(IVerseRef verseReference)
-        {
-            // get the key to see if we already have this data (TODO: add a 'it was changed in Ptx', so we can remove it from this collection)
-            var bookChapterFirstVerse = $"{verseReference.BookNum:D2}_{verseReference.ChapterNum:D3}_{verseReference.VerseNum:D3}";
-            if (verseReference.RepresentsMultipleVerses)
-                bookChapterFirstVerse += $"-{verseReference.AllVerses.Last().VerseNum:D3}";
-            return bookChapterFirstVerse;
         }
 
         private void ReleaseRequested(IWriteLock obj)
