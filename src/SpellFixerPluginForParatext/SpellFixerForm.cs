@@ -276,6 +276,8 @@ namespace SIL.SpellFixerPluginForParatext
             var startAtBeginningOfChapter = false;
             _hasShownConvertError = false;
 
+            _lastCheckedReference = null;
+
             SetChecking(true);
             try
             {
@@ -288,13 +290,24 @@ namespace SIL.SpellFixerPluginForParatext
                     startAtBeginningOfChapter = true;
                 }
             }
+            catch (Exception ex)
+            {
+                _host.Log(_plugin, $"SpellFixer: CheckFromCurrentVerse: {ex}");
+                MessageBox.Show($"Checking stopped because of an error:{Environment.NewLine}{ex.Message}", SpellFixerPlugin.PluginName);
+            }
             finally
             {
                 SetChecking(false);
             }
 
+            // so the next run picks up where this one left off (which is also where Paratext is now)
+            if (_lastCheckedReference != null)
+                SetVerseReference(_lastCheckedReference);
+
             SetStatus($"Done: {totalWordsFixed} word(s) fixed.");
         }
+
+        private IVerseRef _lastCheckedReference;
 
         private void SetChecking(bool isChecking)
         {
@@ -314,18 +327,19 @@ namespace SIL.SpellFixerPluginForParatext
         /// </summary>
         private bool CheckChapter(IVerseRef chapterReference, bool startAtBeginningOfChapter, SpellFixerSession session, ref int totalWordsFixed)
         {
-            var vrefTokens = LoadChapter(chapterReference);
+            var vrefTokens = GroupByVerse(LoadChapter(chapterReference));
             if (vrefTokens == null)
                 return true;    // some books don't return proper things (e.g. GLO), so just go on
 
             var verseKey = startAtBeginningOfChapter
                             ? vrefTokens.Keys.FirstOrDefault()
-                            : UsfmChapterTokens.StartVerseKey(vrefTokens, chapterReference);
+                            : SpellFixerTokenProcessor.StartVerseKey(vrefTokens, chapterReference);
 
             while (verseKey != null)
             {
                 var verseTokens = vrefTokens[verseKey];
                 var verseReference = verseTokens.First().VerseRef;
+                _lastCheckedReference = verseReference;
                 _setSyncReference(verseReference);
                 SetStatus($"Checking {verseReference}...");
 
@@ -339,7 +353,7 @@ namespace SIL.SpellFixerPluginForParatext
                     totalWordsFixed += wordsFixed;
                     SetStatus($"Wrote {wordsFixed} fix(es) to {verseReference}");
 
-                    vrefTokens = LoadChapter(chapterReference);     // Paratext has the new data now
+                    vrefTokens = GroupByVerse(LoadChapter(chapterReference));     // Paratext has the new data now
                     if (vrefTokens == null)
                         return false;
                 }
@@ -353,12 +367,18 @@ namespace SIL.SpellFixerPluginForParatext
             return true;
         }
 
-        private SortedDictionary<string, List<IUSFMToken>> LoadChapter(IVerseRef chapterReference)
+        // the chapter's tokens in document order (null if there aren't any)
+        private List<IUSFMToken> LoadChapter(IVerseRef chapterReference)
         {
             var chapterTokens = _project.GetUSFMTokens(chapterReference.BookNum, chapterReference.ChapterNum)?.ToList();
             return ((chapterTokens == null) || !chapterTokens.Any())
                     ? null
-                    : UsfmChapterTokens.GroupByVerse(chapterTokens);
+                    : chapterTokens;
+        }
+
+        private static SortedDictionary<string, List<IUSFMToken>> GroupByVerse(List<IUSFMToken> chapterTokens)
+        {
+            return (chapterTokens == null) ? null : UsfmChapterTokens.GroupByVerse(chapterTokens);
         }
 
         /// <summary>
@@ -380,15 +400,19 @@ namespace SIL.SpellFixerPluginForParatext
 
                 // getting the lock may have saved changes the user had made in Paratext, so make sure we aren't
                 //  about to overwrite them with stale data
-                var currentTokens = LoadChapter(chapterReference);
+                //  (markers included, e.g. if they changed \p to \q1)
+                var currentChapterTokens = LoadChapter(chapterReference);
+                var currentTokens = GroupByVerse(currentChapterTokens);
                 if ((currentTokens == null) || !currentTokens.TryGetValue(verseKey, out List<IUSFMToken> currentVerseTokens)
-                    || (SpellFixerTokenProcessor.VerseText(currentVerseTokens) != SpellFixerTokenProcessor.VerseText(originalVerseTokens)))
+                    || (SpellFixerTokenProcessor.VerseSignature(currentVerseTokens) != SpellFixerTokenProcessor.VerseSignature(originalVerseTokens)))
                 {
                     MessageBox.Show($"{fixedVerseTokens.First().VerseRef} was changed in Paratext while it was being checked, so the fixes to it weren't saved. Check it again.", SpellFixerPlugin.PluginName);
                     return false;
                 }
 
-                var chapterTokens = SpellFixerTokenProcessor.SpliceVerse(currentTokens, verseKey, fixedVerseTokens);
+                // replace the verse's tokens in place, so the rest of the chapter is written back exactly as it is
+                //  (e.g. even if verses are out of order)
+                var chapterTokens = SpellFixerTokenProcessor.SpliceVerse(currentChapterTokens, currentVerseTokens, fixedVerseTokens);
                 _project.PutUSFMTokens(writeLock, chapterTokens, chapterReference.BookNum);
                 return true;
             }

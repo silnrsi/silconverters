@@ -122,21 +122,46 @@ namespace SIL.SpellFixerPluginForParatext
         }
 
         /// <summary>
-        /// Returns all of the chapter's tokens (in order) with the tokens for verseKey replaced by newVerseTokens
-        /// (i.e. what to pass to IProject.PutUSFMTokens)
+        /// Returns all of the chapter's tokens, in their document order, with each of the verse's tokens (which are
+        /// in chapterTokens, though not necessarily contiguous) replaced by the corresponding one in newVerseTokens
+        /// (i.e. what to pass to IProject.PutUSFMTokens). newVerseTokens must be parallel to verseTokensInChapter
+        /// (as returned by FixVerseTokens).
         /// </summary>
-        public static List<IUSFMToken> SpliceVerse(SortedDictionary<string, List<IUSFMToken>> vrefTokens, string verseKey, List<IUSFMToken> newVerseTokens)
+        public static List<IUSFMToken> SpliceVerse(List<IUSFMToken> chapterTokens, List<IUSFMToken> verseTokensInChapter, List<IUSFMToken> newVerseTokens)
         {
-            return vrefTokens.SelectMany(kvp => (kvp.Key == verseKey) ? newVerseTokens : kvp.Value)
-                             .ToList();
+            if (verseTokensInChapter.Count != newVerseTokens.Count)
+                throw new ArgumentException("The new verse tokens must correspond one-to-one with the verse's tokens", nameof(newVerseTokens));
+
+            return chapterTokens.Select(token =>
+                                {
+                                    var index = verseTokensInChapter.FindIndex(t => ReferenceEquals(t, token));
+                                    return (index < 0) ? token : newVerseTokens[index];
+                                })
+                                .ToList();
         }
 
         /// <summary>
-        /// The text of all the text tokens of a verse (to detect whether it was changed in Paratext since we read it)
+        /// The markers and text of a verse, in order (to detect whether it was changed in Paratext since we read it)
         /// </summary>
-        public static string VerseText(IEnumerable<IUSFMToken> verseTokens)
+        public static string VerseSignature(IEnumerable<IUSFMToken> verseTokens)
         {
-            return String.Join("\n", verseTokens.OfType<IUSFMTextToken>().Select(t => t.Text));
+            return String.Join("\n", verseTokens.Select(t => (t is IUSFMTextToken textToken)
+                                                               ? textToken.Text
+                                                               : (t is IUSFMMarkerToken markerToken)
+                                                                   ? $"\\{markerToken.Marker}|{markerToken.Data}|{markerToken.EndMarker}"
+                                                                   : t.GetType().Name));
+        }
+
+        /// <summary>
+        /// Returns the key of the verse to start checking at: the verse (range) containing verseReference, except
+        /// when that's verse 1 (or the chapter start), in which case it's the first key of the chapter (so the
+        /// section heading, etc. before \v 1 gets checked too)
+        /// </summary>
+        public static string StartVerseKey(SortedDictionary<string, List<IUSFMToken>> vrefTokens, IVerseRef verseReference)
+        {
+            return (verseReference.VerseNum <= 1)
+                    ? vrefTokens.Keys.FirstOrDefault()
+                    : UsfmChapterTokens.StartVerseKey(vrefTokens, verseReference);
         }
     }
 }

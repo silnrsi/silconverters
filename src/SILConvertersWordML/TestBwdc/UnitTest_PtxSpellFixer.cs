@@ -134,10 +134,10 @@ namespace TestBwdc
                 Marker(v1, "v", MarkerType.Verse), Text(v1, "one"),
                 Marker(v2, "v", MarkerType.Verse), Text(v2, "teh two"),
             };
-            var vrefTokens = UsfmChapterTokens.GroupByVerse(chapter);
+            var verse2 = UsfmChapterTokens.GroupByVerse(chapter)["40_005_002"];
             var newVerse2 = new List<IUSFMToken> { chapter[2], Text(v2, "the two") };
 
-            var result = SpellFixerTokenProcessor.SpliceVerse(vrefTokens, "40_005_002", newVerse2);
+            var result = SpellFixerTokenProcessor.SpliceVerse(chapter, verse2, newVerse2);
 
             Assert.AreEqual(4, result.Count);
             Assert.AreSame(chapter[0], result[0]);
@@ -147,15 +147,88 @@ namespace TestBwdc
         }
 
         [Test]
-        public void VerseText_DiffersWhenATextTokenChanges()
+        public void SpliceVerse_KeepsDocumentOrderOfOutOfOrderVerses()
+        {
+            // Paratext allows verses out of order (e.g. \v 17 before \v 16); writing back must not reorder them
+            var v16 = Vref(5, 16);
+            var v17 = Vref(5, 17);
+            var chapter = new List<IUSFMToken>
+            {
+                Marker(v17, "v", MarkerType.Verse), Text(v17, "seventeen"),
+                Marker(v16, "v", MarkerType.Verse), Text(v16, "teh sixteen"),
+            };
+            var verse16 = UsfmChapterTokens.GroupByVerse(chapter)["40_005_016"];
+            var newVerse16 = new List<IUSFMToken> { chapter[2], Text(v16, "the sixteen") };
+
+            var result = SpellFixerTokenProcessor.SpliceVerse(chapter, verse16, newVerse16);
+
+            Assert.AreEqual(4, result.Count);
+            Assert.AreSame(chapter[0], result[0]);
+            Assert.AreSame(chapter[1], result[1]);
+            Assert.AreSame(chapter[2], result[2]);
+            Assert.AreEqual("the sixteen", ((IUSFMTextToken)result[3]).Text);
+        }
+
+        [Test]
+        public void SpliceVerse_KeepsNonContiguousPartsOfAVerseInPlace()
+        {
+            // e.g. \v 3a ... \v 4 ... \v 3b: both parts of 3 group together, but must be written back where they were
+            var v3 = Vref(5, 3);
+            var v4 = Vref(5, 4);
+            var chapter = new List<IUSFMToken>
+            {
+                Marker(v3, "v", MarkerType.Verse), Text(v3, "teh 3a"),
+                Marker(v4, "v", MarkerType.Verse), Text(v4, "four"),
+                Marker(v3, "v", MarkerType.Verse), Text(v3, "teh 3b"),
+            };
+            var verse3 = UsfmChapterTokens.GroupByVerse(chapter)["40_005_003"];
+            var newVerse3 = new List<IUSFMToken> { verse3[0], Text(v3, "the 3a"), verse3[2], Text(v3, "the 3b") };
+
+            var result = SpellFixerTokenProcessor.SpliceVerse(chapter, verse3, newVerse3);
+
+            CollectionAssert.AreEqual(new[] { null, "the 3a", null, "four", null, "the 3b" },
+                                      result.Select(t => (t as IUSFMTextToken)?.Text).ToList());
+        }
+
+        [Test]
+        public void VerseSignature_DiffersWhenATextTokenChanges()
         {
             var v1 = Vref(5, 1);
             var before = new List<IUSFMToken> { Marker(v1, "v", MarkerType.Verse), Text(v1, "teh cat") };
             var same = new List<IUSFMToken> { Marker(v1, "v", MarkerType.Verse), Text(v1, "teh cat") };
             var edited = new List<IUSFMToken> { Marker(v1, "v", MarkerType.Verse), Text(v1, "teh dog") };
 
-            Assert.AreEqual(SpellFixerTokenProcessor.VerseText(before), SpellFixerTokenProcessor.VerseText(same));
-            Assert.AreNotEqual(SpellFixerTokenProcessor.VerseText(before), SpellFixerTokenProcessor.VerseText(edited));
+            Assert.AreEqual(SpellFixerTokenProcessor.VerseSignature(before), SpellFixerTokenProcessor.VerseSignature(same));
+            Assert.AreNotEqual(SpellFixerTokenProcessor.VerseSignature(before), SpellFixerTokenProcessor.VerseSignature(edited));
+        }
+
+        [Test]
+        public void VerseSignature_DiffersWhenOnlyAMarkerChanges()
+        {
+            // e.g. the user changed \p to \q1 (unsaved) in the verse being fixed; we must not write the old marker back
+            var v1 = Vref(5, 1);
+            var before = new List<IUSFMToken> { Marker(v1, "p", MarkerType.Paragraph), Marker(v1, "v", MarkerType.Verse), Text(v1, "teh cat") };
+            var edited = new List<IUSFMToken> { Marker(v1, "q1", MarkerType.Paragraph), Marker(v1, "v", MarkerType.Verse), Text(v1, "teh cat") };
+
+            Assert.AreNotEqual(SpellFixerTokenProcessor.VerseSignature(before), SpellFixerTokenProcessor.VerseSignature(edited));
+        }
+
+        [Test]
+        public void StartVerseKey_AtVerseOne_StartsWithTheChapterHeading()
+        {
+            // the \s heading before \v 1 is in verse 0, which should be checked when starting at the top of the chapter
+            var v0 = Vref(5, 0);
+            var v1 = Vref(5, 1);
+            var v2 = Vref(5, 2);
+            var vrefTokens = UsfmChapterTokens.GroupByVerse(new List<IUSFMToken>
+            {
+                Marker(v0, "s", MarkerType.Paragraph), Text(v0, "Heading"),
+                Marker(v1, "v", MarkerType.Verse), Text(v1, "one"),
+                Marker(v2, "v", MarkerType.Verse), Text(v2, "two"),
+            });
+
+            Assert.AreEqual("40_005_000", SpellFixerTokenProcessor.StartVerseKey(vrefTokens, Vref(5, 1)));
+            Assert.AreEqual("40_005_002", SpellFixerTokenProcessor.StartVerseKey(vrefTokens, Vref(5, 2)));
         }
 
         private class FakeUser
