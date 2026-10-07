@@ -157,5 +157,113 @@ namespace TestBwdc
             Assert.AreEqual(SpellFixerTokenProcessor.VerseText(before), SpellFixerTokenProcessor.VerseText(same));
             Assert.AreNotEqual(SpellFixerTokenProcessor.VerseText(before), SpellFixerTokenProcessor.VerseText(edited));
         }
+
+        private class FakeUser
+        {
+            private readonly Queue<(FormButtons Button, string Corrected)> _answers = new Queue<(FormButtons, string)>();
+            public List<(string Word, string Suggestion)> Asked { get; } = new List<(string, string)>();
+
+            public FakeUser Then(FormButtons button, string corrected)
+            {
+                _answers.Enqueue((button, corrected));
+                return this;
+            }
+
+            public FormButtons Ask(string word, string suggestion, out string correctedSpelling)
+            {
+                Asked.Add((word, suggestion));
+                var (button, corrected) = _answers.Dequeue();
+                correctedSpelling = corrected;
+                return button;
+            }
+        }
+
+        private static string FixTeh(string word) => (word == "teh") ? "the" : word;
+
+        [Test]
+        public void FixWord_UnchangedByConverter_DoesNotAsk()
+        {
+            var user = new FakeUser();
+            var session = new SpellFixerSession(FixTeh, user.Ask);
+            Assert.AreEqual("cat", session.FixWord("cat"));
+            Assert.IsEmpty(user.Asked);
+        }
+
+        [Test]
+        public void FixWord_Skip_KeepsWord()
+        {
+            var user = new FakeUser().Then(FormButtons.Next, "the");
+            var session = new SpellFixerSession(FixTeh, user.Ask);
+            Assert.AreEqual("teh", session.FixWord("teh"));
+            CollectionAssert.AreEqual(new[] { ("teh", "the") }, user.Asked);
+        }
+
+        [Test]
+        public void FixWord_ReplaceOnce_UsesCorrectedSpellingAndAsksAgainNextTime()
+        {
+            var user = new FakeUser().Then(FormButtons.ReplaceOnce, "thee").Then(FormButtons.ReplaceOnce, "the");
+            var session = new SpellFixerSession(FixTeh, user.Ask);
+            Assert.AreEqual("thee", session.FixWord("teh"));
+            Assert.AreEqual("the", session.FixWord("teh"));
+            Assert.AreEqual(2, user.Asked.Count);
+        }
+
+        [Test]
+        public void FixWord_ReplaceEvery_ReusesUsersEditedSpellingWithoutAsking()
+        {
+            var user = new FakeUser().Then(FormButtons.ReplaceEvery, "thee");
+            var session = new SpellFixerSession(FixTeh, user.Ask);
+            Assert.AreEqual("thee", session.FixWord("teh"));
+            Assert.AreEqual("thee", session.FixWord("teh"));
+            Assert.AreEqual(1, user.Asked.Count);
+        }
+
+        [Test]
+        public void FixWord_ReplaceAll_StopsAskingForOtherWordsToo()
+        {
+            var user = new FakeUser().Then(FormButtons.ReplaceAll, "the");
+            var session = new SpellFixerSession(w => w == "teh" ? "the" : (w == "adn" ? "and" : w), user.Ask);
+            Assert.AreEqual("the", session.FixWord("teh"));
+            Assert.AreEqual("and", session.FixWord("adn"));
+            Assert.IsTrue(session.IsReplaceAll);
+            Assert.AreEqual(1, user.Asked.Count);
+        }
+
+        [Test]
+        [TestCase(FormButtons.Cancel)]
+        [TestCase(FormButtons.None)]   // e.g. closed with the X
+        public void FixWord_CancelOrClosed_ReturnsNull(FormButtons button)
+        {
+            var user = new FakeUser().Then(button, "the");
+            var session = new SpellFixerSession(FixTeh, user.Ask);
+            Assert.IsNull(session.FixWord("teh"));
+        }
+
+        [Test]
+        public void FixWord_EmptyCorrection_IsAReplacementNotACancel()
+        {
+            var user = new FakeUser().Then(FormButtons.ReplaceOnce, "");
+            var session = new SpellFixerSession(FixTeh, user.Ask);
+            Assert.AreEqual("", session.FixWord("teh"));
+        }
+
+        [Test]
+        public void FixWord_NullCorrection_FallsBackToSuggestion()
+        {
+            var user = new FakeUser().Then(FormButtons.ReplaceOnce, null);
+            var session = new SpellFixerSession(FixTeh, user.Ask);
+            Assert.AreEqual("the", session.FixWord("teh"));
+        }
+
+        [Test]
+        public void Session_DrivesFixWordsEndToEnd()
+        {
+            var user = new FakeUser().Then(FormButtons.ReplaceEvery, "the");
+            var session = new SpellFixerSession(FixTeh, user.Ask);
+            var cancelled = false;
+            var result = SpellFixerTokenProcessor.FixWords("teh cat and teh dog", session.FixWord, ref cancelled, out int wordsFixed);
+            Assert.AreEqual("the cat and the dog", result);
+            Assert.AreEqual(2, wordsFixed);
+        }
     }
 }
