@@ -74,6 +74,7 @@
     <Compile Include="PtxTestTokens.cs" Condition="'$(Platform)' == 'x64'" />
     <Compile Include="UnitTest_UsfmChapterTokens.cs" Condition="'$(Platform)' == 'x64'" />
     <Compile Include="UnitTest_PtxSpellFixer.cs" Condition="'$(Platform)' == 'x64'" />
+    <Compile Include="UnitTest_PtxSpellFixerSpelling.cs" Condition="'$(Platform)' == 'x64'" />
     <Compile Include="UnitTest_BulkWordDocConverter.cs" />
     <Compile Include="XmlDiff.cs" />
     <Compile Include="XmlInput.cs" />
