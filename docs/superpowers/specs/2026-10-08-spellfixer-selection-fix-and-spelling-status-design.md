@@ -56,7 +56,7 @@ Paratext exits, because the plugin API has no way to update spelling status whil
 - **Keyboard.** `IKeyboard.Activate()`; `IProject.VernacularKeyboard` (which may be null); `IPluginHost.DefaultKeyboard`. The API cannot report which keyboard is currently active.
 - **Lifecycle.** `IPluginHost.ShuttingDown` is a `CancelEventHandler`, raised when Paratext starts shutting down.
 - **SpellingFixer30.**
-  - `CscProject.AssignCorrectSpelling(string bad)` uses its internal `QueryGoodSpelling` window with `ShowDialog()`, so it cannot be made non-modal. Instead we call `CscProject.AssignCorrectSpelling(string bad, string good, bool bNoUI, List<string> context, …)`, which is public and shows no UI (CscProject.cs:1100).
+  - `CscProject.AssignCorrectSpelling(string bad)` uses its internal `QueryGoodSpelling` window with `ShowDialog()`, so it cannot be made non-modal. Instead we call `CscProject.AssignCorrectSpelling(string bad, string good, bool bNoUI, List<string> context, …)`, which is public (CscProject.cs:1100). The user asked for `bNoUI: false`, so it can still show its Yes/No/Cancel questions: "already a good word, remove it?" and "already mapped to X, change it?". If the user answers No or Cancel, it just returns, with no exception and no indication that the rule wasn't added.
   - Legacy projects: `SpellingFixer.AssignCorrectSpelling(string bad, string good)`. It may show its own Abort/Retry/Ignore box if an existing rule conflicts.
   - `FindReplaceHelper` keeps `m_cscProject` and `m_aSpellFixerLegacy` as `protected` fields.
   - `GetAmbiguousWords(word)` is public. It searches the known-good list and the words-to-check list, excludes the word itself, sorts by count with the most frequent first, and returns null if nothing matches.
@@ -117,9 +117,10 @@ first (one word, within one verse)." The bad form is `SelectedText` with surroun
 
 1. **Save the rule.**
    - The plugin gets the underlying objects through `PluginFindReplaceHelper : FindReplaceHelper`, a plugin-side subclass that exposes the protected `m_cscProject` and `m_aSpellFixerLegacy`. `SpellFixerProject` is changed to create this subclass in both `QueryUser` and `FromConverterName`, so the plugin keeps one in-memory copy of the project. `QueryUser` becomes `new PluginFindReplaceHelper(); helper.QuerySpellFixProjectType();` and then checks `IsSpellFixerProject`, which is the same logic as `FindReplaceHelper.GetFindReplaceHelper`. The plan's first task must confirm that the shipped 1.0.2 `BackTranslationHelper.dll` is the `!UseReflection` build, i.e. that it has these protected members and `QuerySpellFixProjectType`. If it isn't, stop and report.
-   - **CSC:** `cscProject.AssignCorrectSpelling(bad, good, bNoUI: true, context)`. The context is built as in §1.5. Any further optional parameters keep their defaults, so the rules are saved immediately.
+   - **CSC:** `cscProject.AssignCorrectSpelling(bad, good, bNoUI: false, context)`. Its questions must be shown to the user. The context is built as in §1.5. Any further optional parameters keep their defaults, so the rules are saved immediately.
    - **Legacy:** `spellingFixer.AssignCorrectSpelling(bad, good)`.
    - Then `SpellFixerProject.ReloadConverter()`.
+   - **Did the rule take effect?** `SpellFixerProject.AssignCorrectSpelling` returns `Convert(bad) == good` after the reload. If it returns false (the user declined one of its questions), the dialog stays open and nothing is replaced or recorded. The status line says the rule wasn't added.
    - If this step throws, the plugin shows the error and stops. Nothing is replaced and nothing is recorded.
 2. **Replace the selected occurrence in Paratext** (`SelectionReplacer`; see §1.6). If replacement fails, the plugin shows why; the rule stays saved.
 3. **Record the fix** for SpellingStatus (§2.1).

@@ -1103,7 +1103,7 @@ git commit -m "feat(SpellFixerPluginForParatext): find the Paratext project fold
   - `internal class PluginFindReplaceHelper : FindReplaceHelper`, with `CscProject CscProject`, `SpellingFixer LegacySpellingFixer` and `bool HasProject`.
   - `public class SimilarWord { string Word; int Count; ToString() => "Word (Count)" }`.
   - On `SpellFixerProject`:
-    - `void AssignCorrectSpelling(string bad, string good, List<string> context)`, which throws on failure and reloads the converter.
+    - `bool AssignCorrectSpelling(string bad, string good, List<string> context)`: calls CSC with `bNoUI: false`, reloads the converter, and returns whether `Convert(bad) == good` (false if the user declined one of its questions); throws on failure.
     - `List<SimilarWord> GetSimilarWords(string word)`, which is empty for legacy projects or when there are no matches.
     - `int WordsInContext`, which is 0 for legacy projects.
   - Existing members are unchanged.
@@ -1167,18 +1167,21 @@ Make these changes:
         public int WordsInContext => _findReplaceHelper.CscProject?.WordsInContext ?? 0;
 
         /// <summary>
-        /// Adds the bad -> good rule without any UI (throws if it can't). For a CSC project, 'context' is stored
-        /// with the good word (e.g. for the tooltips in its dialogs)
+        /// Adds the bad -> good rule (without the modal 'Fix Spelling' dialog, but still with the project's own
+        /// questions, e.g. "already a good word..."). For a CSC project, 'context' is stored with the good word.
+        /// Returns whether the rule is now in effect (false if the user said No/Cancel to one of those questions,
+        /// which just return without telling us); throws if it can't be added
         /// </summary>
-        public void AssignCorrectSpelling(string bad, string good, List<string> context)
+        public bool AssignCorrectSpelling(string bad, string good, List<string> context)
         {
             var cscProject = _findReplaceHelper.CscProject;
             if (cscProject != null)
-                cscProject.AssignCorrectSpelling(bad, good, bNoUI: true, context);
+                cscProject.AssignCorrectSpelling(bad, good, bNoUI: false, context);   // its questions should be seen
             else
                 _findReplaceHelper.LegacySpellingFixer.AssignCorrectSpelling(bad, good);
 
             ReloadConverter();
+            return Convert(bad) == good;
         }
 
         /// <summary>
@@ -1210,7 +1213,7 @@ Make these changes:
 $env:ParatextInstallDir=''; & $msbuild src\SpellFixerPluginForParatext\SpellFixerPluginForParatext.csproj -restore -p:Configuration=Debug -p:Platform=x64 -v:m
 ```
 Expected: 0 errors.
-- If `bNoUI:` named-argument binding fails because the parameter name differs, pass the arguments positionally: `(bad, good, true, context)`.
+- If `bNoUI:` named-argument binding fails because the parameter name differs, pass the arguments positionally: `(bad, good, false, context)`.
 
 - [ ] **Step 4: Run the existing spell-fixer tests (regression)**
 
@@ -1220,7 +1223,7 @@ Filter: `FullyQualifiedName~UnitTest_PtxSpellFixer`. Expected: all pass. This fi
 
 ```powershell
 git add src/SpellFixerPluginForParatext/PluginFindReplaceHelper.cs src/SpellFixerPluginForParatext/SpellFixerProject.cs
-git commit -m "feat(SpellFixerPluginForParatext): direct (no UI) AssignCorrectSpelling with context and similar words via FindReplaceHelper subclass`n`nCo-Authored-By: Claude Opus 5.5 (1M context) <noreply@anthropic.com>"
+git commit -m "feat(SpellFixerPluginForParatext): AssignCorrectSpelling (bad, good) with context with context and similar words via FindReplaceHelper subclass`n`nCo-Authored-By: Claude Opus 5.5 (1M context) <noreply@anthropic.com>"
 ```
 
 ---
@@ -1676,7 +1679,12 @@ Replace `ButtonAssignCorrectSpelling_Click` and `ButtonFindReplacementRule_Click
                 var context = isSelectedWord && (_spellFixerProject.WordsInContext > 0)
                                 ? new List<string> { SelectionReplacer.BuildContext(_fixSelection, _fixWord, _fixWordOffset, _spellFixerProject.WordsInContext) }
                                 : null;
-                _spellFixerProject.AssignCorrectSpelling(bad, good, context);
+                if (!_spellFixerProject.AssignCorrectSpelling(bad, good, context))
+                {
+                    // the user said No/Cancel to one of the project's questions; leave the dialog up so they can adjust
+                    SetStatus($"The rule '{bad}' → '{good}' wasn't added, so nothing was changed.");
+                    return false;
+                }
             }
             catch (Exception ex)
             {
