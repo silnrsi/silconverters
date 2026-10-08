@@ -2,6 +2,9 @@ using BackTranslationHelper;
 using ECInterfaces;
 using SilEncConverters40;
 using SpellingFixer30;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace SIL.SpellFixerPluginForParatext
 {
@@ -11,9 +14,9 @@ namespace SIL.SpellFixerPluginForParatext
     /// </summary>
     internal class SpellFixerProject
     {
-        private readonly FindReplaceHelper _findReplaceHelper;
+        private readonly PluginFindReplaceHelper _findReplaceHelper;
 
-        private SpellFixerProject(FindReplaceHelper findReplaceHelper)
+        private SpellFixerProject(PluginFindReplaceHelper findReplaceHelper)
         {
             _findReplaceHelper = findReplaceHelper;
             ConverterName = findReplaceHelper.SpellFixerEncConverterName;
@@ -26,8 +29,10 @@ namespace SIL.SpellFixerPluginForParatext
         /// </summary>
         public static SpellFixerProject QueryUser()
         {
-            var findReplaceHelper = FindReplaceHelper.GetFindReplaceHelper();
-            return (findReplaceHelper == null) ? null : new SpellFixerProject(findReplaceHelper);
+            // same as FindReplaceHelper.GetFindReplaceHelper, but with our subclass
+            var findReplaceHelper = new PluginFindReplaceHelper();
+            findReplaceHelper.QuerySpellFixProjectType();
+            return findReplaceHelper.HasProject ? new SpellFixerProject(findReplaceHelper) : null;
         }
 
         /// <summary>
@@ -36,7 +41,7 @@ namespace SIL.SpellFixerPluginForParatext
         /// </summary>
         public static SpellFixerProject FromConverterName(string converterName)
         {
-            return new SpellFixerProject(new FindReplaceHelper(converterName));
+            return new SpellFixerProject(new PluginFindReplaceHelper(converterName));
         }
 
         public string ConverterName { get; }
@@ -72,11 +77,49 @@ namespace SIL.SpellFixerPluginForParatext
             ReloadConverter();
         }
 
+        public int WordsInContext => _findReplaceHelper.CscProject?.WordsInContext ?? 0;
+
+        /// <summary>
+        /// Adds the bad -> good rule (without the modal 'Fix Spelling' dialog, but still with the project's own
+        /// questions, e.g. "already a good word..."). For a CSC project, 'context' is stored with the good word.
+        /// Returns whether the rule is now in effect (false if the user said No/Cancel to one of those questions,
+        /// which just return without telling us); throws if it can't be added
+        /// </summary>
+        public bool AssignCorrectSpelling(string bad, string good, List<string> context)
+        {
+            var cscProject = _findReplaceHelper.CscProject;
+            if (cscProject != null)
+                cscProject.AssignCorrectSpelling(bad, good, bNoUI: false, context);   // its questions should be seen
+            else
+                _findReplaceHelper.LegacySpellingFixer.AssignCorrectSpelling(bad, good);
+
+            ReloadConverter();
+            return Convert(bad) == good;
+        }
+
+        /// <summary>
+        /// The words the CscProject considers ambiguous with 'word' (its 'bundle'), most frequent first; empty for
+        /// legacy projects (which don't have the notion)
+        /// </summary>
+        public List<SimilarWord> GetSimilarWords(string word)
+        {
+            var words = String.IsNullOrEmpty(word) ? null : _findReplaceHelper.CscProject?.GetAmbiguousWords(word);
+            return words?.Select(w => new SimilarWord { Word = w.Value, Count = w.Count }).ToList()
+                   ?? new List<SimilarWord>();
+        }
+
         // so that rules just added or edited are used for the next word checked
         public void ReloadConverter()
         {
             DirectableEncConverter.EncConverters.Reinitialize();
             Converter = new DirectableEncConverter(ConverterName, bDirectionForward: true, NormalizeFlags.None);
         }
+    }
+
+    public class SimilarWord
+    {
+        public string Word { get; set; }
+        public int Count { get; set; }
+        public override string ToString() => $"{Word} ({Count})";
     }
 }
