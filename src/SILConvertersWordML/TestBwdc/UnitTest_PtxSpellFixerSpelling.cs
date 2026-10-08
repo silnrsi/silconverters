@@ -180,5 +180,133 @@ namespace TestBwdc
         }
 
         #endregion
+
+        #region SpellingStatusMerger / PendingSpellingStatusStore
+
+        private string _tempDir;
+
+        [SetUp]
+        public void SetUp()
+        {
+            _tempDir = Path.Combine(Path.GetTempPath(), "SpellFixerTests_" + Guid.NewGuid().ToString("N"));
+            Directory.CreateDirectory(_tempDir);
+        }
+
+        [TearDown]
+        public void TearDown()
+        {
+            try { Directory.Delete(_tempDir, true); } catch { }
+        }
+
+        private static XElement StatusOf(XDocument doc, string word) =>
+            doc.Root.Elements("Status").Single(e => (string)e.Attribute("Word") == word);
+
+        [Test]
+        public void Apply_NewWords_AddsWrongWithCorrectionAndRight()
+        {
+            var doc = new XDocument(new XElement("SpellingStatus"));
+            SpellingStatusMerger.Apply(doc, "teh", "the");
+
+            Assert.AreEqual("W", (string)StatusOf(doc, "teh").Attribute("State"));
+            Assert.AreEqual("the", StatusOf(doc, "teh").Element("Correction").Value);
+            Assert.AreEqual("R", (string)StatusOf(doc, "the").Attribute("State"));
+            Assert.IsNull(StatusOf(doc, "the").Element("Correction"));
+        }
+
+        [Test]
+        public void Apply_ExistingEntries_AreUpdatedInPlace()
+        {
+            var doc = XDocument.Parse(
+                "<SpellingStatus>" +
+                "<Status Word=\"teh\" State=\"R\" />" +
+                "<Status Word=\"the\" State=\"W\"><Correction>thee</Correction></Status>" +
+                "<Status Word=\"adn\" State=\"W\"><Correction>an</Correction></Status>" +
+                "</SpellingStatus>");
+
+            SpellingStatusMerger.Apply(doc, "teh", "the");
+            SpellingStatusMerger.Apply(doc, "adn", "and");
+
+            Assert.AreEqual(4, doc.Root.Elements("Status").Count(), "teh, the, adn + and (new), with no duplicates");
+            Assert.AreEqual("W", (string)StatusOf(doc, "teh").Attribute("State"));
+            Assert.AreEqual(1, StatusOf(doc, "teh").Elements("Correction").Count());
+            Assert.AreEqual("R", (string)StatusOf(doc, "the").Attribute("State"));
+            Assert.IsNull(StatusOf(doc, "the").Element("Correction"));
+            Assert.AreEqual("and", StatusOf(doc, "adn").Element("Correction").Value);
+            CollectionAssert.AreEqual(new[] { "teh", "the", "adn", "and" },
+                                      doc.Root.Elements("Status").Select(e => (string)e.Attribute("Word")).Distinct().ToList());
+        }
+
+        [Test]
+        public void Apply_LaterFixWins()
+        {
+            var doc = new XDocument(new XElement("SpellingStatus"));
+            SpellingStatusMerger.Apply(doc, "colour", "color");
+            SpellingStatusMerger.Apply(doc, "color", "colour");
+
+            Assert.AreEqual("R", (string)StatusOf(doc, "colour").Attribute("State"));
+            Assert.AreEqual("W", (string)StatusOf(doc, "color").Attribute("State"));
+            Assert.AreEqual("colour", StatusOf(doc, "color").Element("Correction").Value);
+        }
+
+        [Test]
+        public void Save_KeepsUnrelatedEntriesIdentical()
+        {
+            var original =
+                "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n" +
+                "<SpellingStatus>\r\n" +
+                "  <Status Word=\"किताब\" State=\"R\" />\r\n" +
+                "  <Status Word=\"कीताब\" State=\"W\">\r\n" +
+                "    <Correction>किताब</Correction>\r\n" +
+                "  </Status>\r\n" +
+                "</SpellingStatus>";
+            var path = Path.Combine(_tempDir, "SpellingStatus.xml");
+            File.WriteAllText(path, original, new System.Text.UTF8Encoding(true));
+
+            var doc = SpellingStatusMerger.LoadOrCreate(path);
+            SpellingStatusMerger.Apply(doc, "teh", "the");
+            SpellingStatusMerger.Save(doc, path);
+
+            var bytes = File.ReadAllBytes(path);
+            CollectionAssert.AreEqual(new byte[] { 0xEF, 0xBB, 0xBF }, bytes.Take(3).ToArray(), "UTF-8 BOM");
+            var saved = File.ReadAllText(path);
+            StringAssert.StartsWith(original.Substring(0, original.IndexOf("</SpellingStatus>", StringComparison.Ordinal)), saved);
+            StringAssert.Contains("  <Status Word=\"teh\" State=\"W\">\r\n    <Correction>the</Correction>\r\n  </Status>\r\n", saved);
+            StringAssert.Contains("  <Status Word=\"the\" State=\"R\" />\r\n", saved);
+        }
+
+        [Test]
+        public void LoadOrCreate_MissingFile_GivesEmptyRoot()
+        {
+            var doc = SpellingStatusMerger.LoadOrCreate(Path.Combine(_tempDir, "nope.xml"));
+            Assert.AreEqual("SpellingStatus", doc.Root.Name.LocalName);
+            Assert.IsEmpty(doc.Root.Elements());
+        }
+
+        [Test]
+        public void PendingStore_AppendLoadAndClear()
+        {
+            var projectFolder = Path.Combine(_tempDir, "Dog");
+            var path = PendingSpellingStatusStore.PathFor(projectFolder);
+            StringAssert.EndsWith(@"Dog\local\SpellFixer\PendingSpellingStatus.xml", path);
+
+            CollectionAssert.IsEmpty(PendingSpellingStatusStore.Load(path));
+
+            var when = new DateTime(2026, 10, 8, 14, 3, 0, DateTimeKind.Utc);
+            PendingSpellingStatusStore.Append(path, "teh", "the", when);
+            PendingSpellingStatusStore.Append(path, "adn", "and", when.AddMinutes(1));
+
+            var fixes = PendingSpellingStatusStore.Load(path);
+            CollectionAssert.AreEqual(new[] { "teh", "adn" }, fixes.Select(f => f.Bad).ToList());
+            CollectionAssert.AreEqual(new[] { "the", "and" }, fixes.Select(f => f.Good).ToList());
+            Assert.AreEqual(when, fixes[0].WhenUtc);
+
+            PendingSpellingStatusStore.Save(path, fixes.Skip(1));
+            Assert.AreEqual(1, PendingSpellingStatusStore.Load(path).Count);
+
+            PendingSpellingStatusStore.Save(path, Enumerable.Empty<PendingFix>());
+            Assert.IsFalse(File.Exists(path));
+        }
+
+        #endregion
     }
 }
