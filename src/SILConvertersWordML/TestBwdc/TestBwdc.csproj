@@ -265,6 +265,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\ParatextPluginBackTranslationHelper\ParatextPluginBackTranslationHelper.csproj" Condition="('$(Platform)' == 'x64') and ('$(OS)'=='Windows_NT')" />
     <ProjectReference Include="..\..\SpellFixerPluginForParatext\SpellFixerPluginForParatext.csproj" Condition="('$(Platform)' == 'x64') and ('$(OS)'=='Windows_NT')" Aliases="SpellFixer" />
+    <ProjectReference Include="..\..\SpellingStatusUpdater\SpellingStatusUpdater.csproj" Condition="('$(Platform)' == 'x64') and ('$(OS)'=='Windows_NT')" Aliases="Updater" />
     <ProjectReference Include="..\SILConvertersWordML.csproj" />
   </ItemGroup>
   <ItemGroup>

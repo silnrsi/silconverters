@@ -1,6 +1,10 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Windows.Forms;
 using Paratext.PluginInterfaces;
 using SIL.ParatextBackTranslationHelperPlugin;
@@ -34,6 +38,47 @@ namespace SIL.SpellFixerPluginForParatext
             }
         }
 
+        private static bool _isShutdownHooked;
+
+        private static string PluginFolder
+        {
+            get
+            {
+                var location = Assembly.GetExecutingAssembly().Location;
+                return !String.IsNullOrEmpty(location)
+                        ? Path.GetDirectoryName(location)
+                        : Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "plugins", "SpellFixerPluginForParatext");
+            }
+        }
+
+        /// <summary>
+        /// If any spelling fixes were recorded, start SpellingStatusUpdater.exe, which waits for Paratext to exit
+        /// and then merges them into the projects' SpellingStatus.xml (Paratext doesn't let us change it while running)
+        /// </summary>
+        private static void Host_ShuttingDown(object sender, CancelEventArgs e)
+        {
+            try
+            {
+                if (!SpellingStatusRecorder.HasRecordedThisSession)
+                    return;
+
+                var projectsDirectory = ParatextProjectFolder.GetProjectsDirectory();
+                var updaterPath = Path.Combine(PluginFolder, "SpellingStatusUpdater.exe");
+                if ((projectsDirectory == null) || !File.Exists(updaterPath))
+                {
+                    _host?.Log(_this, $"SpellFixer: can't update SpellingStatus.xml (projects folder: '{projectsDirectory}', updater: '{updaterPath}')");
+                    return;
+                }
+
+                var arguments = $"--wait-pid {Process.GetCurrentProcess().Id} --projects-dir \"{projectsDirectory.TrimEnd('\\')}\"";
+                Process.Start(new ProcessStartInfo(updaterPath, arguments) { UseShellExecute = false, CreateNoWindow = true });
+            }
+            catch (Exception ex)
+            {
+                _host?.Log(_this, $"SpellFixer: unable to start SpellingStatusUpdater: {ex.Message}");
+            }
+        }
+
         public IDataFileMerger GetMerger(IPluginHost host, string dataIdentifier) => throw new NotImplementedException();
 
         public string GetDescription(string locale)
@@ -48,6 +93,12 @@ namespace SIL.SpellFixerPluginForParatext
         {
             Application.EnableVisualStyles();
             _host = host;
+
+            if (!_isShutdownHooked)
+            {
+                host.ShuttingDown += Host_ShuttingDown;
+                _isShutdownHooked = true;
+            }
 
             var shortName = state.Project?.ShortName ?? host.ActiveWindowState?.Project?.ShortName;
             var project = host.GetAllProjects().FirstOrDefault(p => p.ShortName == shortName);

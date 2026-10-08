@@ -81,6 +81,10 @@
     <EmbeddedResource Include="..\ParatextPluginBackTranslationHelper\Resources\pindown.bmp" Link="Resources\pindown.bmp" LogicalName="SIL.SpellFixerPluginForParatext.pindown.bmp" />
   </ItemGroup>
   <ItemGroup>
+    <!-- build order only: SpellingStatusUpdater.exe is shipped next to the plugin -->
+    <ProjectReference Include="..\SpellingStatusUpdater\SpellingStatusUpdater.csproj" ReferenceOutputAssembly="false" />
+  </ItemGroup>
+  <ItemGroup>
     <PackageReference Include="Encoding-Converters-Core" Version="1.0.2" />
     <PackageReference Include="ParatextEmbeddedUiPluginInterfaces" Version="2.0.23" />
     <PackageReference Include="ParatextPluginInterfaces" Version="2.0.23" />
@@ -110,6 +114,9 @@ del "%ParatextInstallDir%\plugins\$(MSBuildProjectName)\$(MSBuildProjectName).pt
 xcopy "$(SolutionDir)output\x64\Debug\*.*" "%ParatextInstallDir%\Encoding Core" /y /i /c
 @echo Copying '$(SolutionDir)output\x64\Debug\$(AssemblyName).dll' to: '%ParatextInstallDir%\plugins\$(MSBuildProjectName)\$(MSBuildProjectName).ptxplg'
 copy "$(SolutionDir)output\x64\Debug\$(AssemblyName).dll" "%ParatextInstallDir%\plugins\$(MSBuildProjectName)\$(MSBuildProjectName).ptxplg"
+
+@echo Copying '$(SolutionDir)output\x64\Debug\SpellingStatusUpdater.exe' to: '%ParatextInstallDir%\plugins\$(MSBuildProjectName)'
+copy "$(SolutionDir)output\x64\Debug\SpellingStatusUpdater.exe" "%ParatextInstallDir%\plugins\$(MSBuildProjectName)\SpellingStatusUpdater.exe"
 
 :nocopy</PostBuildEvent>
   </PropertyGroup>

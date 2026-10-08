@@ -1,4 +1,5 @@
 extern alias SpellFixer;
+extern alias Updater;
 
 using System;
 using System.Collections.Generic;
@@ -8,6 +9,7 @@ using System.Xml.Linq;
 using NUnit.Framework;
 using SpellFixer::SIL.SpellFixerPluginForParatext;
 using static TestBwdc.PtxTestTokens;
+using SpellingStatusUpdateRunner = Updater::SIL.SpellingStatusUpdater.SpellingStatusUpdateRunner;
 
 namespace TestBwdc
 {
@@ -348,6 +350,65 @@ namespace TestBwdc
         {
             Assert.IsNull(ParatextProjectFolder.Find(_tempDir, "Cat", "x"));
             Assert.IsNull(ParatextProjectFolder.Find(null, "Dog", "x"));
+        }
+
+        #endregion
+
+        #region SpellingStatusUpdateRunner
+
+        [Test]
+        public void Runner_MergesPendingFixes_BacksUpAndClearsPending()
+        {
+            var projectFolder = MakeProject("Dog", null);
+            var statusPath = Path.Combine(projectFolder, "SpellingStatus.xml");
+            File.WriteAllText(statusPath, "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<SpellingStatus>\r\n  <Status Word=\"cat\" State=\"R\" />\r\n</SpellingStatus>");
+            var pendingPath = PendingSpellingStatusStore.PathFor(projectFolder);
+            PendingSpellingStatusStore.Append(pendingPath, "teh", "the", DateTime.UtcNow);
+            MakeProject("Cat", null);   // a project with nothing pending
+
+            var now = new DateTime(2026, 10, 8, 15, 4, 5);
+            var lines = SpellingStatusUpdateRunner.ProcessProjectsDirectory(_tempDir, now);
+
+            Assert.AreEqual(1, lines.Count);
+            StringAssert.Contains("Dog", lines[0]);
+            Assert.IsFalse(File.Exists(pendingPath), "pending fixes cleared");
+            Assert.IsTrue(File.Exists(Path.Combine(PendingSpellingStatusStore.FolderFor(projectFolder), "SpellingStatus.xml.20261008150405.bak")));
+            Assert.IsTrue(File.Exists(Path.Combine(PendingSpellingStatusStore.FolderFor(projectFolder), "SpellingStatusUpdater.log")));
+
+            var doc = XDocument.Load(statusPath);
+            Assert.AreEqual("W", (string)StatusOf(doc, "teh").Attribute("State"));
+            Assert.AreEqual("R", (string)StatusOf(doc, "the").Attribute("State"));
+            Assert.AreEqual("R", (string)StatusOf(doc, "cat").Attribute("State"));
+        }
+
+        [Test]
+        public void Runner_NoSpellingStatusYet_CreatesIt()
+        {
+            var projectFolder = MakeProject("Dog", null);
+            PendingSpellingStatusStore.Append(PendingSpellingStatusStore.PathFor(projectFolder), "teh", "the", DateTime.UtcNow);
+
+            SpellingStatusUpdateRunner.ProcessProjectsDirectory(_tempDir, DateTime.Now);
+
+            var doc = XDocument.Load(Path.Combine(projectFolder, "SpellingStatus.xml"));
+            Assert.AreEqual("W", (string)StatusOf(doc, "teh").Attribute("State"));
+        }
+
+        [Test]
+        public void Runner_LockedSpellingStatus_LeavesFixesPending()
+        {
+            var projectFolder = MakeProject("Dog", null);
+            var statusPath = Path.Combine(projectFolder, "SpellingStatus.xml");
+            File.WriteAllText(statusPath, "<SpellingStatus />");
+            var pendingPath = PendingSpellingStatusStore.PathFor(projectFolder);
+            PendingSpellingStatusStore.Append(pendingPath, "teh", "the", DateTime.UtcNow);
+
+            using (new FileStream(statusPath, FileMode.Open, FileAccess.ReadWrite, FileShare.None))
+            {
+                var lines = SpellingStatusUpdateRunner.ProcessProjectsDirectory(_tempDir, DateTime.Now);
+                StringAssert.Contains("ERROR", lines.Single());
+            }
+
+            Assert.AreEqual(1, PendingSpellingStatusStore.Load(pendingPath).Count, "still pending");
         }
 
         #endregion
