@@ -308,5 +308,48 @@ namespace TestBwdc
         }
 
         #endregion
+
+        #region ParatextProjectFolder
+
+        private string MakeProject(string shortName, string guid)
+        {
+            var folder = Path.Combine(_tempDir, shortName);
+            Directory.CreateDirectory(folder);
+            var settings = (guid == null)
+                            ? "<ScriptureText><Name>" + shortName + "</Name></ScriptureText>"
+                            : "<ScriptureText><Guid>" + guid + "</Guid><Name>" + shortName + "</Name></ScriptureText>";
+            File.WriteAllText(Path.Combine(folder, "Settings.xml"), settings);
+            return folder;
+        }
+
+        [Test]
+        public void Find_MatchingGuid_ReturnsFolder()
+        {
+            var folder = MakeProject("Dog", "580567e691300a47f556b191275ab1791777ef21");
+            Assert.AreEqual(folder, ParatextProjectFolder.Find(_tempDir, "Dog", "580567E691300A47F556B191275AB1791777EF21"));
+        }
+
+        [Test]
+        public void Find_GuidMismatch_ReturnsNull()
+        {
+            MakeProject("Dog", "580567e691300a47f556b191275ab1791777ef21");
+            Assert.IsNull(ParatextProjectFolder.Find(_tempDir, "Dog", "0000000000000000000000000000000000000000"));
+        }
+
+        [Test]
+        public void Find_NoGuidInSettings_AcceptsFolder()
+        {
+            var folder = MakeProject("Dog", null);
+            Assert.AreEqual(folder, ParatextProjectFolder.Find(_tempDir, "Dog", "anything"));
+        }
+
+        [Test]
+        public void Find_MissingProjectOrDirectory_ReturnsNull()
+        {
+            Assert.IsNull(ParatextProjectFolder.Find(_tempDir, "Cat", "x"));
+            Assert.IsNull(ParatextProjectFolder.Find(null, "Dog", "x"));
+        }
+
+        #endregion
     }
 }
