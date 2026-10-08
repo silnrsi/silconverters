@@ -15,6 +15,9 @@
             <Component Id="SpellFixerPluginForParatext.ptxplg" Guid="{9B7E2C41-3D6A-4F18-A5C2-7E0B9D3F1A64}">
               <File Id="SpellFixerPluginForParatext.ptxplg" Name="SpellFixerPluginForParatext.ptxplg" KeyPath="yes" Assembly=".net" AssemblyManifest="SpellFixerPluginForParatext.ptxplg" AssemblyApplication="SpellFixerPluginForParatext.ptxplg" Source="..\..\output\x64\release\SpellFixerPluginForParatext.dll" />
             </Component>
+            <Component Id="SpellingStatusUpdater.exe" Guid="{4E2D8A63-1B7C-4F59-9D3A-6C8E2F1B7A45}">
+              <File Id="SpellingStatusUpdater.exe" Name="SpellingStatusUpdater.exe" KeyPath="yes" Source="..\..\output\x64\release\SpellingStatusUpdater.exe" />
+            </Component>
           </Directory>
         </Directory>
 
