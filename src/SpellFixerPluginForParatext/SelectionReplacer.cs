@@ -1,5 +1,7 @@
 using Paratext.PluginInterfaces;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Text.RegularExpressions;
 
 namespace SIL.SpellFixerPluginForParatext
@@ -47,6 +49,18 @@ namespace SIL.SpellFixerPluginForParatext
 
         public static bool ValidateSelection(SelectionInfo s, out string word, out int wordOffset, out string reason)
         {
+            return ValidateSelection(s, null, out word, out wordOffset, out reason);
+        }
+
+        /// <summary>
+        /// Checks that the selection is a single word within one verse and returns that word, without the leading
+        /// and trailing characters the SpellFixer's CC table doesn't consider part of a word (the same ones
+        /// CscProject.TrimWhiteSpaceAndPunctuation trims: whitespace, digits, Unicode punctuation (e.g. ',' and the
+        /// danda), plus extraTrimCharacters, e.g. the project's script system's extra punctuation), and the offset
+        /// of the word in the verse's USFM
+        /// </summary>
+        public static bool ValidateSelection(SelectionInfo s, ICollection<char> extraTrimCharacters, out string word, out int wordOffset, out string reason)
+        {
             word = null;
             wordOffset = -1;
             reason = null;
@@ -67,8 +81,30 @@ namespace SIL.SpellFixerPluginForParatext
             if (reason != null)
                 return false;
 
-            word = trimmed;
-            wordOffset = s.Offset + (text.Length - text.TrimStart().Length);
+            bool ShouldTrim(char ch) => (ch <= 0x0020) || Char.IsDigit(ch) || Char.IsPunctuation(ch) || Char.IsWhiteSpace(ch) ||
+                                        ((extraTrimCharacters != null) && extraTrimCharacters.Contains(ch));
+
+            int start = 0, end = text.Length - 1;
+            while ((start <= end) && ShouldTrim(text[start]))
+                start++;
+            while ((end >= start) && ShouldTrim(text[end]))
+                end--;
+
+            if (start > end)
+            {
+                reason = "the selection doesn't have a word in it (only punctuation, digits or spaces)";
+                return false;
+            }
+
+            var candidate = text.Substring(start, end - start + 1);
+            if (candidate.Any(Char.IsWhiteSpace))
+            {
+                reason = "select a single word (the selection has more than one)";
+                return false;
+            }
+
+            word = candidate;
+            wordOffset = s.Offset + start;
             return true;
         }
 

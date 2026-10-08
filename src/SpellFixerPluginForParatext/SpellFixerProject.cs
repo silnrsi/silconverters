@@ -79,6 +79,41 @@ namespace SIL.SpellFixerPluginForParatext
 
         public int WordsInContext => _findReplaceHelper.CscProject?.WordsInContext ?? 0;
 
+        private HashSet<char> _trimCharacters;
+
+        /// <summary>
+        /// The characters (besides whitespace, digits and Unicode punctuation) the CC table doesn't consider part of a
+        /// word, so they should be trimmed off a selected word: the default word boundary punctuation and, for a CSC
+        /// project, its script system's 'extra punctuation' (e.g. '|')
+        /// </summary>
+        public ICollection<char> TrimCharacters
+        {
+            get
+            {
+                if (_trimCharacters == null)
+                {
+                    _trimCharacters = new HashSet<char>(System.Text.RegularExpressions.Regex
+                                                            .Matches(SpellingFixer.cstrDefaultPunctuationAndWhitespace, "'(.)'|\"(.)\"")
+                                                            .Cast<System.Text.RegularExpressions.Match>()
+                                                            .Select(m => m.Groups[1].Success ? m.Groups[1].Value[0] : m.Groups[2].Value[0]));
+
+                    // CscProject doesn't expose its script system's extra punctuation, so get it the hard way (and do
+                    //  without it if that ever changes)
+                    try
+                    {
+                        var trimPunctuationField = typeof(CscProject).GetField("m_achTrimPunctuation", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic);
+                        if ((_findReplaceHelper.CscProject != null) && (trimPunctuationField?.GetValue(_findReplaceHelper.CscProject) is IEnumerable<char> extraPunctuation))
+                            _trimCharacters.UnionWith(extraPunctuation);
+                    }
+                    catch
+                    {
+                        // just use the defaults
+                    }
+                }
+                return _trimCharacters;
+            }
+        }
+
         /// <summary>
         /// Adds the bad -> good rule (without the modal 'Fix Spelling' dialog, but still with the project's own
         /// questions, e.g. "already a good word..."). For a CSC project, 'context' is stored with the good word.

@@ -250,7 +250,7 @@ namespace SIL.SpellFixerPluginForParatext
                 return;     // (the button is disabled then anyway)
 
             var selection = CurrentSelection;
-            if (!SelectionReplacer.ValidateSelection(selection, out string word, out int wordOffset, out string reason))
+            if (!SelectionReplacer.ValidateSelection(selection, _spellFixerProject.TrimCharacters, out string word, out int wordOffset, out string reason))
             {
                 MessageBox.Show($"Select the misspelled word in the {_project.ShortName} text window first (one word, within one verse): {reason}.",
                                 SpellFixerPlugin.PluginName);
@@ -283,7 +283,7 @@ namespace SIL.SpellFixerPluginForParatext
 
         private void ButtonFindReplacementRule_Click(object sender, EventArgs e)
         {
-            if (SelectionReplacer.ValidateSelection(CurrentSelection, out string word, out _, out _))
+            if (SelectionReplacer.ValidateSelection(CurrentSelection, _spellFixerProject.TrimCharacters, out string word, out _, out _))
                 TryAction(() => _spellFixerProject.FindReplacementRule(word));
             else
                 DoWithClipboardWord(clipboardWord => _spellFixerProject.FindReplacementRule(clipboardWord));

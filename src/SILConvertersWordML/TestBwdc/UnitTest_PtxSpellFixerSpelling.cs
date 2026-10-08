@@ -60,6 +60,63 @@ namespace TestBwdc
         }
 
         [Test]
+        [TestCase("teh,", "teh", 0)]
+        [TestCase("(teh)", "teh", 1)]
+        [TestCase("teh।", "teh", 0)]          // Devanagari danda
+        [TestCase("“teh”॥", "teh", 1)]  // curly quotes + double danda
+        [TestCase(" teh,  ", "teh", 1)]
+        [TestCase("12teh", "teh", 2)]              // digits at the edges are trimmed, as CscProject does
+        public void ValidateSelection_TrimsPunctuationTheCcTableIgnores(string selected, string expectedWord, int expectedShift)
+        {
+            var s = Sel("\\v 1 the ", selected, " cat");
+            Assert.IsTrue(SelectionReplacer.ValidateSelection(s, null, out string word, out int wordOffset, out string reason), reason);
+            Assert.AreEqual(expectedWord, word);
+            Assert.AreEqual(s.Offset + expectedShift, wordOffset);
+        }
+
+        [Test]
+        public void ValidateSelection_TrimsTheProjectsExtraPunctuation()
+        {
+            // '|' isn't Unicode punctuation (it's a math symbol), but a CSC project's script system can list it
+            var s = Sel("\\v 1 the ", "teh|", " cat");
+            Assert.IsTrue(SelectionReplacer.ValidateSelection(s, null, out string word, out _, out _));
+            Assert.AreEqual("teh|", word);
+
+            Assert.IsTrue(SelectionReplacer.ValidateSelection(s, new[] { '|' }, out word, out int wordOffset, out _));
+            Assert.AreEqual("teh", word);
+            Assert.AreEqual(s.Offset, wordOffset);
+        }
+
+        [Test]
+        [TestCase("two words")]
+        [TestCase("two words")]
+        [TestCase("teh, cat")]
+        public void ValidateSelection_RejectsMoreThanOneWord(string selected)
+        {
+            Assert.IsFalse(SelectionReplacer.ValidateSelection(Sel("\\v 1 ", selected, " end"), null, out _, out _, out string reason));
+            StringAssert.Contains("single word", reason);
+        }
+
+        [Test]
+        [TestCase("।")]
+        [TestCase(", 12 .")]
+        public void ValidateSelection_RejectsSelectionWithNoWordInIt(string selected)
+        {
+            Assert.IsFalse(SelectionReplacer.ValidateSelection(Sel("\\v 1 ", selected, " end"), null, out _, out _, out string reason));
+            Assert.IsFalse(string.IsNullOrEmpty(reason));
+        }
+
+        [Test]
+        public void ValidateSelection_TrimmedWord_ReplacesOnlyTheWordInTheVerse()
+        {
+            var s = Sel("\\v 1 the cat and ", "teh,", " dog");
+            Assert.IsTrue(SelectionReplacer.ValidateSelection(s, null, out string word, out int wordOffset, out _));
+            var verse = s.BeforeContext + s.SelectedText + s.AfterContext;
+            Assert.IsTrue(SelectionReplacer.TryReplaceInVerse(verse, s, word, wordOffset, "the", out string newVerse, out _));
+            Assert.AreEqual("\\v 1 the cat and the, dog", newVerse);
+        }
+
+        [Test]
         public void ValidateSelection_RejectsSelectionWithoutVerseReference()
         {
             var s = Sel("\\v 1 ", "teh", " end");
