@@ -37,9 +37,43 @@ namespace SIL.SpellFixerPluginForParatext
             SetPinToTop(Properties.Settings.Default.PinToTop);
 
             _host.VerseRefChanged += Host_VerseRefChanged;
+            _host.ActiveWindowSelectionChanged += Host_ActiveWindowSelectionChanged;
+            _lastSelection = CurrentSelection;
         }
 
         public string ProjectShortName => _project.ShortName;
+
+        #region Paratext selection
+
+        private SelectionInfo _lastSelection;
+
+        private void Host_ActiveWindowSelectionChanged(IPluginHost sender, IParatextChildState activeWindowState, IReadOnlyList<ISelection> currentSelections)
+        {
+            // only keep selections in this project's (Scripture text) windows; moving to our own window must not lose it
+            if (activeWindowState?.Project?.ShortName != _project.ShortName)
+                return;
+
+            var selection = currentSelections?.OfType<IScriptureTextSelection>().FirstOrDefault();
+            if (selection != null)
+                _lastSelection = SelectionInfo.FromSelection(selection);
+        }
+
+        private SelectionInfo CurrentSelection
+        {
+            get
+            {
+                var state = _host.ActiveWindowState;
+                if (state?.Project?.ShortName == _project.ShortName)
+                {
+                    var selection = state.Selections?.OfType<IScriptureTextSelection>().FirstOrDefault();
+                    if (selection != null)
+                        return SelectionInfo.FromSelection(selection);
+                }
+                return _lastSelection;
+            }
+        }
+
+        #endregion
 
         private static Bitmap LoadBitmap(string name)
         {
@@ -82,6 +116,8 @@ namespace SIL.SpellFixerPluginForParatext
             }
 
             _host.VerseRefChanged -= Host_VerseRefChanged;
+            _host.ActiveWindowSelectionChanged -= Host_ActiveWindowSelectionChanged;
+            _fixSpellingForm?.Close();
 
             if (WindowState == FormWindowState.Normal)
                 Properties.Settings.Default.WindowLocation = Location;
@@ -150,6 +186,7 @@ namespace SIL.SpellFixerPluginForParatext
             _spellFixerProject = spellFixerProject;
             _queryForm?.Dispose();
             _queryForm = null;
+            _fixSpellingForm?.Close();
             labelSpellFixerProject.Text = spellFixerProject.DisplayName;
             UpdateButtonStates();
         }
@@ -188,7 +225,7 @@ namespace SIL.SpellFixerPluginForParatext
         {
             var haveProject = (_spellFixerProject != null);
             buttonChooseProject.Enabled = !_isChecking;
-            buttonCheck.Enabled = haveProject && !_isChecking;
+            buttonCheck.Enabled = haveProject && !_isChecking && ((_fixSpellingForm == null) || _fixSpellingForm.IsDisposed);
             buttonAssignCorrectSpelling.Enabled = haveProject && !_isChecking;
             buttonFindReplacementRule.Enabled = haveProject && !_isChecking;
             buttonEditSpellingFixes.Enabled = haveProject && !_isChecking;
@@ -199,14 +236,134 @@ namespace SIL.SpellFixerPluginForParatext
             ChooseSpellFixerProject();
         }
 
+        private FixSpellingForm _fixSpellingForm;
+
+        // the selection (and the word in it) the Fix Spelling dialog was opened for
+        private SelectionInfo _fixSelection;
+        private string _fixWord;
+        private int _fixWordOffset;
+
         private void ButtonAssignCorrectSpelling_Click(object sender, EventArgs e)
         {
-            DoWithClipboardWord(word => _spellFixerProject.AssignCorrectSpelling(word));
+            var selection = CurrentSelection;
+            if (!SelectionReplacer.ValidateSelection(selection, out string word, out int wordOffset, out string reason))
+            {
+                MessageBox.Show($"Select the misspelled word in the {_project.ShortName} text window first (one word, within one verse): {reason}.",
+                                SpellFixerPlugin.PluginName);
+                return;
+            }
+
+            _fixSelection = selection;
+            _fixWord = word;
+            _fixWordOffset = wordOffset;
+
+            if ((_fixSpellingForm == null) || _fixSpellingForm.IsDisposed)
+            {
+                _projectFont ??= GetProjectFont();
+                _fixSpellingForm = new FixSpellingForm(_spellFixerProject, _projectFont, _project.Language?.IsRtoL ?? false,
+                                                       _project.VernacularKeyboard, _host.DefaultKeyboard, ApplyFix);
+                _fixSpellingForm.FormClosed += (s, args) =>
+                {
+                    _fixSpellingForm = null;
+                    UpdateButtonStates();
+                };
+            }
+
+            _fixSpellingForm.TopMost = TopMost;
+            _fixSpellingForm.LoadWord(word, selection.VerseRefStart?.ToString());
+            if (!_fixSpellingForm.Visible)
+                _fixSpellingForm.Show(this);
+            _fixSpellingForm.Activate();
+            UpdateButtonStates();
         }
 
         private void ButtonFindReplacementRule_Click(object sender, EventArgs e)
         {
-            DoWithClipboardWord(word => _spellFixerProject.FindReplacementRule(word));
+            if (SelectionReplacer.ValidateSelection(CurrentSelection, out string word, out _, out _))
+                TryAction(() => _spellFixerProject.FindReplacementRule(word));
+            else
+                DoWithClipboardWord(clipboardWord => _spellFixerProject.FindReplacementRule(clipboardWord));
+        }
+
+        /// <summary>
+        /// Called when OK is clicked in the Fix Spelling dialog: add the rule, replace the selected word in Paratext,
+        /// and record the fix for Paratext's spelling status. Returns true to close the dialog.
+        /// </summary>
+        private bool ApplyFix(string bad, string good)
+        {
+            // only if the dialog's bad form is still the selected word do we know where it is (for the context
+            //  and the replacement in Paratext)
+            var isSelectedWord = (_fixSelection != null) && (bad == _fixWord);
+
+            try
+            {
+                var context = isSelectedWord && (_spellFixerProject.WordsInContext > 0)
+                                ? new List<string> { SelectionReplacer.BuildContext(_fixSelection, _fixWord, _fixWordOffset, _spellFixerProject.WordsInContext) }
+                                : null;
+                if (!_spellFixerProject.AssignCorrectSpelling(bad, good, context))
+                {
+                    // the user said No/Cancel to one of the project's questions; leave the dialog up so they can adjust
+                    SetStatus($"The rule '{bad}' → '{good}' wasn't added, so nothing was changed.");
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                _host.Log(_plugin, $"SpellFixer: AssignCorrectSpelling: {ex}");
+                MessageBox.Show(_fixSpellingForm, $"Unable to add the rule '{bad}' → '{good}':{Environment.NewLine}{ex.Message}", SpellFixerPlugin.PluginName);
+                return false;
+            }
+
+            var problem = isSelectedWord
+                            ? ReplaceSelectedWord(_fixSelection, _fixWord, _fixWordOffset, good)
+                            : $"The rule was added, but the text in Paratext wasn't changed because the bad form ('{bad}') isn't the selected word ('{_fixWord}').";
+
+            SpellingStatusRecorder.Record(_project, _plugin, bad, good, message => MessageBox.Show(message, SpellFixerPlugin.PluginName));
+
+            SetStatus($"Added the rule '{bad}' → '{good}'" + ((problem == null) ? $" and fixed it in {_fixSelection.VerseRefStart}." : "."));
+            if (problem != null)
+                MessageBox.Show(_fixSpellingForm, problem, SpellFixerPlugin.PluginName);
+
+            _fixSelection = null;
+            return true;
+        }
+
+        /// <summary>
+        /// Replaces the selected occurrence of the bad word with the good one (if the verse hasn't changed since
+        /// it was selected). Returns null if it worked, or else the reason it didn't.
+        /// </summary>
+        private string ReplaceSelectedWord(SelectionInfo selection, string bad, int badOffset, string good)
+        {
+            var verseReference = selection.VerseRefStart;
+            IWriteLock writeLock = null;
+            try
+            {
+                writeLock = _project.RequestWriteLock(_plugin, ReleaseRequested, verseReference.BookNum, verseReference.ChapterNum);
+                if (writeLock == null)
+                    return $"The rule was added, but you don't have edit privilege on {verseReference.BookCode} {verseReference.ChapterNum} of the {_project.ShortName} project, so the text wasn't changed.";
+
+                var chapterUsfm = _project.GetUSFM(verseReference.BookNum, verseReference.ChapterNum);
+                var verseUsfm = _project.GetUSFM(verseReference.BookNum, verseReference.ChapterNum, verseReference.VerseNum);
+
+                if (!SelectionReplacer.TryReplaceInVerse(verseUsfm, selection, bad, badOffset, good, out string newVerseUsfm, out string reason))
+                    return $"The rule was added, but {verseReference} wasn't changed because {reason}. Fix it by hand (or select it again).";
+
+                if (!SelectionReplacer.ReplaceVerseInChapter(chapterUsfm, verseUsfm, newVerseUsfm, out string newChapterUsfm))
+                    return $"The rule was added, but {verseReference} wasn't changed because the verse couldn't be located in the chapter.";
+
+                _project.PutUSFM(writeLock, newChapterUsfm, verseReference.BookNum);
+                return null;
+            }
+            catch (Exception ex)
+            {
+                _host.Log(_plugin, $"SpellFixer: ReplaceSelectedWord: {ex}");
+                return $"The rule was added, but changing {verseReference} failed:{Environment.NewLine}{ex.Message}";
+            }
+            finally
+            {
+                writeLock?.Dispose();
+                _setSyncReference(verseReference);
+            }
         }
 
         private void ButtonEditSpellingFixes_Click(object sender, EventArgs e)
@@ -475,7 +632,8 @@ namespace SIL.SpellFixerPluginForParatext
 
         private FormButtons AskUser(string word, string suggestion, out string correctedSpelling)
         {
-            _queryForm ??= new SpellFixerQueryForm(_spellFixerProject);
+            _queryForm ??= new SpellFixerQueryForm(_spellFixerProject,
+                (bad, good) => SpellingStatusRecorder.Record(_project, _plugin, bad, good, message => MessageBox.Show(message, SpellFixerPlugin.PluginName)));
             _projectFont ??= GetProjectFont();
 
             var button = _queryForm.Show(this, _projectFont, _project.Language?.IsRtoL ?? false, word, suggestion);

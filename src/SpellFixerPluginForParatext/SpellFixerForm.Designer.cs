@@ -126,13 +126,13 @@ namespace SIL.SpellFixerPluginForParatext
             this.flowLayoutPanelButtons.Name = "flowLayoutPanelButtons";
             this.buttonAssignCorrectSpelling.AutoSize = true;
             this.buttonAssignCorrectSpelling.Name = "buttonAssignCorrectSpelling";
-            this.buttonAssignCorrectSpelling.Text = "&Assign Correct Spelling (clipboard)";
-            this.toolTip.SetToolTip(this.buttonAssignCorrectSpelling, "Assign the correct spelling for the word on the system clipboard. Copy the word (e.g. from Paratext) to the clipboard before clicking this button.");
+            this.buttonAssignCorrectSpelling.Text = "&Assign Correct Spelling (selection)";
+            this.toolTip.SetToolTip(this.buttonAssignCorrectSpelling, "Select the misspelled word in the Paratext text window, then click here. Paste the correct spelling into the Replacement box (Ctrl+V), or click one of the similar words.");
             this.buttonAssignCorrectSpelling.Click += new System.EventHandler(this.ButtonAssignCorrectSpelling_Click);
             this.buttonFindReplacementRule.AutoSize = true;
             this.buttonFindReplacementRule.Name = "buttonFindReplacementRule";
-            this.buttonFindReplacementRule.Text = "&Find Replacement Rule (clipboard)";
-            this.toolTip.SetToolTip(this.buttonFindReplacementRule, "Find the replacement rule that applies to the word on the system clipboard. Copy the word to the clipboard before clicking this button.");
+            this.buttonFindReplacementRule.Text = "&Find Replacement Rule";
+            this.toolTip.SetToolTip(this.buttonFindReplacementRule, "Find the replacement rule for the word selected in the Paratext text window (or, if nothing is selected, the word on the clipboard).");
             this.buttonFindReplacementRule.Click += new System.EventHandler(this.ButtonFindReplacementRule_Click);
             this.buttonEditSpellingFixes.AutoSize = true;
             this.buttonEditSpellingFixes.Name = "buttonEditSpellingFixes";
