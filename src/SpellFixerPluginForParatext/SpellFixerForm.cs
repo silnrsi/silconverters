@@ -109,9 +109,9 @@ namespace SIL.SpellFixerPluginForParatext
 
         private void SpellFixerForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (_isChecking)
+            if (_isChecking || _isApplyingFix)
             {
-                e.Cancel = true;    // let the run finish (click Cancel in the query dialog to stop it)
+                e.Cancel = true;    // let the run (or the fix) finish (click Cancel in the query dialog to stop a run)
                 return;
             }
 
@@ -224,11 +224,12 @@ namespace SIL.SpellFixerPluginForParatext
         private void UpdateButtonStates()
         {
             var haveProject = (_spellFixerProject != null);
-            buttonChooseProject.Enabled = !_isChecking;
-            buttonCheck.Enabled = haveProject && !_isChecking && ((_fixSpellingForm == null) || _fixSpellingForm.IsDisposed);
-            buttonAssignCorrectSpelling.Enabled = haveProject && !_isChecking;
-            buttonFindReplacementRule.Enabled = haveProject && !_isChecking;
-            buttonEditSpellingFixes.Enabled = haveProject && !_isChecking;
+            var isBusy = _isChecking || _isApplyingFix;
+            buttonChooseProject.Enabled = !isBusy;
+            buttonCheck.Enabled = haveProject && !isBusy && ((_fixSpellingForm == null) || _fixSpellingForm.IsDisposed);
+            buttonAssignCorrectSpelling.Enabled = haveProject && !isBusy;
+            buttonFindReplacementRule.Enabled = haveProject && !isBusy;
+            buttonEditSpellingFixes.Enabled = haveProject && !isBusy;
         }
 
         private void ButtonChooseProject_Click(object sender, EventArgs e)
@@ -245,6 +246,9 @@ namespace SIL.SpellFixerPluginForParatext
 
         private void ButtonAssignCorrectSpelling_Click(object sender, EventArgs e)
         {
+            if (_isApplyingFix)
+                return;     // (the button is disabled then anyway)
+
             var selection = CurrentSelection;
             if (!SelectionReplacer.ValidateSelection(selection, out string word, out int wordOffset, out string reason))
             {
@@ -291,42 +295,63 @@ namespace SIL.SpellFixerPluginForParatext
         /// </summary>
         private bool ApplyFix(string bad, string good)
         {
-            // only if the dialog's bad form is still the selected word do we know where it is (for the context
-            //  and the replacement in Paratext)
-            var isSelectedWord = (_fixSelection != null) && (bad == _fixWord);
+            // the project's questions (e.g. "already a good word...") are modal only to the Fix Spelling dialog, so
+            //  don't let this window change what we're fixing while they're up (e.g. by re-clicking Assign), and only
+            //  use the selection as it was when OK was clicked
+            var selection = _fixSelection;
+            var fixWord = _fixWord;
+            var fixWordOffset = _fixWordOffset;
+            var owner = _fixSpellingForm;
 
+            _isApplyingFix = true;
+            UpdateButtonStates();
             try
             {
-                var context = isSelectedWord && (_spellFixerProject.WordsInContext > 0)
-                                ? new List<string> { SelectionReplacer.BuildContext(_fixSelection, _fixWord, _fixWordOffset, _spellFixerProject.WordsInContext) }
-                                : null;
-                if (!_spellFixerProject.AssignCorrectSpelling(bad, good, context))
+                // only if the dialog's bad form is still the selected word do we know where it is (for the context
+                //  and the replacement in Paratext)
+                var isSelectedWord = (selection != null) && (bad == fixWord);
+
+                try
                 {
-                    // the user said No/Cancel to one of the project's questions; leave the dialog up so they can adjust
-                    SetStatus($"The rule '{bad}' → '{good}' wasn't added, so nothing was changed.");
+                    var context = isSelectedWord && (_spellFixerProject.WordsInContext > 0)
+                                    ? new List<string> { SelectionReplacer.BuildContext(selection, fixWord, fixWordOffset, _spellFixerProject.WordsInContext) }
+                                    : null;
+                    if (!_spellFixerProject.AssignCorrectSpelling(bad, good, context))
+                    {
+                        // the user said No/Cancel to one of the project's questions; leave the dialog up so they can adjust
+                        SetStatus($"The rule '{bad}' → '{good}' wasn't added, so nothing was changed.");
+                        return false;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    _host.Log(_plugin, $"SpellFixer: AssignCorrectSpelling: {ex}");
+                    MessageBox.Show(owner, $"Unable to add the rule '{bad}' → '{good}':{Environment.NewLine}{ex.Message}", SpellFixerPlugin.PluginName);
                     return false;
                 }
+
+                var problem = isSelectedWord
+                                ? ReplaceSelectedWord(selection, fixWord, fixWordOffset, good)
+                                : $"The rule was added, but the text in Paratext wasn't changed because the bad form ('{bad}') isn't the selected word ('{fixWord}').";
+
+                SpellingStatusRecorder.Record(_project, _plugin, bad, good, message => MessageBox.Show(message, SpellFixerPlugin.PluginName));
+
+                SetStatus($"Added the rule '{bad}' → '{good}'" + ((problem == null) ? $" and fixed it in {selection.VerseRefStart}." : "."));
+                if (problem != null)
+                    MessageBox.Show(owner, problem, SpellFixerPlugin.PluginName);
+
+                if (ReferenceEquals(_fixSelection, selection))
+                    _fixSelection = null;
+                return true;
             }
-            catch (Exception ex)
+            finally
             {
-                _host.Log(_plugin, $"SpellFixer: AssignCorrectSpelling: {ex}");
-                MessageBox.Show(_fixSpellingForm, $"Unable to add the rule '{bad}' → '{good}':{Environment.NewLine}{ex.Message}", SpellFixerPlugin.PluginName);
-                return false;
+                _isApplyingFix = false;
+                UpdateButtonStates();
             }
-
-            var problem = isSelectedWord
-                            ? ReplaceSelectedWord(_fixSelection, _fixWord, _fixWordOffset, good)
-                            : $"The rule was added, but the text in Paratext wasn't changed because the bad form ('{bad}') isn't the selected word ('{_fixWord}').";
-
-            SpellingStatusRecorder.Record(_project, _plugin, bad, good, message => MessageBox.Show(message, SpellFixerPlugin.PluginName));
-
-            SetStatus($"Added the rule '{bad}' → '{good}'" + ((problem == null) ? $" and fixed it in {_fixSelection.VerseRefStart}." : "."));
-            if (problem != null)
-                MessageBox.Show(_fixSpellingForm, problem, SpellFixerPlugin.PluginName);
-
-            _fixSelection = null;
-            return true;
         }
+
+        private bool _isApplyingFix;
 
         /// <summary>
         /// Replaces the selected occurrence of the bad word with the good one (if the verse hasn't changed since

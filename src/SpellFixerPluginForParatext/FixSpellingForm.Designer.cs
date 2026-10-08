@@ -134,6 +134,7 @@ namespace SIL.SpellFixerPluginForParatext
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Fix Spelling";
             this.Deactivate += new System.EventHandler(this.FixSpellingForm_Deactivate);
+            this.Activated += new System.EventHandler(this.FixSpellingForm_Activated);
             this.tableLayoutPanel.ResumeLayout(false);
             this.tableLayoutPanel.PerformLayout();
             this.flowLayoutPanelButtons.ResumeLayout(false);

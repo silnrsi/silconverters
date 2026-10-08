@@ -59,10 +59,11 @@ namespace SIL.SpellFixerPluginForParatext
         {
             try
             {
-                if (!SpellingStatusRecorder.HasRecordedThisSession)
+                // also if fixes were left pending by an earlier session (e.g. if Paratext crashed)
+                var projectsDirectory = ParatextProjectFolder.GetProjectsDirectory();
+                if (!SpellingStatusRecorder.HasRecordedThisSession && !PendingSpellingStatusStore.AnyPending(projectsDirectory))
                     return;
 
-                var projectsDirectory = ParatextProjectFolder.GetProjectsDirectory();
                 var updaterPath = Path.Combine(PluginFolder, "SpellingStatusUpdater.exe");
                 if ((projectsDirectory == null) || !File.Exists(updaterPath))
                 {

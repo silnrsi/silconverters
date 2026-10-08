@@ -60,6 +60,16 @@ namespace TestBwdc
         }
 
         [Test]
+        public void ValidateSelection_RejectsSelectionWithoutVerseReference()
+        {
+            var s = Sel("\\v 1 ", "teh", " end");
+            s.VerseRefStart = null;
+            s.VerseRefEnd = null;
+            Assert.IsFalse(SelectionReplacer.ValidateSelection(s, out _, out _, out string reason));
+            Assert.IsFalse(string.IsNullOrEmpty(reason));
+        }
+
+        [Test]
         public void ValidateSelection_RejectsNull()
         {
             Assert.IsFalse(SelectionReplacer.ValidateSelection(null, out _, out _, out _));
@@ -355,6 +365,19 @@ namespace TestBwdc
         #endregion
 
         #region SpellingStatusUpdateRunner
+
+        [Test]
+        public void AnyPending_FindsLeftoverPendingFilesInAnyProject()
+        {
+            MakeProject("Cat", null);
+            Assert.IsFalse(PendingSpellingStatusStore.AnyPending(_tempDir));
+            Assert.IsFalse(PendingSpellingStatusStore.AnyPending(Path.Combine(_tempDir, "missing")));
+            Assert.IsFalse(PendingSpellingStatusStore.AnyPending(null));
+
+            var projectFolder = MakeProject("Dog", null);
+            PendingSpellingStatusStore.Append(PendingSpellingStatusStore.PathFor(projectFolder), "teh", "the", DateTime.UtcNow);
+            Assert.IsTrue(PendingSpellingStatusStore.AnyPending(_tempDir));
+        }
 
         [Test]
         public void Runner_MergesPendingFixes_BacksUpAndClearsPending()

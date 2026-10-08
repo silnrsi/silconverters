@@ -1,5 +1,6 @@
 using Paratext.PluginInterfaces;
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
@@ -38,6 +39,9 @@ namespace SIL.SpellFixerPluginForParatext
             labelVerse.Text = verseReference;
             textBoxBadForm.Text = badForm;      // TextChanged fills in the replacement and similar words
             RefreshSuggestions();               // ... even if it's the same word as before
+
+            // so Ctrl+V pastes into the Replacement box (Focus() alone doesn't work before the form is first shown)
+            ActiveControl = textBoxReplacement;
             textBoxReplacement.Focus();
             textBoxReplacement.SelectAll();
         }
@@ -58,7 +62,15 @@ namespace SIL.SpellFixerPluginForParatext
             textBoxReplacement.Text = replacement;
             textBoxReplacement.SelectAll();
 
-            var similarWords = _spellFixerProject.GetSimilarWords(bad);
+            List<SimilarWord> similarWords;
+            try
+            {
+                similarWords = _spellFixerProject.GetSimilarWords(bad);
+            }
+            catch
+            {
+                similarWords = new List<SimilarWord>();     // (this runs on every keystroke, so don't complain)
+            }
             listBoxSimilarWords.BeginUpdate();
             listBoxSimilarWords.Items.Clear();
             listBoxSimilarWords.Items.AddRange(similarWords.Cast<object>().ToArray());
@@ -91,6 +103,14 @@ namespace SIL.SpellFixerPluginForParatext
         private void FixSpellingForm_Deactivate(object sender, EventArgs e)
         {
             ActivateKeyboard(_defaultKeyboard);
+        }
+
+        // coming back from Paratext (e.g. after searching there), Enter isn't raised again for the text box that
+        //  still has the focus, so switch back to the vernacular keyboard here
+        private void FixSpellingForm_Activated(object sender, EventArgs e)
+        {
+            if ((ActiveControl == textBoxBadForm) || (ActiveControl == textBoxReplacement))
+                ActivateKeyboard(_vernacularKeyboard);
         }
 
         private static void ActivateKeyboard(IKeyboard keyboard)

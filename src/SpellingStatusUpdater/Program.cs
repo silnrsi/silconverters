@@ -16,6 +16,28 @@ namespace SIL.SpellingStatusUpdater
         [STAThread]
         private static int Main(string[] args)
         {
+            // never crash (that would put up a Windows "stopped working" dialog after Paratext has closed)
+            try
+            {
+                return Run(args);
+            }
+            catch (Exception ex)
+            {
+                try
+                {
+                    File.AppendAllText(Path.Combine(Path.GetTempPath(), "SpellingStatusUpdater.log"),
+                                       $"{DateTime.Now:s} ERROR: {ex}{Environment.NewLine}");
+                }
+                catch
+                {
+                    // nowhere else to report it
+                }
+                return 3;
+            }
+        }
+
+        private static int Run(string[] args)
+        {
             int? waitPid = null;
             string projectsDirectory = null;
             for (var i = 0; i < args.Length - 1; i++)

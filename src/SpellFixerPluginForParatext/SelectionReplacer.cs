@@ -59,6 +59,8 @@ namespace SIL.SpellFixerPluginForParatext
                 reason = "the selection includes a USFM marker";
             else if (trimmed.IndexOfAny(new[] { '\r', '\n' }) >= 0)
                 reason = "the selection spans more than one line";
+            else if (s.VerseRefStart == null)
+                reason = "the selection isn't in a verse";
             else if (!IsSameVerse(s.VerseRefStart, s.VerseRefEnd))
                 reason = "the selection spans more than one verse";
 

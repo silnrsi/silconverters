@@ -31,6 +31,23 @@ namespace SIL.SpellFixerPluginForParatext
 
         public static string PathFor(string projectFolder) => Path.Combine(FolderFor(projectFolder), FileName);
 
+        /// <summary>
+        /// Whether any project in the projects folder has fixes still waiting to go into its SpellingStatus.xml
+        /// (e.g. left over from a session where Paratext crashed)
+        /// </summary>
+        public static bool AnyPending(string projectsDirectory)
+        {
+            try
+            {
+                return !String.IsNullOrEmpty(projectsDirectory) && Directory.Exists(projectsDirectory) &&
+                       Directory.EnumerateDirectories(projectsDirectory).Any(projectFolder => File.Exists(PathFor(projectFolder)));
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
         public static List<PendingFix> Load(string path)
         {
             if (!File.Exists(path))
