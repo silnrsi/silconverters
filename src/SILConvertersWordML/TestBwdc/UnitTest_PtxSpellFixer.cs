@@ -338,5 +338,43 @@ namespace TestBwdc
             Assert.AreEqual("the cat and the dog", result);
             Assert.AreEqual(2, wordsFixed);
         }
+
+        private static SortedDictionary<string, List<IUSFMToken>> ChapterWithHeadingAndCombinedVerse()
+        {
+            var v0 = Vref(5, 0);
+            var v1 = Vref(5, 1);
+            var v34 = Vref(5, 3, 4);
+            return UsfmChapterTokens.GroupByVerse(new List<IUSFMToken>
+            {
+                Marker(v0, "s", MarkerType.Paragraph), Text(v0, "Heading"),
+                Marker(v1, "v", MarkerType.Verse), Text(v1, "one"),
+                Marker(v34, "v", MarkerType.Verse), Text(v34, "three and four"),
+            });
+        }
+
+        [Test]
+        public void CurrentVerseKey_ExactVerse()
+        {
+            Assert.AreEqual("40_005_001", SpellFixerTokenProcessor.CurrentVerseKey(ChapterWithHeadingAndCombinedVerse(), Vref(5, 1)));
+        }
+
+        [Test]
+        public void CurrentVerseKey_VerseInsideCombinedVerse_IsTheWholeGroup()
+        {
+            Assert.AreEqual("40_005_003-004", SpellFixerTokenProcessor.CurrentVerseKey(ChapterWithHeadingAndCombinedVerse(), Vref(5, 4)));
+        }
+
+        [Test]
+        public void CurrentVerseKey_Heading_IsVerseZero()
+        {
+            // unlike StartVerseKey, the current verse at verse 0 is just the heading (not "from the top of the chapter")
+            Assert.AreEqual("40_005_000", SpellFixerTokenProcessor.CurrentVerseKey(ChapterWithHeadingAndCombinedVerse(), Vref(5, 0)));
+        }
+
+        [Test]
+        public void CurrentVerseKey_VerseNotInChapter_IsNull()
+        {
+            Assert.IsNull(SpellFixerTokenProcessor.CurrentVerseKey(ChapterWithHeadingAndCombinedVerse(), Vref(5, 2)));
+        }
     }
 }

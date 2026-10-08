@@ -157,6 +157,15 @@ namespace SIL.SpellFixerPluginForParatext
         /// when that's verse 1 (or the chapter start), in which case it's the first key of the chapter (so the
         /// section heading, etc. before \v 1 gets checked too)
         /// </summary>
+        /// <summary>
+        /// Returns the key of just the verse (range) containing verseReference (e.g. "40_005_003-004" for 5:4 if
+        /// verses 3-4 are combined; "40_005_000" for a heading before \v 1), or null if it isn't in the chapter
+        /// </summary>
+        public static string CurrentVerseKey(SortedDictionary<string, List<IUSFMToken>> vrefTokens, IVerseRef verseReference)
+        {
+            return UsfmChapterTokens.TriangulateBookChapterVerseKey(UsfmChapterTokens.GetBookChapterVerseRangeKey(verseReference), vrefTokens);
+        }
+
         public static string StartVerseKey(SortedDictionary<string, List<IUSFMToken>> vrefTokens, IVerseRef verseReference)
         {
             return (verseReference.VerseNum <= 1)

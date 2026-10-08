@@ -226,7 +226,8 @@ namespace SIL.SpellFixerPluginForParatext
             var haveProject = (_spellFixerProject != null);
             var isBusy = _isChecking || _isApplyingFix;
             buttonChooseProject.Enabled = !isBusy;
-            buttonCheck.Enabled = haveProject && !isBusy && ((_fixSpellingForm == null) || _fixSpellingForm.IsDisposed);
+            buttonCheck.Enabled = buttonCheckCurrentVerse.Enabled =
+                haveProject && !isBusy && ((_fixSpellingForm == null) || _fixSpellingForm.IsDisposed);
             buttonAssignCorrectSpelling.Enabled = haveProject && !isBusy;
             buttonFindReplacementRule.Enabled = haveProject && !isBusy;
             buttonEditSpellingFixes.Enabled = haveProject && !isBusy;
@@ -437,7 +438,12 @@ namespace SIL.SpellFixerPluginForParatext
 
         private void ButtonCheck_Click(object sender, EventArgs e)
         {
-            CheckFromCurrentVerse();
+            RunCheck(currentVerseOnly: false);
+        }
+
+        private void ButtonCheckCurrentVerse_Click(object sender, EventArgs e)
+        {
+            RunCheck(currentVerseOnly: true);
         }
 
         #endregion
@@ -447,7 +453,11 @@ namespace SIL.SpellFixerPluginForParatext
         private Font _projectFont;
         private bool _hasShownConvertError;
 
-        private void CheckFromCurrentVerse()
+        /// <summary>
+        /// Checks either just the current verse (range), or from the current verse to the end of the chapter (the
+        /// user moves to the next chapter in Paratext when they want to go on)
+        /// </summary>
+        private void RunCheck(bool currentVerseOnly)
         {
             if ((_spellFixerProject == null) || (_verseReference == null))
                 return;
@@ -455,7 +465,8 @@ namespace SIL.SpellFixerPluginForParatext
             var session = new SpellFixerSession(ConvertWord, AskUser);
             var totalWordsFixed = 0;
             var chapterReference = _verseReference;
-            var startAtBeginningOfChapter = false;
+            var completed = false;
+            var foundVerse = true;
             _hasShownConvertError = false;
 
             _lastCheckedReference = null;
@@ -463,18 +474,11 @@ namespace SIL.SpellFixerPluginForParatext
             SetChecking(true);
             try
             {
-                while (chapterReference != null)
-                {
-                    if (!CheckChapter(chapterReference, startAtBeginningOfChapter, session, ref totalWordsFixed))
-                        break;  // cancelled or couldn't write
-
-                    chapterReference = QueryNextChapter(chapterReference);
-                    startAtBeginningOfChapter = true;
-                }
+                completed = CheckChapter(chapterReference, currentVerseOnly, session, ref totalWordsFixed, out foundVerse);
             }
             catch (Exception ex)
             {
-                _host.Log(_plugin, $"SpellFixer: CheckFromCurrentVerse: {ex}");
+                _host.Log(_plugin, $"SpellFixer: RunCheck: {ex}");
                 MessageBox.Show($"Checking stopped because of an error:{Environment.NewLine}{ex.Message}", SpellFixerPlugin.PluginName);
             }
             finally
@@ -486,7 +490,12 @@ namespace SIL.SpellFixerPluginForParatext
             if (_lastCheckedReference != null)
                 SetVerseReference(_lastCheckedReference);
 
-            SetStatus($"Done: {totalWordsFixed} word(s) fixed.");
+            if (!foundVerse)
+                SetStatus($"Couldn't find {chapterReference} in the text of the chapter, so nothing was checked.");
+            else if (currentVerseOnly)
+                SetStatus($"Done: {totalWordsFixed} word(s) fixed in {_lastCheckedReference ?? chapterReference}.");
+            else
+                SetStatus($"Done: {totalWordsFixed} word(s) fixed" + (completed ? $" (to the end of {chapterReference.BookCode} {chapterReference.ChapterNum})." : "."));
         }
 
         private IVerseRef _lastCheckedReference;
@@ -504,18 +513,21 @@ namespace SIL.SpellFixerPluginForParatext
         }
 
         /// <summary>
-        /// Checks one chapter, writing each verse that has accepted fixes. Returns false if the run should stop
-        /// (the user cancelled or a verse couldn't be written)
+        /// Checks the current verse (range) only, or from it to the end of the chapter, writing each verse that has
+        /// accepted fixes. Returns false if it stopped early (the user cancelled or a verse couldn't be written)
         /// </summary>
-        private bool CheckChapter(IVerseRef chapterReference, bool startAtBeginningOfChapter, SpellFixerSession session, ref int totalWordsFixed)
+        private bool CheckChapter(IVerseRef chapterReference, bool currentVerseOnly, SpellFixerSession session, ref int totalWordsFixed,
+                                  out bool foundVerse)
         {
+            foundVerse = false;
             var vrefTokens = GroupByVerse(LoadChapter(chapterReference));
             if (vrefTokens == null)
-                return true;    // some books don't return proper things (e.g. GLO), so just go on
+                return true;    // some books don't return proper things (e.g. GLO)
 
-            var verseKey = startAtBeginningOfChapter
-                            ? vrefTokens.Keys.FirstOrDefault()
+            var verseKey = currentVerseOnly
+                            ? SpellFixerTokenProcessor.CurrentVerseKey(vrefTokens, chapterReference)
                             : SpellFixerTokenProcessor.StartVerseKey(vrefTokens, chapterReference);
+            foundVerse = (verseKey != null);
 
             while (verseKey != null)
             {
@@ -542,6 +554,9 @@ namespace SIL.SpellFixerPluginForParatext
 
                 if (cancelled)
                     return false;
+
+                if (currentVerseOnly)
+                    break;
 
                 verseKey = UsfmChapterTokens.NextVerseKey(vrefTokens, verseKey);
             }
@@ -613,28 +628,6 @@ namespace SIL.SpellFixerPluginForParatext
         private void ReleaseRequested(IWriteLock writeLock)
         {
             writeLock?.Dispose();
-        }
-
-        /// <summary>
-        /// Asks whether to go on to the next chapter (or the next book at the end of a book). Returns null if not
-        /// (or if there isn't one)
-        /// </summary>
-        private IVerseRef QueryNextChapter(IVerseRef chapterReference)
-        {
-            var next = chapterReference.GetNextChapter(_project);
-            if (next == null)
-            {
-                MessageBox.Show("That was the last chapter in the project.", SpellFixerPlugin.PluginName);
-                return null;
-            }
-
-            var question = (next.BookNum == chapterReference.BookNum)
-                            ? $"Finished {chapterReference.BookCode} {chapterReference.ChapterNum}. Continue checking with the next chapter ({next.BookCode} {next.ChapterNum})?"
-                            : $"Finished {chapterReference.BookCode}. Continue checking with the next book ({next.BookCode})?";
-
-            return (MessageBox.Show(this, question, SpellFixerPlugin.PluginName, MessageBoxButtons.YesNo) == DialogResult.Yes)
-                    ? next
-                    : null;
         }
 
         private string ConvertWord(string word)

@@ -24,6 +24,7 @@ namespace SIL.SpellFixerPluginForParatext
             this.labelVerseCaption = new System.Windows.Forms.Label();
             this.labelVerse = new System.Windows.Forms.Label();
             this.buttonCheck = new System.Windows.Forms.Button();
+            this.buttonCheckCurrentVerse = new System.Windows.Forms.Button();
             this.flowLayoutPanelButtons = new System.Windows.Forms.FlowLayoutPanel();
             this.buttonAssignCorrectSpelling = new System.Windows.Forms.Button();
             this.buttonFindReplacementRule = new System.Windows.Forms.Button();
@@ -49,14 +50,16 @@ namespace SIL.SpellFixerPluginForParatext
             this.tableLayoutPanel.Controls.Add(this.labelVerseCaption, 0, 2);
             this.tableLayoutPanel.Controls.Add(this.labelVerse, 1, 2);
             this.tableLayoutPanel.Controls.Add(this.buttonCheck, 2, 2);
-            this.tableLayoutPanel.Controls.Add(this.flowLayoutPanelButtons, 0, 3);
-            this.tableLayoutPanel.Controls.Add(this.textBoxStatus, 0, 4);
+            this.tableLayoutPanel.Controls.Add(this.buttonCheckCurrentVerse, 2, 3);
+            this.tableLayoutPanel.Controls.Add(this.flowLayoutPanelButtons, 0, 4);
+            this.tableLayoutPanel.Controls.Add(this.textBoxStatus, 0, 5);
             this.tableLayoutPanel.SetColumnSpan(this.flowLayoutPanelButtons, 3);
             this.tableLayoutPanel.SetColumnSpan(this.textBoxStatus, 3);
             this.tableLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel.Name = "tableLayoutPanel";
             this.tableLayoutPanel.Padding = new System.Windows.Forms.Padding(6);
-            this.tableLayoutPanel.RowCount = 5;
+            this.tableLayoutPanel.RowCount = 6;
+            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.AutoSize));
             this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.AutoSize));
             this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.AutoSize));
             this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.AutoSize));
@@ -83,7 +86,7 @@ namespace SIL.SpellFixerPluginForParatext
             this.labelVerseCaption.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.labelVerseCaption.AutoSize = true;
             this.labelVerseCaption.Name = "labelVerseCaption";
-            this.labelVerseCaption.Text = "Start at:";
+            this.labelVerseCaption.Text = "Current verse:";
             this.labelVerse.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.labelVerse.AutoSize = true;
             this.labelVerse.Name = "labelVerse";
@@ -113,8 +116,17 @@ namespace SIL.SpellFixerPluginForParatext
             this.buttonCheck.Dock = System.Windows.Forms.DockStyle.Fill;
             this.buttonCheck.Name = "buttonCheck";
             this.buttonCheck.Text = "C&heck from Current Verse";
-            this.toolTip.SetToolTip(this.buttonCheck, "Check each word from the verse selected in Paratext to the end of the chapter, asking about each one the Spell Fixer would change");
+            this.toolTip.SetToolTip(this.buttonCheck, "Check each word from the current verse in Paratext to the end of the chapter, asking about each one the Spell Fixer would change");
             this.buttonCheck.Click += new System.EventHandler(this.ButtonCheck_Click);
+            //
+            // buttonCheckCurrentVerse
+            //
+            this.buttonCheckCurrentVerse.AutoSize = true;
+            this.buttonCheckCurrentVerse.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.buttonCheckCurrentVerse.Name = "buttonCheckCurrentVerse";
+            this.buttonCheckCurrentVerse.Text = "Check Current &Verse";
+            this.toolTip.SetToolTip(this.buttonCheckCurrentVerse, "Check each word of just the current verse (or combined verses) in Paratext, asking about each one the Spell Fixer would change");
+            this.buttonCheckCurrentVerse.Click += new System.EventHandler(this.ButtonCheckCurrentVerse_Click);
             //
             // flowLayoutPanelButtons
             //
@@ -176,6 +188,7 @@ namespace SIL.SpellFixerPluginForParatext
         private System.Windows.Forms.Label labelVerseCaption;
         private System.Windows.Forms.Label labelVerse;
         private System.Windows.Forms.Button buttonCheck;
+        private System.Windows.Forms.Button buttonCheckCurrentVerse;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelButtons;
         private System.Windows.Forms.Button buttonAssignCorrectSpelling;
         private System.Windows.Forms.Button buttonFindReplacementRule;

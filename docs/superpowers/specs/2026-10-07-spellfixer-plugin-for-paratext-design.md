@@ -3,6 +3,8 @@
 Date: 2026-10-07
 Status: Draft for review
 
+> **Update 2026-10-08 (user request):** the end-of-chapter/end-of-book "continue?" prompts were removed. "Check from Current Verse" now stops at the end of the chapter, and the user moves to the next chapter in Paratext to go on. A **Check Current Verse** button was added; it checks only the verse (or combined verses, or the heading at verse 0) that the cursor is in.
+
 ## Goal
 
 Bring the SILConvertersOffice "Check Spelling" feature (`WordApp.CheckSpelling_Click` +
