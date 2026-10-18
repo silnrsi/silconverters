@@ -81,22 +81,14 @@ namespace SIL.SpellFixerPluginForParatext
             if (reason != null)
                 return false;
 
-            bool ShouldTrim(char ch) => (ch <= 0x0020) || Char.IsDigit(ch) || Char.IsPunctuation(ch) || Char.IsWhiteSpace(ch) ||
-                                        ((extraTrimCharacters != null) && extraTrimCharacters.Contains(ch));
-
-            int start = 0, end = text.Length - 1;
-            while ((start <= end) && ShouldTrim(text[start]))
-                start++;
-            while ((end >= start) && ShouldTrim(text[end]))
-                end--;
-
-            if (start > end)
+            var start = SpellFixerTokenProcessor.TrimmedWordBounds(text, extraTrimCharacters, out int length);
+            if (length <= 0)
             {
                 reason = "the selection doesn't have a word in it (only punctuation, digits or spaces)";
                 return false;
             }
 
-            var candidate = text.Substring(start, end - start + 1);
+            var candidate = text.Substring(start, length);
             if (candidate.Any(Char.IsWhiteSpace))
             {
                 reason = "select a single word (the selection has more than one)";
@@ -115,8 +107,11 @@ namespace SIL.SpellFixerPluginForParatext
         }
 
         /// <summary>
-        /// Replaces 'bad' (at badOffset) with 'good' in the verse's current USFM, but only if the verse still looks
-        /// the way it did when the selection was made
+        /// Replaces 'bad' (selected at badOffset) with 'good' in the verse's current USFM, but only if the text
+        /// around it still looks the way it did when the selection was made. The selection's contexts aren't
+        /// necessarily exactly the verse's USFM (e.g. line endings, or where the verse is considered to end), so
+        /// only up to 20 characters on either side of the word are compared (ignoring differences in whitespace),
+        /// and if the word isn't at badOffset any more, the one place in the verse where that matches is used.
         /// </summary>
         public static bool TryReplaceInVerse(string currentVerseUsfm, SelectionInfo s, string bad, int badOffset, string good,
                                              out string newVerseUsfm, out string reason)
@@ -124,47 +119,71 @@ namespace SIL.SpellFixerPluginForParatext
             newVerseUsfm = null;
             reason = null;
             currentVerseUsfm ??= String.Empty;
-            var before = s.BeforeContext ?? String.Empty;
             var selected = s.SelectedText ?? String.Empty;
-            var after = s.AfterContext ?? String.Empty;
 
-            if (before.Length == s.Offset)
+            // the text before and after the word itself (which may be only part of the selection)
+            var wordInSelection = badOffset - s.Offset;
+            if (String.IsNullOrEmpty(bad) || (wordInSelection < 0) || (wordInSelection + bad.Length > selected.Length) ||
+                (String.CompareOrdinal(selected, wordInSelection, bad, 0, bad.Length) != 0))
             {
-                if (currentVerseUsfm != before + selected + after)
-                    reason = "the verse has changed since the word was selected";
-            }
-            else if (!NeighbourhoodMatches(currentVerseUsfm, s.Offset, before, selected, after))
-            {
-                reason = "the text around the selection has changed since the word was selected";
+                reason = $"'{bad}' isn't the selected word";
+                return false;
             }
 
-            if ((reason == null) &&
-                ((badOffset < 0) || (badOffset + bad.Length > currentVerseUsfm.Length) ||
-                 (String.CompareOrdinal(currentVerseUsfm, badOffset, bad, 0, bad.Length) != 0)))
-            {
-                reason = $"'{bad}' is no longer where it was selected";
-            }
+            var before = (s.BeforeContext ?? String.Empty) + selected.Substring(0, wordInSelection);
+            var after = selected.Substring(wordInSelection + bad.Length) + (s.AfterContext ?? String.Empty);
 
-            if (reason != null)
+            var index = OccursAt(currentVerseUsfm, badOffset, bad) && NeighbourhoodMatches(currentVerseUsfm, badOffset, bad.Length, before, after)
+                            ? badOffset
+                            : FindUniqueMatch(currentVerseUsfm, bad, before, after, out reason);
+            if (index < 0)
                 return false;
 
-            newVerseUsfm = currentVerseUsfm.Substring(0, badOffset) + good + currentVerseUsfm.Substring(badOffset + bad.Length);
+            newVerseUsfm = currentVerseUsfm.Substring(0, index) + good + currentVerseUsfm.Substring(index + bad.Length);
             return true;
         }
 
-        // when the contexts are partial, compare the selection itself and up to 20 characters on either side of it
-        private static bool NeighbourhoodMatches(string verse, int offset, string before, string selected, string after)
+        private static bool OccursAt(string verse, int index, string word)
         {
-            var selectionEnd = offset + selected.Length;
-            if ((offset < 0) || (selectionEnd > verse.Length) || (String.CompareOrdinal(verse, offset, selected, 0, selected.Length) != 0))
-                return false;
+            return (index >= 0) && (index + word.Length <= verse.Length) && (String.CompareOrdinal(verse, index, word, 0, word.Length) == 0);
+        }
 
-            var k = Math.Min(NeighbourhoodLength, Math.Min(before.Length, offset));
-            if (String.CompareOrdinal(verse, offset - k, before, before.Length - k, k) != 0)
-                return false;
+        // the index of the only occurrence of word in verse whose neighbourhood matches (or -1 and why not)
+        private static int FindUniqueMatch(string verse, string word, string before, string after, out string reason)
+        {
+            reason = null;
+            var found = -1;
+            for (var i = verse.IndexOf(word, StringComparison.Ordinal); i >= 0; i = verse.IndexOf(word, i + 1, StringComparison.Ordinal))
+            {
+                if (!NeighbourhoodMatches(verse, i, word.Length, before, after))
+                    continue;
 
-            var j = Math.Min(NeighbourhoodLength, Math.Min(after.Length, verse.Length - selectionEnd));
-            return String.CompareOrdinal(verse, selectionEnd, after, 0, j) == 0;
+                if (found >= 0)
+                {
+                    reason = $"'{word}' couldn't be located unambiguously in the verse";
+                    return -1;
+                }
+                found = i;
+            }
+
+            if (found < 0)
+                reason = "the text around the selection has changed since the word was selected";
+            return found;
+        }
+
+        // compare up to 20 characters on either side of the word (ignoring differences in whitespace, e.g. \r\n vs. \n)
+        private static bool NeighbourhoodMatches(string verse, int index, int length, string before, string after)
+        {
+            var beforeTail = CollapseWhitespace(before.Substring(Math.Max(0, before.Length - NeighbourhoodLength))).TrimStart();
+            var afterHead = CollapseWhitespace(after.Substring(0, Math.Min(NeighbourhoodLength, after.Length))).TrimEnd();
+
+            return CollapseWhitespace(verse.Substring(0, index)).EndsWith(beforeTail, StringComparison.Ordinal) &&
+                   CollapseWhitespace(verse.Substring(index + length)).StartsWith(afterHead, StringComparison.Ordinal);
+        }
+
+        private static string CollapseWhitespace(string s)
+        {
+            return Whitespace.Replace(s, " ");
         }
 
         /// <summary>

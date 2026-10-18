@@ -60,10 +60,44 @@ namespace SIL.SpellFixerPluginForParatext
         }
 
         /// <summary>
-        /// Calls fixWord for each word in text and returns the rebuilt text. If fixWord returns null, 'cancelled'
-        /// is set and the rest of the text is left as is.
+        /// Whether ch is one of the characters the SpellFixer's CC table doesn't consider part of a word, so it gets
+        /// trimmed off the ends of a word (the same ones CscProject.TrimWhiteSpaceAndPunctuation trims: whitespace,
+        /// digits, Unicode punctuation (e.g. ',' and the danda), plus extraTrimCharacters, e.g. the project's script
+        /// system's extra punctuation)
         /// </summary>
+        public static bool IsTrimCharacter(char ch, ICollection<char> extraTrimCharacters)
+        {
+            return (ch <= 0x0020) || Char.IsDigit(ch) || Char.IsPunctuation(ch) || Char.IsWhiteSpace(ch) ||
+                   ((extraTrimCharacters != null) && extraTrimCharacters.Contains(ch));
+        }
+
+        /// <summary>
+        /// Returns the index of the first and the length of the word in 'run' without its leading and trailing trim
+        /// characters (length 0 if it's all trim characters)
+        /// </summary>
+        public static int TrimmedWordBounds(string run, ICollection<char> extraTrimCharacters, out int length)
+        {
+            int start = 0, end = run.Length - 1;
+            while ((start <= end) && IsTrimCharacter(run[start], extraTrimCharacters))
+                start++;
+            while ((end >= start) && IsTrimCharacter(run[end], extraTrimCharacters))
+                end--;
+
+            length = end - start + 1;
+            return start;
+        }
+
         public static string FixWords(string text, WordFixer fixWord, ref bool cancelled, out int wordsFixed)
+        {
+            return FixWords(text, null, fixWord, ref cancelled, out wordsFixed);
+        }
+
+        /// <summary>
+        /// Calls fixWord for each word in text (without any leading or trailing punctuation, which is put back
+        /// around the fixed word) and returns the rebuilt text. If fixWord returns null, 'cancelled' is set and the
+        /// rest of the text is left as is.
+        /// </summary>
+        public static string FixWords(string text, ICollection<char> extraTrimCharacters, WordFixer fixWord, ref bool cancelled, out int wordsFixed)
         {
             wordsFixed = 0;
             if (cancelled || String.IsNullOrEmpty(text))
@@ -78,7 +112,15 @@ namespace SIL.SpellFixerPluginForParatext
                     continue;
                 }
 
-                var fixedWord = fixWord(run);
+                var start = TrimmedWordBounds(run, extraTrimCharacters, out int length);
+                if (length <= 0)
+                {
+                    sb.Append(run);     // only punctuation and/or digits
+                    continue;
+                }
+
+                var word = run.Substring(start, length);
+                var fixedWord = fixWord(word);
                 if (fixedWord == null)
                 {
                     cancelled = true;
@@ -86,9 +128,9 @@ namespace SIL.SpellFixerPluginForParatext
                     continue;
                 }
 
-                if (fixedWord != run)
+                if (fixedWord != word)
                     wordsFixed++;
-                sb.Append(fixedWord);
+                sb.Append(run, 0, start).Append(fixedWord).Append(run, start + length, run.Length - start - length);
             }
 
             return sb.ToString();
@@ -100,13 +142,19 @@ namespace SIL.SpellFixerPluginForParatext
         /// </summary>
         public static List<IUSFMToken> FixVerseTokens(List<IUSFMToken> verseTokens, WordFixer fixWord, ref bool cancelled, out int wordsFixed)
         {
+            return FixVerseTokens(verseTokens, null, fixWord, ref cancelled, out wordsFixed);
+        }
+
+        public static List<IUSFMToken> FixVerseTokens(List<IUSFMToken> verseTokens, ICollection<char> extraTrimCharacters, WordFixer fixWord,
+                                                      ref bool cancelled, out int wordsFixed)
+        {
             wordsFixed = 0;
             var result = new List<IUSFMToken>(verseTokens.Count);
             foreach (var token in verseTokens)
             {
                 if (!cancelled && (token is IUSFMTextToken textToken) && PtxPluginHelpers.IsPublishableVernacular(textToken, verseTokens))
                 {
-                    var newText = FixWords(textToken.Text, fixWord, ref cancelled, out int wordsFixedInToken);
+                    var newText = FixWords(textToken.Text, extraTrimCharacters, fixWord, ref cancelled, out int wordsFixedInToken);
                     if (newText != textToken.Text)
                     {
                         result.Add(new TextToken(textToken) { Text = newText });

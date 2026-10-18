@@ -52,14 +52,28 @@ namespace TestBwdc
         }
 
         [Test]
-        public void FixWords_PassesPunctuatedRunWhole()
+        public void FixWords_PassesWordWithoutPunctuation_AndPutsItBack()
         {
             var seen = new List<string>();
             var cancelled = false;
-            var result = SpellFixerTokenProcessor.FixWords("(teh, cat.", w => { seen.Add(w); return w == "(teh," ? "(the," : w; }, ref cancelled, out _);
+            var result = SpellFixerTokenProcessor.FixWords("(teh, cat. 12 ,", w => { seen.Add(w); return w == "teh" ? "the" : w; }, ref cancelled, out int wordsFixed);
 
-            CollectionAssert.AreEqual(new[] { "(teh,", "cat." }, seen);
-            Assert.AreEqual("(the, cat.", result);
+            CollectionAssert.AreEqual(new[] { "teh", "cat" }, seen);
+            Assert.AreEqual("(the, cat. 12 ,", result);
+            Assert.AreEqual(1, wordsFixed);
+        }
+
+        [Test]
+        public void FixWords_TrimsDandaAndExtraTrimCharacters()
+        {
+            var seen = new List<string>();
+            var cancelled = false;
+            var result = SpellFixerTokenProcessor.FixWords("खंघ़। |खंघ़|", new[] { '|' }, w => { seen.Add(w); return w == "खंघ़" ? "खंह़स" : w; },
+                                                           ref cancelled, out int wordsFixed);
+
+            CollectionAssert.AreEqual(new[] { "खंघ़", "खंघ़" }, seen);
+            Assert.AreEqual("खंह़स। |खंह़स|", result);
+            Assert.AreEqual(2, wordsFixed);
         }
 
         [Test]

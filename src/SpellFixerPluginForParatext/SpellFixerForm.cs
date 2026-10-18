@@ -372,7 +372,11 @@ namespace SIL.SpellFixerPluginForParatext
                 var verseUsfm = _project.GetUSFM(verseReference.BookNum, verseReference.ChapterNum, verseReference.VerseNum);
 
                 if (!SelectionReplacer.TryReplaceInVerse(verseUsfm, selection, bad, badOffset, good, out string newVerseUsfm, out string reason))
+                {
+                    _host.Log(_plugin, $"SpellFixer: ReplaceSelectedWord: {reason}: verse='{verseUsfm}', offset={selection.Offset}, wordOffset={badOffset}, " +
+                                       $"before='{selection.BeforeContext}', selected='{selection.SelectedText}', after='{selection.AfterContext}'");
                     return $"The rule was added, but {verseReference} wasn't changed because {reason}. Fix it by hand (or select it again).";
+                }
 
                 if (!SelectionReplacer.ReplaceVerseInChapter(chapterUsfm, verseUsfm, newVerseUsfm, out string newChapterUsfm))
                     return $"The rule was added, but {verseReference} wasn't changed because the verse couldn't be located in the chapter.";
@@ -538,7 +542,7 @@ namespace SIL.SpellFixerPluginForParatext
                 SetStatus($"Checking {verseReference}...");
 
                 var cancelled = false;
-                var fixedTokens = SpellFixerTokenProcessor.FixVerseTokens(verseTokens, session.FixWord, ref cancelled, out int wordsFixed);
+                var fixedTokens = SpellFixerTokenProcessor.FixVerseTokens(verseTokens, _spellFixerProject.TrimCharacters, session.FixWord, ref cancelled, out int wordsFixed);
                 if (wordsFixed > 0)
                 {
                     if (!WriteVerse(chapterReference, verseKey, verseTokens, fixedTokens))

@@ -169,8 +169,28 @@ namespace TestBwdc
         public void TryReplaceInVerse_VerseChanged_IsRefused()
         {
             var s = Sel("\\v 1 the cat and ", "teh", " dog");
-            Assert.IsFalse(SelectionReplacer.TryReplaceInVerse("\\v 1 the cat and teh dogs", s, "teh", s.Offset, "the", out _, out string reason));
+            Assert.IsFalse(SelectionReplacer.TryReplaceInVerse("\\v 1 the cat or teh dog", s, "teh", s.Offset, "the", out _, out string reason));
             Assert.IsFalse(string.IsNullOrEmpty(reason));
+        }
+
+        [Test]
+        public void TryReplaceInVerse_VerseUsfmDiffersOnlyInLineEndingsAndTrailingMarker_Replaces()
+        {
+            // e.g. the contexts use \n, but GetUSFM gives \r\n and includes the paragraph marker after the verse
+            var s = Sel("\\c 35\n\\p\n\\v 3 खंघ़ ", "खंघ़", "।\n");
+            var verse = "\\c 35\r\n\\p\r\n\\v 3 खंघ़ खंघ़।\r\n\\p\r\n";
+            Assert.IsTrue(SelectionReplacer.TryReplaceInVerse(verse, s, "खंघ़", s.Offset, "खंह़स", out string newVerse, out string reason), reason);
+            Assert.AreEqual("\\c 35\r\n\\p\r\n\\v 3 खंघ़ खंह़स।\r\n\\p\r\n", newVerse);
+        }
+
+        [Test]
+        public void TryReplaceInVerse_ContextsDontStartWhereTheVerseUsfmDoes_FindsTheWord()
+        {
+            // the offset doesn't line up with GetUSFM's verse (e.g. it has the preceding \p and the contexts don't)
+            var s = Sel("\\v 1 the cat and ", "teh", " dog");
+            var verse = "\\p\r\n\\v 1 the cat and teh dog";
+            Assert.IsTrue(SelectionReplacer.TryReplaceInVerse(verse, s, "teh", s.Offset, "the", out string newVerse, out string reason), reason);
+            Assert.AreEqual("\\p\r\n\\v 1 the cat and the dog", newVerse);
         }
 
         [Test]
