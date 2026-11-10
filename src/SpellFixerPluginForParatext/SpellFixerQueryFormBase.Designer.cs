@@ -366,7 +366,7 @@ namespace SIL.SpellFixerPluginForParatext
             this.fontDialog.AllowScriptChange = false;
             this.fontDialog.ShowColor = true;
             // 
-            // BaseConverterForm
+            // SpellFixerQueryFormBase
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
