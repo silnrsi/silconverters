@@ -1561,10 +1561,29 @@ namespace SFMConv
                     MessageBox.Show($"No '{ParatextSpellingStatusFilename}' file found!", cstrCaption);
                     return;
                 }
+
+                strFileSpec = dlgSettings.FileName;
             }
 
             System.Diagnostics.Debug.Assert(File.Exists(strFileSpec));
-            m_cscProject.AddParatextSpellingStatusToCheckLists(strFileSpec);
+            toolStripStatusLabel.Text = $"Importing spelling status information from '{strFileSpec}'...";
+            statusStrip.Refresh();
+            Cursor = Cursors.WaitCursor;
+            try
+            {
+                toolStripStatusLabel.Text = m_cscProject.AddParatextSpellingStatusToCheckLists(strFileSpec)
+                    ? $"Spelling status information imported from Paratext ('{strFileSpec}')"
+                    : $"No spelling status information could be imported from '{strFileSpec}'";
+            }
+            catch (Exception ex)
+            {
+                toolStripStatusLabel.Text = "Importing spelling status information from Paratext failed";
+                MessageBox.Show(ex.Message, cstrCaption);
+            }
+            finally
+            {
+                Cursor = Cursors.Default;
+            }
         }
 
         /*
