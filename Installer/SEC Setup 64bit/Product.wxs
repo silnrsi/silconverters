@@ -1,5 +1,5 @@
 ﻿<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs" xmlns:ui="http://wixtoolset.org/schemas/v4/wxs/ui">
-  <Package UpgradeCode="{0F7D5D72-E9F3-40BB-9748-D388C70096CD}" Name="SIL Converters 6.0 (x64)" Manufacturer="SIL International" Language="1033" Version="6.0">
+  <Package UpgradeCode="{0F7D5D72-E9F3-40BB-9748-D388C70096CD}" Name="SIL Converters (x64)" Manufacturer="SIL International" Language="1033" Version="6.0">
     
 
     <Launch Condition="Privileged" Message="You need to be an administrator to install this product." />
