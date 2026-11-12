@@ -29,6 +29,7 @@ namespace ClipboardEC
         private ToolStripMenuItem previewToolStripMenuItem;
         private ToolStripMenuItem debugToolStripMenuItem;
         private ToolStripMenuItem filteringToolStripMenuItem;
+        private ToolStripMenuItem groupByImplementationTypeToolStripMenuItem;
         internal ToolStripMenuItem byTransductionTypeToolStripMenuItem;
         internal ToolStripMenuItem byImplementationTypeToolStripMenuItem;
         internal ToolStripMenuItem byEncodingToolStripMenuItem;
@@ -98,6 +99,7 @@ namespace ClipboardEC
             this.previewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.debugToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.filteringToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.groupByImplementationTypeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.byTransductionTypeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.showAllTransductionTypesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.unicodeEncodingConversionToolStripMenuItem = new ClipboardEC.ProcTypeMenuItem();
@@ -157,6 +159,7 @@ namespace ClipboardEC
             this.previewToolStripMenuItem,
             this.debugToolStripMenuItem,
             this.filteringToolStripMenuItem,
+            this.groupByImplementationTypeToolStripMenuItem,
             this.toolStripSeparator3,
             this.launchSILConvertersSetupToolStripMenuItem,
             this.addConverterToolStripMenuItem,
@@ -250,6 +253,14 @@ namespace ClipboardEC
             this.filteringToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
             this.filteringToolStripMenuItem.Text = "&Filtering";
             this.filteringToolStripMenuItem.ToolTipText = "Allows you to filter the list of converters (to reduce processing time)";
+            //
+            // groupByImplementationTypeToolStripMenuItem
+            //
+            this.groupByImplementationTypeToolStripMenuItem.Name = "groupByImplementationTypeToolStripMenuItem";
+            this.groupByImplementationTypeToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
+            this.groupByImplementationTypeToolStripMenuItem.Text = "&Group by Implementation Type";
+            this.groupByImplementationTypeToolStripMenuItem.ToolTipText = "Specifies whether to group the converters into sub-menus by their implementation type (e.g. CC, VertexAi). Turned on automatically if the full list wouldn't fit on the screen, until you set it yourself";
+            this.groupByImplementationTypeToolStripMenuItem.Click += new System.EventHandler(this.groupByImplementationTypeToolStripMenuItem_Click);
             //
             // byTransductionTypeToolStripMenuItem
             //
