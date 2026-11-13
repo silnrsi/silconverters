@@ -117,30 +117,36 @@ namespace SIL.SpellFixerPluginForParatext
         /// <summary>
         /// Adds the bad -> good rule (without the modal 'Fix Spelling' dialog, but still with the project's own
         /// questions, e.g. "already a good word..."). For a CSC project, 'context' is stored with the good word.
-        /// Returns whether the rule is now in effect (false if the user said No/Cancel to one of those questions,
-        /// which just return without telling us); throws if it can't be added
+        /// Returns whether the rule is now in effect (false if the user said No/Cancel to one of those questions);
+        /// throws if it can't be added
         /// </summary>
         public bool AssignCorrectSpelling(string bad, string good, List<string> context)
         {
             var cscProject = _findReplaceHelper.CscProject;
             if (cscProject != null)
-                cscProject.AssignCorrectSpelling(bad, good, bNoUI: false, context);   // its questions should be seen
-            else
-                _findReplaceHelper.LegacySpellingFixer.AssignCorrectSpelling(bad, good);
+            {
+                var added = cscProject.TryAssignCorrectSpelling(bad, good, bNoUI: false, context);   // its questions should be seen
+                ReloadConverter();
+                return added;
+            }
 
+            // the legacy one doesn't tell us whether the user backed out of one of its questions
+            _findReplaceHelper.LegacySpellingFixer.AssignCorrectSpelling(bad, good);
             ReloadConverter();
             return Convert(bad) == good;
         }
 
         /// <summary>
-        /// The words the CscProject considers ambiguous with 'word' (its 'bundle'), most frequent first; empty for
-        /// legacy projects (which don't have the notion)
+        /// For the Fix Spelling dialog's Similar words list: the words the CscProject considers ambiguous with a word
+        /// (its 'bundle'), most frequent first; null for legacy projects (which don't have the notion)
         /// </summary>
-        public List<SimilarWord> GetSimilarWords(string word)
+        public Func<string, SpellFixerWords> SimilarWordsProvider
         {
-            var words = String.IsNullOrEmpty(word) ? null : _findReplaceHelper.CscProject?.GetAmbiguousWords(word);
-            return words?.Select(w => new SimilarWord { Word = w.Value, Count = w.Count }).ToList()
-                   ?? new List<SimilarWord>();
+            get
+            {
+                var cscProject = _findReplaceHelper.CscProject;
+                return (cscProject == null) ? null : (Func<string, SpellFixerWords>)cscProject.GetAmbiguousWords;
+            }
         }
 
         // so that rules just added or edited are used for the next word checked
@@ -149,12 +155,5 @@ namespace SIL.SpellFixerPluginForParatext
             DirectableEncConverter.EncConverters.Reinitialize();
             Converter = new DirectableEncConverter(ConverterName, bDirectionForward: true, NormalizeFlags.None);
         }
-    }
-
-    public class SimilarWord
-    {
-        public string Word { get; set; }
-        public int Count { get; set; }
-        public override string ToString() => $"{Word} ({Count})";
     }
 }

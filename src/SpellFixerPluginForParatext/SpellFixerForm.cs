@@ -1,5 +1,6 @@
 using Paratext.PluginInterfaces;
 using SIL.ParatextBackTranslationHelperPlugin;
+using SpellingFixer30;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
@@ -238,7 +239,8 @@ namespace SIL.SpellFixerPluginForParatext
             ChooseSpellFixerProject();
         }
 
-        private FixSpellingForm _fixSpellingForm;
+        // SpellingFixer30's Fix Spelling dialog, shown non-modally (so the user can still search, copy, etc. in Paratext)
+        private QueryGoodSpelling _fixSpellingForm;
 
         // the selection (and the word in it) the Fix Spelling dialog was opened for
         private SelectionInfo _fixSelection;
@@ -263,23 +265,85 @@ namespace SIL.SpellFixerPluginForParatext
             _fixWordOffset = wordOffset;
 
             if ((_fixSpellingForm == null) || _fixSpellingForm.IsDisposed)
-            {
-                _projectFont ??= GetProjectFont();
-                _fixSpellingForm = new FixSpellingForm(_spellFixerProject, _projectFont, _project.Language?.IsRtoL ?? false,
-                                                       _project.VernacularKeyboard, _host.DefaultKeyboard, ApplyFix);
-                _fixSpellingForm.FormClosed += (s, args) =>
-                {
-                    _fixSpellingForm = null;
-                    UpdateButtonStates();
-                };
-            }
+                _fixSpellingForm = CreateFixSpellingForm();
 
             _fixSpellingForm.TopMost = TopMost;
-            _fixSpellingForm.LoadWord(word, selection.VerseRefStart?.ToString());
+            _fixSpellingForm.LoadWord(word, ExistingReplacement(word), null, bShowDelete: false, bShowSwapWords: false);
+            _fixSpellingForm.Text = $"{SpellFixerPlugin.PluginName}: Fix Spelling — {selection.VerseRefStart} ({_spellFixerProject.DisplayName})";
             if (!_fixSpellingForm.Visible)
                 _fixSpellingForm.Show(this);
             _fixSpellingForm.Activate();
             UpdateButtonStates();
+        }
+
+        private QueryGoodSpelling CreateFixSpellingForm()
+        {
+            _projectFont ??= GetProjectFont();
+            var form = new QueryGoodSpelling(_projectFont, _spellFixerProject.SimilarWordsProvider)
+            {
+                VernacularRightToLeft = _project.Language?.IsRtoL ?? false
+            };
+
+            form.Accepting += FixSpellingForm_Accepting;
+
+            // the vernacular keyboard for the vernacular text boxes; Paratext's default one when the user goes elsewhere
+            //  (coming back from Paratext, Enter isn't raised again for the text box that still has the focus)
+            form.BadWordTextBox.Enter += (s, args) => ActivateKeyboard(_project.VernacularKeyboard);
+            form.ReplacementTextBox.Enter += (s, args) => ActivateKeyboard(_project.VernacularKeyboard);
+            form.Activated += (s, args) =>
+            {
+                if ((form.ActiveControl == form.BadWordTextBox) || (form.ActiveControl == form.ReplacementTextBox))
+                    ActivateKeyboard(_project.VernacularKeyboard);
+            };
+            form.Deactivate += (s, args) => ActivateKeyboard(_host.DefaultKeyboard);
+
+            form.FormClosed += (s, args) =>
+            {
+                if (ReferenceEquals(_fixSpellingForm, form))
+                    _fixSpellingForm = null;
+                UpdateButtonStates();
+            };
+            return form;
+        }
+
+        // what the project would currently change the word to (i.e. an existing rule's replacement), or else the word itself
+        private string ExistingReplacement(string word)
+        {
+            try
+            {
+                return _spellFixerProject.Convert(word);
+            }
+            catch
+            {
+                return word;
+            }
+        }
+
+        private static void ActivateKeyboard(IKeyboard keyboard)
+        {
+            try
+            {
+                keyboard?.Activate();
+            }
+            catch
+            {
+                // not worth bothering the user about
+            }
+        }
+
+        private void FixSpellingForm_Accepting(object sender, QueryGoodSpellingAcceptingEventArgs e)
+        {
+            var bad = e.BadSpelling?.Trim();
+            var good = e.GoodSpelling?.Trim();
+            if (String.IsNullOrEmpty(bad) || String.IsNullOrEmpty(good) || (bad == good))
+            {
+                MessageBox.Show((IWin32Window)sender, "Put the correct spelling in the Replacement box first (e.g. paste it with Ctrl+V, or click one of the similar words).",
+                                SpellFixerPlugin.PluginName);
+                e.Cancel = true;
+                return;
+            }
+
+            e.Cancel = !ApplyFix(bad, good);
         }
 
         private void ButtonFindReplacementRule_Click(object sender, EventArgs e)
