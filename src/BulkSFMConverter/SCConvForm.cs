@@ -1584,7 +1584,7 @@ namespace SFMConv
             Cursor = Cursors.WaitCursor;
             try
             {
-                m_cscProject.ExportSpellingStatusToParatext(strFileSpec, out var strSummary);
+                ParatextSpellingStatusExport.Export(m_cscProject, strFileSpec, this, out var strSummary);
                 toolStripStatusLabel.Text = strSummary;
             }
             catch (Exception ex)

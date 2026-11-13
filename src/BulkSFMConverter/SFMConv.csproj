@@ -59,6 +59,10 @@
   <ItemGroup>
     <PackageReference Include="Encoding-Converters-Core" Version="1.0.4" />
   </ItemGroup>
+  <ItemGroup>
+    <!-- shared with (linked from) the SpellFixerPluginForParatext project (writes SpellingStatus.xml the way Paratext does) -->
+    <Compile Include="..\SpellFixerPluginForParatext\SpellingStatusMerger.cs" Link="Shared\SpellingStatusMerger.cs" />
+  </ItemGroup>
   <PropertyGroup>
     <UseEcSharedItems>true</UseEcSharedItems>
   </PropertyGroup>
