@@ -295,7 +295,6 @@ namespace ClipboardEC
             this.Cursor = Cursors.Default;
         }
 
-        private const int nFixedMenuItems = 16;
         private const int cnMaxPreviewLength = 30; // max chars to show for preview (so we don't go off the screen)
         static private string strInstallerLocationRegKey    = @"SOFTWARE\SIL\SilEncConverters40\Installer";
         static private string strInstallerPathKey           = "InstallerPath";
@@ -304,7 +303,8 @@ namespace ClipboardEC
         {
             this.Hide();
 
-            while( this.contextMenuStripEC.Items.Count > nFixedMenuItems )
+            // remove the dynamically-added converter items (i.e. everything above the first fixed item, toolStripSeparator1)
+            while ((this.contextMenuStripEC.Items.Count > 0) && (this.contextMenuStripEC.Items[0] != this.toolStripSeparator1))
                 this.contextMenuStripEC.Items.RemoveAt(0);
 
             // enable or disable the Launch Setup command depending on whether we can
