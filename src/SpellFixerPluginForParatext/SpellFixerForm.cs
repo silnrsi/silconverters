@@ -384,7 +384,8 @@ namespace SIL.SpellFixerPluginForParatext
                     if (!_spellFixerProject.AssignCorrectSpelling(bad, good, context))
                     {
                         // the user said No/Cancel to one of the project's questions; leave the dialog up so they can adjust
-                        SetStatus($"The rule '{bad}' → '{good}' wasn't added, so nothing was changed.");
+                        //  (if they said Yes to removing it from the good words first, that part was done)
+                        SetStatus($"The rule '{bad}' → '{good}' wasn't added, so the text wasn't changed.");
                         return false;
                     }
                 }

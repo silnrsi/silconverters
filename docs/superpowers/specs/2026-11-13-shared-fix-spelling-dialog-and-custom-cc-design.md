@@ -41,7 +41,7 @@ Date: 2026-11-13. Spans two repos: `encoding-converters-core` (SpellingFixer30) 
 ## Plugin
 
 - `FixSpellingForm` (+ Designer) deleted.
-- `SpellFixerForm` creates `QueryGoodSpelling(font, word => cscProject?.GetAmbiguousWords(word))`, sets `VernacularRightToLeft`, title `SpellFixer: Fix Spelling — <verse> (<project>)`, shows it with `Show(this)`, reloads it with `LoadWord(word, Convert(word), word, false, false)`.
+- `SpellFixerForm` creates `QueryGoodSpelling(font, word => cscProject?.GetAmbiguousWords(word))`, sets `VernacularRightToLeft`, title `SpellFixer: Fix Spelling — <verse> (<project>)`, shows it with `Show(this)`, reloads it with `LoadWord(word, Convert(word), null, false, false)` (no "while fixing:" row; it would just repeat the bad word).
 - `Accepting` handler = today's `ApplyFix(bad, good)`; `e.Cancel = !ApplyFix(...)`. Same checks as before (empty / unchanged replacement → message, stay open).
 - Keyboard: `Enter` of both exposed text boxes → vernacular keyboard; form `Activated` / `Deactivate` as today.
 - `SpellFixerProject.AssignCorrectSpelling(bad, good, context)` uses `TryAssignCorrectSpelling` for CSC projects instead of inferring from `Convert`.
