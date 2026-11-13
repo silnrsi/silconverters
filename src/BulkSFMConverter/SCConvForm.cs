@@ -1510,6 +1510,7 @@ namespace SFMConv
             initializeCheckListToolStripMenuItem.Enabled = bEnableTheRest;
             correctSpellingToolStripMenuItem.Enabled = bEnableTheRest;
             importSpellingDataFromParatextProjectToolStripMenuItem.Enabled = bEnableTheRest;
+            exportSpellingDataToParatextProjectToolStripMenuItem.Enabled = bEnableTheRest;
             /*
             editSpellingFixesToolStripMenuItem.Enabled = bEnableTheRest;
             editDictionaryToolStripMenuItem.Enabled = bEnableTheRest;
@@ -1542,30 +1543,9 @@ namespace SFMConv
                 if (!TrySelectProject())
                     return;
 
-            // see if there is a 'SpellingSettings.xml' file in the same directory as one of the open SFM files
-            System.Diagnostics.Debug.Assert(m_lstFilesOpen.Any());
-            var strDir = Path.GetDirectoryName(m_lstFilesOpen[0]);
-            var strFileSpec = Path.Combine(strDir, ParatextSpellingStatusFilename);
-            if (!File.Exists(strFileSpec))
-            {
-                var dlgSettings = new OpenFileDialog
-                {
-                    FileName = ParatextSpellingStatusFilename,
-                    RestoreDirectory = true,
-                    InitialDirectory = strDir,
-                    Filter = $"Paratext SpellingStatus files ({ParatextSpellingStatusFilename})|{ParatextSpellingStatusFilename}|All files|*.*"
-                };
+            if (!TryGetParatextSpellingStatusFile(out var strFileSpec))
+                return;
 
-                if (dlgSettings.ShowDialog() != DialogResult.OK)
-                {
-                    MessageBox.Show($"No '{ParatextSpellingStatusFilename}' file found!", cstrCaption);
-                    return;
-                }
-
-                strFileSpec = dlgSettings.FileName;
-            }
-
-            System.Diagnostics.Debug.Assert(File.Exists(strFileSpec));
             toolStripStatusLabel.Text = $"Importing spelling status information from '{strFileSpec}'...";
             statusStrip.Refresh();
             Cursor = Cursors.WaitCursor;
@@ -1584,6 +1564,67 @@ namespace SFMConv
             {
                 Cursor = Cursors.Default;
             }
+        }
+
+        private void exportSpellingDataToParatextProjectToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (m_cscProject == null)
+                if (!TrySelectProject())
+                    return;
+
+            if (!TryGetParatextSpellingStatusFile(out var strFileSpec))
+                return;
+
+            if (MessageBox.Show($"Are you sure you want to save the Approved words and the Spelling Corrections to the '{strFileSpec}' file?",
+                                cstrCaption, MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
+                return;
+
+            toolStripStatusLabel.Text = $"Exporting spelling data to '{strFileSpec}'...";
+            statusStrip.Refresh();
+            Cursor = Cursors.WaitCursor;
+            try
+            {
+                m_cscProject.ExportSpellingStatusToParatext(strFileSpec, out var strSummary);
+                toolStripStatusLabel.Text = strSummary;
+            }
+            catch (Exception ex)
+            {
+                toolStripStatusLabel.Text = "Exporting spelling data to Paratext failed";
+                MessageBox.Show(ex.Message, cstrCaption);
+            }
+            finally
+            {
+                Cursor = Cursors.Default;
+            }
+        }
+
+        /// <summary>
+        /// Finds the Paratext SpellingStatus.xml file for the open SFM files (i.e. in the same folder as them) or, if it
+        /// isn't there, lets the user browse for it
+        /// </summary>
+        private bool TryGetParatextSpellingStatusFile(out string strFileSpec)
+        {
+            var strDir = (m_lstFilesOpen?.Any() == true) ? Path.GetDirectoryName(m_lstFilesOpen[0]) : null;
+            strFileSpec = (strDir != null) ? Path.Combine(strDir, ParatextSpellingStatusFilename) : null;
+            if ((strFileSpec != null) && File.Exists(strFileSpec))
+                return true;
+
+            var dlgSettings = new OpenFileDialog
+            {
+                FileName = ParatextSpellingStatusFilename,
+                RestoreDirectory = true,
+                InitialDirectory = strDir,
+                Filter = $"Paratext SpellingStatus files ({ParatextSpellingStatusFilename})|{ParatextSpellingStatusFilename}|All files|*.*"
+            };
+
+            if (dlgSettings.ShowDialog() != DialogResult.OK)
+            {
+                MessageBox.Show($"No '{ParatextSpellingStatusFilename}' file found!", cstrCaption);
+                return false;
+            }
+
+            strFileSpec = dlgSettings.FileName;
+            return File.Exists(strFileSpec);
         }
 
         /*

@@ -92,6 +92,7 @@ namespace SFMConv
             this.toolStripButtonSingleStep = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.importSpellingDataFromParatextProjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exportSpellingDataToParatextProjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
@@ -318,7 +319,8 @@ namespace SFMConv
             this.selectProjectToolStripMenuItem,
             this.importSpellingDataFromParatextProjectToolStripMenuItem,
             this.initializeCheckListToolStripMenuItem,
-            this.correctSpellingToolStripMenuItem});
+            this.correctSpellingToolStripMenuItem,
+            this.exportSpellingDataToParatextProjectToolStripMenuItem});
             this.consistentSpellingCheckToolStripMenuItem.Name = "consistentSpellingCheckToolStripMenuItem";
             this.consistentSpellingCheckToolStripMenuItem.Size = new System.Drawing.Size(165, 20);
             this.consistentSpellingCheckToolStripMenuItem.Text = "Consistent &Spelling Options";
@@ -613,6 +615,15 @@ namespace SFMConv
             this.importSpellingDataFromParatextProjectToolStripMenuItem.ToolTipText = "Click this to browse for a corresponding Paratext project to import Spelling Stat" +
     "us information from.";
             this.importSpellingDataFromParatextProjectToolStripMenuItem.Click += new System.EventHandler(this.importSpellingDataFromParatextProjectToolStripMenuItem_Click);
+            //
+            // exportSpellingDataToParatextProjectToolStripMenuItem
+            //
+            this.exportSpellingDataToParatextProjectToolStripMenuItem.Name = "exportSpellingDataToParatextProjectToolStripMenuItem";
+            this.exportSpellingDataToParatextProjectToolStripMenuItem.Size = new System.Drawing.Size(295, 22);
+            this.exportSpellingDataToParatextProjectToolStripMenuItem.Text = "&Export SpellFixer Spelling data into associated Paratext project";
+            this.exportSpellingDataToParatextProjectToolStripMenuItem.ToolTipText = "Click this to put the SpellFixer project\'s good words and spelling corrections into" +
+    " the associated Paratext project\'s Spelling Status information (Paratext must be closed).";
+            this.exportSpellingDataToParatextProjectToolStripMenuItem.Click += new System.EventHandler(this.exportSpellingDataToParatextProjectToolStripMenuItem_Click);
             // 
             // statusStrip
             // 
@@ -716,6 +727,7 @@ namespace SFMConv
         private System.Windows.Forms.DataGridViewButtonColumn Converter;
         private System.Windows.Forms.DataGridViewTextBoxColumn ExampleResults;
         private System.Windows.Forms.ToolStripMenuItem importSpellingDataFromParatextProjectToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem exportSpellingDataToParatextProjectToolStripMenuItem;
     }
 }
 
