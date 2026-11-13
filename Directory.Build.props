@@ -8,7 +8,7 @@
     <Year>2026</Year>
     <Manufacturer>SIL International</Manufacturer>
 	<NuGetPackageRoot Condition="'$(NuGetPackageRoot)' == ''">$(UserProfile)\.nuget\packages\</NuGetPackageRoot>
-    <EcCoreVersion>1.0.3</EcCoreVersion>
+    <EcCoreVersion>1.0.4</EcCoreVersion>
     <EcLibFilesPath>$(NuGetPackageRoot)encoding-converters-core\$(EcCoreVersion)\lib</EcLibFilesPath>
     <EcDistFilesPath>$(NuGetPackageRoot)encoding-converters-core\$(EcCoreVersion)\runtimes\EcDistFiles</EcDistFilesPath>
     <EcSharedItemsProps>$(NuGetPackageRoot)encoding-converters-core\$(EcCoreVersion)\build\SharedItems.props</EcSharedItemsProps>

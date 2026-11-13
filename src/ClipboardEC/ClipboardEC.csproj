@@ -111,7 +111,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Encoding-Converters-Core" Version="1.0.3" />
+    <PackageReference Include="Encoding-Converters-Core" Version="1.0.4" />
   </ItemGroup>
   <PropertyGroup>
     <UseEcSharedItems>true</UseEcSharedItems>
