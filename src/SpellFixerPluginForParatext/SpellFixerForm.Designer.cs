@@ -161,7 +161,7 @@ namespace SIL.SpellFixerPluginForParatext
             this.buttonCheck.TabIndex = 8;
             this.buttonCheck.Text = "C&heck from Current Verse";
             this.toolTip.SetToolTip(this.buttonCheck, "Check each word from the current verse in Paratext to the end of the chapter, ask" +
-        "ing about each one the Spell Fixer would change");
+        "ing about each one the Spell Fixer would change. To highlight the word in the text, turn on View > Highlight the word SpellFixer is checking in the text window.");
             this.buttonCheck.Click += new System.EventHandler(this.ButtonCheck_Click);
             // 
             // buttonCheckCurrentVerse
@@ -174,7 +174,7 @@ namespace SIL.SpellFixerPluginForParatext
             this.buttonCheckCurrentVerse.TabIndex = 9;
             this.buttonCheckCurrentVerse.Text = "Check Current &Verse";
             this.toolTip.SetToolTip(this.buttonCheckCurrentVerse, "Check each word of just the current verse (or combined verses) in Paratext, askin" +
-        "g about each one the Spell Fixer would change");
+        "g about each one the Spell Fixer would change. To highlight the word in the text, turn on View > Highlight the word SpellFixer is checking in the text window.");
             this.buttonCheckCurrentVerse.Click += new System.EventHandler(this.ButtonCheckCurrentVerse_Click);
             // 
             // flowLayoutPanelButtons

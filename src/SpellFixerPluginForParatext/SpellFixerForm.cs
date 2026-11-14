@@ -552,6 +552,7 @@ namespace SIL.SpellFixerPluginForParatext
             }
             finally
             {
+                CheckedWordHighlighter.Clear();
                 SetChecking(false);
             }
 
@@ -722,6 +723,10 @@ namespace SIL.SpellFixerPluginForParatext
             _queryForm ??= new SpellFixerQueryForm(_spellFixerProject,
                 (bad, good) => SpellingStatusRecorder.Record(_project, _plugin, bad, good, message => MessageBox.Show(message, SpellFixerPlugin.PluginName)));
             _projectFont ??= GetProjectFont();
+
+            // highlight it in the text (if the user turned that on in the text window's View menu); it stays until the
+            //  next word asked about, or the end of the run, so there's only one redraw per word
+            CheckedWordHighlighter.Set(_project.ShortName, _lastCheckedReference, word);
 
             var button = _queryForm.Show(this, _projectFont, _project.Language?.IsRtoL ?? false, word, suggestion);
             correctedSpelling = _queryForm.CorrectedSpelling;
