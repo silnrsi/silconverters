@@ -1,6 +1,6 @@
 ﻿<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs" xmlns:ui="http://wixtoolset.org/schemas/v4/wxs/ui">
 
-  <Package UpgradeCode="8A50226C-84D0-4CAF-AF8F-B0284643C415" Name="SIL Converters 6.0" Manufacturer="SIL International" Language="1033" Version="6.0">
+  <Package UpgradeCode="8A50226C-84D0-4CAF-AF8F-B0284643C415" Name="SIL Converters (x86)" Manufacturer="SIL International" Language="1033" Version="6.0">
     
     
     <Launch Condition="Privileged" Message="You need to be an administrator to install this product." />

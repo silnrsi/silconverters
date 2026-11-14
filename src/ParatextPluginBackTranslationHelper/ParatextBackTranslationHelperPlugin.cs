@@ -34,47 +34,7 @@ namespace SIL.ParatextBackTranslationHelperPlugin
         {
 			_this = this;
 
-			AppDomain.CurrentDomain.AssemblyResolve +=
-			   CurrentDomain_AssemblyResolve;
-		}
-
-		private List<string> _assembliesToFindInPluginFolder = new List<string>
-		{
-			"SilEncConverters40.dll",
-			"ECInterfaces.dll",
-		};
-
-		private Assembly CurrentDomain_AssemblyResolve(object sender, ResolveEventArgs args)
-        {
-			// Ignore missing resources
-			if (!_assembliesToFindInPluginFolder.Any(s => args.Name.Contains(s)))
-				return null;
-
-			try
-			{
-				var pathToPluginFolder = Assembly.GetExecutingAssembly().Location;
-				pathToPluginFolder = Path.Combine(Path.GetDirectoryName(pathToPluginFolder), "SilEncConverters40.dll");
-				var asm = Assembly.LoadFrom(pathToPluginFolder);
-				var types = asm.GetTypes();
-
-				foreach (var type in types)
-				{
-					try
-					{
-						Activator.CreateInstance(type);
-					}
-					catch   // ignore errors
-					{
-					}
-				}
-			}
-			catch (Exception ex)
-			{
-				var msg = $"Unable to load add-in assembly: {Path.GetFileNameWithoutExtension(args.Name)}: {ex.Message}";
-				_host.Log(_this, msg);
-			}
-
-			return null;
+			PluginAssemblyResolver.Register(msg => _host?.Log(_this, msg));
 		}
 
 		public IEnumerable<PluginMenuEntry> PluginMenuEntries

@@ -42,6 +42,7 @@ namespace ClipboardEC
         public const string  cstrProjectMemoryKey = @"SOFTWARE\SIL\SilEncConverters40\ClipboardEC";
         private string  cstrProjectShowPreviewLastState = "LastShowPreviewState";
         private string  cstrProjectDebugModeLastState = "LastDebugModeState";
+        private string  cstrProjectGroupByImplTypeLastState = "LastGroupByImplTypeState";
         public const string  cstrProjectImplTypeFilterLastState = "LastImplTypeFilterState";
         public const string  cstrProjectTransTypeFilterLastState = "LastProcessTypeFilterState";
         public const string  cstrProjectEncodingFilterLastState = "LastEncodingFilterState";
@@ -100,6 +101,12 @@ namespace ClipboardEC
                 }
                 catch { }
                 this.debugToolStripMenuItem.Checked = DebugState;
+
+                // if never set by the user, this stays null, which means 'auto' (i.e. group only if
+                //  the full list won't fit on the screen)
+                object oGroupBy = keyLastState.GetValue(cstrProjectGroupByImplTypeLastState);
+                if (oGroupBy is int nGroupBy)
+                    this.GroupByImplType = (nGroupBy != 0);
 
                 try
                 {
@@ -207,6 +214,11 @@ namespace ClipboardEC
             set { m_bDebugState = value; }
         }
 
+        /// <summary>
+        /// null means the user hasn't chosen, so group only if the full list wouldn't fit on the screen
+        /// </summary>
+        public bool? GroupByImplType { get; set; }
+
         private ProcessTypeFlags m_lProcessTypeFilter = ProcessTypeFlags.DontKnow;
         public ProcessTypeFlags ProcessTypeFilter
         {
@@ -283,7 +295,6 @@ namespace ClipboardEC
             this.Cursor = Cursors.Default;
         }
 
-        private const int nFixedMenuItems = 15;
         private const int cnMaxPreviewLength = 30; // max chars to show for preview (so we don't go off the screen)
         static private string strInstallerLocationRegKey    = @"SOFTWARE\SIL\SilEncConverters40\Installer";
         static private string strInstallerPathKey           = "InstallerPath";
@@ -292,7 +303,8 @@ namespace ClipboardEC
         {
             this.Hide();
 
-            while( this.contextMenuStripEC.Items.Count > nFixedMenuItems )
+            // remove the dynamically-added converter items (i.e. everything above the first fixed item, toolStripSeparator1)
+            while ((this.contextMenuStripEC.Items.Count > 0) && (this.contextMenuStripEC.Items[0] != this.toolStripSeparator1))
                 this.contextMenuStripEC.Items.RemoveAt(0);
 
             // enable or disable the Launch Setup command depending on whether we can
@@ -341,44 +353,124 @@ namespace ClipboardEC
                 aSL.Add(sName, sName);
             }
 
-            for(int i = aSL.Count; i-- > 0; )
+            // group by implementation type if the user asked for it, or (if they haven't said) if
+            //  the full list wouldn't fit on the screen
+            bool bGroupBy = GroupByImplType ?? WouldOverflowScreen(aSL.Count);
+            this.groupByImplementationTypeToolStripMenuItem.Checked = bGroupBy;
+
+            if (!bGroupBy)
+            {
+                for (int i = aSL.Count; i-- > 0; )
+                {
+                    string strText = (string)aSL.GetKey(i);
+                    this.contextMenuStripEC.Items.Insert(0, CreateConverterMenuItem(aECs, strText, strInput));
+                }
+                return;
+            }
+
+            // bucket the (already sorted) converter names by their (display) implementation type
+            var mapGroups = new SortedDictionary<string, List<string>>(StringComparer.OrdinalIgnoreCase);
+            for (int i = 0; i < aSL.Count; i++)
             {
                 string strText = (string)aSL.GetKey(i);
-                string strOutput = null;
-                if( /* (aEC != null) && */ ShowPreview && !String.IsNullOrEmpty(strInput) )
+                string strGroup = GetImplTypeGroupName(aECs[strText]);
+                if (!mapGroups.TryGetValue(strGroup, out List<string> lstNames))
                 {
-                    try
-                    {
-                        IEncConverter aEC = aECs[strText];
+                    lstNames = new List<string>();
+                    mapGroups.Add(strGroup, lstNames);
+                }
+                lstNames.Add(strText);
+            }
 
-                        // if it's a Translator type, then hold off calling to the internet for conversion
-                        //  which takes time and is possibly unnecessary), put in a dummy result to see if
-                        //  that's really what they want
-                        if (IsOnlineTranslator(aEC))
-                        {
-                            strOutput = $"Click to convert w/ {aEC.Name}";
-                        }
-                        else
-                        {
-                            strOutput = this.ConvertData(aEC, strInput);
-                        }
-                    }
-                    catch (Exception e)
+            int nInsertIndex = 0;
+            foreach (var kvp in mapGroups)
+            {
+                var groupMenuItem = new ToolStripMenuItem(kvp.Key);
+                foreach (string strText in kvp.Value)
+                    groupMenuItem.DropDownItems.Add(CreateConverterMenuItem(aECs, strText, strInput));
+                this.contextMenuStripEC.Items.Insert(nInsertIndex++, groupMenuItem);
+            }
+        }
+
+        private ToolStripMenuItem CreateConverterMenuItem(EncConverters aECs, string strText, string strInput)
+        {
+            string strOutput = null;
+            if (ShowPreview && !String.IsNullOrEmpty(strInput))
+            {
+                try
+                {
+                    IEncConverter aEC = aECs[strText];
+
+                    // if it's a Translator type, then hold off calling to the internet for conversion
+                    //  which takes time and is possibly unnecessary), put in a dummy result to see if
+                    //  that's really what they want
+                    if (IsOnlineTranslator(aEC))
                     {
-                        // since this is just a 'preview' (and exceptions can be expected), don't
-                        //  allow them to be throw up.
-                        strOutput = String.Format("Error: {0}", e.Message);
+                        strOutput = $"Click to convert w/ {aEC.Name}";
+                    }
+                    else
+                    {
+                        strOutput = this.ConvertData(aEC, strInput);
                     }
                 }
-
-                ToolStripMenuItem menuItem = new ToolStripMenuItem(strText);
-                menuItem.ToolTipText = strOutput;
-                if (!String.IsNullOrEmpty(strOutput) && (strOutput.Length > cnMaxPreviewLength))
-                    strOutput = strOutput.Substring(0, cnMaxPreviewLength) + "...";
-                menuItem.ShortcutKeyDisplayString = strOutput;
-                menuItem.Click += new EventHandler(ConverterClick);
-                this.contextMenuStripEC.Items.Insert(0,menuItem);
+                catch (Exception e)
+                {
+                    // since this is just a 'preview' (and exceptions can be expected), don't
+                    //  allow them to be throw up.
+                    strOutput = String.Format("Error: {0}", e.Message);
+                }
             }
+
+            ToolStripMenuItem menuItem = new ToolStripMenuItem(strText);
+            menuItem.ToolTipText = strOutput;
+            if (!String.IsNullOrEmpty(strOutput) && (strOutput.Length > cnMaxPreviewLength))
+                strOutput = strOutput.Substring(0, cnMaxPreviewLength) + "...";
+            menuItem.ShortcutKeyDisplayString = strOutput;
+            menuItem.Click += new EventHandler(ConverterClick);
+            return menuItem;
+        }
+
+        /// <summary>
+        /// e.g. "SIL.cc" -> "cc", "SIL.VertexAi" -> "VertexAi" (other prefixes are left as is)
+        /// </summary>
+        private static string GetImplTypeGroupName(IEncConverter aEC)
+        {
+            const string strSilPrefix = "SIL.";
+            string strImplType = aEC?.ImplementType;
+            if (String.IsNullOrEmpty(strImplType))
+                return "(unknown)";
+            if (strImplType.StartsWith(strSilPrefix, StringComparison.OrdinalIgnoreCase) && (strImplType.Length > strSilPrefix.Length))
+                return strImplType.Substring(strSilPrefix.Length);
+            return strImplType;
+        }
+
+        /// <summary>
+        /// Estimates whether the context menu, with nNumConverters converter items listed flat (in addition
+        /// to the fixed items currently in it), would be taller than the screen it's popping up on.
+        /// </summary>
+        private bool WouldOverflowScreen(int nNumConverters)
+        {
+            try
+            {
+                int nScreenHeight = Screen.FromPoint(Cursor.Position).WorkingArea.Height;
+                int nFixedHeight = this.contextMenuStripEC.GetPreferredSize(System.Drawing.Size.Empty).Height;
+                int nItemHeight = Math.Max(this.exitToolStripMenuItem.Height,
+                                           this.exitToolStripMenuItem.GetPreferredSize(System.Drawing.Size.Empty).Height);
+                return (nFixedHeight + (nNumConverters * nItemHeight)) > nScreenHeight;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        private void groupByImplementationTypeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.GroupByImplType = this.groupByImplementationTypeToolStripMenuItem.Checked = !this.groupByImplementationTypeToolStripMenuItem.Checked;
+
+            // add that to the registry also, so we remember it (and stop auto-deciding).
+            RegistryKey keyLastState = Registry.CurrentUser.CreateSubKey(cstrProjectMemoryKey);
+            keyLastState.SetValue(cstrProjectGroupByImplTypeLastState, (GroupByImplType == true) ? 1 : 0);
         }
 
         private static bool IsOnlineTranslator(IEncConverter aEC)

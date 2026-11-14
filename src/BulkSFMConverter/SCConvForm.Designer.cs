@@ -80,6 +80,8 @@ namespace SFMConv
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.progressBarSpellingCheck = new System.Windows.Forms.ProgressBar();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.statusStrip = new System.Windows.Forms.StatusStrip();
+            this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripButtonOpenLegacy = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonOpenUnicode = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonRefresh = new System.Windows.Forms.ToolStripButton();
@@ -90,10 +92,12 @@ namespace SFMConv
             this.toolStripButtonSingleStep = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.importSpellingDataFromParatextProjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exportSpellingDataToParatextProjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
+            this.statusStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip
@@ -315,7 +319,8 @@ namespace SFMConv
             this.selectProjectToolStripMenuItem,
             this.importSpellingDataFromParatextProjectToolStripMenuItem,
             this.initializeCheckListToolStripMenuItem,
-            this.correctSpellingToolStripMenuItem});
+            this.correctSpellingToolStripMenuItem,
+            this.exportSpellingDataToParatextProjectToolStripMenuItem});
             this.consistentSpellingCheckToolStripMenuItem.Name = "consistentSpellingCheckToolStripMenuItem";
             this.consistentSpellingCheckToolStripMenuItem.Size = new System.Drawing.Size(165, 20);
             this.consistentSpellingCheckToolStripMenuItem.Text = "Consistent &Spelling Options";
@@ -610,6 +615,31 @@ namespace SFMConv
             this.importSpellingDataFromParatextProjectToolStripMenuItem.ToolTipText = "Click this to browse for a corresponding Paratext project to import Spelling Stat" +
     "us information from.";
             this.importSpellingDataFromParatextProjectToolStripMenuItem.Click += new System.EventHandler(this.importSpellingDataFromParatextProjectToolStripMenuItem_Click);
+            //
+            // exportSpellingDataToParatextProjectToolStripMenuItem
+            //
+            this.exportSpellingDataToParatextProjectToolStripMenuItem.Name = "exportSpellingDataToParatextProjectToolStripMenuItem";
+            this.exportSpellingDataToParatextProjectToolStripMenuItem.Size = new System.Drawing.Size(295, 22);
+            this.exportSpellingDataToParatextProjectToolStripMenuItem.Text = "&Export SpellFixer Spelling data into associated Paratext project";
+            this.exportSpellingDataToParatextProjectToolStripMenuItem.ToolTipText = "Click this to put the SpellFixer project\'s good words and spelling corrections into" +
+    " the associated Paratext project\'s Spelling Status information (Paratext must be closed).";
+            this.exportSpellingDataToParatextProjectToolStripMenuItem.Click += new System.EventHandler(this.exportSpellingDataToParatextProjectToolStripMenuItem_Click);
+            // 
+            // statusStrip
+            // 
+            this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabel});
+            this.statusStrip.Location = new System.Drawing.Point(0, 380);
+            this.statusStrip.Name = "statusStrip";
+            this.statusStrip.Size = new System.Drawing.Size(627, 22);
+            this.statusStrip.TabIndex = 5;
+            // 
+            // toolStripStatusLabel
+            // 
+            this.toolStripStatusLabel.Name = "toolStripStatusLabel";
+            this.toolStripStatusLabel.Size = new System.Drawing.Size(612, 17);
+            this.toolStripStatusLabel.Spring = true;
+            this.toolStripStatusLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // SCConvForm
             // 
@@ -617,6 +647,7 @@ namespace SFMConv
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(627, 402);
             this.Controls.Add(this.tableLayoutPanel1);
+            this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.menuStrip);
             this.HelpButton = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -630,6 +661,8 @@ namespace SFMConv
             this.tableLayoutPanel1.PerformLayout();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
+            this.statusStrip.ResumeLayout(false);
+            this.statusStrip.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -676,6 +709,8 @@ namespace SFMConv
         private System.Windows.Forms.ToolStripMenuItem setDefaultExampleResultsFontToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
         private System.Windows.Forms.ToolStrip toolStrip1;
+        private System.Windows.Forms.StatusStrip statusStrip;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel;
         private System.Windows.Forms.ToolStripButton toolStripButtonOpenUnicode;
         private System.Windows.Forms.ToolStripButton toolStripButtonOpenLegacy;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
@@ -692,6 +727,7 @@ namespace SFMConv
         private System.Windows.Forms.DataGridViewButtonColumn Converter;
         private System.Windows.Forms.DataGridViewTextBoxColumn ExampleResults;
         private System.Windows.Forms.ToolStripMenuItem importSpellingDataFromParatextProjectToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem exportSpellingDataToParatextProjectToolStripMenuItem;
     }
 }
 

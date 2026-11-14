@@ -1,0 +1,394 @@
+extern alias SpellFixer;
+
+using System.Collections.Generic;
+using System.Linq;
+using NUnit.Framework;
+using Paratext.PluginInterfaces;
+using SIL.ParatextBackTranslationHelperPlugin;
+using SpellFixer::SIL.SpellFixerPluginForParatext;
+using static TestBwdc.PtxTestTokens;
+
+namespace TestBwdc
+{
+    [TestFixture]
+    public class UnitTest_PtxSpellFixer
+    {
+        private static string Rebuild(IEnumerable<string> runs) => string.Concat(runs);
+
+        [Test]
+        [TestCase("")]
+        [TestCase("word")]
+        [TestCase(" leading")]
+        [TestCase("trailing ")]
+        [TestCase("two  spaces")]
+        [TestCase("tab\there")]
+        [TestCase("no break")]
+        [TestCase("line1\r\nline2")]
+        [TestCase("  ")]
+        public void SplitIntoRuns_RebuildsOriginalExactly(string text)
+        {
+            Assert.AreEqual(text, Rebuild(SpellFixerTokenProcessor.SplitIntoRuns(text)));
+        }
+
+        [Test]
+        public void SplitIntoRuns_AlternatesWordsAndSeparators()
+        {
+            var runs = SpellFixerTokenProcessor.SplitIntoRuns(" a  bc d");
+            CollectionAssert.AreEqual(new[] { " ", "a", "  ", "bc", " ", "d" }, runs);
+            CollectionAssert.AreEqual(new[] { true, false, true, false, true, false }, runs.Select(SpellFixerTokenProcessor.IsSeparatorRun).ToList());
+        }
+
+        [Test]
+        public void FixWords_CallsFixerOnlyForWords_AndRebuilds()
+        {
+            var seen = new List<string>();
+            var cancelled = false;
+            var result = SpellFixerTokenProcessor.FixWords("Teh  cat sat", w => { seen.Add(w); return w == "Teh" ? "The" : w; }, ref cancelled, out int wordsFixed);
+
+            Assert.AreEqual("The  cat sat", result);
+            CollectionAssert.AreEqual(new[] { "Teh", "cat", "sat" }, seen);
+            Assert.AreEqual(1, wordsFixed);
+            Assert.IsFalse(cancelled);
+        }
+
+        [Test]
+        public void FixWords_PassesWordWithoutPunctuation_AndPutsItBack()
+        {
+            var seen = new List<string>();
+            var cancelled = false;
+            var result = SpellFixerTokenProcessor.FixWords("(teh, cat. 12 ,", w => { seen.Add(w); return w == "teh" ? "the" : w; }, ref cancelled, out int wordsFixed);
+
+            CollectionAssert.AreEqual(new[] { "teh", "cat" }, seen);
+            Assert.AreEqual("(the, cat. 12 ,", result);
+            Assert.AreEqual(1, wordsFixed);
+        }
+
+        [Test]
+        public void FixWords_TrimsDandaAndExtraTrimCharacters()
+        {
+            var seen = new List<string>();
+            var cancelled = false;
+            var result = SpellFixerTokenProcessor.FixWords("खंघ़। |खंघ़|", new[] { '|' }, w => { seen.Add(w); return w == "खंघ़" ? "खंह़स" : w; },
+                                                           ref cancelled, out int wordsFixed);
+
+            CollectionAssert.AreEqual(new[] { "खंघ़", "खंघ़" }, seen);
+            Assert.AreEqual("खंह़स। |खंह़स|", result);
+            Assert.AreEqual(2, wordsFixed);
+        }
+
+        [Test]
+        [TestCase(null)]
+        [TestCase("")]
+        [TestCase(" \r\n ")]
+        public void FixWords_NoWords_NeverCallsFixer(string text)
+        {
+            var cancelled = false;
+            var result = SpellFixerTokenProcessor.FixWords(text, w => { Assert.Fail("should not be called"); return w; }, ref cancelled, out int wordsFixed);
+            Assert.AreEqual(text, result);
+            Assert.AreEqual(0, wordsFixed);
+        }
+
+        [Test]
+        public void FixWords_NullFromFixer_CancelsAndLeavesRestUnchanged()
+        {
+            var calls = 0;
+            var cancelled = false;
+            var result = SpellFixerTokenProcessor.FixWords("teh cat teh", w => { calls++; return calls == 1 ? "the" : null; }, ref cancelled, out int wordsFixed);
+
+            Assert.AreEqual("the cat teh", result);
+            Assert.AreEqual(2, calls);
+            Assert.AreEqual(1, wordsFixed);
+            Assert.IsTrue(cancelled);
+        }
+
+        [Test]
+        public void FixVerseTokens_ChangesOnlyPublishableTextTokens_KeepingOrderAndInstances()
+        {
+            var v1 = Vref(5, 1);
+            var marker = Marker(v1, "v", MarkerType.Verse);
+            var text = Text(v1, "teh cat");
+            var footnoteMarker = Marker(v1, "f", MarkerType.Note);
+            var notPublishable = Text(v1, "teh note", publishable: false);
+            var verseTokens = new List<IUSFMToken> { marker, text, footnoteMarker, notPublishable };
+
+            var cancelled = false;
+            var result = SpellFixerTokenProcessor.FixVerseTokens(verseTokens, w => w == "teh" ? "the" : w, ref cancelled, out int wordsFixed);
+
+            Assert.AreEqual(4, result.Count);
+            Assert.AreSame(marker, result[0]);
+            Assert.AreNotSame(text, result[1]);
+            Assert.AreEqual("the cat", ((IUSFMTextToken)result[1]).Text);
+            Assert.AreSame(v1, result[1].VerseRef);
+            Assert.AreSame(footnoteMarker, result[2]);
+            Assert.AreSame(notPublishable, result[3]);
+            Assert.AreEqual(1, wordsFixed);
+            Assert.AreEqual("teh cat", text.Text, "the original token must not be modified");
+        }
+
+        [Test]
+        public void FixVerseTokens_NoChanges_ReturnsSameInstances()
+        {
+            var v1 = Vref(5, 1);
+            var verseTokens = new List<IUSFMToken> { Marker(v1, "v", MarkerType.Verse), Text(v1, "the cat") };
+            var cancelled = false;
+            var result = SpellFixerTokenProcessor.FixVerseTokens(verseTokens, w => w, ref cancelled, out int wordsFixed);
+
+            Assert.AreEqual(0, wordsFixed);
+            Assert.AreSame(verseTokens[0], result[0]);
+            Assert.AreSame(verseTokens[1], result[1]);
+        }
+
+        [Test]
+        public void SpliceVerse_ReplacesOnlyThatVerse()
+        {
+            var v1 = Vref(5, 1);
+            var v2 = Vref(5, 2);
+            var chapter = new List<IUSFMToken>
+            {
+                Marker(v1, "v", MarkerType.Verse), Text(v1, "one"),
+                Marker(v2, "v", MarkerType.Verse), Text(v2, "teh two"),
+            };
+            var verse2 = UsfmChapterTokens.GroupByVerse(chapter)["40_005_002"];
+            var newVerse2 = new List<IUSFMToken> { chapter[2], Text(v2, "the two") };
+
+            var result = SpellFixerTokenProcessor.SpliceVerse(chapter, verse2, newVerse2);
+
+            Assert.AreEqual(4, result.Count);
+            Assert.AreSame(chapter[0], result[0]);
+            Assert.AreSame(chapter[1], result[1]);
+            Assert.AreSame(chapter[2], result[2]);
+            Assert.AreEqual("the two", ((IUSFMTextToken)result[3]).Text);
+        }
+
+        [Test]
+        public void SpliceVerse_KeepsDocumentOrderOfOutOfOrderVerses()
+        {
+            // Paratext allows verses out of order (e.g. \v 17 before \v 16); writing back must not reorder them
+            var v16 = Vref(5, 16);
+            var v17 = Vref(5, 17);
+            var chapter = new List<IUSFMToken>
+            {
+                Marker(v17, "v", MarkerType.Verse), Text(v17, "seventeen"),
+                Marker(v16, "v", MarkerType.Verse), Text(v16, "teh sixteen"),
+            };
+            var verse16 = UsfmChapterTokens.GroupByVerse(chapter)["40_005_016"];
+            var newVerse16 = new List<IUSFMToken> { chapter[2], Text(v16, "the sixteen") };
+
+            var result = SpellFixerTokenProcessor.SpliceVerse(chapter, verse16, newVerse16);
+
+            Assert.AreEqual(4, result.Count);
+            Assert.AreSame(chapter[0], result[0]);
+            Assert.AreSame(chapter[1], result[1]);
+            Assert.AreSame(chapter[2], result[2]);
+            Assert.AreEqual("the sixteen", ((IUSFMTextToken)result[3]).Text);
+        }
+
+        [Test]
+        public void SpliceVerse_KeepsNonContiguousPartsOfAVerseInPlace()
+        {
+            // e.g. \v 3a ... \v 4 ... \v 3b: both parts of 3 group together, but must be written back where they were
+            var v3 = Vref(5, 3);
+            var v4 = Vref(5, 4);
+            var chapter = new List<IUSFMToken>
+            {
+                Marker(v3, "v", MarkerType.Verse), Text(v3, "teh 3a"),
+                Marker(v4, "v", MarkerType.Verse), Text(v4, "four"),
+                Marker(v3, "v", MarkerType.Verse), Text(v3, "teh 3b"),
+            };
+            var verse3 = UsfmChapterTokens.GroupByVerse(chapter)["40_005_003"];
+            var newVerse3 = new List<IUSFMToken> { verse3[0], Text(v3, "the 3a"), verse3[2], Text(v3, "the 3b") };
+
+            var result = SpellFixerTokenProcessor.SpliceVerse(chapter, verse3, newVerse3);
+
+            CollectionAssert.AreEqual(new[] { null, "the 3a", null, "four", null, "the 3b" },
+                                      result.Select(t => (t as IUSFMTextToken)?.Text).ToList());
+        }
+
+        [Test]
+        public void VerseSignature_DiffersWhenATextTokenChanges()
+        {
+            var v1 = Vref(5, 1);
+            var before = new List<IUSFMToken> { Marker(v1, "v", MarkerType.Verse), Text(v1, "teh cat") };
+            var same = new List<IUSFMToken> { Marker(v1, "v", MarkerType.Verse), Text(v1, "teh cat") };
+            var edited = new List<IUSFMToken> { Marker(v1, "v", MarkerType.Verse), Text(v1, "teh dog") };
+
+            Assert.AreEqual(SpellFixerTokenProcessor.VerseSignature(before), SpellFixerTokenProcessor.VerseSignature(same));
+            Assert.AreNotEqual(SpellFixerTokenProcessor.VerseSignature(before), SpellFixerTokenProcessor.VerseSignature(edited));
+        }
+
+        [Test]
+        public void VerseSignature_DiffersWhenOnlyAMarkerChanges()
+        {
+            // e.g. the user changed \p to \q1 (unsaved) in the verse being fixed; we must not write the old marker back
+            var v1 = Vref(5, 1);
+            var before = new List<IUSFMToken> { Marker(v1, "p", MarkerType.Paragraph), Marker(v1, "v", MarkerType.Verse), Text(v1, "teh cat") };
+            var edited = new List<IUSFMToken> { Marker(v1, "q1", MarkerType.Paragraph), Marker(v1, "v", MarkerType.Verse), Text(v1, "teh cat") };
+
+            Assert.AreNotEqual(SpellFixerTokenProcessor.VerseSignature(before), SpellFixerTokenProcessor.VerseSignature(edited));
+        }
+
+        [Test]
+        public void StartVerseKey_AtVerseOne_StartsWithTheChapterHeading()
+        {
+            // the \s heading before \v 1 is in verse 0, which should be checked when starting at the top of the chapter
+            var v0 = Vref(5, 0);
+            var v1 = Vref(5, 1);
+            var v2 = Vref(5, 2);
+            var vrefTokens = UsfmChapterTokens.GroupByVerse(new List<IUSFMToken>
+            {
+                Marker(v0, "s", MarkerType.Paragraph), Text(v0, "Heading"),
+                Marker(v1, "v", MarkerType.Verse), Text(v1, "one"),
+                Marker(v2, "v", MarkerType.Verse), Text(v2, "two"),
+            });
+
+            Assert.AreEqual("40_005_000", SpellFixerTokenProcessor.StartVerseKey(vrefTokens, Vref(5, 1)));
+            Assert.AreEqual("40_005_002", SpellFixerTokenProcessor.StartVerseKey(vrefTokens, Vref(5, 2)));
+        }
+
+        private class FakeUser
+        {
+            private readonly Queue<(FormButtons Button, string Corrected)> _answers = new Queue<(FormButtons, string)>();
+            public List<(string Word, string Suggestion)> Asked { get; } = new List<(string, string)>();
+
+            public FakeUser Then(FormButtons button, string corrected)
+            {
+                _answers.Enqueue((button, corrected));
+                return this;
+            }
+
+            public FormButtons Ask(string word, string suggestion, out string correctedSpelling)
+            {
+                Asked.Add((word, suggestion));
+                var (button, corrected) = _answers.Dequeue();
+                correctedSpelling = corrected;
+                return button;
+            }
+        }
+
+        private static string FixTeh(string word) => (word == "teh") ? "the" : word;
+
+        [Test]
+        public void FixWord_UnchangedByConverter_DoesNotAsk()
+        {
+            var user = new FakeUser();
+            var session = new SpellFixerSession(FixTeh, user.Ask);
+            Assert.AreEqual("cat", session.FixWord("cat"));
+            Assert.IsEmpty(user.Asked);
+        }
+
+        [Test]
+        public void FixWord_Skip_KeepsWord()
+        {
+            var user = new FakeUser().Then(FormButtons.Next, "the");
+            var session = new SpellFixerSession(FixTeh, user.Ask);
+            Assert.AreEqual("teh", session.FixWord("teh"));
+            CollectionAssert.AreEqual(new[] { ("teh", "the") }, user.Asked);
+        }
+
+        [Test]
+        public void FixWord_ReplaceOnce_UsesCorrectedSpellingAndAsksAgainNextTime()
+        {
+            var user = new FakeUser().Then(FormButtons.ReplaceOnce, "thee").Then(FormButtons.ReplaceOnce, "the");
+            var session = new SpellFixerSession(FixTeh, user.Ask);
+            Assert.AreEqual("thee", session.FixWord("teh"));
+            Assert.AreEqual("the", session.FixWord("teh"));
+            Assert.AreEqual(2, user.Asked.Count);
+        }
+
+        [Test]
+        public void FixWord_ReplaceEvery_ReusesUsersEditedSpellingWithoutAsking()
+        {
+            var user = new FakeUser().Then(FormButtons.ReplaceEvery, "thee");
+            var session = new SpellFixerSession(FixTeh, user.Ask);
+            Assert.AreEqual("thee", session.FixWord("teh"));
+            Assert.AreEqual("thee", session.FixWord("teh"));
+            Assert.AreEqual(1, user.Asked.Count);
+        }
+
+        [Test]
+        public void FixWord_ReplaceAll_StopsAskingForOtherWordsToo()
+        {
+            var user = new FakeUser().Then(FormButtons.ReplaceAll, "the");
+            var session = new SpellFixerSession(w => w == "teh" ? "the" : (w == "adn" ? "and" : w), user.Ask);
+            Assert.AreEqual("the", session.FixWord("teh"));
+            Assert.AreEqual("and", session.FixWord("adn"));
+            Assert.IsTrue(session.IsReplaceAll);
+            Assert.AreEqual(1, user.Asked.Count);
+        }
+
+        [Test]
+        [TestCase(FormButtons.Cancel)]
+        [TestCase(FormButtons.None)]   // e.g. closed with the X
+        public void FixWord_CancelOrClosed_ReturnsNull(FormButtons button)
+        {
+            var user = new FakeUser().Then(button, "the");
+            var session = new SpellFixerSession(FixTeh, user.Ask);
+            Assert.IsNull(session.FixWord("teh"));
+        }
+
+        [Test]
+        public void FixWord_EmptyCorrection_IsAReplacementNotACancel()
+        {
+            var user = new FakeUser().Then(FormButtons.ReplaceOnce, "");
+            var session = new SpellFixerSession(FixTeh, user.Ask);
+            Assert.AreEqual("", session.FixWord("teh"));
+        }
+
+        [Test]
+        public void FixWord_NullCorrection_FallsBackToSuggestion()
+        {
+            var user = new FakeUser().Then(FormButtons.ReplaceOnce, null);
+            var session = new SpellFixerSession(FixTeh, user.Ask);
+            Assert.AreEqual("the", session.FixWord("teh"));
+        }
+
+        [Test]
+        public void Session_DrivesFixWordsEndToEnd()
+        {
+            var user = new FakeUser().Then(FormButtons.ReplaceEvery, "the");
+            var session = new SpellFixerSession(FixTeh, user.Ask);
+            var cancelled = false;
+            var result = SpellFixerTokenProcessor.FixWords("teh cat and teh dog", session.FixWord, ref cancelled, out int wordsFixed);
+            Assert.AreEqual("the cat and the dog", result);
+            Assert.AreEqual(2, wordsFixed);
+        }
+
+        private static SortedDictionary<string, List<IUSFMToken>> ChapterWithHeadingAndCombinedVerse()
+        {
+            var v0 = Vref(5, 0);
+            var v1 = Vref(5, 1);
+            var v34 = Vref(5, 3, 4);
+            return UsfmChapterTokens.GroupByVerse(new List<IUSFMToken>
+            {
+                Marker(v0, "s", MarkerType.Paragraph), Text(v0, "Heading"),
+                Marker(v1, "v", MarkerType.Verse), Text(v1, "one"),
+                Marker(v34, "v", MarkerType.Verse), Text(v34, "three and four"),
+            });
+        }
+
+        [Test]
+        public void CurrentVerseKey_ExactVerse()
+        {
+            Assert.AreEqual("40_005_001", SpellFixerTokenProcessor.CurrentVerseKey(ChapterWithHeadingAndCombinedVerse(), Vref(5, 1)));
+        }
+
+        [Test]
+        public void CurrentVerseKey_VerseInsideCombinedVerse_IsTheWholeGroup()
+        {
+            Assert.AreEqual("40_005_003-004", SpellFixerTokenProcessor.CurrentVerseKey(ChapterWithHeadingAndCombinedVerse(), Vref(5, 4)));
+        }
+
+        [Test]
+        public void CurrentVerseKey_Heading_IsVerseZero()
+        {
+            // unlike StartVerseKey, the current verse at verse 0 is just the heading (not "from the top of the chapter")
+            Assert.AreEqual("40_005_000", SpellFixerTokenProcessor.CurrentVerseKey(ChapterWithHeadingAndCombinedVerse(), Vref(5, 0)));
+        }
+
+        [Test]
+        public void CurrentVerseKey_VerseNotInChapter_IsNull()
+        {
+            Assert.IsNull(SpellFixerTokenProcessor.CurrentVerseKey(ChapterWithHeadingAndCombinedVerse(), Vref(5, 2)));
+        }
+    }
+}

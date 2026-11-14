@@ -158,10 +158,14 @@ namespace SFMConv
             }
         }
 
+        // the files that are currently open (used to reload them, e.g. after processing them or via Refresh)
+        protected string[] m_astrFilesOpened = new string[0];
+
         protected void OpenDocuments(string [] astrFilenames, Encoding enc)
         {
             // in case it was already open and the user clicks the "Open SFM document" again.
             Reset();
+            m_astrFilesOpened = astrFilenames;
             GetSfmList(astrFilenames, enc);
             PopulateGrid();
             AddFilenameToTitle(astrFilenames, enc);
@@ -170,34 +174,45 @@ namespace SFMConv
         public void AddFilenameToTitle(string[] astrFilenames, Encoding enc)
         {
             System.Diagnostics.Debug.Assert(astrFilenames.Length > 0);
-            string strTitleName = "<various>";  // assume multiple files
 
-            // if there's only one, then add it to the recently used files
+            // add it to the list of recently used files: a single file by its path, and a set of files by the books
+            //  in them (e.g. "C:\...\XYZ: GEN EXO RUT MAT-REV"), which opens the same set of files again
+            string strEntry, strTitleName;
             if (astrFilenames.Length == 1)
             {
-                // add this filename to the list of recently used files
-                string strFilename = astrFilenames[0];
-                strTitleName = Path.GetFileName(strFilename);
-
-                // add this filename to the list of recently used files
-                if (Properties.Settings.Default.RecentFiles.Contains(strFilename))
-                {
-                    int nIndex = Properties.Settings.Default.RecentFiles.IndexOf(strFilename);
-                    Properties.Settings.Default.RecentFiles.RemoveAt(nIndex);
-                    Properties.Settings.Default.RecentFilesCodePages.RemoveAt(nIndex);
-                }
-                else if (Properties.Settings.Default.RecentFiles.Count > nMaxRecentFiles)
-                {
-                    Properties.Settings.Default.RecentFiles.RemoveAt(nMaxRecentFiles);
-                    Properties.Settings.Default.RecentFilesCodePages.RemoveAt(nMaxRecentFiles);
-                }
-
-                Properties.Settings.Default.RecentFiles.Insert(0, strFilename);
-                Properties.Settings.Default.RecentFilesCodePages.Insert(0, enc.CodePage.ToString());
-                Properties.Settings.Default.Save();
+                strEntry = astrFilenames[0];
+                strTitleName = Path.GetFileName(strEntry);
+            }
+            else
+            {
+                strEntry = SfmBookCorpus.MakeRecentFilesEntry(astrFilenames, enc);
+                strTitleName = SfmBookCorpus.GetDisplayText(strEntry);
             }
 
+            RemoveFromRecentFiles(strEntry);
+            while (Properties.Settings.Default.RecentFiles.Count >= nMaxRecentFiles)
+                RemoveFromRecentFiles(Properties.Settings.Default.RecentFiles.Count - 1);
+
+            Properties.Settings.Default.RecentFiles.Insert(0, strEntry);
+            Properties.Settings.Default.RecentFilesCodePages.Insert(0, enc.CodePage.ToString());
+            Properties.Settings.Default.Save();
+
             this.Text = String.Format("{0} -- {1}", cstrCaption, strTitleName);
+        }
+
+        private static void RemoveFromRecentFiles(string strEntry)
+        {
+            var nIndex = Properties.Settings.Default.RecentFiles.IndexOf(strEntry);
+            if (nIndex >= 0)
+                RemoveFromRecentFiles(nIndex);
+        }
+
+        // keeps the list of code pages in step with the list of files
+        private static void RemoveFromRecentFiles(int nIndex)
+        {
+            Properties.Settings.Default.RecentFiles.RemoveAt(nIndex);
+            if (nIndex < Properties.Settings.Default.RecentFilesCodePages.Count)
+                Properties.Settings.Default.RecentFilesCodePages.RemoveAt(nIndex);
         }
 
         private void PopulateGrid()
@@ -374,7 +389,7 @@ namespace SFMConv
             //  encoding will (likely) be different (so we check and if the same name is applied, then
             //  we reset m_encOpen to the target encoding).
             Reset();
-            GetSfmList(openSFMFileDialog.FileNames, m_encOpen);
+            GetSfmList(m_astrFilesOpened, m_encOpen);
             PopulateGrid();
         }
 
@@ -971,12 +986,17 @@ namespace SFMConv
                 (m_lstFilesOpen.Count > 0);
             
             recentFilesToolStripMenuItem.DropDownItems.Clear();
+            recentFilesToolStripMenuItem.DropDown.ShowItemToolTips = true;  // (to list the files in a set of files)
             for (int i = 0; i < Properties.Settings.Default.RecentFiles.Count; i++)
             {
                 string strRecentFile = Properties.Settings.Default.RecentFiles[i];
-                int nCodePage = Convert.ToInt32(Properties.Settings.Default.RecentFilesCodePages[i]);
-                ToolStripItem tsi = recentFilesToolStripMenuItem.DropDownItems.Add(strRecentFile, null, recentFilesToolStripMenuItem_Click);
-                tsi.Tag = nCodePage;
+                int nCodePage = (i < Properties.Settings.Default.RecentFilesCodePages.Count)
+                                    ? Convert.ToInt32(Properties.Settings.Default.RecentFilesCodePages[i])
+                                    : Encoding.UTF8.CodePage;
+                ToolStripItem tsi = recentFilesToolStripMenuItem.DropDownItems.Add(SfmBookCorpus.GetDisplayText(strRecentFile), null, recentFilesToolStripMenuItem_Click);
+                tsi.Tag = new Tuple<string, int>(strRecentFile, nCodePage);
+                if (SfmBookCorpus.IsMultiFileEntry(strRecentFile))
+                    tsi.ToolTipText = String.Join(Environment.NewLine, SfmBookCorpus.GetFilePaths(strRecentFile).Select(Path.GetFileName));
             }
             recentFilesToolStripMenuItem.Enabled = (recentFilesToolStripMenuItem.DropDownItems.Count > 0);
         }
@@ -1207,19 +1227,32 @@ namespace SFMConv
         void recentFilesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ToolStripDropDownItem aRecentFile = (ToolStripDropDownItem)sender;
+            var entry = (Tuple<string, int>)aRecentFile.Tag;
             try
             {
-                Encoding enc = Encoding.GetEncoding((int)aRecentFile.Tag);
+                Encoding enc = Encoding.GetEncoding(entry.Item2);
 
-                // put it in the open dialog's FileNames array because that's used to reload the file after
-                //  conversion.
-                openSFMFileDialog.FileName = aRecentFile.Text;
-                OpenDocuments(openSFMFileDialog.FileNames, enc);
+                // a set of files opened together (shown by the books in them) opens the same files again (skipping
+                //  any that aren't there anymore)
+                var astrFilenames = SfmBookCorpus.GetFilePaths(entry.Item1);
+                var missing = astrFilenames.Where(f => !File.Exists(f)).ToList();
+                if (missing.Count == astrFilenames.Length)
+                    throw new FileNotFoundException((missing.Count == 1)
+                                                        ? $"The file '{missing[0]}' doesn't exist anymore."
+                                                        : $"None of these files exist anymore:{Environment.NewLine}{String.Join(Environment.NewLine, missing)}");
+                if (missing.Count > 0)
+                    MessageBox.Show($"These files don't exist anymore, so they won't be opened:{Environment.NewLine}{Environment.NewLine}{String.Join(Environment.NewLine, missing)}",
+                                    cstrCaption, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                // (opening them adds the entry back at the top -- possibly changed, e.g. if a file is missing now)
+                RemoveFromRecentFiles(entry.Item1);
+                OpenDocuments(astrFilenames.Except(missing).ToArray(), enc);
             }
             catch (Exception ex)
             {
                 // probably means the file doesn't exist anymore, so remove it from the recent used list
-                Properties.Settings.Default.RecentFiles.Remove(aRecentFile.Text);
+                RemoveFromRecentFiles(entry.Item1);
+                Properties.Settings.Default.Save();
                 MessageBox.Show(ex.Message, cstrCaption);
             }
         }
@@ -1289,7 +1322,7 @@ namespace SFMConv
 
         private void toolStripButtonRefresh_Click(object sender, EventArgs e)
         {
-            OpenDocuments(openSFMFileDialog.FileNames, m_encOpen);
+            OpenDocuments(m_astrFilesOpened, m_encOpen);
         }
 
         private void dataGridView_KeyPress(object sender, KeyPressEventArgs e)
@@ -1477,6 +1510,7 @@ namespace SFMConv
             initializeCheckListToolStripMenuItem.Enabled = bEnableTheRest;
             correctSpellingToolStripMenuItem.Enabled = bEnableTheRest;
             importSpellingDataFromParatextProjectToolStripMenuItem.Enabled = bEnableTheRest;
+            exportSpellingDataToParatextProjectToolStripMenuItem.Enabled = bEnableTheRest;
             /*
             editSpellingFixesToolStripMenuItem.Enabled = bEnableTheRest;
             editDictionaryToolStripMenuItem.Enabled = bEnableTheRest;
@@ -1509,29 +1543,88 @@ namespace SFMConv
                 if (!TrySelectProject())
                     return;
 
-            // see if there is a 'SpellingSettings.xml' file in the same directory as one of the open SFM files
-            System.Diagnostics.Debug.Assert(m_lstFilesOpen.Any());
-            var strDir = Path.GetDirectoryName(m_lstFilesOpen[0]);
-            var strFileSpec = Path.Combine(strDir, ParatextSpellingStatusFilename);
-            if (!File.Exists(strFileSpec))
-            {
-                var dlgSettings = new OpenFileDialog
-                {
-                    FileName = ParatextSpellingStatusFilename,
-                    RestoreDirectory = true,
-                    InitialDirectory = strDir,
-                    Filter = $"Paratext SpellingStatus files ({ParatextSpellingStatusFilename})|{ParatextSpellingStatusFilename}|All files|*.*"
-                };
+            if (!TryGetParatextSpellingStatusFile(out var strFileSpec))
+                return;
 
-                if (dlgSettings.ShowDialog() != DialogResult.OK)
-                {
-                    MessageBox.Show($"No '{ParatextSpellingStatusFilename}' file found!", cstrCaption);
+            toolStripStatusLabel.Text = $"Importing spelling status information from '{strFileSpec}'...";
+            statusStrip.Refresh();
+            Cursor = Cursors.WaitCursor;
+            try
+            {
+                toolStripStatusLabel.Text = m_cscProject.AddParatextSpellingStatusToCheckLists(strFileSpec)
+                    ? $"Spelling status information imported from Paratext ('{strFileSpec}')"
+                    : $"No spelling status information could be imported from '{strFileSpec}'";
+            }
+            catch (Exception ex)
+            {
+                toolStripStatusLabel.Text = "Importing spelling status information from Paratext failed";
+                MessageBox.Show(ex.Message, cstrCaption);
+            }
+            finally
+            {
+                Cursor = Cursors.Default;
+            }
+        }
+
+        private void exportSpellingDataToParatextProjectToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (m_cscProject == null)
+                if (!TrySelectProject())
                     return;
-                }
+
+            if (!TryGetParatextSpellingStatusFile(out var strFileSpec))
+                return;
+
+            if (MessageBox.Show($"Are you sure you want to save the Approved words and the Spelling Corrections to the '{strFileSpec}' file?",
+                                cstrCaption, MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
+                return;
+
+            toolStripStatusLabel.Text = $"Exporting spelling data to '{strFileSpec}'...";
+            statusStrip.Refresh();
+            Cursor = Cursors.WaitCursor;
+            try
+            {
+                ParatextSpellingStatusExport.Export(m_cscProject, strFileSpec, this, out var strSummary);
+                toolStripStatusLabel.Text = strSummary;
+            }
+            catch (Exception ex)
+            {
+                toolStripStatusLabel.Text = "Exporting spelling data to Paratext failed";
+                MessageBox.Show(ex.Message, cstrCaption);
+            }
+            finally
+            {
+                Cursor = Cursors.Default;
+            }
+        }
+
+        /// <summary>
+        /// Finds the Paratext SpellingStatus.xml file for the open SFM files (i.e. in the same folder as them) or, if it
+        /// isn't there, lets the user browse for it
+        /// </summary>
+        private bool TryGetParatextSpellingStatusFile(out string strFileSpec)
+        {
+            var strDir = (m_lstFilesOpen?.Any() == true) ? Path.GetDirectoryName(m_lstFilesOpen[0]) : null;
+            strFileSpec = (strDir != null) ? Path.Combine(strDir, ParatextSpellingStatusFilename) : null;
+            if ((strFileSpec != null) && File.Exists(strFileSpec))
+                return true;
+
+            var dlgSettings = new OpenFileDialog
+            {
+                FileName = ParatextSpellingStatusFilename,
+                RestoreDirectory = true,
+                InitialDirectory = strDir,
+                Filter = $"Paratext SpellingStatus files ({ParatextSpellingStatusFilename})|{ParatextSpellingStatusFilename}|All files|*.*"
+            };
+
+            if (dlgSettings.ShowDialog() != DialogResult.OK)
+            {
+                MessageBox.Show($"No '{ParatextSpellingStatusFilename}' file found!", cstrCaption);
+                return false;
             }
 
-            System.Diagnostics.Debug.Assert(File.Exists(strFileSpec));
-            m_cscProject.AddParatextSpellingStatusToCheckLists(strFileSpec);
+            strFileSpec = dlgSettings.FileName;
+            return File.Exists(strFileSpec);
         }
 
         /*
