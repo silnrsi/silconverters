@@ -278,3 +278,9 @@ autom4te.cache
 /.vs/SEC VS2015/v14/.suo
 /src/SpellingFixer30/CscFixerMM/.svn
 /build/engine.exe
+/graphify-out/cache
+/graphify-out/.graphify_labels.json
+/graphify-out/.graphify_python
+/graphify-out/.graphify_root
+/graphify-out/cost.json
+/graphify-out/manifest.json
