@@ -80,7 +80,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Encoding-Converters-Core" Version="1.0.4" />
+    <PackageReference Include="Encoding-Converters-Core" Version="$(EcCoreVersion)" />
   </ItemGroup>
   <PropertyGroup>
     <UseEcSharedItems>true</UseEcSharedItems>

@@ -8,7 +8,9 @@
     <Year>2026</Year>
     <Manufacturer>SIL International</Manufacturer>
 	<NuGetPackageRoot Condition="'$(NuGetPackageRoot)' == ''">$(UserProfile)\.nuget\packages\</NuGetPackageRoot>
-    <EcCoreVersion>1.0.4</EcCoreVersion>
+    <!-- The one place to change the Encoding-Converters-Core version: every ec-core PackageReference (csproj, vbproj
+         and wixproj) uses this, as do the Ec*Path properties below. -->
+    <EcCoreVersion>1.0.5</EcCoreVersion>
     <EcLibFilesPath>$(NuGetPackageRoot)encoding-converters-core\$(EcCoreVersion)\lib</EcLibFilesPath>
     <EcDistFilesPath>$(NuGetPackageRoot)encoding-converters-core\$(EcCoreVersion)\runtimes\EcDistFiles</EcDistFilesPath>
     <EcSharedItemsProps>$(NuGetPackageRoot)encoding-converters-core\$(EcCoreVersion)\build\SharedItems.props</EcSharedItemsProps>
