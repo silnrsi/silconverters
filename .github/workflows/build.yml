@@ -120,24 +120,40 @@ jobs:
     # output\<platform>\<configuration>\ (see e.g. DChartHelperMM's Source="..\..\output\x64\
     # release\DChartHelper.exe") and were already built - unsigned - by the single solution Build
     # above. Sign that output now, then force the merge modules (and the MSI/bundle that harvest
-    # them in turn) to rebuild so they pick up the now-signed bytes.
-    - name: Sign build outputs
+    # them in turn) to rebuild so they pick up the now-signed bytes. Only files that aren't already
+    # validly signed are signed: the Encoding-Converters-Core files copied in here arrive signed by
+    # SIL, and third-party ones (Microsoft, Google, ...) keep their own vendor's signature.
+    - name: Collect unsigned build outputs
+      id: unsigned
       if: ${{ matrix.build_configuration == 'Release' && github.event_name != 'pull_request' }}
+      # pwsh, not powershell: Windows PowerShell 5's utf8 Out-File writes a BOM into GITHUB_OUTPUT
+      shell: pwsh
+      run: |
+        $dir = "output\${{ matrix.build_platform }}\${{ matrix.build_configuration }}"
+        if (-not (Test-Path $dir)) { throw "$dir does not exist" }
+        $files = Get-ChildItem $dir -File | Where-Object { $_.Extension -in '.dll','.exe' } |
+          Where-Object { (Get-AuthenticodeSignature $_.FullName).Status -ne 'Valid' } |
+          ForEach-Object { $_.FullName }
+        Write-Host "Unsigned files to sign: $(@($files).Count)"
+        $files | ForEach-Object { Write-Host "  $_" }
+        "count=$(@($files).Count)" | Out-File $env:GITHUB_OUTPUT -Append -Encoding utf8
+        "files<<EOF_FILE_LIST" | Out-File $env:GITHUB_OUTPUT -Append -Encoding utf8
+        $files | Out-File $env:GITHUB_OUTPUT -Append -Encoding utf8
+        "EOF_FILE_LIST" | Out-File $env:GITHUB_OUTPUT -Append -Encoding utf8
+
+    - name: Sign build outputs
+      if: ${{ matrix.build_configuration == 'Release' && github.event_name != 'pull_request' && steps.unsigned.outputs.count != '0' }}
       uses: sillsdev/codesign/trusted-signing-action@v3
       with:
         credentials: ${{ secrets.TRUSTED_SIGNING_CREDENTIALS }}
-        files-folder: output\${{ matrix.build_platform }}\${{ matrix.build_configuration }}
-        files-folder-filter: "dll,exe"
+        files: ${{ steps.unsigned.outputs.files }}
 
     # Clear the wix projects' own bind cache/output so the rebuild below can't decide they're
     # already up to date - the safest guarantee is to force it, rather than trust that WiX's own
     # bind-input tracking picks up the now-newer Source= binaries. Only descend into obj\<platform>\
     # <configuration>\ (the wix bind intermediate/tracking output) and bin\ - never obj\ itself,
     # which is also where these SDK-style wixprojs' NuGet restore assets (project.assets.json etc.)
-    # live; deleting those would reintroduce the NETSDK1047 restore failures fixed earlier. The
-    # app/library projects are left alone: their compiled output is untouched by signing except
-    # for its timestamp, which the normal incremental build already treats as up to date against
-    # their (unchanged) sources.
+    # live; deleting those would reintroduce the NETSDK1047 restore failures fixed earlier.
     - name: Clear installer project outputs
       if: ${{ matrix.build_configuration == 'Release' && github.event_name != 'pull_request' }}
       shell: powershell
@@ -149,15 +165,66 @@ jobs:
         Get-ChildItem -Path Installer -Directory -Recurse -Filter bin |
           Remove-Item -Recurse -Force
 
+    # Rebuild ONLY the .wixproj projects - never the whole solution. Rebuilding the solution re-runs
+    # every C#/VB project's copy-to-output step, which sees that the signed exe/dll in output\ no
+    # longer matches obj\ (different size/timestamp) and copies the unsigned obj\ build back over it,
+    # silently undoing the signing above before the merge modules harvest it (which is how
+    # AdaptIt2Unicode.exe, SFMConv.exe, etc. shipped unsigned). Everything this needs is read from
+    # the .sln so it can't drift from it: which wixprojs build for this solution platform (and with
+    # what project platform), and their build order (the sln's ProjectDependencies between wixprojs:
+    # merge modules -> SEC Setup* MSIs -> SetupSILConverters bundle). SolutionDir is passed because
+    # SEC Setup*'s CopyMsiToOutput target uses it, and it's only set automatically by a .sln build.
     - name: Rebuild installer projects with signed binaries
       if: ${{ matrix.build_configuration == 'Release' && github.event_name != 'pull_request' }}
-      shell: cmd
-      run: >
-        "%MSBUILD_PATH%"
-        /m
-        /p:Configuration=${{matrix.build_configuration}}
-        /p:Platform=${{matrix.build_platform}}
-        "${{env.SOLUTION_FILE_PATH}}"
+      shell: powershell
+      run: |
+        $sln = Get-Content "${{ env.SOLUTION_FILE_PATH }}" -Raw
+        $solutionCfg = "${{ matrix.build_configuration }}|${{ matrix.build_platform }}"
+        $wix = @{}
+        foreach ($m in [regex]::Matches($sln, '(?s)Project\("\{[^}]+\}"\) = "[^"]+", "([^"]+\.wixproj)", "\{([0-9A-Fa-f-]+)\}"(.*?)\r?\nEndProject')) {
+          $guid = $m.Groups[2].Value.ToUpper()
+          $cfg = [regex]::Match($sln, '(?m)^\s*\{' + [regex]::Escape($m.Groups[2].Value) + '\}\.' + [regex]::Escape($solutionCfg) + '\.Build\.0 = ([^|]+)\|(\S+)\s*$')
+          $deps = @([regex]::Matches($m.Groups[3].Value, '\{([0-9A-Fa-f-]+)\} = \{') | ForEach-Object { $_.Groups[1].Value.ToUpper() })
+          $wix[$guid] = [pscustomobject]@{ Path = $m.Groups[1].Value; Build = $cfg.Success; Cfg = $cfg.Groups[1].Value; Plat = $cfg.Groups[2].Value; Deps = $deps }
+        }
+        if ($wix.Count -eq 0) { throw "No .wixproj projects found in ${{ env.SOLUTION_FILE_PATH }}" }
+        # Depth-first topological order over wixproj -> wixproj dependencies (others are already built).
+        $order = New-Object System.Collections.Generic.List[string]; $state = @{}
+        function Visit-Project([string]$g) {
+          if ($state[$g] -eq 'done') { return }
+          if ($state[$g] -eq 'visiting') { throw "Dependency cycle involving $($wix[$g].Path)" }
+          $state[$g] = 'visiting'
+          foreach ($d in $wix[$g].Deps) { if ($wix.ContainsKey($d)) { Visit-Project $d } }
+          $state[$g] = 'done'; $order.Add($g)
+        }
+        foreach ($g in @($wix.Keys | Sort-Object)) { Visit-Project $g }
+        $built = 0
+        foreach ($g in $order) {
+          $p = $wix[$g]
+          if (-not $p.Build) { Write-Host "Skipping $($p.Path) (not built for $solutionCfg)"; continue }
+          Write-Host "Building $($p.Path) ($($p.Cfg)|$($p.Plat))"
+          & $env:MSBUILD_PATH $p.Path /v:m "/p:Configuration=$($p.Cfg)" "/p:Platform=$($p.Plat)" "/p:SolutionDir=$env:GITHUB_WORKSPACE\"
+          if ($LASTEXITCODE -ne 0) { throw "Building $($p.Path) failed" }
+          $built++
+        }
+        if ($built -eq 0) { throw "No .wixproj was built for $solutionCfg - check the .sln parsing above" }
+
+    # Fail here rather than ship an installer with unsigned files: every exe/dll the merge modules
+    # just harvested from output\<platform>\<configuration>\ must still carry a valid signature.
+    - name: Verify build outputs are signed
+      if: ${{ matrix.build_configuration == 'Release' && github.event_name != 'pull_request' }}
+      shell: powershell
+      run: |
+        $dir = "output\${{ matrix.build_platform }}\${{ matrix.build_configuration }}"
+        $bad = Get-ChildItem $dir -File | Where-Object { $_.Extension -in '.dll','.exe' } | ForEach-Object {
+          $status = (Get-AuthenticodeSignature $_.FullName).Status
+          if ($status -ne 'Valid') { "{0,-14} {1}" -f $status, $_.FullName }
+        }
+        if ($bad) {
+          $bad | ForEach-Object { Write-Host "::error::$_" }
+          throw "$(@($bad).Count) build output file(s) are not validly signed"
+        }
+        Write-Host "All build outputs are validly signed."
 
     # The rebuild above produced the MSI (output\<platform>\SetupSILConverters_<platform>.msi) and, in the
     # same pass, the bundle that embeds it - so the embedded MSI is unsigned. Signing the loose MSI only
